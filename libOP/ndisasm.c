@@ -747,11 +747,13 @@ static int matches(const struct itemplate* t, uint8_t* data,
         case4(0234) :
         {
             int modrm = *data++;
+
+            // detected reg/op as op
+            *flags |= 0x02000000 + (1 << op2);
+
             if (((modrm >> 3) & 07) != (c & 07))
                 return 0;   /* spare field doesn't match up */
 
-            // detected reg/op as op
-            *flags |= 0x02000000  + (1 << op2);
 
 
             data = do_ea(data, modrm, asize, segsize, eat, opy, ins);
@@ -1223,51 +1225,62 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         case 0xF2:
         case 0xF3:
             fetch_or_return(origdata, data, data_size, 1);
+            *flags |= 0x04000000;
             prefix.rep = *data++;
             break;
 
         case 0x9B:
             fetch_or_return(origdata, data, data_size, 1);
+            *flags |= 0x04000000;
             prefix.wait = *data++;
             break;
 
         case 0xF0:
             fetch_or_return(origdata, data, data_size, 1);
+            *flags |= 0x04000000;
             prefix.lock = *data++;
             break;
 
         case 0x2E:
             fetch_or_return(origdata, data, data_size, 1);
+            *flags |= 0x04000000;
             segover = "cs", prefix.seg = *data++;
             break;
         case 0x36:
             fetch_or_return(origdata, data, data_size, 1);
+            *flags |= 0x04000000;
             segover = "ss", prefix.seg = *data++;
             break;
         case 0x3E:
             fetch_or_return(origdata, data, data_size, 1);
+            *flags |= 0x04000000;
             segover = "ds", prefix.seg = *data++;
             break;
         case 0x26:
             fetch_or_return(origdata, data, data_size, 1);
+            *flags |= 0x04000000;
             segover = "es", prefix.seg = *data++;
             break;
         case 0x64:
             fetch_or_return(origdata, data, data_size, 1);
+            *flags |= 0x04000000;
             segover = "fs", prefix.seg = *data++;
             break;
         case 0x65:
             fetch_or_return(origdata, data, data_size, 1);
+            *flags |= 0x04000000;
             segover = "gs", prefix.seg = *data++;
             break;
 
         case 0x66:
             fetch_or_return(origdata, data, data_size, 1);
+            *flags |= 0x04000000;
             prefix.osize = (segsize == 16) ? 32 : 16;
             prefix.osp = *data++;
             break;
         case 0x67:
             fetch_or_return(origdata, data, data_size, 1);
+            *flags |= 0x04000000;
             prefix.asize = (segsize == 32) ? 16 : 32;
             prefix.asp = *data++;
             break;
@@ -1277,6 +1290,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             if (segsize == 64 || (data[1] & 0xc0) == 0xc0)
             {
                 fetch_or_return(origdata, data, data_size, 2);
+                *flags |= 0x04000000;
                 prefix.vex[0] = *data++;
                 prefix.vex[1] = *data++;
 
@@ -1311,6 +1325,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             if (segsize == 64 || ((data[1] & 0xc0) == 0xc0))
             {
                 fetch_or_return(origdata, data, data_size, 4);
+                *flags |= 0x04000000;
                 data++;        /* 62h EVEX prefix */
                 prefix.evex[0] = *data++;
                 prefix.evex[1] = *data++;
@@ -1335,6 +1350,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 (segsize == 64 || (data[1] & 0xc0) == 0xc0))
             {
                 fetch_or_return(origdata, data, data_size, 3);
+                *flags |= 0x04000000;
                 prefix.vex[0] = *data++;
                 prefix.vex[1] = *data++;
                 prefix.vex[2] = *data++;
@@ -1372,6 +1388,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             if (segsize == 64)
             {
                 fetch_or_return(origdata, data, data_size, 1);
+                *flags |= 0x04000000;
                 prefix.rex = *data++;
                 if (prefix.rex & REX_W)
                 {
