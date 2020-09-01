@@ -855,7 +855,7 @@ OP_ENTRY Grp16_18h[8] = {
 };
 
 
-extern "C" int ndisasm(unsigned char* data, OPENTRY * outbuf, E_ADM segsize, unsigned int* flags);
+extern "C" int ndisasm(unsigned char* data, OPENTRY * pOpEntry, E_ADM eADM, unsigned int* flags);
 
 // find 8 throughput
 static BOOL GrpMatch(WCHAR* strModRM, BYTE bModRM)
@@ -924,22 +924,29 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
     DWORD lFound = 0;
     OP_ENTRY* pGrp;
 
-    WCHAR* strModRmList[256];
+    /* WCHAR* strModRmList[256]; */
 
     // decode to single operand level mnemonic and operand type
     if (nOption & OPTION_EXPAND_MODRM_EA)
     {
         // input, multiple byte string array
         unsigned char buffer[8];
+        // pointer to buffer
         unsigned char* ptr_buffer;
         // initialize pointer before usage
         ptr_buffer = buffer;
-        int lendis = 0;
+        // binary data length in byte
+        int lendis;
+        // switch display, switch loop behavior options
         unsigned int options;
+
+        // initialze buffer
+        memset(buffer, 0xCC, sizeof(buffer));
 
         if (eOPTab == E_1B_OP)
         {
             //ptr_buffer = buffer + 0;
+
         }
         else if (eOPTab == E_2B_OP)
         {
@@ -960,15 +967,17 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
             if (OPMatch(strOPMatch + 0, OpIdx))
             {
                 // update op-code byte
-                *(ptr_buffer + 0) = (char)OpIdx;
+                *(ptr_buffer + 0) = (unsigned char)OpIdx;
                 for (int OPExtIdx = 0; (OPExtIdx < 256) && (lFound < nOpEntryMax); OPExtIdx++)
                 {
                     // check wchar 8 ~ 15
                     if (OPMatch(strOPMatch + 8, OPExtIdx))
                     {
-                        // update extend op-code byte
-                        *(ptr_buffer + 1) = (char)OPExtIdx;
+                        // update extended op-code byte
+                        *(ptr_buffer + 1) = (unsigned char)OPExtIdx;
                         lendis = ndisasm(buffer, pOpEntry, eADM, &options);
+                        pOpEntry++;
+                        lFound++;
                     }
                 }
             }

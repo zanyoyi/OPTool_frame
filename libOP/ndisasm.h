@@ -18,5 +18,5 @@ typedef enum {
     E_AD_ALL
 }E_ADM;
 
-int ndisasm(unsigned char* data, OPENTRY* outbuf, E_ADM segsize, unsigned int* flags);
+int ndisasm(unsigned char* data, OPENTRY* pOpEntry, E_ADM segsize, unsigned int* flags);
 #endif /* NASM_NDISASM_H */
