@@ -1,0 +1,212 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文 (台灣) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHT)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL
+#pragma code_page(950)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHT)\r\n"
+    "LANGUAGE 4, 1\r\n"
+    "#pragma code_page(950)\r\n"
+    "#include ""res\\OPMapping.rc2""  // 非 Microsoft Visual C++ 編輯過的資源\r\n"
+    "#include ""l.CHT\\afxres.rc""      // 標準元件\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\OPMapping.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 170, 62
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "關於 OPMapping"
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,14,14,21,20
+    LTEXT           "OPMapping, 1.0 版",IDC_STATIC,42,14,114,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2020",IDC_STATIC,42,26,114,8
+    DEFPUSHBUTTON   "確定",IDOK,113,41,50,14,WS_GROUP
+END
+
+IDD_OPMAPPING_DIALOG DIALOGEX 0, 0, 322, 287
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "OPMapping"
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CTEXT           "TODO: 在此放置對話方塊控制項。",IDC_STATUS,7,272,300,8
+    EDITTEXT        IDC_LOCATION,7,7,114,14,ES_AUTOHSCROLL
+    LISTBOX         IDC_LIST1,7,51,308,219,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "List",IDC_BUTTON2,125,7,45,15
+    GROUPBOX        "Addressing mode",IDC_STATIC,7,22,88,24
+    CONTROL         "ADR16",IDC_RADIO_AD16,"Button",BS_AUTORADIOBUTTON | WS_GROUP,13,33,35,8
+    CONTROL         "AD32",IDC_RADIO_AD32,"Button",BS_AUTORADIOBUTTON,59,33,35,8
+    CONTROL         "Decode OP Map",IDC_CHK_DECODE_OPMAP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,191,7,95,13
+    CONTROL         "Expand Effective Address",IDC_CHK_EXPAND_EA,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,191,20,95,13
+    GROUPBOX        "OP Tab",IDC_STATIC,100,22,71,24
+    CONTROL         "1B",IDC_RADIO_1B,"Button",BS_AUTORADIOBUTTON | WS_GROUP,106,33,24,8
+    CONTROL         "2B",IDC_RADIO_2B,"Button",BS_AUTORADIOBUTTON,130,33,24,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040403b6"
+        BEGIN
+            VALUE "CompanyName", "TODO: <公司名稱>"
+            VALUE "FileDescription", "TODO: <檔案說明>"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "OPMapping.exe"
+            VALUE "LegalCopyright", "TODO: (c) <公司名稱>.  All rights reserved."
+            VALUE "OriginalFilename", "OPMapping.exe"
+            VALUE "ProductName", "TODO: <產品名稱>"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x404, 950
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 163
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 55
+    END
+
+    IDD_OPMAPPING_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 315
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 280
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "關於 OPMapping(&A)..."
+END
+
+#endif    // 中文 (台灣) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHT)
+LANGUAGE 4, 1
+#pragma code_page(950)
+#include "res\OPMapping.rc2"  // 非 Microsoft Visual C++ 編輯過的資源
+#include "l.CHT\afxres.rc"      // 標準元件
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
