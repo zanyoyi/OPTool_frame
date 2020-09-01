@@ -750,7 +750,7 @@ static int matches(const struct itemplate* t, uint8_t* data,
             if (((modrm >> 3) & 07) != (c & 07))
                 return 0;   /* spare field doesn't match up */
 
-            // detected reg/op as reg
+            // detected reg/op as op
             *flags |= 0x02000000  + (1 << op2);
 
 
@@ -2684,8 +2684,6 @@ int ndisasm(unsigned char* data, OPENTRY* pOpEntry, E_ADM eADM, unsigned int* fl
     int segsize = (eADM == E_AD16) ? 16 : 32;
     int len = disasm(data, 8, outbuf, sizeof(outbuf), segsize, flags);
     // convert char array to wchar array
-    swprintf(pOpEntry->strDisasm, 128, L"ins:%hs", outbuf);
-    pOpEntry->OP = 0;
-    pOpEntry->OPExt = 0;
-    return 0;
+    swprintf(pOpEntry->strDisasm, 128, L"%hs", outbuf);
+    return len;
 }
