@@ -950,21 +950,23 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
         if (eOPTab == E_1B_OP)
         {
             //ptr_buffer = buffer + 0;
-            buffer[0] = 0x66;
+            buffer[0] = 0x00;
             ptr_buffer += 1;
         }
         else if (eOPTab == E_2B_OP)
         {
-            buffer[0] = 0x0F;
+            buffer[0] = 0x00;
+            buffer[1] = 0x0F;
             //ptr_buffer = buffer + 1;
-            ptr_buffer += 1;
+            ptr_buffer += 2;
         }
         else if (eOPTab == E_3B_OP)
         {
-            buffer[0] = 0x0F;
-            buffer[1] = 0x38;           /* fixed assignment, temporary*/
+            buffer[0] = 0x00;
+            buffer[1] = 0x0F;
+            buffer[2] = 0x38;           /* fixed assignment, temporary*/
             //ptr_buffer = buffer + 2;
-            ptr_buffer += 2;
+            ptr_buffer += 3;
         }
         for (int OpIdx = 0; (OpIdx < 256) && (lFound < nOpEntryMax); OpIdx++)
         {
@@ -1003,13 +1005,13 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 // check wchar 8 ~ 15
                 if (OPMatch(strOPMatch + 8, OP_2)) // do while match
                 {
-                    lendis = ndisasm(buffer, pOpEntry, eADM, &options);
+                    lendis = ndisasm(buffer + 1, pOpEntry, eADM, &options);
                 }
                 else
                 {
                     if (OPExtIdx == 0) // check the first time
                     {
-                        ndisasm(buffer, pOpEntry, eADM, &options);
+                        ndisasm(buffer + 1, pOpEntry, eADM, &options);
                     }
                     lendis = 0;
                 }
