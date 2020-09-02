@@ -1426,7 +1426,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         return 0;        /* No instruction table at all... */
     }
 
-    dp = data;
+    dp = data +0;
 
     fetch_or_return(origdata, dp, data_size, 1);
     ix += *dp++;
@@ -2249,9 +2249,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 colon = false;
             }
 
-
-            // uint64_t a = is_class(REGMEM, t);
-            // printf("a_low = %8x \n", a);
             // check register or fpu register prefix?
 
             if ((t & (REGISTER | FPUREG)) ||
@@ -2382,15 +2379,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             {
                 int started = false;
                 uint64_t a = t;
-                // printf("REGMEM = %0x \n", REGMEM);
-                // printf("REG_GPR = %0x \n", REG_GPR);
-                // printf("test a = %0x \n", a);
-                // a = a >> 32;
-                // printf("test a = %0x \n", a);
-                // uint64_t b = BITS8|BITS16|BITS32;
-                // a = a >> 32;
-                // b = b >> 32;
-                // printf("test b = %d \n", b);
 
                 if (t & BITS8)
                 {
@@ -2708,8 +2696,8 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
 int ndisasm(unsigned char* data, OPENTRY* pOpEntry, E_ADM eADM, unsigned int* flags)
 {
     char outbuf[36];
-    *flags = 0x40000000;
-    //*flags = 0x00000000;
+    //*flags = 0x40000000;
+    *flags = 0x00000000;
     // if segment size is 16-bit, choose 16-bit;
     // else if segment size is 32-bit or 64-bit, choose 32-bit
     int segsize = (eADM == E_AD16) ? 16 : 32;

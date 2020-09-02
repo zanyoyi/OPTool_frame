@@ -933,8 +933,6 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
         unsigned char buffer[8];
         // pointer to buffer
         unsigned char* ptr_buffer;
-        // initialize pointer before usage
-        ptr_buffer = buffer;
         // binary data length in byte
         int lendis;
         // switch display, switch loop behavior options
@@ -944,13 +942,16 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
         // inner loop count
         int nOPExtIdx;
 
+        // initialize pointer before usage
+        ptr_buffer = buffer;
         // initialze buffer
         memset(buffer, 0xCC, sizeof(buffer));
 
         if (eOPTab == E_1B_OP)
         {
             //ptr_buffer = buffer + 0;
-
+            buffer[0] = 0x66;
+            ptr_buffer += 1;
         }
         else if (eOPTab == E_2B_OP)
         {
@@ -1014,12 +1015,13 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 }
 
                 // match and valid cases
-                if (options & 0x04000000)
-                {
-                    OPExtIdx |= 0xFF;   // skip rest
-                }
+                //if (options & 0x04000000)
+                //{
+                    //OPExtIdx |= 0xFF;   // skip rest
+                //}
                 // no prefix instruction go here
-                else if ((options & 0x00F00000) != (eOPTab << 20))
+                //else if ((options & 0x00F00000) != (eOPTab << 20))
+                if ((options & 0x00F00000) != (eOPTab << 20))
                 {
                     OPExtIdx |= 0xFF;   // skip rest
                 }
