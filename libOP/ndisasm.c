@@ -1719,22 +1719,22 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 if (t & BITS8)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "imm8 ");
+                        snprintf(output + slen, outbufsize - slen, "byte ");
                 }
                 else if (t & BITS16)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "imm16 ");
+                        snprintf(output + slen, outbufsize - slen, "word ");
                 }
                 else if (t & BITS32)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "imm32 ");
+                        snprintf(output + slen, outbufsize - slen, "dword ");
                 }
                 else if (t & BITS64)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "imm64 ");
+                        snprintf(output + slen, outbufsize - slen, "qword ");
                 }
                 else if (t & NEAR)
                 {
@@ -1746,6 +1746,8 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     slen +=
                         snprintf(output + slen, outbufsize - slen, "short ");
                 }
+                slen +=
+                    snprintf(output + slen, outbufsize - slen, "imm");
             }
 
             // check immediate(or offset) address?
@@ -2697,7 +2699,9 @@ int ndisasm(unsigned char* data, OPENTRY* pOpEntry, E_ADM eADM, unsigned int* fl
 {
     char outbuf[32];
     *flags = 0x40000000;
-    // if segment size is 16-bit, choose 16-bit; else if segment size is 32-bit or 64-bit, choose 32-bit
+    //*flags = 0x00000000;
+    // if segment size is 16-bit, choose 16-bit;
+    // else if segment size is 32-bit or 64-bit, choose 32-bit
     int segsize = (eADM == E_AD16) ? 16 : 32;
     int len = disasm(data, 8, outbuf, sizeof(outbuf), segsize, flags);
     // convert char array to wchar array

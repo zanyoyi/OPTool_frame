@@ -908,7 +908,7 @@ DWORD EnumGrp(OP_ENTRY* pGrp, WCHAR* strModRMMatch, OPENTRY* pOpEntry, DWORD nOp
             {
                 pOpEntry->OP = OpIdx;
                 pOpEntry->OPExt = GrpIdx | 0x80; //set [bit 7] for valid
-                swprintf(pOpEntry->strDisasm, 128, _T("ins:%hs"), pGrp[GrpIdx].strFmt);
+                swprintf(pOpEntry->strDisasm, 128, _T("%hs"), pGrp[GrpIdx].strFmt);
                 pOpEntry++;
                 lFound++;
             }
@@ -939,8 +939,10 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
         int lendis;
         // switch display, switch loop behavior options
         unsigned int options;
-        // monipulate loop sequencial
+        // manipulate loop sequencial
         int OP_2;
+        // inner loop count
+        int nOPExtIdx;
 
         // initialze buffer
         memset(buffer, 0xCC, sizeof(buffer));
@@ -965,78 +967,90 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
         }
         for (int OpIdx = 0; (OpIdx < 256) && (lFound < nOpEntryMax); OpIdx++)
         {
+            // update op-code byte
+            *(ptr_buffer + 0) = (unsigned char)OpIdx;
+            options = 0;
+
             // check wchar 0 ~ 7
             if (OPMatch(strOPMatch + 0, OpIdx))
             {
-                // initialize flags
-                options = 0;
-                // update op-code byte
-                *(ptr_buffer + 0) = (unsigned char)OpIdx;
-
-                for (int OPExtIdx = 0; (OPExtIdx < 256) && (lFound < nOpEntryMax); OPExtIdx++)
+                nOPExtIdx = 256;
+            }
+            else
+            {
+                nOPExtIdx = 0;
+            }
+            for (int OPExtIdx = 0; (OPExtIdx < nOPExtIdx) && (lFound < nOpEntryMax); OPExtIdx++)
+            {
+                // mapping loop index to binary data
+                if (options & 0x02000000)
                 {
-                    // mapping loop index to binary data
-                    if (options & 0x02000000)
-                    {
-                        // group index: {mod,op,rm} <--> {op,mod,rm}
-                        OP_2 = ((OPExtIdx & 0x18) << 3) |
-                            ((OPExtIdx & 0xE0) >> 2) | (OPExtIdx & 0x07);
-                    }
-                    else // (options & 0x01000000)
-                    {
-                        // register index: {mod,reg,rm} <--> {mod,rm,reg}
-                        OP_2 = (OPExtIdx & 0xC0) | ((OPExtIdx & 0x07) << 3) |
-                            ((OPExtIdx & 0x38) >> 3);
-                    }
+                    // group index: {mod,op,rm} <--> {op,mod,rm}
+                    OP_2 = ((OPExtIdx & 0x18) << 3) |
+                        ((OPExtIdx & 0xE0) >> 2) | (OPExtIdx & 0x07);
+                }
+                else // (options & 0x01000000)
+                {
+                    // register index: {mod,reg,rm} <--> {mod,rm,reg}
+                    OP_2 = (OPExtIdx & 0xC0) | ((OPExtIdx & 0x07) << 3) |
+                        ((OPExtIdx & 0x38) >> 3);
+                }
 
-                    // check wchar 8 ~ 15
-                    if (OPMatch(strOPMatch + 8, OP_2)) // do while match
+                // update extended op-code byte
+                *(ptr_buffer + 1) = (unsigned char)OP_2;
+
+                // check wchar 8 ~ 15
+                if (OPMatch(strOPMatch + 8, OP_2)) // do while match
+                {
+                    lendis = ndisasm(buffer, pOpEntry, eADM, &options);
+                }
+                else
+                {
+                    if (OPExtIdx == 0) // check the first time
                     {
-                        // update extended op-code byte
-                        *(ptr_buffer + 1) = (unsigned char)OP_2;
-                        lendis = ndisasm(buffer, pOpEntry, eADM, &options);
+                        ndisasm(buffer, pOpEntry, eADM, &options);
                     }
-                    else if (!OPExtIdx) // check the first time
-                    {
-                        lendis = ndisasm(buffer, pOpEntry, eADM, &options);
-                        // update again here
-                        lendis = 0;
-                    }
-                    // match and valid cases
+                    lendis = 0;
+                }
+
+                // match and valid cases
+                if (options & 0x04000000)
+                {
+                    OPExtIdx |= 0xFF;   // skip rest
+                }
+                // no prefix instruction go here
+                else if (options & 0x02000000)
+                {
+                    pOpEntry->OP = OpIdx;
+                    pOpEntry->OPExt = 0x80 | ((OP_2 >> 3) & 0x07);
                     if (lendis)
                     {
-                        // update again here
-                        lendis = 0;
-                        switch (options & 0x07000000)
-                        {
-                            case 0x00000000:    /* -- mnemonic*/
-                                pOpEntry->OP = OPExtIdx;
-                                pOpEntry->OPExt = 0;
-                                pOpEntry++;
-                                lFound++;
-                                OPExtIdx += 256;// skip rest
-                                break;
-                            case 0x01000000:    /* reg mnemonic*/
-                                pOpEntry->OP = OpIdx;
-                                pOpEntry->OPExt = 0;
-                                pOpEntry++;
-                                lFound++;
-                                OPExtIdx += 7; // skip same reg type
-                                break;
-                            case 0x02000000:    /* op mnemonic*/
-                                pOpEntry->OP = OpIdx;
-                                pOpEntry->OPExt = 0x80 | ((OP_2 >> 3) & 0x07);
-                                pOpEntry++;
-                                lFound++;
-                                //OPExtIdx += 0;
-                                break;
-                            case 0x04000000:    /* prefixes mnemonic*/
-                            case 0x05000000:
-                            case 0x06000000:
-                            default:            /* error cases*/
-                                OPExtIdx += 256;// skip rest
-                                break;
-                        }
+                        pOpEntry++;
+                        lFound++;
+                    }
+                }
+                // no group instruction go here
+                else if (options & 0x01000000)
+                {
+                    pOpEntry->OP = OpIdx;
+                    pOpEntry->OPExt = 0;
+                    if (lendis)
+                    {
+                        pOpEntry++;
+                        lFound++;
+                        OPExtIdx |= 0x07;   // skip rest
+                    }
+                }
+                // no modrm instruction go here
+                else
+                {
+                    pOpEntry->OP = OpIdx;
+                    pOpEntry->OPExt = 0;
+                    if (lendis)
+                    {
+                        pOpEntry++;
+                        lFound++;
+                        OPExtIdx |= 0xFF;   // skip rest
                     }
                 }
             }
@@ -1104,7 +1118,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         if (OP1BMap[OpIdx].strFmt)
                         {
                             pOpEntry->OP = OpIdx;
-                            swprintf(pOpEntry->strDisasm, 128, _T("ins:%hs"), OP1BMap[OpIdx].strFmt);
+                            swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP1BMap[OpIdx].strFmt);
                             pOpEntry++;
                             lFound++;
                         }
@@ -1162,7 +1176,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         if (OP2BMap[OpIdx].strFmt)
                         {
                             pOpEntry->OP = OpIdx;
-                            swprintf(pOpEntry->strDisasm, 128, _T("ins:%hs"), OP2BMap[OpIdx].strFmt);
+                            swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP2BMap[OpIdx].strFmt);
                             pOpEntry++;
                             lFound++;
                         }
