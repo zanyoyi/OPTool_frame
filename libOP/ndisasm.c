@@ -690,11 +690,10 @@ static int matches(const struct itemplate* t, uint8_t* data,
             case4(0120) :
             case4(0130) :
             {
-                int modrm = *data++;
-                                                
                 // detected reg/op as reg
                 *flags |= 0x01000000 + (1 << (op1 + 8)) + (1 << op2);
 
+                int modrm = *data++;
                 opx->segment |= SEG_RMREG;
                 data = do_ea(data, modrm, asize, segsize, eat, opy, ins);
                 if (!data)
@@ -746,11 +745,22 @@ static int matches(const struct itemplate* t, uint8_t* data,
         case4(0230) :
         case4(0234) :
         {
-            int modrm = *data++;
-
             // detected reg/op as op
-            *flags |= 0x02000000 + (1 << op2);
+            if (
+                (*(data - 1) == 0x1F) ||                            /* NOP Ev special case*/
+                ((*(data - 1) >= 0x90) && (*(data - 1) <= 0x9F))    /* SETcc Eb special case*/
+                )
+            {
+                // make sure no function assume (operand[op1] == REG) as register
+                *flags |= 0x01000000 + (1 << op2);
+            }
+            // default group instruction
+            else
+            {
+                *flags |= 0x02000000 + (1 << op2);
+            }
 
+            int modrm = *data++;
             if (((modrm >> 3) & 07) != (c & 07))
                 return 0;   /* spare field doesn't match up */
 
@@ -2697,7 +2707,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
 
 int ndisasm(unsigned char* data, OPENTRY* pOpEntry, E_ADM eADM, unsigned int* flags)
 {
-    char outbuf[32];
+    char outbuf[36];
     *flags = 0x40000000;
     //*flags = 0x00000000;
     // if segment size is 16-bit, choose 16-bit;
