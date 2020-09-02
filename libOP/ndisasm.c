@@ -1420,13 +1420,13 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
 
     fetch_or_return(origdata, dp, data_size, 1);
     ix += *dp++;
-
     // printf("%s \n", origdata);
 
     while (ix->n == -1)
     {
         fetch_or_return(origdata, dp, data_size, 1);
         ix = (const struct disasm_index*)ix->p + *dp++;
+        *flags += 0x00100000;
     }
 
     p = (const struct itemplate* const*)ix->p;
