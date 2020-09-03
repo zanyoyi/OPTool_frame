@@ -1436,6 +1436,9 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
     {
         fetch_or_return(origdata, dp, data_size, 1);
         ix = (const struct disasm_index*)ix->p + *dp++;
+
+        // check multiple byte instruction?
+
         *flags += 0x00100000;
     }
 
@@ -1449,7 +1452,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         {
             // allow instruction fragments, works always true
             // mnemonic information generator
-            // length = matches(*p, data, &prefix, segsize, &tmp_ins);
+
             works = true;
 
             /*
@@ -1537,6 +1540,24 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         return 0;               /* no instruction was matched */
     }
 
+    p = (const struct itemplate* const*)ix->p;
+
+    // /check abstract concepts
+
+    for (n = ix->n; n && (*flags & 0x80000000); n--, p++)
+    {
+        // same mnemonic
+        bool test_token = (*p)->opcode == (*best_p)->opcode;
+        bool test_FAR = ~((*p)->opd[0] ^ (*best_p)->opd[0]) & FAR;
+
+        if ((*p)->opcode == (*best_p)->opcode)
+        {
+            *flags += 0x00010000;
+        }
+    }
+
+    // /check abstract concepts block end
+
     /* Pick the best match */
     p = best_p;
     length = best_length;
@@ -1598,9 +1619,10 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
 
     if (*flags & 0x80000000)
     {
-        // check if mnemonic and operand code are needed
+        // check if reg operand is not needed
         for (i = 0; i < (*p)->operands; i++)
         {
+            // shortcuts to (*p)->opd[i];
             opflags_t t = (*p)->opd[i];
             // shortcuts to (*p)->deco[i];
             decoflags_t deco = (*p)->deco[i];
@@ -1609,14 +1631,33 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
 
             output[slen++] = (colon ? ':' : i == 0 ? ' ' : ',');
             colon = (t & COLON);
-
-            // check register or fpu register prefix?
-
             if ((t & (REGISTER | FPUREG)) ||
                 (o->segment & SEG_RMREG))
             {
-                slen +=
-                    snprintf(output + slen, outbufsize - slen, "%s", "reg");
+                // check i'th operand base register
+
+                enum reg_enum reg;
+                reg = whichreg(t, o->basereg, ins.rex);
+
+                // indicate reg/op register operand
+                if (*flags & 0x01000000) // reg/op is register operand
+                {
+                    if (((*flags & 0x0000FF00) >> 8) == (1 << i)) // reg operand is i'th operand
+                    {
+                        slen += snprintf(output + slen, outbufsize - slen, "%s",
+                            nasm_reg_types[reg - EXPR_REG_START]);
+                    }
+                    else //reg operand does not exists, or reg is in other operand
+                    {
+                        slen += snprintf(output + slen, outbufsize - slen, "%s",
+                            nasm_reg_names[reg - EXPR_REG_START]);
+                    }
+                }
+                else  // reg/op is extended op, or modrm does not exists
+                {
+                    slen += snprintf(output + slen, outbufsize - slen, "%s",
+                        nasm_reg_names[reg - EXPR_REG_START]);
+                }
             }
 
             // check 1?
@@ -1630,6 +1671,36 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
 
             else if (t & IMMEDIATE)
             {
+                if (t & BITS8)
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "byte ");
+                }
+                else if (t & BITS16)
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "word ");
+                }
+                else if (t & BITS32)
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "dword ");
+                }
+                else if (t & BITS64)
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "qword ");
+                }
+                else if (t & NEAR)
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "near ");
+                }
+                else if (t & SHORT)
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "short ");
+                }
                 slen +=
                     snprintf(output + slen, outbufsize - slen, "imm");
             }
@@ -1639,13 +1710,42 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             else if (!(MEM_OFFS & ~t))
             {
                 slen +=
-                    snprintf(output + slen, outbufsize - slen, "mem");
+                    snprintf(output + slen, outbufsize - slen, "mem_offset");
             }
 
-            // check register/memory operand?
+            // check register/memory operand size?
 
             else if (is_class(REGMEM, t))
             {
+                int started = false;
+
+                if (t & BITS8)
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "byte ");
+                }
+                if (t & BITS16)
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "word ");
+                }
+                if (t & BITS32)
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "dword ");
+                }
+                if (t & BITS64)
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "qword ");
+                }
+                if (t & BITS80)
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "tword ");
+                }
+                // skip complicate cases
+
                 // check far indicator?
                 // parts of instruction mnemonic
                 if (t & FAR)
@@ -1658,14 +1758,153 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     slen +=
                         snprintf(output + slen, outbufsize - slen, "near ");
                 }
-                slen +=
-                    snprintf(output + slen, outbufsize - slen, "r/m");
+                output[slen++] = '[';
+
+                // skip check displacement flag?
+
+                // check rel??
+
+                if (o->eaflags & EAF_REL)
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "rel ");
+                }
+
+                // check segment override flag
+
+                if (segover)
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "%s:",
+                            segover);
+                    // clear segment override flag
+                    segover = NULL;
+                }
+
+                // check if base register is valid
+
+                if ((segsize == 32) && (o->basereg == R_ESP))
+                {
+                    // base register is ESP : SIB flag
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "[--][--]");
+                }
+                else if (o->basereg != -1)
+                {
+                    // base register is valid
+                    slen += snprintf(output + slen, outbufsize - slen, "%s",
+                        nasm_reg_names[(o->basereg - EXPR_REG_START)]);
+                    started = true;
+                }
+
+                // check if index register is valid, if scale factor is valid
+
+                if ((segsize == 32) && (o->basereg == R_ESP))
+                {
+                    // base register is ESP : SIB flag
+                }
+                else if (o->indexreg != -1 && !itemp_has(*best_p, IF_MIB))
+                {
+                    if (started)
+                    {
+                        output[slen++] = '+';
+                    }
+                    slen += snprintf(output + slen, outbufsize - slen, "%s",
+                        nasm_reg_names[(o->indexreg - EXPR_REG_START)]);
+                    // skip scale factor equal 1 case
+                    if (o->scale > 1)
+                    {
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "*%d",
+                                o->scale);
+                    }
+                    started = true;
+                }
+                if (o->segment & SEG_DISP8)
+                {
+                    // override to disp32 by evex flag
+                    if (is_evex)
+                    {
+                        const char* prefix;
+
+                        prefix = "+";
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "%sdisp32",
+                                prefix);
+                    }
+                    // default to disp8
+                    else
+                    {
+                        const char* prefix;
+
+                        prefix = "+";
+
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "%sdisp8",
+                                prefix);
+                    }
+                }
+                else if (o->segment & SEG_DISP16)
+                {
+                    const char* prefix;
+                    // default to disp16
+
+                    prefix = started ? "+" : "";
+                    // replace this line with other function
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen,
+                            "%sdisp16", prefix);
+                }
+                else if (o->segment & SEG_DISP32)
+                {
+                    // override to disp64 by a64 flag
+                    if (prefix.asize == 64)
+                    {
+                        const char* prefix;
+
+                        prefix = started ? "+" : "";
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen,
+                                "%sdisp64", prefix);
+                    }
+                    // default to disp32
+                    else
+                    {
+                        const char* prefix;
+
+                        prefix = started ? "+" : "";
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen,
+                                "%sdisp32", prefix);
+                    }
+                }
+
+                // check index register is valid, check scale factor(again?)
+                if (o->indexreg != -1 && itemp_has(*best_p, IF_MIB))
+                {
+                    // replace this line with other function
+                    output[slen++] = ',';
+                    slen += snprintf(output + slen, outbufsize - slen, "%s",
+                        nasm_reg_names[(o->indexreg - EXPR_REG_START)]);
+                    // skip scale factor equal 1 case
+                    if (o->scale > 1)
+                    {
+                        // replace this line with other function
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "*%d",
+                                o->scale);
+                    }
+                    started = true;
+                }
+                // replace this line with other function
+                output[slen++] = ']';
             }
 
             // unkown cases
 
             else
             {
+                // replace this line with other function
                 slen +=
                     snprintf(output + slen, outbufsize - slen, "<operand%d>",
                         i);
@@ -2695,14 +2934,21 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
 
 int ndisasm(unsigned char* data, OPENTRY* pOpEntry, E_ADM eADM, unsigned int* flags)
 {
-    char outbuf[36];
-    *flags = 0x40000000;
+    char outbuf[32];
+    *flags = 0x80000000;
+    //*flags = 0x40000000;
     //*flags = 0x00000000;
+
     // if segment size is 16-bit, choose 16-bit;
     // else if segment size is 32-bit or 64-bit, choose 32-bit
+    // segment size is 64-bit, go hell
     int segsize = (eADM == E_AD16) ? 16 : 32;
     int len = disasm(data, 8, outbuf, sizeof(outbuf), segsize, flags);
-    // convert char array to wchar array
-    swprintf(pOpEntry->strDisasm, 128, L"%hs", outbuf);
-    return len;
+    if (len)
+    {
+        // convert char array to wchar array
+        swprintf(pOpEntry->strDisasm, 128, L"%hs", outbuf);
+        return len;
+    }
+    return 0;
 }
