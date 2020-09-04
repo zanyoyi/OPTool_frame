@@ -691,8 +691,8 @@ static int matches(const struct itemplate* t, uint8_t* data,
             case4(0130) :
             {
                 // detected reg/op as reg
-                *flags |= 0x01000000 + (1 << (op1 + 8)) + (1 << op2);
-
+                *flags |= 0x01000000 + ((op1 & 0x3) << 4) + (op2 & 0x3);
+                
                 int modrm = *data++;
                 opx->segment |= SEG_RMREG;
                 data = do_ea(data, modrm, asize, segsize, eat, opy, ins);
@@ -752,12 +752,12 @@ static int matches(const struct itemplate* t, uint8_t* data,
                 )
             {
                 // make sure no function assume (operand[op1] == REG) as register
-                *flags |= 0x01000000 + (1 << op2);
+                *flags |= 0x01000000 + (op2 & 0x3);
             }
             // default group instruction
             else
             {
-                *flags |= 0x02000000 + (1 << op2);
+                *flags |= 0x02000000 + (op2 & 0x3);
             }
 
             int modrm = *data++;
@@ -1543,19 +1543,49 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
     p = (const struct itemplate* const*)ix->p;
 
     // /check abstract concepts
-
-    for (n = ix->n; n && (*flags & 0x80000000); n--, p++)
+    if (*flags & 0x80000000)
     {
-        // same mnemonic
-        bool test_token = (*p)->opcode == (*best_p)->opcode;
-        bool test_FAR = ~((*p)->opd[0] ^ (*best_p)->opd[0]) & FAR;
-
-        if ((*p)->opcode == (*best_p)->opcode)
+        uint64_t opd0 = 0;
+        uint64_t opd1 = 0;
+        uint64_t opd2 = 0;
+        uint64_t opd3 = 0;
+        for (n = ix->n; n; n--, p++)
         {
-            *flags += 0x00010000;
-        }
-    }
+            // same mnemonic
+            bool test_token = (*p)->opcode == (*best_p)->opcode;
+            bool test_FAR = ~((*p)->opd[0] ^ (*best_p)->opd[0]) & FAR;
 
+            if ((*p)->opcode == (*best_p)->opcode)
+            {
+                if (~((*p)->opd[0] ^ (*best_p)->opd[0]) & REG_CLASS_GPR)
+                {
+                    opd0 |= (*p)->opd[0];
+                }
+                if (~((*p)->opd[1] ^ (*best_p)->opd[1]) & REG_CLASS_GPR)
+                {
+                    //uint64_t a0 = MEMORY;
+                    //uint64_t a1 = GEN_OPTYPE(3);
+                    //uint64_t a2 = REGMEM;
+                    //uint64_t b0 = REG_GPR;
+                    //uint64_t b1 = REG_CLASS_GPR;
+                    //uint64_t b2 = REGMEM;
+                    //uint64_t b3 = REGISTER;
+                    opd1 |= (*p)->opd[1];
+                }
+                if (~((*p)->opd[2] ^ (*best_p)->opd[2]) & REG_CLASS_GPR)
+                {
+                    opd2 |= (*p)->opd[2];
+
+                }
+                if (~((*p)->opd[3] ^ (*best_p)->opd[3]) & REG_CLASS_GPR)
+                {
+                    opd3 |= (*p)->opd[3];
+
+                }
+            }
+        }
+        *flags |= ((opd0 >> 32) & 0x0F) << 4 | ((opd1 >> 32) & 0x0F) << 8 | ((opd2 >> 32) & 0x0F) << 12 | ((opd3 >> 32) & 0x0F) << 16;
+    }
     // /check abstract concepts block end
 
     /* Pick the best match */
@@ -1642,7 +1672,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 // indicate reg/op register operand
                 if (*flags & 0x01000000) // reg/op is register operand
                 {
-                    if (((*flags & 0x0000FF00) >> 8) == (1 << i)) // reg operand is i'th operand
+                    if (((*flags & 0x0000000C) >> 2) == i) // reg operand is i'th operand
                     {
                         slen += snprintf(output + slen, outbufsize - slen, "%s",
                             nasm_reg_types[reg - EXPR_REG_START]);
@@ -1657,6 +1687,21 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 {
                     slen += snprintf(output + slen, outbufsize - slen, "%s",
                         nasm_reg_names[reg - EXPR_REG_START]);
+                }
+                if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
+                {
+                    slen += snprintf(output + slen, outbufsize - slen,
+                        "(word/dword)");
+                }
+                else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
+                {
+                    slen += snprintf(output + slen, outbufsize - slen,
+                        "(dword/qword)");
+                }
+                else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
+                {
+                    slen += snprintf(output + slen, outbufsize - slen,
+                        "(word/dword/qword)");
                 }
             }
 
@@ -1898,6 +1943,21 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 }
                 // replace this line with other function
                 output[slen++] = ']';
+                if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
+                {
+                    slen += snprintf(output + slen, outbufsize - slen,
+                        "(word/dword)");
+                }
+                else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
+                {
+                    slen += snprintf(output + slen, outbufsize - slen,
+                        "(dword/qword)");
+                }
+                else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
+                {
+                    slen += snprintf(output + slen, outbufsize - slen,
+                        "(word/dword/qword)");
+                }
             }
 
             // unkown cases
@@ -1936,7 +1996,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 // indicate reg/op register operand
                 if (*flags & 0x01000000) // reg/op is register operand
                 {
-                    if (((*flags & 0x0000FF00) >> 8) == (1 << i)) // reg operand is i'th operand
+                    if (((*flags & 0x0000000C) >> 2) == i) // reg operand is i'th operand
                     {
                         slen += snprintf(output + slen, outbufsize - slen, "%s",
                             nasm_reg_types[reg - EXPR_REG_START]);
@@ -2231,7 +2291,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 // indicate reg/op register operand
                 if (*flags & 0x01000000) // reg/op is register operand
                 {
-                    if (((*flags & 0x0000FF00) >> 8) == (1 << i)) // reg operand is i'th operand
+                    if (((*flags & 0x0000000C) >> 2) == i) // reg operand is i'th operand
                     {
                         slen += snprintf(output + slen, outbufsize - slen, "%s",
                             nasm_reg_types[reg - EXPR_REG_START]);
@@ -2934,7 +2994,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
 
 int ndisasm(unsigned char* data, OPENTRY* pOpEntry, E_ADM eADM, unsigned int* flags)
 {
-    char outbuf[32];
+    char outbuf[64];
     *flags = 0x80000000;
     //*flags = 0x40000000;
     //*flags = 0x00000000;
