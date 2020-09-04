@@ -949,15 +949,23 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
 
         if (eOPTab == E_1B_OP)
         {
-            //ptr_buffer = buffer + 0;
+            //buffer[0] = 0x66;
+            //ptr_buffer = buffer + 1;
         }
         else if (eOPTab == E_2B_OP)
         {
+            //buffer[0] = 0x66;
+            //buffer[1] = 0x0F;
+            //ptr_buffer = buffer + 2;
             buffer[0] = 0x0F;
             ptr_buffer = buffer + 1;
         }
         else if (eOPTab == E_3B_OP)
         {
+            //buffer[0] = 0x66;
+            //buffer[1] = 0x0F;
+            //buffer[2] = 0x38;           /* fixed assignment, temporary*/
+            //ptr_buffer = buffer + 3;
             buffer[0] = 0x0F;
             buffer[1] = 0x38;           /* fixed assignment, temporary*/
             ptr_buffer = buffer + 2;
@@ -980,13 +988,13 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
             for (int OPExtIdx = 0; (OPExtIdx < nOPExtIdx) && (lFound < nOpEntryMax); OPExtIdx++)
             {
                 // mapping loop index to binary data
-                if (options & 0x02000000)
+                if (options & 0x08000000)
                 {
                     // group index: {mod,op,rm} <--> {op,mod,rm}
                     OP_2 = ((OPExtIdx & 0x18) << 3) |
                         ((OPExtIdx & 0xE0) >> 2) | (OPExtIdx & 0x07);
                 }
-                else // (options & 0x01000000)
+                else // (options & 0x04000000)
                 {
                     // register index: {mod,reg,rm} <--> {mod,rm,reg}
                     OP_2 = (OPExtIdx & 0xC0) | ((OPExtIdx & 0x07) << 3) |
@@ -1011,17 +1019,18 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 }
 
                 // match and valid cases
-                if (options & 0x04000000)
-                {
-                    OPExtIdx |= 0xFF;   // skip rest
-                }
+                //if (options & 0x00000000)
+                //{
+                //    OPExtIdx |= 0xFF;   // skip rest
+                //}
                 // no prefix instruction go here
-                else if ((options & 0x00F00000) != (eOPTab << 20))
+                //else if ((options & 0x00C00000) != (eOPTab << 24))
+                if ((options & 0x03000000) != (eOPTab << 24))
                 {
                     OPExtIdx |= 0xFF;   // skip rest
                 }
                 // no multiple-byte instruction mismatch go here
-                else if (options & 0x02000000)
+                else if (options & 0x08000000)
                 {
                     pOpEntry->OP = OpIdx;
                     pOpEntry->OPExt = 0x80 | ((OP_2 >> 3) & 0x07);
@@ -1032,7 +1041,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     }
                 }
                 // no group instruction go here
-                else if (options & 0x01000000)
+                else if (options & 0x04000000)
                 {
                     pOpEntry->OP = OpIdx;
                     pOpEntry->OPExt = 0;

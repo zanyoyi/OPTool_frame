@@ -691,7 +691,7 @@ static int matches(const struct itemplate* t, uint8_t* data,
             case4(0130) :
             {
                 // detected reg/op as reg
-                *flags |= 0x01000000 + ((op1 & 0x3) << 4) + (op2 & 0x3);
+                *flags |= 0x04000000 + ((op1 & 0x3) << 2) + (op2 & 0x3);
                 
                 int modrm = *data++;
                 opx->segment |= SEG_RMREG;
@@ -752,12 +752,12 @@ static int matches(const struct itemplate* t, uint8_t* data,
                 )
             {
                 // make sure no function assume (operand[op1] == REG) as register
-                *flags |= 0x01000000 + (op2 & 0x3);
+                *flags |= 0x04000000 + (op2 & 0x3);
             }
             // default group instruction
             else
             {
-                *flags |= 0x02000000 + (op2 & 0x3);
+                *flags |= 0x08000000 + (op2 & 0x3);
             }
 
             int modrm = *data++;
@@ -1235,62 +1235,51 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         case 0xF2:
         case 0xF3:
             fetch_or_return(origdata, data, data_size, 1);
-            *flags |= 0x04000000;
             prefix.rep = *data++;
             break;
 
         case 0x9B:
             fetch_or_return(origdata, data, data_size, 1);
-            *flags |= 0x04000000;
             prefix.wait = *data++;
             break;
 
         case 0xF0:
             fetch_or_return(origdata, data, data_size, 1);
-            *flags |= 0x04000000;
             prefix.lock = *data++;
             break;
 
         case 0x2E:
             fetch_or_return(origdata, data, data_size, 1);
-            *flags |= 0x04000000;
             segover = "cs", prefix.seg = *data++;
             break;
         case 0x36:
             fetch_or_return(origdata, data, data_size, 1);
-            *flags |= 0x04000000;
             segover = "ss", prefix.seg = *data++;
             break;
         case 0x3E:
             fetch_or_return(origdata, data, data_size, 1);
-            *flags |= 0x04000000;
             segover = "ds", prefix.seg = *data++;
             break;
         case 0x26:
             fetch_or_return(origdata, data, data_size, 1);
-            *flags |= 0x04000000;
             segover = "es", prefix.seg = *data++;
             break;
         case 0x64:
             fetch_or_return(origdata, data, data_size, 1);
-            *flags |= 0x04000000;
             segover = "fs", prefix.seg = *data++;
             break;
         case 0x65:
             fetch_or_return(origdata, data, data_size, 1);
-            *flags |= 0x04000000;
             segover = "gs", prefix.seg = *data++;
             break;
 
         case 0x66:
             fetch_or_return(origdata, data, data_size, 1);
-            *flags |= 0x04000000;
             prefix.osize = (segsize == 16) ? 32 : 16;
             prefix.osp = *data++;
             break;
         case 0x67:
             fetch_or_return(origdata, data, data_size, 1);
-            *flags |= 0x04000000;
             prefix.asize = (segsize == 32) ? 16 : 32;
             prefix.asp = *data++;
             break;
@@ -1300,7 +1289,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             if (segsize == 64 || (data[1] & 0xc0) == 0xc0)
             {
                 fetch_or_return(origdata, data, data_size, 2);
-                *flags |= 0x04000000;
                 prefix.vex[0] = *data++;
                 prefix.vex[1] = *data++;
 
@@ -1310,7 +1298,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 if (prefix.vex[0] == 0xc4)
                 {
                     fetch_or_return(origdata, data, data_size, 1);
-                    prefix.vex[2] = *data++;
                     prefix.rex |= (~prefix.vex[1] >> 5) & 7; /* REX_RXB */
                     prefix.rex |= (prefix.vex[2] >> (7 - 3)) & REX_W;
                     prefix.vex_m = prefix.vex[1] & 0x1f;
@@ -1335,7 +1322,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             if (segsize == 64 || ((data[1] & 0xc0) == 0xc0))
             {
                 fetch_or_return(origdata, data, data_size, 4);
-                *flags |= 0x04000000;
                 data++;        /* 62h EVEX prefix */
                 prefix.evex[0] = *data++;
                 prefix.evex[1] = *data++;
@@ -1360,7 +1346,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 (segsize == 64 || (data[1] & 0xc0) == 0xc0))
             {
                 fetch_or_return(origdata, data, data_size, 3);
-                *flags |= 0x04000000;
                 prefix.vex[0] = *data++;
                 prefix.vex[1] = *data++;
                 prefix.vex[2] = *data++;
@@ -1398,7 +1383,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             if (segsize == 64)
             {
                 fetch_or_return(origdata, data, data_size, 1);
-                *flags |= 0x04000000;
                 prefix.rex = *data++;
                 if (prefix.rex & REX_W)
                 {
@@ -1439,7 +1423,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
 
         // check multiple byte instruction?
 
-        *flags += 0x00100000;
+        *flags += 1 << 24;
     }
 
     p = (const struct itemplate* const*)ix->p;
@@ -1555,35 +1539,28 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             bool test_token = (*p)->opcode == (*best_p)->opcode;
             bool test_FAR = ~((*p)->opd[0] ^ (*best_p)->opd[0]) & FAR;
 
-            if ((*p)->opcode == (*best_p)->opcode)
+            if (test_token && test_FAR)
             {
+                // operand are both register, or both not register
                 if (~((*p)->opd[0] ^ (*best_p)->opd[0]) & REG_CLASS_GPR)
                 {
                     opd0 |= (*p)->opd[0];
                 }
                 if (~((*p)->opd[1] ^ (*best_p)->opd[1]) & REG_CLASS_GPR)
                 {
-                    //uint64_t a0 = MEMORY;
-                    //uint64_t a1 = GEN_OPTYPE(3);
-                    //uint64_t a2 = REGMEM;
-                    //uint64_t b0 = REG_GPR;
-                    //uint64_t b1 = REG_CLASS_GPR;
-                    //uint64_t b2 = REGMEM;
-                    //uint64_t b3 = REGISTER;
                     opd1 |= (*p)->opd[1];
                 }
                 if (~((*p)->opd[2] ^ (*best_p)->opd[2]) & REG_CLASS_GPR)
                 {
                     opd2 |= (*p)->opd[2];
-
                 }
                 if (~((*p)->opd[3] ^ (*best_p)->opd[3]) & REG_CLASS_GPR)
                 {
                     opd3 |= (*p)->opd[3];
-
                 }
             }
         }
+        // check 8, 16, 32, 64-bit flags
         *flags |= ((opd0 >> 32) & 0x0F) << 4 | ((opd1 >> 32) & 0x0F) << 8 | ((opd2 >> 32) & 0x0F) << 12 | ((opd3 >> 32) & 0x0F) << 16;
     }
     // /check abstract concepts block end
@@ -1670,7 +1647,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 reg = whichreg(t, o->basereg, ins.rex);
 
                 // indicate reg/op register operand
-                if (*flags & 0x01000000) // reg/op is register operand
+                if (*flags & 0x04000000) // reg/op is register operand
                 {
                     if (((*flags & 0x0000000C) >> 2) == i) // reg operand is i'th operand
                     {
@@ -1688,16 +1665,19 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     slen += snprintf(output + slen, outbufsize - slen, "%s",
                         nasm_reg_names[reg - EXPR_REG_START]);
                 }
+                // 16/32 bit operand case
                 if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
                 {
                     slen += snprintf(output + slen, outbufsize - slen,
                         "(word/dword)");
                 }
+                // 32/64 bit operand case
                 else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
                 {
                     slen += snprintf(output + slen, outbufsize - slen,
                         "(dword/qword)");
                 }
+                // 16/32/64 bit operand case
                 else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
                 {
                     slen += snprintf(output + slen, outbufsize - slen,
@@ -1943,16 +1923,19 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 }
                 // replace this line with other function
                 output[slen++] = ']';
+                // 16/32 bit operand case
                 if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
                 {
                     slen += snprintf(output + slen, outbufsize - slen,
                         "(word/dword)");
                 }
+                // 32/64 bit operand case
                 else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
                 {
                     slen += snprintf(output + slen, outbufsize - slen,
                         "(dword/qword)");
                 }
+                // 16/32/64 bit operand case
                 else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
                 {
                     slen += snprintf(output + slen, outbufsize - slen,
@@ -1994,7 +1977,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 reg = whichreg(t, o->basereg, ins.rex);
 
                 // indicate reg/op register operand
-                if (*flags & 0x01000000) // reg/op is register operand
+                if (*flags & 0x04000000) // reg/op is register operand
                 {
                     if (((*flags & 0x0000000C) >> 2) == i) // reg operand is i'th operand
                     {
@@ -2289,7 +2272,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 reg = whichreg(t, o->basereg, ins.rex);
 
                 // indicate reg/op register operand
-                if (*flags & 0x01000000) // reg/op is register operand
+                if (*flags & 0x04000000) // reg/op is register operand
                 {
                     if (((*flags & 0x0000000C) >> 2) == i) // reg operand is i'th operand
                     {
