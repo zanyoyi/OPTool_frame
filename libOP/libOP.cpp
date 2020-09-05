@@ -985,7 +985,10 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
             {
                 nOPExtIdx = 0;
             }
-            for (int OPExtIdx = 0; (OPExtIdx < nOPExtIdx) && (lFound < nOpEntryMax); OPExtIdx++)
+
+            // while loop is more verbose than for loop
+            int OPExtIdx = 0;
+            while ((OPExtIdx < nOPExtIdx) && (lFound < nOpEntryMax))
             {
                 // mapping loop index to binary data
                 if (options & 0x08000000)
@@ -1027,7 +1030,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 //else if ((options & 0x00C00000) != (eOPTab << 24))
                 if ((options & 0x03000000) != (eOPTab << 24))
                 {
-                    OPExtIdx |= 0xFF;   // skip rest
+                    OPExtIdx = 256;     // skip rest
                 }
                 // no multiple-byte instruction mismatch go here
                 else if (options & 0x08000000)
@@ -1061,9 +1064,10 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     {
                         pOpEntry++;
                         lFound++;
-                        OPExtIdx |= 0xFF;   // skip rest
+                        OPExtIdx = 256;     // skip rest
                     }
                 }
+                OPExtIdx++;
             }
         }
     }

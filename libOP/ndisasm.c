@@ -2984,7 +2984,7 @@ int ndisasm(unsigned char* data, OPENTRY* pOpEntry, E_ADM eADM, unsigned int* fl
 
     // if segment size is 16-bit, choose 16-bit;
     // else if segment size is 32-bit or 64-bit, choose 32-bit
-    // segment size is 64-bit, go hell
+    // segment size is 64-bit?
     int segsize = (eADM == E_AD16) ? 16 : 32;
     int len = disasm(data, 8, outbuf, sizeof(outbuf), segsize, flags);
     if (len)
