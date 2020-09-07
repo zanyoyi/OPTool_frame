@@ -931,20 +931,22 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
     {
         // input, multiple byte string array
         unsigned char buffer[16];
-        // pointer to buffer
+        // pointer to buffer for typing
         unsigned char* ptr_buffer;
+        // pointer to buffer for fetching
         unsigned char* ptr2_buffer;
         // binary data length in byte
         int lendis;
         // switch display, switch loop behavior options
         unsigned int options;
-        // manipulate loop sequencial
+        // manipulate loop sequential
         int OP_2;
         // inner loop count
         int nOPExtIdx;
 
         // initialize pointer before usage
         ptr_buffer = buffer;
+        ptr2_buffer = buffer;
         // initialze buffer
         memset(buffer, 0xCC, sizeof(buffer));
 
@@ -994,7 +996,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
             // small index for all possible prefixes
             int PrefixIdx = 0;
             int next_PrefixIdx = 0;
-            // while loop is more verbose than for loop
+            // while loop is more verbose than triple for loop
             int OPExtIdx = 0;
             while ((OPExtIdx < nOPExtIdx) && (lFound < nOpEntryMax))
             {
@@ -1042,6 +1044,8 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     ptr2_buffer = buffer + 3 - 1;
                     next_PrefixIdx = 0x00;
                     break;
+                case 0xF266:
+                case 0xF366:
                 default:
                     break;
                 }
@@ -1068,8 +1072,6 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     {
                         options = 0x40000000;
                         ndisasm(ptr2_buffer, pOpEntry, eADM, &options);
-                        // don't need prefix scan anymore
-                        next_PrefixIdx = 0;
                     }
                     lendis = 0;
                 }
@@ -1103,21 +1105,18 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         pOpEntry->ReqPrefix = 0x00000000;
                         pOpEntry++;
                         lFound++;
-                        PrefixIdx = next_PrefixIdx;
+                        // reset to default prefix
+                        PrefixIdx = 0;
                         OPExtIdx++;         // find next member
                     }
                     else if ((options & 0x00F00000) && next_PrefixIdx)
                     {
                         PrefixIdx = next_PrefixIdx;
                     }
-                    else if (PrefixIdx)
-                    {
-                        // reset to default prefix
-                        PrefixIdx = next_PrefixIdx;
-                        OPExtIdx++;         // find next member
-                    }
                     else
                     {
+                        // reset to default prefix
+                        PrefixIdx = 0;
                         OPExtIdx++;         // find next member
                     }
                 }
@@ -1138,24 +1137,21 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         pOpEntry->ReqPrefix = 0x00000000;
                         pOpEntry++;
                         lFound++;
-                        PrefixIdx = next_PrefixIdx;
+                        // reset to default prefix
+                        PrefixIdx = 0;
                         OPExtIdx |= 0x07;   // skip rest
                         OPExtIdx++;         // find next member
                     }
+                    // prefix exists and not last one
                     else if ((options & 0x00F00000) && next_PrefixIdx)
                     {
                         PrefixIdx = next_PrefixIdx;
                     }
-                    else if (PrefixIdx)
-                    {
-                        // reset to default prefix
-                        PrefixIdx = next_PrefixIdx;
-                        OPExtIdx |= 0x07;   // skip rest
-                        OPExtIdx++;         // find next member
-                    }
                     else
                     {
-                        OPExtIdx++;         // find next member
+                        // reset to default prefixs
+                        PrefixIdx = 0;
+                        OPExtIdx++;         // always check next member
                     }
                 }
                 // no modrm instruction go here
@@ -1176,7 +1172,6 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         pOpEntry++;
                         lFound++;
                         OPExtIdx = 256; // skip rest
-                        PrefixIdx = next_PrefixIdx;
                     }
                     else if ((options & 0x00F00000) && next_PrefixIdx)
                     {
@@ -1184,11 +1179,12 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     }
                     else
                     {
-                        OPExtIdx = 256; // skip rest
-                        PrefixIdx = next_PrefixIdx;
+                        // reset to default prefix
+                        PrefixIdx = 0;
+                        OPExtIdx++;         // always check next member
                     }
                 }
-            } // (OPExtIdx < nOPExtIdx) && (lFound < nOpEntryMax)
+            }
         }
     }
     // decode to instruction level mnemonic and operand type

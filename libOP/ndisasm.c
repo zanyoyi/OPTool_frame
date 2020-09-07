@@ -1550,6 +1550,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         uint64_t opd3 = 0;
         for (n = ix->n; n; n--, p++)
         {
+            // same prefix? no, but they are same mnemonic
             // same mnemonic
             bool test_token = (*p)->opcode == (*best_p)->opcode;
             bool test_FAR = ~((*p)->opd[0] ^ (*best_p)->opd[0]) & FAR;
@@ -1685,18 +1686,24 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 {
                     slen += snprintf(output + slen, outbufsize - slen,
                         "(word/dword)");
+                    // clear operand prefix flags
+                    *flags &= 0xFFEFFFFF;
                 }
                 // 32/64 bit operand case
                 else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
                 {
                     slen += snprintf(output + slen, outbufsize - slen,
                         "(dword/qword)");
+                    // clear operand prefix flags
+                    *flags &= 0xFFEFFFFF;
                 }
                 // 16/32/64 bit operand case
                 else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
                 {
                     slen += snprintf(output + slen, outbufsize - slen,
                         "(word/dword/qword)");
+                    // clear operand prefix flags
+                    *flags &= 0xFFEFFFFF;
                 }
             }
 
@@ -1943,18 +1950,24 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 {
                     slen += snprintf(output + slen, outbufsize - slen,
                         "(word/dword)");
+                    // clear operand prefix flags
+                    *flags &= 0xFFEFFFFF;
                 }
                 // 32/64 bit operand case
                 else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
                 {
                     slen += snprintf(output + slen, outbufsize - slen,
                         "(dword/qword)");
+                    // clear operand prefix flags
+                    *flags &= 0xFFEFFFFF;
                 }
                 // 16/32/64 bit operand case
                 else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
                 {
                     slen += snprintf(output + slen, outbufsize - slen,
                         "(word/dword/qword)");
+                    // clear operand prefix flags
+                    *flags &= 0xFFEFFFFF;
                 }
             }
 
