@@ -1604,6 +1604,8 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         // check all possible prefix
         if (prefix)
         {
+            // try not to display spurious instructions
+            return 0;
             // replace this line with other function
             slen += snprintf(output + slen, outbufsize - slen, "%s ", prefix);
         }
