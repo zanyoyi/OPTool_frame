@@ -3,7 +3,7 @@
 #ifndef NASM_REGS_H
 #define NASM_REGS_H
 
-#define EXPR_REG_START 1
+#define EXPR_REG_START 16
 
 enum reg_enum {
     R_zero = 0,

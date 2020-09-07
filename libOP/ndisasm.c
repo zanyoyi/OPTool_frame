@@ -1460,6 +1460,20 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
              */
             for (i = 0; i < (*p)->operands; i++)
             {
+                //int a = (!(tmp_ins.oprs[i].segment & SEG_RMREG) &&
+                //    !(REG_EA & ~(*p)->opd[i]) &&
+                //    !((*p)->opd[i] & REG_SMASK));
+                //int b = (!(tmp_ins.oprs[i].segment & SEG_RMREG) &&
+                //    !(REG_EA & ~(*p)->opd[i]) &&
+                //    !((*p)->opd[i] & REG_SMASK));
+                //int c = ((((*p)->opd[i] & (REGISTER | FPUREG)) ||
+                //    (tmp_ins.oprs[i].segment & SEG_RMREG)) &&
+                //    !whichreg((*p)->opd[i],
+                //        tmp_ins.oprs[i].basereg, tmp_ins.rex));
+                //int c0 = ((*p)->opd[i] & (REGISTER | FPUREG));
+                //int c1 = tmp_ins.oprs[i].segment & SEG_RMREG;
+                //int c2 = !whichreg((*p)->opd[i],
+                //    tmp_ins.oprs[i].basereg, tmp_ins.rex);
                 if (
                     // check immediate-assigned only memory operand,
                     // but we get register-assigned memory operand
@@ -1488,6 +1502,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                             tmp_ins.oprs[i].basereg, tmp_ins.rex))
                     )
                 {
+
                     works = false;
                     break;
                 }
