@@ -895,6 +895,27 @@ static BOOL OPMatch(WCHAR* strOP, BYTE bOP)
     return TRUE;
 }
 
+static BOOL ByteMapHitPrefix(BYTE data)
+{
+    switch (data)
+    {
+    case 0x26:
+    case 0x36:
+    case 0x64:
+    case 0x65:
+    case 0x66:
+    case 0x67:
+    case 0xF0:
+    case 0xF2:
+    case 0xF3:
+    // case 0x0F:
+    case 0x2E:
+    case 0x3E:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
 // sprintf array
 DWORD EnumGrp(OP_ENTRY* pGrp, WCHAR* strModRMMatch, OPENTRY* pOpEntry, DWORD nOpEntryMax)
 {
@@ -1078,13 +1099,12 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
 
                 // match and valid cases
 
-                //if (options & 0x00000000)
-                //{
-                //    OPExtIdx |= 0xFF;   // skip rest
-                //}
+                if (ByteMapHitPrefix(ptr2_buffer[0]))
+                {
+                    OPExtIdx = 256;     // skip rest
+                }
                 // no prefix instruction go here
-                //else if ((options & 0x00C00000) != (eOPTab << 24))
-                if ((options & 0x03000000) != (eOPTab << 24))
+                else if ((options & 0x03000000) != (eOPTab << 24))
                 {
                     OPExtIdx = 256;     // skip rest
                 }
