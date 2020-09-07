@@ -1068,6 +1068,8 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     {
                         options = 0x40000000;
                         ndisasm(ptr2_buffer, pOpEntry, eADM, &options);
+                        // don't need prefix scan anymore
+                        next_PrefixIdx = 0;
                     }
                     lendis = 0;
                 }
@@ -1148,6 +1150,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     {
                         // reset to default prefix
                         PrefixIdx = next_PrefixIdx;
+                        OPExtIdx |= 0x07;   // skip rest
                         OPExtIdx++;         // find next member
                     }
                     else
@@ -1185,7 +1188,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         PrefixIdx = next_PrefixIdx;
                     }
                 }
-            }
+            } // (OPExtIdx < nOPExtIdx) && (lFound < nOpEntryMax)
         }
     }
     // decode to instruction level mnemonic and operand type
