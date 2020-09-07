@@ -8,6 +8,7 @@
 typedef struct {
     unsigned char OP;
     unsigned char OPExt;         /*[7] indicated valid,[2:0] = ModRm.REG;*/
+    unsigned int ReqPrefix;
     unsigned short strDisasm[128];
 }OPENTRY;
 

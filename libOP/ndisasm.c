@@ -950,14 +950,20 @@ static int matches(const struct itemplate* t, uint8_t* data,
 
         case 0320:
             if (osize != 16)
+            {
+                *flags |= 0x00100000;
                 return 0;
+            }
             else
                 o_used = true;
             break;
 
         case 0321:
             if (osize != 32)
+            {
+                *flags |= 0x00100000;
                 return 0;
+            }
             else
                 o_used = true;
             break;
@@ -1007,13 +1013,19 @@ static int matches(const struct itemplate* t, uint8_t* data,
 
         case 0332:
             if (prefix->rep != 0xF2)
+            {
+                *flags |= 0x00200000;
                 return 0;
+            }
             drep = 0;
             break;
 
         case 0333:
             if (prefix->rep != 0xF3)
+            {
+                *flags |= 0x00400000;
                 return 0;
+            }
             drep = 0;
             break;
 
@@ -1049,7 +1061,10 @@ static int matches(const struct itemplate* t, uint8_t* data,
 
         case 0361:
             if (!prefix->osp || prefix->rep)
+            {
+                *flags |= 0x00100000;
                 return 0;
+            }
             o_used = true;
             break;
 
@@ -2978,7 +2993,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
 int ndisasm(unsigned char* data, OPENTRY* pOpEntry, E_ADM eADM, unsigned int* flags)
 {
     char outbuf[64];
-    *flags = 0x80000000;
+    //*flags = 0x80000000;
     //*flags = 0x40000000;
     //*flags = 0x00000000;
 
