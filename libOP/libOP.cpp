@@ -968,8 +968,13 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
 
     /* WCHAR* strModRmList[256]; */
 
+    // decode to double operand level mnemonic and operand type
+    if (nOption & OPTION_EXPAND_MODRM_REG)
+    {
+
+    }
     // decode to single operand level mnemonic and operand type
-    if (nOption & OPTION_EXPAND_MODRM_EA)
+    else if (nOption & OPTION_EXPAND_MODRM_EA)
     {
         // input, multiple byte string array
         unsigned char buffer[16];
@@ -1064,30 +1069,42 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 case 0x00:      // default prefix
                     prefixes = 0x00000000;
                     ptr2_buffer = buffer + 3;
+                    // dynamic linked list pointer is not ready
                     next_PrefixIdx = 0x66;
                     break;
                 case 0x66:      // operand size prefix
                     prefixes = 0x00000200;
                     buffer[2] = 0x66;
                     ptr2_buffer = buffer + 3 - 1;
+                    // dynamic linked list pointer is not ready
+                    next_PrefixIdx = 0xF2;
+                    break;
+                case 0x9B:      // FWAIT/WAIT prefix
+                    prefixes = 0x00002000;
+                    buffer[2] = 0x9B;
+                    ptr2_buffer = buffer + 3 - 1;
+                    // dynamic linked list pointer is not ready
                     next_PrefixIdx = 0xF2;
                     break;
                 case 0xF2:      // REPNE prefix
                     prefixes = 0x00000004;
                     buffer[2] = 0xF2;
                     ptr2_buffer = buffer + 3 - 1;
+                    // dynamic linked list pointer is not ready
                     next_PrefixIdx = 0xF3;
                     break;
                 case 0xF3:      // REP prefix
                     prefixes = 0x00000002;
                     buffer[2] = 0xF3;
                     ptr2_buffer = buffer + 3 - 1;
+                    // dynamic linked list pointer is not ready
                     next_PrefixIdx = 0x00;
                     break;
                 case 0x48:      // REX.W prefix
                     prefixes = 0x00001000;
                     buffer[2] = 0x48;
                     ptr2_buffer = buffer + 3 - 1;
+                    // dynamic linked list pointer is not ready
                     next_PrefixIdx = 0x00;
                     break;
                 case 0xF266:    // CRC32 need this prefix
@@ -1096,6 +1113,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     buffer[1] = 0x66;
                     buffer[2] = 0xF2;
                     ptr2_buffer = buffer + 3 - 2;
+                    // dynamic linked list pointer is not ready
                     next_PrefixIdx = 0x00;
                     break;
                 case 0xF366:
@@ -1108,15 +1126,15 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 // check default prefix mnemonic
                 if (OPMatch(strOPMatch + 8, OP_2) && (PrefixIdx == 0))
                 {
-                    options = 0x80000000;
+                    // preserve reg/op information
+                    options = 0x80000000 | (options & 0x0C000000);
                     lendis = ndisasm(ptr2_buffer, pOpEntry, eADM, &options);
                 }
                 // exists prefix but different mnemonic, or exists prefix only mnemonic
                 else if (OPMatch(strOPMatch + 8, OP_2))
                 {
-                    options = 0x40000000;
-                    // tell ndisasm expected prefix, reject others in case
-                    //options |= PrefixIdx << 20;
+                    // preserve reg/op information
+                    options = 0x40000000 | (options & 0x0C000000);
                     lendis = ndisasm(ptr2_buffer, pOpEntry, eADM, &options);
                 }
                 // check the first time (distinguish reg/op type)

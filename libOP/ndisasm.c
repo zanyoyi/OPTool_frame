@@ -747,8 +747,8 @@ static int matches(const struct itemplate* t, uint8_t* data,
         {
             // detected reg/op as op
             if (
-                (*(data - 1) == 0x1F) ||                            /* NOP Ev special case*/
-                ((*(data - 1) >= 0x90) && (*(data - 1) <= 0x9F))    /* SETcc Eb special case*/
+                (*(data - 1) == 0x1F) ||                            /* NOP Ev special case */
+                ((*(data - 1) >= 0x90) && (*(data - 1) <= 0x9F))    /* SETcc Eb special case */
                 )
             {
                 // make sure no function assume (operand[op1] == REG) as register
@@ -763,8 +763,6 @@ static int matches(const struct itemplate* t, uint8_t* data,
             int modrm = *data++;
             if (((modrm >> 3) & 07) != (c & 07))
                 return 0;   /* spare field doesn't match up */
-
-
 
             data = do_ea(data, modrm, asize, segsize, eat, opy, ins);
             if (!data)
@@ -795,7 +793,10 @@ static int matches(const struct itemplate* t, uint8_t* data,
                 break;
             case 020:
                 if (!(prefix->rex & REX_W))
+                {
+                    *flags |= 0x00100000;
                     return 0;
+                }
                 ins->rex |= REX_W;
                 break;
             case 040:        /* VEX.W is a don't care */
@@ -983,7 +984,10 @@ static int matches(const struct itemplate* t, uint8_t* data,
 
         case 0324:
             if (osize != 64)
+            {
+                *flags |= 0x00100000;
                 return 0;
+            }
             o_used = true;
             break;
 
@@ -1023,7 +1027,7 @@ static int matches(const struct itemplate* t, uint8_t* data,
         case 0333:
             if (prefix->rep != 0xF3)
             {
-                *flags |= 0x00400000;
+                *flags |= 0x00200000;
                 return 0;
             }
             drep = 0;
@@ -1050,7 +1054,10 @@ static int matches(const struct itemplate* t, uint8_t* data,
 
         case 0341:
             if (prefix->wait != 0x9B)
+            {
+                *flags |= 0x00400000;
                 return 0;
+            }
             dwait = 0;
             break;
 
@@ -1080,7 +1087,10 @@ static int matches(const struct itemplate* t, uint8_t* data,
 
         case 0366:
             if (!prefix->osp)
+            {
+                *flags |= 0x00100000;
                 return 0;
+            }
             o_used = true;
             break;
 
@@ -1702,7 +1712,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
                 {
                     slen += snprintf(output + slen, outbufsize - slen,
-                        "(word/dword)");
+                        "(w/dw)");
                     // clear operand prefix flags
                     *flags &= 0xFFEFFFFF;
                 }
@@ -1710,7 +1720,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
                 {
                     slen += snprintf(output + slen, outbufsize - slen,
-                        "(dword/qword)");
+                        "(dw/qw)");
                     // clear operand prefix flags
                     *flags &= 0xFFEFFFFF;
                 }
@@ -1718,7 +1728,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
                 {
                     slen += snprintf(output + slen, outbufsize - slen,
-                        "(word/dword/qword)");
+                        "(w/dw/qw)");
                     // clear operand prefix flags
                     *flags &= 0xFFEFFFFF;
                 }
@@ -1966,7 +1976,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
                 {
                     slen += snprintf(output + slen, outbufsize - slen,
-                        "(word/dword)");
+                        "(w/dw)");
                     // clear operand prefix flags
                     *flags &= 0xFFEFFFFF;
                 }
@@ -1974,7 +1984,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
                 {
                     slen += snprintf(output + slen, outbufsize - slen,
-                        "(dword/qword)");
+                        "(dw/qw)");
                     // clear operand prefix flags
                     *flags &= 0xFFEFFFFF;
                 }
@@ -1982,7 +1992,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
                 {
                     slen += snprintf(output + slen, outbufsize - slen,
-                        "(word/dword/qword)");
+                        "(w/dw/qw)");
                     // clear operand prefix flags
                     *flags &= 0xFFEFFFFF;
                 }
