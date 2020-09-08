@@ -151,10 +151,10 @@ OP_ENTRY OP1BMap[256] = {
     {0x7e,0x00," JLE/JNG Jb"},
     {0x7f,0x00," JNLE/JG Jb"},
     //# 0x80 - 0x8f"
-    {0x80,0x00," Grp1 Eb,Ib (1A)"},
-    {0x81,0x00," Grp1 Ev,Iz (1A)"},
-    {0x82,0x00," Grp1 Eb,Ib (1A),(i64)"},
-    {0x83,0x00," Grp1 Ev,Ib (1A)"},
+    {0x80,0x80," Grp1 Eb,Ib (1A)"},
+    {0x81,0x80," Grp1 Ev,Iz (1A)"},
+    {0x82,0x80," Grp1 Eb,Ib (1A),(i64)"},
+    {0x83,0x80," Grp1 Ev,Ib (1A)"},
     {0x84,0x00," TEST Eb,Gb"},
     {0x85,0x00," TEST Ev,Gv"},
     {0x86,0x00," XCHG Eb,Gb"},
@@ -166,7 +166,7 @@ OP_ENTRY OP1BMap[256] = {
     {0x8c,0x00," MOV Ev,Sw"},
     {0x8d,0x00," LEA Gv,M"},
     {0x8e,0x00," MOV Sw,Ew"},
-    {0x8f,0x00," Grp1A (1A) | POP Ev (d64)"},
+    {0x8f,0x80," Grp1A (1A) | POP Ev (d64)"},
     //# 0x90 - 0x9f"
     {0x90,0x00," NOP | PAUSE (F3) | XCHG r8,rAX"},
     {0x91,0x00," XCHG rCX/r9,rAX"},
@@ -221,14 +221,14 @@ OP_ENTRY OP1BMap[256] = {
     {0xbe,0x00," MOV rSI/r14,Iv"},
     {0xbf,0x00," MOV rDI/r15,Iv"},
     //# 0xc0 - 0xcf
-    {0xc0,0x00," Grp2 Eb,Ib (1A)"},
-    {0xc1,0x00," Grp2 Ev,Ib (1A)"},
+    {0xc0,0x80," Grp2 Eb,Ib (1A)"},
+    {0xc1,0x80," Grp2 Ev,Ib (1A)"},
     {0xc2,0x00," RETN Iw (f64)"},
     {0xc3,0x00," RETN"},
     {0xc4,0x00," LES Gz,Mp (i64) | VEX+2byte (Prefix)"},
     {0xc5,0x00," LDS Gz,Mp (i64) | VEX+1byte (Prefix)"},
-    {0xc6,0x00," Grp11A Eb,Ib (1A)"},
-    {0xc7,0x00," Grp11B Ev,Iz (1A)"},
+    {0xc6,0x80," Grp11A Eb,Ib (1A)"},
+    {0xc7,0x80," Grp11B Ev,Iz (1A)"},
     {0xc8,0x00," ENTER Iw,Ib"},
     {0xc9,0x00," LEAVE (d64)"},
     {0xca,0x00," RETF Iw"},
@@ -238,10 +238,10 @@ OP_ENTRY OP1BMap[256] = {
     {0xce,0x00," INTO (i64)"},
     {0xcf,0x00," IRET/D/Q"},
     //# 0xd0 - 0xdf
-    {0xd0,0x00," Grp2 Eb,1 (1A)"},
-    {0xd1,0x00," Grp2 Ev,1 (1A)"},
-    {0xd2,0x00," Grp2 Eb,CL (1A)"},
-    {0xd3,0x00," Grp2 Ev,CL (1A)"},
+    {0xd0,0x80," Grp2 Eb,1 (1A)"},
+    {0xd1,0x80," Grp2 Ev,1 (1A)"},
+    {0xd2,0x80," Grp2 Eb,CL (1A)"},
+    {0xd3,0x80," Grp2 Ev,CL (1A)"},
     {0xd4,0x00," AAM Ib (i64)"},
     {0xd5,0x00," AAD Ib (i64)"},
     {0xd6,0x00,NULL},
@@ -285,16 +285,16 @@ OP_ENTRY OP1BMap[256] = {
     {0xf3,0x00," REP/REPE (Prefix) | XRELEASE (Prefix)"},
     {0xf4,0x00," HLT"},
     {0xf5,0x00," CMC"},
-    {0xf6,0x00," Grp3_1 Eb (1A)"},
-    {0xf7,0x00," Grp3_2 Ev (1A)"},
+    {0xf6,0x80," Grp3_1 Eb (1A)"},
+    {0xf7,0x80," Grp3_2 Ev (1A)"},
     {0xf8,0x00," CLC"},
     {0xf9,0x00," STC"},
     {0xfa,0x00," CLI"},
     {0xfb,0x00," STI"},
     {0xfc,0x00," CLD"},
     {0xfd,0x00," STD"},
-    {0xfe,0x00," Grp4 (1A)"},
-    {0xff,0x00," Grp5 (1A)"},
+    {0xfe,0x80," Grp4 (1A)"},
+    {0xff,0x80," Grp5 (1A)"},
 };
 OP_ENTRY Grp01_80h[8] = {
     {0x80,0x80," ADD Eb,Ib"},
@@ -468,8 +468,8 @@ OP_ENTRY Grp11_C7h[8] = {
 };
 OP_ENTRY OP2BMap[256] = {
     // # 0x0f 0x00-0x0f
-    {0x00,0x00," Grp6 (1A)"},
-    {0x01,0x00," Grp7 (1A)"},
+    {0x00,0x80," Grp6 (1A)"},
+    {0x01,0x80," Grp7 (1A)"},
     {0x02,0x00," LAR Gv,Ew"},
     {0x03,0x00," LSL Gv,Ew"},
     {0x04,0x00,NULL},
@@ -482,7 +482,7 @@ OP_ENTRY OP2BMap[256] = {
     {0x0b,0x00," UD2 (1B)"},
     {0x0c,0x00,NULL},
     // # AMD's prefetch group. Intel supports prefetchw(/1) only.
-    {0x0d,0x00," GrpP"},
+    {0x0d,0x80," GrpP"},
     {0x0e,0x00," FEMMS"},
     // # 3DNow! uses the last imm byte as opcode extension.
     {0x0f,0x00," 3DNow! Pq,Qq,Ib"},
@@ -500,7 +500,7 @@ OP_ENTRY OP2BMap[256] = {
     {0x15,0x00," vunpckhps Vx,Hx,Wx"},
     {0x16,0x00," vmovhps Vdq,Hq,Mq (v1)"},
     {0x17,0x00," vmovhps Mq,Vq (v1)"},
-    {0x18,0x00," Grp16 (1A)"},
+    {0x18,0x80," Grp16 (1A)"},
     {0x19,0x00,NULL},
     // # Intel SDM opcode map does not list MPX instructions. For now using Gv for
     // # bnd registers and Ev for everything else is OK because the instruction
@@ -508,9 +508,9 @@ OP_ENTRY OP2BMap[256] = {
     // # a ModR/M byte.
     {0x1a,0x00," BNDCL Gv,Ev (F3)"},
     {0x1b,0x00," BNDCN Gv,Ev (F2)"},
-    {0x1c,0x00," Grp20 (1A),(1C)"},
+    {0x1c,0x80," Grp20 (1A),(1C)"},
     {0x1d,0x00,NULL},
-    {0x1e,0x00," Grp21 (1A)"},
+    {0x1e,0x80," Grp21 (1A)"},
     {0x1f,0x00," NOP Ev"},
     // # 0x0f 0x20-0x2f
     {0x20,0x00," MOV Rd,Cd"},
@@ -599,9 +599,9 @@ OP_ENTRY OP2BMap[256] = {
     {0x6f,0x00," movq Pq,Qq"},
     // # 0x0f 0x70-0x7f
     {0x70,0x00," pshufw Pq,Qq,Ib"},
-    {0x71,0x00," Grp12 (1A)"},
-    {0x72,0x00," Grp13 (1A)"},
-    {0x73,0x00," Grp14 (1A)"},
+    {0x71,0x80," Grp12 (1A)"},
+    {0x72,0x80," Grp13 (1A)"},
+    {0x73,0x80," Grp14 (1A)"},
     {0x74,0x00," pcmpeqb Pq,Qq"},
     {0x75,0x00," pcmpeqw Pq,Qq"},
     {0x76,0x00," pcmpeqd Pq,Qq"},
@@ -657,15 +657,15 @@ OP_ENTRY OP2BMap[256] = {
     {0xa3,0x00," BT Ev,Gv"},
     {0xa4,0x00," SHLD Ev,Gv,Ib"},
     {0xa5,0x00," SHLD Ev,Gv,CL"},
-    {0xa6,0x00," GrpPDLK"},
-    {0xa7,0x00," GrpRNG"},
+    {0xa6,0x80," GrpPDLK"},
+    {0xa7,0x80," GrpRNG"},
     {0xa8,0x00," PUSH GS (d64)"},
     {0xa9,0x00," POP GS (d64)"},
     {0xaa,0x00," RSM"},
     {0xab,0x00," BTS Ev,Gv"},
     {0xac,0x00," SHRD Ev,Gv,Ib"},
     {0xad,0x00," SHRD Ev,Gv,CL"},
-    {0xae,0x00," Grp15 (1A),(1C)"},
+    {0xae,0x80," Grp15 (1A),(1C)"},
     {0xaf,0x00," IMUL Gv,Ev"},
     // # 0x0f 0xb0-0xbf
     {0xb0,0x00," CMPXCHG Eb,Gb"},
@@ -677,8 +677,8 @@ OP_ENTRY OP2BMap[256] = {
     {0xb6,0x00," MOVZX Gv,Eb"},
     {0xb7,0x00," MOVZX Gv,Ew"},
     {0xb8,0x00," JMPE (!F3)"},
-    {0xb9,0x00," Grp10 (1A)"},
-    {0xba,0x00," Grp8 Ev,Ib (1A)"},
+    {0xb9,0x80," Grp10 (1A)"},
+    {0xba,0x80," Grp8 Ev,Ib (1A)"},
     {0xbb,0x00," BTC Ev,Gv"},
     {0xbc,0x00," BSF Gv,Ev (!F3)"},
     {0xbd,0x00," BSR Gv,Ev (!F3)"},
@@ -692,7 +692,7 @@ OP_ENTRY OP2BMap[256] = {
     {0xc4,0x00," pinsrw Pq,Ry/Mw,Ib"},
     {0xc5,0x00," pextrw Gd,Nq,Ib"},
     {0xc6,0x00," vshufps Vps,Hps,Wps,Ib"},
-    {0xc7,0x00," Grp9 (1A)"},
+    {0xc7,0x80," Grp9 (1A)"},
     {0xc8,0x00," BSWAP RAX/EAX/R8/R8D"},
     {0xc9,0x00," BSWAP RCX/ECX/R9/R9D"},
     {0xca,0x00," BSWAP RDX/EDX/R10/R10D"},
@@ -937,6 +937,20 @@ static BOOL ByteMapHitPrefix(BYTE data)
         return FALSE;
     }
 }
+
+static BOOL OpcodeGroupCheck(E_ADM eADM, BYTE ptr_buffer)
+{
+    if (eADM == E_AD16)
+    {
+        return OP1BMap[ptr_buffer].OPExt;
+    }
+    else if (eADM == E_AD32)
+    {
+        return OP2BMap[ptr_buffer].OPExt;
+    }
+    return FALSE;
+}
+
 // sprintf array
 DWORD EnumGrp(OP_ENTRY* pGrp, WCHAR* strModRMMatch, OPENTRY* pOpEntry, DWORD nOpEntryMax)
 {
@@ -1051,13 +1065,13 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
             while ((OPExtIdx < nOPExtIdx) && (lFound < nOpEntryMax))
             {
                 // mapping loop index to binary data
-                if (options & 0x08000000)
+                if (OpcodeGroupCheck(eADM, ptr_buffer[0]))
                 {
                     // group index: {mod,op,rm} <--> {op,mod,rm}
                     OP_2 = ((OPExtIdx & 0x18) << 3) |
                         ((OPExtIdx & 0xE0) >> 2) | (OPExtIdx & 0x07);
                 }
-                else // (options & 0x04000000)
+                else
                 {
                     // register index: {mod,reg,rm} <--> {mod,rm,reg}
                     OP_2 = (OPExtIdx & 0xC0) | ((OPExtIdx & 0x07) << 3) |
@@ -1120,8 +1134,6 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     // dynamic linked list pointer is not ready
                     next_PrefixIdx = 0x00;
                     break;
-                case 0xF366:
-                    break;
                 default:
                     break;
                 }
@@ -1146,7 +1158,15 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 {
                     if ((OPExtIdx == 0) && (PrefixIdx == 0))
                     {
-                        options = 0x40000000;
+                        // check group instruction at the first loop
+                        if (OpcodeGroupCheck(eADM, ptr_buffer[0]))
+                        {
+                            options = 0x40000000 | 0x08000000;
+                        }
+                        else
+                        {
+                            options = 0x40000000;
+                        }
                         ndisasm(ptr2_buffer, pOpEntry, eADM, &options);
                     }
                     lendis = 0;
@@ -1193,7 +1213,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         // reset to default prefix
                         PrefixIdx = 0;
                         OPExtIdx++;         // find next member
-                        //lFound2 = lFound;   // update found entries
+                        lFound2 = lFound;   // update found entries
                     }
                 }
                 // no group instruction go here

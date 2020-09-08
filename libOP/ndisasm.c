@@ -690,7 +690,7 @@ static int matches(const struct itemplate* t, uint8_t* data,
             case4(0120) :
             case4(0130) :
             {
-                // detected reg/op as reg
+                // detected modrm
                 *flags |= 0x04000000 + ((op1 & 0x3) << 2) + (op2 & 0x3);
                 
                 int modrm = *data++;
@@ -745,21 +745,9 @@ static int matches(const struct itemplate* t, uint8_t* data,
         case4(0230) :
         case4(0234) :
         {
-            // detected reg/op as op
-            if (
-                (*(data - 1) == 0x1F) ||                            /* NOP Ev special case */
-                ((*(data - 1) >= 0x90) && (*(data - 1) <= 0x9F))    /* SETcc Eb special case */
-                )
-            {
-                // make sure no function assume (operand[op1] == REG) as register
-                *flags |= 0x04000000 + (op2 & 0x3);
-            }
-            // default group instruction
-            else
-            {
-                *flags |= 0x08000000 + (op2 & 0x3);
-            }
-
+            // detected modrm
+            *flags |= 0x04000000 + (op2 & 0x3);
+            
             int modrm = *data++;
             if (((modrm >> 3) & 07) != (c & 07))
                 return 0;   /* spare field doesn't match up */
