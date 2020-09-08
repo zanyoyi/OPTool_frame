@@ -1619,6 +1619,8 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         {
             // try not to display spurious instructions
             return 0;
+            // LOCK, REP, REPNE, and other valid prefixes are required,
+            // but not now
             // replace this line with other function
             slen += snprintf(output + slen, outbufsize - slen, "%s ", prefix);
         }
@@ -1678,7 +1680,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 reg = whichreg(t, o->basereg, ins.rex);
 
                 // indicate reg/op register operand
-                if (*flags & 0x04000000) // reg/op is register operand
+                if (*flags & 0x0C000000 == 0x04000000) // reg/op is register operand
                 {
                     if (((*flags & 0x0000000C) >> 2) == i) // reg operand is i'th operand
                     {
@@ -2020,7 +2022,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 reg = whichreg(t, o->basereg, ins.rex);
 
                 // indicate reg/op register operand
-                if (*flags & 0x04000000) // reg/op is register operand
+                if (*flags & 0x0C000000 == 0x04000000) // reg/op is register operand
                 {
                     if (((*flags & 0x0000000C) >> 2) == i) // reg operand is i'th operand
                     {
@@ -2315,7 +2317,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 reg = whichreg(t, o->basereg, ins.rex);
 
                 // indicate reg/op register operand
-                if (*flags & 0x04000000) // reg/op is register operand
+                if (*flags & 0x0C000000 == 0x04000000) // reg/op is register operand
                 {
                     if (((*flags & 0x0000000C) >> 2) == i) // reg operand is i'th operand
                     {

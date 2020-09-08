@@ -1157,15 +1157,8 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     options = 0x40000000 | (options & 0x0C000000);
                     lendis = ndisasm(ptr2_buffer, pOpEntry, eADM, &options);
                 }
-                // check the first time (distinguish reg/op type)
                 else
                 {
-                    if ((OPExtIdx == 0) && (PrefixIdx == 0))
-                    {
-                        // preserve reg/op information
-                        options = 0x40000000 | (options & 0x0C000000);
-                        ndisasm(ptr2_buffer, pOpEntry, eADM, &options);
-                    }
                     lendis = 0;
                 }
 
