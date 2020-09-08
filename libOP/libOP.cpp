@@ -964,6 +964,8 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
         int OP_2;
         // inner loop count
         int nOPExtIdx;
+        // prefix indicator
+        unsigned int prefixes;
 
         // initialize pointer before usage
         ptr_buffer = buffer;
@@ -1042,25 +1044,30 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 switch (PrefixIdx)
                 {
                 case 0x00:  // default prefix
+                    prefixes = 0x00000000;
                     ptr2_buffer = buffer + 3;
                     next_PrefixIdx = 0x66;
                     break;
                 case 0x66:  // operand size prefix
+                    prefixes = 0x00000200;
                     buffer[2] = 0x66;
                     ptr2_buffer = buffer + 3 - 1;
                     next_PrefixIdx = 0xF2;
                     break;
                 case 0xF2:  // REP prefix
+                    prefixes = 0x00000004;
                     buffer[2] = 0xF2;
                     ptr2_buffer = buffer + 3 - 1;
                     next_PrefixIdx = 0xF3;
                     break;
                 case 0xF3:  // REPZ prefix
+                    prefixes = 0x00000002;
                     buffer[2] = 0xF3;
                     ptr2_buffer = buffer + 3 - 1;
                     next_PrefixIdx = 0x00;
                     break;
                 case 0x48:  // REX.W prefix
+                    prefixes = 0x00001000;
                     buffer[2] = 0x48;
                     ptr2_buffer = buffer + 3 - 1;
                     next_PrefixIdx = 0x00;
@@ -1113,16 +1120,15 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 {
                     pOpEntry->OP = OpIdx;
                     pOpEntry->OPExt = 0x80 | ((OP_2 >> 3) & 0x07);
+                    pOpEntry->ReqPrefix = prefixes;
                     if (lendis && (options & 0x00F00000) && next_PrefixIdx)
                     {
-                        pOpEntry->ReqPrefix = 0x00000206;
                         pOpEntry++;
                         lFound++;
                         PrefixIdx = next_PrefixIdx;
                     }
                     else if (lendis)
                     {
-                        pOpEntry->ReqPrefix = 0x00000000;
                         pOpEntry++;
                         lFound++;
                         // reset to default prefix
@@ -1145,16 +1151,15 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 {
                     pOpEntry->OP = OpIdx;
                     pOpEntry->OPExt = 0;
+                    pOpEntry->ReqPrefix = prefixes;
                     if (lendis && (options & 0x00F00000) && next_PrefixIdx)
                     {
-                        pOpEntry->ReqPrefix = 0x00000206;
                         pOpEntry++;
                         lFound++;
                         PrefixIdx = next_PrefixIdx;
                     }
                     else if (lendis)
                     {
-                        pOpEntry->ReqPrefix = 0x00000000;
                         pOpEntry++;
                         lFound++;
                         // reset to default prefix
@@ -1179,16 +1184,15 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 {
                     pOpEntry->OP = OpIdx;
                     pOpEntry->OPExt = 0;
+                    pOpEntry->ReqPrefix = prefixes;
                     if (lendis && (options & 0x00F00000) && next_PrefixIdx)
                     {
-                        pOpEntry->ReqPrefix = 0x00000206;
                         pOpEntry++;
                         lFound++;
                         PrefixIdx = next_PrefixIdx;
                     }
                     else if (lendis)
                     {
-                        pOpEntry->ReqPrefix = 0x00000000;
                         pOpEntry++;
                         lFound++;
                         OPExtIdx = 256; // skip rest
