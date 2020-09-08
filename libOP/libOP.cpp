@@ -899,18 +899,39 @@ static BOOL ByteMapHitPrefix(BYTE data)
 {
     switch (data)
     {
-    case 0x26:
+    case 0xF2:
+    case 0xF3:
+    case 0x9B:
+    case 0xF0:
+    case 0x2E:
     case 0x36:
+    case 0x3E:
+    case 0x26:
     case 0x64:
     case 0x65:
     case 0x66:
     case 0x67:
-    case 0xF0:
-    case 0xF2:
-    case 0xF3:
+    //case 0xC4:
+    //case 0xC5:
+    //case 0x62:
+    //case 0x8F:
+    //case 0x40:
+    //case 0x41:
+    //case 0x42:
+    //case 0x43:
+    //case 0x44:
+    //case 0x45:
+    //case 0x46:
+    //case 0x47:
+    //case 0x48:
+    //case 0x49:
+    //case 0x4A:
+    //case 0x4B:
+    //case 0x4C:
+    //case 0x4D:
+    //case 0x4E:
+    //case 0x4F:
     // case 0x0F:
-    case 0x2E:
-    case 0x3E:
         return TRUE;
     default:
         return FALSE;
@@ -977,23 +998,20 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
 
         if (eOPTab == E_1B_OP)
         {
-            // buffer[0] = 0x66;
-
             // reserve three slots for prefix
             ptr_buffer = buffer + 0 + 3;
         }
         else if (eOPTab == E_2B_OP)
         {
-            //buffer[0] = 0x66;
             buffer[3] = 0x0F;
             // reserve three slots for prefix
             ptr_buffer = buffer + 1 + 3;
         }
         else if (eOPTab == E_3B_OP)
         {
-            //buffer[0] = 0x66;
             buffer[3] = 0x0F;
             buffer[4] = 0x38;           /* fixed assignment, temporary*/
+            //buffer[4] = 0x3A;           /* fixed assignment, temporary*/
             // reserve three slots for prefix
             ptr_buffer = buffer + 2 + 3;
         }
@@ -1043,37 +1061,45 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 // update binary data pointer for prefix indicator
                 switch (PrefixIdx)
                 {
-                case 0x00:  // default prefix
+                case 0x00:      // default prefix
                     prefixes = 0x00000000;
                     ptr2_buffer = buffer + 3;
                     next_PrefixIdx = 0x66;
                     break;
-                case 0x66:  // operand size prefix
+                case 0x66:      // operand size prefix
                     prefixes = 0x00000200;
                     buffer[2] = 0x66;
                     ptr2_buffer = buffer + 3 - 1;
                     next_PrefixIdx = 0xF2;
                     break;
-                case 0xF2:  // REP prefix
+                case 0xF2:      // REPNE prefix
                     prefixes = 0x00000004;
                     buffer[2] = 0xF2;
                     ptr2_buffer = buffer + 3 - 1;
                     next_PrefixIdx = 0xF3;
                     break;
-                case 0xF3:  // REPZ prefix
+                case 0xF3:      // REP prefix
                     prefixes = 0x00000002;
                     buffer[2] = 0xF3;
                     ptr2_buffer = buffer + 3 - 1;
                     next_PrefixIdx = 0x00;
                     break;
-                case 0x48:  // REX.W prefix
+                case 0x48:      // REX.W prefix
                     prefixes = 0x00001000;
                     buffer[2] = 0x48;
                     ptr2_buffer = buffer + 3 - 1;
                     next_PrefixIdx = 0x00;
                     break;
-                case 0xF266:
+                case 0xF266:    // CRC32 need this prefix
+                    prefixes = 0x00000204;
+                    // cannot exchange with each other
+                    buffer[1] = 0x66;
+                    buffer[2] = 0xF2;
+                    ptr2_buffer = buffer + 3 - 2;
+                    next_PrefixIdx = 0x00;
+                    break;
                 case 0xF366:
+                    break;
                 default:
                     break;
                 }
@@ -1118,9 +1144,9 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 // no multiple-byte instruction mismatch go here
                 else if (options & 0x08000000)
                 {
+                    pOpEntry->ReqPrefix = prefixes;
                     pOpEntry->OP = OpIdx;
                     pOpEntry->OPExt = 0x80 | ((OP_2 >> 3) & 0x07);
-                    pOpEntry->ReqPrefix = prefixes;
                     if (lendis && (options & 0x00F00000) && next_PrefixIdx)
                     {
                         pOpEntry++;
@@ -1149,9 +1175,9 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 // no group instruction go here
                 else if (options & 0x04000000)
                 {
+                    pOpEntry->ReqPrefix = prefixes;
                     pOpEntry->OP = OpIdx;
                     pOpEntry->OPExt = 0;
-                    pOpEntry->ReqPrefix = prefixes;
                     if (lendis && (options & 0x00F00000) && next_PrefixIdx)
                     {
                         pOpEntry++;
@@ -1182,9 +1208,9 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 // no modrm instruction go here
                 else
                 {
+                    pOpEntry->ReqPrefix = prefixes;
                     pOpEntry->OP = OpIdx;
                     pOpEntry->OPExt = 0;
-                    pOpEntry->ReqPrefix = prefixes;
                     if (lendis && (options & 0x00F00000) && next_PrefixIdx)
                     {
                         pOpEntry++;
