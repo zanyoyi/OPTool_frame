@@ -938,13 +938,13 @@ static BOOL ByteMapHitPrefix(BYTE data)
     }
 }
 
-static BOOL OpcodeGroupCheck(E_ADM eADM, BYTE ptr_buffer)
+static BOOL OpcodeGroupCheck(E_XB_OP eOPTab, BYTE ptr_buffer)
 {
-    if (eADM == E_AD16)
+    if (eOPTab == E_AD16)
     {
         return OP1BMap[ptr_buffer].OPExt;
     }
-    else if (eADM == E_AD32)
+    else if (eOPTab == E_AD32)
     {
         return OP2BMap[ptr_buffer].OPExt;
     }
@@ -1065,14 +1065,18 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
             while ((OPExtIdx < nOPExtIdx) && (lFound < nOpEntryMax))
             {
                 // mapping loop index to binary data
-                if (OpcodeGroupCheck(eADM, ptr_buffer[0]))
+                if (OpcodeGroupCheck(eOPTab, ptr_buffer[0]))
                 {
+                    // set as group
+                    options |= 0x08000000;
                     // group index: {mod,op,rm} <--> {op,mod,rm}
                     OP_2 = ((OPExtIdx & 0x18) << 3) |
                         ((OPExtIdx & 0xE0) >> 2) | (OPExtIdx & 0x07);
                 }
                 else
                 {
+                    // not set as group
+                    //options |= 0x08000000;
                     // register index: {mod,reg,rm} <--> {mod,rm,reg}
                     OP_2 = (OPExtIdx & 0xC0) | ((OPExtIdx & 0x07) << 3) |
                         ((OPExtIdx & 0x38) >> 3);
@@ -1158,15 +1162,8 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 {
                     if ((OPExtIdx == 0) && (PrefixIdx == 0))
                     {
-                        // check group instruction at the first loop
-                        if (OpcodeGroupCheck(eADM, ptr_buffer[0]))
-                        {
-                            options = 0x40000000 | 0x08000000;
-                        }
-                        else
-                        {
-                            options = 0x40000000;
-                        }
+                        // preserve reg/op information
+                        options = 0x40000000 | (options & 0x0C000000);
                         ndisasm(ptr2_buffer, pOpEntry, eADM, &options);
                     }
                     lendis = 0;
