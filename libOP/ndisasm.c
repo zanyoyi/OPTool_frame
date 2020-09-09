@@ -1908,7 +1908,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             else if (!(MEM_OFFS & ~t))
             {
                 slen +=
-                    snprintf(output + slen, outbufsize - slen, "mem_offset");
+                    snprintf(output + slen, outbufsize - slen, "[moffs]");
             }
 
             // check register/memory operand size?
