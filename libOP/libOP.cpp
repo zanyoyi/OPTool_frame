@@ -344,7 +344,8 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 {
                     pOpEntry->ReqPrefix = prefixes;
                     pOpEntry->OP = OpIdx;
-                    pOpEntry->OPExt = 0x80 | ((OP_2 >> 3) & 0x07);
+                    // group indicator | mod indicator | 11B indicator | group number
+                    pOpEntry->OPExt = 0x80 | 0x40 | ((OP_2 >= 0xC0) << 3) | ((OP_2 >> 3) & 0x07);
                     if (lendis && (options & 0x00F00000) && next_PrefixIdx)
                     {
                         pOpEntry++;

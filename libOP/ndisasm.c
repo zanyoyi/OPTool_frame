@@ -1570,6 +1570,9 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
 
             if (test_token && test_FAR)
             {
+                //int a = REG_CLASS_GPR;
+                //int b = RM_GPR;
+                //int c = REGMEM;
                 // operand are both register, or both not register
                 if (~((*p)->opd[0] ^ (*best_p)->opd[0]) & REG_CLASS_GPR)
                 {
