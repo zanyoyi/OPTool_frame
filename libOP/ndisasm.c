@@ -1824,6 +1824,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     }
                     else
                     {
+                        // never happen
                         slen +=
                             snprintf(output + slen, outbufsize - slen, "imm16 ");
                     }
@@ -1839,6 +1840,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     // 32/64 bit operand case
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
                     {
+                        // never happen
                         slen +=
                             snprintf(output + slen, outbufsize - slen, "imm32/imm64 ");
                     }
@@ -1850,6 +1852,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     }
                     else
                     {
+                        // never happen
                         slen +=
                             snprintf(output + slen, outbufsize - slen, "imm32 ");
                     }
@@ -1865,17 +1868,20 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     // 32/64 bit operand case
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
                     {
+                        // never happen
                         slen +=
                             snprintf(output + slen, outbufsize - slen, "imm32/imm64 ");
                     }
                     // 16/32/64 bit operand case
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
                     {
+                        // never happen
                         slen +=
                             snprintf(output + slen, outbufsize - slen, "imm16/imm32/imm64 ");
                     }
                     else
                     {
+                        // never happen
                         slen +=
                             snprintf(output + slen, outbufsize - slen, "imm64 ");
                     }
@@ -1883,12 +1889,12 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 else if (t & NEAR)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "near ");
+                        snprintf(output + slen, outbufsize - slen, "near imm");
                 }
                 else if (t & SHORT)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "short ");
+                        snprintf(output + slen, outbufsize - slen, "short imm");
                 }
                 else
                 {
@@ -1922,7 +1928,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
                     {
                         slen += snprintf(output + slen, outbufsize - slen,
-                            "(w/dw)");
+                            "word/dword");
                         // clear operand prefix flags
                         *flags &= 0xFFEFFFFF;
                     }
@@ -1930,7 +1936,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
                     {
                         slen += snprintf(output + slen, outbufsize - slen,
-                            "(dw/qw)");
+                            "dword/qword");
                         // clear operand prefix flags
                         *flags &= 0xFFEFFFFF;
                     }
@@ -1938,7 +1944,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
                     {
                         slen += snprintf(output + slen, outbufsize - slen,
-                            "(w/dw/qw)");
+                            "word/dword/qword");
                         // clear operand prefix flags
                         *flags &= 0xFFEFFFFF;
                     }
@@ -1954,7 +1960,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
                     {
                         slen += snprintf(output + slen, outbufsize - slen,
-                            "(w/dw)");
+                            "word/dword");
                         // clear operand prefix flags
                         *flags &= 0xFFEFFFFF;
                     }
@@ -1962,7 +1968,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
                     {
                         slen += snprintf(output + slen, outbufsize - slen,
-                            "(dw/qw)");
+                            "dword/qword");
                         // clear operand prefix flags
                         *flags &= 0xFFEFFFFF;
                     }
@@ -1970,7 +1976,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
                     {
                         slen += snprintf(output + slen, outbufsize - slen,
-                            "(w/dw/qw)");
+                            "word/dword/qword");
                         // clear operand prefix flags
                         *flags &= 0xFFEFFFFF;
                     }
@@ -1986,7 +1992,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
                     {
                         slen += snprintf(output + slen, outbufsize - slen,
-                            "(w/dw)");
+                            "word/dword");
                         // clear operand prefix flags
                         *flags &= 0xFFEFFFFF;
                     }
@@ -1994,7 +2000,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
                     {
                         slen += snprintf(output + slen, outbufsize - slen,
-                            "(dw/qw)");
+                            "dword/qword");
                         // clear operand prefix flags
                         *flags &= 0xFFEFFFFF;
                     }
@@ -2002,7 +2008,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
                     {
                         slen += snprintf(output + slen, outbufsize - slen,
-                            "(w/dw/qw)");
+                            "word/dword/qword");
                         // clear operand prefix flags
                         *flags &= 0xFFEFFFFF;
                     }
