@@ -745,8 +745,8 @@ static int matches(const struct itemplate* t, uint8_t* data,
         case4(0230) :
         case4(0234) :
         {
-            // detected modrm, fix reg to forth operand
-            *flags |= 0x04000000 + (3 << 2) + (op2 & 0x3);
+            // detected modrm
+            *flags |= 0x04000000 + (op2 & 0x3);
             
             int modrm = *data++;
             if (((modrm >> 3) & 07) != (c & 07))
@@ -1681,7 +1681,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 // indicate reg/op register operand
                 if ((*flags & 0x0C000000) == 0x04000000) // reg/op is register operand
                 {
-                    if (((*flags & 0x0000000C) >> 2) == i) // reg operand is i'th operand
+                    if ((((*flags & 0x0000000C) >> 2) == i) && ((*flags & 0x0000000F)) > 0) // reg operand is i'th operand
                     {
                         slen += snprintf(output + slen, outbufsize - slen, "%s",
                             nasm_reg_types[reg - EXPR_REG_START]);
@@ -2023,7 +2023,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 // indicate reg/op register operand
                 if ((*flags & 0x0C000000) == 0x04000000) // reg/op is register operand
                 {
-                    if (((*flags & 0x0000000C) >> 2) == i) // reg operand is i'th operand
+                    if ((((*flags & 0x0000000C) >> 2) == i) && ((*flags & 0x0000000F)) > 0) // reg operand is i'th operand
                     {
                         slen += snprintf(output + slen, outbufsize - slen, "%s",
                             nasm_reg_types[reg - EXPR_REG_START]);
@@ -2318,7 +2318,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 // indicate reg/op register operand
                 if ((*flags & 0x0C000000) == 0x04000000) // reg/op is register operand
                 {
-                    if (((*flags & 0x0000000C) >> 2) == i) // reg operand is i'th operand
+                    if ((((*flags & 0x0000000C) >> 2) == i) && ((*flags & 0x0000000F)) > 0) // reg operand is i'th operand
                     {
                         slen += snprintf(output + slen, outbufsize - slen, "%s",
                             nasm_reg_types[reg - EXPR_REG_START]);
