@@ -1381,6 +1381,37 @@ OP_ENTRY OP3BMap_0F3Ah[256] = {
     {0xFE,0x00,NULL},
     {0xFF,0x00,NULL},
 };
+OP_ENTRY Grp17_F3h[8] = {
+    {0xF3,0x80,NULL},
+    {0xF3,0x81," BLSR By,Ey (v)"},
+    {0xF3,0x82," BLSMSK By,Ey (v)"},
+    {0xF3,0x83," BLSI By,Ey (v)"},
+    {0xF3,0x84,NULL},
+    {0xF3,0x85,NULL},
+    {0xF3,0x86,NULL},
+    {0xF3,0x87,NULL},
+};
+OP_ENTRY Grp18_C6h[8] = {
+    {0xC6,0x80,NULL},
+    {0xC6,0x81," vgatherpf0dps/d Wx (66),(ev)"},
+    {0xC6,0x82," vgatherpf1dps/d Wx (66),(ev)"},
+    {0xC6,0x83,NULL},
+    {0xC6,0x84,NULL},
+    {0xC6,0x85," vscatterpf0dps/d Wx (66),(ev)"},
+    {0xC6,0x86," vscatterpf1dps/d Wx (66),(ev)"},
+    {0xC6,0x87,NULL},
+};
+OP_ENTRY Grp19_C7h[8] = {
+    {0xC7,0x80,NULL},
+    {0xC7,0x81," vgatherpf0qps/d Wx (66),(ev)"},
+    {0xC7,0x82," vgatherpf1qps/d Wx (66),(ev)"},
+    {0xC7,0x83,NULL},
+    {0xC7,0x84,NULL},
+    {0xC7,0x85," vscatterpf0qps/d Wx (66),(ev)"},
+    {0xC7,0x86," vscatterpf1qps/d Wx (66),(ev)"},
+    {0xC7,0x87,NULL},
+};
+
 extern "C" int ndisasm(unsigned char* data, OPENTRY * pOpEntry, E_ADM eADM, unsigned int* flags);
 
 // find 8 throughput
