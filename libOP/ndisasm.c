@@ -1654,7 +1654,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
 
     colon = false;
     is_evex = !!(ins.rex & REX_EV);
-    length += data - origdata;  /* fix up for prefixes */
+        length += data - origdata;  /* fix up for prefixes */
 
     if (*flags & 0x80000000)
     {
@@ -1682,52 +1682,107 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 if ((*flags & 0x0C000000) == 0x04000000) // reg/op is register operand
                 {
                     // case #1 both operand exists
-                    if ((((*flags & 0x0000000C) >> 2) == i) && (((*flags & 0x0000000C) >> 2) ^ (*flags & 0x00000003)))
-                    {
-                        slen += snprintf(output + slen, outbufsize - slen, "%s",
-                            nasm_reg_types[reg - EXPR_REG_START]);
-                    }
                     // case #2 operand is reciprocal
-                    else if (!i && (((*flags & 0x0000000C) >> 2) && (*flags & 0x00000003)))
+                    if (
+                        (((*flags & 0x0000000C) >> 2) == i) && (((*flags & 0x0000000C) >> 2) ^ (*flags & 0x00000003)) ||
+                        !i && (((*flags & 0x0000000C) >> 2) && (*flags & 0x00000003))
+                        )
                     {
-                        slen += snprintf(output + slen, outbufsize - slen, "%s",
-                            nasm_reg_types[reg - EXPR_REG_START]);
+                        // 16/32 bit operand case
+                        if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
+                        {
+                            slen += snprintf(output + slen, outbufsize - slen, "%s",
+                                nasm_reg_types_0110[reg - EXPR_REG_START]);
+                            // clear operand prefix flags
+                            *flags &= 0xFFEFFFFF;
+                        }
+                        // 32/64 bit operand case
+                        else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
+                        {
+                            slen += snprintf(output + slen, outbufsize - slen, "%s",
+                                nasm_reg_types_1100[reg - EXPR_REG_START]);
+                            // clear operand prefix flags
+                            *flags &= 0xFFEFFFFF;
+                        }
+                        // 16/32/64 bit operand case
+                        else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
+                        {
+                            slen += snprintf(output + slen, outbufsize - slen, "%s",
+                                nasm_reg_types_1110[reg - EXPR_REG_START]);
+                            // clear operand prefix flags
+                            *flags &= 0xFFEFFFFF;
+                        }
+                        else
+                        {
+                            slen += snprintf(output + slen, outbufsize - slen, "%s",
+                                nasm_reg_types[reg - EXPR_REG_START]);
+                        }
                     }
                     // case #3 reg operand does not exists, or reg is in other operand
+                    else
+                    {
+                        // 16/32 bit operand case
+                        if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
+                        {
+                            slen += snprintf(output + slen, outbufsize - slen, "%s",
+                                nasm_reg_names_0110[reg - EXPR_REG_START]);
+                            // clear operand prefix flags
+                            *flags &= 0xFFEFFFFF;
+                        }
+                        // 32/64 bit operand case
+                        else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
+                        {
+                            slen += snprintf(output + slen, outbufsize - slen, "%s",
+                                nasm_reg_names_1100[reg - EXPR_REG_START]);
+                            // clear operand prefix flags
+                            *flags &= 0xFFEFFFFF;
+                        }
+                        // 16/32/64 bit operand case
+                        else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
+                        {
+                            slen += snprintf(output + slen, outbufsize - slen, "%s",
+                                nasm_reg_names_1110[reg - EXPR_REG_START]);
+                            // clear operand prefix flags
+                            *flags &= 0xFFEFFFFF;
+                        }
+                        else
+                        {
+                            slen += snprintf(output + slen, outbufsize - slen, "%s",
+                                nasm_reg_names[reg - EXPR_REG_START]);
+                        }
+                    }
+                }
+                else  // reg/op is extended op, or modrm does not exists
+                {
+                    // 16/32 bit operand case
+                    if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
+                    {
+                        slen += snprintf(output + slen, outbufsize - slen, "%s",
+                            nasm_reg_names_0110[reg - EXPR_REG_START]);
+                        // clear operand prefix flags
+                        *flags &= 0xFFEFFFFF;
+                    }
+                    // 32/64 bit operand case
+                    else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
+                    {
+                        slen += snprintf(output + slen, outbufsize - slen, "%s",
+                            nasm_reg_names_1100[reg - EXPR_REG_START]);
+                        // clear operand prefix flags
+                        *flags &= 0xFFEFFFFF;
+                    }
+                    // 16/32/64 bit operand case
+                    else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
+                    {
+                        slen += snprintf(output + slen, outbufsize - slen, "%s",
+                            nasm_reg_names_1110[reg - EXPR_REG_START]);
+                        // clear operand prefix flags
+                        *flags &= 0xFFEFFFFF;
+                    }
                     else
                     {
                         slen += snprintf(output + slen, outbufsize - slen, "%s",
                             nasm_reg_names[reg - EXPR_REG_START]);
                     }
-                }
-                else  // reg/op is extended op, or modrm does not exists
-                {
-                    slen += snprintf(output + slen, outbufsize - slen, "%s",
-                        nasm_reg_names[reg - EXPR_REG_START]);
-                }
-                // 16/32 bit operand case
-                if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
-                {
-                    slen += snprintf(output + slen, outbufsize - slen,
-                        "(w/dw)");
-                    // clear operand prefix flags
-                    *flags &= 0xFFEFFFFF;
-                }
-                // 32/64 bit operand case
-                else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
-                {
-                    slen += snprintf(output + slen, outbufsize - slen,
-                        "(dw/qw)");
-                    // clear operand prefix flags
-                    *flags &= 0xFFEFFFFF;
-                }
-                // 16/32/64 bit operand case
-                else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
-                {
-                    slen += snprintf(output + slen, outbufsize - slen,
-                        "(w/dw/qw)");
-                    // clear operand prefix flags
-                    *flags &= 0xFFEFFFFF;
                 }
             }
 
@@ -1745,22 +1800,85 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 if (t & BITS8)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "byte ");
+                        snprintf(output + slen, outbufsize - slen, "imm8 ");
                 }
                 else if (t & BITS16)
                 {
-                    slen +=
-                        snprintf(output + slen, outbufsize - slen, "word ");
+                    // 16/32 bit operand case
+                    if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
+                    {
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "imm16/imm32 ");
+                    }
+                    // 32/64 bit operand case
+                    else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
+                    {
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "imm32/imm64 ");
+                    }
+                    // 16/32/64 bit operand case
+                    else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
+                    {
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "imm16/imm32/imm64 ");
+                    }
+                    else
+                    {
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "imm16 ");
+                    }
                 }
                 else if (t & BITS32)
                 {
-                    slen +=
-                        snprintf(output + slen, outbufsize - slen, "dword ");
+                    // 16/32 bit operand case
+                    if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
+                    {
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "imm16/imm32 ");
+                    }
+                    // 32/64 bit operand case
+                    else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
+                    {
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "imm32/imm64 ");
+                    }
+                    // 16/32/64 bit operand case
+                    else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
+                    {
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "imm16/imm32/imm64 ");
+                    }
+                    else
+                    {
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "imm32 ");
+                    }
                 }
                 else if (t & BITS64)
                 {
-                    slen +=
-                        snprintf(output + slen, outbufsize - slen, "qword ");
+                    // 16/32 bit operand case
+                    if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
+                    {
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "imm16/imm32 ");
+                    }
+                    // 32/64 bit operand case
+                    else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
+                    {
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "imm32/imm64 ");
+                    }
+                    // 16/32/64 bit operand case
+                    else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
+                    {
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "imm16/imm32/imm64 ");
+                    }
+                    else
+                    {
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "imm64 ");
+                    }
                 }
                 else if (t & NEAR)
                 {
@@ -1772,8 +1890,11 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     slen +=
                         snprintf(output + slen, outbufsize - slen, "short ");
                 }
-                slen +=
-                    snprintf(output + slen, outbufsize - slen, "imm");
+                else
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "imm");
+                }
             }
 
             // check immediate(or offset) address?

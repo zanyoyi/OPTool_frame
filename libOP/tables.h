@@ -57,7 +57,14 @@ extern const char * const nasm_insn_names[];
 
 /* regs.c */
 extern const char * const nasm_reg_names[];
-extern const char * const nasm_reg_types[]; // add for register classify
+extern const char * const nasm_reg_types[];			// add for register classify
+extern const char * const nasm_reg_names_1110[];	// add for register naming
+extern const char * const nasm_reg_names_0110[];	// add for register naming
+extern const char * const nasm_reg_names_1100[];	// add for register naming
+extern const char * const nasm_reg_types_1110[];	// add for register classify
+extern const char * const nasm_reg_types_0110[];	// add for register classify
+extern const char * const nasm_reg_types_1100[];	// add for register classify
+
 /* regflags.c */
 typedef uint64_t opflags_t;
 typedef uint16_t  decoflags_t;
