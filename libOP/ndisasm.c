@@ -1680,7 +1680,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 reg = whichreg(t, o->basereg, ins.rex);
 
                 // indicate reg/op register operand
-                if (*flags & 0x0C000000 == 0x04000000) // reg/op is register operand
+                if ((*flags & 0x0C000000) == 0x04000000) // reg/op is register operand
                 {
                     if (((*flags & 0x0000000C) >> 2) == i) // reg operand is i'th operand
                     {
@@ -2022,7 +2022,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 reg = whichreg(t, o->basereg, ins.rex);
 
                 // indicate reg/op register operand
-                if (*flags & 0x0C000000 == 0x04000000) // reg/op is register operand
+                if ((*flags & 0x0C000000) == 0x04000000) // reg/op is register operand
                 {
                     if (((*flags & 0x0000000C) >> 2) == i) // reg operand is i'th operand
                     {
@@ -2317,7 +2317,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 reg = whichreg(t, o->basereg, ins.rex);
 
                 // indicate reg/op register operand
-                if (*flags & 0x0C000000 == 0x04000000) // reg/op is register operand
+                if ((*flags & 0x0C000000) == 0x04000000) // reg/op is register operand
                 {
                     if (((*flags & 0x0000000C) >> 2) == i) // reg operand is i'th operand
                     {

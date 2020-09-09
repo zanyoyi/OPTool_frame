@@ -90,15 +90,15 @@ static BOOL ByteMapHitPrefix(BYTE data)
     }
 }
 
-static BOOL OpcodeGroupCheck(E_XB_OP eOPTab, BYTE ptr_buffer)
+static BOOL OpcodeGroupCheck(E_XB_OP eOPTab, BYTE buffer)
 {
     if (eOPTab == E_AD16)
     {
-        return OP1BMap[ptr_buffer].OPExt;
+        return OP1BMap[buffer].OPExt;
     }
     else if (eOPTab == E_AD32)
     {
-        return OP2BMap[ptr_buffer].OPExt;
+        return OP2BMap[buffer].OPExt;
     }
     return FALSE;
 }
@@ -203,7 +203,19 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
             // check wchar 0 ~ 7
             if (OPMatch(strOPMatch + 0, OpIdx))
             {
-                nOPExtIdx = 256;
+                // check op-code mismatch
+                if (
+                    (eOPTab == E_1B_OP && OpIdx == 0x0F) ||
+                    (eOPTab == E_2B_OP && OpIdx == 0x38) ||
+                    (eOPTab == E_2B_OP && OpIdx == 0x3A)
+                    )
+                {
+                    nOPExtIdx = 0;
+                }
+                else
+                {
+                    nOPExtIdx = 256;
+                }
             }
             else
             {
@@ -303,13 +315,14 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     options = 0x80000000 | (options & 0x0C000000);
                     lendis = ndisasm(ptr2_buffer, pOpEntry, eADM, &options);
                 }
-                // exists prefix but different mnemonic, or exists prefix only mnemonic
+                // exists prefix but different mnemonic, or it is prefix-exclusive mnemonic
                 else if (OPMatch(strOPMatch + 8, OP_2))
                 {
                     // preserve reg/op information
                     options = 0x40000000 | (options & 0x0C000000);
                     lendis = ndisasm(ptr2_buffer, pOpEntry, eADM, &options);
                 }
+                // no match
                 else
                 {
                     lendis = 0;
@@ -322,10 +335,10 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     OPExtIdx = 256;     // skip rest
                 }
                 // no prefix instruction go here
-                else if ((options & 0x03000000) != (eOPTab << 24))
-                {
-                    OPExtIdx = 256;     // skip rest
-                }
+                //else if ((options & 0x03000000) != (eOPTab << 24))
+                //{
+                //    OPExtIdx = 256;     // skip rest
+                //}
                 // no multiple-byte instruction mismatch go here
                 else if (options & 0x08000000)
                 {
@@ -356,7 +369,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         // reset to default prefix
                         PrefixIdx = 0;
                         OPExtIdx++;         // find next member
-                        lFound2 = lFound;   // update found entries
+                        //lFound2 = lFound;   // update found entries
                     }
                 }
                 // no group instruction go here
@@ -581,6 +594,6 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
         }
     }
 
-EXIT:
+/* EXIT: */
     return lFound;
 }
