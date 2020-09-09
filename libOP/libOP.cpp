@@ -10,14 +10,14 @@
 extern "C" int ndisasm(unsigned char* data, OPENTRY * pOpEntry, E_ADM eADM, unsigned int* flags);
 
 // find 8 throughput
-static BOOL GrpMatch(WCHAR* strModRM, BYTE bModRM)
+static BOOL GrpMatch(WCHAR* strModRM, BYTE GrpIdx)
 {
     BYTE BitMap[8] = { 0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01 };
     for (int i = 2; i < 5; i++)
     {
         if (strModRM[i] == _T('x') ||
-            (strModRM[i] == _T('1') && (bModRM & BitMap[i])) ||
-            (strModRM[i] == _T('0') && (bModRM & BitMap[i]) == 0))
+            (strModRM[i] == _T('1') && ((GrpIdx << 3) & BitMap[i])) ||
+            (strModRM[i] == _T('0') && ((GrpIdx << 3) & BitMap[i]) == 0))
         {
         }
         else
