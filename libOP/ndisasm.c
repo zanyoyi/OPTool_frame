@@ -1681,12 +1681,20 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 // indicate reg/op register operand
                 if ((*flags & 0x0C000000) == 0x04000000) // reg/op is register operand
                 {
-                    if ((((*flags & 0x0000000C) >> 2) == i) && ((*flags & 0x0000000F)) > 0) // reg operand is i'th operand
+                    // case #1 both operand exists
+                    if ((((*flags & 0x0000000C) >> 2) == i) && (((*flags & 0x0000000C) >> 2) ^ (*flags & 0x00000003)))
                     {
                         slen += snprintf(output + slen, outbufsize - slen, "%s",
                             nasm_reg_types[reg - EXPR_REG_START]);
                     }
-                    else //reg operand does not exists, or reg is in other operand
+                    // case #2 operand is reciprocal
+                    else if (!i && (((*flags & 0x0000000C) >> 2) && (*flags & 0x00000003)))
+                    {
+                        slen += snprintf(output + slen, outbufsize - slen, "%s",
+                            nasm_reg_types[reg - EXPR_REG_START]);
+                    }
+                    // case #3 reg operand does not exists, or reg is in other operand
+                    else
                     {
                         slen += snprintf(output + slen, outbufsize - slen, "%s",
                             nasm_reg_names[reg - EXPR_REG_START]);
@@ -1789,18 +1797,99 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 }
                 if (t & BITS16)
                 {
-                    slen +=
-                        snprintf(output + slen, outbufsize - slen, "word ");
+                    // 16/32 bit operand case
+                    if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
+                    {
+                        slen += snprintf(output + slen, outbufsize - slen,
+                            "(w/dw)");
+                        // clear operand prefix flags
+                        *flags &= 0xFFEFFFFF;
+                    }
+                    // 32/64 bit operand case
+                    else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
+                    {
+                        slen += snprintf(output + slen, outbufsize - slen,
+                            "(dw/qw)");
+                        // clear operand prefix flags
+                        *flags &= 0xFFEFFFFF;
+                    }
+                    // 16/32/64 bit operand case
+                    else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
+                    {
+                        slen += snprintf(output + slen, outbufsize - slen,
+                            "(w/dw/qw)");
+                        // clear operand prefix flags
+                        *flags &= 0xFFEFFFFF;
+                    }
+                    else
+                    {
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "word ");
+                    }
                 }
                 if (t & BITS32)
                 {
-                    slen +=
-                        snprintf(output + slen, outbufsize - slen, "dword ");
+                    // 16/32 bit operand case
+                    if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
+                    {
+                        slen += snprintf(output + slen, outbufsize - slen,
+                            "(w/dw)");
+                        // clear operand prefix flags
+                        *flags &= 0xFFEFFFFF;
+                    }
+                    // 32/64 bit operand case
+                    else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
+                    {
+                        slen += snprintf(output + slen, outbufsize - slen,
+                            "(dw/qw)");
+                        // clear operand prefix flags
+                        *flags &= 0xFFEFFFFF;
+                    }
+                    // 16/32/64 bit operand case
+                    else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
+                    {
+                        slen += snprintf(output + slen, outbufsize - slen,
+                            "(w/dw/qw)");
+                        // clear operand prefix flags
+                        *flags &= 0xFFEFFFFF;
+                    }
+                    else
+                    {
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "dword ");
+                    }
                 }
                 if (t & BITS64)
                 {
-                    slen +=
-                        snprintf(output + slen, outbufsize - slen, "qword ");
+                    // 16/32 bit operand case
+                    if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
+                    {
+                        slen += snprintf(output + slen, outbufsize - slen,
+                            "(w/dw)");
+                        // clear operand prefix flags
+                        *flags &= 0xFFEFFFFF;
+                    }
+                    // 32/64 bit operand case
+                    else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
+                    {
+                        slen += snprintf(output + slen, outbufsize - slen,
+                            "(dw/qw)");
+                        // clear operand prefix flags
+                        *flags &= 0xFFEFFFFF;
+                    }
+                    // 16/32/64 bit operand case
+                    else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
+                    {
+                        slen += snprintf(output + slen, outbufsize - slen,
+                            "(w/dw/qw)");
+                        // clear operand prefix flags
+                        *flags &= 0xFFEFFFFF;
+                    }
+                    else
+                    {
+                        slen +=
+                            snprintf(output + slen, outbufsize - slen, "qword ");
+                    }
                 }
                 if (t & BITS80)
                 {
@@ -1961,30 +2050,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 }
                 // replace this line with other function
                 output[slen++] = ']';
-                // 16/32 bit operand case
-                if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
-                {
-                    slen += snprintf(output + slen, outbufsize - slen,
-                        "(w/dw)");
-                    // clear operand prefix flags
-                    *flags &= 0xFFEFFFFF;
-                }
-                // 32/64 bit operand case
-                else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
-                {
-                    slen += snprintf(output + slen, outbufsize - slen,
-                        "(dw/qw)");
-                    // clear operand prefix flags
-                    *flags &= 0xFFEFFFFF;
-                }
-                // 16/32/64 bit operand case
-                else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
-                {
-                    slen += snprintf(output + slen, outbufsize - slen,
-                        "(w/dw/qw)");
-                    // clear operand prefix flags
-                    *flags &= 0xFFEFFFFF;
-                }
             }
 
             // unkown cases
@@ -2023,12 +2088,20 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 // indicate reg/op register operand
                 if ((*flags & 0x0C000000) == 0x04000000) // reg/op is register operand
                 {
-                    if ((((*flags & 0x0000000C) >> 2) == i) && ((*flags & 0x0000000F)) > 0) // reg operand is i'th operand
+                    // case #1 both operand exists
+                    if ((((*flags & 0x0000000C) >> 2) == i) && (((*flags & 0x0000000C) >> 2) ^ (*flags & 0x00000003)))
                     {
                         slen += snprintf(output + slen, outbufsize - slen, "%s",
                             nasm_reg_types[reg - EXPR_REG_START]);
                     }
-                    else //reg operand does not exists, or reg is in other operand
+                    // case #2 operand is reciprocal
+                    else if (!i && (((*flags & 0x0000000C) >> 2) && (*flags & 0x00000003)))
+                    {
+                        slen += snprintf(output + slen, outbufsize - slen, "%s",
+                            nasm_reg_types[reg - EXPR_REG_START]);
+                    }
+                    // case #3 reg operand does not exists, or reg is in other operand
+                    else
                     {
                         slen += snprintf(output + slen, outbufsize - slen, "%s",
                             nasm_reg_names[reg - EXPR_REG_START]);
@@ -2318,11 +2391,19 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 // indicate reg/op register operand
                 if ((*flags & 0x0C000000) == 0x04000000) // reg/op is register operand
                 {
-                    if ((((*flags & 0x0000000C) >> 2) == i) && ((*flags & 0x0000000F)) > 0) // reg operand is i'th operand
+                    // case #1 both operand exists
+                    if ((((*flags & 0x0000000C) >> 2) == i) && (((*flags & 0x0000000C) >> 2) ^ (*flags & 0x00000003)))
                     {
                         slen += snprintf(output + slen, outbufsize - slen, "%s",
                             nasm_reg_types[reg - EXPR_REG_START]);
                     }
+                    // case #2 operand is reciprocal
+                    else if (!i && (((*flags & 0x0000000C) >> 2) && (*flags & 0x00000003)))
+                    {
+                        slen += snprintf(output + slen, outbufsize - slen, "%s",
+                            nasm_reg_types[reg - EXPR_REG_START]);
+                    }
+                    // case #3 reg operand does not exists, or reg is in other operand
                     else
                     {
                         slen += snprintf(output + slen, outbufsize - slen, "%s",
