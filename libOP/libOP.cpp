@@ -335,11 +335,6 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     OPExtIdx = 256;     // skip rest
                 }
                 // no prefix instruction go here
-                //else if ((options & 0x03000000) != (eOPTab << 24))
-                //{
-                //    OPExtIdx = 256;     // skip rest
-                //}
-                // no multiple-byte instruction mismatch go here
                 else if (options & 0x08000000)
                 {
                     pOpEntry->ReqPrefix = prefixes;

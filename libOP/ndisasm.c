@@ -745,8 +745,8 @@ static int matches(const struct itemplate* t, uint8_t* data,
         case4(0230) :
         case4(0234) :
         {
-            // detected modrm
-            *flags |= 0x04000000 + (op2 & 0x3);
+            // detected modrm, fix reg to forth operand
+            *flags |= 0x04000000 + (3 << 2) + (op2 & 0x3);
             
             int modrm = *data++;
             if (((modrm >> 3) & 07) != (c & 07))
@@ -1433,10 +1433,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
     {
         fetch_or_return(origdata, dp, data_size, 1);
         ix = (const struct disasm_index*)ix->p + *dp++;
-
-        // check multiple byte instruction?
-
-        *flags += 1 << 24;
     }
 
     p = (const struct itemplate* const*)ix->p;
