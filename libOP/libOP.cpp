@@ -457,7 +457,7 @@ OP_ENTRY Grp11_C6h[8] = {
     {0xC6,0x80," XABORT Ib (000),(11B)"},
 };
 OP_ENTRY Grp11_C7h[8] = {
-    {0xC7,0x80," MOV Eb,Iz"},
+    {0xC7,0x80," MOV Ev,Iz"},
     {0xC7,0x81,NULL},
     {0xC7,0x82,NULL},
     {0xC7,0x83,NULL},
