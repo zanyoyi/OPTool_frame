@@ -128,13 +128,17 @@ static DWORD EnumGrp(OP_ENTRY* pGrp, WCHAR* strModRMMatch, OPENTRY* pOpEntry, DW
     return lFound;
 }
 
-static int * pPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx)
+static int pPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY * pGrp)
 {
     if(eOPTab == E_AD16)
     {
         switch (OpIdx)
         {
-        case 0x40:
+        case 0x00:
+            // modified value is local visible only
+            //pGrp = Grp01_80h;
+            *pGrp = *Grp01_80h;
+            return 2;
             break;
         case 0x41:
             break;
@@ -152,11 +156,6 @@ static int * pPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx)
     }
     else if (eOPTab == E_AD32)
     {
-        switch (OpIdx)
-        {
-        default:
-            break;
-        }
     }
     return 0;
 }
@@ -521,6 +520,14 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
     {
         for (int OpIdx = 0; (OpIdx < 256) && (lFound < nOpEntryMax); OpIdx++)
         {
+            // never pass null pointer into function
+            pGrp = OP1BMap;
+            int a = pPrefixes(eOPTab, OpIdx, 0, pGrp);
+            int b = pGrp->OP;
+            int c = 0;
+            a = pPrefixes(eOPTab, OpIdx, 0, pGrp);
+            c = pGrp->OP;
+
             if (OPMatch(strOPMatch, OpIdx))
             {
                 if (eOPTab == E_1B_OP)

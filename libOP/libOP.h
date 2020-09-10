@@ -18,6 +18,7 @@ extern  "C" {
 #define OPTION_EXPAND_MODRM_REG   0x00000001 // option to indicate to expand REG of ModRM
 #define OPTION_EXPAND_MODRM_EA    0x00000002 // option to indicate to expand Effective address of ModRM
 #define OPTION_DECODE_OPMAP       0x00000004 // option to indicate to decode ModRM or not
+#define OPTION_DECODE_UNSUPPORT   0x00000008 // option to not decode unsupported op-code
 
 typedef struct{
 	BYTE OP;         //OP code
@@ -51,26 +52,6 @@ typedef struct {
     BYTE OPExt;         /*[7] indicated valid,[2:0] = ModRm.REG;*/
     char* strFmt;
 }OP_ENTRY;
-
-#define OPlabel_F_3_inv     1 << 0
-#define OPlabel_11B         1 << 1
-#define OPlabel_1A          1 << 2
-#define OPlabel_1B          1 << 3
-#define OPlabel_1C          1 << 4
-#define OPlabel_66          1 << 5
-#define OPlabel_66andF_2    1 << 6
-#define OPlabel_d64         1 << 7
-#define OPlabel_ev          1 << 8
-#define OPlabel_evo         1 << 9
-#define OPlabel_F_2         1 << 10
-#define OPlabel_F_3         1 << 11
-#define OPlabel_f64         1 << 12
-#define OPlabel_FMA         1 << 13
-#define OPlabel_i64         1 << 14
-#define OPlabel_o64         1 << 15
-#define OPlabel_Prefix      1 << 16
-#define OPlabel_v           1 << 17
-#define OPlabel_v1          1 << 18
 
 typedef struct {
     DWORD OPlabel;      // labels
