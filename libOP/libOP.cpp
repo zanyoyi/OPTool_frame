@@ -551,10 +551,10 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         pGrp = Grp01A_8Fh;
                         break;
                     case 0xc6://Grp11A 
-                        pGrp = Grp11_C6h;
+                        pGrp = Grp11A_C6h;
                         break;
                     case 0xc7://Grp11B 
-                        pGrp = Grp11_C7h;
+                        pGrp = Grp11B_C7h;
                         break;
                     case 0xf6://Grp3_1 
                         pGrp = Grp03_F6h;
