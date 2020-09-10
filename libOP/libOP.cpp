@@ -295,11 +295,43 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     next_PrefixIdx = 0x00;
                     break;
                 case 0xF266:    // CRC32 need this prefix
+                case 0x66F2:
                     prefixes = 0x00000204;
                     // cannot exchange with each other
                     buffer[1] = 0x66;
                     buffer[2] = 0xF2;
                     ptr2_buffer = buffer + 3 - 2;
+                    // dynamic linked list pointer is not ready
+                    next_PrefixIdx = 0x00;
+                    break;
+                case 0x48F2:
+                    prefixes = 0x00001004;
+                    // cannot exchange with each other
+                    buffer[1] = 0xF2;
+                    buffer[2] = 0x48;
+                    ptr2_buffer = buffer + 3 - 2;
+                    // dynamic linked list pointer is not ready
+                    next_PrefixIdx = 0x00;
+                    break;
+                case 0x48F3:
+                    prefixes = 0x00001002;
+                    // cannot exchange with each other
+                    buffer[1] = 0xF3;
+                    buffer[2] = 0x48;
+                    ptr2_buffer = buffer + 3 - 2;
+                    // dynamic linked list pointer is not ready
+                    next_PrefixIdx = 0x00;
+                    break;
+                case 0xF24866:  // CRC32 need this prefix
+                case 0x48F266:
+                case 0x6648F2:
+                case 0x4866F2:
+                    prefixes = 0x00001204;
+                    // cannot exchange with each other
+                    buffer[0] = 0x66;
+                    buffer[1] = 0x48;
+                    buffer[2] = 0xF2;
+                    ptr2_buffer = buffer + 3 - 3;
                     // dynamic linked list pointer is not ready
                     next_PrefixIdx = 0x00;
                     break;
