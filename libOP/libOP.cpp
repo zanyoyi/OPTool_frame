@@ -94,17 +94,19 @@ static BOOL OpcodeGroupCheck(E_XB_OP eOPTab, BYTE buffer)
 {
     if (eOPTab == E_AD16)
     {
-        return OP1BMap[buffer].OPExt;
+        // AND with 0x80
+        return (OP1BMap[buffer].OPExt >> 7);
     }
     else if (eOPTab == E_AD32)
     {
-        return OP2BMap[buffer].OPExt;
+        // AND with 0x80
+        return (OP2BMap[buffer].OPExt >> 7);;
     }
     return FALSE;
 }
 
 // sprintf array
-DWORD EnumGrp(OP_ENTRY* pGrp, WCHAR* strModRMMatch, OPENTRY* pOpEntry, DWORD nOpEntryMax)
+static DWORD EnumGrp(OP_ENTRY* pGrp, WCHAR* strModRMMatch, OPENTRY* pOpEntry, DWORD nOpEntryMax)
 {
     DWORD lFound = 0;
     /*int8_t*/BYTE OpIdx = pOpEntry->OP;
@@ -126,7 +128,38 @@ DWORD EnumGrp(OP_ENTRY* pGrp, WCHAR* strModRMMatch, OPENTRY* pOpEntry, DWORD nOp
     return lFound;
 }
 
-
+static int * pPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx)
+{
+    if(eOPTab == E_AD16)
+    {
+        switch (OpIdx)
+        {
+        case 0x40:
+            break;
+        case 0x41:
+            break;
+        case 0x42:
+            break;
+        case 0x43:
+            break;
+        case 0x44:
+            break;
+        case 0x45:
+            break;
+        default:
+            break;
+        }
+    }
+    else if (eOPTab == E_AD32)
+    {
+        switch (OpIdx)
+        {
+        default:
+            break;
+        }
+    }
+    return 0;
+}
 
 LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPENTRY* pOpEntry, DWORD nOpEntryMax, DWORD nOption)
 {
@@ -253,6 +286,9 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 // update binary data pointer for prefix indicator
                 switch (PrefixIdx)
                 {
+                // Only one REX prefix is allowed per instruction.If used,
+                // the REX prefix byte must immediately precede the opcode
+                // byte or the escape opcode byte(0FH).
                 case 0x00:      // default prefix
                     prefixes = 0x00000000;
                     ptr2_buffer = buffer + 3;
@@ -322,15 +358,13 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     // dynamic linked list pointer is not ready
                     next_PrefixIdx = 0x00;
                     break;
-                case 0xF24866:  // CRC32 need this prefix
-                case 0x48F266:
-                case 0x6648F2:
+                case 0x48F266:  // CRC32 need this prefix
                 case 0x4866F2:
                     prefixes = 0x00001204;
                     // cannot exchange with each other
                     buffer[0] = 0x66;
-                    buffer[1] = 0x48;
-                    buffer[2] = 0xF2;
+                    buffer[1] = 0xF2;
+                    buffer[2] = 0x48;
                     ptr2_buffer = buffer + 3 - 3;
                     // dynamic linked list pointer is not ready
                     next_PrefixIdx = 0x00;
@@ -372,7 +406,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     pOpEntry->ReqPrefix = prefixes;
                     pOpEntry->OP = OpIdx;
                     // group indicator | mod indicator | 11B indicator | group number
-                    pOpEntry->OPExt = 0x80 | 0x40 | ((OP_2 >= 0xC0) << 3) | ((OP_2 >> 3) & 0x07);
+                    pOpEntry->OPExt = 0x80 | 0x20 | ((OP_2 >= 0xC0) << 3) | ((OP_2 >> 3) & 0x07);
                     if (lendis && (options & 0x00F00000) && next_PrefixIdx)
                     {
                         pOpEntry++;
@@ -543,9 +577,9 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     {
                         if (OP1BMap[OpIdx].strFmt)
                         {
-                            pOpEntry->ReqPrefix = 0;
                             pOpEntry->OP = OpIdx;
                             pOpEntry->OPExt = 0;
+                            pOpEntry->ReqPrefix = 0;
                             swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP1BMap[OpIdx].strFmt);
                             pOpEntry++;
                             lFound++;
@@ -609,9 +643,9 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     {
                         if (OP2BMap[OpIdx].strFmt)
                         {
-                            pOpEntry->ReqPrefix = 0;
                             pOpEntry->OP = OpIdx;
                             pOpEntry->OPExt = 0;
+                            pOpEntry->ReqPrefix = 0;
                             swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP2BMap[OpIdx].strFmt);
                             pOpEntry++;
                             lFound++;

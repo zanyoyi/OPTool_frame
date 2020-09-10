@@ -241,9 +241,9 @@ void COPMappingDlg::OnBnClickedButton2()
 			// group, prefixes
 			if ((OpEntry[i].OPExt & 0x80) && OpEntry[i].ReqPrefix)
 			{
-				if((OpEntry[i].OPExt & 0x40) && OpEntry[i].OPExt & 0x08)
+				if((OpEntry[i].OPExt & 0x20) && OpEntry[i].OPExt & 0x08)
 					strTemp.Format(_T("%02X/%x [11B] %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
-				else if (OpEntry[i].OPExt & 0x40)
+				else if (OpEntry[i].OPExt & 0x20)
 					strTemp.Format(_T("%02X/%x [mem] %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
 				else
 					strTemp.Format(_T("%02X/%x       %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
@@ -256,9 +256,9 @@ void COPMappingDlg::OnBnClickedButton2()
 			// group
 			else if(OpEntry[i].OPExt & 0x80)
 			{
-				if ((OpEntry[i].OPExt & 0x40) && OpEntry[i].OPExt & 0x08)
+				if ((OpEntry[i].OPExt & 0x20) && OpEntry[i].OPExt & 0x08)
 					strTemp.Format(_T("%02X/%x [11B] %s"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm);
-				else if (OpEntry[i].OPExt & 0x40)
+				else if (OpEntry[i].OPExt & 0x20)
 					strTemp.Format(_T("%02X/%x [mem] %s"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm);
 				else
 					strTemp.Format(_T("%02X/%x       %s"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm);
