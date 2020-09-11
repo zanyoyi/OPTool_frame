@@ -31,20 +31,21 @@ typedef enum{
     E_AD16,
     E_AD32,
     E_AD64,
-	E_AD_ALL
+	E_AD_ALL,
 }E_ADM;
 
 typedef enum{
     E_OPR_16,
     E_OPR_32,
 	E_OPR_64,
-	E_OPR_ALL
+	E_OPR_ALL,
 }E_OPR_SZ;
 
 typedef enum{
     E_1B_OP,
     E_2B_OP,
-    E_3B_OP
+    E_3B_OP_0F38,
+    E_3B_OP_0F3A,
 }E_XB_OP;
 
 typedef enum {
