@@ -203,6 +203,13 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             break;
         }
     }
+    else if (eOPTab == E_3B_OP_0F38)
+    {
+    }
+    else if (eOPTab == E_3B_OP_0F3A)
+    {
+    }
+    // somehow nested switch breaks indent spacing
     else if (eOPTab == E_2B_OP)
     {
         switch (OpIdx)
@@ -702,12 +709,6 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
         default:
             break;
         }
-    }
-    else if (eOPTab == E_3B_OP_0F38)
-    {
-    }
-    else if (eOPTab == E_3B_OP_0F3A)
-    {
     }
 
     return 0;
