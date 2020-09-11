@@ -165,6 +165,15 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
         case 0x63:
             *pGrp = OP_63;
             return 2;
+        case 0x8F:
+            switch (GrpIdx)
+            {
+            case 0x08:
+                *pGrp = OP_8F;
+                return 1;
+            default:
+                break;
+            }
         case 0x90:
             *pGrp = OP_90;
             return 3;
@@ -188,6 +197,27 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
     {
         switch (OpIdx)
         {
+        case 0x01:
+            switch (GrpIdx)
+            {
+            case 0x00:
+                *pGrp = OP_0F01_0;
+                return 7;
+            case 0x01:
+                *pGrp = OP_0F01_1;
+                return 6;
+            case 0x02:
+                *pGrp = OP_0F01_2;
+                return 7;
+            case 0x05:
+                *pGrp = OP_0F01_5;
+                return 5;
+            case 0x07:
+                *pGrp = OP_0F01_7;
+                return 3;
+            default:
+                break;
+            }
         case 0x09:
             *pGrp = OP_0F09;
             return 2;
@@ -322,7 +352,7 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             return 2;
         case 0x61:
             *pGrp = OP_0F61;
-            return 61;
+            return 2;
         case 0x62:
             *pGrp = OP_0F62;
             return 2;
@@ -358,10 +388,52 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             return 2;
         case 0x6F:
             *pGrp = OP_0F6F;
-            return 2;
+            return 6;
         case 0x70:
             *pGrp = OP_0F70;
-            return 2;
+            return 4;
+        case 0x71:
+            switch (GrpIdx)
+            {
+            case 0x02:
+                *pGrp = OP_0F71_2;
+                return 2;
+            case 0x04:
+                *pGrp = OP_0F71_4;
+                return 2;
+            case 0x06:
+                *pGrp = OP_0F71_6;
+                return 2;
+            default:
+                break;
+            }
+        case 0x72:
+            switch (GrpIdx)
+            {
+            case 0x02:
+                *pGrp = OP_0F72_2;
+                return 2;
+            case 0x04:
+                *pGrp = OP_0F72_4;
+                return 3;
+            case 0x06:
+                *pGrp = OP_0F72_6;
+                return 2;
+            default:
+                break;
+            }
+        case 0x73:
+            switch (GrpIdx)
+            {
+            case 0x02:
+                *pGrp = OP_0F73_2;
+                return 2;
+            case 0x06:
+                *pGrp = OP_0F73_6;
+                return 2;
+            default:
+                break;
+            }
         case 0x74:
             *pGrp = OP_0F74;
             return 2;
@@ -373,19 +445,19 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             return 2;
         case 0x77:
             *pGrp = OP_0F77;
-            return 2;
+            return 3;
         case 0x78:
             *pGrp = OP_0F78;
-            return 2;
+            return 5;
         case 0x79:
             *pGrp = OP_0F79;
-            return 2;
+            return 5;
         case 0x7A:
             *pGrp = OP_0F7A;
-            return 2;
+            return 3;
         case 0x7B:
             *pGrp = OP_0F7B;
-            return 2;
+            return 3;
         case 0x7C:
             *pGrp = OP_0F7C;
             return 2;
@@ -394,28 +466,58 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             return 2;
         case 0x7E:
             *pGrp = OP_0F7E;
-            return 2;
+            return 3;
         case 0x7F:
             *pGrp = OP_0F7F;
-            return 2;
+            return 6;
         case 0x90:
             *pGrp = OP_0F90;
-            return 2;
+            return 3;
         case 0x91:
             *pGrp = OP_0F91;
-            return 2;
+            return 3;
         case 0x92:
             *pGrp = OP_0F92;
-            return 2;
+            return 4;
         case 0x93:
             *pGrp = OP_0F93;
-            return 2;
+            return 4;
         case 0x98:
             *pGrp = OP_0F98;
-            return 2;
+            return 3;
         case 0x99:
             *pGrp = OP_0F99;
-            return 2;
+            return 3;
+        case 0xAE:
+            switch (GrpIdx)
+            {
+            case 0x00:
+                *pGrp = OP_0FAE_0;
+                return 2;
+            case 0x01:
+                *pGrp = OP_0FAE_1;
+                return 2;
+            case 0x02:
+                *pGrp = OP_0FAE_2;
+                return 2;
+            case 0x03:
+                *pGrp = OP_0FAE_3;
+                return 2;
+            case 0x04:
+                *pGrp = OP_0FAE_4;
+                return 2;
+            case 0x05:
+                *pGrp = OP_0FAE_5;
+                return 3;
+            case 0x06:
+                *pGrp = OP_0FAE_6;
+                return 7;
+            case 0x07:
+                *pGrp = OP_0FAE_7;
+                return 2;
+            default:
+                break;
+            }
         case 0xB8:
             *pGrp = OP_0FB8;
             return 2;
@@ -427,7 +529,7 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             return 2;
         case 0xC2:
             *pGrp = OP_0FC2;
-            return 2;
+            return 4;
         case 0xC4:
             *pGrp = OP_0FC4;
             return 2;
@@ -437,6 +539,18 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
         case 0xC6:
             *pGrp = OP_0FC6;
             return 2;
+        case 0xC7:
+            switch (GrpIdx)
+            {
+            case 0x06:
+                *pGrp = OP_0FC7_6;
+                return 4;
+            case 0x07:
+                *pGrp = OP_0FC7_7;
+                return 3;
+            default:
+                break;
+            }
         case 0xD0:
             *pGrp = OP_0FD0;
             return 2;
@@ -457,7 +571,7 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             return 2;
         case 0xD6:
             *pGrp = OP_0FD6;
-            return 2;
+            return 3;
         case 0xD7:
             *pGrp = OP_0FD7;
             return 2;
@@ -472,7 +586,7 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             return 2;
         case 0xDB:
             *pGrp = OP_0FDB;
-            return 2;
+            return 3;
         case 0xDC:
             *pGrp = OP_0FDC;
             return 2;
@@ -484,7 +598,7 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             return 2;
         case 0xDF:
             *pGrp = OP_0FDF;
-            return 2;
+            return 3;
         case 0xE0:
             *pGrp = OP_0FE0;
             return 2;
@@ -505,7 +619,7 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             return 2;
         case 0xE6:
             *pGrp = OP_0FE6;
-            return 2;
+            return 4;
         case 0xE7:
             *pGrp = OP_0FE7;
             return 2;
@@ -520,7 +634,7 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             return 2;
         case 0xEB:
             *pGrp = OP_0FEB;
-            return 2;
+            return 3;
         case 0xEC:
             *pGrp = OP_0FEC;
             return 2;
@@ -532,7 +646,7 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             return 2;
         case 0xEF:
             *pGrp = OP_0FEF;
-            return 2;
+            return 3;
         case 0xF1:
             *pGrp = OP_0FF1;
             return 2;
@@ -645,7 +759,6 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
 {
     DWORD lFound = 0;
     OP_ENTRY* pGrp;
-    OP_ENTRY* ptr_PrefixGroup;
 
     /* WCHAR* strModRmList[256]; */
 
@@ -1000,6 +1113,11 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
     // decode to instruction level mnemonic and operand type
     else if (nOption & OPTION_DECODE_OPMAP)
     {
+        // pointer to the prefix group
+        OP_ENTRY* ptr_PrefixGroup;
+        // pointer to pointer to the prefix group
+        OP_ENTRY** ptr_ptr_PrefixGroup = &ptr_PrefixGroup;
+
         for (int OpIdx = 0; (OpIdx < 256) && (lFound < nOpEntryMax); OpIdx++)
         {
             // never pass null pointer into function
@@ -1062,23 +1180,31 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         lGrpFound = EnumGrp(eOPTab, pGrp, &strOPMatch[8], pOpEntry, nOpEntryMax - lFound);
                         pOpEntry += lGrpFound;
                         lFound += lGrpFound;
+                        if (DWORD lPrefixEntry = lPrefixes(eOPTab, OpIdx, 8, ptr_ptr_PrefixGroup))
+                        {
+                            pOpEntry->OP = OpIdx;
+                            pOpEntry->OPExt = 0;
+                            lGrpFound = EnumPrefixes(ptr_PrefixGroup, lPrefixEntry, pOpEntry, nOpEntryMax - lFound);
+                            pOpEntry += lGrpFound;
+                            lFound += lGrpFound;
+                        }
                     }
                     else if (OP1BMap[OpIdx].strFmt)
                     {
-                        // pointer to pointer to the prefix group
-                        OP_ENTRY ** ptr_ptr_PrefixGroup = &ptr_PrefixGroup;
-                        pOpEntry->OP = OpIdx;
-                        pOpEntry->OPExt = 0;
                         // get prefix group address and prefix group size
                         if (DWORD lPrefixEntry = lPrefixes(eOPTab,OpIdx,8, ptr_ptr_PrefixGroup))
                         {
                             DWORD lGrpFound = 0;
+                            pOpEntry->OP = OpIdx;
+                            pOpEntry->OPExt = 0;
                             lGrpFound = EnumPrefixes(ptr_PrefixGroup, lPrefixEntry, pOpEntry, nOpEntryMax - lFound);
                             pOpEntry += lGrpFound;
                             lFound += lGrpFound;
                         }
                         else
                         {
+                            pOpEntry->OP = OpIdx;
+                            pOpEntry->OPExt = 0;
                             pOpEntry->ReqPrefix = OP1BMap[OpIdx].PF;
                             swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP1BMap[OpIdx].strFmt);
                             pOpEntry++;
@@ -1141,8 +1267,6 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     }
                     else if (OP2BMap[OpIdx].strFmt)
                     {
-                        // pointer to pointer to the prefix group
-                        OP_ENTRY** ptr_ptr_PrefixGroup = &ptr_PrefixGroup;
                         pOpEntry->OP = OpIdx;
                         pOpEntry->OPExt = 0;
                         // get prefix group address and prefix group size

@@ -73,7 +73,7 @@ typedef struct {
 
 
 OP_ENTRY OP1BMap[256] = {
-    //# 0x00 - 0x
+    //# 0x00 - 0x0f
     {0x00,0x00,0 | PF_Valid," ADD Eb,Gb"},
     {0x01,0x00,0 | PF_Valid," ADD Ev,Gv"},
     {0x02,0x00,0 | PF_Valid," ADD Gb,Eb"},
@@ -89,8 +89,8 @@ OP_ENTRY OP1BMap[256] = {
     {0x0c,0x00,0 | PF_Valid," OR AL,Ib"},
     {0x0d,0x00,0 | PF_Valid," OR rAX,Iz"},
     {0x0e,0x00,0 | PF_Valid," PUSH CS (i64)"},
-    {0x0f,0x00,0," escape # 2-byte escape"},
-    //# 0x10 - 0x
+    {0x0f,0x00,0 | PF_Valid," escape # 2-byte escape"},
+    //# 0x10 - 0x1f
     {0x10,0x00,0 | PF_Valid," ADC Eb,Gb"},
     {0x11,0x00,0 | PF_Valid," ADC Ev,Gv"},
     {0x12,0x00,0 | PF_Valid," ADC Gb,Eb"},
@@ -107,7 +107,7 @@ OP_ENTRY OP1BMap[256] = {
     {0x1d,0x00,0 | PF_Valid," SBB rAX,Iz"},
     {0x1e,0x00,0 | PF_Valid," PUSH DS (i64)"},
     {0x1f,0x00,0 | PF_Valid," POP DS (i64)"},
-    //# 0x20 - 0x
+    //# 0x20 - 0x2f
     {0x20,0x00,0 | PF_Valid," AND Eb,Gb"},
     {0x21,0x00,0 | PF_Valid," AND Ev,Gv"},
     {0x22,0x00,0 | PF_Valid," AND Gb,Eb"},
@@ -124,7 +124,7 @@ OP_ENTRY OP1BMap[256] = {
     {0x2d,0x00,0 | PF_Valid," SUB rAX,Iz"},
     {0x2e,0x00,0 | PF_Valid," SEG=CS (Prefix)"},
     {0x2f,0x00,0 | PF_Valid," DAS (i64)"},
-    //# 0x30 - 0x
+    //# 0x30 - 0x3f
     {0x30,0x00,0 | PF_Valid," XOR Eb,Gb"},
     {0x31,0x00,0 | PF_Valid," XOR Ev,Gv"},
     {0x32,0x00,0 | PF_Valid," XOR Gb,Eb"},
@@ -141,7 +141,7 @@ OP_ENTRY OP1BMap[256] = {
     {0x3d,0x00,0 | PF_Valid," CMP rAX,Iz"},
     {0x3e,0x00,0 | PF_Valid," SEG=DS (Prefix)"},
     {0x3f,0x00,0 | PF_Valid," AAS (i64)"},
-    //# 0x40 - 0x
+    //# 0x40 - 0x4f
     {0x40,0x00,0," INC eAX (i64) | REX (o64)"},
     {0x41,0x00,0," INC eCX (i64) | REX.B (o64)"},
     {0x42,0x00,0," INC eDX (i64) | REX.X (o64)"},
@@ -158,7 +158,7 @@ OP_ENTRY OP1BMap[256] = {
     {0x4d,0x00,0," DEC eBP (i64) | REX.WRB (o64)"},
     {0x4e,0x00,0," DEC eSI (i64) | REX.WRX (o64)"},
     {0x4f,0x00,0," DEC eDI (i64) | REX.WRXB (o64)"},
-    //# 0x50 - 0x
+    //# 0x50 - 0x5f
     {0x50,0x00,0 | PF_Valid," PUSH rAX/r8 (d64)"},
     {0x51,0x00,0 | PF_Valid," PUSH rCX/r9 (d64)"},
     {0x52,0x00,0 | PF_Valid," PUSH rDX/r10 (d64)"},
@@ -175,7 +175,7 @@ OP_ENTRY OP1BMap[256] = {
     {0x5d,0x00,0 | PF_Valid," POP rBP/r13 (d64)"},
     {0x5e,0x00,0 | PF_Valid," POP rSI/r14 (d64)"},
     {0x5f,0x00,0 | PF_Valid," POP rDI/r15 (d64)"},
-    //# 0x60 - 0x
+    //# 0x60 - 0x6f
     {0x60,0x00,0 | PF_Valid," PUSHA/PUSHAD (i64)"},
     {0x61,0x00,0 | PF_Valid," POPA/POPAD (i64)"},
     {0x62,0x00,0," BOUND Gv,Ma (i64) | EVEX (Prefix)"},
@@ -192,7 +192,7 @@ OP_ENTRY OP1BMap[256] = {
     {0x6d,0x00,0 | PF_Valid," INS/INSW/INSD Yz,DX"},
     {0x6e,0x00,0 | PF_Valid," OUTS/OUTSB DX,Xb"},
     {0x6f,0x00,0 | PF_Valid," OUTS/OUTSW/OUTSD DX,Xz"},
-    //# 0x70 - 0x
+    //# 0x70 - 0x7f
     {0x70,0x00,0 | PF_Valid," JO Jb"},
     {0x71,0x00,0 | PF_Valid," JNO Jb"},
     {0x72,0x00,0 | PF_Valid," JB/JNAE/JC Jb"},
@@ -209,7 +209,7 @@ OP_ENTRY OP1BMap[256] = {
     {0x7d,0x00,0 | PF_Valid," JNL/JGE Jb"},
     {0x7e,0x00,0 | PF_Valid," JLE/JNG Jb"},
     {0x7f,0x00,0 | PF_Valid," JNLE/JG Jb"},
-    //# 0x80 - 0x
+    //# 0x80 - 0x8f
     {0x80,0x80,0," Grp1 Eb,Ib (1A)"},
     {0x81,0x80,0," Grp1 Ev,Iz (1A)"},
     {0x82,0x80,0," Grp1 Eb,Ib (1A),(i64)"},
@@ -226,7 +226,7 @@ OP_ENTRY OP1BMap[256] = {
     {0x8d,0x00,0 | PF_Valid," LEA Gv,M"},
     {0x8e,0x00,0 | PF_Valid," MOV Sw,Ew"},
     {0x8f,0x80,0," Grp1A (1A) | POP Ev (d64)"},
-    //# 0x90 - 0x
+    //# 0x90 - 0x9f
     {0x90,0x00,0," NOP | PAUSE (F3) | XCHG rAX/r8,rAX"},
     {0x91,0x00,0 | PF_Valid," XCHG rCX/r9,rAX"},
     {0x92,0x00,0 | PF_Valid," XCHG rDX/r10,rAX"},
@@ -243,7 +243,7 @@ OP_ENTRY OP1BMap[256] = {
     {0x9d,0x00,0 | PF_Valid," POPF/D/Q Fv (d64)"},
     {0x9e,0x00,0 | PF_Valid," SAHF"},
     {0x9f,0x00,0 | PF_Valid," LAHF"},
-    //# 0xa0 - 0x
+    //# 0xa0 - 0xaf
     {0xa0,0x00,0 | PF_Valid," MOV AL,Ob"},
     {0xa1,0x00,0 | PF_Valid," MOV rAX,Ov"},
     {0xa2,0x00,0 | PF_Valid," MOV Ob,AL"},
@@ -259,10 +259,10 @@ OP_ENTRY OP1BMap[256] = {
     {0xac,0x00,0 | PF_Valid," LODS/B AL,Xb"},
     {0xad,0x00,0 | PF_Valid," LODS/W/D/Q rAX,Xv"},
     {0xae,0x00,0 | PF_Valid," SCAS/B AL,Yb"},
-    //# Note," Th
-    //# next inst
+    //# Note: The May 2011 Intel manual shows Xv for the second parameter of the
+    //# next instruction but Yv is correct
     {0xaf,0x00,0 | PF_Valid," SCAS/W/D/Q rAX,Yv"},
-    //# 0xb0 - 0x
+    //# 0xb0 - 0xbf
     {0xb0,0x00,0 | PF_Valid," MOV AL/R8L,Ib"},
     {0xb1,0x00,0 | PF_Valid," MOV CL/R9L,Ib"},
     {0xb2,0x00,0 | PF_Valid," MOV DL/R10L,Ib"},
@@ -279,7 +279,7 @@ OP_ENTRY OP1BMap[256] = {
     {0xbd,0x00,0 | PF_Valid," MOV rBP/r13,Iv"},
     {0xbe,0x00,0 | PF_Valid," MOV rSI/r14,Iv"},
     {0xbf,0x00,0 | PF_Valid," MOV rDI/r15,Iv"},
-    //# 0xc0 - 0x
+    //# 0xc0 - 0xcf
     {0xc0,0x80,0," Grp2 Eb,Ib (1A)"},
     {0xc1,0x80,0," Grp2 Ev,Ib (1A)"},
     {0xc2,0x00,0 | PF_Valid," RETN Iw (f64)"},
@@ -296,7 +296,7 @@ OP_ENTRY OP1BMap[256] = {
     {0xcd,0x00,0 | PF_Valid," INT Ib"},
     {0xce,0x00,0 | PF_Valid," INTO (i64)"},
     {0xcf,0x00,0 | PF_Valid," IRET/D/Q"},
-    //# 0xd0 - 0x
+    //# 0xd0 - 0xdf
     {0xd0,0x80,0," Grp2 Eb,1 (1A)"},
     {0xd1,0x80,0," Grp2 Ev,1 (1A)"},
     {0xd2,0x80,0," Grp2 Eb,CL (1A)"},
@@ -313,10 +313,10 @@ OP_ENTRY OP1BMap[256] = {
     {0xdd,0x00,0 | PF_Valid," ESC"},
     {0xde,0x00,0 | PF_Valid," ESC"},
     {0xdf,0x00,0 | PF_Valid," ESC"},
-    //# 0xe0 - 0x
-    //# Note," "f
-    //# in 64-bit
-    //# to 16 bit
+    //# 0xe0 - 0xef
+    //# Note: "forced64" is Intel CPU behavior: they ignore 0x66 prefix
+    //# in 64-bit mode. AMD CPUs accept 0x66 prefix, it causes RIP truncation
+    //# to 16 bits. In 32-bit mode, 0x66 is accepted by both Intel and AMD.
     {0xe0,0x00,0 | PF_Valid," LOOPNE/LOOPNZ Jb (f64)"},
     {0xe1,0x00,0 | PF_Valid," LOOPE/LOOPZ Jb (f64)"},
     {0xe2,0x00,0 | PF_Valid," LOOP Jb (f64)"},
@@ -325,10 +325,10 @@ OP_ENTRY OP1BMap[256] = {
     {0xe5,0x00,0 | PF_Valid," IN eAX,Ib"},
     {0xe6,0x00,0 | PF_Valid," OUT Ib,AL"},
     {0xe7,0x00,0 | PF_Valid," OUT Ib,eAX"},
-    //# With 0x66
-    //# in "near"
-    //# push of r
-    //# but is no
+    //# With 0x66 prefix in 64-bit mode, for AMD CPUs immediate offset
+    //# in "near" jumps and calls is 16-bit. For CALL,
+    //# push of return address is 16-bit wide, RSP is decremented by 2
+    //# but is not truncated to 16 bits, unlike RIP.
     {0xe8,0x00,0 | PF_Valid," CALL Jz (f64)"},
     {0xe9,0x00,0 | PF_Valid," JMP-near Jz (f64)"},
     {0xea,0x00,0 | PF_Valid," JMP-far Ap (i64)"},
@@ -337,7 +337,7 @@ OP_ENTRY OP1BMap[256] = {
     {0xed,0x00,0 | PF_Valid," IN eAX,DX"},
     {0xee,0x00,0 | PF_Valid," OUT DX,AL"},
     {0xef,0x00,0 | PF_Valid," OUT DX,eAX"},
-    //# 0xf0 - 0x
+    //# 0xf0 - 0xff
     {0xf0,0x00,0 | PF_Valid," LOCK (Prefix)"},
     {0xf1,0x00,0 | PF_Valid,NULL},
     {0xf2,0x00,0," REPNE (Prefix) | XACQUIRE (Prefix)"},
@@ -356,7 +356,7 @@ OP_ENTRY OP1BMap[256] = {
     {0xff,0x80,0," Grp5 (1A)"},
 };
 OP_ENTRY OP2BMap[256] = {
-    // # 0x0f 0x0
+    //# 0x0f 0x00-0x0f
     {0x00,0x80,0," Grp6 (1A)"},
     {0x01,0x80,0," Grp7 (1A)"},
     {0x02,0x00,0 | PF_Valid," LAR Gv,Ew"},
@@ -370,17 +370,17 @@ OP_ENTRY OP2BMap[256] = {
     {0x0a,0x00,0 | PF_Valid,NULL},
     {0x0b,0x00,0 | PF_Valid," UD2 (1B)"},
     {0x0c,0x00,0 | PF_Valid,NULL},
-    // # AMD's pr
+    //# AMD's prefetch group. Intel supports prefetchw(/1) only.
     {0x0d,0x80,0," GrpP"},
     {0x0e,0x00,0 | PF_Valid," FEMMS"},
-    // # 3DNow! u
+    //# 3DNow! uses the last imm byte as opcode extension.
     {0x0f,0x00,0 | PF_Valid," 3DNow! Pq,Qq,Ib"},
-    // # 0x0f 0x1
-    // # NOTE: Ac
-    // # but it a
-    // # MOVSS/MO
-    // # Many AVX
-    // # Referenc
+    //# 0x0f 0x10-0x1f
+    //# NOTE: According to Intel SDM opcode map, vmovups and vmovupd has no operands
+    //# but it actually has operands. And also, vmovss and vmovsd only accept 128bit.
+    //# MOVSS/MOVSD has too many forms(3) on SDM. This map just shows a typical form.
+    //# Many AVX instructions lack v1 superscript, according to Intel AVX-Prgramming
+    //# Reference A.1
     {0x10,0x00,0," vmovups Vps,Wps | vmovupd Vpd,Wpd (66) | vmovss Vx,Hx,Wss (F3),(v1) | vmovsd Vx,Hx,Wsd (F2),(v1)"},
     {0x11,0x00,0," vmovups Wps,Vps | vmovupd Wpd,Vpd (66) | vmovss Wss,Hx,Vss (F3),(v1) | vmovsd Wsd,Hx,Vsd (F2),(v1)"},
     {0x12,0x00,0," vmovlps Vq,Hq,Mq (v1) | vmovhlps Vq,Hq,Uq (v1) | vmovlpd Vq,Hq,Mq (66),(v1) | vmovsldup Vx,Wx (F3) | vmovddup Vx,Wx (F2)"},
@@ -391,17 +391,17 @@ OP_ENTRY OP2BMap[256] = {
     {0x17,0x00,0," vmovhps Mq,Vq (v1) | vmovhpd Mq,Vq (66),(v1)"},
     {0x18,0x80,0," Grp16 (1A)"},
     {0x19,0x00,0 | PF_Valid,NULL},
-    // # Intel SD
-    // # bnd regi
-    // # decoder 
-    // # a ModR/M
+    //# Intel SDM opcode map does not list MPX instructions. For now using Gv for
+    //# bnd registers and Ev for everything else is OK because the instruction
+    //# decoder does not use the information except as an indication that there is
+    //# a ModR/M byte.
     {0x1a,0x00,0," BNDCL Gv,Ev (F3) | BNDCU Gv,Ev (F2) | BNDMOV Gv,Ev (66) | BNDLDX Gv,Ev"},
     {0x1b,0x00,0," BNDCN Gv,Ev (F2) | BNDMOV Ev,Gv (66) | BNDMK Gv,Ev (F3) | BNDSTX Ev,Gv"},
     {0x1c,0x80,0," Grp20 (1A),(1C)"},
     {0x1d,0x00,0 | PF_Valid,NULL},
     {0x1e,0x80,0," Grp21 (1A)"},
     {0x1f,0x00,0 | PF_Valid," NOP Ev"},
-    // # 0x0f 0x2
+    //# 0x0f 0x20-0x2f
     {0x20,0x00,0 | PF_Valid," MOV Rd,Cd"},
     {0x21,0x00,0 | PF_Valid," MOV Rd,Dd"},
     {0x22,0x00,0 | PF_Valid," MOV Cd,Rd"},
@@ -418,7 +418,7 @@ OP_ENTRY OP2BMap[256] = {
     {0x2d,0x00,0," cvtps2pi Ppi,Wps | cvtpd2pi Qpi,Wpd (66) | vcvtss2si Gy,Wss (F3),(v1) | vcvtsd2si Gy,Wsd (F2),(v1)"},
     {0x2e,0x00,0," vucomiss Vss,Wss (v1) | vucomisd  Vsd,Wsd (66),(v1)"},
     {0x2f,0x00,0," vcomiss Vss,Wss (v1) | vcomisd  Vsd,Wsd (66),(v1)"},
-    // # 0x0f 0x3
+    //# 0x0f 0x30-0x3f
     {0x30,0x00,0 | PF_Valid," WRMSR"},
     {0x31,0x00,0 | PF_Valid," RDTSC"},
     {0x32,0x00,0 | PF_Valid," RDMSR"},
@@ -427,15 +427,15 @@ OP_ENTRY OP2BMap[256] = {
     {0x35,0x00,0 | PF_Valid," SYSEXIT"},
     {0x36,0x00,0 | PF_Valid,NULL},
     {0x37,0x00,0 | PF_Valid," GETSEC"},
-    {0x38,0x00,0," escape # 3-byte escape 1"},
+    {0x38,0x00,0 | PF_Valid," escape # 3-byte escape 1"},
     {0x39,0x00,0 | PF_Valid,NULL},
-    {0x3a,0x00,0," escape # 3-byte escape 2"},
+    {0x3a,0x00,0 | PF_Valid," escape # 3-byte escape 2"},
     {0x3b,0x00,0 | PF_Valid,NULL},
     {0x3c,0x00,0 | PF_Valid,NULL},
     {0x3d,0x00,0 | PF_Valid,NULL},
     {0x3e,0x00,0 | PF_Valid,NULL},
     {0x3f,0x00,0 | PF_Valid,NULL},
-    // # 0x0f 0x4
+    //# 0x0f 0x40-0x4f
     {0x40,0x00,0 | PF_Valid," CMOVO Gv,Ev"},
     {0x41,0x00,0," CMOVNO Gv,Ev | kandw/q Vk,Hk,Uk | kandb/d Vk,Hk,Uk (66)"},
     {0x42,0x00,0," CMOVB/C/NAE Gv,Ev | kandnw/q Vk,Hk,Uk | kandnb/d Vk,Hk,Uk (66)"},
@@ -452,7 +452,7 @@ OP_ENTRY OP2BMap[256] = {
     {0x4d,0x00,0 | PF_Valid," CMOVNL/GE Gv,Ev"},
     {0x4e,0x00,0 | PF_Valid," CMOVLE/NG Gv,Ev"},
     {0x4f,0x00,0 | PF_Valid," CMOVNLE/G Gv,Ev"},
-    // # 0x0f 0x5
+    //# 0x0f 0x50-0x5f
     {0x50,0x00,0," vmovmskps Gy,Ups | vmovmskpd Gy,Upd (66)"},
     {0x51,0x00,0," vsqrtps Vps,Wps | vsqrtpd Vpd,Wpd (66) | vsqrtss Vss,Hss,Wss (F3),(v1) | vsqrtsd Vsd,Hsd,Wsd (F2),(v1)"},
     {0x52,0x00,0," vrsqrtps Vps,Wps | vrsqrtss Vss,Hss,Wss (F3),(v1)"},
@@ -469,7 +469,7 @@ OP_ENTRY OP2BMap[256] = {
     {0x5d,0x00,0," vminps Vps,Hps,Wps | vminpd Vpd,Hpd,Wpd (66) | vminss Vss,Hss,Wss (F3),(v1) | vminsd Vsd,Hsd,Wsd (F2),(v1)"},
     {0x5e,0x00,0," vdivps Vps,Hps,Wps | vdivpd Vpd,Hpd,Wpd (66) | vdivss Vss,Hss,Wss (F3),(v1) | vdivsd Vsd,Hsd,Wsd (F2),(v1)"},
     {0x5f,0x00,0," vmaxps Vps,Hps,Wps | vmaxpd Vpd,Hpd,Wpd (66) | vmaxss Vss,Hss,Wss (F3),(v1) | vmaxsd Vsd,Hsd,Wsd (F2),(v1)"},
-    // # 0x0f 0x6
+    //# 0x0f 0x60-0x6f
     {0x60,0x00,0," punpcklbw Pq,Qd | vpunpcklbw Vx,Hx,Wx (66),(v1)"},
     {0x61,0x00,0," punpcklwd Pq,Qd | vpunpcklwd Vx,Hx,Wx (66),(v1)"},
     {0x62,0x00,0," punpckldq Pq,Qd | vpunpckldq Vx,Hx,Wx (66),(v1)"},
@@ -486,7 +486,7 @@ OP_ENTRY OP2BMap[256] = {
     {0x6d,0x00,0 | PF_Valid | PF_Operand," vpunpckhqdq Vx,Hx,Wx (66),(v1)"},
     {0x6e,0x00,0," movd/q Pd,Ey | vmovd/q Vy,Ey (66),(v1)"},
     {0x6f,0x00,0," movq Pq,Qq | vmovdqa Vx,Wx (66) | vmovdqa32/64 Vx,Wx (66),(evo) | vmovdqu Vx,Wx (F3) | vmovdqu32/64 Vx,Wx (F3),(evo) | vmovdqu"},
-    // # 0x0f 0x7
+    //# 0x0f 0x70-0x7f
     {0x70,0x00,0," pshufw Pq,Qq,Ib | vpshufd Vx,Wx,Ib (66),(v1) | vpshufhw Vx,Wx,Ib (F3),(v1) | vpshuflw Vx,Wx,Ib (F2),(v1)"},
     {0x71,0x80,0," Grp12 (1A)"},
     {0x72,0x80,0," Grp13 (1A)"},
@@ -494,7 +494,7 @@ OP_ENTRY OP2BMap[256] = {
     {0x74,0x00,0," pcmpeqb Pq,Qq | vpcmpeqb Vx,Hx,Wx (66),(v1)"},
     {0x75,0x00,0," pcmpeqw Pq,Qq | vpcmpeqw Vx,Hx,Wx (66),(v1)"},
     {0x76,0x00,0," pcmpeqd Pq,Qq | vpcmpeqd Vx,Hx,Wx (66),(v1)"},
-    // # Note: Re
+    //# Note: Remove (v), because vzeroall and vzeroupper becomes emms without VEX.
     {0x77,0x00,0," emms | vzeroupper | vzeroall"},
     {0x78,0x00,0," VMREAD Ey,Gy | vcvttps2udq/pd2udq Vx,Wpd (evo) | vcvttsd2usi Gv,Wx (F2),(ev) | vcvttss2usi Gv,Wx (F3),(ev) | vcvttps2uqq/pd2uq"},
     {0x79,0x00,0," VMWRITE Gy,Ey | vcvtps2udq/pd2udq Vx,Wpd (evo) | vcvtsd2usi Gv,Wx (F2),(ev) | vcvtss2usi Gv,Wx (F3),(ev) | vcvtps2uqq/pd2uqq V"},
@@ -504,8 +504,8 @@ OP_ENTRY OP2BMap[256] = {
     {0x7d,0x00,0," vhsubpd Vpd,Hpd,Wpd (66) | vhsubps Vps,Hps,Wps (F2)"},
     {0x7e,0x00,0," movd/q Ey,Pd | vmovd/q Ey,Vy (66),(v1) | vmovq Vq,Wq (F3),(v1)"},
     {0x7f,0x00,0," movq Qq,Pq | vmovdqa Wx,Vx (66) | vmovdqa32/64 Wx,Vx (66),(evo) | vmovdqu Wx,Vx (F3) | vmovdqu32/64 Wx,Vx (F3),(evo) | vmovdqu"},
-    // # 0x0f 0x8
-    // # Note: "f
+    //# 0x0f 0x80-0x8f
+    //# Note: "forced64" is Intel CPU behavior (see comment about CALL insn).
     {0x80,0x00,0 | PF_Valid," JO Jz (f64)"},
     {0x81,0x00,0 | PF_Valid," JNO Jz (f64)"},
     {0x82,0x00,0 | PF_Valid," JB/JC/JNAE Jz (f64)"},
@@ -522,7 +522,7 @@ OP_ENTRY OP2BMap[256] = {
     {0x8d,0x00,0 | PF_Valid," JNL/JGE Jz (f64)"},
     {0x8e,0x00,0 | PF_Valid," JLE/JNG Jz (f64)"},
     {0x8f,0x00,0 | PF_Valid," JNLE/JG Jz (f64)"},
-    // # 0x0f 0x9
+    //# 0x0f 0x90-0x9f
     {0x90,0x00,0," SETO Eb | kmovw/q Vk,Wk | kmovb/d Vk,Wk (66)"},
     {0x91,0x00,0," SETNO Eb | kmovw/q Mv,Vk | kmovb/d Mv,Vk (66)"},
     {0x92,0x00,0," SETB/C/NAE Eb | kmovw Vk,Rv | kmovb Vk,Rv (66) | kmovq/d Vk,Rv (F2)"},
@@ -539,7 +539,7 @@ OP_ENTRY OP2BMap[256] = {
     {0x9d,0x00,0 | PF_Valid," SETNL/GE Eb"},
     {0x9e,0x00,0 | PF_Valid," SETLE/NG Eb"},
     {0x9f,0x00,0 | PF_Valid," SETNLE/G Eb"},
-    // # 0x0f 0xa
+    //# 0x0f 0xa0-0xaf
     {0xa0,0x00,0 | PF_Valid," PUSH FS (d64)"},
     {0xa1,0x00,0 | PF_Valid," POP FS (d64)"},
     {0xa2,0x00,0 | PF_Valid," CPUID"},
@@ -556,7 +556,7 @@ OP_ENTRY OP2BMap[256] = {
     {0xad,0x00,0 | PF_Valid," SHRD Ev,Gv,CL"},
     {0xae,0x80,0," Grp15 (1A),(1C)"},
     {0xaf,0x00,0 | PF_Valid," IMUL Gv,Ev"},
-    // # 0x0f 0xb
+    //# 0x0f 0xb0-0xbf
     {0xb0,0x00,0 | PF_Valid," CMPXCHG Eb,Gb"},
     {0xb1,0x00,0 | PF_Valid," CMPXCHG Ev,Gv"},
     {0xb2,0x00,0 | PF_Valid," LSS Gv,Mp"},
@@ -573,7 +573,7 @@ OP_ENTRY OP2BMap[256] = {
     {0xbd,0x00,0," BSR Gv,Ev (!F3) | LZCNT Gv,Ev (F3)"},
     {0xbe,0x00,0 | PF_Valid," MOVSX Gv,Eb"},
     {0xbf,0x00,0 | PF_Valid," MOVSX Gv,Ew"},
-    // # 0x0f 0xc
+    //# 0x0f 0xc0-0xcf
     {0xc0,0x00,0 | PF_Valid," XADD Eb,Gb"},
     {0xc1,0x00,0 | PF_Valid," XADD Ev,Gv"},
     {0xc2,0x00,0," vcmpps Vps,Hps,Wps,Ib | vcmppd Vpd,Hpd,Wpd,Ib (66) | vcmpss Vss,Hss,Wss,Ib (F3),(v1) | vcmpsd Vsd,Hsd,Wsd,Ib (F2),(v1)"},
@@ -590,7 +590,7 @@ OP_ENTRY OP2BMap[256] = {
     {0xcd,0x00,0 | PF_Valid," BSWAP RBP/EBP/R13/R13D"},
     {0xce,0x00,0 | PF_Valid," BSWAP RSI/ESI/R14/R14D"},
     {0xcf,0x00,0 | PF_Valid," BSWAP RDI/EDI/R15/R15D"},
-    // # 0x0f 0xd
+    //# 0x0f 0xd0-0xdf
     {0xd0,0x00,0," vaddsubpd Vpd,Hpd,Wpd (66) | vaddsubps Vps,Hps,Wps (F2)"},
     {0xd1,0x00,0," psrlw Pq,Qq | vpsrlw Vx,Hx,Wx (66),(v1)"},
     {0xd2,0x00,0," psrld Pq,Qq | vpsrld Vx,Hx,Wx (66),(v1)"},
@@ -607,7 +607,7 @@ OP_ENTRY OP2BMap[256] = {
     {0xdd,0x00,0," paddusw Pq,Qq | vpaddusw Vx,Hx,Wx (66),(v1)"},
     {0xde,0x00,0," pmaxub Pq,Qq | vpmaxub Vx,Hx,Wx (66),(v1)"},
     {0xdf,0x00,0," pandn Pq,Qq | vpandn Vx,Hx,Wx (66),(v1) | vpandnd/q Vx,Hx,Wx (66),(evo)"},
-    // # 0x0f 0xe
+    //# 0x0f 0xe0-0xef
     {0xe0,0x00,0," pavgb Pq,Qq | vpavgb Vx,Hx,Wx (66),(v1)"},
     {0xe1,0x00,0," psraw Pq,Qq | vpsraw Vx,Hx,Wx (66),(v1)"},
     {0xe2,0x00,0," psrad Pq,Qq | vpsrad Vx,Hx,Wx (66),(v1)"},
@@ -624,7 +624,7 @@ OP_ENTRY OP2BMap[256] = {
     {0xed,0x00,0," paddsw Pq,Qq | vpaddsw Vx,Hx,Wx (66),(v1)"},
     {0xee,0x00,0," pmaxsw Pq,Qq | vpmaxsw Vx,Hx,Wx (66),(v1)"},
     {0xef,0x00,0," pxor Pq,Qq | vpxor Vx,Hx,Wx (66),(v1) | vpxord/q Vx,Hx,Wx (66),(evo)"},
-    // # 0x0f 0xf
+    //# 0x0f 0xf0-0xff
     {0xf0,0x00,0 | PF_Valid | PF_REPNE," vlddqu Vx,Mx (F2)"},
     {0xf1,0x00,0," psllw Pq,Qq | vpsllw Vx,Hx,Wx (66),(v1)"},
     {0xf2,0x00,0," pslld Pq,Qq | vpslld Vx,Hx,Wx (66),(v1)"},
@@ -1330,7 +1330,7 @@ OP_ENTRY Grp06_00h[8] = {
     {0x00,0x87,0 | PF_Valid,NULL},
 };
 OP_ENTRY Grp07_01h[8] = {
-    {0x01,0x80,0,"  CH (010),(11B) | VMRESUME (011),(11B) | VMXOFF (100),(11B) | PCONFIG (101),(11B) | ENCLV "},
+    {0x01,0x80,0," SGDT Ms | VMCALL (001),(11B) | VMRESUME (011),(11B) | VMXOFF (100),(11B) | PCONFIG (101),(11B) | ENCLV "},
     {0x01,0x81,0," SIDT Ms | MONITOR (000),(11B) | MWAIT (001),(11B) | CLAC (010),(11B) | STAC (011),(11B) | ENCLS (111),(11B)"},
     {0x01,0x82,0," LGDT Ms | XGETBV (000),(11B) | XSETBV (001),(11B) | VMFUNC (100),(11B) | XEND (101)(11B) | XTEST (110)(11B) | ENCLU (111),(11B"},
     {0x01,0x83,0 | PF_Valid," LIDT Ms"},
