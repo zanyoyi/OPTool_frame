@@ -239,7 +239,7 @@ void COPMappingDlg::OnBnClickedButton2()
 			};
 
 			// group, prefixes
-			if ((OpEntry[i].OPExt & 0x80) && OpEntry[i].ReqPrefix)
+			if ((OpEntry[i].OPExt & 0x80) && (OpEntry[i].ReqPrefix & 0xFFFE))
 			{
 				if((OpEntry[i].OPExt & 0x20) && (OpEntry[i].OPExt & 0x08))
 					strTemp.Format(_T("%02X/%x [11B] %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
@@ -249,7 +249,7 @@ void COPMappingDlg::OnBnClickedButton2()
 					strTemp.Format(_T("%02X/%x       %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
-			else if (OpEntry[i].ReqPrefix)
+			else if (OpEntry[i].ReqPrefix & 0xFFFE)
 			{
 				strTemp.Format(_T("%02X         %s (%s)"), OpEntry[i].OP, OpEntry[i].strDisasm, prefixes);
 			}
