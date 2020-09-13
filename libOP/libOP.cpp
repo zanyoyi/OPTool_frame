@@ -929,14 +929,14 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     next_PrefixIdx = 0xF2;
                     break;
                 case 0xF2:      // REPNE prefix
-                    prefixes = PF_Valid | E_REPNE;
+                    prefixes = PF_Valid | PF_REPNE;
                     buffer[2] = 0xF2;
                     ptr2_buffer = buffer + 3 - 1;
                     // dynamic linked list pointer is not ready
                     next_PrefixIdx = 0xF3;
                     break;
                 case 0xF3:      // REP prefix
-                    prefixes = PF_Valid | E_REP;
+                    prefixes = PF_Valid | PF_REP;
                     buffer[2] = 0xF3;
                     ptr2_buffer = buffer + 3 - 1;
                     // dynamic linked list pointer is not ready
