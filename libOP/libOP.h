@@ -53,15 +53,17 @@ typedef enum {
     E_Operand,
     E_REPNE,
     E_REP,
-    E_NOREP,
+    E_FWAIT,
     E_VEX,
     E_EVEX,
+    E_NOREP,
 }E_PF;
 
 #define PF_Valid        1 << E_Valid        // architecture support flags
 #define PF_Operand      1 << E_Operand      // mandatory prefix 0x66
 #define PF_REPNE        1 << E_REPNE        // mandatory prefix 0xF2
 #define PF_REP          1 << E_REP          // mandatory prefix 0xF3
+#define PF_FWAIT        1 << E_FWAIT        // this opcode requires FWAIT prefix
 #define PF_VEX          1 << E_VEX          // this opcode requires VEX prefix
 #define PF_EVEX         1 << E_EVEX         // this opcode requires EVEX prefix
 

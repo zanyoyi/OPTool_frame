@@ -740,7 +740,7 @@ static DWORD EnumGrp(E_XB_OP eOPTab, OP_ENTRY* pGrp, WCHAR* strModRMMatch, OPENT
     // pointer to the pointer to the prefix group
     OP_ENTRY** ptr_ptr_PrefixGroup = &ptr_PrefixGroup;
     // counter of found entries
-    DWORD lFound = 0;
+    /*uint32_t*/DWORD lFound = 0;
     // temp store of OpIdx
     /*int8_t*/BYTE OpIdx = pOpEntry->OP;
 
@@ -751,11 +751,12 @@ static DWORD EnumGrp(E_XB_OP eOPTab, OP_ENTRY* pGrp, WCHAR* strModRMMatch, OPENT
             if (pGrp[GrpIdx].strFmt)
             {
                 pOpEntry->OP = OpIdx;
-                pOpEntry->OPExt = GrpIdx | 0x80; //set [bit 7] for valid
+                pOpEntry->OPExt = GrpIdx | 0x80; //set [bit 7] for group valid
                 // get prefix group address and prefix group size
                 if (DWORD lPrefixEntry = lPrefixes(eOPTab, OpIdx, GrpIdx, ptr_ptr_PrefixGroup))
                 {
                     DWORD lGrpFound = 0;
+                    // fill pOpEntry->ReqPrefix in EnumPrefixes()
                     lGrpFound = EnumPrefixes(ptr_PrefixGroup, lPrefixEntry, pOpEntry, nOpEntryMax - lFound);
                     pOpEntry += lGrpFound;
                     lFound += lGrpFound;
@@ -908,41 +909,41 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 // the REX prefix byte must immediately precede the opcode
                 // byte or the escape opcode byte(0FH).
                 case 0x00:      // default prefix
-                    prefixes = 0x00000000;
+                    prefixes = PF_Valid;
                     ptr2_buffer = buffer + 3;
                     // dynamic linked list pointer is not ready
                     next_PrefixIdx = 0x66;
                     break;
                 case 0x66:      // operand size prefix
-                    prefixes = 0x00000200;
+                    prefixes = PF_Valid | PF_Operand;
                     buffer[2] = 0x66;
                     ptr2_buffer = buffer + 3 - 1;
                     // dynamic linked list pointer is not ready
                     next_PrefixIdx = 0xF2;
                     break;
                 case 0x9B:      // FWAIT/WAIT prefix
-                    prefixes = 0x00002000;
+                    prefixes = PF_Valid | PF_FWAIT;
                     buffer[2] = 0x9B;
                     ptr2_buffer = buffer + 3 - 1;
                     // dynamic linked list pointer is not ready
                     next_PrefixIdx = 0xF2;
                     break;
                 case 0xF2:      // REPNE prefix
-                    prefixes = 0x00000004;
+                    prefixes = PF_Valid | E_REPNE;
                     buffer[2] = 0xF2;
                     ptr2_buffer = buffer + 3 - 1;
                     // dynamic linked list pointer is not ready
                     next_PrefixIdx = 0xF3;
                     break;
                 case 0xF3:      // REP prefix
-                    prefixes = 0x00000002;
+                    prefixes = PF_Valid | E_REP;
                     buffer[2] = 0xF3;
                     ptr2_buffer = buffer + 3 - 1;
                     // dynamic linked list pointer is not ready
                     next_PrefixIdx = 0x00;
                     break;
                 case 0x48:      // REX.W prefix
-                    prefixes = 0x00001000;
+                    prefixes = PF_Valid;
                     buffer[2] = 0x48;
                     ptr2_buffer = buffer + 3 - 1;
                     // dynamic linked list pointer is not ready
@@ -950,7 +951,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     break;
                 case 0xF266:    // CRC32 need this prefix
                 case 0x66F2:
-                    prefixes = 0x00000204;
+                    prefixes = PF_Valid | PF_Operand | PF_REPNE;
                     // cannot exchange with each other
                     buffer[1] = 0x66;
                     buffer[2] = 0xF2;
@@ -959,7 +960,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     next_PrefixIdx = 0x00;
                     break;
                 case 0x48F2:
-                    prefixes = 0x00001004;
+                    prefixes = PF_Valid | PF_REPNE;
                     // cannot exchange with each other
                     buffer[1] = 0xF2;
                     buffer[2] = 0x48;
@@ -968,7 +969,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     next_PrefixIdx = 0x00;
                     break;
                 case 0x48F3:
-                    prefixes = 0x00001002;
+                    prefixes = PF_Valid | PF_REP;
                     // cannot exchange with each other
                     buffer[1] = 0xF3;
                     buffer[2] = 0x48;
@@ -978,7 +979,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     break;
                 case 0x48F266:  // CRC32 need this prefix
                 case 0x4866F2:
-                    prefixes = 0x00001204;
+                    prefixes = PF_Valid | PF_Operand | PF_REPNE;
                     // cannot exchange with each other
                     buffer[0] = 0x66;
                     buffer[1] = 0xF2;
@@ -988,6 +989,10 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     next_PrefixIdx = 0x00;
                     break;
                 default:
+                    prefixes = 0;
+                    ptr2_buffer = buffer + 3;
+                    // dynamic linked list pointer is not ready
+                    next_PrefixIdx = 0x00;
                     break;
                 }
 
@@ -1142,8 +1147,9 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
         // pointer to the prefix group
         OP_ENTRY* ptr_PrefixGroup;
         // pointer to the pointer to the prefix group
-        OP_ENTRY** ptr_ptr_PrefixGroup = &ptr_PrefixGroup;
-
+        OP_ENTRY** ptr_ptr_PrefixGroup;
+        // initialize pointer of pointer to the prefix group
+        ptr_ptr_PrefixGroup = &ptr_PrefixGroup;
         for (int OpIdx = 0; (OpIdx < 256) && (lFound < nOpEntryMax); OpIdx++)
         {
             if (OPMatch(strOPMatch, OpIdx))
