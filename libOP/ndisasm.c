@@ -1591,6 +1591,85 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         // check 8, 16, 32, 64-bit flags
         *flags |= ((opd0 >> 32) & 0x0F) << 4 | ((opd1 >> 32) & 0x0F) << 8 | ((opd2 >> 32) & 0x0F) << 12 | ((opd3 >> 32) & 0x0F) << 16;
     }
+    else if (*flags & 0x40000000)
+    {
+        uint64_t opd0 = 0;
+        uint64_t opd1 = 0;
+        uint64_t opd2 = 0;
+        uint64_t opd3 = 0;
+        for (n = ix->n; n; n--, p++)
+        {
+            // same prefix? no, but they are same mnemonic
+            // same mnemonic
+            bool test_token = (*p)->opcode == (*best_p)->opcode;
+            bool test_FAR = ~((*p)->opd[0] ^ (*best_p)->opd[0]) & FAR;
+
+            if (test_token && test_FAR)
+            {
+                //int a = REG_CLASS_GPR;
+                //int b = RM_GPR;
+                //int c = REGMEM;
+                // operand are both register, or both not register
+                if (~((*p)->opd[0] ^ (*best_p)->opd[0]) & REG_CLASS_GPR)
+                {
+                    opd0 |= (*p)->opd[0];
+                }
+                if (~((*p)->opd[1] ^ (*best_p)->opd[1]) & REG_CLASS_GPR)
+                {
+                    opd1 |= (*p)->opd[1];
+                }
+                if (~((*p)->opd[2] ^ (*best_p)->opd[2]) & REG_CLASS_GPR)
+                {
+                    opd2 |= (*p)->opd[2];
+                }
+                if (~((*p)->opd[3] ^ (*best_p)->opd[3]) & REG_CLASS_GPR)
+                {
+                    opd3 |= (*p)->opd[3];
+                }
+            }
+        }
+        // do not show 66 prefix case
+        switch ((opd0 >> 32) & 0x0F)
+        {
+        case 0x0E:
+        case 0x06:
+        case 0x0C:
+            // same mnemonic, prefix one is invalid
+            return 0;
+        default:
+            break;
+        }
+        switch ((opd1 >> 32) & 0x0F)
+        {
+        case 0x0E:
+        case 0x06:
+        case 0x0C:
+            // same mnemonic, prefix one is invalid
+            return 0;
+        default:
+            break;
+        }
+        switch ((opd2 >> 32) & 0x0F)
+        {
+        case 0x0E:
+        case 0x06:
+        case 0x0C:
+            // same mnemonic, prefix one is invalid
+            return 0;
+        default:
+            break;
+        }
+        switch ((opd3 >> 32) & 0x0F)
+        {
+        case 0x0E:
+        case 0x06:
+        case 0x0C:
+            // same mnemonic, prefix one is invalid
+            return 0;
+        default:
+            break;
+        }
+    }
     // /check abstract concepts block end
 
     /* Pick the best match */

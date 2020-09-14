@@ -221,7 +221,7 @@ void COPMappingDlg::OnBnClickedButton2()
 		strTemp.Format(_T("%i item in listbox"),lOpMatch);
 		SetDlgItemText(IDC_STATUS,strTemp);
 		m_strAsmList.ResetContent();
-		for(int i = 0 ; i < lOpMatch ; i++)
+		for(DWORD i = 0 ; i < lOpMatch ; i++)
 		{
 			if (OpEntry[i].ReqPrefix & PF_Operand)
 			{
