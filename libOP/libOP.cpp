@@ -720,7 +720,7 @@ static DWORD EnumPrefixes(OP_ENTRY* ptr_PrefixGroup, DWORD length, OPENTRY* pOpE
     /*int8_t*/BYTE OpIdx = pOpEntry->OP;
     /*int8_t*/BYTE GrpIdx = pOpEntry->OPExt;
 
-    for (int PrefixIdx = 0; (PrefixIdx < length) && (lFound < nOpEntryMax); PrefixIdx++)
+    for (DWORD PrefixIdx = 0; (PrefixIdx < length) && (lFound < nOpEntryMax); PrefixIdx++)
     {
         pOpEntry->ReqPrefix = ptr_PrefixGroup[PrefixIdx].PF;
         pOpEntry->OP = OpIdx;
