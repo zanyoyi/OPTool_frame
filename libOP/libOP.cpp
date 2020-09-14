@@ -809,8 +809,9 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
         unsigned int lFound2;
 
         // initialize pointer before usage
-        ptr_buffer = buffer;
-        ptr2_buffer = buffer;
+        //ptr_buffer = buffer;
+        //ptr2_buffer = buffer;
+
         // initialze buffer
         memset(buffer, 0xCC, sizeof(buffer));
 
@@ -834,7 +835,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
             // reserve three slots for prefix
             ptr_buffer = buffer + 2 + 3;
         }
-        else if (eOPTab == E_3B_OP_0F3A)
+        else /*if (eOPTab == E_3B_OP_0F3A)*/
         {
             buffer[3] = 0x0F;
             buffer[4] = 0x3A;

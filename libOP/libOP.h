@@ -56,16 +56,38 @@ typedef enum {
     E_FWAIT,
     E_VEX,
     E_EVEX,
+    E_VEX_XMM,
     E_NOREP,
+    E_ToOperand,
+    E_ToREPNE,
+    E_ToREP,
+    E_ToVEX,
+    E_ToEVEX,
+    E_ToREX,
 }E_PF;
 
 #define PF_Valid        1 << E_Valid        // architecture support flags
-#define PF_Operand      1 << E_Operand      // mandatory prefix 0x66
-#define PF_REPNE        1 << E_REPNE        // mandatory prefix 0xF2
-#define PF_REP          1 << E_REP          // mandatory prefix 0xF3
+#define PF_Operand      1 << E_Operand      // mandatory prefix 0x66 (66)
+#define PF_REPNE        1 << E_REPNE        // mandatory prefix 0xF2 (F2)
+#define PF_REP          1 << E_REP          // mandatory prefix 0xF3 (F3)
 #define PF_FWAIT        1 << E_FWAIT        // this opcode requires FWAIT prefix
-#define PF_VEX          1 << E_VEX          // this opcode requires VEX prefix
-#define PF_EVEX         1 << E_EVEX         // this opcode requires EVEX prefix
+#define PF_VEX          1 << E_VEX          // this opcode requires VEX prefix (v),(v1)
+#define PF_EVEX         1 << E_EVEX         // this opcode requires EVEX prefix (ev)
+
+#define PF_VEX_XMM      1 <  E_VEX_XMM      // this vex prefix opcode only support XMM (v1)
+
+#define PF_NOREP        1 << E_NOREP        // this opcode does not requires 0xF3
+#define PF_ToOperand    1 << E_ToOperand    // this opcode can be promoted with 0x66 prefix
+#define PF_ToREPNE      1 << E_ToREPNE      // this opcode can be promoted with 0xF2 prefix
+#define PF_ToREP        1 << E_ToREP        // this opcode can be promoted with 0xF3 prefix
+// mnemonics that begin with lowercase 'v' accept a VEX or EVEX prefix
+// mnemonics that begin with lowercase 'k' accept a VEX prefix
+#define PF_ToVEX        1 << E_ToVEX        // this opcode can be promoted with VEX prefix (v),(v1)
+// mnemonics that begin with lowercase 'v' accept a VEX or EVEX prefix
+#define PF_ToEVEX       1 << E_ToEVEX       // this opcode can be promoted with EVEX prefix (evo)
+
+#define PF_ToREX        1 << E_ToREX        // this opcode can be promoted with REX prefix
+
 
 typedef struct {
     BYTE OP;
@@ -498,7 +520,7 @@ OP_ENTRY OP2BMap[256] = {
     {0x75,0x00,0," pcmpeqw Pq,Qq | vpcmpeqw Vx,Hx,Wx (66),(v1)"},
     {0x76,0x00,0," pcmpeqd Pq,Qq | vpcmpeqd Vx,Hx,Wx (66),(v1)"},
     //# Note: Remove (v), because vzeroall and vzeroupper becomes emms without VEX.
-    {0x77,0x00,0," emms | vzeroupper | vzeroall"},
+    {0x77,0x00,0," emms | vzeroupper (v) | vzeroall (v)"},
     {0x78,0x00,0," VMREAD Ey,Gy | vcvttps2udq/pd2udq Vx,Wpd (evo) | vcvttsd2usi Gv,Wx (F2),(ev) | vcvttss2usi Gv,Wx (F3),(ev) | vcvttps2uqq/pd2uq"},
     {0x79,0x00,0," VMWRITE Gy,Ey | vcvtps2udq/pd2udq Vx,Wpd (evo) | vcvtsd2usi Gv,Wx (F2),(ev) | vcvtss2usi Gv,Wx (F3),(ev) | vcvtps2uqq/pd2uqq V"},
     {0x7a,0x00,0," vcvtudq2pd/uqq2pd Vpd,Wx (F3),(ev) | vcvtudq2ps/uqq2ps Vpd,Wx (F2),(ev) | vcvttps2qq/pd2qq Vx,Wx (66),(ev)"},
@@ -1885,8 +1907,8 @@ OP_ENTRY OP_0F76[2] = {
 };
 OP_ENTRY OP_0F77[3] = {
     {0x77,0x00,0 | PF_Valid," emms"},
-    {0x77,0x00,0 | PF_Valid," vzeroupper"},
-    {0x77,0x00,0 | PF_Valid," vzeroall"},
+    {0x77,0x00,0 | PF_Valid," vzeroupper (v)"},
+    {0x77,0x00,0 | PF_Valid," vzeroall (v)"},
 };
 OP_ENTRY OP_0F78[5] = {
     {0x78,0x00,0 | PF_Valid," VMREAD Ey,Gy"},
