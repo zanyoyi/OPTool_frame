@@ -41,5 +41,5 @@
 #include "nasm.h"
 
 uint8_t get_disp8N(insn *ins);
-
+bool is_disp8n(operand *input, insn *ins, int8_t *compdisp);
 #endif  /* NASM_DISP8_H */

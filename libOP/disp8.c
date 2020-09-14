@@ -37,7 +37,6 @@
 #include "pch.h"
 #include "disp8.h"
 
-
 /*
  * Find N value for compressed displacement (disp8 * N)
  */
@@ -104,4 +103,29 @@ uint8_t get_disp8N(insn *ins)
     }
 
     return n;
+}
+
+/*
+ * Check if offset is a multiple of N with corresponding tuple type
+ * if Disp8*N is available, compressed displacement is stored in compdisp
+ */
+bool is_disp8n(operand *input, insn *ins, int8_t *compdisp)
+{
+    int32_t off           = input->offset;
+    uint8_t n;
+    int32_t disp8;
+
+    n = get_disp8N(ins);
+
+    if (n && !(off & (n - 1))) {
+        disp8 = off / n;
+        /* if it fits in Disp8 */
+        if (disp8 >= -128 && disp8 <= 127) {
+            *compdisp = disp8;
+            return true;
+        }
+    }
+
+    *compdisp = 0;
+    return false;
 }

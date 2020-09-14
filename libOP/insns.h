@@ -49,5 +49,9 @@ extern const struct disasm_index * const itable_vex[NASM_VEX_CLASSES][32][4];
 /* Common table for the byte codes */
 extern const uint8_t nasm_bytecodes[];
 
+/*
+ * this define is used to signify the end of an itemplate
+ */
+#define ITEMPLATE_END {I_none,0,{0,},{0,},NULL,0}
 
 #endif /* NASM_INSNS_H */
