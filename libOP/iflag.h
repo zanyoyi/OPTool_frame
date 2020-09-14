@@ -68,7 +68,7 @@ static inline int iflag_cmp(const iflag_t *a, const iflag_t *b)
         return res;                                                     \
     }
 
-//IF_GEN_HELPER(xor, ^)
+IF_GEN_HELPER(xor, ^)
 
 /* Some helpers which are to work with predefined masks */
 #define IF_SMASK        (IFM_SB|IFM_SW|IFM_SD|IFM_SQ|IFM_SO|IFM_SY|IFM_SZ|IFM_SIZE|IFM_ANYSIZE)
