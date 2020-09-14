@@ -1638,7 +1638,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             }
         }
         // do not show 66 prefix case at all
-        switch ((opd0 >> 32) & 0x0F)
+        switch ((opd0 >> SIZE_SHIFT) & 0x0F)
         {
         case 0x0E:
         case 0x06:
@@ -1648,7 +1648,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         default:
             break;
         }
-        switch ((opd1 >> 32) & 0x0F)
+        switch ((opd1 >> SIZE_SHIFT) & 0x0F)
         {
         case 0x0E:
         case 0x06:
@@ -1658,7 +1658,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         default:
             break;
         }
-        switch ((opd2 >> 32) & 0x0F)
+        switch ((opd2 >> SIZE_SHIFT) & 0x0F)
         {
         case 0x0E:
         case 0x06:
@@ -1668,7 +1668,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         default:
             break;
         }
-        switch ((opd3 >> 32) & 0x0F)
+        switch ((opd3 >> SIZE_SHIFT) & 0x0F)
         {
         case 0x0E:
         case 0x06:
