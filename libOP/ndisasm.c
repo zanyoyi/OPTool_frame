@@ -1551,6 +1551,8 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
     p = (const struct itemplate* const*)ix->p;
 
     // /check abstract concepts
+
+    // check default prefix case
     if (*flags & 0x80000000)
     {
         uint64_t opd0 = 0;
@@ -1563,8 +1565,9 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             // same mnemonic
             bool test_token = (*p)->opcode == (*best_p)->opcode;
             bool test_FAR = ~((*p)->opd[0] ^ (*best_p)->opd[0]) & FAR;
+            bool test_SHORT = ~((*p)->opd[0] ^ (*best_p)->opd[0]) & SHORT;
 
-            if (test_token && test_FAR)
+            if (test_token && test_FAR && test_SHORT)
             {
                 //int a = REG_CLASS_GPR;
                 //int b = RM_GPR;
@@ -1591,7 +1594,8 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         // check 8, 16, 32, 64-bit flags
         *flags |= ((opd0 >> 32) & 0x0F) << 4 | ((opd1 >> 32) & 0x0F) << 8 | ((opd2 >> 32) & 0x0F) << 12 | ((opd3 >> 32) & 0x0F) << 16;
     }
-    else if (*flags & 0x40000000)
+    // check best_p is 66 prefix case
+    else if ((*flags & 0x40000000) && (prefix.osp == 0x66))
     {
         uint64_t opd0 = 0;
         uint64_t opd1 = 0;
@@ -1603,8 +1607,9 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             // same mnemonic
             bool test_token = (*p)->opcode == (*best_p)->opcode;
             bool test_FAR = ~((*p)->opd[0] ^ (*best_p)->opd[0]) & FAR;
+            bool test_SHORT = ~((*p)->opd[0] ^ (*best_p)->opd[0]) & SHORT;
 
-            if (test_token && test_FAR)
+            if (test_token && test_FAR && test_SHORT)
             {
                 //int a = REG_CLASS_GPR;
                 //int b = RM_GPR;
@@ -1628,13 +1633,13 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 }
             }
         }
-        // do not show 66 prefix case
+        // do not show 66 prefix case at all
         switch ((opd0 >> 32) & 0x0F)
         {
         case 0x0E:
         case 0x06:
         case 0x0C:
-            // same mnemonic, prefix one is invalid
+            // same mnemonic, prefix ones die
             return 0;
         default:
             break;
@@ -1644,7 +1649,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         case 0x0E:
         case 0x06:
         case 0x0C:
-            // same mnemonic, prefix one is invalid
+            // same mnemonic, prefix ones die
             return 0;
         default:
             break;
@@ -1654,7 +1659,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         case 0x0E:
         case 0x06:
         case 0x0C:
-            // same mnemonic, prefix one is invalid
+            // same mnemonic, prefix ones die
             return 0;
         default:
             break;
@@ -1664,7 +1669,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         case 0x0E:
         case 0x06:
         case 0x0C:
-            // same mnemonic, prefix one is invalid
+            // same mnemonic, prefix ones die
             return 0;
         default:
             break;
