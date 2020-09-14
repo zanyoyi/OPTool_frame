@@ -1592,7 +1592,11 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             }
         }
         // check 8, 16, 32, 64-bit flags
-        *flags |= ((opd0 >> 32) & 0x0F) << 4 | ((opd1 >> 32) & 0x0F) << 8 | ((opd2 >> 32) & 0x0F) << 12 | ((opd3 >> 32) & 0x0F) << 16;
+        *flags |=
+            ((opd0 >> SIZE_SHIFT) & 0x0F) << 4 |
+            ((opd1 >> SIZE_SHIFT) & 0x0F) << 8 |
+            ((opd2 >> SIZE_SHIFT) & 0x0F) << 12 |
+            ((opd3 >> SIZE_SHIFT) & 0x0F) << 16;
     }
     // check best_p is 66 prefix case
     else if ((*flags & 0x40000000) && (prefix.osp == 0x66))
