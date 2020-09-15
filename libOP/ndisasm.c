@@ -1897,10 +1897,13 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     {
                         slen +=
                             snprintf(output + slen, outbufsize - slen, "imm16/imm32 ");
+                        // clear operand prefix flags
+                        *flags &= 0xFFEFFFFF;
                     }
                     // 32/64 bit operand case
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
                     {
+                        // never happen
                         slen +=
                             snprintf(output + slen, outbufsize - slen, "imm32/imm64 ");
                     }
@@ -1909,6 +1912,8 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     {
                         slen +=
                             snprintf(output + slen, outbufsize - slen, "imm16/imm32/imm64 ");
+                        // clear operand prefix flags
+                        *flags &= 0xFFEFFFFF;
                     }
                     else
                     {
@@ -1924,6 +1929,8 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     {
                         slen +=
                             snprintf(output + slen, outbufsize - slen, "imm16/imm32 ");
+                        // clear operand prefix flags
+                        *flags &= 0xFFEFFFFF;
                     }
                     // 32/64 bit operand case
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
@@ -1937,6 +1944,8 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     {
                         slen +=
                             snprintf(output + slen, outbufsize - slen, "imm16/imm32/imm64 ");
+                        // clear operand prefix flags
+                        *flags &= 0xFFEFFFFF;
                     }
                     else
                     {
@@ -1950,6 +1959,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     // 16/32 bit operand case
                     if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
                     {
+                        // never happen
                         slen +=
                             snprintf(output + slen, outbufsize - slen, "imm16/imm32 ");
                     }
