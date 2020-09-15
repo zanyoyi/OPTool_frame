@@ -1526,17 +1526,17 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     {
                         nprefix++;
                     }
-                    if (nprefix < best_pref ||
-                        (nprefix == best_pref &&
-                            iflag_cmp(&goodness, &best) < 0))
-                    {
-                        /* This is the best one found so far */
-                        best = goodness;
-                        best_p = p;
-                        best_pref = nprefix;
-                        best_length = length;
-                        ins = tmp_ins;
-                    }
+                }
+                if (nprefix < best_pref ||
+                    (nprefix == best_pref &&
+                        iflag_cmp(&goodness, &best) < 0))
+                {
+                    /* This is the best one found so far */
+                    best = goodness;
+                    best_p = p;
+                    best_pref = nprefix;
+                    best_length = length;
+                    ins = tmp_ins;
                 }
 
             }
@@ -2121,6 +2121,16 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     slen +=
                         snprintf(output + slen, outbufsize - slen, "tword ");
                 }
+                if (t & BITS128)
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "oword ");
+                }
+                if (t & BITS256)
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "yword ");
+                }
                 // skip complicate cases
 
                 // check far indicator?
@@ -2422,6 +2432,16 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 {
                     slen +=
                         snprintf(output + slen, outbufsize - slen, "tword ");
+                }
+                if (t & BITS128)
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "oword ");
+                }
+                if (t & BITS256)
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "yword ");
                 }
                 // skip complicate cases
 

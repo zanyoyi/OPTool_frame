@@ -56,38 +56,89 @@ typedef enum {
     E_FWAIT,
     E_VEX,
     E_EVEX,
-    E_VEX_XMM,
     E_NOREP,
+    E_NOREX,
     E_ToOperand,
     E_ToREPNE,
     E_ToREP,
     E_ToVEX,
+    E_ToVEX_XMM,
     E_ToEVEX,
-    E_ToREX,
 }E_PF;
+typedef enum {
+    E_PRIV,
+    E_SMM,
+    E_PROT,
+    E_LOCK,
+    E_NOLONG,
+    E_LONG,
+    E_NOHLE,
+    E_MIB,
+    E_SIB,
+    E_BND,
+    E_UNDOC,
+    E_HLE,
+    E_FPU,
+    E_MMX,
+    E_3DNOW,
+    E_SSE,
+    E_SSE2,
+    E_SSE3,
+    E_VMX,
+    E_SSSE3,
+    E_SSE4A,
+    E_SSE41,
+    E_SSE42,
+    E_SSE5,
+    E_AVX,
+    E_PREFETCHWT1,
+}E_FEATURE;
 
 #define PF_Valid        1 << E_Valid        // architecture support flags
 #define PF_Operand      1 << E_Operand      // mandatory prefix 0x66 (66)
 #define PF_REPNE        1 << E_REPNE        // mandatory prefix 0xF2 (F2)
 #define PF_REP          1 << E_REP          // mandatory prefix 0xF3 (F3)
-#define PF_FWAIT        1 << E_FWAIT        // this opcode requires FWAIT prefix
-#define PF_VEX          1 << E_VEX          // this opcode requires VEX prefix (v),(v1)
-#define PF_EVEX         1 << E_EVEX         // this opcode requires EVEX prefix (ev)
+#define PF_FWAIT        1 << E_FWAIT        // this mnemonic requires FWAIT prefix
+#define PF_VEX          1 << E_VEX          // this mnemonic requires VEX prefix (v),(v1)
+#define PF_EVEX         1 << E_EVEX         // this mnemonic requires EVEX prefix (ev)
 
-#define PF_VEX_XMM      1 <  E_VEX_XMM      // this vex prefix opcode only support XMM (v1)
-
-#define PF_NOREP        1 << E_NOREP        // this opcode does not requires 0xF3
-#define PF_ToOperand    1 << E_ToOperand    // this opcode can be promoted with 0x66 prefix
-#define PF_ToREPNE      1 << E_ToREPNE      // this opcode can be promoted with 0xF2 prefix
-#define PF_ToREP        1 << E_ToREP        // this opcode can be promoted with 0xF3 prefix
+#define PF_NOREP        1 << E_NOREP        // this mnemonic does not requires 0xF3
+#define PF_NOREX        1 << E_NOREX        // this mnemonic does not requires REX.W prefix for 64-bit operand size
+#define PF_ToOperand    1 << E_ToOperand    // this mnemonic can be promoted with mandatory prefix 0x66
+#define PF_ToREPNE      1 << E_ToREPNE      // this mnemonic can be promoted with mandatory prefix 0xF2
+#define PF_ToREP        1 << E_ToREP        // this mnemonic can be promoted with mandatory prefix 0xF3
 // mnemonics that begin with lowercase 'v' accept a VEX or EVEX prefix
 // mnemonics that begin with lowercase 'k' accept a VEX prefix
-#define PF_ToVEX        1 << E_ToVEX        // this opcode can be promoted with VEX prefix (v),(v1)
-// mnemonics that begin with lowercase 'v' accept a VEX or EVEX prefix
-#define PF_ToEVEX       1 << E_ToEVEX       // this opcode can be promoted with EVEX prefix (evo)
+#define PF_ToVEX        1 << E_ToVEX        // this mnemonic can be promoted with VEX prefix (v)
+#define PF_ToVEX_XMM    1 <  E_ToVEX_XMM    // this mnemonic can be promoted with VEX prefix with XMM only (v1)
+#define PF_ToEVEX       1 << E_ToEVEX       // this mnemonic can be promoted with EVEX prefix (evo)
 
-#define PF_ToREX        1 << E_ToREX        // this opcode can be promoted with REX prefix
-
+#define PF_PRIV         1 << E_PRIV         // Privileged instruction
+#define PF_SMM          1 << E_SMM          // Only valid in SMM
+#define PF_PROT         1 << E_PROT         // Protected mode only
+#define PF_LOCK         1 << E_LOCK         // Lockable if operand 0 is memory
+#define PF_NOLONG       1 << E_NOLONG       // Not available in long mode
+#define PF_LONG         1 << E_LONG         // Long mode
+#define PF_NOHLE        1 << E_NOHLE        // HLE prefixes forbidden
+#define PF_MIB          1 << E_MIB          // split base/index EA
+#define PF_SIB          1 << E_SIB          // SIB encoding required
+#define PF_BND          1 << E_BND          // BND (0xF2) prefix available
+#define PF_UNDOC        1 << E_UNDOC        // Undocumented
+#define PF_HLE          1 << E_HLE          // HLE prefixed
+#define PF_FPU          1 << E_FPU          // FPU
+#define PF_MMX          1 << E_MMX          // MMX
+#define PF_3DNOW        1 << E_3DNOW        // 3DNOW!
+#define PF_SSE          1 << E_SSE          // SSE (KNI, MMX2)
+#define PF_SSE2         1 << E_SSE2         // SSE2
+#define PF_SSE3         1 << E_SSE3         // SSE3 (PNI)
+#define PF_VMX          1 << E_VMX          // VMX
+#define PF_SSSE3        1 << E_SSSE3        // SSSE3
+#define PF_SSE4A        1 << E_SSE4A        // AMD SSE4a
+#define PF_SSE41        1 << E_SSE41        // SSE4.1
+#define PF_SSE42        1 << E_SSE42        // SSE4.2
+#define PF_SSE5         1 << E_SSE5         // SSE5
+#define PF_AVX          1 << E_AVX          // AVX  (256-bit floating point)
+#define PF_PREFETCHWT1  1 << E_PREFETCHWT1  // PREFETCHWT1
 
 typedef struct {
     BYTE OP;
