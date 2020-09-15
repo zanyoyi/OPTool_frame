@@ -235,6 +235,7 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             default:
                 break;
             }
+            break;
         case 0x09:
             *pGrp = OP_0F09;
             return sizeof(OP_0F09) / sizeof(OP_ENTRY);
@@ -424,6 +425,7 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             default:
                 break;
             }
+            break;
         case 0x72:
             switch (GrpIdx)
             {
@@ -439,6 +441,7 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             default:
                 break;
             }
+            break;
         case 0x73:
             switch (GrpIdx)
             {
@@ -451,6 +454,7 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             default:
                 break;
             }
+            break;
         case 0x74:
             *pGrp = OP_0F74;
             return sizeof(OP_0F74) / sizeof(OP_ENTRY);
@@ -535,6 +539,7 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             default:
                 break;
             }
+            break;
         case 0xB8:
             *pGrp = OP_0FB8;
             return sizeof(OP_0FB8) / sizeof(OP_ENTRY);
@@ -568,6 +573,7 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             default:
                 break;
             }
+            break;
         case 0xD0:
             *pGrp = OP_0FD0;
             return sizeof(OP_0FD0) / sizeof(OP_ENTRY);
