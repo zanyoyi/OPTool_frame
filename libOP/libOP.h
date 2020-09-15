@@ -2511,13 +2511,10 @@ OP_ENTRY OP_0F3853[2] = {
     {0x53,0x00,0 | PF_Valid | PF_Operand," vpdpwssds Vx,Hx,Wx (66),(ev)"},
     {0x53,0x00,0 | PF_Valid | PF_REPNE," vp4dpwssds Vdqq,Hdqq,Wdq (F2),(ev)"},
 };
-OP_ENTRY OP_0F3857[2] = {
-    {0x57,0x00,0 | PF_Valid,""},
-    {0x57,0x00,0 | PF_Valid | PF_Operand," vbroadcasti32x2 Vx,Wx (66),(evo)"},
-};
-OP_ENTRY OP_0F3858[2] = {
-    {0x58,0x00,0 | PF_Valid | PF_Operand," vpbroadcastd Vx,Wx (66),(v)"},
-    {0x58,0x00,0 | PF_Valid | PF_Operand," vbroadcasti32x4/64x2 Vx,Wx (66),(evo)"},
+
+OP_ENTRY OP_0F3859[2] = {
+    {0x59,0x00,0 | PF_Valid | PF_Operand," vpbroadcastq Vx,Wx (66),(v)"},
+    {0x59,0x00,0 | PF_Valid | PF_Operand," vbroadcasti32x2 Vx,Wx (66),(evo)"},
 };
 OP_ENTRY OP_0F385A[2] = {
     {0x5a,0x00,0 | PF_Valid | PF_Operand," vbroadcasti128 Vqq,Mdq (66),(v)"},
@@ -2534,14 +2531,6 @@ OP_ENTRY OP_0F3890[2] = {
 OP_ENTRY OP_0F3891[2] = {
     {0x91,0x00,0 | PF_Valid | PF_Operand," vgatherqd/q Vx,Hx,Wx (66),(v)"},
     {0x91,0x00,0 | PF_Valid | PF_Operand," vpgatherqd/q Vx,Wx (66),(evo)"},
-};
-OP_ENTRY OP_0F3898[2] = {
-    {0x98,0x00,0 | PF_Valid | PF_Operand," vfmadd132ps/d Vx,Hx,Wx (66),(v)"},
-    {0x98,0x00,0 | PF_Valid | PF_REPNE," v4fmaddps Vdqq,Hdqq,Wdq (F2),(ev)"},
-};
-OP_ENTRY OP_0F3899[2] = {
-    {0x99,0x00,0 | PF_Valid | PF_Operand," vfmadd132ss/d Vx,Hx,Wx (66),(v),(v1)"},
-    {0x99,0x00,0 | PF_Valid | PF_REPNE," v4fmaddss Vdq,Hdq,Wdq (F2),(ev)"},
 };
 OP_ENTRY OP_0F389A[2] = {
     {0x9a,0x00,0 | PF_Valid | PF_Operand," vfmsub132ps/d Vx,Hx,Wx (66),(v)"},
