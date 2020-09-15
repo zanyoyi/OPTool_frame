@@ -718,7 +718,7 @@ OP_ENTRY OP2BMap[256] = {
     {0xfe,0x00,0," paddd Pq,Qq | vpaddd Vx,Hx,Wx (66),(v1)"},
     {0xff,0x00,0 | PF_Valid," UD0"},
 };
-OP_ENTRY OP3BMap_0F38h[256] = {
+OP_ENTRY OP3BMap_0F38[256] = {
     //# 0x0f 0x38 0x00-0x0f
     {0x00,0x00,0," pshufb Pq,Qq | vpshufb Vx,Hx,Wx (66),(v1)"},
     {0x01,0x00,0," phaddw Pq,Qq | vphaddw Vx,Hx,Wx (66),(v1)"},
@@ -986,7 +986,7 @@ OP_ENTRY OP3BMap_0F38h[256] = {
     {0xFE,0x00,0 | PF_Valid,NULL},
     {0xFF,0x00,0 | PF_Valid,NULL},
 };
-OP_ENTRY OP3BMap_0F3Ah[256] = {
+OP_ENTRY OP3BMap_0F3A[256] = {
     //# 0x0f 0x3a 0x00-0xff
     {0x00,0x00,0 | PF_Valid | PF_Operand," vpermq Vqq,Wqq,Ib (66),(v)"},
     {0x01,0x00,0 | PF_Valid | PF_Operand," vpermpd Vqq,Wqq,Ib (66),(v)"},
@@ -1565,6 +1565,37 @@ OP_ENTRY Grp21_1Eh[8] = {
     {0x1E,0x86,0 | PF_Valid,NULL},
     {0x1E,0x87,0," ENDBR64 (F3),(010),(11B) | ENDBR32 (F3),(011),(11B)"},
 };
+OP_ENTRY GrpP_0Dh[8] = {
+    {0x0D,0x80,0 | PF_Valid," PREFETCH"},
+    {0x0D,0x81,0 | PF_Valid," PREFETCHW"},
+    {0x0D,0x82,0 | PF_Valid,NULL},
+    {0x0D,0x83,0 | PF_Valid,NULL},
+    {0x0D,0x84,0 | PF_Valid,NULL},
+    {0x0D,0x85,0 | PF_Valid,NULL},
+    {0x0D,0x86,0 | PF_Valid,NULL},
+    {0x0D,0x87,0 | PF_Valid,NULL},
+};
+OP_ENTRY GrpPDLK_A6h[8] = {
+    {0xA6,0x80,0 | PF_Valid," MONTMUL"},
+    {0xA6,0x81,0 | PF_Valid," XSHA1"},
+    {0xA6,0x82,0 | PF_Valid," XSHA2"},
+    {0xA6,0x83,0 | PF_Valid,NULL},
+    {0xA6,0x84,0 | PF_Valid,NULL},
+    {0xA6,0x85,0 | PF_Valid,NULL},
+    {0xA6,0x86,0 | PF_Valid,NULL},
+    {0xA6,0x87,0 | PF_Valid,NULL},
+};
+OP_ENTRY GrpRNG_A7h[8] = {
+    {0xA7,0x80,0 | PF_Valid," xstore-rng"},
+    {0xA7,0x81,0 | PF_Valid," xcrypt-ecb"},
+    {0xA7,0x82,0 | PF_Valid," xcrypt-cbc"},
+    {0xA7,0x84,0 | PF_Valid," xcrypt-cfb"},
+    {0xA7,0x85,0 | PF_Valid," xcrypt-ofb"},
+    {0xA7,0x85,0 | PF_Valid,NULL},
+    {0xA7,0x86,0 | PF_Valid,NULL},
+    {0xA7,0x87,0 | PF_Valid,NULL},
+};
+
 OP_ENTRY OP_40[2] = {
     {0x40,0x00,0 | PF_Valid," INC eAX (i64)"},
     {0x40,0x00,0 | PF_Valid," REX (o64)"},
@@ -2358,6 +2389,7 @@ OP_ENTRY OP_0F381E[2] = {
     {0x1e,0x00,0 | PF_Valid," pabsd Pq,Qq"},
     {0x1e,0x00,0 | PF_Valid | PF_Operand," vpabsd Vx,Wx (66),(v1)"},
 };
+// Grp07_0F01
 OP_ENTRY OP_0F01_0[7] = {
     {0x01,0x80,0 | PF_Valid," SGDT Ms"},
     {0x01,0x80,0 | PF_Valid," VMCALL (001),(11B)"},
@@ -2396,6 +2428,7 @@ OP_ENTRY OP_0F01_7[3] = {
     {0x01,0x87,0 | PF_Valid," SWAPGS (o64),(000),(11B)"},
     {0x01,0x87,0 | PF_Valid," RDTSCP (001),(11B)"},
 };
+// Grp09_0FC7
 OP_ENTRY OP_0FC7_6[4] = {
     {0xc7,0x86,0 | PF_Valid," VMPTRLD Mq"},
     {0xc7,0x86,0 | PF_Valid | PF_Operand," VMCLEAR Mq (66)"},
@@ -2407,6 +2440,7 @@ OP_ENTRY OP_0FC7_7[3] = {
     {0xc7,0x87,0 | PF_Valid | PF_REP," VMPTRST Mq (F3)"},
     {0xc7,0x87,0 | PF_Valid," RDSEED Rv (11B)"},
 };
+// Grp12_0F71
 OP_ENTRY OP_0F71_2[2] = {
     {0x71,0x82,0 | PF_Valid," psrlw Nq,Ib (11B)"},
     {0x71,0x82,0 | PF_Valid | PF_Operand," vpsrlw Hx,Ux,Ib (66),(11B),(v1)"},
@@ -2419,6 +2453,7 @@ OP_ENTRY OP_0F71_6[2] = {
     {0x71,0x86,0 | PF_Valid," psllw Nq,Ib (11B)"},
     {0x71,0x86,0 | PF_Valid | PF_Operand," vpsllw Hx,Ux,Ib (66),(11B),(v1)"},
 };
+// Grp13_0F72
 OP_ENTRY OP_0F72_2[2] = {
     {0x72,0x82,0 | PF_Valid," psrld Nq,Ib (11B)"},
     {0x72,0x82,0 | PF_Valid | PF_Operand," vpsrld Hx,Ux,Ib (66),(11B),(v1)"},
@@ -2432,6 +2467,7 @@ OP_ENTRY OP_0F72_6[2] = {
     {0x72,0x86,0 | PF_Valid," pslld Nq,Ib (11B)"},
     {0x72,0x86,0 | PF_Valid | PF_Operand," vpslld Hx,Ux,Ib (66),(11B),(v1)"},
 };
+// Grp14_0F73
 OP_ENTRY OP_0F73_2[2] = {
     {0x73,0x82,0 | PF_Valid," psrlq Nq,Ib (11B)"},
     {0x73,0x82,0 | PF_Valid | PF_Operand," vpsrlq Hx,Ux,Ib (66),(11B),(v1)"},
@@ -2440,6 +2476,7 @@ OP_ENTRY OP_0F73_6[2] = {
     {0x73,0x86,0 | PF_Valid," psllq Nq,Ib (11B)"},
     {0x73,0x86,0 | PF_Valid | PF_Operand," vpsllq Hx,Ux,Ib (66),(11B),(v1)"},
 };
+// Grp15_0FAE
 OP_ENTRY OP_0FAE_0[2] = {
     {0xae,0x80,0 | PF_Valid," fxsave"},
     {0xae,0x80,0 | PF_Valid | PF_REP," RDFSBASE Ry (F3),(11B)"},
@@ -2478,6 +2515,11 @@ OP_ENTRY OP_0FAE_7[3] = {
     {0xae,0x87,0 | PF_Valid," clflush"},
     {0xae,0x87,0 | PF_Valid | PF_Operand," clflushopt (66)"},
     {0xae,0x87,0 | PF_Valid," sfence (11B)"},
+};
+// Grp21_0F1E
+OP_ENTRY OP_0F1E_7[2] = {
+    {0x1e,0x87,0 | PF_Valid | PF_REP," ENDBR64 (F3),(010),(11B)"},
+    {0x1e,0x87,0 | PF_Valid | PF_REP," ENDBR32 (F3),(011),(11B)"},
 };
 
 // WCHAR* strOPMatch : opcode string to match strOPMatch =>{OP[7:0],MODRM[7:0]}

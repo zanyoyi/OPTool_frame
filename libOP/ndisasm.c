@@ -1598,7 +1598,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             ((opd2 >> SIZE_SHIFT) & 0x0F) << 12 |
             ((opd3 >> SIZE_SHIFT) & 0x0F) << 16;
     }
-    // check best_p is 66 prefix case
+    // check other prefix, best_p is 66 prefix case
     else if ((*flags & 0x40000000) && (prefix.osp == 0x66))
     {
         uint64_t opd0 = 0;
@@ -1618,7 +1618,9 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 //int a = REG_CLASS_GPR;
                 //int b = RM_GPR;
                 //int c = REGMEM;
-                // operand are both register, or both not register
+                // operand are both register
+                // what about operand are both imm?
+                // what about operand are both memory?
                 if (~((*p)->opd[0] ^ (*best_p)->opd[0]) & REG_CLASS_GPR)
                 {
                     opd0 |= (*p)->opd[0];
@@ -2363,35 +2365,39 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 if (t & BITS8)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "byte ");
+                        snprintf(output + slen, outbufsize - slen, "imm8");
                 }
                 else if (t & BITS16)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "word ");
+                        snprintf(output + slen, outbufsize - slen, "imm16");
                 }
                 else if (t & BITS32)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "dword ");
+                        snprintf(output + slen, outbufsize - slen, "imm32");
                 }
                 else if (t & BITS64)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "qword ");
+                        snprintf(output + slen, outbufsize - slen, "imm64");
                 }
                 else if (t & NEAR)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "near ");
+                        snprintf(output + slen, outbufsize - slen, "near imm");
                 }
                 else if (t & SHORT)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "short ");
+                        snprintf(output + slen, outbufsize - slen, "short imm");
                 }
-                slen +=
-                    snprintf(output + slen, outbufsize - slen, "imm");
+                else
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "imm");
+
+                }
             }
 
             // check immediate(or offset) address?

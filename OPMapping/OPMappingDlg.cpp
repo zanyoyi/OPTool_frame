@@ -225,19 +225,19 @@ void COPMappingDlg::OnBnClickedButton2()
 		{
 			if (OpEntry[i].ReqPrefix & PF_Operand)
 			{
-				memcpy(prefixes, L"opdsize", sizeof(L"opdsize"));
+				memcpy(prefixes, L"66", sizeof(L"66"));
 			}
 			else if (OpEntry[i].ReqPrefix & PF_REPNE)
 			{
-				memcpy(prefixes, L"REPNE", sizeof(L"REPNE"));
+				memcpy(prefixes, L"F2", sizeof(L"F2"));
 			}
 			else if (OpEntry[i].ReqPrefix & PF_REP)
 			{
-				memcpy(prefixes, L"REP", sizeof(L"REP"));
+				memcpy(prefixes, L"F3", sizeof(L"F3"));
 			}
 			else if (OpEntry[i].ReqPrefix & PF_FWAIT)
 			{
-				memcpy(prefixes, L"FWAIT", sizeof(L"FWAIT"));
+				memcpy(prefixes, L"9B", sizeof(L"9B"));
 			}
 
 			// group, prefixes

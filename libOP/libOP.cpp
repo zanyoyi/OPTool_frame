@@ -105,12 +105,12 @@ static BOOL OpcodeGroupCheck(E_XB_OP eOPTab, BYTE buffer)
     else if (eOPTab == E_3B_OP_0F38)
     {
         // AND with 0x80
-        return (OP3BMap_0F38h[buffer].OPExt >> 7);
+        return (OP3BMap_0F38[buffer].OPExt >> 7);
     }
     else if (eOPTab == E_3B_OP_0F3A)
     {
         // AND with 0x80
-        return (OP3BMap_0F3Ah[buffer].OPExt >> 7);
+        return (OP3BMap_0F3A[buffer].OPExt >> 7);
     }
     return FALSE;
 }
@@ -184,6 +184,7 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             default:
                 break;
             }
+            break;
         case 0x90:
             *pGrp = OP_90;
             return sizeof(OP_90) / sizeof(OP_ENTRY);
@@ -269,6 +270,16 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
         case 0x1B:
             *pGrp = OP_0F1B;
             return sizeof(OP_0F1B) / sizeof(OP_ENTRY);
+        case 0x1E:
+            switch (GrpIdx)
+            {
+            case 0x07:
+                *pGrp = OP_0F1E_7;
+                return sizeof(OP_0F1E_7) / sizeof(OP_ENTRY);
+            default:
+                break;
+            }
+            break;
         case 0x28:
             *pGrp = OP_0F28;
             return sizeof(OP_0F28) / sizeof(OP_ENTRY);
@@ -1245,6 +1256,56 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         }
                     }
                 }
+                else if (eOPTab == E_3B_OP_0F38)
+                {
+                    pGrp = NULL;
+                    switch (OpIdx)
+                    {
+                    case 0x80://Grp18
+                        pGrp = Grp18_C6h;
+                        break;
+                    case 0x81://Grp19
+                        pGrp = Grp19_C7h;
+                        break;
+                    case 0x82://Grp17
+                        pGrp = Grp17_F3h;
+                        break;
+                    default:
+                        break;
+                    }
+
+                    if (pGrp)
+                    {
+                        DWORD lGrpFound = 0;
+                        pOpEntry->OP = OpIdx;
+                        // pOpEntry->OPExt = 0x80;
+                        lGrpFound = EnumGrp(eOPTab, pGrp, &strOPMatch[8], pOpEntry, nOpEntryMax - lFound);
+                        pOpEntry += lGrpFound;
+                        lFound += lGrpFound;
+                    }
+                    else if (OP3BMap_0F38[OpIdx].strFmt)
+                    {
+                        pOpEntry->OP = OpIdx;
+                        pOpEntry->OPExt = 0;
+                        pOpEntry->ReqPrefix = OP3BMap_0F38[OpIdx].PF;
+                        swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP3BMap_0F38[OpIdx].strFmt);
+                        pOpEntry++;
+                        lFound++;
+                    }
+                }
+                else if (eOPTab == E_3B_OP_0F3A)
+                {
+                    // no group in 0F3A
+                    if (OP3BMap_0F3A[OpIdx].strFmt)
+                    {
+                        pOpEntry->OP = OpIdx;
+                        pOpEntry->OPExt = 0;
+                        pOpEntry->ReqPrefix = OP3BMap_0F3A[OpIdx].PF;
+                        swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP3BMap_0F3A[OpIdx].strFmt);
+                        pOpEntry++;
+                        lFound++;
+                    }
+                }
                 else if (eOPTab == E_2B_OP)
                 {
                     pGrp = NULL;
@@ -1255,6 +1316,9 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         break;
                     case 0x01: //Grp7
                         pGrp = Grp07_01h;
+                        break;
+                    case 0x0D: //GrpP
+                        pGrp = GrpP_0Dh;
                         break;
                     case 0x18: //Grp16
                         pGrp = Grp16_18h;
@@ -1274,6 +1338,12 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     case 0x73: //Grp14
                         pGrp = Grp14_73h;
                         break;
+                    case 0xA6: //GrpPDLK
+                        pGrp = GrpPDLK_A6h;
+                        break;
+                    case 0xA7: //GrpRNG
+                        pGrp = GrpRNG_A7h;
+                        break;
                     case 0xAE: //Grp15
                         pGrp = Grp15_AEh;
                         break;
@@ -1289,7 +1359,6 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     default:
                         break;
                     }
-
                     if (pGrp)
                     {
                         DWORD lGrpFound = 0;
@@ -1312,18 +1381,12 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         }
                         else
                         {
-                            pOpEntry->ReqPrefix = OP1BMap[OpIdx].PF;
+                            pOpEntry->ReqPrefix = OP2BMap[OpIdx].PF;
                             swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP2BMap[OpIdx].strFmt);
                             pOpEntry++;
                             lFound++;
                         }
                     }
-                }
-                else if (eOPTab == E_3B_OP_0F38)
-                {
-                }
-                else if (eOPTab == E_3B_OP_0F3A)
-                {
                 }
             }
         }
