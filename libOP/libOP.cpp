@@ -926,7 +926,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     buffer[2] = 0x66;
                     ptr2_buffer = buffer + 3 - 1;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0xF2;
+                    next_PrefixIdx = 0x9B;
                     break;
                 case 0x9B:      // FWAIT/WAIT prefix
                     prefixes = PF_Valid | PF_FWAIT;

@@ -235,6 +235,10 @@ void COPMappingDlg::OnBnClickedButton2()
 			{
 				memcpy(prefixes, L"REP", sizeof(L"REP"));
 			}
+			else if (OpEntry[i].ReqPrefix & PF_FWAIT)
+			{
+				memcpy(prefixes, L"FWAIT", sizeof(L"FWAIT"));
+			}
 
 			// group, prefixes
 			if ((OpEntry[i].OPExt & 0x80) && (OpEntry[i].ReqPrefix & 0xFE))

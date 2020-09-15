@@ -381,14 +381,14 @@ OP_ENTRY OP1BMap[256] = {
     {0xd5,0x00,0 | PF_Valid," AAD Ib (i64)"},
     {0xd6,0x00,0 | PF_Valid,NULL},
     {0xd7,0x00,0 | PF_Valid," XLAT/XLATB"},
-    {0xd8,0x00,0 | PF_Valid," ESC"},
-    {0xd9,0x00,0 | PF_Valid," ESC"},
-    {0xda,0x00,0 | PF_Valid," ESC"},
-    {0xdb,0x00,0 | PF_Valid," ESC"},
-    {0xdc,0x00,0 | PF_Valid," ESC"},
-    {0xdd,0x00,0 | PF_Valid," ESC"},
-    {0xde,0x00,0 | PF_Valid," ESC"},
-    {0xdf,0x00,0 | PF_Valid," ESC"},
+    {0xd8,0x80,0 | PF_Valid," ESC"},
+    {0xd9,0x80,0 | PF_Valid," ESC"},
+    {0xda,0x80,0 | PF_Valid," ESC"},
+    {0xdb,0x80,0 | PF_Valid," ESC"},
+    {0xdc,0x80,0 | PF_Valid," ESC"},
+    {0xdd,0x80,0 | PF_Valid," ESC"},
+    {0xde,0x80,0 | PF_Valid," ESC"},
+    {0xdf,0x80,0 | PF_Valid," ESC"},
     //# 0xe0 - 0xef
     //# Note: "forced64" is Intel CPU behavior: they ignore 0x66 prefix
     //# in 64-bit mode. AMD CPUs accept 0x66 prefix, it causes RIP truncation
