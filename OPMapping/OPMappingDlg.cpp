@@ -223,53 +223,6 @@ void COPMappingDlg::OnBnClickedButton2()
 		m_strAsmList.ResetContent();
 		for(DWORD i = 0 ; i < lOpMatch ; i++)
 		{
-			if (OpEntry[i].ReqPrefix & PF_Operand)
-			{
-				memcpy(prefixes, L"opdsize", sizeof(L"opdsize"));
-			}
-			else if (OpEntry[i].ReqPrefix & PF_REPNE)
-			{
-				memcpy(prefixes, L"REPNE", sizeof(L"REPNE"));
-			}
-			else if (OpEntry[i].ReqPrefix & PF_REP)
-			{
-				memcpy(prefixes, L"REP", sizeof(L"REP"));
-			}
-			else if (OpEntry[i].ReqPrefix & PF_FWAIT)
-			{
-				memcpy(prefixes, L"FWAIT", sizeof(L"FWAIT"));
-			}
-
-			// group, prefixes
-			if ((OpEntry[i].OPExt & 0x80) && (OpEntry[i].ReqPrefix & 0xFE))
-			{
-				if((OpEntry[i].OPExt & 0x20) && (OpEntry[i].OPExt & 0x08))
-					strTemp.Format(_T("%02X/%x [11B] %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
-				else if (OpEntry[i].OPExt & 0x20)
-					strTemp.Format(_T("%02X/%x [mem] %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
-				else
-					strTemp.Format(_T("%02X/%x       %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
-			}
-			// prefixes
-			else if (OpEntry[i].ReqPrefix & 0xFE)
-			{
-				strTemp.Format(_T("%02X         %s (%s)"), OpEntry[i].OP, OpEntry[i].strDisasm, prefixes);
-			}
-			// group
-			else if(OpEntry[i].OPExt & 0x80)
-			{
-				if ((OpEntry[i].OPExt & 0x20) && (OpEntry[i].OPExt & 0x08))
-					strTemp.Format(_T("%02X/%x [11B] %s"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm);
-				else if (OpEntry[i].OPExt & 0x20)
-					strTemp.Format(_T("%02X/%x [mem] %s"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm);
-				else
-					strTemp.Format(_T("%02X/%x       %s"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm);
-			}
-			// default
-			else
-			{
-				strTemp.Format(_T("%02X         %s"), OpEntry[i].OP, OpEntry[i].strDisasm);
-			}
 			m_strAsmList.AddString(strTemp);
 		}
 	}
