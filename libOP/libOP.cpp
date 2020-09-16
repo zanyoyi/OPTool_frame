@@ -1037,7 +1037,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
 
                 // match and valid cases
 
-                if (ByteMapHitPrefix(ptr_buffer[0]))
+                if ((ByteMapHitPrefix(ptr_buffer[0])) && (eOPTab == E_1B_OP))
                 {
                     OPExtIdx = 256;     // skip rest
                 }
