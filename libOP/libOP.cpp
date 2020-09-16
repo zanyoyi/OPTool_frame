@@ -246,14 +246,7 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
         default:
             break;
         }
-    }
-    else if (eOPTab == E_3B_OP_0F38)
-    {
-    }
-    else if (eOPTab == E_3B_OP_0F3A)
-    {
-    }
-    // somehow nested switch breaks indent spacing
+    }    // somehow nested switch breaks indent spacing
     else if (eOPTab == E_2B_OP)
     {
         switch (OpIdx)
@@ -770,7 +763,274 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             break;
         }
     }
-
+    else if (eOPTab == E_3B_OP_0F38)
+    {
+        switch (OpIdx)
+        {
+        case 0x00:
+            *pGrp = OP_0F3800;
+            return sizeof(OP_0F3800) / sizeof(OP_ENTRY);
+        case 0x01:
+            *pGrp = OP_0F3801;
+            return sizeof(OP_0F3801) / sizeof(OP_ENTRY);
+        case 0x02:
+            *pGrp = OP_0F3802;
+            return sizeof(OP_0F3802) / sizeof(OP_ENTRY);
+        case 0x03:
+            *pGrp = OP_0F3803;
+            return sizeof(OP_0F3803) / sizeof(OP_ENTRY);
+        case 0x04:
+            *pGrp = OP_0F3804;
+            return sizeof(OP_0F3804) / sizeof(OP_ENTRY);
+        case 0x05:
+            *pGrp = OP_0F3805;
+            return sizeof(OP_0F3805) / sizeof(OP_ENTRY);
+        case 0x06:
+            *pGrp = OP_0F3806;
+            return sizeof(OP_0F3806) / sizeof(OP_ENTRY);
+        case 0x07:
+            *pGrp = OP_0F3807;
+            return sizeof(OP_0F3807) / sizeof(OP_ENTRY);
+        case 0x08:
+            *pGrp = OP_0F3808;
+            return sizeof(OP_0F3808) / sizeof(OP_ENTRY);
+        case 0x09:
+            *pGrp = OP_0F3809;
+            return sizeof(OP_0F3809) / sizeof(OP_ENTRY);
+        case 0x0A:
+            *pGrp = OP_0F380A;
+            return sizeof(OP_0F380A) / sizeof(OP_ENTRY);
+        case 0x0B:
+            *pGrp = OP_0F380B;
+            return sizeof(OP_0F380B) / sizeof(OP_ENTRY);
+        case 0x10:
+            *pGrp = OP_0F3810;
+            return sizeof(OP_0F3810) / sizeof(OP_ENTRY);
+        case 0x11:
+            *pGrp = OP_0F3811;
+            return sizeof(OP_0F3811) / sizeof(OP_ENTRY);
+        case 0x12:
+            *pGrp = OP_0F3812;
+            return sizeof(OP_0F3812) / sizeof(OP_ENTRY);
+        case 0x13:
+            *pGrp = OP_0F3813;
+            return sizeof(OP_0F3813) / sizeof(OP_ENTRY);
+        case 0x14:
+            *pGrp = OP_0F3814;
+            return sizeof(OP_0F3814) / sizeof(OP_ENTRY);
+        case 0x15:
+            *pGrp = OP_0F3815;
+            return sizeof(OP_0F3815) / sizeof(OP_ENTRY);
+        case 0x16:
+            *pGrp = OP_0F3816;
+            return sizeof(OP_0F3816) / sizeof(OP_ENTRY);
+        case 0x19:
+            *pGrp = OP_0F3819;
+            return sizeof(OP_0F3819) / sizeof(OP_ENTRY);
+        case 0x1A:
+            *pGrp = OP_0F381A;
+            return sizeof(OP_0F381A) / sizeof(OP_ENTRY);
+        case 0x1C:
+            *pGrp = OP_0F381C;
+            return sizeof(OP_0F381C) / sizeof(OP_ENTRY);
+        case 0x1D:
+            *pGrp = OP_0F381D;
+            return sizeof(OP_0F381D) / sizeof(OP_ENTRY);
+        case 0x1E:
+            *pGrp = OP_0F381E;
+            return sizeof(OP_0F381E) / sizeof(OP_ENTRY);
+        case 0x20:
+            *pGrp = OP_0F3820;
+            return sizeof(OP_0F3820) / sizeof(OP_ENTRY);
+        case 0x21:
+            *pGrp = OP_0F3821;
+            return sizeof(OP_0F3821) / sizeof(OP_ENTRY);
+        case 0x22:
+            *pGrp = OP_0F3822;
+            return sizeof(OP_0F3822) / sizeof(OP_ENTRY);
+        case 0x23:
+            *pGrp = OP_0F3823;
+            return sizeof(OP_0F3823) / sizeof(OP_ENTRY);
+        case 0x24:
+            *pGrp = OP_0F3824;
+            return sizeof(OP_0F3824) / sizeof(OP_ENTRY);
+        case 0x25:
+            *pGrp = OP_0F3825;
+            return sizeof(OP_0F3825) / sizeof(OP_ENTRY);
+        case 0x26:
+            *pGrp = OP_0F3826;
+            return sizeof(OP_0F3826) / sizeof(OP_ENTRY);
+        case 0x27:
+            *pGrp = OP_0F3827;
+            return sizeof(OP_0F3827) / sizeof(OP_ENTRY);
+        case 0x28:
+            *pGrp = OP_0F3828;
+            return sizeof(OP_0F3828) / sizeof(OP_ENTRY);
+        case 0x29:
+            *pGrp = OP_0F3829;
+            return sizeof(OP_0F3829) / sizeof(OP_ENTRY);
+        case 0x2A:
+            *pGrp = OP_0F382A;
+            return sizeof(OP_0F382A) / sizeof(OP_ENTRY);
+        case 0x2C:
+            *pGrp = OP_0F382C;
+            return sizeof(OP_0F382C) / sizeof(OP_ENTRY);
+        case 0x2D:
+            *pGrp = OP_0F382D;
+            return sizeof(OP_0F382D) / sizeof(OP_ENTRY);
+        case 0x30:
+            *pGrp = OP_0F3830;
+            return sizeof(OP_0F3830) / sizeof(OP_ENTRY);
+        case 0x31:
+            *pGrp = OP_0F3831;
+            return sizeof(OP_0F3831) / sizeof(OP_ENTRY);
+        case 0x32:
+            *pGrp = OP_0F3832;
+            return sizeof(OP_0F3832) / sizeof(OP_ENTRY);
+        case 0x33:
+            *pGrp = OP_0F3833;
+            return sizeof(OP_0F3833) / sizeof(OP_ENTRY);
+        case 0x34:
+            *pGrp = OP_0F3834;
+            return sizeof(OP_0F3834) / sizeof(OP_ENTRY);
+        case 0x35:
+            *pGrp = OP_0F3835;
+            return sizeof(OP_0F3835) / sizeof(OP_ENTRY);
+        case 0x36:
+            *pGrp = OP_0F3836;
+            return sizeof(OP_0F3836) / sizeof(OP_ENTRY);
+        case 0x38:
+            *pGrp = OP_0F3838;
+            return sizeof(OP_0F3838) / sizeof(OP_ENTRY);
+        case 0x39:
+            *pGrp = OP_0F3839;
+            return sizeof(OP_0F3839) / sizeof(OP_ENTRY);
+        case 0x3A:
+            *pGrp = OP_0F383A;
+            return sizeof(OP_0F383A) / sizeof(OP_ENTRY);
+        case 0x3B:
+            *pGrp = OP_0F383B;
+            return sizeof(OP_0F383B) / sizeof(OP_ENTRY);
+        case 0x3D:
+            *pGrp = OP_0F383D;
+            return sizeof(OP_0F383D) / sizeof(OP_ENTRY);
+        case 0x3F:
+            *pGrp = OP_0F383F;
+            return sizeof(OP_0F383F) / sizeof(OP_ENTRY);
+        case 0x40:
+            *pGrp = OP_0F3840;
+            return sizeof(OP_0F3840) / sizeof(OP_ENTRY);
+        case 0x46:
+            *pGrp = OP_0F3846;
+            return sizeof(OP_0F3846) / sizeof(OP_ENTRY);
+        case 0x52:
+            *pGrp = OP_0F3852;
+            return sizeof(OP_0F3852) / sizeof(OP_ENTRY);
+        case 0x53:
+            *pGrp = OP_0F3853;
+            return sizeof(OP_0F3853) / sizeof(OP_ENTRY);
+        case 0x59:
+            *pGrp = OP_0F3859;
+            return sizeof(OP_0F3859) / sizeof(OP_ENTRY);
+        case 0x5A:
+            *pGrp = OP_0F385A;
+            return sizeof(OP_0F385A) / sizeof(OP_ENTRY);
+        case 0x72:
+            *pGrp = OP_0F3872;
+            return sizeof(OP_0F3872) / sizeof(OP_ENTRY);
+        case 0x90:
+            *pGrp = OP_0F3890;
+            return sizeof(OP_0F3890) / sizeof(OP_ENTRY);
+        case 0x91:
+            *pGrp = OP_0F3891;
+            return sizeof(OP_0F3891) / sizeof(OP_ENTRY);
+        case 0x9A:
+            *pGrp = OP_0F389A;
+            return sizeof(OP_0F389A) / sizeof(OP_ENTRY);
+        case 0x9B:
+            *pGrp = OP_0F389B;
+            return sizeof(OP_0F389B) / sizeof(OP_ENTRY);
+        case 0xAA:
+            *pGrp = OP_0F38AA;
+            return sizeof(OP_0F38AA) / sizeof(OP_ENTRY);
+        case 0xAB:
+            *pGrp = OP_0F38AB;
+            return sizeof(OP_0F38AB) / sizeof(OP_ENTRY);
+        case 0xC8:
+            *pGrp = OP_0F38C8;
+            return sizeof(OP_0F38C8) / sizeof(OP_ENTRY);
+        case 0xCA:
+            *pGrp = OP_0F38CA;
+            return sizeof(OP_0F38CA) / sizeof(OP_ENTRY);
+        case 0xCB:
+            *pGrp = OP_0F38CB;
+            return sizeof(OP_0F38CB) / sizeof(OP_ENTRY);
+        case 0xCC:
+            *pGrp = OP_0F38CC;
+            return sizeof(OP_0F38CC) / sizeof(OP_ENTRY);
+        case 0xCD:
+            *pGrp = OP_0F38CD;
+            return sizeof(OP_0F38CD) / sizeof(OP_ENTRY);
+        case 0xF0:
+            *pGrp = OP_0F38F0;
+            return sizeof(OP_0F38F0) / sizeof(OP_ENTRY);
+        case 0xF1:
+            *pGrp = OP_0F38F1;
+            return sizeof(OP_0F38F1) / sizeof(OP_ENTRY);
+        case 0xF5:
+            *pGrp = OP_0F38F5;
+            return sizeof(OP_0F38F5) / sizeof(OP_ENTRY);
+        case 0xF6:
+            *pGrp = OP_0F38F6;
+            return sizeof(OP_0F38F6) / sizeof(OP_ENTRY);
+        case 0xF7:
+            *pGrp = OP_0F38F7;
+            return sizeof(OP_0F38F7) / sizeof(OP_ENTRY);
+        case 0xF8:
+            *pGrp = OP_0F38F8;
+            return sizeof(OP_0F38F8) / sizeof(OP_ENTRY);
+        default:
+            break;
+        }
+    }
+    else if (eOPTab == E_3B_OP_0F3A)
+    {
+        switch (OpIdx)
+        {
+        case 0x08:
+            *pGrp = OP_0F3A08;
+            return sizeof(OP_0F3A08) / sizeof(OP_ENTRY);
+        case 0x09:
+            *pGrp = OP_0F3A09;
+            return sizeof(OP_0F3A09) / sizeof(OP_ENTRY);
+        case 0x0A:
+            *pGrp = OP_0F3A0A;
+            return sizeof(OP_0F3A0A) / sizeof(OP_ENTRY);
+        case 0x0B:
+            *pGrp = OP_0F3A0B;
+            return sizeof(OP_0F3A0B) / sizeof(OP_ENTRY);
+        case 0x0F:
+            *pGrp = OP_0F3A0F;
+            return sizeof(OP_0F3A0F) / sizeof(OP_ENTRY);
+        case 0x18:
+            *pGrp = OP_0F3A18;
+            return sizeof(OP_0F3A18) / sizeof(OP_ENTRY);
+        case 0x19:
+            *pGrp = OP_0F3A19;
+            return sizeof(OP_0F3A19) / sizeof(OP_ENTRY);
+        case 0x38:
+            *pGrp = OP_0F3A38;
+            return sizeof(OP_0F3A38) / sizeof(OP_ENTRY);
+        case 0x39:
+            *pGrp = OP_0F3A39;
+            return sizeof(OP_0F3A39) / sizeof(OP_ENTRY);
+        case 0x42:
+            *pGrp = OP_0F3A42;
+            return sizeof(OP_0F3A42) / sizeof(OP_ENTRY);
+        default:
+            break;
+        }
+    }
     return 0;
 }
 
