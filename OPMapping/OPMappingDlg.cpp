@@ -223,6 +223,7 @@ void COPMappingDlg::OnBnClickedButton2()
 		m_strAsmList.ResetContent();
 		for(DWORD i = 0 ; i < lOpMatch ; i++)
 		{
+			strTemp.Format(_T("%02X         %s"), OpEntry[i].OP, OpEntry[i].strDisasm);
 			m_strAsmList.AddString(strTemp);
 		}
 	}
