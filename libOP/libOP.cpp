@@ -1384,7 +1384,8 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 {
                     pOpEntry->ReqPrefix = prefixes;
                     pOpEntry->OP = OpIdx;
-                    pOpEntry->OPExt = 0;
+                    // mod indicator | 11B indicator
+                    pOpEntry->OPExt = 0x20 | ((OP_2 >= 0xC0) << 3);
                     if (lendis && (options & 0x00F00000) && next_PrefixIdx)
                     {
                         pOpEntry++;

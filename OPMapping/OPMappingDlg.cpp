@@ -253,7 +253,12 @@ void COPMappingDlg::OnBnClickedButton2()
 			// prefixes
 			else if (OpEntry[i].ReqPrefix & 0xFE)
 			{
-				strTemp.Format(_T("%02X         %s (%s)"), OpEntry[i].OP, OpEntry[i].strDisasm, prefixes);
+				if ((OpEntry[i].OPExt & 0x20) && (OpEntry[i].OPExt & 0x08))
+					strTemp.Format(_T("%02X   [11B] %s (%s)"), OpEntry[i].OP, OpEntry[i].strDisasm, prefixes);
+				else if (OpEntry[i].OPExt & 0x20)
+					strTemp.Format(_T("%02X   [mem] %s (%s)"), OpEntry[i].OP, OpEntry[i].strDisasm, prefixes);
+				else
+					strTemp.Format(_T("%02X         %s (%s)"), OpEntry[i].OP, OpEntry[i].strDisasm, prefixes);
 			}
 			// group
 			else if (OpEntry[i].OPExt & 0x80)
@@ -268,7 +273,12 @@ void COPMappingDlg::OnBnClickedButton2()
 			// default
 			else
 			{
-				strTemp.Format(_T("%02X         %s"), OpEntry[i].OP, OpEntry[i].strDisasm);
+				if ((OpEntry[i].OPExt & 0x20) && (OpEntry[i].OPExt & 0x08))
+					strTemp.Format(_T("%02X   [11B] %s"), OpEntry[i].OP, OpEntry[i].strDisasm);
+				else if (OpEntry[i].OPExt & 0x20)
+					strTemp.Format(_T("%02X   [mem] %s"), OpEntry[i].OP, OpEntry[i].strDisasm);
+				else
+					strTemp.Format(_T("%02X         %s"), OpEntry[i].OP, OpEntry[i].strDisasm);
 			}
 			m_strAsmList.AddString(strTemp);
 		}
