@@ -47,46 +47,89 @@ static BOOL OPMatch(WCHAR* strOP, BYTE bOP)
     return TRUE;
 }
 
-static BOOL ByteMapHitPrefix(BYTE data)
+static BOOL ByteMapHitPrefix(E_ADM eADM, BYTE data)
 {
-    switch (data)
+    if (eADM == E_AD64)
     {
-    case 0xF2:
-    case 0xF3:
-    case 0x9B:
-    case 0xF0:
-    case 0x2E:
-    case 0x36:
-    case 0x3E:
-    case 0x26:
-    case 0x64:
-    case 0x65:
-    case 0x66:
-    case 0x67:
-    //case 0xC4:
-    //case 0xC5:
-    //case 0x62:
-    //case 0x8F:
-    //case 0x40:
-    //case 0x41:
-    //case 0x42:
-    //case 0x43:
-    //case 0x44:
-    //case 0x45:
-    //case 0x46:
-    //case 0x47:
-    //case 0x48:
-    //case 0x49:
-    //case 0x4A:
-    //case 0x4B:
-    //case 0x4C:
-    //case 0x4D:
-    //case 0x4E:
-    //case 0x4F:
-    // case 0x0F:
-        return TRUE;
-    default:
-        return FALSE;
+        switch (data)
+        {
+        case 0xF2:      // REPNE,BND prefix
+        case 0xF3:      // REP prefix
+        case 0x9B:      // WAIT/FWAIT prefix
+        case 0xF0:      // LOCK prefix
+        case 0x2E:      // CS segment prefix
+        case 0x36:      // SS segment prefix
+        case 0x3E:      // DS segment prefix
+        case 0x26:      // ES segment prefix
+        case 0x64:      // FS segment prefix
+        case 0x65:      // GS segment prefix
+        case 0x66:      // operand size prefix
+        case 0x67:      // address size prefix
+        case 0xC4:      // VEX+2-byte prefix in long mode
+        case 0xC5:      // VEX+1-byte prefix in long mode
+        case 0x62:      // {M,E}VEX prefix in long mode
+        case 0x8F:      // XOP prefix in long mode
+        case 0x40:      // REX + 0x0 in long mode
+        case 0x41:
+        case 0x42:
+        case 0x43:
+        case 0x44:
+        case 0x45:
+        case 0x46:
+        case 0x47:
+        case 0x48:
+        case 0x49:
+        case 0x4A:
+        case 0x4B:
+        case 0x4C:
+        case 0x4D:
+        case 0x4E:
+        case 0x4F:      // REX + 0xF in long mode
+            return TRUE;
+        default:
+            return FALSE;
+        }
+    }
+    else
+    {
+        switch (data)
+        {
+        case 0xF2:      // REPNE,BND prefix
+        case 0xF3:      // REP prefix
+        case 0x9B:      // WAIT/FWAIT prefix
+        case 0xF0:      // LOCK prefix
+        case 0x2E:      // CS segment prefix
+        case 0x36:      // SS segment prefix
+        case 0x3E:      // DS segment prefix
+        case 0x26:      // ES segment prefix
+        case 0x64:      // FS segment prefix
+        case 0x65:      // GS segment prefix
+        case 0x66:      // operand size prefix
+        case 0x67:      // address size prefix
+        //case 0xC4:      // VEX+2-byte prefix in long mode
+        //case 0xC5:      // VEX+1-byte prefix in long mode
+        //case 0x62:      // {M,E}VEX prefix in long mode
+        //case 0x8F:      // XOP prefix in long mode
+        //case 0x40:      // REX + 0x0 in long mode
+        //case 0x41:
+        //case 0x42:
+        //case 0x43:
+        //case 0x44:
+        //case 0x45:
+        //case 0x46:
+        //case 0x47:
+        //case 0x48:
+        //case 0x49:
+        //case 0x4A:
+        //case 0x4B:
+        //case 0x4C:
+        //case 0x4D:
+        //case 0x4E:
+        //case 0x4F:      // REX + 0xF in long mode
+            return TRUE;
+        default:
+            return FALSE;
+        }
     }
 }
 
@@ -878,6 +921,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     (eOPTab == E_1B_OP && OpIdx == 0x0F) ||
                     (eOPTab == E_2B_OP && OpIdx == 0x38) ||
                     (eOPTab == E_2B_OP && OpIdx == 0x3A)
+                    // treat 0F A6 and 0F A7 as group instruction
                     )
                 {
                     nOPExtIdx = 0;
@@ -1037,7 +1081,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
 
                 // match and valid cases
 
-                if ((ByteMapHitPrefix(ptr_buffer[0])) && (eOPTab == E_1B_OP))
+                if ((ByteMapHitPrefix(eADM, ptr_buffer[0])) && (eOPTab == E_1B_OP))
                 {
                     OPExtIdx = 256;     // skip rest
                 }
