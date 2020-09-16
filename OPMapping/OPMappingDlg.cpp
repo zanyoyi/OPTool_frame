@@ -171,7 +171,10 @@ HCURSOR COPMappingDlg::OnQueryDragIcon()
 
 #include "libOP.h"
 #define OP_ENTRY_MAX 4096
+#define SHOW_VALID
+
 OPENTRY OpEntry[OP_ENTRY_MAX];
+
 
 void COPMappingDlg::OnBnClickedButton2()
 {
@@ -240,47 +243,55 @@ void COPMappingDlg::OnBnClickedButton2()
 				memcpy(prefixes, L"FWAIT", sizeof(L"FWAIT"));
 			}
 
-			// group, prefixes
-			if ((OpEntry[i].OPExt & 0x80) && (OpEntry[i].ReqPrefix & 0xFE))
+			// debug mode
+			#ifdef SHOW_VALID
+			if (OpEntry[i].ReqPrefix & 0x01)
 			{
-				if ((OpEntry[i].OPExt & 0x20) && (OpEntry[i].OPExt & 0x08))
-					strTemp.Format(_T("%02X/%x [11B] %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
-				else if (OpEntry[i].OPExt & 0x20)
-					strTemp.Format(_T("%02X/%x [mem] %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
+			#endif /* SHOW_VALID */
+				// group, prefixes
+				if ((OpEntry[i].OPExt & 0x80) && (OpEntry[i].ReqPrefix & 0xFE))
+				{
+					if ((OpEntry[i].OPExt & 0x20) && (OpEntry[i].OPExt & 0x08))
+						strTemp.Format(_T("%02X/%x [11B] %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
+					else if (OpEntry[i].OPExt & 0x20)
+						strTemp.Format(_T("%02X/%x [mem] %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
+					else
+						strTemp.Format(_T("%02X/%x       %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
+				}
+				// prefixes
+				else if (OpEntry[i].ReqPrefix & 0xFE)
+				{
+					if ((OpEntry[i].OPExt & 0x20) && (OpEntry[i].OPExt & 0x08))
+						strTemp.Format(_T("%02X   [11B] %s (%s)"), OpEntry[i].OP, OpEntry[i].strDisasm, prefixes);
+					else if (OpEntry[i].OPExt & 0x20)
+						strTemp.Format(_T("%02X   [mem] %s (%s)"), OpEntry[i].OP, OpEntry[i].strDisasm, prefixes);
+					else
+						strTemp.Format(_T("%02X         %s (%s)"), OpEntry[i].OP, OpEntry[i].strDisasm, prefixes);
+				}
+				// group
+				else if (OpEntry[i].OPExt & 0x80)
+				{
+					if ((OpEntry[i].OPExt & 0x20) && (OpEntry[i].OPExt & 0x08))
+						strTemp.Format(_T("%02X/%x [11B] %s"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm);
+					else if (OpEntry[i].OPExt & 0x20)
+						strTemp.Format(_T("%02X/%x [mem] %s"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm);
+					else
+						strTemp.Format(_T("%02X/%x       %s"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm);
+				}
+				// default
 				else
-					strTemp.Format(_T("%02X/%x       %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
+				{
+					if ((OpEntry[i].OPExt & 0x20) && (OpEntry[i].OPExt & 0x08))
+						strTemp.Format(_T("%02X   [11B] %s"), OpEntry[i].OP, OpEntry[i].strDisasm);
+					else if (OpEntry[i].OPExt & 0x20)
+						strTemp.Format(_T("%02X   [mem] %s"), OpEntry[i].OP, OpEntry[i].strDisasm);
+					else
+						strTemp.Format(_T("%02X         %s"), OpEntry[i].OP, OpEntry[i].strDisasm);
+				}
+				m_strAsmList.AddString(strTemp);
+			#ifdef SHOW_VALID
 			}
-			// prefixes
-			else if (OpEntry[i].ReqPrefix & 0xFE)
-			{
-				if ((OpEntry[i].OPExt & 0x20) && (OpEntry[i].OPExt & 0x08))
-					strTemp.Format(_T("%02X   [11B] %s (%s)"), OpEntry[i].OP, OpEntry[i].strDisasm, prefixes);
-				else if (OpEntry[i].OPExt & 0x20)
-					strTemp.Format(_T("%02X   [mem] %s (%s)"), OpEntry[i].OP, OpEntry[i].strDisasm, prefixes);
-				else
-					strTemp.Format(_T("%02X         %s (%s)"), OpEntry[i].OP, OpEntry[i].strDisasm, prefixes);
-			}
-			// group
-			else if (OpEntry[i].OPExt & 0x80)
-			{
-				if ((OpEntry[i].OPExt & 0x20) && (OpEntry[i].OPExt & 0x08))
-					strTemp.Format(_T("%02X/%x [11B] %s"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm);
-				else if (OpEntry[i].OPExt & 0x20)
-					strTemp.Format(_T("%02X/%x [mem] %s"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm);
-				else
-					strTemp.Format(_T("%02X/%x       %s"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm);
-			}
-			// default
-			else
-			{
-				if ((OpEntry[i].OPExt & 0x20) && (OpEntry[i].OPExt & 0x08))
-					strTemp.Format(_T("%02X   [11B] %s"), OpEntry[i].OP, OpEntry[i].strDisasm);
-				else if (OpEntry[i].OPExt & 0x20)
-					strTemp.Format(_T("%02X   [mem] %s"), OpEntry[i].OP, OpEntry[i].strDisasm);
-				else
-					strTemp.Format(_T("%02X         %s"), OpEntry[i].OP, OpEntry[i].strDisasm);
-			}
-			m_strAsmList.AddString(strTemp);
+			#endif /* SHOW_VALID */
 		}
 	}
 }
