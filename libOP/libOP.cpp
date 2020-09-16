@@ -1565,13 +1565,13 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     pGrp = NULL;
                     switch (OpIdx)
                     {
-                    case 0x80://Grp18
+                    case 0xC6://Grp18
                         pGrp = Grp18_C6h;
                         break;
-                    case 0x81://Grp19
+                    case 0xC7://Grp19
                         pGrp = Grp19_C7h;
                         break;
-                    case 0x82://Grp17
+                    case 0xF3://Grp17
                         pGrp = Grp17_F3h;
                         break;
                     default:
@@ -1589,12 +1589,25 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     }
                     else if (OP3BMap_0F38[OpIdx].strFmt)
                     {
-                        pOpEntry->OP = OpIdx;
-                        pOpEntry->OPExt = 0;
-                        pOpEntry->ReqPrefix = OP3BMap_0F38[OpIdx].PF;
-                        swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP3BMap_0F38[OpIdx].strFmt);
-                        pOpEntry++;
-                        lFound++;
+                        // get prefix group address and prefix group size
+                        if (DWORD lPrefixEntry = lPrefixes(eOPTab, OpIdx, 8, ptr_ptr_PrefixGroup))
+                        {
+                            DWORD lGrpFound = 0;
+                            pOpEntry->OP = OpIdx;
+                            pOpEntry->OPExt = 0;
+                            lGrpFound = EnumPrefixes(ptr_PrefixGroup, lPrefixEntry, pOpEntry, nOpEntryMax - lFound);
+                            pOpEntry += lGrpFound;
+                            lFound += lGrpFound;
+                        }
+                        else
+                        {
+                            pOpEntry->OP = OpIdx;
+                            pOpEntry->OPExt = 0;
+                            pOpEntry->ReqPrefix = OP3BMap_0F38[OpIdx].PF;
+                            swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP3BMap_0F38[OpIdx].strFmt);
+                            pOpEntry++;
+                            lFound++;
+                        }
                     }
                 }
                 else if (eOPTab == E_3B_OP_0F3A)
@@ -1602,12 +1615,25 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     // no group in 0F3A
                     if (OP3BMap_0F3A[OpIdx].strFmt)
                     {
-                        pOpEntry->OP = OpIdx;
-                        pOpEntry->OPExt = 0;
-                        pOpEntry->ReqPrefix = OP3BMap_0F3A[OpIdx].PF;
-                        swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP3BMap_0F3A[OpIdx].strFmt);
-                        pOpEntry++;
-                        lFound++;
+                        // get prefix group address and prefix group size
+                        if (DWORD lPrefixEntry = lPrefixes(eOPTab, OpIdx, 8, ptr_ptr_PrefixGroup))
+                        {
+                            DWORD lGrpFound = 0;
+                            pOpEntry->OP = OpIdx;
+                            pOpEntry->OPExt = 0;
+                            lGrpFound = EnumPrefixes(ptr_PrefixGroup, lPrefixEntry, pOpEntry, nOpEntryMax - lFound);
+                            pOpEntry += lGrpFound;
+                            lFound += lGrpFound;
+                        }
+                        else
+                        {
+                            pOpEntry->OP = OpIdx;
+                            pOpEntry->OPExt = 0;
+                            pOpEntry->ReqPrefix = OP3BMap_0F3A[OpIdx].PF;
+                            swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP3BMap_0F3A[OpIdx].strFmt);
+                            pOpEntry++;
+                            lFound++;
+                        }
                     }
                 }
                 else if (eOPTab == E_2B_OP)
