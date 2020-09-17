@@ -1598,7 +1598,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             ((opd2 >> SIZE_SHIFT) & 0x0F) << 12 |
             ((opd3 >> SIZE_SHIFT) & 0x0F) << 16;
     }
-    // check best_p is 66 prefix case
+    // check other prefix, best_p is 66 prefix case
     else if ((*flags & 0x40000000) && (prefix.osp == 0x66))
     {
         uint64_t opd0 = 0;
@@ -1618,7 +1618,10 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 //int a = REG_CLASS_GPR;
                 //int b = RM_GPR;
                 //int c = REGMEM;
-                // operand are both register, or both not register
+                // operand are both register
+                // what about operand are both imm?
+                // what about operand are both memory?
+                // what about operand are mmx vs xmm?
                 if (~((*p)->opd[0] ^ (*best_p)->opd[0]) & REG_CLASS_GPR)
                 {
                     opd0 |= (*p)->opd[0];
@@ -1888,7 +1891,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 if (t & BITS8)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "imm8 ");
+                        snprintf(output + slen, outbufsize - slen, "imm8");
                 }
                 else if (t & BITS16)
                 {
@@ -1896,7 +1899,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
                     {
                         slen +=
-                            snprintf(output + slen, outbufsize - slen, "imm16/imm32 ");
+                            snprintf(output + slen, outbufsize - slen, "imm16/imm32");
                         // clear operand prefix flags
                         *flags &= 0xFFEFFFFF;
                     }
@@ -1905,13 +1908,13 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     {
                         // never happen
                         slen +=
-                            snprintf(output + slen, outbufsize - slen, "imm32/imm64 ");
+                            snprintf(output + slen, outbufsize - slen, "imm32/imm64");
                     }
                     // 16/32/64 bit operand case
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
                     {
                         slen +=
-                            snprintf(output + slen, outbufsize - slen, "imm16/imm32/imm64 ");
+                            snprintf(output + slen, outbufsize - slen, "imm16/imm32/imm64");
                         // clear operand prefix flags
                         *flags &= 0xFFEFFFFF;
                     }
@@ -1919,7 +1922,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     {
                         // never happen
                         slen +=
-                            snprintf(output + slen, outbufsize - slen, "imm16 ");
+                            snprintf(output + slen, outbufsize - slen, "imm16");
                     }
                 }
                 else if (t & BITS32)
@@ -1928,7 +1931,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x06))
                     {
                         slen +=
-                            snprintf(output + slen, outbufsize - slen, "imm16/imm32 ");
+                            snprintf(output + slen, outbufsize - slen, "imm16/imm32");
                         // clear operand prefix flags
                         *flags &= 0xFFEFFFFF;
                     }
@@ -1937,13 +1940,13 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     {
                         // never happen
                         slen +=
-                            snprintf(output + slen, outbufsize - slen, "imm32/imm64 ");
+                            snprintf(output + slen, outbufsize - slen, "imm32/imm64");
                     }
                     // 16/32/64 bit operand case
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
                     {
                         slen +=
-                            snprintf(output + slen, outbufsize - slen, "imm16/imm32/imm64 ");
+                            snprintf(output + slen, outbufsize - slen, "imm16/imm32/imm64");
                         // clear operand prefix flags
                         *flags &= 0xFFEFFFFF;
                     }
@@ -1951,7 +1954,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     {
                         // never happen
                         slen +=
-                            snprintf(output + slen, outbufsize - slen, "imm32 ");
+                            snprintf(output + slen, outbufsize - slen, "imm32");
                     }
                 }
                 else if (t & BITS64)
@@ -1961,27 +1964,27 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     {
                         // never happen
                         slen +=
-                            snprintf(output + slen, outbufsize - slen, "imm16/imm32 ");
+                            snprintf(output + slen, outbufsize - slen, "imm16/imm32");
                     }
                     // 32/64 bit operand case
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0C))
                     {
                         // never happen
                         slen +=
-                            snprintf(output + slen, outbufsize - slen, "imm32/imm64 ");
+                            snprintf(output + slen, outbufsize - slen, "imm32/imm64");
                     }
                     // 16/32/64 bit operand case
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
                     {
                         // never happen
                         slen +=
-                            snprintf(output + slen, outbufsize - slen, "imm16/imm32/imm64 ");
+                            snprintf(output + slen, outbufsize - slen, "imm16/imm32/imm64");
                     }
                     else
                     {
                         // never happen
                         slen +=
-                            snprintf(output + slen, outbufsize - slen, "imm64 ");
+                            snprintf(output + slen, outbufsize - slen, "imm64");
                     }
                 }
                 else if (t & NEAR)
@@ -2018,7 +2021,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 if (t & BITS8)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "byte ");
+                        snprintf(output + slen, outbufsize - slen, "byte");
                 }
                 if (t & BITS16)
                 {
@@ -2049,7 +2052,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     else
                     {
                         slen +=
-                            snprintf(output + slen, outbufsize - slen, "word ");
+                            snprintf(output + slen, outbufsize - slen, "word");
                     }
                 }
                 if (t & BITS32)
@@ -2081,7 +2084,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     else
                     {
                         slen +=
-                            snprintf(output + slen, outbufsize - slen, "dword ");
+                            snprintf(output + slen, outbufsize - slen, "dword");
                     }
                 }
                 if (t & BITS64)
@@ -2113,23 +2116,23 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     else
                     {
                         slen +=
-                            snprintf(output + slen, outbufsize - slen, "qword ");
+                            snprintf(output + slen, outbufsize - slen, "qword");
                     }
                 }
                 if (t & BITS80)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "tword ");
+                        snprintf(output + slen, outbufsize - slen, "tword");
                 }
                 if (t & BITS128)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "oword ");
+                        snprintf(output + slen, outbufsize - slen, "oword");
                 }
                 if (t & BITS256)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "yword ");
+                        snprintf(output + slen, outbufsize - slen, "yword");
                 }
                 // skip complicate cases
 
@@ -2138,12 +2141,12 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 if (t & FAR)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "far ");
+                        snprintf(output + slen, outbufsize - slen, "far");
                 }
                 if (t & NEAR)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "near ");
+                        snprintf(output + slen, outbufsize - slen, "near");
                 }
                 output[slen++] = '[';
 
@@ -2237,7 +2240,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     // default to disp16
 
                     prefix = started ? "+" : "";
-                    // replace this line with other function
                     slen +=
                         snprintf(output + slen, outbufsize - slen,
                             "%sdisp16", prefix);
@@ -2269,21 +2271,18 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 // check index register is valid, check scale factor(again?)
                 if (o->indexreg != -1 && itemp_has(*best_p, IF_MIB))
                 {
-                    // replace this line with other function
                     output[slen++] = ',';
                     slen += snprintf(output + slen, outbufsize - slen, "%s",
                         nasm_reg_names[(o->indexreg - EXPR_REG_START)]);
                     // skip scale factor equal 1 case
                     if (o->scale > 1)
                     {
-                        // replace this line with other function
                         slen +=
                             snprintf(output + slen, outbufsize - slen, "*%d",
                                 o->scale);
                     }
                     started = true;
                 }
-                // replace this line with other function
                 output[slen++] = ']';
             }
 
@@ -2291,7 +2290,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
 
             else
             {
-                // replace this line with other function
                 slen +=
                     snprintf(output + slen, outbufsize - slen, "<operand%d>",
                         i);
@@ -2363,35 +2361,39 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 if (t & BITS8)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "byte ");
+                        snprintf(output + slen, outbufsize - slen, "imm8");
                 }
                 else if (t & BITS16)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "word ");
+                        snprintf(output + slen, outbufsize - slen, "imm16");
                 }
                 else if (t & BITS32)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "dword ");
+                        snprintf(output + slen, outbufsize - slen, "imm32");
                 }
                 else if (t & BITS64)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "qword ");
+                        snprintf(output + slen, outbufsize - slen, "imm64");
                 }
                 else if (t & NEAR)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "near ");
+                        snprintf(output + slen, outbufsize - slen, "near imm");
                 }
                 else if (t & SHORT)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "short ");
+                        snprintf(output + slen, outbufsize - slen, "short imm");
                 }
-                slen +=
-                    snprintf(output + slen, outbufsize - slen, "imm");
+                else
+                {
+                    slen +=
+                        snprintf(output + slen, outbufsize - slen, "imm");
+
+                }
             }
 
             // check immediate(or offset) address?
@@ -2399,7 +2401,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             else if (!(MEM_OFFS & ~t))
             {
                 slen +=
-                    snprintf(output + slen, outbufsize - slen, "mem_offset");
+                    snprintf(output + slen, outbufsize - slen, "[moffs]");
             }
 
             // check register/memory operand size?
@@ -2411,37 +2413,37 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 if (t & BITS8)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "byte ");
+                        snprintf(output + slen, outbufsize - slen, "byte");
                 }
                 if (t & BITS16)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "word ");
+                        snprintf(output + slen, outbufsize - slen, "word");
                 }
                 if (t & BITS32)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "dword ");
+                        snprintf(output + slen, outbufsize - slen, "dword");
                 }
                 if (t & BITS64)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "qword ");
+                        snprintf(output + slen, outbufsize - slen, "qword");
                 }
                 if (t & BITS80)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "tword ");
+                        snprintf(output + slen, outbufsize - slen, "tword");
                 }
                 if (t & BITS128)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "oword ");
+                        snprintf(output + slen, outbufsize - slen, "oword");
                 }
                 if (t & BITS256)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "yword ");
+                        snprintf(output + slen, outbufsize - slen, "yword");
                 }
                 // skip complicate cases
 
@@ -2450,12 +2452,12 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 if (t & FAR)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "far ");
+                        snprintf(output + slen, outbufsize - slen, "far");
                 }
                 if (t & NEAR)
                 {
                     slen +=
-                        snprintf(output + slen, outbufsize - slen, "near ");
+                        snprintf(output + slen, outbufsize - slen, "near");
                 }
                 output[slen++] = '[';
 
@@ -2549,7 +2551,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     // default to disp16
 
                     prefix = started ? "+" : "";
-                    // replace this line with other function
                     slen +=
                         snprintf(output + slen, outbufsize - slen,
                             "%sdisp16", prefix);
@@ -2581,21 +2582,18 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 // check index register is valid, check scale factor(again?)
                 if (o->indexreg != -1 && itemp_has(*best_p, IF_MIB))
                 {
-                    // replace this line with other function
                     output[slen++] = ',';
                     slen += snprintf(output + slen, outbufsize - slen, "%s",
                         nasm_reg_names[(o->indexreg - EXPR_REG_START)]);
                     // skip scale factor equal 1 case
                     if (o->scale > 1)
                     {
-                        // replace this line with other function
                         slen +=
                             snprintf(output + slen, outbufsize - slen, "*%d",
                                 o->scale);
                     }
                     started = true;
                 }
-                // replace this line with other function
                 output[slen++] = ']';
             }
 
@@ -2603,7 +2601,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
 
             else
             {
-            // replace this line with other function
             slen +=
                 snprintf(output + slen, outbufsize - slen, "<operand%d>",
                     i);

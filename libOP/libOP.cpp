@@ -47,46 +47,89 @@ static BOOL OPMatch(WCHAR* strOP, BYTE bOP)
     return TRUE;
 }
 
-static BOOL ByteMapHitPrefix(BYTE data)
+static BOOL ByteMapHitPrefix(E_ADM eADM, BYTE data)
 {
-    switch (data)
+    if (eADM == E_AD64)
     {
-    case 0xF2:
-    case 0xF3:
-    case 0x9B:
-    case 0xF0:
-    case 0x2E:
-    case 0x36:
-    case 0x3E:
-    case 0x26:
-    case 0x64:
-    case 0x65:
-    case 0x66:
-    case 0x67:
-    //case 0xC4:
-    //case 0xC5:
-    //case 0x62:
-    //case 0x8F:
-    //case 0x40:
-    //case 0x41:
-    //case 0x42:
-    //case 0x43:
-    //case 0x44:
-    //case 0x45:
-    //case 0x46:
-    //case 0x47:
-    //case 0x48:
-    //case 0x49:
-    //case 0x4A:
-    //case 0x4B:
-    //case 0x4C:
-    //case 0x4D:
-    //case 0x4E:
-    //case 0x4F:
-    // case 0x0F:
-        return TRUE;
-    default:
-        return FALSE;
+        switch (data)
+        {
+        case 0xF2:      // REPNE,BND prefix
+        case 0xF3:      // REP prefix
+        case 0x9B:      // WAIT/FWAIT prefix
+        case 0xF0:      // LOCK prefix
+        case 0x2E:      // CS segment prefix
+        case 0x36:      // SS segment prefix
+        case 0x3E:      // DS segment prefix
+        case 0x26:      // ES segment prefix
+        case 0x64:      // FS segment prefix
+        case 0x65:      // GS segment prefix
+        case 0x66:      // operand size prefix
+        case 0x67:      // address size prefix
+        case 0xC4:      // VEX+2-byte prefix in long mode
+        case 0xC5:      // VEX+1-byte prefix in long mode
+        case 0x62:      // {M,E}VEX prefix in long mode
+        case 0x8F:      // XOP prefix in long mode
+        case 0x40:      // REX + 0x0 in long mode
+        case 0x41:
+        case 0x42:
+        case 0x43:
+        case 0x44:
+        case 0x45:
+        case 0x46:
+        case 0x47:
+        case 0x48:
+        case 0x49:
+        case 0x4A:
+        case 0x4B:
+        case 0x4C:
+        case 0x4D:
+        case 0x4E:
+        case 0x4F:      // REX + 0xF in long mode
+            return TRUE;
+        default:
+            return FALSE;
+        }
+    }
+    else
+    {
+        switch (data)
+        {
+        case 0xF2:      // REPNE,BND prefix
+        case 0xF3:      // REP prefix
+        case 0x9B:      // WAIT/FWAIT prefix
+        case 0xF0:      // LOCK prefix
+        case 0x2E:      // CS segment prefix
+        case 0x36:      // SS segment prefix
+        case 0x3E:      // DS segment prefix
+        case 0x26:      // ES segment prefix
+        case 0x64:      // FS segment prefix
+        case 0x65:      // GS segment prefix
+        case 0x66:      // operand size prefix
+        case 0x67:      // address size prefix
+        //case 0xC4:      // VEX+2-byte prefix in long mode
+        //case 0xC5:      // VEX+1-byte prefix in long mode
+        //case 0x62:      // {M,E}VEX prefix in long mode
+        //case 0x8F:      // XOP prefix in long mode
+        //case 0x40:      // REX + 0x0 in long mode
+        //case 0x41:
+        //case 0x42:
+        //case 0x43:
+        //case 0x44:
+        //case 0x45:
+        //case 0x46:
+        //case 0x47:
+        //case 0x48:
+        //case 0x49:
+        //case 0x4A:
+        //case 0x4B:
+        //case 0x4C:
+        //case 0x4D:
+        //case 0x4E:
+        //case 0x4F:      // REX + 0xF in long mode
+            return TRUE;
+        default:
+            return FALSE;
+        }
     }
 }
 
@@ -105,16 +148,51 @@ static BOOL OpcodeGroupCheck(E_XB_OP eOPTab, BYTE buffer)
     else if (eOPTab == E_3B_OP_0F38)
     {
         // AND with 0x80
-        return (OP3BMap_0F38h[buffer].OPExt >> 7);
+        return (OP3BMap_0F38[buffer].OPExt >> 7);
     }
     else if (eOPTab == E_3B_OP_0F3A)
     {
         // AND with 0x80
-        return (OP3BMap_0F3Ah[buffer].OPExt >> 7);
+        return (OP3BMap_0F3A[buffer].OPExt >> 7);
     }
     return FALSE;
 }
 
+// kill, override, invalid
+static BOOL SpuriousCheck(E_XB_OP eOPTab, BYTE OpIdx, BYTE OPExtIdx, int PrefixIdx)
+{
+    if ((eOPTab == E_1B_OP) && (PrefixIdx == 0x66))
+    {
+        switch (OpIdx)
+        {
+        case 0x60:          // pushaw / pushad / pushaq
+        case 0x61:          // popaw / popad / popaq
+        case 0x6D:          // insw / insd
+        case 0x6F:          // outsw /outsd
+        case 0x98:          // cbw / cwde
+        case 0x99:          // cwd / cwq
+        case 0x9C:          // pushfw / pushfd / pushfq
+        case 0x9D:          // popfw /popfd / popfq
+        case 0xA5:          // movsw / movsd / movsq
+        case 0xA7:          // cmpsw / cmpsd / cmpsq
+        case 0xAB:          // stosw / stosd / sotsq
+        case 0xAD:          // lodsw / lodsd / lodsq
+        case 0xAF:          // scasw / scasd / scasq
+        case 0xC2:          // ret imm16/ ret imm32 / ret imm64
+        case 0xC3:          // retw / retd / retq
+        case 0xCA:          // retf imm16 / retf imm32 / retf imm64
+        case 0xCB:          // retfw / retfd / retfq
+        case 0xCF:          // iretw / iretd / iretq
+            return TRUE;
+        default:
+            break;
+        }
+    }
+    else if ((eOPTab == E_2B_OP) && (PrefixIdx == 0x66))
+    {
+    }
+    return FALSE;
+}
 static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
 {
     if (eOPTab == E_1B_OP)
@@ -184,6 +262,7 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             default:
                 break;
             }
+            break;
         case 0x90:
             *pGrp = OP_90;
             return sizeof(OP_90) / sizeof(OP_ENTRY);
@@ -202,14 +281,7 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
         default:
             break;
         }
-    }
-    else if (eOPTab == E_3B_OP_0F38)
-    {
-    }
-    else if (eOPTab == E_3B_OP_0F3A)
-    {
-    }
-    // somehow nested switch breaks indent spacing
+    }    // somehow nested switch breaks indent spacing
     else if (eOPTab == E_2B_OP)
     {
         switch (OpIdx)
@@ -269,6 +341,16 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
         case 0x1B:
             *pGrp = OP_0F1B;
             return sizeof(OP_0F1B) / sizeof(OP_ENTRY);
+        case 0x1E:
+            switch (GrpIdx)
+            {
+            case 0x07:
+                *pGrp = OP_0F1E_7;
+                return sizeof(OP_0F1E_7) / sizeof(OP_ENTRY);
+            default:
+                break;
+            }
+            break;
         case 0x28:
             *pGrp = OP_0F28;
             return sizeof(OP_0F28) / sizeof(OP_ENTRY);
@@ -716,7 +798,274 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             break;
         }
     }
-
+    else if (eOPTab == E_3B_OP_0F38)
+    {
+        switch (OpIdx)
+        {
+        case 0x00:
+            *pGrp = OP_0F3800;
+            return sizeof(OP_0F3800) / sizeof(OP_ENTRY);
+        case 0x01:
+            *pGrp = OP_0F3801;
+            return sizeof(OP_0F3801) / sizeof(OP_ENTRY);
+        case 0x02:
+            *pGrp = OP_0F3802;
+            return sizeof(OP_0F3802) / sizeof(OP_ENTRY);
+        case 0x03:
+            *pGrp = OP_0F3803;
+            return sizeof(OP_0F3803) / sizeof(OP_ENTRY);
+        case 0x04:
+            *pGrp = OP_0F3804;
+            return sizeof(OP_0F3804) / sizeof(OP_ENTRY);
+        case 0x05:
+            *pGrp = OP_0F3805;
+            return sizeof(OP_0F3805) / sizeof(OP_ENTRY);
+        case 0x06:
+            *pGrp = OP_0F3806;
+            return sizeof(OP_0F3806) / sizeof(OP_ENTRY);
+        case 0x07:
+            *pGrp = OP_0F3807;
+            return sizeof(OP_0F3807) / sizeof(OP_ENTRY);
+        case 0x08:
+            *pGrp = OP_0F3808;
+            return sizeof(OP_0F3808) / sizeof(OP_ENTRY);
+        case 0x09:
+            *pGrp = OP_0F3809;
+            return sizeof(OP_0F3809) / sizeof(OP_ENTRY);
+        case 0x0A:
+            *pGrp = OP_0F380A;
+            return sizeof(OP_0F380A) / sizeof(OP_ENTRY);
+        case 0x0B:
+            *pGrp = OP_0F380B;
+            return sizeof(OP_0F380B) / sizeof(OP_ENTRY);
+        case 0x10:
+            *pGrp = OP_0F3810;
+            return sizeof(OP_0F3810) / sizeof(OP_ENTRY);
+        case 0x11:
+            *pGrp = OP_0F3811;
+            return sizeof(OP_0F3811) / sizeof(OP_ENTRY);
+        case 0x12:
+            *pGrp = OP_0F3812;
+            return sizeof(OP_0F3812) / sizeof(OP_ENTRY);
+        case 0x13:
+            *pGrp = OP_0F3813;
+            return sizeof(OP_0F3813) / sizeof(OP_ENTRY);
+        case 0x14:
+            *pGrp = OP_0F3814;
+            return sizeof(OP_0F3814) / sizeof(OP_ENTRY);
+        case 0x15:
+            *pGrp = OP_0F3815;
+            return sizeof(OP_0F3815) / sizeof(OP_ENTRY);
+        case 0x16:
+            *pGrp = OP_0F3816;
+            return sizeof(OP_0F3816) / sizeof(OP_ENTRY);
+        case 0x19:
+            *pGrp = OP_0F3819;
+            return sizeof(OP_0F3819) / sizeof(OP_ENTRY);
+        case 0x1A:
+            *pGrp = OP_0F381A;
+            return sizeof(OP_0F381A) / sizeof(OP_ENTRY);
+        case 0x1C:
+            *pGrp = OP_0F381C;
+            return sizeof(OP_0F381C) / sizeof(OP_ENTRY);
+        case 0x1D:
+            *pGrp = OP_0F381D;
+            return sizeof(OP_0F381D) / sizeof(OP_ENTRY);
+        case 0x1E:
+            *pGrp = OP_0F381E;
+            return sizeof(OP_0F381E) / sizeof(OP_ENTRY);
+        case 0x20:
+            *pGrp = OP_0F3820;
+            return sizeof(OP_0F3820) / sizeof(OP_ENTRY);
+        case 0x21:
+            *pGrp = OP_0F3821;
+            return sizeof(OP_0F3821) / sizeof(OP_ENTRY);
+        case 0x22:
+            *pGrp = OP_0F3822;
+            return sizeof(OP_0F3822) / sizeof(OP_ENTRY);
+        case 0x23:
+            *pGrp = OP_0F3823;
+            return sizeof(OP_0F3823) / sizeof(OP_ENTRY);
+        case 0x24:
+            *pGrp = OP_0F3824;
+            return sizeof(OP_0F3824) / sizeof(OP_ENTRY);
+        case 0x25:
+            *pGrp = OP_0F3825;
+            return sizeof(OP_0F3825) / sizeof(OP_ENTRY);
+        case 0x26:
+            *pGrp = OP_0F3826;
+            return sizeof(OP_0F3826) / sizeof(OP_ENTRY);
+        case 0x27:
+            *pGrp = OP_0F3827;
+            return sizeof(OP_0F3827) / sizeof(OP_ENTRY);
+        case 0x28:
+            *pGrp = OP_0F3828;
+            return sizeof(OP_0F3828) / sizeof(OP_ENTRY);
+        case 0x29:
+            *pGrp = OP_0F3829;
+            return sizeof(OP_0F3829) / sizeof(OP_ENTRY);
+        case 0x2A:
+            *pGrp = OP_0F382A;
+            return sizeof(OP_0F382A) / sizeof(OP_ENTRY);
+        case 0x2C:
+            *pGrp = OP_0F382C;
+            return sizeof(OP_0F382C) / sizeof(OP_ENTRY);
+        case 0x2D:
+            *pGrp = OP_0F382D;
+            return sizeof(OP_0F382D) / sizeof(OP_ENTRY);
+        case 0x30:
+            *pGrp = OP_0F3830;
+            return sizeof(OP_0F3830) / sizeof(OP_ENTRY);
+        case 0x31:
+            *pGrp = OP_0F3831;
+            return sizeof(OP_0F3831) / sizeof(OP_ENTRY);
+        case 0x32:
+            *pGrp = OP_0F3832;
+            return sizeof(OP_0F3832) / sizeof(OP_ENTRY);
+        case 0x33:
+            *pGrp = OP_0F3833;
+            return sizeof(OP_0F3833) / sizeof(OP_ENTRY);
+        case 0x34:
+            *pGrp = OP_0F3834;
+            return sizeof(OP_0F3834) / sizeof(OP_ENTRY);
+        case 0x35:
+            *pGrp = OP_0F3835;
+            return sizeof(OP_0F3835) / sizeof(OP_ENTRY);
+        case 0x36:
+            *pGrp = OP_0F3836;
+            return sizeof(OP_0F3836) / sizeof(OP_ENTRY);
+        case 0x38:
+            *pGrp = OP_0F3838;
+            return sizeof(OP_0F3838) / sizeof(OP_ENTRY);
+        case 0x39:
+            *pGrp = OP_0F3839;
+            return sizeof(OP_0F3839) / sizeof(OP_ENTRY);
+        case 0x3A:
+            *pGrp = OP_0F383A;
+            return sizeof(OP_0F383A) / sizeof(OP_ENTRY);
+        case 0x3B:
+            *pGrp = OP_0F383B;
+            return sizeof(OP_0F383B) / sizeof(OP_ENTRY);
+        case 0x3D:
+            *pGrp = OP_0F383D;
+            return sizeof(OP_0F383D) / sizeof(OP_ENTRY);
+        case 0x3F:
+            *pGrp = OP_0F383F;
+            return sizeof(OP_0F383F) / sizeof(OP_ENTRY);
+        case 0x40:
+            *pGrp = OP_0F3840;
+            return sizeof(OP_0F3840) / sizeof(OP_ENTRY);
+        case 0x46:
+            *pGrp = OP_0F3846;
+            return sizeof(OP_0F3846) / sizeof(OP_ENTRY);
+        case 0x52:
+            *pGrp = OP_0F3852;
+            return sizeof(OP_0F3852) / sizeof(OP_ENTRY);
+        case 0x53:
+            *pGrp = OP_0F3853;
+            return sizeof(OP_0F3853) / sizeof(OP_ENTRY);
+        case 0x59:
+            *pGrp = OP_0F3859;
+            return sizeof(OP_0F3859) / sizeof(OP_ENTRY);
+        case 0x5A:
+            *pGrp = OP_0F385A;
+            return sizeof(OP_0F385A) / sizeof(OP_ENTRY);
+        case 0x72:
+            *pGrp = OP_0F3872;
+            return sizeof(OP_0F3872) / sizeof(OP_ENTRY);
+        case 0x90:
+            *pGrp = OP_0F3890;
+            return sizeof(OP_0F3890) / sizeof(OP_ENTRY);
+        case 0x91:
+            *pGrp = OP_0F3891;
+            return sizeof(OP_0F3891) / sizeof(OP_ENTRY);
+        case 0x9A:
+            *pGrp = OP_0F389A;
+            return sizeof(OP_0F389A) / sizeof(OP_ENTRY);
+        case 0x9B:
+            *pGrp = OP_0F389B;
+            return sizeof(OP_0F389B) / sizeof(OP_ENTRY);
+        case 0xAA:
+            *pGrp = OP_0F38AA;
+            return sizeof(OP_0F38AA) / sizeof(OP_ENTRY);
+        case 0xAB:
+            *pGrp = OP_0F38AB;
+            return sizeof(OP_0F38AB) / sizeof(OP_ENTRY);
+        case 0xC8:
+            *pGrp = OP_0F38C8;
+            return sizeof(OP_0F38C8) / sizeof(OP_ENTRY);
+        case 0xCA:
+            *pGrp = OP_0F38CA;
+            return sizeof(OP_0F38CA) / sizeof(OP_ENTRY);
+        case 0xCB:
+            *pGrp = OP_0F38CB;
+            return sizeof(OP_0F38CB) / sizeof(OP_ENTRY);
+        case 0xCC:
+            *pGrp = OP_0F38CC;
+            return sizeof(OP_0F38CC) / sizeof(OP_ENTRY);
+        case 0xCD:
+            *pGrp = OP_0F38CD;
+            return sizeof(OP_0F38CD) / sizeof(OP_ENTRY);
+        case 0xF0:
+            *pGrp = OP_0F38F0;
+            return sizeof(OP_0F38F0) / sizeof(OP_ENTRY);
+        case 0xF1:
+            *pGrp = OP_0F38F1;
+            return sizeof(OP_0F38F1) / sizeof(OP_ENTRY);
+        case 0xF5:
+            *pGrp = OP_0F38F5;
+            return sizeof(OP_0F38F5) / sizeof(OP_ENTRY);
+        case 0xF6:
+            *pGrp = OP_0F38F6;
+            return sizeof(OP_0F38F6) / sizeof(OP_ENTRY);
+        case 0xF7:
+            *pGrp = OP_0F38F7;
+            return sizeof(OP_0F38F7) / sizeof(OP_ENTRY);
+        case 0xF8:
+            *pGrp = OP_0F38F8;
+            return sizeof(OP_0F38F8) / sizeof(OP_ENTRY);
+        default:
+            break;
+        }
+    }
+    else if (eOPTab == E_3B_OP_0F3A)
+    {
+        switch (OpIdx)
+        {
+        case 0x08:
+            *pGrp = OP_0F3A08;
+            return sizeof(OP_0F3A08) / sizeof(OP_ENTRY);
+        case 0x09:
+            *pGrp = OP_0F3A09;
+            return sizeof(OP_0F3A09) / sizeof(OP_ENTRY);
+        case 0x0A:
+            *pGrp = OP_0F3A0A;
+            return sizeof(OP_0F3A0A) / sizeof(OP_ENTRY);
+        case 0x0B:
+            *pGrp = OP_0F3A0B;
+            return sizeof(OP_0F3A0B) / sizeof(OP_ENTRY);
+        case 0x0F:
+            *pGrp = OP_0F3A0F;
+            return sizeof(OP_0F3A0F) / sizeof(OP_ENTRY);
+        case 0x18:
+            *pGrp = OP_0F3A18;
+            return sizeof(OP_0F3A18) / sizeof(OP_ENTRY);
+        case 0x19:
+            *pGrp = OP_0F3A19;
+            return sizeof(OP_0F3A19) / sizeof(OP_ENTRY);
+        case 0x38:
+            *pGrp = OP_0F3A38;
+            return sizeof(OP_0F3A38) / sizeof(OP_ENTRY);
+        case 0x39:
+            *pGrp = OP_0F3A39;
+            return sizeof(OP_0F3A39) / sizeof(OP_ENTRY);
+        case 0x42:
+            *pGrp = OP_0F3A42;
+            return sizeof(OP_0F3A42) / sizeof(OP_ENTRY);
+        default:
+            break;
+        }
+    }
     return 0;
 }
 
@@ -867,6 +1216,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     (eOPTab == E_1B_OP && OpIdx == 0x0F) ||
                     (eOPTab == E_2B_OP && OpIdx == 0x38) ||
                     (eOPTab == E_2B_OP && OpIdx == 0x3A)
+                    // treat 0F A6 and 0F A7 as group instruction
                     )
                 {
                     nOPExtIdx = 0;
@@ -883,7 +1233,8 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
 
             // small index for all possible prefixes
             int PrefixIdx = 0;
-            int next_PrefixIdx = 0;
+            int PrefixIdx_next = 0;
+            int PrefixIdx_previous = 0;
             // while loop is more verbose than triple for loop
             int OPExtIdx = 0;
             while ((OPExtIdx < nOPExtIdx) && (lFound < nOpEntryMax))
@@ -919,42 +1270,42 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     prefixes = PF_Valid;
                     ptr2_buffer = buffer + 3;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0x66;
+                    PrefixIdx_next = 0x66;
                     break;
                 case 0x66:      // operand size prefix
                     prefixes = PF_Valid | PF_Operand;
                     buffer[2] = 0x66;
                     ptr2_buffer = buffer + 3 - 1;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0x9B;
+                    PrefixIdx_next = 0x9B;
                     break;
                 case 0x9B:      // FWAIT/WAIT prefix
                     prefixes = PF_Valid | PF_FWAIT;
                     buffer[2] = 0x9B;
                     ptr2_buffer = buffer + 3 - 1;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0xF2;
+                    PrefixIdx_next = 0xF2;
                     break;
                 case 0xF2:      // REPNE prefix
                     prefixes = PF_Valid | PF_REPNE;
                     buffer[2] = 0xF2;
                     ptr2_buffer = buffer + 3 - 1;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0xF3;
+                    PrefixIdx_next = 0xF3;
                     break;
                 case 0xF3:      // REP prefix
                     prefixes = PF_Valid | PF_REP;
                     buffer[2] = 0xF3;
                     ptr2_buffer = buffer + 3 - 1;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0x00;
+                    PrefixIdx_next = 0x00;
                     break;
                 case 0x48:      // REX.W prefix
                     prefixes = PF_Valid;
                     buffer[2] = 0x48;
                     ptr2_buffer = buffer + 3 - 1;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0x00;
+                    PrefixIdx_next = 0x00;
                     break;
                 case 0xF266:    // CRC32 need this prefix
                 case 0x66F2:
@@ -964,7 +1315,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     buffer[2] = 0xF2;
                     ptr2_buffer = buffer + 3 - 2;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0x00;
+                    PrefixIdx_next = 0x00;
                     break;
                 case 0x48F2:
                     prefixes = PF_Valid | PF_REPNE;
@@ -973,7 +1324,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     buffer[2] = 0x48;
                     ptr2_buffer = buffer + 3 - 2;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0x00;
+                    PrefixIdx_next = 0x00;
                     break;
                 case 0x48F3:
                     prefixes = PF_Valid | PF_REP;
@@ -982,7 +1333,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     buffer[2] = 0x48;
                     ptr2_buffer = buffer + 3 - 2;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0x00;
+                    PrefixIdx_next = 0x00;
                     break;
                 case 0x48F266:  // CRC32 need this prefix
                 case 0x4866F2:
@@ -993,13 +1344,13 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     buffer[2] = 0x48;
                     ptr2_buffer = buffer + 3 - 3;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0x00;
+                    PrefixIdx_next = 0x00;
                     break;
                 default:
                     prefixes = 0;
                     ptr2_buffer = buffer + 3;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0x00;
+                    PrefixIdx_next = 0x00;
                     break;
                 }
 
@@ -1026,7 +1377,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
 
                 // match and valid cases
 
-                if (ByteMapHitPrefix(ptr_buffer[0]))
+                if ((ByteMapHitPrefix(eADM, ptr_buffer[0])) && (eOPTab == E_1B_OP))
                 {
                     OPExtIdx = 256;     // skip rest
                 }
@@ -1037,28 +1388,32 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     pOpEntry->OP = OpIdx;
                     // group indicator | mod indicator | 11B indicator | group number
                     pOpEntry->OPExt = 0x80 | 0x20 | ((OP_2 >= 0xC0) << 3) | ((OP_2 >> 3) & 0x07);
-                    if (lendis && (options & 0x00F00000) && next_PrefixIdx)
+                    if (lendis && (options & 0x00F00000) && PrefixIdx_next)
                     {
                         pOpEntry++;
                         lFound++;
-                        PrefixIdx = next_PrefixIdx;
+                        PrefixIdx_previous = PrefixIdx;
+                        PrefixIdx = PrefixIdx_next;
                     }
                     else if (lendis)
                     {
                         pOpEntry++;
                         lFound++;
                         // reset to default prefix
+                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx++;         // find next member
                         //lFound2 = lFound;   // update found entries
                     }
-                    else if ((options & 0x00F00000) && next_PrefixIdx)
+                    else if ((options & 0x00F00000) && PrefixIdx_next)
                     {
-                        PrefixIdx = next_PrefixIdx;
+                        PrefixIdx_previous = PrefixIdx;
+                        PrefixIdx = PrefixIdx_next;
                     }
                     else
                     {
                         // reset to default prefix
+                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx++;         // find next member
                         //lFound2 = lFound;   // update found entries
@@ -1069,37 +1424,43 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 {
                     pOpEntry->ReqPrefix = prefixes;
                     pOpEntry->OP = OpIdx;
-                    pOpEntry->OPExt = 0;
-                    if (lendis && (options & 0x00F00000) && next_PrefixIdx)
+                    // mod indicator | 11B indicator
+                    pOpEntry->OPExt = 0x20 | ((OP_2 >= 0xC0) << 3);
+                    if (lendis && (options & 0x00F00000) && PrefixIdx_next)
                     {
                         pOpEntry++;
                         lFound++;
-                        PrefixIdx = next_PrefixIdx;
+                        PrefixIdx_previous = PrefixIdx;
+                        PrefixIdx = PrefixIdx_next;
                     }
                     else if (lendis)
                     {
                         pOpEntry++;
                         lFound++;
                         // reset to default prefix
+                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx |= 0x07;   // skip rest
                         OPExtIdx++;         // find next member
                         lFound2 = lFound;   // update found entries
                     }
                     // prefix exists and not last one
-                    else if ((options & 0x00F00000) && next_PrefixIdx)
+                    else if ((options & 0x00F00000) && PrefixIdx_next)
                     {
-                        PrefixIdx = next_PrefixIdx;
+                        PrefixIdx_previous = PrefixIdx;
+                        PrefixIdx = PrefixIdx_next;
                     }
                     else if(lFound2 == lFound)
                     {
                         // reset to default prefixs
+                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx++;         // always check next member
                     }
                     else
                     {
                         // reset to default prefixs
+                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx |= 0x07;   // skip rest
                         OPExtIdx++;         // find next member
@@ -1112,11 +1473,12 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     pOpEntry->ReqPrefix = prefixes;
                     pOpEntry->OP = OpIdx;
                     pOpEntry->OPExt = 0;
-                    if (lendis && (options & 0x00F00000) && next_PrefixIdx)
+                    if (lendis && (options & 0x00F00000) && PrefixIdx_next)
                     {
                         pOpEntry++;
                         lFound++;
-                        PrefixIdx = next_PrefixIdx;
+                        PrefixIdx_previous = PrefixIdx;
+                        PrefixIdx = PrefixIdx_next;
                     }
                     else if (lendis)
                     {
@@ -1125,23 +1487,33 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         OPExtIdx = 256; // skip rest
                         //lFound2 = lFound;   // update found entries
                     }
-                    else if ((options & 0x00F00000) && next_PrefixIdx)
+                    else if ((options & 0x00F00000) && PrefixIdx_next)
                     {
-                        PrefixIdx = next_PrefixIdx;
+                        PrefixIdx_previous = PrefixIdx;
+                        PrefixIdx = PrefixIdx_next;
                     }
                     else if (lFound2 == lFound)
                     {
                         // reset to default prefix
+                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx++;         // always check next member
                     }
                     else
                     {
                         // reset to default prefix
+                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx = 256;     // skip rest
                         //lFound2 = lFound;   // update found entries
                     }
+                }
+
+                // final check
+                if (SpuriousCheck(eOPTab, OpIdx, OP_2, PrefixIdx_previous))
+                {
+                    pOpEntry--;
+                    lFound--;
                 }
             }
         }
@@ -1245,6 +1617,82 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         }
                     }
                 }
+                else if (eOPTab == E_3B_OP_0F38)
+                {
+                    pGrp = NULL;
+                    switch (OpIdx)
+                    {
+                    case 0xC6://Grp18
+                        pGrp = Grp18_C6h;
+                        break;
+                    case 0xC7://Grp19
+                        pGrp = Grp19_C7h;
+                        break;
+                    case 0xF3://Grp17
+                        pGrp = Grp17_F3h;
+                        break;
+                    default:
+                        break;
+                    }
+
+                    if (pGrp)
+                    {
+                        DWORD lGrpFound = 0;
+                        pOpEntry->OP = OpIdx;
+                        // pOpEntry->OPExt = 0x80;
+                        lGrpFound = EnumGrp(eOPTab, pGrp, &strOPMatch[8], pOpEntry, nOpEntryMax - lFound);
+                        pOpEntry += lGrpFound;
+                        lFound += lGrpFound;
+                    }
+                    else if (OP3BMap_0F38[OpIdx].strFmt)
+                    {
+                        // get prefix group address and prefix group size
+                        if (DWORD lPrefixEntry = lPrefixes(eOPTab, OpIdx, 8, ptr_ptr_PrefixGroup))
+                        {
+                            DWORD lGrpFound = 0;
+                            pOpEntry->OP = OpIdx;
+                            pOpEntry->OPExt = 0;
+                            lGrpFound = EnumPrefixes(ptr_PrefixGroup, lPrefixEntry, pOpEntry, nOpEntryMax - lFound);
+                            pOpEntry += lGrpFound;
+                            lFound += lGrpFound;
+                        }
+                        else
+                        {
+                            pOpEntry->OP = OpIdx;
+                            pOpEntry->OPExt = 0;
+                            pOpEntry->ReqPrefix = OP3BMap_0F38[OpIdx].PF;
+                            swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP3BMap_0F38[OpIdx].strFmt);
+                            pOpEntry++;
+                            lFound++;
+                        }
+                    }
+                }
+                else if (eOPTab == E_3B_OP_0F3A)
+                {
+                    // no group in 0F3A
+                    if (OP3BMap_0F3A[OpIdx].strFmt)
+                    {
+                        // get prefix group address and prefix group size
+                        if (DWORD lPrefixEntry = lPrefixes(eOPTab, OpIdx, 8, ptr_ptr_PrefixGroup))
+                        {
+                            DWORD lGrpFound = 0;
+                            pOpEntry->OP = OpIdx;
+                            pOpEntry->OPExt = 0;
+                            lGrpFound = EnumPrefixes(ptr_PrefixGroup, lPrefixEntry, pOpEntry, nOpEntryMax - lFound);
+                            pOpEntry += lGrpFound;
+                            lFound += lGrpFound;
+                        }
+                        else
+                        {
+                            pOpEntry->OP = OpIdx;
+                            pOpEntry->OPExt = 0;
+                            pOpEntry->ReqPrefix = OP3BMap_0F3A[OpIdx].PF;
+                            swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP3BMap_0F3A[OpIdx].strFmt);
+                            pOpEntry++;
+                            lFound++;
+                        }
+                    }
+                }
                 else if (eOPTab == E_2B_OP)
                 {
                     pGrp = NULL;
@@ -1255,6 +1703,9 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         break;
                     case 0x01: //Grp7
                         pGrp = Grp07_01h;
+                        break;
+                    case 0x0D: //GrpP
+                        pGrp = GrpP_0Dh;
                         break;
                     case 0x18: //Grp16
                         pGrp = Grp16_18h;
@@ -1274,6 +1725,12 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     case 0x73: //Grp14
                         pGrp = Grp14_73h;
                         break;
+                    case 0xA6: //GrpPDLK
+                        pGrp = GrpPDLK_A6h;
+                        break;
+                    case 0xA7: //GrpRNG
+                        pGrp = GrpRNG_A7h;
+                        break;
                     case 0xAE: //Grp15
                         pGrp = Grp15_AEh;
                         break;
@@ -1289,7 +1746,6 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     default:
                         break;
                     }
-
                     if (pGrp)
                     {
                         DWORD lGrpFound = 0;
@@ -1312,18 +1768,12 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         }
                         else
                         {
-                            pOpEntry->ReqPrefix = OP1BMap[OpIdx].PF;
+                            pOpEntry->ReqPrefix = OP2BMap[OpIdx].PF;
                             swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP2BMap[OpIdx].strFmt);
                             pOpEntry++;
                             lFound++;
                         }
                     }
-                }
-                else if (eOPTab == E_3B_OP_0F38)
-                {
-                }
-                else if (eOPTab == E_3B_OP_0F3A)
-                {
                 }
             }
         }
