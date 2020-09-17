@@ -1,0 +1,349 @@
+00          ADD Eb,Gb
+01          ADD Ev,Gv
+02          ADD Gb,Eb
+03          ADD Gv,Ev
+04          ADD AL,Ib
+05          ADD rAX,Iz
+06          PUSH ES (i64)
+07          POP ES (i64)
+08          OR Eb,Gb
+09          OR Ev,Gv
+0A          OR Gb,Eb
+0B          OR Gv,Ev
+0C          OR AL,Ib
+0D          OR rAX,Iz
+0E          PUSH CS (i64)
+0F          escape # 2-byte escape
+10          ADC Eb,Gb
+11          ADC Ev,Gv
+12          ADC Gb,Eb
+13          ADC Gv,Ev
+14          ADC AL,Ib
+15          ADC rAX,Iz
+16          PUSH SS (i64)
+17          POP SS (i64)
+18          SBB Eb,Gb
+19          SBB Ev,Gv
+1A          SBB Gb,Eb
+1B          SBB Gv,Ev
+1C          SBB AL,Ib
+1D          SBB rAX,Iz
+1E          PUSH DS (i64)
+1F          POP DS (i64)
+20          AND Eb,Gb
+21          AND Ev,Gv
+22          AND Gb,Eb
+23          AND Gv,Ev
+24          AND AL,Ib
+25          AND rAx,Iz
+26          SEG=ES (Prefix)
+27          DAA (i64)
+28          SUB Eb,Gb
+29          SUB Ev,Gv
+2A          SUB Gb,Eb
+2B          SUB Gv,Ev
+2C          SUB AL,Ib
+2D          SUB rAX,Iz
+2E          SEG=CS (Prefix)
+2F          DAS (i64)
+30          XOR Eb,Gb
+31          XOR Ev,Gv
+32          XOR Gb,Eb
+33          XOR Gv,Ev
+34          XOR AL,Ib
+35          XOR rAX,Iz
+36          SEG=SS (Prefix)
+37          AAA (i64)
+38          CMP Eb,Gb
+39          CMP Ev,Gv
+3A          CMP Gb,Eb
+3B          CMP Gv,Ev
+3C          CMP AL,Ib
+3D          CMP rAX,Iz
+3E          SEG=DS (Prefix)
+3F          AAS (i64)
+40          INC eAX (i64)
+41          INC eCX (i64)
+42          INC eDX (i64)
+43          INC eBX (i64)
+44          INC eSP (i64)
+45          INC eBP (i64)
+46          INC eSI (i64)
+47          INC eDI (i64)
+48          DEC eAX (i64)
+49          DEC eCX (i64)
+4A          DEC eDX (i64)
+4B          DEC eBX (i64)
+4C          DEC eSP (i64)
+4D          DEC eBP (i64)
+4E          DEC eSI (i64)
+4F          DEC eDI (i64)
+50          PUSH rAX/r8 (d64)
+51          PUSH rCX/r9 (d64)
+52          PUSH rDX/r10 (d64)
+53          PUSH rBX/r11 (d64)
+54          PUSH rSP/r12 (d64)
+55          PUSH rBP/r13 (d64)
+56          PUSH rSI/r14 (d64)
+57          PUSH rDI/r15 (d64)
+58          POP rAX/r8 (d64)
+59          POP rCX/r9 (d64)
+5A          POP rDX/r10 (d64)
+5B          POP rBX/r11 (d64)
+5C          POP rSP/r12 (d64)
+5D          POP rBP/r13 (d64)
+5E          POP rSI/r14 (d64)
+5F          POP rDI/r15 (d64)
+60          PUSHA/PUSHAD (i64)
+61          POPA/POPAD (i64)
+62          BOUND Gv,Ma (i64)
+62          EVEX (Prefix)
+63          ARPL Ew,Gw (i64)
+64          SEG=FS (Prefix)
+65          SEG=GS (Prefix)
+66          Operand-Size (Prefix)
+67          Address-Size (Prefix)
+68          PUSH Iz (d64)
+69          IMUL Gv,Ev,Iz
+6A          PUSH Ib (d64)
+6B          IMUL Gv,Ev,Ib
+6C          INS/INSB Yb,DX
+6D          INS/INSW/INSD Yz,DX
+6E          OUTS/OUTSB DX,Xb
+6F          OUTS/OUTSW/OUTSD DX,Xz
+70          JO Jb
+71          JNO Jb
+72          JB/JNAE/JC Jb
+73          JNB/JAE/JNC Jb
+74          JZ/JE Jb
+75          JNZ/JNE Jb
+76          JBE/JNA Jb
+77          JNBE/JA Jb
+78          JS Jb
+79          JNS Jb
+7A          JP/JPE Jb
+7B          JNP/JPO Jb
+7C          JL/JNGE Jb
+7D          JNL/JGE Jb
+7E          JLE/JNG Jb
+7F          JNLE/JG Jb
+80/0        ADD Eb,Ib
+80/1        OR Eb,Ib
+80/2        ADC Eb,Ib
+80/3        SBB Eb,Ib
+80/4        AND Eb,Ib
+80/5        SUB Eb,Ib
+80/6        XOR Eb,Ib
+80/7        CMP Eb,Ib
+81/0        ADD Ev,Iz
+81/1        OR Ev,Iz
+81/2        ADC Ev,Iz
+81/3        SBB Ev,Iz
+81/4        AND Ev,Iz
+81/5        SUB Ev,Iz
+81/6        XOR Ev,Iz
+81/7        CMP Ev,Iz
+82/0        ADD Eb,Ib
+82/1        OR Eb,Ib
+82/2        ADC Eb,Ib
+82/3        SBB Eb,Ib
+82/4        AND Eb,Ib
+82/5        SUB Eb,Ib
+82/6        XOR Eb,Ib
+82/7        CMP Eb,Ib
+83/0        ADD Ev,Ib
+83/1        OR Ev,Ib
+83/2        ADC Ev,Ib
+83/3        SBB Ev,Ib
+83/4        AND Ev,Ib
+83/5        SUB Ev,Ib
+83/6        XOR Ev,Ib
+83/7        CMP Ev,Ib
+84          TEST Eb,Gb
+85          TEST Ev,Gv
+86          XCHG Eb,Gb
+87          XCHG Ev,Gv
+88          MOV Eb,Gb
+89          MOV Ev,Gv
+8A          MOV Gb,Eb
+8B          MOV Gv,Ev
+8C          MOV Ev,Sw
+8D          LEA Gv,M
+8E          MOV Sw,Ew
+8F/0        POP Ev
+8F          POP Ev (d64)
+90          NOP
+90          PAUSE (F3) (REP)
+90          XCHG rAX/r8,rAX
+91          XCHG rCX/r9,rAX
+92          XCHG rDX/r10,rAX
+93          XCHG rBX/r11,rAX
+94          XCHG rSP/r12,rAX
+95          XCHG rBP/r13,rAX
+96          XCHG rSI/r14,rAX
+97          XCHG rDI/r15,rAX
+98          CBW/CWDE/CDQE
+99          CWD/CDQ/CQO
+9A          CALLF Ap (i64)
+9B          FWAIT/WAIT
+9C          PUSHF/D/Q Fv (d64)
+9D          POPF/D/Q Fv (d64)
+9E          SAHF
+9F          LAHF
+A0          MOV AL,Ob
+A1          MOV rAX,Ov
+A2          MOV Ob,AL
+A3          MOV Ov,rAX
+A4          MOVS/B Yb,Xb
+A5          MOVS/W/D/Q Yv,Xv
+A6          CMPS/B Xb,Yb
+A7          CMPS/W/D Xv,Yv
+A8          TEST AL,Ib
+A9          TEST rAX,Iz
+AA          STOS/B Yb,AL
+AB          STOS/W/D/Q Yv,rAX
+AC          LODS/B AL,Xb
+AD          LODS/W/D/Q rAX,Xv
+AE          SCAS/B AL,Yb
+AF          SCAS/W/D/Q rAX,Yv
+B0          MOV AL/R8L,Ib
+B1          MOV CL/R9L,Ib
+B2          MOV DL/R10L,Ib
+B3          MOV BL/R11L,Ib
+B4          MOV AH/R12L,Ib
+B5          MOV CH/R13L,Ib
+B6          MOV DH/R14L,Ib
+B7          MOV BH/R15L,Ib
+B8          MOV rAX/r8,Iv
+B9          MOV rCX/r9,Iv
+BA          MOV rDX/r10,Iv
+BB          MOV rBX/r11,Iv
+BC          MOV rSP/r12,Iv
+BD          MOV rBP/r13,Iv
+BE          MOV rSI/r14,Iv
+BF          MOV rDI/r15,Iv
+C0/0        ROL Eb,Ib
+C0/1        ROR Eb,Ib
+C0/2        RCL Eb,Ib
+C0/3        RCR Eb,Ib
+C0/4        SHL/SAL Eb,Ib
+C0/5        SHR Eb,Ib
+C0/7        SAR Eb,Ib
+C1/0        ROL Ev,Ib
+C1/1        ROR Ev,Ib
+C1/2        RCL Ev,Ib
+C1/3        RCR Ev,Ib
+C1/4        SHL/SAL Ev,Ib
+C1/5        SHR Ev,Ib
+C1/7        SAR Ev,Ib
+C2          RETN Iw (f64)
+C3          RETN
+C4          LES Gz,Mp (i64)
+C4          VEX+2byte (Prefix)
+C5          LDS Gz,Mp (i64)
+C5          VEX+1byte (Prefix)
+C6/0        MOV Eb,Ib
+C6/7        XABORT Ib (000),(11B)
+C7/0        MOV Ev,Iz
+C7/7        XBEGIN Jz (000),(11B)
+C8          ENTER Iw,Ib
+C9          LEAVE (d64)
+CA          RETF Iw
+CB          RETF
+CC          INT3
+CD          INT Ib
+CE          INTO (i64)
+CF          IRET/D/Q
+D0/0        ROL Eb,1
+D0/1        ROR Eb,1
+D0/2        RCL Eb,1
+D0/3        RCR Eb,1
+D0/4        SHL/SAL Eb,1
+D0/5        SHR Eb,1
+D0/7        SAR Eb,1
+D1/0        ROL Ev,1
+D1/1        ROR Ev,1
+D1/2        RCL Ev,1
+D1/3        RCR Ev,1
+D1/4        SHL/SAL Ev,1
+D1/5        SHR Ev,1
+D1/7        SAR Ev,1
+D2/0        ROL Eb,CL
+D2/1        ROR Eb,CL
+D2/2        RCL Eb,CL
+D2/3        RCR Eb,CL
+D2/4        SHL/SAL Eb,CL
+D2/5        SHR Eb,CL
+D2/7        SAR Eb,CL
+D3/0        ROL Ev,CL
+D3/1        ROR Ev,CL
+D3/2        RCL Ev,CL
+D3/3        RCR Ev,CL
+D3/4        SHL/SAL Ev,CL
+D3/5        SHR Ev,CL
+D3/7        SAR Ev,CL
+D4          AAM Ib (i64)
+D5          AAD Ib (i64)
+D7          XLAT/XLATB
+D8          ESC
+D9          ESC
+DA          ESC
+DB          ESC
+DC          ESC
+DD          ESC
+DE          ESC
+DF          ESC
+E0          LOOPNE/LOOPNZ Jb (f64)
+E1          LOOPE/LOOPZ Jb (f64)
+E2          LOOP Jb (f64)
+E3          JrCXZ Jb (f64)
+E4          IN AL,Ib
+E5          IN eAX,Ib
+E6          OUT Ib,AL
+E7          OUT Ib,eAX
+E8          CALL Jz (f64)
+E9          JMP-near Jz (f64)
+EA          JMP-far Ap (i64)
+EB          JMP-short Jb (f64)
+EC          IN AL,DX
+ED          IN eAX,DX
+EE          OUT DX,AL
+EF          OUT DX,eAX
+F0          LOCK (Prefix)
+F2          REPNE (Prefix)
+F2          XACQUIRE (Prefix)
+F3          REP/REPE (Prefix)
+F3          XRELEASE (Prefix)
+F4          HLT
+F5          CMC
+F6/0        TEST Eb,Ib
+F6/1        TEST Eb,Ib
+F6/2        NOT Eb
+F6/3        NEG Eb
+F6/4        MUL AL,Eb
+F6/5        IMUL AL,Eb
+F6/6        DIV AL,Eb
+F6/7        IDIV AL,Eb
+F7/0        TEST Ev,Iz
+F7/1        TEST Ev,Iz
+F7/2        NOT Ev
+F7/3        NEG Ev
+F7/4        MUL rAX,Ev
+F7/5        IMUL rAX,Ev
+F7/6        DIV rAX,Ev
+F7/7        IDIV rAX,Ev
+F8          CLC
+F9          STC
+FA          CLI
+FB          STI
+FC          CLD
+FD          STD
+FE/0        INC Eb
+FE/1        DEC Eb
+FF/0        INC Ev
+FF/1        DEC Ev
+FF/2        CALL Ev
+FF/3        CALL FAR Ep
+FF/4        JMP Ev
+FF/5        JMP FAR Mp
+FF/6        PUSH Ev

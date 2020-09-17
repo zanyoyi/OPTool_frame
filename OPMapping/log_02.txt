@@ -1,0 +1,104 @@
+00          pshufb Pq,Qq
+00          vpshufb Vx,Hx,Wx (66),(v1) (opdsize)
+01          phaddw Pq,Qq
+01          vphaddw Vx,Hx,Wx (66),(v1) (opdsize)
+02          phaddd Pq,Qq
+02          vphaddd Vx,Hx,Wx (66),(v1) (opdsize)
+03          phaddsw Pq,Qq
+03          vphaddsw Vx,Hx,Wx (66),(v1) (opdsize)
+04          pmaddubsw Pq,Qq
+04          vpmaddubsw Vx,Hx,Wx (66),(v1) (opdsize)
+05          phsubw Pq,Qq
+05          vphsubw Vx,Hx,Wx (66),(v1) (opdsize)
+06          phsubd Pq,Qq
+06          vphsubd Vx,Hx,Wx (66),(v1) (opdsize)
+07          phsubsw Pq,Qq
+07          vphsubsw Vx,Hx,Wx (66),(v1) (opdsize)
+08          psignb Pq,Qq
+08          vpsignb Vx,Hx,Wx (66),(v1) (opdsize)
+09          psignw Pq,Qq
+09          vpsignw Vx,Hx,Wx (66),(v1) (opdsize)
+0A          psignd Pq,Qq
+0A          vpsignd Vx,Hx,Wx (66),(v1) (opdsize)
+0B          pmulhrsw Pq,Qq
+0B          vpmulhrsw Vx,Hx,Wx (66),(v1) (opdsize)
+10          pblendvb Vdq,Wdq (66) (opdsize)
+14          blendvps Vdq,Wdq (66) (opdsize)
+15          blendvpd Vdq,Wdq (66) (opdsize)
+17          vptest Vx,Wx (66) (opdsize)
+1C          pabsb Pq,Qq
+1C          vpabsb Vx,Wx (66),(v1) (opdsize)
+1D          pabsw Pq,Qq
+1D          vpabsw Vx,Wx (66),(v1) (opdsize)
+1E          pabsd Pq,Qq
+1E          vpabsd Vx,Wx (66),(v1) (opdsize)
+20          vpmovsxbw Vx,Ux/Mq (66),(v1) (opdsize)
+21          vpmovsxbd Vx,Ux/Md (66),(v1) (opdsize)
+22          vpmovsxbq Vx,Ux/Mw (66),(v1) (opdsize)
+23          vpmovsxwd Vx,Ux/Mq (66),(v1) (opdsize)
+24          vpmovsxwq Vx,Ux/Md (66),(v1) (opdsize)
+25          vpmovsxdq Vx,Ux/Mq (66),(v1) (opdsize)
+28          vpmuldq Vx,Hx,Wx (66),(v1) (opdsize)
+29          vpcmpeqq Vx,Hx,Wx (66),(v1) (opdsize)
+2A          vmovntdqa Vx,Mx (66),(v1) (opdsize)
+2B          vpackusdw Vx,Hx,Wx (66),(v1) (opdsize)
+30          vpmovzxbw Vx,Ux/Mq (66),(v1) (opdsize)
+31          vpmovzxbd Vx,Ux/Md (66),(v1) (opdsize)
+32          vpmovzxbq Vx,Ux/Mw (66),(v1) (opdsize)
+33          vpmovzxwd Vx,Ux/Mq (66),(v1) (opdsize)
+34          vpmovzxwq Vx,Ux/Md (66),(v1) (opdsize)
+35          vpmovzxdq Vx,Ux/Mq (66),(v1) (opdsize)
+37          vpcmpgtq Vx,Hx,Wx (66),(v1) (opdsize)
+38          vpminsb Vx,Hx,Wx (66),(v1) (opdsize)
+39          vpminsd Vx,Hx,Wx (66),(v1) (opdsize)
+3A          vpminuw Vx,Hx,Wx (66),(v1) (opdsize)
+3B          vpminud Vx,Hx,Wx (66),(v1) (opdsize)
+3C          vpmaxsb Vx,Hx,Wx (66),(v1) (opdsize)
+3D          vpmaxsd Vx,Hx,Wx (66),(v1) (opdsize)
+3E          vpmaxuw Vx,Hx,Wx (66),(v1) (opdsize)
+3F          vpmaxud Vx,Hx,Wx (66),(v1) (opdsize)
+40          vpmulld Vx,Hx,Wx (66),(v1) (opdsize)
+41          vphminposuw Vdq,Wdq (66),(v1) (opdsize)
+80          INVEPT Gy,Mdq (66) (opdsize)
+81          INVVPID Gy,Mdq (66) (opdsize)
+82          INVPCID Gy,Mdq (66) (opdsize)
+94          UD0
+95          UD0
+C6/1        vgatherpf0dps/d Wx (66),(ev) (opdsize)
+C6/2        vgatherpf1dps/d Wx (66),(ev) (opdsize)
+C6/5        vscatterpf0dps/d Wx (66),(ev) (opdsize)
+C6/6        vscatterpf1dps/d Wx (66),(ev) (opdsize)
+C7/1        vgatherpf0qps/d Wx (66),(ev) (opdsize)
+C7/2        vgatherpf1qps/d Wx (66),(ev) (opdsize)
+C7/5        vscatterpf0qps/d Wx (66),(ev) (opdsize)
+C7/6        vscatterpf1qps/d Wx (66),(ev) (opdsize)
+C8          sha1nexte Vdq,Wdq
+C9          sha1msg1 Vdq,Wdq
+CA          sha1msg2 Vdq,Wdq
+CB          sha256rnds2 Vdq,Wdq
+CC          sha256msg1 Vdq,Wdq
+CD          sha256msg2 Vdq,Wdq
+CF          vgf2p8mulb Vx,Wx (66) (opdsize)
+DB          VAESIMC Vdq,Wdq (66),(v1) (opdsize)
+DC          vaesenc Vx,Hx,Wx (66) (opdsize)
+DD          vaesenclast Vx,Hx,Wx (66) (opdsize)
+DE          vaesdec Vx,Hx,Wx (66) (opdsize)
+DF          vaesdeclast Vx,Hx,Wx (66) (opdsize)
+F0          MOVBE Gy,My
+F0          MOVBE Gw,Mw (66) (opdsize)
+F0          CRC32 Gd,Eb (F2) (REPNE)
+F0          CRC32 Gd,Eb (66&F2) (opdsize)
+F1          MOVBE My,Gy
+F1          MOVBE Mw,Gw (66) (opdsize)
+F1          CRC32 Gd,Ey (F2) (REPNE)
+F1          CRC32 Gd,Ew (66&F2) (opdsize)
+F3/1        BLSR By,Ey (v)
+F3/2        BLSMSK By,Ey (v)
+F3/3        BLSI By,Ey (v)
+F5          WRUSSD/Q My,Gy (66) (opdsize)
+F6          ADCX Gy,Ey (66) (opdsize)
+F6          ADOX Gy,Ey (F3) (REP)
+F6          WRSSD/Q My,Gy
+F8          ENQCMD Gv,Mdqq (F2) (REPNE)
+F8          ENQCMDS Gv,Mdqq (F3) (REP)
+F9          MOVDIRI My,Gy
