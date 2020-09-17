@@ -75,6 +75,7 @@ BEGIN_MESSAGE_MAP(COPMappingDlg, CDialog)
 	ON_WM_QUERYDRAGICON()
 	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDC_BUTTON2, &COPMappingDlg::OnBnClickedButton2)
+	ON_BN_CLICKED(IDC_BUTTON1, &COPMappingDlg::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -294,4 +295,10 @@ void COPMappingDlg::OnBnClickedButton2()
 			#endif /* SHOW_VALID */
 		}
 	}
+}
+
+
+void COPMappingDlg::OnBnClickedButton1()
+{
+	// TODO: 在此加入控制項告知處理常式程式碼
 }
