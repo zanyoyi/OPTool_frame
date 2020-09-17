@@ -1554,10 +1554,10 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     case 0x8f://Grp1A 
                         pGrp = Grp01A_8Fh;
                         break;
-                    case 0xc0://Grp11B 
+                    case 0xc0://Grp02
                         pGrp = Grp02_C0h;
                         break;
-                    case 0xc1://Grp11B 
+                    case 0xc1://Grp02 
                         pGrp = Grp02_C1h;
                         break;
                     case 0xc6://Grp11A 
