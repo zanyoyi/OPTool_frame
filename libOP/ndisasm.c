@@ -1621,6 +1621,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 // operand are both register
                 // what about operand are both imm?
                 // what about operand are both memory?
+                // what about operand are mmx vs xmm?
                 if (~((*p)->opd[0] ^ (*best_p)->opd[0]) & REG_CLASS_GPR)
                 {
                     opd0 |= (*p)->opd[0];
