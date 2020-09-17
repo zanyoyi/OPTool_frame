@@ -1,0 +1,8 @@
+#include "compiler.h"
+#include "ndisasm.h"
+#include "nasm.h"
+#include "sync.h"
+#include "insns.h"
+#include "tables.h"
+#include "regdis.h"
+#include "disp8.h"
