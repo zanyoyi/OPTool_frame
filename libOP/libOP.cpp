@@ -193,6 +193,7 @@ static BOOL SpuriousCheck(E_XB_OP eOPTab, BYTE OpIdx, BYTE OPExtIdx, int PrefixI
     }
     return FALSE;
 }
+
 static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
 {
     if (eOPTab == E_1B_OP)

@@ -1641,12 +1641,11 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 }
             }
         }
-        // do not show 66 prefix case at all
+        // do not show 66 prefix case
         switch ((opd0 >> SIZE_SHIFT) & 0x0F)
         {
         case 0x0E:
         case 0x06:
-        case 0x0C:
             // same mnemonic, prefix ones die
             return 0;
         default:
@@ -1656,7 +1655,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         {
         case 0x0E:
         case 0x06:
-        case 0x0C:
             // same mnemonic, prefix ones die
             return 0;
         default:
@@ -1666,7 +1664,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         {
         case 0x0E:
         case 0x06:
-        case 0x0C:
             // same mnemonic, prefix ones die
             return 0;
         default:
@@ -1676,7 +1673,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         {
         case 0x0E:
         case 0x06:
-        case 0x0C:
             // same mnemonic, prefix ones die
             return 0;
         default:
@@ -1792,8 +1788,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                         {
                             slen += snprintf(output + slen, outbufsize - slen, "%s",
                                 nasm_reg_types_1100[reg - EXPR_REG_START]);
-                            // clear operand prefix flags
-                            *flags &= 0xFFEFFFFF;
+                            // clear operand prefix flags at outside
                         }
                         // 16/32/64 bit operand case
                         else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
@@ -1825,8 +1820,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                         {
                             slen += snprintf(output + slen, outbufsize - slen, "%s",
                                 nasm_reg_names_1100[reg - EXPR_REG_START]);
-                            // clear operand prefix flags
-                            *flags &= 0xFFEFFFFF;
+                            // clear operand prefix flags at outside
                         }
                         // 16/32/64 bit operand case
                         else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
@@ -1858,8 +1852,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     {
                         slen += snprintf(output + slen, outbufsize - slen, "%s",
                             nasm_reg_names_1100[reg - EXPR_REG_START]);
-                        // clear operand prefix flags
-                        *flags &= 0xFFEFFFFF;
+                        // clear operand prefix flags at outside
                     }
                     // 16/32/64 bit operand case
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
@@ -2038,8 +2031,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     {
                         slen += snprintf(output + slen, outbufsize - slen,
                             "dword/qword");
-                        // clear operand prefix flags
-                        *flags &= 0xFFEFFFFF;
+                        // clear operand prefix flags at outside
                     }
                     // 16/32/64 bit operand case
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
@@ -2070,8 +2062,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     {
                         slen += snprintf(output + slen, outbufsize - slen,
                             "dword/qword");
-                        // clear operand prefix flags
-                        *flags &= 0xFFEFFFFF;
+                        // clear operand prefix flags at outside
                     }
                     // 16/32/64 bit operand case
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
@@ -2102,8 +2093,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     {
                         slen += snprintf(output + slen, outbufsize - slen,
                             "dword/qword");
-                        // clear operand prefix flags
-                        *flags &= 0xFFEFFFFF;
+                        // clear operand prefix flags at outside
                     }
                     // 16/32/64 bit operand case
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
