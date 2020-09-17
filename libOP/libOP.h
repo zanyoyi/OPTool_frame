@@ -438,9 +438,9 @@ OP_ENTRY OP2BMap[256] = {
     {0x02,0x00,0 | PF_Valid," LAR Gv,Ew"},
     {0x03,0x00,0 | PF_Valid," LSL Gv,Ew"},
     {0x04,0x00,0 | PF_Valid,NULL},
-    {0x05,0x00,0 | PF_Valid," SYSCALL (o64)"},
+    {0x05,0x00,0," SYSCALL (o64)"},
     {0x06,0x00,0 | PF_Valid," CLTS"},
-    {0x07,0x00,0 | PF_Valid," SYSRET (o64)"},
+    {0x07,0x00,0," SYSRET (o64)"},
     {0x08,0x00,0 | PF_Valid," INVD"},
     {0x09,0x00,0," WBINVD | WBNOINVD (F3)"},
     {0x0a,0x00,0 | PF_Valid,NULL},
@@ -1598,67 +1598,67 @@ OP_ENTRY GrpRNG_A7h[8] = {
 
 OP_ENTRY OP_40[2] = {
     {0x40,0x00,0 | PF_Valid," INC eAX (i64)"},
-    {0x40,0x00,0 | PF_Valid," REX (o64)"},
+    {0x40,0x00,0," REX (o64)"},
 };
 OP_ENTRY OP_41[2] = {
     {0x41,0x00,0 | PF_Valid," INC eCX (i64)"},
-    {0x41,0x00,0 | PF_Valid," REX.B (o64)"},
+    {0x41,0x00,0," REX.B (o64)"},
 };
 OP_ENTRY OP_42[2] = {
     {0x42,0x00,0 | PF_Valid," INC eDX (i64)"},
-    {0x42,0x00,0 | PF_Valid," REX.X (o64)"},
+    {0x42,0x00,0," REX.X (o64)"},
 };
 OP_ENTRY OP_43[2] = {
     {0x43,0x00,0 | PF_Valid," INC eBX (i64)"},
-    {0x43,0x00,0 | PF_Valid," REX.XB (o64)"},
+    {0x43,0x00,0," REX.XB (o64)"},
 };
 OP_ENTRY OP_44[2] = {
     {0x44,0x00,0 | PF_Valid," INC eSP (i64)"},
-    {0x44,0x00,0 | PF_Valid," REX.R (o64)"},
+    {0x44,0x00,0," REX.R (o64)"},
 };
 OP_ENTRY OP_45[2] = {
     {0x45,0x00,0 | PF_Valid," INC eBP (i64)"},
-    {0x45,0x00,0 | PF_Valid," REX.RB (o64)"},
+    {0x45,0x00,0," REX.RB (o64)"},
 };
 OP_ENTRY OP_46[2] = {
     {0x46,0x00,0 | PF_Valid," INC eSI (i64)"},
-    {0x46,0x00,0 | PF_Valid," REX.RX (o64)"},
+    {0x46,0x00,0," REX.RX (o64)"},
 };
 OP_ENTRY OP_47[2] = {
     {0x47,0x00,0 | PF_Valid," INC eDI (i64)"},
-    {0x47,0x00,0 | PF_Valid," REX.RXB (o64)"},
+    {0x47,0x00,0," REX.RXB (o64)"},
 };
 OP_ENTRY OP_48[2] = {
     {0x48,0x00,0 | PF_Valid," DEC eAX (i64)"},
-    {0x48,0x00,0 | PF_Valid," REX.W (o64)"},
+    {0x48,0x00,0," REX.W (o64)"},
 };
 OP_ENTRY OP_49[2] = {
     {0x49,0x00,0 | PF_Valid," DEC eCX (i64)"},
-    {0x49,0x00,0 | PF_Valid," REX.WB (o64)"},
+    {0x49,0x00,0," REX.WB (o64)"},
 };
 OP_ENTRY OP_4A[2] = {
     {0x4a,0x00,0 | PF_Valid," DEC eDX (i64)"},
-    {0x4a,0x00,0 | PF_Valid," REX.WX (o64)"},
+    {0x4a,0x00,0," REX.WX (o64)"},
 };
 OP_ENTRY OP_4B[2] = {
     {0x4b,0x00,0 | PF_Valid," DEC eBX (i64)"},
-    {0x4b,0x00,0 | PF_Valid," REX.WXB (o64)"},
+    {0x4b,0x00,0," REX.WXB (o64)"},
 };
 OP_ENTRY OP_4C[2] = {
     {0x4c,0x00,0 | PF_Valid," DEC eSP (i64)"},
-    {0x4c,0x00,0 | PF_Valid," REX.WR (o64)"},
+    {0x4c,0x00,0," REX.WR (o64)"},
 };
 OP_ENTRY OP_4D[2] = {
     {0x4d,0x00,0 | PF_Valid," DEC eBP (i64)"},
-    {0x4d,0x00,0 | PF_Valid," REX.WRB (o64)"},
+    {0x4d,0x00,0," REX.WRB (o64)"},
 };
 OP_ENTRY OP_4E[2] = {
     {0x4e,0x00,0 | PF_Valid," DEC eSI (i64)"},
-    {0x4e,0x00,0 | PF_Valid," REX.WRX (o64)"},
+    {0x4e,0x00,0," REX.WRX (o64)"},
 };
 OP_ENTRY OP_4F[2] = {
     {0x4f,0x00,0 | PF_Valid," DEC eDI (i64)"},
-    {0x4f,0x00,0 | PF_Valid," REX.WRXB (o64)"},
+    {0x4f,0x00,0," REX.WRXB (o64)"},
 };
 OP_ENTRY OP_62[2] = {
     {0x62,0x00,0 | PF_Valid," BOUND Gv,Ma (i64)"},
@@ -1666,7 +1666,7 @@ OP_ENTRY OP_62[2] = {
 };
 OP_ENTRY OP_63[2] = {
     {0x63,0x00,0 | PF_Valid," ARPL Ew,Gw (i64)"},
-    {0x63,0x00,0 | PF_Valid," MOVSXD Gv,Ev (o64)"},
+    {0x63,0x00,0," MOVSXD Gv,Ev (o64)"},
 };
 OP_ENTRY OP_8F[1] = {
     {0x8f,0x00,0 | PF_Valid," POP Ev (d64)"},
