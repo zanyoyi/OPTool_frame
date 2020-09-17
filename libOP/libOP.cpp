@@ -165,24 +165,24 @@ static BOOL SpuriousCheck(E_XB_OP eOPTab, BYTE OpIdx, BYTE OPExtIdx, int PrefixI
     {
         switch (OpIdx)
         {
-        case 0x60:          // pushaw / pushad / pushaq
-        case 0x61:          // popaw / popad / popaq
-        case 0x6D:          // insw / insd
-        case 0x6F:          // outsw /outsd
-        case 0x98:          // cbw / cwde
-        case 0x99:          // cwd / cwq
-        case 0x9C:          // pushfw / pushfd / pushfq
-        case 0x9D:          // popfw /popfd / popfq
-        case 0xA5:          // movsw / movsd / movsq
-        case 0xA7:          // cmpsw / cmpsd / cmpsq
-        case 0xAB:          // stosw / stosd / sotsq
-        case 0xAD:          // lodsw / lodsd / lodsq
-        case 0xAF:          // scasw / scasd / scasq
-        case 0xC2:          // ret imm16/ ret imm32 / ret imm64
-        case 0xC3:          // retw / retd / retq
-        case 0xCA:          // retf imm16 / retf imm32 / retf imm64
-        case 0xCB:          // retfw / retfd / retfq
-        case 0xCF:          // iretw / iretd / iretq
+        case 0x60:          // pusha / pushaw / pushad / pushaq
+        case 0x61:          // popa / popaw / popad / popaq
+        case 0x6D:          // ins / insw / insd
+        case 0x6F:          // outs / outsw /outsd
+        case 0x98:          // cbw / cwde / cdqe
+        case 0x99:          // cwd / cwq / cwo
+        case 0x9C:          // pushf / pushfw / pushfd / pushfq
+        case 0x9D:          // popf / popfw /popfd / popfq
+        case 0xA5:          // movs / movsw / movsd / movsq
+        case 0xA7:          // cmps / cmpsw / cmpsd / cmpsq
+        case 0xAB:          // stos / stosw / stosd / sotsq
+        case 0xAD:          // lods / lodsw / lodsd / lodsq
+        case 0xAF:          // scas / scasw / scasd / scasq
+        case 0xC2:          // ret imm / ret imm16/ ret imm32 / ret imm64
+        case 0xC3:          // ret / retw / retd / retq
+        case 0xCA:          // retf imm / retf imm16 / retf imm32 / retf imm64
+        case 0xCB:          // retf / retfw / retfd / retfq
+        case 0xCF:          // iret / iretw / iretd / iretq
             return TRUE;
         default:
             break;
@@ -190,6 +190,22 @@ static BOOL SpuriousCheck(E_XB_OP eOPTab, BYTE OpIdx, BYTE OPExtIdx, int PrefixI
     }
     else if ((eOPTab == E_2B_OP) && (PrefixIdx == 0x66))
     {
+        switch (OpIdx)
+        {
+        case 0xB7:      // movzx
+        case 0xBF:      // movsx
+        case 0xC8:      // bswap EAX/E08
+        case 0xC9:      // bswap ECX/E09
+        case 0xCA:      // bswap EDX/E10
+        case 0xCB:      // bswap EBX/E11
+        case 0xCC:      // bswap ESP/E12
+        case 0xCD:      // bswap EBP/E13
+        case 0xCE:      // bswap ESI/E14
+        case 0xCF:      // bswap EDI/E15
+            return TRUE;
+        default:
+            break;
+        }
     }
     return FALSE;
 }
