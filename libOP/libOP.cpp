@@ -158,6 +158,42 @@ static BOOL OpcodeGroupCheck(E_XB_OP eOPTab, BYTE buffer)
     return FALSE;
 }
 
+// kill, override, invalid
+static BOOL SpuriousCheck(E_XB_OP eOPTab, BYTE OpIdx, BYTE OPExtIdx, int PrefixIdx)
+{
+    if ((eOPTab == E_1B_OP) && (PrefixIdx == 0x66))
+    {
+        switch (OpIdx)
+        {
+        case 0x60:          // pushaw / pushad / pushaq
+        case 0x61:          // popaw / popad / popaq
+        case 0x6D:          // insw / insd
+        case 0x6F:          // outsw /outsd
+        case 0x98:          // cbw / cwde
+        case 0x99:          // cwd / cwq
+        case 0x9C:          // pushfw / pushfd / pushfq
+        case 0x9D:          // popfw /popfd / popfq
+        case 0xA5:          // movsw / movsd / movsq
+        case 0xA7:          // cmpsw / cmpsd / cmpsq
+        case 0xAB:          // stosw / stosd / sotsq
+        case 0xAD:          // lodsw / lodsd / lodsq
+        case 0xAF:          // scasw / scasd / scasq
+        case 0xC2:          // ret imm16/ ret imm32 / ret imm64
+        case 0xC3:          // retw / retd / retq
+        case 0xCA:          // retf imm16 / retf imm32 / retf imm64
+        case 0xCB:          // retfw / retfd / retfq
+        case 0xCF:          // iretw / iretd / iretq
+            return TRUE;
+        default:
+            break;
+        }
+    }
+    else if ((eOPTab == E_2B_OP) && (PrefixIdx == 0x66))
+    {
+    }
+    return FALSE;
+}
+
 static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
 {
     if (eOPTab == E_1B_OP)
@@ -1198,7 +1234,8 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
 
             // small index for all possible prefixes
             int PrefixIdx = 0;
-            int next_PrefixIdx = 0;
+            int PrefixIdx_next = 0;
+            int PrefixIdx_previous = 0;
             // while loop is more verbose than triple for loop
             int OPExtIdx = 0;
             while ((OPExtIdx < nOPExtIdx) && (lFound < nOpEntryMax))
@@ -1234,42 +1271,42 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     prefixes = PF_Valid;
                     ptr2_buffer = buffer + 3;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0x66;
+                    PrefixIdx_next = 0x66;
                     break;
                 case 0x66:      // operand size prefix
                     prefixes = PF_Valid | PF_Operand;
                     buffer[2] = 0x66;
                     ptr2_buffer = buffer + 3 - 1;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0x9B;
+                    PrefixIdx_next = 0x9B;
                     break;
                 case 0x9B:      // FWAIT/WAIT prefix
                     prefixes = PF_Valid | PF_FWAIT;
                     buffer[2] = 0x9B;
                     ptr2_buffer = buffer + 3 - 1;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0xF2;
+                    PrefixIdx_next = 0xF2;
                     break;
                 case 0xF2:      // REPNE prefix
                     prefixes = PF_Valid | PF_REPNE;
                     buffer[2] = 0xF2;
                     ptr2_buffer = buffer + 3 - 1;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0xF3;
+                    PrefixIdx_next = 0xF3;
                     break;
                 case 0xF3:      // REP prefix
                     prefixes = PF_Valid | PF_REP;
                     buffer[2] = 0xF3;
                     ptr2_buffer = buffer + 3 - 1;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0x00;
+                    PrefixIdx_next = 0x00;
                     break;
                 case 0x48:      // REX.W prefix
                     prefixes = PF_Valid;
                     buffer[2] = 0x48;
                     ptr2_buffer = buffer + 3 - 1;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0x00;
+                    PrefixIdx_next = 0x00;
                     break;
                 case 0xF266:    // CRC32 need this prefix
                 case 0x66F2:
@@ -1279,7 +1316,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     buffer[2] = 0xF2;
                     ptr2_buffer = buffer + 3 - 2;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0x00;
+                    PrefixIdx_next = 0x00;
                     break;
                 case 0x48F2:
                     prefixes = PF_Valid | PF_REPNE;
@@ -1288,7 +1325,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     buffer[2] = 0x48;
                     ptr2_buffer = buffer + 3 - 2;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0x00;
+                    PrefixIdx_next = 0x00;
                     break;
                 case 0x48F3:
                     prefixes = PF_Valid | PF_REP;
@@ -1297,7 +1334,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     buffer[2] = 0x48;
                     ptr2_buffer = buffer + 3 - 2;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0x00;
+                    PrefixIdx_next = 0x00;
                     break;
                 case 0x48F266:  // CRC32 need this prefix
                 case 0x4866F2:
@@ -1308,13 +1345,13 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     buffer[2] = 0x48;
                     ptr2_buffer = buffer + 3 - 3;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0x00;
+                    PrefixIdx_next = 0x00;
                     break;
                 default:
                     prefixes = 0;
                     ptr2_buffer = buffer + 3;
                     // dynamic linked list pointer is not ready
-                    next_PrefixIdx = 0x00;
+                    PrefixIdx_next = 0x00;
                     break;
                 }
 
@@ -1352,28 +1389,32 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     pOpEntry->OP = OpIdx;
                     // group indicator | mod indicator | 11B indicator | group number
                     pOpEntry->OPExt = 0x80 | 0x20 | ((OP_2 >= 0xC0) << 3) | ((OP_2 >> 3) & 0x07);
-                    if (lendis && (options & 0x00F00000) && next_PrefixIdx)
+                    if (lendis && (options & 0x00F00000) && PrefixIdx_next)
                     {
                         pOpEntry++;
                         lFound++;
-                        PrefixIdx = next_PrefixIdx;
+                        PrefixIdx_previous = PrefixIdx;
+                        PrefixIdx = PrefixIdx_next;
                     }
                     else if (lendis)
                     {
                         pOpEntry++;
                         lFound++;
                         // reset to default prefix
+                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx++;         // find next member
                         //lFound2 = lFound;   // update found entries
                     }
-                    else if ((options & 0x00F00000) && next_PrefixIdx)
+                    else if ((options & 0x00F00000) && PrefixIdx_next)
                     {
-                        PrefixIdx = next_PrefixIdx;
+                        PrefixIdx_previous = PrefixIdx;
+                        PrefixIdx = PrefixIdx_next;
                     }
                     else
                     {
                         // reset to default prefix
+                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx++;         // find next member
                         //lFound2 = lFound;   // update found entries
@@ -1386,36 +1427,41 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     pOpEntry->OP = OpIdx;
                     // mod indicator | 11B indicator
                     pOpEntry->OPExt = 0x20 | ((OP_2 >= 0xC0) << 3);
-                    if (lendis && (options & 0x00F00000) && next_PrefixIdx)
+                    if (lendis && (options & 0x00F00000) && PrefixIdx_next)
                     {
                         pOpEntry++;
                         lFound++;
-                        PrefixIdx = next_PrefixIdx;
+                        PrefixIdx_previous = PrefixIdx;
+                        PrefixIdx = PrefixIdx_next;
                     }
                     else if (lendis)
                     {
                         pOpEntry++;
                         lFound++;
                         // reset to default prefix
+                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx |= 0x07;   // skip rest
                         OPExtIdx++;         // find next member
                         lFound2 = lFound;   // update found entries
                     }
                     // prefix exists and not last one
-                    else if ((options & 0x00F00000) && next_PrefixIdx)
+                    else if ((options & 0x00F00000) && PrefixIdx_next)
                     {
-                        PrefixIdx = next_PrefixIdx;
+                        PrefixIdx_previous = PrefixIdx;
+                        PrefixIdx = PrefixIdx_next;
                     }
                     else if(lFound2 == lFound)
                     {
                         // reset to default prefixs
+                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx++;         // always check next member
                     }
                     else
                     {
                         // reset to default prefixs
+                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx |= 0x07;   // skip rest
                         OPExtIdx++;         // find next member
@@ -1428,11 +1474,12 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     pOpEntry->ReqPrefix = prefixes;
                     pOpEntry->OP = OpIdx;
                     pOpEntry->OPExt = 0;
-                    if (lendis && (options & 0x00F00000) && next_PrefixIdx)
+                    if (lendis && (options & 0x00F00000) && PrefixIdx_next)
                     {
                         pOpEntry++;
                         lFound++;
-                        PrefixIdx = next_PrefixIdx;
+                        PrefixIdx_previous = PrefixIdx;
+                        PrefixIdx = PrefixIdx_next;
                     }
                     else if (lendis)
                     {
@@ -1441,23 +1488,33 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         OPExtIdx = 256; // skip rest
                         //lFound2 = lFound;   // update found entries
                     }
-                    else if ((options & 0x00F00000) && next_PrefixIdx)
+                    else if ((options & 0x00F00000) && PrefixIdx_next)
                     {
-                        PrefixIdx = next_PrefixIdx;
+                        PrefixIdx_previous = PrefixIdx;
+                        PrefixIdx = PrefixIdx_next;
                     }
                     else if (lFound2 == lFound)
                     {
                         // reset to default prefix
+                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx++;         // always check next member
                     }
                     else
                     {
                         // reset to default prefix
+                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx = 256;     // skip rest
                         //lFound2 = lFound;   // update found entries
                     }
+                }
+
+                // final check
+                if (SpuriousCheck(eOPTab, OpIdx, OP_2, PrefixIdx_previous))
+                {
+                    pOpEntry--;
+                    lFound--;
                 }
             }
         }

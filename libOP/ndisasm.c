@@ -1441,7 +1441,8 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
 
     for (n = ix->n; n; n--, p++)
     {
-        if ((length = matches(*p, data, &prefix, segsize, &tmp_ins, flags)))
+        length = matches(*p, data, &prefix, segsize, &tmp_ins, flags);
+        if (length)
         {
             // allow instruction fragments, works always true
             // mnemonic information generator
@@ -1512,7 +1513,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
              */
             if (works)
             {
-                int i;
+                //int i;
                 int nprefix;
                 goodness = iflag_pfmask(*p);
 
@@ -1621,6 +1622,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 // operand are both register
                 // what about operand are both imm?
                 // what about operand are both memory?
+                // what about operand are mmx vs xmm?
                 if (~((*p)->opd[0] ^ (*best_p)->opd[0]) & REG_CLASS_GPR)
                 {
                     opd0 |= (*p)->opd[0];
@@ -1639,12 +1641,11 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 }
             }
         }
-        // do not show 66 prefix case at all
+        // do not show 66 prefix case
         switch ((opd0 >> SIZE_SHIFT) & 0x0F)
         {
         case 0x0E:
         case 0x06:
-        case 0x0C:
             // same mnemonic, prefix ones die
             return 0;
         default:
@@ -1654,7 +1655,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         {
         case 0x0E:
         case 0x06:
-        case 0x0C:
             // same mnemonic, prefix ones die
             return 0;
         default:
@@ -1664,7 +1664,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         {
         case 0x0E:
         case 0x06:
-        case 0x0C:
             // same mnemonic, prefix ones die
             return 0;
         default:
@@ -1674,7 +1673,6 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
         {
         case 0x0E:
         case 0x06:
-        case 0x0C:
             // same mnemonic, prefix ones die
             return 0;
         default:
@@ -1710,8 +1708,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             return 0;
             // LOCK, REP, REPNE, and other valid prefixes are required,
             // but not now
-            // replace this line with other function
-            slen += snprintf(output + slen, outbufsize - slen, "%s ", prefix);
+            //slen += snprintf(output + slen, outbufsize - slen, "%s ", prefix);
         }
     }
 
@@ -1754,7 +1751,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             // shortcuts to (*p)->opd[i];
             opflags_t t = (*p)->opd[i];
             // shortcuts to (*p)->deco[i];
-            decoflags_t deco = (*p)->deco[i];
+            //decoflags_t deco = (*p)->deco[i];
             // shortcut to &ins.oprs[i]
             const operand* o = &ins.oprs[i];
 
@@ -1774,7 +1771,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     // case #1 both operand exists
                     // case #2 operand is reciprocal
                     if (
-                        (((*flags & 0x0000000C) >> 2) == i) && (((*flags & 0x0000000C) >> 2) ^ (*flags & 0x00000003)) ||
+                        (((*flags & 0x0000000C) >> 2) == (uint32_t)i) && (((*flags & 0x0000000C) >> 2) ^ (*flags & 0x00000003)) ||
                         !i && (((*flags & 0x0000000C) >> 2) && (*flags & 0x00000003))
                         )
                     {
@@ -1791,8 +1788,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                         {
                             slen += snprintf(output + slen, outbufsize - slen, "%s",
                                 nasm_reg_types_1100[reg - EXPR_REG_START]);
-                            // clear operand prefix flags
-                            *flags &= 0xFFEFFFFF;
+                            // clear operand prefix flags at outside
                         }
                         // 16/32/64 bit operand case
                         else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
@@ -1824,8 +1820,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                         {
                             slen += snprintf(output + slen, outbufsize - slen, "%s",
                                 nasm_reg_names_1100[reg - EXPR_REG_START]);
-                            // clear operand prefix flags
-                            *flags &= 0xFFEFFFFF;
+                            // clear operand prefix flags at outside
                         }
                         // 16/32/64 bit operand case
                         else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
@@ -1857,8 +1852,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     {
                         slen += snprintf(output + slen, outbufsize - slen, "%s",
                             nasm_reg_names_1100[reg - EXPR_REG_START]);
-                        // clear operand prefix flags
-                        *flags &= 0xFFEFFFFF;
+                        // clear operand prefix flags at outside
                     }
                     // 16/32/64 bit operand case
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
@@ -2037,8 +2031,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     {
                         slen += snprintf(output + slen, outbufsize - slen,
                             "dword/qword");
-                        // clear operand prefix flags
-                        *flags &= 0xFFEFFFFF;
+                        // clear operand prefix flags at outside
                     }
                     // 16/32/64 bit operand case
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
@@ -2069,8 +2062,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     {
                         slen += snprintf(output + slen, outbufsize - slen,
                             "dword/qword");
-                        // clear operand prefix flags
-                        *flags &= 0xFFEFFFFF;
+                        // clear operand prefix flags at outside
                     }
                     // 16/32/64 bit operand case
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
@@ -2101,8 +2093,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                     {
                         slen += snprintf(output + slen, outbufsize - slen,
                             "dword/qword");
-                        // clear operand prefix flags
-                        *flags &= 0xFFEFFFFF;
+                        // clear operand prefix flags at outside
                     }
                     // 16/32/64 bit operand case
                     else if (((*flags >> (4 + (i << 2)) & 0x0F) == 0x0E))
@@ -2303,7 +2294,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             // shortcuts to (*p)->opd[i];
             opflags_t t = (*p)->opd[i];
             // shortcuts to (*p)->deco[i];
-            decoflags_t deco = (*p)->deco[i];
+            //decoflags_t deco = (*p)->deco[i];
             // shortcut to &ins.oprs[i]
             const operand* o = &ins.oprs[i];
 
@@ -2321,7 +2312,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 if ((*flags & 0x0C000000) == 0x04000000) // reg/op is register operand
                 {
                     // case #1 both operand exists
-                    if ((((*flags & 0x0000000C) >> 2) == i) && (((*flags & 0x0000000C) >> 2) ^ (*flags & 0x00000003)))
+                    if ((((*flags & 0x0000000C) >> 2) == (uint32_t)i) && (((*flags & 0x0000000C) >> 2) ^ (*flags & 0x00000003)))
                     {
                         slen += snprintf(output + slen, outbufsize - slen, "%s",
                             nasm_reg_types[reg - EXPR_REG_START]);
@@ -2614,7 +2605,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             // shortcuts to (*p)->opd[i];
             opflags_t t = (*p)->opd[i];
             // shortcuts to (*p)->deco[i];
-            decoflags_t deco = (*p)->deco[i];
+            //decoflags_t deco = (*p)->deco[i];
             // shortcut to &ins.oprs[i]
             const operand* o = &ins.oprs[i];
 
@@ -2633,7 +2624,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
                 if ((*flags & 0x0C000000) == 0x04000000) // reg/op is register operand
                 {
                     // case #1 both operand exists
-                    if ((((*flags & 0x0000000C) >> 2) == i) && (((*flags & 0x0000000C) >> 2) ^ (*flags & 0x00000003)))
+                    if ((((*flags & 0x0000000C) >> 2) == (uint32_t)i) && (((*flags & 0x0000000C) >> 2) ^ (*flags & 0x00000003)))
                     {
                         slen += snprintf(output + slen, outbufsize - slen, "%s",
                             nasm_reg_types[reg - EXPR_REG_START]);
@@ -3026,7 +3017,7 @@ int32_t disasm(uint8_t* data, int32_t data_size, char* output, int outbufsize, i
             else if (is_class(REGMEM, t))
             {
                 int started = false;
-                uint64_t a = t;
+                //uint64_t a = t;
 
                 if (t & BITS8)
                 {
