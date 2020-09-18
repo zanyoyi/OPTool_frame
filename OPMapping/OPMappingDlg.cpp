@@ -227,30 +227,30 @@ void COPMappingDlg::OnBnClickedButton2()
 		m_strAsmList.ResetContent();
 		for(i = 0 ; i < (int)lOpMatch ; i++)
 		{
-			if (OpEntry[i].ReqPrefix & PF_Operand)
+			if (OpEntry[i].Attr & PF_Operand)
 			{
 				memcpy(prefixes, L"opdsize", sizeof(L"opdsize"));
 			}
-			else if (OpEntry[i].ReqPrefix & PF_REPNE)
+			else if (OpEntry[i].Attr & PF_REPNE)
 			{
 				memcpy(prefixes, L"REPNE", sizeof(L"REPNE"));
 			}
-			else if (OpEntry[i].ReqPrefix & PF_REP)
+			else if (OpEntry[i].Attr & PF_REP)
 			{
 				memcpy(prefixes, L"REP", sizeof(L"REP"));
 			}
-			else if (OpEntry[i].ReqPrefix & PF_FWAIT)
+			else if (OpEntry[i].Attr & PF_FWAIT)
 			{
 				memcpy(prefixes, L"FWAIT", sizeof(L"FWAIT"));
 			}
 
 			// debug mode
 			#ifdef SHOW_VALID
-			if (OpEntry[i].ReqPrefix & 0x01)
+			if (OpEntry[i].Attr & 0x01)
 			{
 			#endif /* SHOW_VALID */
 				// group, prefixes
-				if ((OpEntry[i].OPExt & 0x80) && (OpEntry[i].ReqPrefix & 0xFE))
+				if ((OpEntry[i].OPExt & 0x80) && (OpEntry[i].Attr & 0xFC))
 				{
 					if ((OpEntry[i].OPExt & 0x20) && (OpEntry[i].OPExt & 0x08))
 						strTemp.Format(_T("%02X/%x [11B] %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
@@ -260,7 +260,7 @@ void COPMappingDlg::OnBnClickedButton2()
 						strTemp.Format(_T("%02X/%x       %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
 				}
 				// prefixes
-				else if (OpEntry[i].ReqPrefix & 0xFE)
+				else if (OpEntry[i].Attr & 0xFC)
 				{
 					if ((OpEntry[i].OPExt & 0x20) && (OpEntry[i].OPExt & 0x08))
 						strTemp.Format(_T("%02X   [11B] %s (%s)"), OpEntry[i].OP, OpEntry[i].strDisasm, prefixes);
@@ -395,19 +395,19 @@ void COPMappingDlg::OnBnClickedButton1()
 	// do the actual write
 	for (unsigned int i = 0; i < lOpMatch; i++)
 	{
-		if (ptr_OpEntry[i].ReqPrefix & PF_Operand)
+		if (ptr_OpEntry[i].Attr & PF_Operand)
 		{
 			prefixes = opdsize;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REPNE)
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
 		{
 			prefixes = REPNE;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REP)
+		else if (ptr_OpEntry[i].Attr & PF_REP)
 		{
 			prefixes = REP;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_FWAIT)
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
 		{
 			prefixes = FWAIT;
 		}
@@ -415,10 +415,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = NULL;
 		}
-		if (ptr_OpEntry[i].ReqPrefix & 0x01)
+		if (ptr_OpEntry[i].Attr & 0x01)
 		{
 			// group, prefixes
-			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].ReqPrefix & 0xFE))
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
@@ -428,7 +428,7 @@ void COPMappingDlg::OnBnClickedButton1()
 					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
-			else if (ptr_OpEntry[i].ReqPrefix & 0xFE)
+			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
@@ -474,19 +474,19 @@ void COPMappingDlg::OnBnClickedButton1()
 	// do the actual write
 	for (unsigned int i = 0; i < lOpMatch; i++)
 	{
-		if (ptr_OpEntry[i].ReqPrefix & PF_Operand)
+		if (ptr_OpEntry[i].Attr & PF_Operand)
 		{
 			prefixes = opdsize;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REPNE)
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
 		{
 			prefixes = REPNE;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REP)
+		else if (ptr_OpEntry[i].Attr & PF_REP)
 		{
 			prefixes = REP;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_FWAIT)
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
 		{
 			prefixes = FWAIT;
 		}
@@ -494,10 +494,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = NULL;
 		}
-		if (ptr_OpEntry[i].ReqPrefix & 0x01)
+		if (ptr_OpEntry[i].Attr & 0x01)
 		{
 			// group, prefixes
-			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].ReqPrefix & 0xFE))
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
@@ -507,7 +507,7 @@ void COPMappingDlg::OnBnClickedButton1()
 					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
-			else if (ptr_OpEntry[i].ReqPrefix & 0xFE)
+			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
@@ -553,19 +553,19 @@ void COPMappingDlg::OnBnClickedButton1()
 	// do the actual write
 	for (unsigned int i = 0; i < lOpMatch; i++)
 	{
-		if (ptr_OpEntry[i].ReqPrefix & PF_Operand)
+		if (ptr_OpEntry[i].Attr & PF_Operand)
 		{
 			prefixes = opdsize;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REPNE)
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
 		{
 			prefixes = REPNE;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REP)
+		else if (ptr_OpEntry[i].Attr & PF_REP)
 		{
 			prefixes = REP;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_FWAIT)
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
 		{
 			prefixes = FWAIT;
 		}
@@ -573,10 +573,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = NULL;
 		}
-		if (ptr_OpEntry[i].ReqPrefix & 0x01)
+		if (ptr_OpEntry[i].Attr & 0x01)
 		{
 			// group, prefixes
-			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].ReqPrefix & 0xFE))
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
@@ -586,7 +586,7 @@ void COPMappingDlg::OnBnClickedButton1()
 					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
-			else if (ptr_OpEntry[i].ReqPrefix & 0xFE)
+			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
@@ -633,19 +633,19 @@ void COPMappingDlg::OnBnClickedButton1()
 	// do the actual write
 	for (unsigned int i = 0; i < lOpMatch; i++)
 	{
-		if (ptr_OpEntry[i].ReqPrefix & PF_Operand)
+		if (ptr_OpEntry[i].Attr & PF_Operand)
 		{
 			prefixes = opdsize;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REPNE)
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
 		{
 			prefixes = REPNE;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REP)
+		else if (ptr_OpEntry[i].Attr & PF_REP)
 		{
 			prefixes = REP;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_FWAIT)
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
 		{
 			prefixes = FWAIT;
 		}
@@ -653,10 +653,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = NULL;
 		}
-		if (ptr_OpEntry[i].ReqPrefix & 0x01)
+		if (ptr_OpEntry[i].Attr & 0x01)
 		{
 			// group, prefixes
-			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].ReqPrefix & 0xFE))
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
@@ -666,7 +666,7 @@ void COPMappingDlg::OnBnClickedButton1()
 					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
-			else if (ptr_OpEntry[i].ReqPrefix & 0xFE)
+			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
@@ -712,19 +712,19 @@ void COPMappingDlg::OnBnClickedButton1()
 	// do the actual write
 	for (unsigned int i = 0; i < lOpMatch; i++)
 	{
-		if (ptr_OpEntry[i].ReqPrefix & PF_Operand)
+		if (ptr_OpEntry[i].Attr & PF_Operand)
 		{
 			prefixes = opdsize;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REPNE)
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
 		{
 			prefixes = REPNE;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REP)
+		else if (ptr_OpEntry[i].Attr & PF_REP)
 		{
 			prefixes = REP;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_FWAIT)
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
 		{
 			prefixes = FWAIT;
 		}
@@ -732,10 +732,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = NULL;
 		}
-		if (ptr_OpEntry[i].ReqPrefix & 0x01)
+		if (ptr_OpEntry[i].Attr & 0x01)
 		{
 			// group, prefixes
-			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].ReqPrefix & 0xFE))
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
@@ -745,7 +745,7 @@ void COPMappingDlg::OnBnClickedButton1()
 					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
-			else if (ptr_OpEntry[i].ReqPrefix & 0xFE)
+			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
@@ -791,19 +791,19 @@ void COPMappingDlg::OnBnClickedButton1()
 	// do the actual write
 	for (unsigned int i = 0; i < lOpMatch; i++)
 	{
-		if (ptr_OpEntry[i].ReqPrefix & PF_Operand)
+		if (ptr_OpEntry[i].Attr & PF_Operand)
 		{
 			prefixes = opdsize;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REPNE)
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
 		{
 			prefixes = REPNE;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REP)
+		else if (ptr_OpEntry[i].Attr & PF_REP)
 		{
 			prefixes = REP;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_FWAIT)
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
 		{
 			prefixes = FWAIT;
 		}
@@ -811,10 +811,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = NULL;
 		}
-		if (ptr_OpEntry[i].ReqPrefix & 0x01)
+		if (ptr_OpEntry[i].Attr & 0x01)
 		{
 			// group, prefixes
-			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].ReqPrefix & 0xFE))
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
@@ -824,7 +824,7 @@ void COPMappingDlg::OnBnClickedButton1()
 					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
-			else if (ptr_OpEntry[i].ReqPrefix & 0xFE)
+			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
@@ -870,19 +870,19 @@ void COPMappingDlg::OnBnClickedButton1()
 	// do the actual write
 	for (unsigned int i = 0; i < lOpMatch; i++)
 	{
-		if (ptr_OpEntry[i].ReqPrefix & PF_Operand)
+		if (ptr_OpEntry[i].Attr & PF_Operand)
 		{
 			prefixes = opdsize;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REPNE)
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
 		{
 			prefixes = REPNE;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REP)
+		else if (ptr_OpEntry[i].Attr & PF_REP)
 		{
 			prefixes = REP;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_FWAIT)
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
 		{
 			prefixes = FWAIT;
 		}
@@ -890,10 +890,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = NULL;
 		}
-		if (ptr_OpEntry[i].ReqPrefix & 0x01)
+		if (ptr_OpEntry[i].Attr & 0x01)
 		{
 			// group, prefixes
-			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].ReqPrefix & 0xFE))
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
@@ -903,7 +903,7 @@ void COPMappingDlg::OnBnClickedButton1()
 					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
-			else if (ptr_OpEntry[i].ReqPrefix & 0xFE)
+			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
@@ -949,19 +949,19 @@ void COPMappingDlg::OnBnClickedButton1()
 	// do the actual write
 	for (unsigned int i = 0; i < lOpMatch; i++)
 	{
-		if (ptr_OpEntry[i].ReqPrefix & PF_Operand)
+		if (ptr_OpEntry[i].Attr & PF_Operand)
 		{
 			prefixes = opdsize;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REPNE)
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
 		{
 			prefixes = REPNE;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REP)
+		else if (ptr_OpEntry[i].Attr & PF_REP)
 		{
 			prefixes = REP;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_FWAIT)
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
 		{
 			prefixes = FWAIT;
 		}
@@ -969,10 +969,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = NULL;
 		}
-		if (ptr_OpEntry[i].ReqPrefix & 0x01)
+		if (ptr_OpEntry[i].Attr & 0x01)
 		{
 			// group, prefixes
-			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].ReqPrefix & 0xFE))
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
@@ -982,7 +982,7 @@ void COPMappingDlg::OnBnClickedButton1()
 					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
-			else if (ptr_OpEntry[i].ReqPrefix & 0xFE)
+			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
@@ -1028,19 +1028,19 @@ void COPMappingDlg::OnBnClickedButton1()
 	// do the actual write
 	for (unsigned int i = 0; i < lOpMatch; i++)
 	{
-		if (ptr_OpEntry[i].ReqPrefix & PF_Operand)
+		if (ptr_OpEntry[i].Attr & PF_Operand)
 		{
 			prefixes = opdsize;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REPNE)
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
 		{
 			prefixes = REPNE;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REP)
+		else if (ptr_OpEntry[i].Attr & PF_REP)
 		{
 			prefixes = REP;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_FWAIT)
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
 		{
 			prefixes = FWAIT;
 		}
@@ -1048,10 +1048,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = NULL;
 		}
-		if (ptr_OpEntry[i].ReqPrefix & 0x01)
+		if (ptr_OpEntry[i].Attr & 0x01)
 		{
 			// group, prefixes
-			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].ReqPrefix & 0xFE))
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
@@ -1061,7 +1061,7 @@ void COPMappingDlg::OnBnClickedButton1()
 					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
-			else if (ptr_OpEntry[i].ReqPrefix & 0xFE)
+			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
@@ -1107,19 +1107,19 @@ void COPMappingDlg::OnBnClickedButton1()
 	// do the actual write
 	for (unsigned int i = 0; i < lOpMatch; i++)
 	{
-		if (ptr_OpEntry[i].ReqPrefix & PF_Operand)
+		if (ptr_OpEntry[i].Attr & PF_Operand)
 		{
 			prefixes = opdsize;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REPNE)
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
 		{
 			prefixes = REPNE;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REP)
+		else if (ptr_OpEntry[i].Attr & PF_REP)
 		{
 			prefixes = REP;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_FWAIT)
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
 		{
 			prefixes = FWAIT;
 		}
@@ -1127,10 +1127,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = NULL;
 		}
-		if (ptr_OpEntry[i].ReqPrefix & 0x01)
+		if (ptr_OpEntry[i].Attr & 0x01)
 		{
 			// group, prefixes
-			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].ReqPrefix & 0xFE))
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
@@ -1140,7 +1140,7 @@ void COPMappingDlg::OnBnClickedButton1()
 					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
-			else if (ptr_OpEntry[i].ReqPrefix & 0xFE)
+			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
@@ -1187,19 +1187,19 @@ void COPMappingDlg::OnBnClickedButton1()
 	// do the actual write
 	for (unsigned int i = 0; i < lOpMatch; i++)
 	{
-		if (ptr_OpEntry[i].ReqPrefix & PF_Operand)
+		if (ptr_OpEntry[i].Attr & PF_Operand)
 		{
 			prefixes = opdsize;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REPNE)
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
 		{
 			prefixes = REPNE;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REP)
+		else if (ptr_OpEntry[i].Attr & PF_REP)
 		{
 			prefixes = REP;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_FWAIT)
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
 		{
 			prefixes = FWAIT;
 		}
@@ -1207,10 +1207,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = NULL;
 		}
-		if (ptr_OpEntry[i].ReqPrefix & 0x01)
+		if (ptr_OpEntry[i].Attr & 0x01)
 		{
 			// group, prefixes
-			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].ReqPrefix & 0xFE))
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
@@ -1220,7 +1220,7 @@ void COPMappingDlg::OnBnClickedButton1()
 					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
-			else if (ptr_OpEntry[i].ReqPrefix & 0xFE)
+			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
@@ -1267,19 +1267,19 @@ void COPMappingDlg::OnBnClickedButton1()
 	// do the actual write
 	for (unsigned int i = 0; i < lOpMatch; i++)
 	{
-		if (ptr_OpEntry[i].ReqPrefix & PF_Operand)
+		if (ptr_OpEntry[i].Attr & PF_Operand)
 		{
 			prefixes = opdsize;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REPNE)
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
 		{
 			prefixes = REPNE;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_REP)
+		else if (ptr_OpEntry[i].Attr & PF_REP)
 		{
 			prefixes = REP;
 		}
-		else if (ptr_OpEntry[i].ReqPrefix & PF_FWAIT)
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
 		{
 			prefixes = FWAIT;
 		}
@@ -1287,10 +1287,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = NULL;
 		}
-		if (ptr_OpEntry[i].ReqPrefix & 0x01)
+		if (ptr_OpEntry[i].Attr & 0x01)
 		{
 			// group, prefixes
-			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].ReqPrefix & 0xFE))
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
@@ -1300,7 +1300,7 @@ void COPMappingDlg::OnBnClickedButton1()
 					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
-			else if (ptr_OpEntry[i].ReqPrefix & 0xFE)
+			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
 					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);

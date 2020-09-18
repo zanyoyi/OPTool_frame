@@ -23,7 +23,7 @@ extern  "C" {
 typedef struct{
 	BYTE OP;         //OP code
 	BYTE OPExt;      //Op extension:OPExt[7]set to 1 indicate OPExt[2:0] is valid.
-    DWORD ReqPrefix;
+    DWORD Attr;
     WCHAR strDisasm[128];
 }OPENTRY;
 
@@ -50,6 +50,7 @@ typedef enum{
 
 typedef enum {
     E_Valid,
+    E_Uncertain,
     E_Operand,
     E_REPNE,
     E_REP,
@@ -94,7 +95,8 @@ typedef enum {
     E_PREFETCHWT1,
 }E_FEATURE;
 
-#define PF_Valid        1 << E_Valid        // architecture support flags
+#define PF_Valid        1 << E_Valid        // architecture valid flags
+#define PF_Uncertain    1 << E_Uncertain    // architecture support uncertained flags
 #define PF_Operand      1 << E_Operand      // mandatory prefix 0x66 (66)
 #define PF_REPNE        1 << E_REPNE        // mandatory prefix 0xF2 (F2)
 #define PF_REP          1 << E_REP          // mandatory prefix 0xF3 (F3)
@@ -143,7 +145,7 @@ typedef enum {
 typedef struct {
     BYTE OP;
     BYTE OPExt;         /*[7] indicated valid,[2:0] = ModRm.REG;*/
-    BYTE PF;
+    BYTE Attr;
     char* strFmt;
 }OP_ENTRY;
 
