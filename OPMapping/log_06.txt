@@ -1910,54 +1910,6 @@
 41   [11B] phminposuw xmm,xmm5 (opdsize)
 41   [11B] phminposuw xmm,xmm6 (opdsize)
 41   [11B] phminposuw xmm,xmm7 (opdsize)
-80   [mem] invept r32,[bx+si] (opdsize)
-80   [mem] invept r32,[bx+di] (opdsize)
-80   [mem] invept r32,[bp+si] (opdsize)
-80   [mem] invept r32,[bp+di] (opdsize)
-80   [mem] invept r32,[si] (opdsize)
-80   [mem] invept r32,[di] (opdsize)
-80   [mem] invept r32,[disp16] (opdsize)
-80   [mem] invept r32,[bx] (opdsize)
-80   [mem] invept r32,[bx+si+disp8] (opdsize)
-80   [mem] invept r32,[bx+di+disp8] (opdsize)
-80   [mem] invept r32,[bp+si+disp8] (opdsize)
-80   [mem] invept r32,[bp+di+disp8] (opdsize)
-80   [mem] invept r32,[si+disp8] (opdsize)
-80   [mem] invept r32,[di+disp8] (opdsize)
-80   [mem] invept r32,[bp+disp8] (opdsize)
-80   [mem] invept r32,[bx+disp8] (opdsize)
-80   [mem] invept r32,[bx+si+disp16] (opdsize)
-80   [mem] invept r32,[bx+di+disp16] (opdsize)
-80   [mem] invept r32,[bp+si+disp16] (opdsize)
-80   [mem] invept r32,[bp+di+disp16] (opdsize)
-80   [mem] invept r32,[si+disp16] (opdsize)
-80   [mem] invept r32,[di+disp16] (opdsize)
-80   [mem] invept r32,[bp+disp16] (opdsize)
-80   [mem] invept r32,[bx+disp16] (opdsize)
-81   [mem] invvpid r32,[bx+si] (opdsize)
-81   [mem] invvpid r32,[bx+di] (opdsize)
-81   [mem] invvpid r32,[bp+si] (opdsize)
-81   [mem] invvpid r32,[bp+di] (opdsize)
-81   [mem] invvpid r32,[si] (opdsize)
-81   [mem] invvpid r32,[di] (opdsize)
-81   [mem] invvpid r32,[disp16] (opdsize)
-81   [mem] invvpid r32,[bx] (opdsize)
-81   [mem] invvpid r32,[bx+si+disp8] (opdsize)
-81   [mem] invvpid r32,[bx+di+disp8] (opdsize)
-81   [mem] invvpid r32,[bp+si+disp8] (opdsize)
-81   [mem] invvpid r32,[bp+di+disp8] (opdsize)
-81   [mem] invvpid r32,[si+disp8] (opdsize)
-81   [mem] invvpid r32,[di+disp8] (opdsize)
-81   [mem] invvpid r32,[bp+disp8] (opdsize)
-81   [mem] invvpid r32,[bx+disp8] (opdsize)
-81   [mem] invvpid r32,[bx+si+disp16] (opdsize)
-81   [mem] invvpid r32,[bx+di+disp16] (opdsize)
-81   [mem] invvpid r32,[bp+si+disp16] (opdsize)
-81   [mem] invvpid r32,[bp+di+disp16] (opdsize)
-81   [mem] invvpid r32,[si+disp16] (opdsize)
-81   [mem] invvpid r32,[di+disp16] (opdsize)
-81   [mem] invvpid r32,[bp+disp16] (opdsize)
-81   [mem] invvpid r32,[bx+disp16] (opdsize)
 82   [mem] invpcid r32,oword[bx+si] (opdsize)
 82   [mem] invpcid r32,oword[bx+di] (opdsize)
 82   [mem] invpcid r32,oword[bp+si] (opdsize)
@@ -1982,51 +1934,3 @@
 82   [mem] invpcid r32,oword[di+disp16] (opdsize)
 82   [mem] invpcid r32,oword[bp+disp16] (opdsize)
 82   [mem] invpcid r32,oword[bx+disp16] (opdsize)
-F0   [mem] movbe r16/r32/r64,word/dword/qword[bx+si]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[bx+di]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[bp+si]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[bp+di]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[si]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[di]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[disp16]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[bx]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[bx+si+disp8]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[bx+di+disp8]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[bp+si+disp8]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[bp+di+disp8]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[si+disp8]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[di+disp8]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[bp+disp8]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[bx+disp8]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[bx+si+disp16]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[bx+di+disp16]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[bp+si+disp16]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[bp+di+disp16]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[si+disp16]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[di+disp16]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[bp+disp16]
-F0   [mem] movbe r16/r32/r64,word/dword/qword[bx+disp16]
-F1   [mem] movbe word/dword/qword[bx+si],r16/r32/r64
-F1   [mem] movbe word/dword/qword[bx+di],r16/r32/r64
-F1   [mem] movbe word/dword/qword[bp+si],r16/r32/r64
-F1   [mem] movbe word/dword/qword[bp+di],r16/r32/r64
-F1   [mem] movbe word/dword/qword[si],r16/r32/r64
-F1   [mem] movbe word/dword/qword[di],r16/r32/r64
-F1   [mem] movbe word/dword/qword[disp16],r16/r32/r64
-F1   [mem] movbe word/dword/qword[bx],r16/r32/r64
-F1   [mem] movbe word/dword/qword[bx+si+disp8],r16/r32/r64
-F1   [mem] movbe word/dword/qword[bx+di+disp8],r16/r32/r64
-F1   [mem] movbe word/dword/qword[bp+si+disp8],r16/r32/r64
-F1   [mem] movbe word/dword/qword[bp+di+disp8],r16/r32/r64
-F1   [mem] movbe word/dword/qword[si+disp8],r16/r32/r64
-F1   [mem] movbe word/dword/qword[di+disp8],r16/r32/r64
-F1   [mem] movbe word/dword/qword[bp+disp8],r16/r32/r64
-F1   [mem] movbe word/dword/qword[bx+disp8],r16/r32/r64
-F1   [mem] movbe word/dword/qword[bx+si+disp16],r16/r32/r64
-F1   [mem] movbe word/dword/qword[bx+di+disp16],r16/r32/r64
-F1   [mem] movbe word/dword/qword[bp+si+disp16],r16/r32/r64
-F1   [mem] movbe word/dword/qword[bp+di+disp16],r16/r32/r64
-F1   [mem] movbe word/dword/qword[si+disp16],r16/r32/r64
-F1   [mem] movbe word/dword/qword[di+disp16],r16/r32/r64
-F1   [mem] movbe word/dword/qword[bp+disp16],r16/r32/r64
-F1   [mem] movbe word/dword/qword[bx+disp16],r16/r32/r64

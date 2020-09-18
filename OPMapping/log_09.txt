@@ -246,10 +246,6 @@
 01/0 [mem] sgdt [ebp+disp32]
 01/0 [mem] sgdt [esi+disp32]
 01/0 [mem] sgdt [edi+disp32]
-01/0 [11B] vmcall
-01/0 [11B] vmlaunch
-01/0 [11B] vmresume
-01/0 [11B] vmxoff
 01/1 [mem] sidt [eax]
 01/1 [mem] sidt [ecx]
 01/1 [mem] sidt [edx]
@@ -276,8 +272,6 @@
 01/1 [mem] sidt [edi+disp32]
 01/1 [11B] monitor
 01/1 [11B] mwait
-01/1 [11B] clac
-01/1 [11B] stac
 01/2 [mem] lgdt [eax]
 01/2 [mem] lgdt [ecx]
 01/2 [mem] lgdt [edx]
@@ -304,7 +298,6 @@
 01/2 [mem] lgdt [edi+disp32]
 01/2 [11B] xgetbv
 01/2 [11B] xsetbv
-01/2 [11B] vmfunc
 01/3 [mem] lidt [eax]
 01/3 [mem] lidt [ecx]
 01/3 [mem] lidt [edx]
@@ -329,12 +322,6 @@
 01/3 [mem] lidt [ebp+disp32]
 01/3 [mem] lidt [esi+disp32]
 01/3 [mem] lidt [edi+disp32]
-01/3 [11B] vmrun
-01/3 [11B] vmmcall
-01/3 [11B] vmload
-01/3 [11B] vmsave
-01/3 [11B] stgi
-01/3 [11B] clgi
 01/3 [11B] invlpga rAX,ecx
 01/4 [mem] smsw [eax]
 01/4 [mem] smsw [ecx]
@@ -491,9 +478,7 @@
 03   [11B] lsl r16/r32/r64,rBP
 03   [11B] lsl r16/r32/r64,rSI
 03   [11B] lsl r16/r32/r64,rDI
-05         syscall
 06         clts
-07         sysret
 08         invd
 09         wbinvd
 0B         ud2
@@ -545,30 +530,6 @@
 0D/1 [mem] prefetchw [ebp+disp32]
 0D/1 [mem] prefetchw [esi+disp32]
 0D/1 [mem] prefetchw [edi+disp32]
-0D/2 [mem] prefetchwt1 byte[eax]
-0D/2 [mem] prefetchwt1 byte[ecx]
-0D/2 [mem] prefetchwt1 byte[edx]
-0D/2 [mem] prefetchwt1 byte[ebx]
-0D/2 [mem] prefetchwt1 byte[[--][--]]
-0D/2 [mem] prefetchwt1 byte[disp32]
-0D/2 [mem] prefetchwt1 byte[esi]
-0D/2 [mem] prefetchwt1 byte[edi]
-0D/2 [mem] prefetchwt1 byte[eax+disp8]
-0D/2 [mem] prefetchwt1 byte[ecx+disp8]
-0D/2 [mem] prefetchwt1 byte[edx+disp8]
-0D/2 [mem] prefetchwt1 byte[ebx+disp8]
-0D/2 [mem] prefetchwt1 byte[[--][--]+disp8]
-0D/2 [mem] prefetchwt1 byte[ebp+disp8]
-0D/2 [mem] prefetchwt1 byte[esi+disp8]
-0D/2 [mem] prefetchwt1 byte[edi+disp8]
-0D/2 [mem] prefetchwt1 byte[eax+disp32]
-0D/2 [mem] prefetchwt1 byte[ecx+disp32]
-0D/2 [mem] prefetchwt1 byte[edx+disp32]
-0D/2 [mem] prefetchwt1 byte[ebx+disp32]
-0D/2 [mem] prefetchwt1 byte[[--][--]disp32]
-0D/2 [mem] prefetchwt1 byte[ebp+disp32]
-0D/2 [mem] prefetchwt1 byte[esi+disp32]
-0D/2 [mem] prefetchwt1 byte[edi+disp32]
 0E         femms
 10   [mem] movups xmm,oword[eax]
 10   [mem] movupd xmm,oword[eax] (opdsize)
@@ -2160,7 +2121,6 @@
 33         rdpmc
 34         sysenter
 35         sysexit
-37         getsec
 40   [mem] cmovo r16/r32/r64,[eax]
 40   [mem] cmovo r16/r32/r64,[ecx]
 40   [mem] cmovo r16/r32/r64,[edx]
@@ -5650,100 +5610,36 @@
 76   [11B] pcmpeqd mm,mm7
 76   [11B] pcmpeqd xmm,xmm7 (opdsize)
 77         emms
-78   [mem] vmread dword/qword[eax],r32/r64
-78   [mem] vmread dword/qword[ecx],r32/r64
-78   [mem] vmread dword/qword[edx],r32/r64
-78   [mem] vmread dword/qword[ebx],r32/r64
-78   [mem] vmread dword/qword[[--][--]],r32/r64
-78   [mem] vmread dword/qword[disp32],r32/r64
-78   [mem] vmread dword/qword[esi],r32/r64
-78   [mem] vmread dword/qword[edi],r32/r64
-78   [mem] vmread dword/qword[eax+disp8],r32/r64
-78   [mem] vmread dword/qword[ecx+disp8],r32/r64
-78   [mem] vmread dword/qword[edx+disp8],r32/r64
-78   [mem] vmread dword/qword[ebx+disp8],r32/r64
-78   [mem] vmread dword/qword[[--][--]+disp8],r32/r64
-78   [mem] vmread dword/qword[ebp+disp8],r32/r64
-78   [mem] vmread dword/qword[esi+disp8],r32/r64
-78   [mem] vmread dword/qword[edi+disp8],r32/r64
-78   [mem] vmread dword/qword[eax+disp32],r32/r64
-78   [mem] vmread dword/qword[ecx+disp32],r32/r64
-78   [mem] vmread dword/qword[edx+disp32],r32/r64
-78   [mem] vmread dword/qword[ebx+disp32],r32/r64
-78   [mem] vmread dword/qword[[--][--]disp32],r32/r64
-78   [mem] vmread dword/qword[ebp+disp32],r32/r64
-78   [mem] vmread dword/qword[esi+disp32],r32/r64
-78   [mem] vmread dword/qword[edi+disp32],r32/r64
-78   [11B] vmread EAX,r32/r64
 78   [11B] extrq xmm0,imm,imm (opdsize)
 78   [11B] insertq xmm,xmm0,imm,imm (REPNE)
-78   [11B] vmread ECX,r32/r64
 78   [11B] extrq xmm1,imm,imm (opdsize)
 78   [11B] insertq xmm,xmm1,imm,imm (REPNE)
-78   [11B] vmread EDX,r32/r64
 78   [11B] extrq xmm2,imm,imm (opdsize)
 78   [11B] insertq xmm,xmm2,imm,imm (REPNE)
-78   [11B] vmread EBX,r32/r64
 78   [11B] extrq xmm3,imm,imm (opdsize)
 78   [11B] insertq xmm,xmm3,imm,imm (REPNE)
-78   [11B] vmread ESP,r32/r64
 78   [11B] extrq xmm4,imm,imm (opdsize)
 78   [11B] insertq xmm,xmm4,imm,imm (REPNE)
-78   [11B] vmread EBP,r32/r64
 78   [11B] extrq xmm5,imm,imm (opdsize)
 78   [11B] insertq xmm,xmm5,imm,imm (REPNE)
-78   [11B] vmread ESI,r32/r64
 78   [11B] extrq xmm6,imm,imm (opdsize)
 78   [11B] insertq xmm,xmm6,imm,imm (REPNE)
-78   [11B] vmread EDI,r32/r64
 78   [11B] extrq xmm7,imm,imm (opdsize)
 78   [11B] insertq xmm,xmm7,imm,imm (REPNE)
-79   [mem] vmwrite r32/r64,dword/qword[eax]
-79   [mem] vmwrite r32/r64,dword/qword[ecx]
-79   [mem] vmwrite r32/r64,dword/qword[edx]
-79   [mem] vmwrite r32/r64,dword/qword[ebx]
-79   [mem] vmwrite r32/r64,dword/qword[[--][--]]
-79   [mem] vmwrite r32/r64,dword/qword[disp32]
-79   [mem] vmwrite r32/r64,dword/qword[esi]
-79   [mem] vmwrite r32/r64,dword/qword[edi]
-79   [mem] vmwrite r32/r64,dword/qword[eax+disp8]
-79   [mem] vmwrite r32/r64,dword/qword[ecx+disp8]
-79   [mem] vmwrite r32/r64,dword/qword[edx+disp8]
-79   [mem] vmwrite r32/r64,dword/qword[ebx+disp8]
-79   [mem] vmwrite r32/r64,dword/qword[[--][--]+disp8]
-79   [mem] vmwrite r32/r64,dword/qword[ebp+disp8]
-79   [mem] vmwrite r32/r64,dword/qword[esi+disp8]
-79   [mem] vmwrite r32/r64,dword/qword[edi+disp8]
-79   [mem] vmwrite r32/r64,dword/qword[eax+disp32]
-79   [mem] vmwrite r32/r64,dword/qword[ecx+disp32]
-79   [mem] vmwrite r32/r64,dword/qword[edx+disp32]
-79   [mem] vmwrite r32/r64,dword/qword[ebx+disp32]
-79   [mem] vmwrite r32/r64,dword/qword[[--][--]disp32]
-79   [mem] vmwrite r32/r64,dword/qword[ebp+disp32]
-79   [mem] vmwrite r32/r64,dword/qword[esi+disp32]
-79   [mem] vmwrite r32/r64,dword/qword[edi+disp32]
-79   [11B] vmwrite r32/r64,EAX
 79   [11B] extrq xmm,xmm0 (opdsize)
 79   [11B] insertq xmm,xmm0 (REPNE)
-79   [11B] vmwrite r32/r64,ECX
 79   [11B] extrq xmm,xmm1 (opdsize)
 79   [11B] insertq xmm,xmm1 (REPNE)
-79   [11B] vmwrite r32/r64,EDX
 79   [11B] extrq xmm,xmm2 (opdsize)
 79   [11B] insertq xmm,xmm2 (REPNE)
-79   [11B] vmwrite r32/r64,EBX
 79   [11B] extrq xmm,xmm3 (opdsize)
 79   [11B] insertq xmm,xmm3 (REPNE)
-79   [11B] vmwrite r32/r64,ESP
 79   [11B] extrq xmm,xmm4 (opdsize)
 79   [11B] insertq xmm,xmm4 (REPNE)
-79   [11B] vmwrite r32/r64,EBP
 79   [11B] extrq xmm,xmm5 (opdsize)
 79   [11B] insertq xmm,xmm5 (REPNE)
-79   [11B] vmwrite r32/r64,ESI
 79   [11B] extrq xmm,xmm6 (opdsize)
 79   [11B] insertq xmm,xmm6 (REPNE)
-79   [11B] vmwrite r32/r64,EDI
 79   [11B] extrq xmm,xmm7 (opdsize)
 79   [11B] insertq xmm,xmm7 (REPNE)
 7C   [mem] haddpd xmm,oword[eax] (opdsize)
@@ -8276,102 +8172,6 @@ C7/5 [mem] xsaves [[--][--]disp32]
 C7/5 [mem] xsaves [ebp+disp32]
 C7/5 [mem] xsaves [esi+disp32]
 C7/5 [mem] xsaves [edi+disp32]
-C7/6 [mem] vmptrld [eax]
-C7/6 [mem] vmclear [eax] (opdsize)
-C7/6 [mem] vmxon [eax] (REP)
-C7/6 [mem] vmptrld [ecx]
-C7/6 [mem] vmclear [ecx] (opdsize)
-C7/6 [mem] vmxon [ecx] (REP)
-C7/6 [mem] vmptrld [edx]
-C7/6 [mem] vmclear [edx] (opdsize)
-C7/6 [mem] vmxon [edx] (REP)
-C7/6 [mem] vmptrld [ebx]
-C7/6 [mem] vmclear [ebx] (opdsize)
-C7/6 [mem] vmxon [ebx] (REP)
-C7/6 [mem] vmptrld [[--][--]]
-C7/6 [mem] vmclear [[--][--]] (opdsize)
-C7/6 [mem] vmxon [[--][--]] (REP)
-C7/6 [mem] vmptrld [disp32]
-C7/6 [mem] vmclear [disp32] (opdsize)
-C7/6 [mem] vmxon [disp32] (REP)
-C7/6 [mem] vmptrld [esi]
-C7/6 [mem] vmclear [esi] (opdsize)
-C7/6 [mem] vmxon [esi] (REP)
-C7/6 [mem] vmptrld [edi]
-C7/6 [mem] vmclear [edi] (opdsize)
-C7/6 [mem] vmxon [edi] (REP)
-C7/6 [mem] vmptrld [eax+disp8]
-C7/6 [mem] vmclear [eax+disp8] (opdsize)
-C7/6 [mem] vmxon [eax+disp8] (REP)
-C7/6 [mem] vmptrld [ecx+disp8]
-C7/6 [mem] vmclear [ecx+disp8] (opdsize)
-C7/6 [mem] vmxon [ecx+disp8] (REP)
-C7/6 [mem] vmptrld [edx+disp8]
-C7/6 [mem] vmclear [edx+disp8] (opdsize)
-C7/6 [mem] vmxon [edx+disp8] (REP)
-C7/6 [mem] vmptrld [ebx+disp8]
-C7/6 [mem] vmclear [ebx+disp8] (opdsize)
-C7/6 [mem] vmxon [ebx+disp8] (REP)
-C7/6 [mem] vmptrld [[--][--]+disp8]
-C7/6 [mem] vmclear [[--][--]+disp8] (opdsize)
-C7/6 [mem] vmxon [[--][--]+disp8] (REP)
-C7/6 [mem] vmptrld [ebp+disp8]
-C7/6 [mem] vmclear [ebp+disp8] (opdsize)
-C7/6 [mem] vmxon [ebp+disp8] (REP)
-C7/6 [mem] vmptrld [esi+disp8]
-C7/6 [mem] vmclear [esi+disp8] (opdsize)
-C7/6 [mem] vmxon [esi+disp8] (REP)
-C7/6 [mem] vmptrld [edi+disp8]
-C7/6 [mem] vmclear [edi+disp8] (opdsize)
-C7/6 [mem] vmxon [edi+disp8] (REP)
-C7/6 [mem] vmptrld [eax+disp32]
-C7/6 [mem] vmclear [eax+disp32] (opdsize)
-C7/6 [mem] vmxon [eax+disp32] (REP)
-C7/6 [mem] vmptrld [ecx+disp32]
-C7/6 [mem] vmclear [ecx+disp32] (opdsize)
-C7/6 [mem] vmxon [ecx+disp32] (REP)
-C7/6 [mem] vmptrld [edx+disp32]
-C7/6 [mem] vmclear [edx+disp32] (opdsize)
-C7/6 [mem] vmxon [edx+disp32] (REP)
-C7/6 [mem] vmptrld [ebx+disp32]
-C7/6 [mem] vmclear [ebx+disp32] (opdsize)
-C7/6 [mem] vmxon [ebx+disp32] (REP)
-C7/6 [mem] vmptrld [[--][--]disp32]
-C7/6 [mem] vmclear [[--][--]disp32] (opdsize)
-C7/6 [mem] vmxon [[--][--]disp32] (REP)
-C7/6 [mem] vmptrld [ebp+disp32]
-C7/6 [mem] vmclear [ebp+disp32] (opdsize)
-C7/6 [mem] vmxon [ebp+disp32] (REP)
-C7/6 [mem] vmptrld [esi+disp32]
-C7/6 [mem] vmclear [esi+disp32] (opdsize)
-C7/6 [mem] vmxon [esi+disp32] (REP)
-C7/6 [mem] vmptrld [edi+disp32]
-C7/6 [mem] vmclear [edi+disp32] (opdsize)
-C7/6 [mem] vmxon [edi+disp32] (REP)
-C7/7 [mem] vmptrst [eax]
-C7/7 [mem] vmptrst [ecx]
-C7/7 [mem] vmptrst [edx]
-C7/7 [mem] vmptrst [ebx]
-C7/7 [mem] vmptrst [[--][--]]
-C7/7 [mem] vmptrst [disp32]
-C7/7 [mem] vmptrst [esi]
-C7/7 [mem] vmptrst [edi]
-C7/7 [mem] vmptrst [eax+disp8]
-C7/7 [mem] vmptrst [ecx+disp8]
-C7/7 [mem] vmptrst [edx+disp8]
-C7/7 [mem] vmptrst [ebx+disp8]
-C7/7 [mem] vmptrst [[--][--]+disp8]
-C7/7 [mem] vmptrst [ebp+disp8]
-C7/7 [mem] vmptrst [esi+disp8]
-C7/7 [mem] vmptrst [edi+disp8]
-C7/7 [mem] vmptrst [eax+disp32]
-C7/7 [mem] vmptrst [ecx+disp32]
-C7/7 [mem] vmptrst [edx+disp32]
-C7/7 [mem] vmptrst [ebx+disp32]
-C7/7 [mem] vmptrst [[--][--]disp32]
-C7/7 [mem] vmptrst [ebp+disp32]
-C7/7 [mem] vmptrst [esi+disp32]
-C7/7 [mem] vmptrst [edi+disp32]
 C8         bswap EAX
 C9         bswap ECX
 CA         bswap EDX

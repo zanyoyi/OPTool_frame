@@ -159,7 +159,7 @@ static BOOL OpcodeGroupCheck(E_XB_OP eOPTab, BYTE buffer)
 }
 
 // kill, override, invalid
-static BOOL SpuriousCheck(E_XB_OP eOPTab, int OpIdx, int OPExtIdx, int PrefixIdx)
+static BOOL SpuriousCheck(E_XB_OP eOPTab, int OpIdx, /*int OPExtIdx,*/ int PrefixIdx)
 {
     if ((eOPTab == E_1B_OP) && (PrefixIdx == 0x66))
     {
@@ -499,10 +499,10 @@ static DWORD lPrefixes(E_XB_OP eOPTab, int OpIdx, int GrpIdx, OP_ENTRY** pGrp)
             return sizeof(OP_0F6A) / sizeof(OP_ENTRY);
         case 0x6B:
             *pGrp = OP_0F6B;
-            return sizeof(OP_0F7B) / sizeof(OP_ENTRY);
+            return sizeof(OP_0F6B) / sizeof(OP_ENTRY);
         case 0x6E:
             *pGrp = OP_0F6E;
-            return sizeof(OP_0F7E) / sizeof(OP_ENTRY);
+            return sizeof(OP_0F6E) / sizeof(OP_ENTRY);
         case 0x6F:
             *pGrp = OP_0F6F;
             return sizeof(OP_0F6F) / sizeof(OP_ENTRY);
@@ -777,37 +777,37 @@ static DWORD lPrefixes(E_XB_OP eOPTab, int OpIdx, int GrpIdx, OP_ENTRY** pGrp)
             return sizeof(OP_0FF2) / sizeof(OP_ENTRY);
         case 0xF3:
             *pGrp = OP_0FF3;
-            return sizeof(OP_0FF4) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FF3) / sizeof(OP_ENTRY);
         case 0xF4:
             *pGrp = OP_0FF4;
-            return sizeof(OP_0FE5) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FF4) / sizeof(OP_ENTRY);
         case 0xF5:
             *pGrp = OP_0FF5;
-            return sizeof(OP_0FE5) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FF5) / sizeof(OP_ENTRY);
         case 0xF6:
             *pGrp = OP_0FF6;
-            return sizeof(OP_0FE6) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FF6) / sizeof(OP_ENTRY);
         case 0xF7:
             *pGrp = OP_0FF7;
-            return sizeof(OP_0FE7) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FF7) / sizeof(OP_ENTRY);
         case 0xF8:
             *pGrp = OP_0FF8;
-            return sizeof(OP_0FE8) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FF8) / sizeof(OP_ENTRY);
         case 0xF9:
             *pGrp = OP_0FF9;
-            return sizeof(OP_0FE9) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FF9) / sizeof(OP_ENTRY);
         case 0xFA:
             *pGrp = OP_0FFA;
-            return sizeof(OP_0FEA) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FFA) / sizeof(OP_ENTRY);
         case 0xFB:
             *pGrp = OP_0FFB;
-            return sizeof(OP_0FEB) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FFB) / sizeof(OP_ENTRY);
         case 0xFC:
             *pGrp = OP_0FFC;
-            return sizeof(OP_0FEC) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FFC) / sizeof(OP_ENTRY);
         case 0xFD:
             *pGrp = OP_0FFD;
-            return sizeof(OP_0FED) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FFD) / sizeof(OP_ENTRY);
         case 0xFE:
             *pGrp = OP_0FFE;
             return sizeof(OP_0FFE) / sizeof(OP_ENTRY);
@@ -1527,7 +1527,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 }
 
                 // final check
-                if (SpuriousCheck(eOPTab, OpIdx, OP_2, PrefixIdx_previous))
+                if (SpuriousCheck(eOPTab, OpIdx, /*OP_2,*/ PrefixIdx_previous))
                 {
                     pOpEntry--;
                     lFound--;

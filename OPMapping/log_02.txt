@@ -62,8 +62,6 @@
 80          INVEPT Gy,Mdq (66) (opdsize)
 81          INVVPID Gy,Mdq (66) (opdsize)
 82          INVPCID Gy,Mdq (66) (opdsize)
-94          UD0
-95          UD0
 C6/1        vgatherpf0dps/d Wx (66),(ev) (opdsize)
 C6/2        vgatherpf1dps/d Wx (66),(ev) (opdsize)
 C6/5        vscatterpf0dps/d Wx (66),(ev) (opdsize)
@@ -72,33 +70,5 @@ C7/1        vgatherpf0qps/d Wx (66),(ev) (opdsize)
 C7/2        vgatherpf1qps/d Wx (66),(ev) (opdsize)
 C7/5        vscatterpf0qps/d Wx (66),(ev) (opdsize)
 C7/6        vscatterpf1qps/d Wx (66),(ev) (opdsize)
-C8          sha1nexte Vdq,Wdq
-C9          sha1msg1 Vdq,Wdq
-CA          sha1msg2 Vdq,Wdq
-CB          sha256rnds2 Vdq,Wdq
-CC          sha256msg1 Vdq,Wdq
-CD          sha256msg2 Vdq,Wdq
-CF          vgf2p8mulb Vx,Wx (66) (opdsize)
 DB          VAESIMC Vdq,Wdq (66),(v1) (opdsize)
-DC          vaesenc Vx,Hx,Wx (66) (opdsize)
-DD          vaesenclast Vx,Hx,Wx (66) (opdsize)
-DE          vaesdec Vx,Hx,Wx (66) (opdsize)
-DF          vaesdeclast Vx,Hx,Wx (66) (opdsize)
-F0          MOVBE Gy,My
-F0          MOVBE Gw,Mw (66) (opdsize)
-F0          CRC32 Gd,Eb (F2) (REPNE)
-F0          CRC32 Gd,Eb (66&F2) (opdsize)
-F1          MOVBE My,Gy
-F1          MOVBE Mw,Gw (66) (opdsize)
-F1          CRC32 Gd,Ey (F2) (REPNE)
-F1          CRC32 Gd,Ew (66&F2) (opdsize)
-F3/1        BLSR By,Ey (v)
-F3/2        BLSMSK By,Ey (v)
-F3/3        BLSI By,Ey (v)
-F5          WRUSSD/Q My,Gy (66) (opdsize)
-F6          ADCX Gy,Ey (66) (opdsize)
-F6          ADOX Gy,Ey (F3) (REP)
-F6          WRSSD/Q My,Gy
-F8          ENQCMD Gv,Mdqq (F2) (REPNE)
-F8          ENQCMDS Gv,Mdqq (F3) (REP)
 F9          MOVDIRI My,Gy

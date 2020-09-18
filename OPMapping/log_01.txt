@@ -5,35 +5,18 @@
 00/4        VERR Ew
 00/5        VERW Ew
 01/0        SGDT Ms
-01/0        VMCALL (001),(11B)
-01/0        VMLAUNCH (010),(11B)
-01/0        VMRESUME (011),(11B)
-01/0        VMXOFF (100),(11B)
-01/0        PCONFIG (101),(11B)
-01/0        ENCLV (000),(11B)
 01/1        SIDT Ms
 01/1        MONITOR (000),(11B)
 01/1        MWAIT (001),(11B)
 01/1        CLAC (010),(11B)
 01/1        STAC (011),(11B)
-01/1        ENCLS (111),(11B)
 01/2        LGDT Ms
 01/2        XGETBV (000),(11B)
 01/2        XSETBV (001),(11B)
-01/2        VMFUNC (100),(11B)
-01/2        XEND (101)(11B)
-01/2        XTEST (110)(11B)
-01/2        ENCLU (111),(11B)
 01/3        LIDT Ms
 01/4        SMSW Mw/Rv
-01/5        rdpkru (110),(11B)
-01/5        wrpkru (111),(11B)
-01/5        SAVEPREVSSP (F3),(010),(11B) (REP)
-01/5        RSTORSSP Mq (F3) (REP)
-01/5        SETSSBSY (F3),(000),(11B) (REP)
 01/6        LMSW Ew
 01/7        INVLPG Mb
-01/7        SWAPGS (o64),(000),(11B)
 01/7        RDTSCP (001),(11B)
 02          LAR Gv,Ew
 03          LSL Gv,Ew
@@ -75,18 +58,6 @@
 18/1        prefetch T0
 18/2        prefetch T1
 18/3        prefetch T2
-1A          BNDCL Gv,Ev (F3) (REP)
-1A          BNDCU Gv,Ev (F2) (REPNE)
-1A          BNDMOV Gv,Ev (66) (opdsize)
-1A          BNDLDX Gv,Ev
-1B          BNDCN Gv,Ev (F2) (REPNE)
-1B          BNDMOV Ev,Gv (66) (opdsize)
-1B          BNDMK Gv,Ev (F3) (REP)
-1B          BNDSTX Ev,Gv
-1C/0        cldemote Mb
-1E/1        RDSSPD/Q Ry (F3),(11B) (REP)
-1E/7        ENDBR64 (F3),(010),(11B) (REP)
-1E/7        ENDBR32 (F3),(011),(11B) (REP)
 1F          NOP Ev
 20          MOV Rd,Cd
 21          MOV Rd,Dd
@@ -125,32 +96,16 @@
 3A          escape # 3-byte escape 2
 40          CMOVO Gv,Ev
 41          CMOVNO Gv,Ev
-41          kandw/q Vk,Hk,Uk
-41          kandb/d Vk,Hk,Uk (66) (opdsize)
 42          CMOVB/C/NAE Gv,Ev
-42          kandnw/q Vk,Hk,Uk
-42          kandnb/d Vk,Hk,Uk (66) (opdsize)
 43          CMOVAE/NB/NC Gv,Ev
 44          CMOVE/Z Gv,Ev
-44          knotw/q Vk,Uk
-44          knotb/d Vk,Uk (66) (opdsize)
 45          CMOVNE/NZ Gv,Ev
-45          korw/q Vk,Hk,Uk
-45          korb/d Vk,Hk,Uk (66) (opdsize)
 46          CMOVBE/NA Gv,Ev
-46          kxnorw/q Vk,Hk,Uk
-46          kxnorb/d Vk,Hk,Uk (66) (opdsize)
 47          CMOVA/NBE Gv,Ev
-47          kxorw/q Vk,Hk,Uk
-47          kxorb/d Vk,Hk,Uk (66) (opdsize)
 48          CMOVS Gv,Ev
 49          CMOVNS Gv,Ev
 4A          CMOVP/PE Gv,Ev
-4A          kaddw/q Vk,Hk,Uk
-4A          kaddb/d Vk,Hk,Uk (66) (opdsize)
 4B          CMOVNP/PO Gv,Ev
-4B          kunpckbw Vk,Hk,Uk (66) (opdsize)
-4B          kunpckwd/dq Vk,Hk,Uk
 4C          CMOVL/NGE Gv,Ev
 4D          CMOVNL/GE Gv,Ev
 4E          CMOVLE/NG Gv,Ev
@@ -228,12 +183,10 @@
 6A          vpunpckhdq Vx,Hx,Wx (66),(v1) (opdsize)
 6B          packssdw Pq,Qd
 6B          vpackssdw Vx,Hx,Wx (66),(v1) (opdsize)
-6B          movd/q Pd,Ey
 6C          vpunpcklqdq Vx,Hx,Wx (66),(v1) (opdsize)
 6D          vpunpckhqdq Vx,Hx,Wx (66),(v1) (opdsize)
 6E          movd/q Pd,Ey
 6E          vmovd/q Vy,Ey (66),(v1) (opdsize)
-6E          movq Pq,Qq
 6F          movq Pq,Qq
 6F          vmovdqa Vx,Wx (66) (opdsize)
 6F          vmovdqu Vx,Wx (F3) (REP)
@@ -297,29 +250,15 @@
 8E          JLE/JNG Jz (f64)
 8F          JNLE/JG Jz (f64)
 90          SETO Eb
-90          kmovw/q Vk,Wk
-90          kmovb/d Vk,Wk (66) (opdsize)
 91          SETNO Eb
-91          kmovw/q Mv,Vk
-91          kmovb/d Mv,Vk (66) (opdsize)
 92          SETB/C/NAE Eb
-92          kmovw Vk,Rv
-92          kmovb Vk,Rv (66) (opdsize)
-92          kmovq/d Vk,Rv (F2) (REPNE)
 93          SETAE/NB/NC Eb
-93          kmovw Gv,Uk
-93          kmovb Gv,Uk (66) (opdsize)
-93          kmovq/d Gv,Uk (F2) (REPNE)
 94          SETE/Z Eb
 95          SETNE/NZ Eb
 96          SETBE/NA Eb
 97          SETA/NBE Eb
 98          SETS Eb
-98          kortestw/q Vk,Uk
-98          kortestb/d Vk,Uk (66) (opdsize)
 99          SETNS Eb
-99          ktestw/q Vk,Uk
-99          ktestb/d Vk,Uk (66) (opdsize)
 9A          SETP/PE Eb
 9B          SETNP/PO Eb
 9C          SETL/NGE Eb
@@ -332,14 +271,6 @@ A2          CPUID
 A3          BT Ev,Gv
 A4          SHLD Ev,Gv,Ib
 A5          SHLD Ev,Gv,CL
-A6/0        MONTMUL
-A6/1        XSHA1
-A6/2        XSHA2
-A7/0        xstore-rng
-A7/1        xcrypt-ecb
-A7/2        xcrypt-cbc
-A7/3        xcrypt-cfb
-A7/4        xcrypt-ofb
 A8          PUSH GS (d64)
 A9          POP GS (d64)
 AA          RSM
@@ -510,8 +441,6 @@ F5          pmaddwd Pq,Qq
 F5          vpmaddwd Vx,Hx,Wx (66),(v1) (opdsize)
 F6          psadbw Pq,Qq
 F6          vpsadbw Vx,Hx,Wx (66),(v1) (opdsize)
-F6          maskmovq Pq,Nq
-F6          vmaskmovdqu Vx,Ux (66),(v1) (opdsize)
 F7          maskmovq Pq,Nq
 F7          vmaskmovdqu Vx,Ux (66),(v1) (opdsize)
 F8          psubb Pq,Qq
@@ -522,7 +451,6 @@ FA          psubd Pq,Qq
 FA          vpsubd Vx,Hx,Wx (66),(v1) (opdsize)
 FB          psubq Pq,Qq
 FB          vpsubq Vx,Hx,Wx (66),(v1) (opdsize)
-FB          paddb Pq,Qq
 FC          paddb Pq,Qq
 FC          vpaddb Vx,Hx,Wx (66),(v1) (opdsize)
 FD          paddw Pq,Qq
