@@ -172,7 +172,7 @@ static BOOL UncertainModify(E_XB_OP eOPTab, int OpIdx, int OPExtIdx/*, int Prefi
     {
         switch (OpIdx)
         {
-        case 0x00:
+        case 0x00:          // Grp06
             switch ((OPExtIdx >> 3) & 0x7)
             {
             case 0x6:       // jmpe
@@ -181,7 +181,7 @@ static BOOL UncertainModify(E_XB_OP eOPTab, int OpIdx, int OPExtIdx/*, int Prefi
                 break;
             }
             break;
-        case 0x01:
+        case 0x01:          // Grp07
             switch ((OPExtIdx >> 3) & 0x7)
             {
             case 0x1:       // monitor, mwait
@@ -212,20 +212,96 @@ static BOOL UncertainModify(E_XB_OP eOPTab, int OpIdx, int OPExtIdx/*, int Prefi
                 break;
             }
             break;
-        case 0x0D:          // prefetch, prefetchw
+        case 0x0D:          // GrpP
+            switch ((OPExtIdx >> 3) & 0x7)
+            {
+            case 0x0:       // prefetch
+                if (!(OPExtIdx >= 0xC0))
+                {
+                    return TRUE;
+                }
+                break;
+            case 0x1:       // prefetchw
+                if (!(OPExtIdx >= 0xC0))
+                {
+                    return TRUE;
+                }
+                break;
+            default:
+                break;
+            }
             return TRUE;
-        case 0x18:          // prefetchnta, prefetcht0, prefetcht1, prefetcht2
+        case 0x0F:          // Grp 3DNow!
+            return TRUE;
+        case 0x18:          // Grp16
+            switch ((OPExtIdx >> 3) & 0x7)
+            {
+            case 0x0:       // prefetchnta
+                if (!(OPExtIdx >= 0xC0))
+                {
+                    return TRUE;
+                }
+                break;
+            case 0x1:       // prefetcht0
+                if (!(OPExtIdx >= 0xC0))
+                {
+                    return TRUE;
+                }
+                break;
+            case 0x2:       // prefetcht1
+                if (!(OPExtIdx >= 0xC0))
+                {
+                    return TRUE;
+                }
+                break;
+            case 0x3:       // prefetcht2
+                if (!(OPExtIdx >= 0xC0))
+                {
+                    return TRUE;
+                }
+                break;
+            default:
+                break;
+            }
             return TRUE;
         case 0x33:          // rdpmc
             return TRUE;
         case 0x77:          // emms
             return TRUE;
-        case 0xAE:          // Grp
-            return TRUE;
+        case 0xAE:          // Grp15 
+            switch ((OPExtIdx >> 3) & 0x7)
+            {
+            case 0x4:       // xsave
+                return TRUE;
+            case 0x5:       // xrstor, lfence
+                return TRUE;
+            case 0x6:       // xsaveopt
+                if (!(OPExtIdx >= 0xC0))
+                {
+                    return TRUE;
+                }
+                break;
+            case 0x7:       // clflush, sfence
+                return TRUE;
+            default:
+                break;
+            }
+            break;
         case 0xB8:          // jmpe
             return TRUE;
-        case 0xC7:          // Grp
-            return TRUE;
+        case 0xC7:          // Grp09
+            switch ((OPExtIdx >> 3) & 0x7)
+            {
+            case 0x3:       // xrstors
+                return TRUE;
+            case 0x4:       // xsavec
+                return TRUE;
+            case 0x5:       // xsaves
+                return TRUE;
+            default:
+                break;
+            }
+            break;
         default:
             break;
         }
