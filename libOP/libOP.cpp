@@ -172,15 +172,6 @@ static BOOL UncertainModify(E_XB_OP eOPTab, int OpIdx, int OPExtIdx/*, int Prefi
     {
         switch (OpIdx)
         {
-        case 0x00:          // Grp06
-            switch ((OPExtIdx >> 3) & 0x7)
-            {
-            case 0x6:       // jmpe
-                return TRUE;
-            default:
-                break;
-            }
-            break;
         case 0x01:          // Grp07
             switch ((OPExtIdx >> 3) & 0x7)
             {
@@ -196,13 +187,7 @@ static BOOL UncertainModify(E_XB_OP eOPTab, int OpIdx, int OPExtIdx/*, int Prefi
                     return TRUE;
                 }
                 break;
-            case 0x3:       // invlpga
-                if (OPExtIdx >= 0xC0)
-                {
-                    return TRUE;
-                }
-                break;
-            case 0x7:       // rdtscp, monitorx, mwaitx
+            case 0x7:       // rdtscp
                 if (OPExtIdx >= 0xC0)
                 {
                     return TRUE;
@@ -230,8 +215,6 @@ static BOOL UncertainModify(E_XB_OP eOPTab, int OpIdx, int OPExtIdx/*, int Prefi
             default:
                 break;
             }
-            return TRUE;
-        case 0x0F:          // Grp 3DNow!
             return TRUE;
         case 0x18:          // Grp16
             switch ((OPExtIdx >> 3) & 0x7)
@@ -265,8 +248,6 @@ static BOOL UncertainModify(E_XB_OP eOPTab, int OpIdx, int OPExtIdx/*, int Prefi
             }
             return TRUE;
         case 0x33:          // rdpmc
-            return TRUE;
-        case 0x77:          // emms
             return TRUE;
         case 0xAE:          // Grp15 
             switch ((OPExtIdx >> 3) & 0x7)

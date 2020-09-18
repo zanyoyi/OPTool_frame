@@ -140,7 +140,6 @@
 5A          vcvtss2sd Vsd,Hx,Wss (F3),(v1) (REP)
 5A          vcvtsd2ss Vss,Hx,Wsd (F2),(v1) (REPNE)
 5B          vcvtdq2ps Vps,Wdq
-5B          vcvtqq2ps Vps,Wqq (evo)
 5B          vcvtps2dq Vdq,Wps (66) (opdsize)
 5B          vcvttps2dq Vdq,Wps (F3) (REP)
 5C          vsubps Vps,Hps,Wps
@@ -200,8 +199,6 @@
 71/4        vpsraw Hx,Ux,Ib (66),(11B),(v1) (opdsize)
 71/6        psllw Nq,Ib (11B)
 71/6        vpsllw Hx,Ux,Ib (66),(11B),(v1) (opdsize)
-72/0        vprord/q Hx,Wx,Ib (66),(ev) (opdsize)
-72/1        vprold/q Hx,Wx,Ib (66),(ev) (opdsize)
 72/2        psrld Nq,Ib (11B)
 72/2        vpsrld Hx,Ux,Ib (66),(11B),(v1) (opdsize)
 72/4        psrad Nq,Ib (11B)

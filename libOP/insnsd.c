@@ -4,1625 +4,1610 @@
 #include "insns.h"
 
 static const struct itemplate instrux[] = {
-    /*    0 */ {I_RESB, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6681, 0},
-    /*    1 */ {I_RESW, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6681, 0},
-    /*    2 */ {I_RESD, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6681, 0},
-    /*    3 */ {I_RESQ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6681, 0},
-    /*    4 */ {I_REST, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6681, 0},
-    /*    5 */ {I_RESO, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6681, 0},
-    /*    6 */ {I_RESY, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6681, 0},
-    /*    7 */ {I_RESZ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6681, 0},
-    /*    8 */ {I_AAA, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7551, 1},
-    /*    9 */ {I_AAD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6543, 1},
-    /*   10 */ {I_AAD, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6547, 2},
-    /*   11 */ {I_AAM, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6551, 1},
-    /*   12 */ {I_AAM, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6555, 2},
-    /*   13 */ {I_AAS, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7554, 1},
-    /*   14 */ {I_ADC, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+4863, 3},
-    /*   15 */ {I_ADC, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+4864, 0},
-    /*   16 */ {I_ADC, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2631, 3},
-    /*   17 */ {I_ADC, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2632, 0},
-    /*   18 */ {I_ADC, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2637, 4},
-    /*   19 */ {I_ADC, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2638, 5},
-    /*   20 */ {I_ADC, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2643, 6},
-    /*   21 */ {I_ADC, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2644, 7},
-    /*   22 */ {I_ADC, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6559, 8},
-    /*   23 */ {I_ADC, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6559, 0},
-    /*   24 */ {I_ADC, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4868, 8},
-    /*   25 */ {I_ADC, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4868, 0},
-    /*   26 */ {I_ADC, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4873, 9},
-    /*   27 */ {I_ADC, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+4873, 5},
-    /*   28 */ {I_ADC, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4878, 10},
-    /*   29 */ {I_ADC, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4878, 7},
-    /*   30 */ {I_ADC, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+720, 11},
-    /*   31 */ {I_ADC, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+727, 12},
-    /*   32 */ {I_ADC, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+734, 13},
-    /*   33 */ {I_ADC, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6563, 8},
-    /*   34 */ {I_ADC, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4883, 8},
-    /*   35 */ {I_ADC, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4888, 9},
-    /*   36 */ {I_ADC, 2, {REG_RAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4893, 10},
-    /*   37 */ {I_ADC, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2649, 3},
-    /*   38 */ {I_ADC, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2655, 3},
-    /*   39 */ {I_ADC, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+741, 3},
-    /*   40 */ {I_ADC, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+748, 4},
-    /*   41 */ {I_ADC, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+755, 6},
-    /*   42 */ {I_ADC, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+741, 3},
-    /*   43 */ {I_ADC, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+748, 4},
-    /*   44 */ {I_ADD, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+4898, 3},
-    /*   45 */ {I_ADD, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+4899, 0},
-    /*   46 */ {I_ADD, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2661, 3},
-    /*   47 */ {I_ADD, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2662, 0},
-    /*   48 */ {I_ADD, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2667, 4},
-    /*   49 */ {I_ADD, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2668, 5},
-    /*   50 */ {I_ADD, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2673, 6},
-    /*   51 */ {I_ADD, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2674, 7},
-    /*   52 */ {I_ADD, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6567, 8},
-    /*   53 */ {I_ADD, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6567, 0},
-    /*   54 */ {I_ADD, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4903, 8},
-    /*   55 */ {I_ADD, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4903, 0},
-    /*   56 */ {I_ADD, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4908, 9},
-    /*   57 */ {I_ADD, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+4908, 5},
-    /*   58 */ {I_ADD, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4913, 10},
-    /*   59 */ {I_ADD, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4913, 7},
-    /*   60 */ {I_ADD, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+762, 11},
-    /*   61 */ {I_ADD, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+769, 12},
-    /*   62 */ {I_ADD, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+776, 13},
-    /*   63 */ {I_ADD, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6571, 8},
-    /*   64 */ {I_ADD, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4918, 8},
-    /*   65 */ {I_ADD, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4923, 9},
-    /*   66 */ {I_ADD, 2, {REG_RAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4928, 10},
-    /*   67 */ {I_ADD, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2679, 3},
-    /*   68 */ {I_ADD, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2685, 3},
-    /*   69 */ {I_ADD, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+783, 3},
-    /*   70 */ {I_ADD, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+790, 4},
-    /*   71 */ {I_ADD, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+797, 6},
-    /*   72 */ {I_ADD, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2679, 3},
-    /*   73 */ {I_ADD, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2685, 3},
-    /*   74 */ {I_ADD, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+783, 3},
-    /*   75 */ {I_ADD, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+790, 4},
-    /*   76 */ {I_AND, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+4933, 3},
-    /*   77 */ {I_AND, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+4934, 0},
-    /*   78 */ {I_AND, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2691, 3},
-    /*   79 */ {I_AND, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2692, 0},
-    /*   80 */ {I_AND, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2697, 4},
-    /*   81 */ {I_AND, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2698, 5},
-    /*   82 */ {I_AND, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2703, 6},
-    /*   83 */ {I_AND, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2704, 7},
-    /*   84 */ {I_AND, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6575, 8},
-    /*   85 */ {I_AND, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6575, 0},
-    /*   86 */ {I_AND, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4938, 8},
-    /*   87 */ {I_AND, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4938, 0},
-    /*   88 */ {I_AND, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4943, 9},
-    /*   89 */ {I_AND, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+4943, 5},
-    /*   90 */ {I_AND, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4948, 10},
-    /*   91 */ {I_AND, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4948, 7},
-    /*   92 */ {I_AND, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+804, 11},
-    /*   93 */ {I_AND, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+811, 12},
-    /*   94 */ {I_AND, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+818, 13},
-    /*   95 */ {I_AND, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6579, 8},
-    /*   96 */ {I_AND, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4953, 8},
-    /*   97 */ {I_AND, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4958, 9},
-    /*   98 */ {I_AND, 2, {REG_RAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4963, 10},
-    /*   99 */ {I_AND, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2709, 3},
-    /*  100 */ {I_AND, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2715, 3},
-    /*  101 */ {I_AND, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+825, 3},
-    /*  102 */ {I_AND, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+832, 4},
-    /*  103 */ {I_AND, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+839, 6},
-    /*  104 */ {I_AND, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2709, 3},
-    /*  105 */ {I_AND, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2715, 3},
-    /*  106 */ {I_AND, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+825, 3},
-    /*  107 */ {I_AND, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+832, 4},
-    /*  108 */ {I_ARPL, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+6583, 14},
-    /*  109 */ {I_ARPL, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+6583, 15},
-    /*  110 */ {I_BOUND, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4968, 16},
-    /*  111 */ {I_BOUND, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4973, 17},
-    /*  112 */ {I_BSF, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+846, 9},
-    /*  113 */ {I_BSF, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+846, 5},
-    /*  114 */ {I_BSF, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+853, 9},
-    /*  115 */ {I_BSF, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+853, 5},
-    /*  116 */ {I_BSF, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+860, 10},
-    /*  117 */ {I_BSF, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+860, 7},
-    /*  118 */ {I_BSR, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+867, 9},
-    /*  119 */ {I_BSR, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+867, 5},
-    /*  120 */ {I_BSR, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+874, 9},
-    /*  121 */ {I_BSR, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+874, 5},
-    /*  122 */ {I_BSR, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+881, 10},
-    /*  123 */ {I_BSR, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+881, 7},
-    /*  124 */ {I_BSWAP, 1, {REG_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2721, 18},
-    /*  125 */ {I_BSWAP, 1, {REG_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2727, 7},
-    /*  126 */ {I_BT, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2733, 9},
-    /*  127 */ {I_BT, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2733, 5},
-    /*  128 */ {I_BT, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2739, 9},
-    /*  129 */ {I_BT, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2739, 5},
-    /*  130 */ {I_BT, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2745, 10},
-    /*  131 */ {I_BT, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2745, 7},
-    /*  132 */ {I_BT, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+888, 5},
-    /*  133 */ {I_BT, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+895, 5},
-    /*  134 */ {I_BT, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+902, 7},
-    /*  135 */ {I_BTC, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+909, 4},
-    /*  136 */ {I_BTC, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+910, 5},
-    /*  137 */ {I_BTC, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+916, 4},
-    /*  138 */ {I_BTC, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+917, 5},
-    /*  139 */ {I_BTC, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+923, 6},
-    /*  140 */ {I_BTC, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+924, 7},
+    /*    0 */ {I_RESB, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6598, 0},
+    /*    1 */ {I_RESW, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6598, 0},
+    /*    2 */ {I_RESD, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6598, 0},
+    /*    3 */ {I_RESQ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6598, 0},
+    /*    4 */ {I_REST, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6598, 0},
+    /*    5 */ {I_RESO, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6598, 0},
+    /*    6 */ {I_RESY, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6598, 0},
+    /*    7 */ {I_RESZ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6598, 0},
+    /*    8 */ {I_AAA, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7468, 1},
+    /*    9 */ {I_AAD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6460, 1},
+    /*   10 */ {I_AAD, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6464, 2},
+    /*   11 */ {I_AAM, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6468, 1},
+    /*   12 */ {I_AAM, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6472, 2},
+    /*   13 */ {I_AAS, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7471, 1},
+    /*   14 */ {I_ADC, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+4790, 3},
+    /*   15 */ {I_ADC, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+4791, 0},
+    /*   16 */ {I_ADC, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2594, 3},
+    /*   17 */ {I_ADC, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2595, 0},
+    /*   18 */ {I_ADC, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2600, 4},
+    /*   19 */ {I_ADC, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2601, 5},
+    /*   20 */ {I_ADC, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2606, 6},
+    /*   21 */ {I_ADC, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2607, 7},
+    /*   22 */ {I_ADC, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6476, 8},
+    /*   23 */ {I_ADC, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6476, 0},
+    /*   24 */ {I_ADC, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4795, 8},
+    /*   25 */ {I_ADC, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4795, 0},
+    /*   26 */ {I_ADC, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4800, 9},
+    /*   27 */ {I_ADC, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+4800, 5},
+    /*   28 */ {I_ADC, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4805, 10},
+    /*   29 */ {I_ADC, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4805, 7},
+    /*   30 */ {I_ADC, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+704, 11},
+    /*   31 */ {I_ADC, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+711, 12},
+    /*   32 */ {I_ADC, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+718, 13},
+    /*   33 */ {I_ADC, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6480, 8},
+    /*   34 */ {I_ADC, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4810, 8},
+    /*   35 */ {I_ADC, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4815, 9},
+    /*   36 */ {I_ADC, 2, {REG_RAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4820, 10},
+    /*   37 */ {I_ADC, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2612, 3},
+    /*   38 */ {I_ADC, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2618, 3},
+    /*   39 */ {I_ADC, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+725, 3},
+    /*   40 */ {I_ADC, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+732, 4},
+    /*   41 */ {I_ADC, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+739, 6},
+    /*   42 */ {I_ADC, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+725, 3},
+    /*   43 */ {I_ADC, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+732, 4},
+    /*   44 */ {I_ADD, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+4825, 3},
+    /*   45 */ {I_ADD, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+4826, 0},
+    /*   46 */ {I_ADD, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2624, 3},
+    /*   47 */ {I_ADD, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2625, 0},
+    /*   48 */ {I_ADD, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2630, 4},
+    /*   49 */ {I_ADD, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2631, 5},
+    /*   50 */ {I_ADD, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2636, 6},
+    /*   51 */ {I_ADD, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2637, 7},
+    /*   52 */ {I_ADD, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6484, 8},
+    /*   53 */ {I_ADD, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6484, 0},
+    /*   54 */ {I_ADD, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4830, 8},
+    /*   55 */ {I_ADD, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4830, 0},
+    /*   56 */ {I_ADD, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4835, 9},
+    /*   57 */ {I_ADD, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+4835, 5},
+    /*   58 */ {I_ADD, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4840, 10},
+    /*   59 */ {I_ADD, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4840, 7},
+    /*   60 */ {I_ADD, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+746, 11},
+    /*   61 */ {I_ADD, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+753, 12},
+    /*   62 */ {I_ADD, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+760, 13},
+    /*   63 */ {I_ADD, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6488, 8},
+    /*   64 */ {I_ADD, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4845, 8},
+    /*   65 */ {I_ADD, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4850, 9},
+    /*   66 */ {I_ADD, 2, {REG_RAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4855, 10},
+    /*   67 */ {I_ADD, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2642, 3},
+    /*   68 */ {I_ADD, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2648, 3},
+    /*   69 */ {I_ADD, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+767, 3},
+    /*   70 */ {I_ADD, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+774, 4},
+    /*   71 */ {I_ADD, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+781, 6},
+    /*   72 */ {I_ADD, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2642, 3},
+    /*   73 */ {I_ADD, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2648, 3},
+    /*   74 */ {I_ADD, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+767, 3},
+    /*   75 */ {I_ADD, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+774, 4},
+    /*   76 */ {I_AND, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+4860, 3},
+    /*   77 */ {I_AND, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+4861, 0},
+    /*   78 */ {I_AND, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2654, 3},
+    /*   79 */ {I_AND, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2655, 0},
+    /*   80 */ {I_AND, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2660, 4},
+    /*   81 */ {I_AND, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2661, 5},
+    /*   82 */ {I_AND, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2666, 6},
+    /*   83 */ {I_AND, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2667, 7},
+    /*   84 */ {I_AND, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6492, 8},
+    /*   85 */ {I_AND, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6492, 0},
+    /*   86 */ {I_AND, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4865, 8},
+    /*   87 */ {I_AND, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4865, 0},
+    /*   88 */ {I_AND, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4870, 9},
+    /*   89 */ {I_AND, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+4870, 5},
+    /*   90 */ {I_AND, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4875, 10},
+    /*   91 */ {I_AND, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4875, 7},
+    /*   92 */ {I_AND, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+788, 11},
+    /*   93 */ {I_AND, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+795, 12},
+    /*   94 */ {I_AND, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+802, 13},
+    /*   95 */ {I_AND, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6496, 8},
+    /*   96 */ {I_AND, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4880, 8},
+    /*   97 */ {I_AND, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4885, 9},
+    /*   98 */ {I_AND, 2, {REG_RAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4890, 10},
+    /*   99 */ {I_AND, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2672, 3},
+    /*  100 */ {I_AND, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2678, 3},
+    /*  101 */ {I_AND, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+809, 3},
+    /*  102 */ {I_AND, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+816, 4},
+    /*  103 */ {I_AND, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+823, 6},
+    /*  104 */ {I_AND, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2672, 3},
+    /*  105 */ {I_AND, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2678, 3},
+    /*  106 */ {I_AND, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+809, 3},
+    /*  107 */ {I_AND, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+816, 4},
+    /*  108 */ {I_ARPL, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+6500, 14},
+    /*  109 */ {I_ARPL, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+6500, 15},
+    /*  110 */ {I_BOUND, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4895, 16},
+    /*  111 */ {I_BOUND, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4900, 17},
+    /*  112 */ {I_BSF, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+830, 9},
+    /*  113 */ {I_BSF, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+830, 5},
+    /*  114 */ {I_BSF, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+837, 9},
+    /*  115 */ {I_BSF, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+837, 5},
+    /*  116 */ {I_BSF, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+844, 10},
+    /*  117 */ {I_BSF, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+844, 7},
+    /*  118 */ {I_BSR, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+851, 9},
+    /*  119 */ {I_BSR, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+851, 5},
+    /*  120 */ {I_BSR, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+858, 9},
+    /*  121 */ {I_BSR, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+858, 5},
+    /*  122 */ {I_BSR, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+865, 10},
+    /*  123 */ {I_BSR, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+865, 7},
+    /*  124 */ {I_BSWAP, 1, {REG_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2684, 18},
+    /*  125 */ {I_BSWAP, 1, {REG_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2690, 7},
+    /*  126 */ {I_BT, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2696, 9},
+    /*  127 */ {I_BT, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2696, 5},
+    /*  128 */ {I_BT, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2702, 9},
+    /*  129 */ {I_BT, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2702, 5},
+    /*  130 */ {I_BT, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2708, 10},
+    /*  131 */ {I_BT, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2708, 7},
+    /*  132 */ {I_BT, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+872, 5},
+    /*  133 */ {I_BT, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+879, 5},
+    /*  134 */ {I_BT, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+886, 7},
+    /*  135 */ {I_BTC, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+893, 4},
+    /*  136 */ {I_BTC, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+894, 5},
+    /*  137 */ {I_BTC, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+900, 4},
+    /*  138 */ {I_BTC, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+901, 5},
+    /*  139 */ {I_BTC, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+907, 6},
+    /*  140 */ {I_BTC, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+908, 7},
     /*  141 */ {I_BTC, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+72, 12},
     /*  142 */ {I_BTC, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+80, 12},
     /*  143 */ {I_BTC, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+88, 13},
-    /*  144 */ {I_BTR, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+930, 4},
-    /*  145 */ {I_BTR, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+931, 5},
-    /*  146 */ {I_BTR, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+937, 4},
-    /*  147 */ {I_BTR, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+938, 5},
-    /*  148 */ {I_BTR, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+944, 6},
-    /*  149 */ {I_BTR, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+945, 7},
+    /*  144 */ {I_BTR, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+914, 4},
+    /*  145 */ {I_BTR, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+915, 5},
+    /*  146 */ {I_BTR, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+921, 4},
+    /*  147 */ {I_BTR, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+922, 5},
+    /*  148 */ {I_BTR, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+928, 6},
+    /*  149 */ {I_BTR, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+929, 7},
     /*  150 */ {I_BTR, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+96, 12},
     /*  151 */ {I_BTR, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+104, 12},
     /*  152 */ {I_BTR, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+112, 13},
-    /*  153 */ {I_BTS, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+951, 4},
-    /*  154 */ {I_BTS, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+952, 5},
-    /*  155 */ {I_BTS, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+958, 4},
-    /*  156 */ {I_BTS, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+959, 5},
-    /*  157 */ {I_BTS, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+965, 6},
-    /*  158 */ {I_BTS, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+966, 7},
+    /*  153 */ {I_BTS, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+935, 4},
+    /*  154 */ {I_BTS, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+936, 5},
+    /*  155 */ {I_BTS, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+942, 4},
+    /*  156 */ {I_BTS, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+943, 5},
+    /*  157 */ {I_BTS, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+949, 6},
+    /*  158 */ {I_BTS, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+950, 7},
     /*  159 */ {I_BTS, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+120, 12},
     /*  160 */ {I_BTS, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+128, 12},
     /*  161 */ {I_BTS, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+136, 13},
-    /*  162 */ {I_CALL, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4978, 19},
-    /*  163 */ {I_CALL, 1, {IMMEDIATE|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4983, 20},
-    /*  164 */ {I_CALL, 1, {IMMEDIATE|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4988, 21},
-    /*  165 */ {I_CALL, 1, {IMMEDIATE|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4993, 22},
-    /*  166 */ {I_CALL, 2, {IMMEDIATE|COLON,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2769, 1},
-    /*  167 */ {I_CALL, 2, {IMMEDIATE|BITS16|COLON,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2775, 1},
-    /*  168 */ {I_CALL, 2, {IMMEDIATE|COLON,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2775, 1},
-    /*  169 */ {I_CALL, 2, {IMMEDIATE|BITS32|COLON,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2781, 17},
-    /*  170 */ {I_CALL, 2, {IMMEDIATE|COLON,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2781, 17},
-    /*  171 */ {I_CALL, 1, {MEMORY|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4998, 1},
-    /*  172 */ {I_CALL, 1, {MEMORY|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5003, 7},
-    /*  173 */ {I_CALL, 1, {MEMORY|BITS16|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5008, 0},
-    /*  174 */ {I_CALL, 1, {MEMORY|BITS32|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5013, 5},
-    /*  175 */ {I_CALL, 1, {MEMORY|BITS64|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5003, 7},
-    /*  176 */ {I_CALL, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5018, 19},
-    /*  177 */ {I_CALL, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5023, 20},
-    /*  178 */ {I_CALL, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5028, 21},
-    /*  179 */ {I_CALL, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5033, 22},
-    /*  180 */ {I_CBW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6587, 0},
-    /*  181 */ {I_CDQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6591, 5},
-    /*  182 */ {I_CDQE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6595, 7},
-    /*  183 */ {I_CLC, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7557, 0},
-    /*  184 */ {I_CLD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7560, 0},
-    /*  185 */ {I_CLI, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5750, 0},
-    /*  186 */ {I_CLTS, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6599, 23},
-    /*  187 */ {I_CMC, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7563, 0},
-    /*  188 */ {I_CMP, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6603, 8},
-    /*  189 */ {I_CMP, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6603, 0},
-    /*  190 */ {I_CMP, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+5038, 8},
-    /*  191 */ {I_CMP, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+5038, 0},
-    /*  192 */ {I_CMP, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+5043, 9},
-    /*  193 */ {I_CMP, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+5043, 5},
-    /*  194 */ {I_CMP, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+5048, 10},
-    /*  195 */ {I_CMP, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+5048, 7},
-    /*  196 */ {I_CMP, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6607, 8},
-    /*  197 */ {I_CMP, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6607, 0},
-    /*  198 */ {I_CMP, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5053, 8},
-    /*  199 */ {I_CMP, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+5053, 0},
-    /*  200 */ {I_CMP, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5058, 9},
-    /*  201 */ {I_CMP, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+5058, 5},
-    /*  202 */ {I_CMP, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5063, 10},
-    /*  203 */ {I_CMP, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+5063, 7},
-    /*  204 */ {I_CMP, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2787, 0},
-    /*  205 */ {I_CMP, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2793, 5},
-    /*  206 */ {I_CMP, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2799, 7},
-    /*  207 */ {I_CMP, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6611, 8},
-    /*  208 */ {I_CMP, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5068, 8},
-    /*  209 */ {I_CMP, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5073, 9},
-    /*  210 */ {I_CMP, 2, {REG_RAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5078, 10},
-    /*  211 */ {I_CMP, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5083, 8},
-    /*  212 */ {I_CMP, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5088, 8},
-    /*  213 */ {I_CMP, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2805, 8},
-    /*  214 */ {I_CMP, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2811, 9},
-    /*  215 */ {I_CMP, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2817, 10},
-    /*  216 */ {I_CMP, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+5083, 8},
-    /*  217 */ {I_CMP, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+5088, 8},
-    /*  218 */ {I_CMP, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2805, 8},
-    /*  219 */ {I_CMP, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2811, 9},
-    /*  220 */ {I_CMPSB, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6615, 0},
-    /*  221 */ {I_CMPSD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5093, 5},
-    /*  222 */ {I_CMPSQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5098, 7},
-    /*  223 */ {I_CMPSW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5103, 0},
-    /*  224 */ {I_CMPXCHG, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2823, 24},
-    /*  225 */ {I_CMPXCHG, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2824, 25},
-    /*  226 */ {I_CMPXCHG, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+972, 24},
-    /*  227 */ {I_CMPXCHG, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+973, 25},
-    /*  228 */ {I_CMPXCHG, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+979, 24},
-    /*  229 */ {I_CMPXCHG, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+980, 25},
-    /*  230 */ {I_CMPXCHG, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+986, 6},
-    /*  231 */ {I_CMPXCHG, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+987, 7},
-    /*  232 */ {I_CMPXCHG8B, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+993, 28},
-    /*  233 */ {I_CMPXCHG16B, 1, {MEMORY|BITS128,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2841, 13},
-    /*  234 */ {I_CPUID, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6619, 25},
-    /*  235 */ {I_CQO, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6623, 7},
-    /*  236 */ {I_CWD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6627, 0},
-    /*  237 */ {I_CWDE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6631, 5},
-    /*  238 */ {I_DAA, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7566, 1},
-    /*  239 */ {I_DAS, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7569, 1},
-    /*  240 */ {I_DEC, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6635, 1},
-    /*  241 */ {I_DEC, 1, {REG_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6639, 17},
-    /*  242 */ {I_DEC, 1, {RM_GPR|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5113, 11},
-    /*  243 */ {I_DEC, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2847, 11},
-    /*  244 */ {I_DEC, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2853, 12},
-    /*  245 */ {I_DEC, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2859, 13},
-    /*  246 */ {I_DIV, 1, {RM_GPR|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6643, 0},
-    /*  247 */ {I_DIV, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5118, 0},
-    /*  248 */ {I_DIV, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5123, 5},
-    /*  249 */ {I_DIV, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5128, 7},
-    /*  250 */ {I_EMMS, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6647, 29},
-    /*  251 */ {I_ENTER, 2, {IMMEDIATE,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5133, 30},
-    /*  252 */ {I_EQU, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7628, 0},
-    /*  253 */ {I_EQU, 2, {IMMEDIATE|COLON,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+7628, 0},
-    /*  254 */ {I_F2XM1, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6651, 31},
-    /*  255 */ {I_FABS, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6655, 31},
-    /*  256 */ {I_FADD, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6659, 31},
-    /*  257 */ {I_FADD, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6663, 31},
-    /*  258 */ {I_FADD, 1, {FPUREG|TO,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5138, 31},
-    /*  259 */ {I_FADD, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5143, 31},
-    /*  260 */ {I_FADD, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5138, 31},
-    /*  261 */ {I_FADD, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5148, 31},
-    /*  262 */ {I_FADDP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5153, 31},
-    /*  263 */ {I_FADDP, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5153, 31},
-    /*  264 */ {I_FBLD, 1, {MEMORY|BITS80,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6671, 31},
-    /*  265 */ {I_FBLD, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6671, 31},
-    /*  266 */ {I_FBSTP, 1, {MEMORY|BITS80,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6675, 31},
-    /*  267 */ {I_FBSTP, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6675, 31},
-    /*  268 */ {I_FCHS, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6679, 31},
-    /*  269 */ {I_FCLEX, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5158, 31},
-    /*  270 */ {I_FCMOVB, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5163, 32},
-    /*  271 */ {I_FCMOVB, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5168, 32},
-    /*  272 */ {I_FCMOVBE, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5173, 32},
-    /*  273 */ {I_FCMOVBE, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5178, 32},
-    /*  274 */ {I_FCMOVE, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5183, 32},
-    /*  275 */ {I_FCMOVE, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5188, 32},
-    /*  276 */ {I_FCMOVNB, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5193, 32},
-    /*  277 */ {I_FCMOVNB, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5198, 32},
-    /*  278 */ {I_FCMOVNBE, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5203, 32},
-    /*  279 */ {I_FCMOVNBE, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5208, 32},
-    /*  280 */ {I_FCMOVNE, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5213, 32},
-    /*  281 */ {I_FCMOVNE, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5218, 32},
-    /*  282 */ {I_FCMOVNU, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5223, 32},
-    /*  283 */ {I_FCMOVNU, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5228, 32},
-    /*  284 */ {I_FCMOVU, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5233, 32},
-    /*  285 */ {I_FCMOVU, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5238, 32},
-    /*  286 */ {I_FCOM, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6715, 31},
-    /*  287 */ {I_FCOM, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6719, 31},
-    /*  288 */ {I_FCOM, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5243, 31},
-    /*  289 */ {I_FCOM, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5248, 31},
-    /*  290 */ {I_FCOMI, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5253, 32},
-    /*  291 */ {I_FCOMI, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5258, 32},
-    /*  292 */ {I_FCOMIP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5263, 32},
-    /*  293 */ {I_FCOMIP, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5268, 32},
-    /*  294 */ {I_FCOMP, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6735, 31},
-    /*  295 */ {I_FCOMP, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6739, 31},
-    /*  296 */ {I_FCOMP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5273, 31},
-    /*  297 */ {I_FCOMP, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5278, 31},
-    /*  298 */ {I_FCOMPP, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6747, 31},
-    /*  299 */ {I_FCOS, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6751, 33},
-    /*  300 */ {I_FDECSTP, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6755, 31},
-    /*  301 */ {I_FDISI, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5283, 31},
-    /*  302 */ {I_FDIV, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6759, 31},
-    /*  303 */ {I_FDIV, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6763, 31},
-    /*  304 */ {I_FDIV, 1, {FPUREG|TO,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5288, 31},
-    /*  305 */ {I_FDIV, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5293, 31},
-    /*  306 */ {I_FDIV, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5288, 31},
-    /*  307 */ {I_FDIV, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5298, 31},
-    /*  308 */ {I_FDIVP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5303, 31},
-    /*  309 */ {I_FDIVP, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5303, 31},
-    /*  310 */ {I_FDIVR, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6771, 31},
-    /*  311 */ {I_FDIVR, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6775, 31},
-    /*  312 */ {I_FDIVR, 1, {FPUREG|TO,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5308, 31},
-    /*  313 */ {I_FDIVR, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5308, 31},
-    /*  314 */ {I_FDIVR, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5313, 31},
-    /*  315 */ {I_FDIVR, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5318, 31},
-    /*  316 */ {I_FDIVRP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5323, 31},
-    /*  317 */ {I_FDIVRP, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5323, 31},
-    /*  318 */ {I_FEMMS, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6783, 34},
-    /*  319 */ {I_FENI, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5328, 31},
-    /*  320 */ {I_FFREE, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5333, 31},
-    /*  321 */ {I_FFREE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6787, 31},
-    /*  322 */ {I_FFREEP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5338, 35},
-    /*  323 */ {I_FFREEP, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6791, 35},
-    /*  324 */ {I_FIADD, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6795, 31},
-    /*  325 */ {I_FIADD, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6799, 31},
-    /*  326 */ {I_FICOM, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6803, 31},
-    /*  327 */ {I_FICOM, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6807, 31},
-    /*  328 */ {I_FICOMP, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6811, 31},
-    /*  329 */ {I_FICOMP, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6815, 31},
-    /*  330 */ {I_FIDIV, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6819, 31},
-    /*  331 */ {I_FIDIV, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6823, 31},
-    /*  332 */ {I_FIDIVR, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6827, 31},
-    /*  333 */ {I_FIDIVR, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6831, 31},
-    /*  334 */ {I_FILD, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6835, 31},
-    /*  335 */ {I_FILD, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6839, 31},
-    /*  336 */ {I_FILD, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6843, 31},
-    /*  337 */ {I_FIMUL, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6847, 31},
-    /*  338 */ {I_FIMUL, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6851, 31},
-    /*  339 */ {I_FINCSTP, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6855, 31},
-    /*  340 */ {I_FINIT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5343, 31},
-    /*  341 */ {I_FIST, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6859, 31},
-    /*  342 */ {I_FIST, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6863, 31},
-    /*  343 */ {I_FISTP, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6867, 31},
-    /*  344 */ {I_FISTP, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6871, 31},
-    /*  345 */ {I_FISTP, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6875, 31},
-    /*  346 */ {I_FISTTP, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6879, 36},
-    /*  347 */ {I_FISTTP, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6883, 36},
-    /*  348 */ {I_FISTTP, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6887, 36},
-    /*  349 */ {I_FISUB, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6891, 31},
-    /*  350 */ {I_FISUB, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6895, 31},
-    /*  351 */ {I_FISUBR, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6899, 31},
-    /*  352 */ {I_FISUBR, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6903, 31},
-    /*  353 */ {I_FLD, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6907, 31},
-    /*  354 */ {I_FLD, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6911, 31},
-    /*  355 */ {I_FLD, 1, {MEMORY|BITS80,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6915, 31},
-    /*  356 */ {I_FLD, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5348, 31},
-    /*  357 */ {I_FLD1, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6923, 31},
-    /*  358 */ {I_FLDCW, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6927, 37},
-    /*  359 */ {I_FLDENV, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6931, 31},
-    /*  360 */ {I_FLDL2E, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6935, 31},
-    /*  361 */ {I_FLDL2T, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6939, 31},
-    /*  362 */ {I_FLDLG2, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6943, 31},
-    /*  363 */ {I_FLDLN2, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6947, 31},
-    /*  364 */ {I_FLDPI, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6951, 31},
-    /*  365 */ {I_FLDZ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6955, 31},
-    /*  366 */ {I_FMUL, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6959, 31},
-    /*  367 */ {I_FMUL, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6963, 31},
-    /*  368 */ {I_FMUL, 1, {FPUREG|TO,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5353, 31},
-    /*  369 */ {I_FMUL, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5353, 31},
-    /*  370 */ {I_FMUL, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5358, 31},
-    /*  371 */ {I_FMUL, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5363, 31},
-    /*  372 */ {I_FMULP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5368, 31},
-    /*  373 */ {I_FMULP, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5368, 31},
-    /*  374 */ {I_FNCLEX, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5159, 31},
-    /*  375 */ {I_FNDISI, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5284, 31},
-    /*  376 */ {I_FNENI, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5329, 31},
-    /*  377 */ {I_FNINIT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5344, 31},
-    /*  378 */ {I_FNOP, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6971, 31},
-    /*  379 */ {I_FNSAVE, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5374, 31},
-    /*  380 */ {I_FNSTCW, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5384, 37},
-    /*  381 */ {I_FNSTENV, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5389, 31},
-    /*  382 */ {I_FNSTSW, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5399, 37},
-    /*  383 */ {I_FNSTSW, 1, {REG_AX,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5404, 38},
-    /*  384 */ {I_FPATAN, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6975, 31},
-    /*  385 */ {I_FPREM, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6979, 31},
-    /*  386 */ {I_FPREM1, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6983, 33},
-    /*  387 */ {I_FPTAN, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6987, 31},
-    /*  388 */ {I_FRNDINT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6991, 31},
-    /*  389 */ {I_FRSTOR, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6995, 31},
-    /*  390 */ {I_FSAVE, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5373, 31},
-    /*  391 */ {I_FSCALE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6999, 31},
-    /*  392 */ {I_FSETPM, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7003, 38},
-    /*  393 */ {I_FSIN, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7007, 33},
-    /*  394 */ {I_FSINCOS, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7011, 33},
-    /*  395 */ {I_FSQRT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7015, 31},
-    /*  396 */ {I_FST, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7019, 31},
-    /*  397 */ {I_FST, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7023, 31},
-    /*  398 */ {I_FST, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5378, 31},
-    /*  399 */ {I_FSTCW, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5383, 37},
-    /*  400 */ {I_FSTENV, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5388, 31},
-    /*  401 */ {I_FSTP, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7031, 31},
-    /*  402 */ {I_FSTP, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7035, 31},
-    /*  403 */ {I_FSTP, 1, {MEMORY|BITS80,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7039, 31},
-    /*  404 */ {I_FSTP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5393, 31},
-    /*  405 */ {I_FSTSW, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5398, 37},
-    /*  406 */ {I_FSTSW, 1, {REG_AX,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5403, 38},
-    /*  407 */ {I_FSUB, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7047, 31},
-    /*  408 */ {I_FSUB, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7051, 31},
-    /*  409 */ {I_FSUB, 1, {FPUREG|TO,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5408, 31},
-    /*  410 */ {I_FSUB, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5408, 31},
-    /*  411 */ {I_FSUB, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5413, 31},
-    /*  412 */ {I_FSUB, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5418, 31},
-    /*  413 */ {I_FSUBP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5423, 31},
-    /*  414 */ {I_FSUBP, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5423, 31},
-    /*  415 */ {I_FSUBR, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7059, 31},
-    /*  416 */ {I_FSUBR, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7063, 31},
-    /*  417 */ {I_FSUBR, 1, {FPUREG|TO,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5428, 31},
-    /*  418 */ {I_FSUBR, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5428, 31},
-    /*  419 */ {I_FSUBR, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5433, 31},
-    /*  420 */ {I_FSUBR, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5438, 31},
-    /*  421 */ {I_FSUBRP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5443, 31},
-    /*  422 */ {I_FSUBRP, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5443, 31},
-    /*  423 */ {I_FTST, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7071, 31},
-    /*  424 */ {I_FUCOM, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5448, 33},
-    /*  425 */ {I_FUCOM, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5453, 33},
-    /*  426 */ {I_FUCOMI, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5458, 32},
-    /*  427 */ {I_FUCOMI, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5463, 32},
-    /*  428 */ {I_FUCOMIP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5468, 32},
-    /*  429 */ {I_FUCOMIP, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5473, 32},
-    /*  430 */ {I_FUCOMP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5478, 33},
-    /*  431 */ {I_FUCOMP, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5483, 33},
-    /*  432 */ {I_FUCOMPP, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7091, 33},
-    /*  433 */ {I_FXAM, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7095, 31},
-    /*  434 */ {I_FXCH, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5488, 31},
-    /*  435 */ {I_FXCH, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5488, 31},
-    /*  436 */ {I_FXCH, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5493, 31},
-    /*  437 */ {I_FXTRACT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7103, 31},
-    /*  438 */ {I_FYL2X, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7107, 31},
-    /*  439 */ {I_FYL2XP1, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7111, 31},
-    /*  440 */ {I_HLT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7572, 39},
-    /*  441 */ {I_IDIV, 1, {RM_GPR|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7115, 0},
-    /*  442 */ {I_IDIV, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5498, 0},
-    /*  443 */ {I_IDIV, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5503, 5},
-    /*  444 */ {I_IDIV, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5508, 7},
-    /*  445 */ {I_IMUL, 1, {RM_GPR|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7119, 0},
-    /*  446 */ {I_IMUL, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5513, 0},
-    /*  447 */ {I_IMUL, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5518, 5},
-    /*  448 */ {I_IMUL, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5523, 7},
-    /*  449 */ {I_IMUL, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+2865, 9},
-    /*  450 */ {I_IMUL, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2865, 5},
-    /*  451 */ {I_IMUL, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+2871, 9},
-    /*  452 */ {I_IMUL, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2871, 5},
-    /*  453 */ {I_IMUL, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+2877, 10},
-    /*  454 */ {I_IMUL, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2877, 7},
-    /*  455 */ {I_IMUL, 3, {REG_GPR|BITS16,MEMORY,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+2883, 43},
-    /*  456 */ {I_IMUL, 3, {REG_GPR|BITS16,MEMORY,IMMEDIATE|BITS16,0,0}, NO_DECORATOR, nasm_bytecodes+2889, 44},
-    /*  457 */ {I_IMUL, 3, {REG_GPR|BITS16,REG_GPR|BITS16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+2883, 30},
-    /*  458 */ {I_IMUL, 3, {REG_GPR|BITS16,REG_GPR|BITS16,IMMEDIATE|BITS16,0,0}, NO_DECORATOR, nasm_bytecodes+2889, 30},
-    /*  459 */ {I_IMUL, 3, {REG_GPR|BITS32,MEMORY,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+2895, 45},
-    /*  460 */ {I_IMUL, 3, {REG_GPR|BITS32,MEMORY,IMMEDIATE|BITS32,0,0}, NO_DECORATOR, nasm_bytecodes+2901, 9},
-    /*  461 */ {I_IMUL, 3, {REG_GPR|BITS32,REG_GPR|BITS32,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+2895, 5},
-    /*  462 */ {I_IMUL, 3, {REG_GPR|BITS32,REG_GPR|BITS32,IMMEDIATE|BITS32,0,0}, NO_DECORATOR, nasm_bytecodes+2901, 5},
-    /*  463 */ {I_IMUL, 3, {REG_GPR|BITS64,MEMORY,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+2907, 46},
-    /*  464 */ {I_IMUL, 3, {REG_GPR|BITS64,MEMORY,IMMEDIATE|BITS32,0,0}, NO_DECORATOR, nasm_bytecodes+2913, 46},
-    /*  465 */ {I_IMUL, 3, {REG_GPR|BITS64,REG_GPR|BITS64,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+2907, 7},
-    /*  466 */ {I_IMUL, 3, {REG_GPR|BITS64,REG_GPR|BITS64,IMMEDIATE|BITS32,0,0}, NO_DECORATOR, nasm_bytecodes+2913, 7},
-    /*  467 */ {I_IMUL, 2, {REG_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2925, 30},
-    /*  468 */ {I_IMUL, 2, {REG_GPR|BITS16,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2931, 30},
-    /*  469 */ {I_IMUL, 2, {REG_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2937, 5},
-    /*  470 */ {I_IMUL, 2, {REG_GPR|BITS32,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2943, 5},
-    /*  471 */ {I_IMUL, 2, {REG_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2949, 7},
-    /*  472 */ {I_IMUL, 2, {REG_GPR|BITS64,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2955, 7},
-    /*  473 */ {I_IN, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+7123, 47},
-    /*  474 */ {I_IN, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5528, 47},
-    /*  475 */ {I_IN, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5533, 48},
-    /*  476 */ {I_IN, 2, {REG_AL,REG_DX,0,0,0}, NO_DECORATOR, nasm_bytecodes+7578, 0},
-    /*  477 */ {I_IN, 2, {REG_AX,REG_DX,0,0,0}, NO_DECORATOR, nasm_bytecodes+7127, 0},
-    /*  478 */ {I_IN, 2, {REG_EAX,REG_DX,0,0,0}, NO_DECORATOR, nasm_bytecodes+7131, 5},
-    /*  479 */ {I_INC, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7135, 1},
-    /*  480 */ {I_INC, 1, {REG_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7139, 17},
-    /*  481 */ {I_INC, 1, {RM_GPR|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5538, 11},
-    /*  482 */ {I_INC, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2961, 11},
-    /*  483 */ {I_INC, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2967, 12},
-    /*  484 */ {I_INC, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2973, 13},
-    /*  485 */ {I_INSB, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7581, 30},
-    /*  486 */ {I_INSD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7143, 5},
-    /*  487 */ {I_INSW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7147, 30},
-    /*  488 */ {I_INT, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7151, 47},
-    /*  489 */ {I_INT1, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7575, 5},
-    /*  490 */ {I_INT3, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7584, 0},
-    /*  491 */ {I_INTO, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7587, 1},
-    /*  492 */ {I_INVD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7155, 49},
-    /*  493 */ {I_INVPCID, 2, {REG_GPR|BITS32,MEMORY|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+1000, 50},
-    /*  494 */ {I_INVPCID, 2, {REG_GPR|BITS64,MEMORY|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+1000, 51},
-    /*  495 */ {I_INVLPG, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5543, 49},
-    /*  496 */ {I_INVLPGA, 2, {REG_AX,REG_ECX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2979, 52},
-    /*  497 */ {I_INVLPGA, 2, {REG_EAX,REG_ECX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2985, 53},
-    /*  498 */ {I_INVLPGA, 2, {REG_RAX,REG_ECX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1007, 54},
-    /*  499 */ {I_INVLPGA, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2986, 53},
-    /*  500 */ {I_IRET, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7159, 0},
-    /*  501 */ {I_IRETD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7163, 5},
-    /*  502 */ {I_IRETQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7167, 7},
-    /*  503 */ {I_IRETW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7171, 0},
-    /*  504 */ {I_JCXZ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5548, 1},
-    /*  505 */ {I_JECXZ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5553, 5},
-    /*  506 */ {I_JRCXZ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2991, 7},
-    /*  507 */ {I_JMP, 1, {IMMEDIATE|SHORT,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5559, 0},
-    /*  508 */ {I_JMP, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5563, 19},
-    /*  509 */ {I_JMP, 1, {IMMEDIATE|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5568, 20},
-    /*  510 */ {I_JMP, 1, {IMMEDIATE|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5573, 21},
-    /*  511 */ {I_JMP, 1, {IMMEDIATE|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5578, 22},
-    /*  512 */ {I_JMP, 2, {IMMEDIATE|COLON,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3015, 1},
-    /*  513 */ {I_JMP, 2, {IMMEDIATE|BITS16|COLON,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3021, 1},
-    /*  514 */ {I_JMP, 2, {IMMEDIATE|COLON,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3021, 1},
-    /*  515 */ {I_JMP, 2, {IMMEDIATE|BITS32|COLON,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3027, 17},
-    /*  516 */ {I_JMP, 2, {IMMEDIATE|COLON,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3027, 17},
-    /*  517 */ {I_JMP, 1, {MEMORY|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5583, 1},
-    /*  518 */ {I_JMP, 1, {MEMORY|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5588, 7},
-    /*  519 */ {I_JMP, 1, {MEMORY|BITS16|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5593, 0},
-    /*  520 */ {I_JMP, 1, {MEMORY|BITS32|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5598, 5},
-    /*  521 */ {I_JMP, 1, {MEMORY|BITS64|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5588, 7},
-    /*  522 */ {I_JMP, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5603, 19},
-    /*  523 */ {I_JMP, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5608, 20},
-    /*  524 */ {I_JMP, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5613, 21},
-    /*  525 */ {I_JMP, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5618, 22},
-    /*  526 */ {I_JMPE, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1014, 55},
-    /*  527 */ {I_JMPE, 1, {IMMEDIATE|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1021, 55},
-    /*  528 */ {I_JMPE, 1, {IMMEDIATE|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1028, 55},
-    /*  529 */ {I_JMPE, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1035, 55},
-    /*  530 */ {I_JMPE, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1042, 55},
-    /*  531 */ {I_LAHF, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7590, 0},
-    /*  532 */ {I_LAR, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3033, 56},
-    /*  533 */ {I_LAR, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3033, 57},
-    /*  534 */ {I_LAR, 2, {REG_GPR|BITS16,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3033, 58},
-    /*  535 */ {I_LAR, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3039, 60},
-    /*  536 */ {I_LAR, 2, {REG_GPR|BITS32,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3039, 58},
-    /*  537 */ {I_LAR, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3039, 58},
-    /*  538 */ {I_LAR, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3045, 61},
-    /*  539 */ {I_LAR, 2, {REG_GPR|BITS64,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3045, 59},
-    /*  540 */ {I_LAR, 2, {REG_GPR|BITS64,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3045, 59},
-    /*  541 */ {I_LAR, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3045, 59},
-    /*  542 */ {I_LDS, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5623, 1},
-    /*  543 */ {I_LDS, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5628, 17},
-    /*  544 */ {I_LEA, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5633, 62},
-    /*  545 */ {I_LEA, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5638, 63},
-    /*  546 */ {I_LEA, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5643, 64},
-    /*  547 */ {I_LEAVE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5890, 30},
-    /*  548 */ {I_LES, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5648, 1},
-    /*  549 */ {I_LES, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5653, 17},
-    /*  550 */ {I_LFENCE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3051, 54},
-    /*  551 */ {I_LFS, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3057, 5},
-    /*  552 */ {I_LFS, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3063, 5},
-    /*  553 */ {I_LFS, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3069, 7},
-    /*  554 */ {I_LGDT, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5658, 23},
-    /*  555 */ {I_LGS, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3075, 5},
-    /*  556 */ {I_LGS, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3081, 5},
-    /*  557 */ {I_LGS, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3087, 7},
-    /*  558 */ {I_LIDT, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5663, 23},
-    /*  559 */ {I_LLDT, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5668, 65},
-    /*  560 */ {I_LLDT, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5668, 65},
-    /*  561 */ {I_LLDT, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5668, 65},
-    /*  562 */ {I_LMSW, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5673, 23},
-    /*  563 */ {I_LMSW, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5673, 23},
-    /*  564 */ {I_LMSW, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5673, 23},
-    /*  565 */ {I_LODSB, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7593, 0},
-    /*  566 */ {I_LODSD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7183, 5},
-    /*  567 */ {I_LODSQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7187, 7},
-    /*  568 */ {I_LODSW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7191, 0},
-    /*  569 */ {I_LOOP, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5678, 0},
-    /*  570 */ {I_LOOP, 2, {IMMEDIATE,REG_CX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5683, 1},
-    /*  571 */ {I_LOOP, 2, {IMMEDIATE,REG_ECX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5688, 5},
-    /*  572 */ {I_LOOP, 2, {IMMEDIATE,REG_RCX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5693, 7},
-    /*  573 */ {I_LOOPE, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5698, 0},
-    /*  574 */ {I_LOOPE, 2, {IMMEDIATE,REG_CX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5703, 1},
-    /*  575 */ {I_LOOPE, 2, {IMMEDIATE,REG_ECX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5708, 5},
-    /*  576 */ {I_LOOPE, 2, {IMMEDIATE,REG_RCX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5713, 7},
-    /*  577 */ {I_LOOPNE, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5718, 0},
-    /*  578 */ {I_LOOPNE, 2, {IMMEDIATE,REG_CX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5723, 1},
-    /*  579 */ {I_LOOPNE, 2, {IMMEDIATE,REG_ECX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5728, 5},
-    /*  580 */ {I_LOOPNE, 2, {IMMEDIATE,REG_RCX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5733, 7},
-    /*  581 */ {I_LOOPNZ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5718, 0},
-    /*  582 */ {I_LOOPNZ, 2, {IMMEDIATE,REG_CX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5723, 1},
-    /*  583 */ {I_LOOPNZ, 2, {IMMEDIATE,REG_ECX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5728, 5},
-    /*  584 */ {I_LOOPNZ, 2, {IMMEDIATE,REG_RCX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5733, 7},
-    /*  585 */ {I_LOOPZ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5698, 0},
-    /*  586 */ {I_LOOPZ, 2, {IMMEDIATE,REG_CX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5703, 1},
-    /*  587 */ {I_LOOPZ, 2, {IMMEDIATE,REG_ECX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5708, 5},
-    /*  588 */ {I_LOOPZ, 2, {IMMEDIATE,REG_RCX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5713, 7},
-    /*  589 */ {I_LSL, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3093, 56},
-    /*  590 */ {I_LSL, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3093, 57},
-    /*  591 */ {I_LSL, 2, {REG_GPR|BITS16,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3093, 58},
-    /*  592 */ {I_LSL, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3099, 60},
-    /*  593 */ {I_LSL, 2, {REG_GPR|BITS32,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3099, 58},
-    /*  594 */ {I_LSL, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3099, 58},
-    /*  595 */ {I_LSL, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3105, 61},
-    /*  596 */ {I_LSL, 2, {REG_GPR|BITS64,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3105, 59},
-    /*  597 */ {I_LSL, 2, {REG_GPR|BITS64,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3105, 59},
-    /*  598 */ {I_LSL, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3105, 59},
-    /*  599 */ {I_LSS, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3111, 5},
-    /*  600 */ {I_LSS, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3117, 5},
-    /*  601 */ {I_LSS, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3123, 7},
-    /*  602 */ {I_LTR, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5738, 65},
-    /*  603 */ {I_LTR, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5738, 65},
-    /*  604 */ {I_LTR, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5738, 65},
-    /*  605 */ {I_MFENCE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3129, 54},
-    /*  606 */ {I_MONITOR, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5743, 67},
-    /*  607 */ {I_MONITORX, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5748, 69},
-    /*  608 */ {I_MOV, 2, {MEMORY,REG_SREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5769, 70},
-    /*  609 */ {I_MOV, 2, {REG_GPR|BITS16,REG_SREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5753, 0},
-    /*  610 */ {I_MOV, 2, {REG_GPR|BITS32,REG_SREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5758, 5},
-    /*  611 */ {I_MOV, 2, {RM_GPR|BITS64,REG_SREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5768, 7},
-    /*  612 */ {I_MOV, 2, {REG_SREG,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5789, 70},
-    /*  613 */ {I_MOV, 2, {REG_SREG,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+5778, 0},
-    /*  614 */ {I_MOV, 2, {REG_SREG,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+5783, 5},
-    /*  615 */ {I_MOV, 2, {REG_SREG,RM_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+5788, 7},
-    /*  616 */ {I_MOV, 2, {REG_AL,MEM_OFFS,0,0,0}, NO_DECORATOR, nasm_bytecodes+7195, 8},
-    /*  617 */ {I_MOV, 2, {REG_AX,MEM_OFFS,0,0,0}, NO_DECORATOR, nasm_bytecodes+5793, 8},
-    /*  618 */ {I_MOV, 2, {REG_EAX,MEM_OFFS,0,0,0}, NO_DECORATOR, nasm_bytecodes+5798, 9},
-    /*  619 */ {I_MOV, 2, {REG_RAX,MEM_OFFS,0,0,0}, NO_DECORATOR, nasm_bytecodes+5803, 10},
-    /*  620 */ {I_MOV, 2, {MEM_OFFS,REG_AL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7199, 74},
-    /*  621 */ {I_MOV, 2, {MEM_OFFS,REG_AX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5808, 74},
-    /*  622 */ {I_MOV, 2, {MEM_OFFS,REG_EAX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5813, 75},
-    /*  623 */ {I_MOV, 2, {MEM_OFFS,REG_RAX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5818, 76},
-    /*  624 */ {I_MOV, 2, {REG_GPR|BITS32,REG_CREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+3135, 77},
-    /*  625 */ {I_MOV, 2, {REG_GPR|BITS64,REG_CREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+3141, 78},
-    /*  626 */ {I_MOV, 2, {REG_CREG,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3147, 77},
-    /*  627 */ {I_MOV, 2, {REG_CREG,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3153, 78},
-    /*  628 */ {I_MOV, 2, {REG_GPR|BITS32,REG_DREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+3160, 77},
-    /*  629 */ {I_MOV, 2, {REG_GPR|BITS64,REG_DREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+3159, 78},
-    /*  630 */ {I_MOV, 2, {REG_DREG,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3166, 77},
-    /*  631 */ {I_MOV, 2, {REG_DREG,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3165, 78},
-    /*  632 */ {I_MOV, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+5833, 8},
-    /*  633 */ {I_MOV, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+5834, 0},
-    /*  634 */ {I_MOV, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3171, 8},
-    /*  635 */ {I_MOV, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3172, 0},
-    /*  636 */ {I_MOV, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3177, 9},
-    /*  637 */ {I_MOV, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3178, 5},
-    /*  638 */ {I_MOV, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3183, 10},
-    /*  639 */ {I_MOV, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3184, 7},
-    /*  640 */ {I_MOV, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7203, 8},
-    /*  641 */ {I_MOV, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+7203, 0},
-    /*  642 */ {I_MOV, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5838, 8},
-    /*  643 */ {I_MOV, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+5838, 0},
-    /*  644 */ {I_MOV, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5843, 9},
-    /*  645 */ {I_MOV, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+5843, 5},
-    /*  646 */ {I_MOV, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5848, 10},
-    /*  647 */ {I_MOV, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+5848, 7},
-    /*  648 */ {I_MOV, 2, {REG_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+7207, 8},
-    /*  649 */ {I_MOV, 2, {REG_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5853, 8},
-    /*  650 */ {I_MOV, 2, {REG_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5858, 9},
-    /*  651 */ {I_MOV, 2, {REG_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5868, 10},
-    /*  652 */ {I_MOV, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3189, 8},
-    /*  653 */ {I_MOV, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1077, 8},
-    /*  654 */ {I_MOV, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1084, 9},
-    /*  655 */ {I_MOV, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1091, 10},
-    /*  656 */ {I_MOV, 2, {RM_GPR|BITS64,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1091, 7},
-    /*  657 */ {I_MOV, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3189, 8},
-    /*  658 */ {I_MOV, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1077, 8},
-    /*  659 */ {I_MOV, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1084, 9},
-    /*  660 */ {I_MOVD, 2, {MMXREG,RM_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3195, 80},
-    /*  661 */ {I_MOVD, 2, {RM_GPR|BITS32,MMXREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+3201, 80},
-    /*  662 */ {I_MOVQ, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+3207, 82},
-    /*  663 */ {I_MOVQ, 2, {RM_MMX,MMXREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+3213, 82},
-    /*  664 */ {I_MOVQ, 2, {MMXREG,RM_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+1098, 83},
-    /*  665 */ {I_MOVQ, 2, {RM_GPR|BITS64,MMXREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+1105, 83},
-    /*  666 */ {I_MOVSB, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+205, 0},
-    /*  667 */ {I_MOVSD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7211, 5},
-    /*  668 */ {I_MOVSQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7215, 7},
-    /*  669 */ {I_MOVSW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7219, 0},
-    /*  670 */ {I_MOVSX, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3219, 48},
-    /*  671 */ {I_MOVSX, 2, {REG_GPR|BITS16,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3219, 5},
-    /*  672 */ {I_MOVSX, 2, {REG_GPR|BITS32,RM_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3225, 5},
-    /*  673 */ {I_MOVSX, 2, {REG_GPR|BITS32,RM_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3231, 5},
-    /*  674 */ {I_MOVSX, 2, {REG_GPR|BITS64,RM_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3237, 7},
-    /*  675 */ {I_MOVSX, 2, {REG_GPR|BITS64,RM_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3243, 7},
-    /*  676 */ {I_MOVZX, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3249, 48},
-    /*  677 */ {I_MOVZX, 2, {REG_GPR|BITS16,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3249, 5},
-    /*  678 */ {I_MOVZX, 2, {REG_GPR|BITS32,RM_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3255, 5},
-    /*  679 */ {I_MOVZX, 2, {REG_GPR|BITS32,RM_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3261, 5},
-    /*  680 */ {I_MOVZX, 2, {REG_GPR|BITS64,RM_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3267, 7},
-    /*  681 */ {I_MOVZX, 2, {REG_GPR|BITS64,RM_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3273, 7},
-    /*  682 */ {I_MUL, 1, {RM_GPR|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7223, 0},
-    /*  683 */ {I_MUL, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5873, 0},
-    /*  684 */ {I_MUL, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5878, 5},
-    /*  685 */ {I_MUL, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5883, 7},
-    /*  686 */ {I_MWAIT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5888, 67},
-    /*  687 */ {I_MWAITX, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5893, 69},
-    /*  688 */ {I_NEG, 1, {RM_GPR|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5898, 11},
-    /*  689 */ {I_NEG, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3279, 11},
-    /*  690 */ {I_NEG, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3285, 12},
-    /*  691 */ {I_NEG, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3291, 13},
-    /*  692 */ {I_NOP, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5903, 0},
-    /*  693 */ {I_NOP, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3297, 84},
-    /*  694 */ {I_NOP, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3303, 84},
-    /*  695 */ {I_NOP, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3309, 7},
-    /*  696 */ {I_NOT, 1, {RM_GPR|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5908, 11},
-    /*  697 */ {I_NOT, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3315, 11},
-    /*  698 */ {I_NOT, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3321, 12},
-    /*  699 */ {I_NOT, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3327, 13},
-    /*  700 */ {I_OR, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+5913, 3},
-    /*  701 */ {I_OR, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+5914, 0},
-    /*  702 */ {I_OR, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3333, 3},
-    /*  703 */ {I_OR, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3334, 0},
-    /*  704 */ {I_OR, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3339, 4},
-    /*  705 */ {I_OR, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3340, 5},
-    /*  706 */ {I_OR, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3345, 6},
-    /*  707 */ {I_OR, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3346, 7},
-    /*  708 */ {I_OR, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7227, 8},
-    /*  709 */ {I_OR, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+7227, 0},
-    /*  710 */ {I_OR, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5918, 8},
-    /*  711 */ {I_OR, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+5918, 0},
-    /*  712 */ {I_OR, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5923, 9},
-    /*  713 */ {I_OR, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+5923, 5},
-    /*  714 */ {I_OR, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5928, 10},
-    /*  715 */ {I_OR, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+5928, 7},
-    /*  716 */ {I_OR, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1112, 11},
-    /*  717 */ {I_OR, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1119, 12},
-    /*  718 */ {I_OR, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1126, 13},
-    /*  719 */ {I_OR, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+7231, 8},
-    /*  720 */ {I_OR, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5933, 8},
-    /*  721 */ {I_OR, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5938, 9},
-    /*  722 */ {I_OR, 2, {REG_RAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5943, 10},
-    /*  723 */ {I_OR, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3351, 3},
-    /*  724 */ {I_OR, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3357, 3},
-    /*  725 */ {I_OR, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1133, 3},
-    /*  726 */ {I_OR, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1140, 4},
-    /*  727 */ {I_OR, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1147, 6},
-    /*  728 */ {I_OR, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3351, 3},
-    /*  729 */ {I_OR, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3357, 3},
-    /*  730 */ {I_OR, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1133, 3},
-    /*  731 */ {I_OR, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1140, 4},
-    /*  732 */ {I_OUT, 2, {IMMEDIATE,REG_AL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7235, 47},
-    /*  733 */ {I_OUT, 2, {IMMEDIATE,REG_AX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5948, 47},
-    /*  734 */ {I_OUT, 2, {IMMEDIATE,REG_EAX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5953, 48},
-    /*  735 */ {I_OUT, 2, {REG_DX,REG_AL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7596, 0},
-    /*  736 */ {I_OUT, 2, {REG_DX,REG_AX,0,0,0}, NO_DECORATOR, nasm_bytecodes+7239, 0},
-    /*  737 */ {I_OUT, 2, {REG_DX,REG_EAX,0,0,0}, NO_DECORATOR, nasm_bytecodes+7243, 5},
-    /*  738 */ {I_OUTSB, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7599, 30},
-    /*  739 */ {I_OUTSD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7247, 5},
-    /*  740 */ {I_OUTSW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7251, 30},
-    /*  741 */ {I_PACKSSDW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1154, 82},
-    /*  742 */ {I_PACKSSWB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1161, 82},
-    /*  743 */ {I_PACKUSWB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1168, 82},
-    /*  744 */ {I_PADDB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1175, 82},
-    /*  745 */ {I_PADDD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1182, 82},
-    /*  746 */ {I_PADDSB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1189, 82},
-    /*  747 */ {I_PADDSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1196, 82},
-    /*  748 */ {I_PADDUSB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1203, 82},
-    /*  749 */ {I_PADDUSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1210, 82},
-    /*  750 */ {I_PADDW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1217, 82},
-    /*  751 */ {I_PAND, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1224, 82},
-    /*  752 */ {I_PANDN, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1231, 82},
-    /*  753 */ {I_PAUSE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7255, 0},
-    /*  754 */ {I_PAVGUSB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+144, 85},
-    /*  755 */ {I_PCMPEQB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1238, 82},
-    /*  756 */ {I_PCMPEQD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1245, 82},
-    /*  757 */ {I_PCMPEQW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1252, 82},
-    /*  758 */ {I_PCMPGTB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1259, 82},
-    /*  759 */ {I_PCMPGTD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1266, 82},
-    /*  760 */ {I_PCMPGTW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1273, 82},
-    /*  761 */ {I_PF2ID, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+152, 85},
-    /*  762 */ {I_PFACC, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+160, 85},
-    /*  763 */ {I_PFADD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+168, 85},
-    /*  764 */ {I_PFCMPEQ, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+176, 85},
-    /*  765 */ {I_PFCMPGE, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+184, 85},
-    /*  766 */ {I_PFCMPGT, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+192, 85},
-    /*  767 */ {I_PFMAX, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+200, 85},
-    /*  768 */ {I_PFMIN, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+208, 85},
-    /*  769 */ {I_PFMUL, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+216, 85},
-    /*  770 */ {I_PFRCP, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+224, 85},
-    /*  771 */ {I_PFRCPIT1, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+232, 85},
-    /*  772 */ {I_PFRCPIT2, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+240, 85},
-    /*  773 */ {I_PFRSQIT1, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+248, 85},
-    /*  774 */ {I_PFRSQRT, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+256, 85},
-    /*  775 */ {I_PFSUB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+264, 85},
-    /*  776 */ {I_PFSUBR, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+272, 85},
-    /*  777 */ {I_PI2FD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+280, 85},
-    /*  778 */ {I_PMADDWD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1280, 82},
-    /*  779 */ {I_PMULHRWA, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+288, 85},
-    /*  780 */ {I_PMULHW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1287, 82},
-    /*  781 */ {I_PMULLW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1294, 82},
-    /*  782 */ {I_POP, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7259, 0},
-    /*  783 */ {I_POP, 1, {REG_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7263, 17},
-    /*  784 */ {I_POP, 1, {REG_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7267, 7},
-    /*  785 */ {I_POP, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5958, 0},
-    /*  786 */ {I_POP, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5963, 17},
-    /*  787 */ {I_POP, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5968, 7},
-    /*  788 */ {I_POP, 1, {REG_ES,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+581, 1},
-    /*  789 */ {I_POP, 1, {REG_SS,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7605, 1},
-    /*  790 */ {I_POP, 1, {REG_DS,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7608, 1},
-    /*  791 */ {I_POP, 1, {REG_FS,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7271, 5},
-    /*  792 */ {I_POP, 1, {REG_GS,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7275, 5},
-    /*  793 */ {I_POPA, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7279, 16},
-    /*  794 */ {I_POPAD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7283, 17},
-    /*  795 */ {I_POPAW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7287, 16},
-    /*  796 */ {I_POPF, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7291, 0},
-    /*  797 */ {I_POPFD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7295, 17},
-    /*  798 */ {I_POPFQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7295, 7},
-    /*  799 */ {I_POPFW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7299, 0},
-    /*  800 */ {I_POR, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1301, 82},
-    /*  801 */ {I_PREFETCH, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5973, 85},
-    /*  802 */ {I_PREFETCHW, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5978, 85},
-    /*  803 */ {I_PSLLD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1308, 82},
-    /*  804 */ {I_PSLLD, 2, {MMXREG,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1315, 29},
-    /*  805 */ {I_PSLLQ, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1322, 82},
-    /*  806 */ {I_PSLLQ, 2, {MMXREG,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1329, 29},
-    /*  807 */ {I_PSLLW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1336, 82},
-    /*  808 */ {I_PSLLW, 2, {MMXREG,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1343, 29},
-    /*  809 */ {I_PSRAD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1350, 82},
-    /*  810 */ {I_PSRAD, 2, {MMXREG,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1357, 29},
-    /*  811 */ {I_PSRAW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1364, 82},
-    /*  812 */ {I_PSRAW, 2, {MMXREG,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1371, 29},
-    /*  813 */ {I_PSRLD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1378, 82},
-    /*  814 */ {I_PSRLD, 2, {MMXREG,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1385, 29},
-    /*  815 */ {I_PSRLQ, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1392, 82},
-    /*  816 */ {I_PSRLQ, 2, {MMXREG,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1399, 29},
-    /*  817 */ {I_PSRLW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1406, 82},
-    /*  818 */ {I_PSRLW, 2, {MMXREG,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1413, 29},
-    /*  819 */ {I_PSUBB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1420, 82},
-    /*  820 */ {I_PSUBD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1427, 82},
-    /*  821 */ {I_PSUBSB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1434, 82},
-    /*  822 */ {I_PSUBSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1441, 82},
-    /*  823 */ {I_PSUBUSB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1448, 82},
-    /*  824 */ {I_PSUBUSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1455, 82},
-    /*  825 */ {I_PSUBW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1462, 82},
-    /*  826 */ {I_PUNPCKHBW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1469, 82},
-    /*  827 */ {I_PUNPCKHDQ, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1476, 82},
-    /*  828 */ {I_PUNPCKHWD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1483, 82},
-    /*  829 */ {I_PUNPCKLBW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1490, 82},
-    /*  830 */ {I_PUNPCKLDQ, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1497, 82},
-    /*  831 */ {I_PUNPCKLWD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1504, 82},
-    /*  832 */ {I_PUSH, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7303, 0},
-    /*  833 */ {I_PUSH, 1, {REG_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7307, 17},
-    /*  834 */ {I_PUSH, 1, {REG_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7311, 7},
-    /*  835 */ {I_PUSH, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5983, 0},
-    /*  836 */ {I_PUSH, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5988, 17},
-    /*  837 */ {I_PUSH, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5993, 7},
-    /*  838 */ {I_PUSH, 1, {REG_ES,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+549, 1},
-    /*  839 */ {I_PUSH, 1, {REG_CS,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7611, 1},
-    /*  840 */ {I_PUSH, 1, {REG_SS,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7614, 1},
-    /*  841 */ {I_PUSH, 1, {REG_DS,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7617, 1},
-    /*  842 */ {I_PUSH, 1, {REG_FS,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7315, 5},
-    /*  843 */ {I_PUSH, 1, {REG_GS,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7319, 5},
-    /*  844 */ {I_PUSH, 1, {IMMEDIATE|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6019, 30},
-    /*  845 */ {I_PUSH, 1, {IMMEDIATE|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6003, 87},
-    /*  846 */ {I_PUSH, 1, {IMMEDIATE|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6013, 88},
-    /*  847 */ {I_PUSH, 1, {IMMEDIATE|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6013, 89},
-    /*  848 */ {I_PUSH, 1, {IMMEDIATE|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6023, 90},
-    /*  849 */ {I_PUSH, 1, {IMMEDIATE|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6023, 90},
-    /*  850 */ {I_PUSHA, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7323, 16},
-    /*  851 */ {I_PUSHAD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7327, 17},
-    /*  852 */ {I_PUSHAW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7331, 16},
-    /*  853 */ {I_PUSHF, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7335, 0},
-    /*  854 */ {I_PUSHFD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7339, 17},
-    /*  855 */ {I_PUSHFQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7339, 7},
-    /*  856 */ {I_PUSHFW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7343, 0},
-    /*  857 */ {I_PXOR, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1511, 82},
-    /*  858 */ {I_RCL, 2, {RM_GPR|BITS8,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7347, 0},
-    /*  859 */ {I_RCL, 2, {RM_GPR|BITS8,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7351, 0},
-    /*  860 */ {I_RCL, 2, {RM_GPR|BITS8,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6028, 30},
-    /*  861 */ {I_RCL, 2, {RM_GPR|BITS16,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6033, 0},
-    /*  862 */ {I_RCL, 2, {RM_GPR|BITS16,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6038, 0},
-    /*  863 */ {I_RCL, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3363, 30},
-    /*  864 */ {I_RCL, 2, {RM_GPR|BITS32,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6043, 5},
-    /*  865 */ {I_RCL, 2, {RM_GPR|BITS32,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6048, 5},
-    /*  866 */ {I_RCL, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3369, 5},
-    /*  867 */ {I_RCL, 2, {RM_GPR|BITS64,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6053, 7},
-    /*  868 */ {I_RCL, 2, {RM_GPR|BITS64,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6058, 7},
-    /*  869 */ {I_RCL, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3375, 7},
-    /*  870 */ {I_RCR, 2, {RM_GPR|BITS8,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7355, 0},
-    /*  871 */ {I_RCR, 2, {RM_GPR|BITS8,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7359, 0},
-    /*  872 */ {I_RCR, 2, {RM_GPR|BITS8,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6063, 30},
-    /*  873 */ {I_RCR, 2, {RM_GPR|BITS16,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6068, 0},
-    /*  874 */ {I_RCR, 2, {RM_GPR|BITS16,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6073, 0},
-    /*  875 */ {I_RCR, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3381, 30},
-    /*  876 */ {I_RCR, 2, {RM_GPR|BITS32,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6078, 5},
-    /*  877 */ {I_RCR, 2, {RM_GPR|BITS32,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6083, 5},
-    /*  878 */ {I_RCR, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3387, 5},
-    /*  879 */ {I_RCR, 2, {RM_GPR|BITS64,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6088, 7},
-    /*  880 */ {I_RCR, 2, {RM_GPR|BITS64,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6093, 7},
-    /*  881 */ {I_RCR, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3393, 7},
-    /*  882 */ {I_RDMSR, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7363, 91},
-    /*  883 */ {I_RDPMC, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7367, 84},
-    /*  884 */ {I_RDTSC, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7371, 25},
-    /*  885 */ {I_RDTSCP, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6098, 92},
-    /*  886 */ {I_RET, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7392, 19},
-    /*  887 */ {I_RET, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6124, 93},
-    /*  888 */ {I_RETF, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7396, 0},
-    /*  889 */ {I_RETF, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6129, 70},
-    /*  890 */ {I_RETN, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7392, 19},
-    /*  891 */ {I_RETN, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6124, 93},
-    /*  892 */ {I_RETW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7375, 19},
-    /*  893 */ {I_RETW, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6124, 93},
-    /*  894 */ {I_RETFW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7379, 0},
-    /*  895 */ {I_RETFW, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6103, 70},
-    /*  896 */ {I_RETNW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7375, 19},
-    /*  897 */ {I_RETNW, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6108, 93},
-    /*  898 */ {I_RETD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7383, 20},
-    /*  899 */ {I_RETD, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6113, 94},
-    /*  900 */ {I_RETFD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7387, 0},
-    /*  901 */ {I_RETFD, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6118, 70},
-    /*  902 */ {I_RETND, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7383, 20},
-    /*  903 */ {I_RETND, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6113, 94},
-    /*  904 */ {I_RETQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7391, 22},
-    /*  905 */ {I_RETQ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6123, 95},
-    /*  906 */ {I_RETFQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7395, 7},
-    /*  907 */ {I_RETFQ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6128, 96},
-    /*  908 */ {I_RETNQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7391, 22},
-    /*  909 */ {I_RETNQ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6123, 95},
-    /*  910 */ {I_ROL, 2, {RM_GPR|BITS8,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7399, 0},
-    /*  911 */ {I_ROL, 2, {RM_GPR|BITS8,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7403, 0},
-    /*  912 */ {I_ROL, 2, {RM_GPR|BITS8,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6133, 30},
-    /*  913 */ {I_ROL, 2, {RM_GPR|BITS16,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6138, 0},
-    /*  914 */ {I_ROL, 2, {RM_GPR|BITS16,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6143, 0},
-    /*  915 */ {I_ROL, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3399, 30},
-    /*  916 */ {I_ROL, 2, {RM_GPR|BITS32,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6148, 5},
-    /*  917 */ {I_ROL, 2, {RM_GPR|BITS32,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6153, 5},
-    /*  918 */ {I_ROL, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3405, 5},
-    /*  919 */ {I_ROL, 2, {RM_GPR|BITS64,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6158, 7},
-    /*  920 */ {I_ROL, 2, {RM_GPR|BITS64,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6163, 7},
-    /*  921 */ {I_ROL, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3411, 7},
-    /*  922 */ {I_ROR, 2, {RM_GPR|BITS8,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7407, 0},
-    /*  923 */ {I_ROR, 2, {RM_GPR|BITS8,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7411, 0},
-    /*  924 */ {I_ROR, 2, {RM_GPR|BITS8,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6168, 30},
-    /*  925 */ {I_ROR, 2, {RM_GPR|BITS16,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6173, 0},
-    /*  926 */ {I_ROR, 2, {RM_GPR|BITS16,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6178, 0},
-    /*  927 */ {I_ROR, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3417, 30},
-    /*  928 */ {I_ROR, 2, {RM_GPR|BITS32,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6183, 5},
-    /*  929 */ {I_ROR, 2, {RM_GPR|BITS32,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6188, 5},
-    /*  930 */ {I_ROR, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3423, 5},
-    /*  931 */ {I_ROR, 2, {RM_GPR|BITS64,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6193, 7},
-    /*  932 */ {I_ROR, 2, {RM_GPR|BITS64,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6198, 7},
-    /*  933 */ {I_ROR, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3429, 7},
-    /*  934 */ {I_RSM, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7415, 97},
-    /*  935 */ {I_SAHF, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+173, 0},
-    /*  936 */ {I_SALC, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7620, 98},
-    /*  937 */ {I_SAR, 2, {RM_GPR|BITS8,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7427, 0},
-    /*  938 */ {I_SAR, 2, {RM_GPR|BITS8,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7431, 0},
-    /*  939 */ {I_SAR, 2, {RM_GPR|BITS8,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6238, 30},
-    /*  940 */ {I_SAR, 2, {RM_GPR|BITS16,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6243, 0},
-    /*  941 */ {I_SAR, 2, {RM_GPR|BITS16,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6248, 0},
-    /*  942 */ {I_SAR, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3453, 30},
-    /*  943 */ {I_SAR, 2, {RM_GPR|BITS32,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6253, 5},
-    /*  944 */ {I_SAR, 2, {RM_GPR|BITS32,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6258, 5},
-    /*  945 */ {I_SAR, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3459, 5},
-    /*  946 */ {I_SAR, 2, {RM_GPR|BITS64,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6263, 7},
-    /*  947 */ {I_SAR, 2, {RM_GPR|BITS64,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6268, 7},
-    /*  948 */ {I_SAR, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3465, 7},
-    /*  949 */ {I_SBB, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6273, 3},
-    /*  950 */ {I_SBB, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6274, 0},
-    /*  951 */ {I_SBB, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3471, 3},
-    /*  952 */ {I_SBB, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3472, 0},
-    /*  953 */ {I_SBB, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3477, 4},
-    /*  954 */ {I_SBB, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3478, 5},
-    /*  955 */ {I_SBB, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3483, 6},
-    /*  956 */ {I_SBB, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3484, 7},
-    /*  957 */ {I_SBB, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7435, 8},
-    /*  958 */ {I_SBB, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+7435, 0},
-    /*  959 */ {I_SBB, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6278, 8},
-    /*  960 */ {I_SBB, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+6278, 0},
-    /*  961 */ {I_SBB, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6283, 9},
-    /*  962 */ {I_SBB, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+6283, 5},
-    /*  963 */ {I_SBB, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6288, 10},
-    /*  964 */ {I_SBB, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+6288, 7},
-    /*  965 */ {I_SBB, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1518, 11},
-    /*  966 */ {I_SBB, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1525, 12},
-    /*  967 */ {I_SBB, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1532, 13},
-    /*  968 */ {I_SBB, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+7439, 8},
-    /*  969 */ {I_SBB, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6293, 8},
-    /*  970 */ {I_SBB, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6298, 9},
-    /*  971 */ {I_SBB, 2, {REG_RAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6303, 10},
-    /*  972 */ {I_SBB, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3489, 3},
-    /*  973 */ {I_SBB, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3495, 3},
-    /*  974 */ {I_SBB, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1539, 3},
-    /*  975 */ {I_SBB, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1546, 4},
-    /*  976 */ {I_SBB, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1553, 6},
-    /*  977 */ {I_SBB, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3489, 3},
-    /*  978 */ {I_SBB, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3495, 3},
-    /*  979 */ {I_SBB, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1539, 3},
-    /*  980 */ {I_SBB, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1546, 4},
-    /*  981 */ {I_SCASB, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7443, 0},
-    /*  982 */ {I_SCASD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6308, 5},
-    /*  983 */ {I_SCASQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6313, 7},
-    /*  984 */ {I_SCASW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6318, 0},
-    /*  985 */ {I_SFENCE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3501, 54},
-    /*  986 */ {I_SGDT, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6323, 99},
-    /*  987 */ {I_SHL, 2, {RM_GPR|BITS8,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7419, 0},
-    /*  988 */ {I_SHL, 2, {RM_GPR|BITS8,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7423, 0},
-    /*  989 */ {I_SHL, 2, {RM_GPR|BITS8,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6203, 30},
-    /*  990 */ {I_SHL, 2, {RM_GPR|BITS16,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6208, 0},
-    /*  991 */ {I_SHL, 2, {RM_GPR|BITS16,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6213, 0},
-    /*  992 */ {I_SHL, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3435, 30},
-    /*  993 */ {I_SHL, 2, {RM_GPR|BITS32,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6218, 5},
-    /*  994 */ {I_SHL, 2, {RM_GPR|BITS32,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6223, 5},
-    /*  995 */ {I_SHL, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3441, 5},
-    /*  996 */ {I_SHL, 2, {RM_GPR|BITS64,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6228, 7},
-    /*  997 */ {I_SHL, 2, {RM_GPR|BITS64,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6233, 7},
-    /*  998 */ {I_SHL, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3447, 7},
-    /*  999 */ {I_SHLD, 3, {MEMORY,REG_GPR|BITS16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1560, 100},
-    /* 1000 */ {I_SHLD, 3, {REG_GPR|BITS16,REG_GPR|BITS16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1560, 100},
-    /* 1001 */ {I_SHLD, 3, {MEMORY,REG_GPR|BITS32,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1567, 100},
-    /* 1002 */ {I_SHLD, 3, {REG_GPR|BITS32,REG_GPR|BITS32,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1567, 100},
-    /* 1003 */ {I_SHLD, 3, {MEMORY,REG_GPR|BITS64,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1574, 101},
-    /* 1004 */ {I_SHLD, 3, {REG_GPR|BITS64,REG_GPR|BITS64,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1574, 101},
-    /* 1005 */ {I_SHLD, 3, {MEMORY,REG_GPR|BITS16,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3507, 9},
-    /* 1006 */ {I_SHLD, 3, {REG_GPR|BITS16,REG_GPR|BITS16,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3507, 5},
-    /* 1007 */ {I_SHLD, 3, {MEMORY,REG_GPR|BITS32,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3513, 9},
-    /* 1008 */ {I_SHLD, 3, {REG_GPR|BITS32,REG_GPR|BITS32,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3513, 5},
-    /* 1009 */ {I_SHLD, 3, {MEMORY,REG_GPR|BITS64,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3519, 10},
-    /* 1010 */ {I_SHLD, 3, {REG_GPR|BITS64,REG_GPR|BITS64,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3519, 7},
-    /* 1011 */ {I_SHR, 2, {RM_GPR|BITS8,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7447, 0},
-    /* 1012 */ {I_SHR, 2, {RM_GPR|BITS8,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7451, 0},
-    /* 1013 */ {I_SHR, 2, {RM_GPR|BITS8,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6328, 30},
-    /* 1014 */ {I_SHR, 2, {RM_GPR|BITS16,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6333, 0},
-    /* 1015 */ {I_SHR, 2, {RM_GPR|BITS16,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6338, 0},
-    /* 1016 */ {I_SHR, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3525, 30},
-    /* 1017 */ {I_SHR, 2, {RM_GPR|BITS32,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6343, 5},
-    /* 1018 */ {I_SHR, 2, {RM_GPR|BITS32,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6348, 5},
-    /* 1019 */ {I_SHR, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3531, 5},
-    /* 1020 */ {I_SHR, 2, {RM_GPR|BITS64,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6353, 7},
-    /* 1021 */ {I_SHR, 2, {RM_GPR|BITS64,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6358, 7},
-    /* 1022 */ {I_SHR, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3537, 7},
-    /* 1023 */ {I_SHRD, 3, {MEMORY,REG_GPR|BITS16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1581, 100},
-    /* 1024 */ {I_SHRD, 3, {REG_GPR|BITS16,REG_GPR|BITS16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1581, 100},
-    /* 1025 */ {I_SHRD, 3, {MEMORY,REG_GPR|BITS32,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1588, 100},
-    /* 1026 */ {I_SHRD, 3, {REG_GPR|BITS32,REG_GPR|BITS32,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1588, 100},
-    /* 1027 */ {I_SHRD, 3, {MEMORY,REG_GPR|BITS64,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1595, 101},
-    /* 1028 */ {I_SHRD, 3, {REG_GPR|BITS64,REG_GPR|BITS64,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1595, 101},
-    /* 1029 */ {I_SHRD, 3, {MEMORY,REG_GPR|BITS16,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3543, 9},
-    /* 1030 */ {I_SHRD, 3, {REG_GPR|BITS16,REG_GPR|BITS16,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3543, 5},
-    /* 1031 */ {I_SHRD, 3, {MEMORY,REG_GPR|BITS32,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3549, 9},
-    /* 1032 */ {I_SHRD, 3, {REG_GPR|BITS32,REG_GPR|BITS32,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3549, 5},
-    /* 1033 */ {I_SHRD, 3, {MEMORY,REG_GPR|BITS64,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3555, 10},
-    /* 1034 */ {I_SHRD, 3, {REG_GPR|BITS64,REG_GPR|BITS64,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3555, 7},
-    /* 1035 */ {I_SIDT, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6363, 99},
-    /* 1036 */ {I_SLDT, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3580, 99},
-    /* 1037 */ {I_SLDT, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3580, 99},
-    /* 1038 */ {I_SLDT, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3561, 99},
-    /* 1039 */ {I_SLDT, 1, {REG_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3567, 5},
-    /* 1040 */ {I_SLDT, 1, {REG_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3579, 7},
-    /* 1041 */ {I_SMI, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7575, 102},
-    /* 1042 */ {I_SMSW, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3598, 99},
-    /* 1043 */ {I_SMSW, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3598, 99},
-    /* 1044 */ {I_SMSW, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3585, 99},
-    /* 1045 */ {I_SMSW, 1, {REG_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3591, 5},
-    /* 1046 */ {I_SMSW, 1, {REG_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3597, 7},
-    /* 1047 */ {I_STC, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6100, 0},
-    /* 1048 */ {I_STD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7623, 0},
-    /* 1049 */ {I_STI, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5895, 0},
-    /* 1050 */ {I_STOSB, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+277, 0},
-    /* 1051 */ {I_STOSD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7455, 5},
-    /* 1052 */ {I_STOSQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7459, 7},
-    /* 1053 */ {I_STOSW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7463, 0},
-    /* 1054 */ {I_STR, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3616, 57},
-    /* 1055 */ {I_STR, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3616, 57},
-    /* 1056 */ {I_STR, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3603, 57},
-    /* 1057 */ {I_STR, 1, {REG_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3609, 58},
-    /* 1058 */ {I_STR, 1, {REG_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3615, 7},
-    /* 1059 */ {I_SUB, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6368, 3},
-    /* 1060 */ {I_SUB, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6369, 0},
-    /* 1061 */ {I_SUB, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3621, 3},
-    /* 1062 */ {I_SUB, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3622, 0},
-    /* 1063 */ {I_SUB, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3627, 4},
-    /* 1064 */ {I_SUB, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3628, 5},
-    /* 1065 */ {I_SUB, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3633, 6},
-    /* 1066 */ {I_SUB, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3634, 7},
-    /* 1067 */ {I_SUB, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7467, 8},
-    /* 1068 */ {I_SUB, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+7467, 0},
-    /* 1069 */ {I_SUB, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6373, 8},
-    /* 1070 */ {I_SUB, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+6373, 0},
-    /* 1071 */ {I_SUB, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6378, 9},
-    /* 1072 */ {I_SUB, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+6378, 5},
-    /* 1073 */ {I_SUB, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6383, 10},
-    /* 1074 */ {I_SUB, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+6383, 7},
-    /* 1075 */ {I_SUB, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1602, 11},
-    /* 1076 */ {I_SUB, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1609, 12},
-    /* 1077 */ {I_SUB, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1616, 13},
-    /* 1078 */ {I_SUB, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+7471, 8},
-    /* 1079 */ {I_SUB, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6388, 8},
-    /* 1080 */ {I_SUB, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6393, 9},
-    /* 1081 */ {I_SUB, 2, {REG_RAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6398, 10},
-    /* 1082 */ {I_SUB, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3639, 3},
-    /* 1083 */ {I_SUB, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3645, 3},
-    /* 1084 */ {I_SUB, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1623, 3},
-    /* 1085 */ {I_SUB, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1630, 4},
-    /* 1086 */ {I_SUB, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1637, 6},
-    /* 1087 */ {I_SUB, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3639, 3},
-    /* 1088 */ {I_SUB, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3645, 3},
-    /* 1089 */ {I_SUB, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1623, 3},
-    /* 1090 */ {I_SUB, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1630, 4},
-    /* 1091 */ {I_SYSENTER, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7475, 84},
-    /* 1092 */ {I_SYSEXIT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7479, 103},
-    /* 1093 */ {I_TEST, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+7483, 8},
-    /* 1094 */ {I_TEST, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+7483, 0},
-    /* 1095 */ {I_TEST, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+6403, 8},
-    /* 1096 */ {I_TEST, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+6403, 0},
-    /* 1097 */ {I_TEST, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+6408, 9},
-    /* 1098 */ {I_TEST, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+6408, 5},
-    /* 1099 */ {I_TEST, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+6413, 10},
-    /* 1100 */ {I_TEST, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+6413, 7},
-    /* 1101 */ {I_TEST, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7487, 8},
-    /* 1102 */ {I_TEST, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6418, 8},
-    /* 1103 */ {I_TEST, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6423, 9},
-    /* 1104 */ {I_TEST, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6428, 10},
-    /* 1105 */ {I_TEST, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+7491, 8},
-    /* 1106 */ {I_TEST, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6433, 8},
-    /* 1107 */ {I_TEST, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6438, 9},
-    /* 1108 */ {I_TEST, 2, {REG_RAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6443, 10},
-    /* 1109 */ {I_TEST, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6448, 8},
-    /* 1110 */ {I_TEST, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3651, 8},
-    /* 1111 */ {I_TEST, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3657, 9},
-    /* 1112 */ {I_TEST, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3663, 10},
-    /* 1113 */ {I_TEST, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6448, 8},
-    /* 1114 */ {I_TEST, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3651, 8},
-    /* 1115 */ {I_TEST, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3657, 9},
-    /* 1116 */ {I_UD0, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7495, 104},
-    /* 1117 */ {I_UD0, 2, {REG_GPR|BITS16,RM_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3669, 30},
-    /* 1118 */ {I_UD0, 2, {REG_GPR|BITS32,RM_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3675, 30},
-    /* 1119 */ {I_UD0, 2, {REG_GPR|BITS64,RM_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3681, 30},
-    /* 1120 */ {I_UD1, 2, {REG_GPR|BITS16,RM_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3687, 30},
-    /* 1121 */ {I_UD1, 2, {REG_GPR|BITS32,RM_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3693, 30},
-    /* 1122 */ {I_UD1, 2, {REG_GPR|BITS64,RM_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3699, 30},
-    /* 1123 */ {I_UD2, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7503, 30},
-    /* 1124 */ {I_VERR, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6453, 57},
-    /* 1125 */ {I_VERR, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6453, 57},
-    /* 1126 */ {I_VERR, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6453, 57},
-    /* 1127 */ {I_VERW, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6458, 57},
-    /* 1128 */ {I_VERW, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6458, 57},
-    /* 1129 */ {I_VERW, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6458, 57},
-    /* 1130 */ {I_FWAIT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7077, 0},
-    /* 1131 */ {I_WBINVD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7507, 49},
-    /* 1132 */ {I_WRMSR, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7511, 91},
-    /* 1133 */ {I_XADD, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3717, 106},
-    /* 1134 */ {I_XADD, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3718, 18},
-    /* 1135 */ {I_XADD, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1672, 106},
-    /* 1136 */ {I_XADD, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1673, 18},
-    /* 1137 */ {I_XADD, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1679, 106},
-    /* 1138 */ {I_XADD, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1680, 18},
-    /* 1139 */ {I_XADD, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+1686, 6},
-    /* 1140 */ {I_XADD, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+1687, 7},
-    /* 1141 */ {I_XCHG, 2, {REG_AX,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+7515, 0},
-    /* 1142 */ {I_XCHG, 2, {REG_EAX,REG32NA,0,0,0}, NO_DECORATOR, nasm_bytecodes+7519, 5},
-    /* 1143 */ {I_XCHG, 2, {REG_RAX,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+7523, 7},
-    /* 1144 */ {I_XCHG, 2, {REG_GPR|BITS16,REG_AX,0,0,0}, NO_DECORATOR, nasm_bytecodes+7527, 0},
-    /* 1145 */ {I_XCHG, 2, {REG32NA,REG_EAX,0,0,0}, NO_DECORATOR, nasm_bytecodes+7531, 5},
-    /* 1146 */ {I_XCHG, 2, {REG_GPR|BITS64,REG_RAX,0,0,0}, NO_DECORATOR, nasm_bytecodes+7535, 7},
-    /* 1147 */ {I_XCHG, 2, {REG_EAX,REG_EAX,0,0,0}, NO_DECORATOR, nasm_bytecodes+7539, 17},
-    /* 1148 */ {I_XCHG, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6463, 3},
-    /* 1149 */ {I_XCHG, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6464, 0},
-    /* 1150 */ {I_XCHG, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3735, 3},
-    /* 1151 */ {I_XCHG, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3736, 0},
-    /* 1152 */ {I_XCHG, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3741, 4},
-    /* 1153 */ {I_XCHG, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3742, 5},
-    /* 1154 */ {I_XCHG, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3747, 6},
-    /* 1155 */ {I_XCHG, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3748, 7},
-    /* 1156 */ {I_XCHG, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6468, 3},
-    /* 1157 */ {I_XCHG, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6469, 0},
-    /* 1158 */ {I_XCHG, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3753, 3},
-    /* 1159 */ {I_XCHG, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3754, 0},
-    /* 1160 */ {I_XCHG, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3759, 4},
-    /* 1161 */ {I_XCHG, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3760, 5},
-    /* 1162 */ {I_XCHG, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3765, 6},
-    /* 1163 */ {I_XCHG, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3766, 7},
-    /* 1164 */ {I_XLATB, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7626, 0},
-    /* 1165 */ {I_XLAT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7626, 0},
-    /* 1166 */ {I_XOR, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6473, 3},
-    /* 1167 */ {I_XOR, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6474, 0},
-    /* 1168 */ {I_XOR, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3771, 3},
-    /* 1169 */ {I_XOR, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3772, 0},
-    /* 1170 */ {I_XOR, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3777, 4},
-    /* 1171 */ {I_XOR, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3778, 5},
-    /* 1172 */ {I_XOR, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3783, 6},
-    /* 1173 */ {I_XOR, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3784, 7},
-    /* 1174 */ {I_XOR, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7543, 8},
-    /* 1175 */ {I_XOR, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+7543, 0},
-    /* 1176 */ {I_XOR, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6478, 8},
-    /* 1177 */ {I_XOR, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+6478, 0},
-    /* 1178 */ {I_XOR, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6483, 9},
-    /* 1179 */ {I_XOR, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+6483, 5},
-    /* 1180 */ {I_XOR, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6488, 10},
-    /* 1181 */ {I_XOR, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+6488, 7},
-    /* 1182 */ {I_XOR, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1693, 11},
-    /* 1183 */ {I_XOR, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1700, 12},
-    /* 1184 */ {I_XOR, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1707, 13},
-    /* 1185 */ {I_XOR, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+7547, 8},
-    /* 1186 */ {I_XOR, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6493, 8},
-    /* 1187 */ {I_XOR, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6498, 9},
-    /* 1188 */ {I_XOR, 2, {REG_RAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6503, 10},
-    /* 1189 */ {I_XOR, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3789, 3},
-    /* 1190 */ {I_XOR, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3795, 3},
-    /* 1191 */ {I_XOR, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1714, 3},
-    /* 1192 */ {I_XOR, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1721, 4},
-    /* 1193 */ {I_XOR, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1728, 6},
-    /* 1194 */ {I_XOR, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3789, 3},
-    /* 1195 */ {I_XOR, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3795, 3},
-    /* 1196 */ {I_XOR, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1714, 3},
-    /* 1197 */ {I_XOR, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1721, 4},
-    /* 1198 */ {I_CMOVcc, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+1735, 109},
-    /* 1199 */ {I_CMOVcc, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1735, 84},
-    /* 1200 */ {I_CMOVcc, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+1742, 109},
-    /* 1201 */ {I_CMOVcc, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1742, 84},
-    /* 1202 */ {I_CMOVcc, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+1749, 10},
-    /* 1203 */ {I_CMOVcc, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+1749, 7},
-    /* 1204 */ {I_Jcc, 1, {IMMEDIATE|NEAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1756, 110},
-    /* 1205 */ {I_Jcc, 1, {IMMEDIATE|BITS16|NEAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1763, 21},
-    /* 1206 */ {I_Jcc, 1, {IMMEDIATE|BITS32|NEAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1770, 21},
-    /* 1207 */ {I_Jcc, 1, {IMMEDIATE|BITS64|NEAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1777, 22},
-    /* 1208 */ {I_Jcc, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6509, 19},
-    /* 1209 */ {I_SETcc, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3801, 48},
-    /* 1210 */ {I_SETcc, 1, {REG_GPR|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3801, 5},
-    /* 1211 */ {I_ADDPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3807, 111},
-    /* 1212 */ {I_ADDSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3813, 111},
-    /* 1213 */ {I_ANDNPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3819, 111},
-    /* 1214 */ {I_ANDPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3825, 111},
-    /* 1215 */ {I_CMPEQPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+296, 111},
-    /* 1216 */ {I_CMPEQSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+304, 111},
-    /* 1217 */ {I_CMPLEPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+312, 111},
-    /* 1218 */ {I_CMPLESS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+320, 111},
-    /* 1219 */ {I_CMPLTPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+328, 111},
-    /* 1220 */ {I_CMPLTSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+336, 111},
-    /* 1221 */ {I_CMPNEQPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+344, 111},
-    /* 1222 */ {I_CMPNEQSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+352, 111},
-    /* 1223 */ {I_CMPNLEPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+360, 111},
-    /* 1224 */ {I_CMPNLESS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+368, 111},
-    /* 1225 */ {I_CMPNLTPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+376, 111},
-    /* 1226 */ {I_CMPNLTSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+384, 111},
-    /* 1227 */ {I_CMPORDPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+392, 111},
-    /* 1228 */ {I_CMPORDSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+400, 111},
-    /* 1229 */ {I_CMPUNORDPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+408, 111},
-    /* 1230 */ {I_CMPUNORDSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+416, 111},
-    /* 1231 */ {I_CMPPS, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+1791, 111},
-    /* 1232 */ {I_CMPSS, 3, {XMM_L16,RM_XMM_L16|BITS32,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+1798, 111},
-    /* 1233 */ {I_COMISS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3831, 111},
-    /* 1234 */ {I_CVTPI2PS, 2, {XMM_L16,RM_MMX|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3837, 112},
-    /* 1235 */ {I_CVTPS2PI, 2, {MMXREG,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3843, 112},
-    /* 1236 */ {I_CVTSI2SS, 2, {XMM_L16,RM_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1806, 113},
-    /* 1237 */ {I_CVTSI2SS, 2, {XMM_L16,RM_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+1805, 114},
-    /* 1238 */ {I_CVTSS2SI, 2, {REG_GPR|BITS32,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1813, 113},
-    /* 1239 */ {I_CVTSS2SI, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+1813, 113},
-    /* 1240 */ {I_CVTSS2SI, 2, {REG_GPR|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1812, 115},
-    /* 1241 */ {I_CVTSS2SI, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+1812, 115},
-    /* 1242 */ {I_CVTTPS2PI, 2, {MMXREG,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3849, 116},
-    /* 1243 */ {I_CVTTSS2SI, 2, {REG_GPR|BITS32,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1820, 113},
-    /* 1244 */ {I_CVTTSS2SI, 2, {REG_GPR|BITS64,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1819, 115},
-    /* 1245 */ {I_DIVPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3855, 111},
-    /* 1246 */ {I_DIVSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3861, 111},
-    /* 1247 */ {I_LDMXCSR, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3867, 111},
-    /* 1248 */ {I_MAXPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3873, 111},
-    /* 1249 */ {I_MAXSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3879, 111},
-    /* 1250 */ {I_MINPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3885, 111},
-    /* 1251 */ {I_MINSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3891, 111},
-    /* 1252 */ {I_MOVAPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3897, 111},
-    /* 1253 */ {I_MOVAPS, 2, {RM_XMM_L16|BITS128,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3903, 111},
-    /* 1254 */ {I_MOVHPS, 2, {XMM_L16,MEMORY|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3909, 111},
-    /* 1255 */ {I_MOVHPS, 2, {MEMORY|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3915, 111},
-    /* 1256 */ {I_MOVLHPS, 2, {XMM_L16,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3909, 111},
-    /* 1257 */ {I_MOVLPS, 2, {XMM_L16,MEMORY|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3711, 111},
-    /* 1258 */ {I_MOVLPS, 2, {MEMORY|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3921, 111},
-    /* 1259 */ {I_MOVHLPS, 2, {XMM_L16,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3711, 111},
-    /* 1260 */ {I_MOVMSKPS, 2, {REG_GPR|BITS32,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3927, 111},
-    /* 1261 */ {I_MOVMSKPS, 2, {REG_GPR|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1826, 117},
-    /* 1262 */ {I_MOVNTPS, 2, {MEMORY|BITS128,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3933, 111},
-    /* 1263 */ {I_MOVSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3939, 111},
-    /* 1264 */ {I_MOVSS, 2, {RM_XMM_L16|BITS32,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3945, 111},
-    /* 1265 */ {I_MOVUPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3951, 111},
-    /* 1266 */ {I_MOVUPS, 2, {RM_XMM_L16|BITS128,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3957, 111},
-    /* 1267 */ {I_MULPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3963, 111},
-    /* 1268 */ {I_MULSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3969, 111},
-    /* 1269 */ {I_ORPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3975, 111},
-    /* 1270 */ {I_RCPPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3981, 111},
-    /* 1271 */ {I_RCPSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3987, 111},
-    /* 1272 */ {I_RSQRTPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3993, 111},
-    /* 1273 */ {I_RSQRTSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3999, 111},
-    /* 1274 */ {I_SHUFPS, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+1833, 111},
-    /* 1275 */ {I_SQRTPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4005, 111},
-    /* 1276 */ {I_SQRTSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+4011, 111},
-    /* 1277 */ {I_STMXCSR, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4017, 111},
-    /* 1278 */ {I_SUBPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4023, 111},
-    /* 1279 */ {I_SUBSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+4029, 111},
-    /* 1280 */ {I_UCOMISS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+4035, 111},
-    /* 1281 */ {I_UNPCKHPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4041, 111},
-    /* 1282 */ {I_UNPCKLPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4047, 111},
-    /* 1283 */ {I_XORPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4053, 111},
-    /* 1284 */ {I_FXRSTOR, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1841, 118},
-    /* 1285 */ {I_FXRSTOR64, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1840, 119},
-    /* 1286 */ {I_FXSAVE, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1848, 118},
-    /* 1287 */ {I_FXSAVE64, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1847, 119},
-    /* 1288 */ {I_XGETBV, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6513, 120},
-    /* 1289 */ {I_XSETBV, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6518, 121},
-    /* 1290 */ {I_XSAVE, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1855, 120},
-    /* 1291 */ {I_XSAVE64, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1854, 122},
-    /* 1292 */ {I_XSAVEC, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1862, 123},
-    /* 1293 */ {I_XSAVEC64, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1861, 124},
-    /* 1294 */ {I_XSAVEOPT, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1869, 123},
-    /* 1295 */ {I_XSAVEOPT64, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1868, 124},
-    /* 1296 */ {I_XSAVES, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1876, 123},
-    /* 1297 */ {I_XSAVES64, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1875, 124},
-    /* 1298 */ {I_XRSTOR, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1883, 120},
-    /* 1299 */ {I_XRSTOR64, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1882, 122},
-    /* 1300 */ {I_XRSTORS, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1890, 123},
-    /* 1301 */ {I_XRSTORS64, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1889, 124},
-    /* 1302 */ {I_PREFETCHNTA, 1, {MEMORY|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6523, 125},
-    /* 1303 */ {I_PREFETCHT0, 1, {MEMORY|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6528, 125},
-    /* 1304 */ {I_PREFETCHT1, 1, {MEMORY|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6533, 125},
-    /* 1305 */ {I_PREFETCHT2, 1, {MEMORY|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6538, 125},
-    /* 1306 */ {I_SFENCE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3501, 125},
-    /* 1307 */ {I_MASKMOVQ, 2, {MMXREG,MMXREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+4059, 126},
-    /* 1308 */ {I_MOVNTQ, 2, {MEMORY,MMXREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+4065, 127},
-    /* 1309 */ {I_PAVGB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1896, 127},
-    /* 1310 */ {I_PAVGW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1903, 127},
-    /* 1311 */ {I_PEXTRW, 3, {REG_GPR|BITS32,MMXREG,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1910, 128},
-    /* 1312 */ {I_PINSRW, 3, {MMXREG,MEMORY,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1917, 128},
-    /* 1313 */ {I_PINSRW, 3, {MMXREG,RM_GPR|BITS16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1917, 128},
-    /* 1314 */ {I_PINSRW, 3, {MMXREG,REG_GPR|BITS32,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1917, 128},
-    /* 1315 */ {I_PMAXSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1924, 127},
-    /* 1316 */ {I_PMAXUB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1931, 127},
-    /* 1317 */ {I_PMINSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1938, 127},
-    /* 1318 */ {I_PMINUB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1945, 127},
-    /* 1319 */ {I_PMOVMSKB, 2, {REG_GPR|BITS32,MMXREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+4071, 126},
-    /* 1320 */ {I_PMULHUW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1952, 127},
-    /* 1321 */ {I_PSADBW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1959, 127},
-    /* 1322 */ {I_PSHUFW, 3, {MMXREG,RM_MMX,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+424, 129},
-    /* 1323 */ {I_PF2IW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+432, 85},
-    /* 1324 */ {I_PFNACC, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+440, 85},
-    /* 1325 */ {I_PFPNACC, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+448, 85},
-    /* 1326 */ {I_PI2FW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+456, 85},
-    /* 1327 */ {I_PSWAPD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+464, 85},
-    /* 1328 */ {I_MASKMOVDQU, 2, {XMM_L16,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4077, 130},
-    /* 1329 */ {I_CLFLUSH, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4083, 130},
-    /* 1330 */ {I_MOVNTDQ, 2, {MEMORY,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4089, 131},
-    /* 1331 */ {I_MOVNTI, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1967, 132},
-    /* 1332 */ {I_MOVNTI, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+1966, 133},
-    /* 1333 */ {I_MOVNTPD, 2, {MEMORY,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4095, 131},
-    /* 1334 */ {I_LFENCE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3051, 130},
-    /* 1335 */ {I_MFENCE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3129, 130},
-    /* 1336 */ {I_MOVD, 2, {MEMORY,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1973, 134},
-    /* 1337 */ {I_MOVD, 2, {XMM_L16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+1980, 134},
-    /* 1338 */ {I_MOVD, 2, {XMM_L16,RM_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1980, 130},
-    /* 1339 */ {I_MOVD, 2, {RM_GPR|BITS32,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1973, 130},
-    /* 1340 */ {I_MOVDQA, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4101, 131},
-    /* 1341 */ {I_MOVDQA, 2, {RM_XMM_L16|BITS128,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4107, 131},
-    /* 1342 */ {I_MOVDQU, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4113, 131},
-    /* 1343 */ {I_MOVDQU, 2, {RM_XMM_L16|BITS128,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4119, 131},
-    /* 1344 */ {I_MOVDQ2Q, 2, {MMXREG,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4125, 130},
-    /* 1345 */ {I_MOVQ, 2, {XMM_L16,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4131, 130},
-    /* 1346 */ {I_MOVQ, 2, {XMM_L16,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4137, 130},
-    /* 1347 */ {I_MOVQ, 2, {MEMORY,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4137, 135},
-    /* 1348 */ {I_MOVQ, 2, {XMM_L16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4131, 135},
-    /* 1349 */ {I_MOVQ, 2, {XMM_L16,RM_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+1987, 136},
-    /* 1350 */ {I_MOVQ, 2, {RM_GPR|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1994, 136},
-    /* 1351 */ {I_MOVQ2DQ, 2, {XMM_L16,MMXREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+4143, 130},
-    /* 1352 */ {I_PACKSSWB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4149, 131},
-    /* 1353 */ {I_PACKSSDW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4155, 131},
-    /* 1354 */ {I_PACKUSWB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4161, 131},
-    /* 1355 */ {I_PADDB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4167, 131},
-    /* 1356 */ {I_PADDW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4173, 131},
-    /* 1357 */ {I_PADDD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4179, 131},
-    /* 1358 */ {I_PADDQ, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+4185, 137},
-    /* 1359 */ {I_PADDQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4191, 131},
-    /* 1360 */ {I_PADDSB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4197, 131},
-    /* 1361 */ {I_PADDSW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4203, 131},
-    /* 1362 */ {I_PADDUSB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4209, 131},
-    /* 1363 */ {I_PADDUSW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4215, 131},
-    /* 1364 */ {I_PAND, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4221, 131},
-    /* 1365 */ {I_PANDN, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4227, 131},
-    /* 1366 */ {I_PAVGB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4233, 131},
-    /* 1367 */ {I_PAVGW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4239, 131},
-    /* 1368 */ {I_PCMPEQB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4245, 131},
-    /* 1369 */ {I_PCMPEQW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4251, 131},
-    /* 1370 */ {I_PCMPEQD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4257, 131},
-    /* 1371 */ {I_PCMPGTB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4263, 131},
-    /* 1372 */ {I_PCMPGTW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4269, 131},
-    /* 1373 */ {I_PCMPGTD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4275, 131},
-    /* 1374 */ {I_PEXTRW, 3, {REG_GPR|BITS32,XMM_L16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+2001, 138},
-    /* 1375 */ {I_PINSRW, 3, {XMM_L16,REG_GPR|BITS16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+2008, 138},
-    /* 1376 */ {I_PINSRW, 3, {XMM_L16,MEMORY,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+2008, 138},
-    /* 1377 */ {I_PINSRW, 3, {XMM_L16,MEMORY|BITS16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+2008, 138},
-    /* 1378 */ {I_PMADDWD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4281, 131},
-    /* 1379 */ {I_PMAXSW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4287, 131},
-    /* 1380 */ {I_PMAXUB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4293, 131},
-    /* 1381 */ {I_PMINSW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4299, 131},
-    /* 1382 */ {I_PMINUB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4305, 131},
-    /* 1383 */ {I_PMOVMSKB, 2, {REG_GPR|BITS32,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4311, 130},
-    /* 1384 */ {I_PMULHUW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4317, 131},
-    /* 1385 */ {I_PMULHW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4323, 131},
-    /* 1386 */ {I_PMULLW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4329, 131},
-    /* 1387 */ {I_PMULUDQ, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2015, 131},
-    /* 1388 */ {I_PMULUDQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4335, 131},
-    /* 1389 */ {I_POR, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4341, 131},
-    /* 1390 */ {I_PSADBW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4347, 131},
-    /* 1391 */ {I_PSHUFD, 3, {XMM_L16,XMM_L16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+2022, 138},
-    /* 1392 */ {I_PSHUFD, 3, {XMM_L16,MEMORY,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+2022, 140},
-    /* 1393 */ {I_PSHUFHW, 3, {XMM_L16,XMM_L16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+2029, 138},
-    /* 1394 */ {I_PSHUFHW, 3, {XMM_L16,MEMORY,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+2029, 140},
-    /* 1395 */ {I_PSHUFLW, 3, {XMM_L16,XMM_L16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+2036, 138},
-    /* 1396 */ {I_PSHUFLW, 3, {XMM_L16,MEMORY,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+2036, 140},
-    /* 1397 */ {I_PSLLDQ, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2043, 141},
-    /* 1398 */ {I_PSLLW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4353, 131},
-    /* 1399 */ {I_PSLLW, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2050, 141},
-    /* 1400 */ {I_PSLLD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4359, 131},
-    /* 1401 */ {I_PSLLD, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2057, 141},
-    /* 1402 */ {I_PSLLQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4365, 131},
-    /* 1403 */ {I_PSLLQ, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2064, 141},
-    /* 1404 */ {I_PSRAW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4371, 131},
-    /* 1405 */ {I_PSRAW, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2071, 141},
-    /* 1406 */ {I_PSRAD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4377, 131},
-    /* 1407 */ {I_PSRAD, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2078, 141},
-    /* 1408 */ {I_PSRLDQ, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2085, 141},
-    /* 1409 */ {I_PSRLW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4383, 131},
-    /* 1410 */ {I_PSRLW, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2092, 141},
-    /* 1411 */ {I_PSRLD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4389, 131},
-    /* 1412 */ {I_PSRLD, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2099, 141},
-    /* 1413 */ {I_PSRLQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4395, 131},
-    /* 1414 */ {I_PSRLQ, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2106, 141},
-    /* 1415 */ {I_PSUBB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4401, 131},
-    /* 1416 */ {I_PSUBW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4407, 131},
-    /* 1417 */ {I_PSUBD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4413, 131},
-    /* 1418 */ {I_PSUBQ, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2113, 131},
-    /* 1419 */ {I_PSUBQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4419, 131},
-    /* 1420 */ {I_PSUBSB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4425, 131},
-    /* 1421 */ {I_PSUBSW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4431, 131},
-    /* 1422 */ {I_PSUBUSB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4437, 131},
-    /* 1423 */ {I_PSUBUSW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4443, 131},
-    /* 1424 */ {I_PUNPCKHBW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4449, 131},
-    /* 1425 */ {I_PUNPCKHWD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4455, 131},
-    /* 1426 */ {I_PUNPCKHDQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4461, 131},
-    /* 1427 */ {I_PUNPCKHQDQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4467, 131},
-    /* 1428 */ {I_PUNPCKLBW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4473, 131},
-    /* 1429 */ {I_PUNPCKLWD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4479, 131},
-    /* 1430 */ {I_PUNPCKLDQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4485, 131},
-    /* 1431 */ {I_PUNPCKLQDQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4491, 131},
-    /* 1432 */ {I_PXOR, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4497, 131},
-    /* 1433 */ {I_ADDPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4503, 131},
-    /* 1434 */ {I_ADDSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4509, 135},
-    /* 1435 */ {I_ANDNPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4515, 131},
-    /* 1436 */ {I_ANDPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4521, 131},
-    /* 1437 */ {I_CMPEQPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+472, 131},
-    /* 1438 */ {I_CMPEQSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+480, 135},
-    /* 1439 */ {I_CMPLEPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+488, 131},
-    /* 1440 */ {I_CMPLESD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+496, 135},
-    /* 1441 */ {I_CMPLTPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+504, 131},
-    /* 1442 */ {I_CMPLTSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+512, 135},
-    /* 1443 */ {I_CMPNEQPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+520, 131},
-    /* 1444 */ {I_CMPNEQSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+528, 135},
-    /* 1445 */ {I_CMPNLEPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+536, 131},
-    /* 1446 */ {I_CMPNLESD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+544, 135},
-    /* 1447 */ {I_CMPNLTPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+552, 131},
-    /* 1448 */ {I_CMPNLTSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+560, 135},
-    /* 1449 */ {I_CMPORDPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+568, 131},
-    /* 1450 */ {I_CMPORDSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+576, 135},
-    /* 1451 */ {I_CMPUNORDPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+584, 131},
-    /* 1452 */ {I_CMPUNORDSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+592, 135},
-    /* 1453 */ {I_CMPPD, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+2120, 130},
-    /* 1454 */ {I_CMPSD, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+2127, 130},
-    /* 1455 */ {I_COMISD, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4527, 130},
-    /* 1456 */ {I_CVTDQ2PD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4533, 135},
-    /* 1457 */ {I_CVTDQ2PS, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4539, 131},
-    /* 1458 */ {I_CVTPD2DQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4545, 131},
-    /* 1459 */ {I_CVTPD2PI, 2, {MMXREG,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4551, 131},
-    /* 1460 */ {I_CVTPD2PS, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4557, 131},
-    /* 1461 */ {I_CVTPI2PD, 2, {XMM_L16,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+4563, 135},
-    /* 1462 */ {I_CVTPS2DQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4569, 131},
-    /* 1463 */ {I_CVTPS2PD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4575, 135},
-    /* 1464 */ {I_CVTSD2SI, 2, {REG_GPR|BITS32,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2134, 142},
-    /* 1465 */ {I_CVTSD2SI, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+2134, 142},
-    /* 1466 */ {I_CVTSD2SI, 2, {REG_GPR|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2141, 143},
-    /* 1467 */ {I_CVTSD2SI, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+2141, 143},
-    /* 1468 */ {I_CVTSD2SS, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4581, 135},
-    /* 1469 */ {I_CVTSI2SD, 2, {XMM_L16,RM_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2148, 144},
-    /* 1470 */ {I_CVTSI2SD, 2, {XMM_L16,RM_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2155, 143},
-    /* 1471 */ {I_CVTSS2SD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4587, 134},
-    /* 1472 */ {I_CVTTPD2PI, 2, {MMXREG,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4593, 131},
-    /* 1473 */ {I_CVTTPD2DQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4599, 131},
-    /* 1474 */ {I_CVTTPS2DQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4605, 131},
-    /* 1475 */ {I_CVTTSD2SI, 2, {REG_GPR|BITS32,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2162, 142},
-    /* 1476 */ {I_CVTTSD2SI, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+2162, 142},
-    /* 1477 */ {I_CVTTSD2SI, 2, {REG_GPR|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2169, 143},
-    /* 1478 */ {I_CVTTSD2SI, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+2169, 143},
-    /* 1479 */ {I_DIVPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4611, 131},
-    /* 1480 */ {I_DIVSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4617, 135},
-    /* 1481 */ {I_MAXPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4623, 131},
-    /* 1482 */ {I_MAXSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4629, 135},
-    /* 1483 */ {I_MINPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4635, 131},
-    /* 1484 */ {I_MINSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4641, 135},
-    /* 1485 */ {I_MOVAPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4647, 130},
-    /* 1486 */ {I_MOVAPD, 2, {RM_XMM_L16|BITS128,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4653, 130},
-    /* 1487 */ {I_MOVHPD, 2, {MEMORY|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4659, 130},
-    /* 1488 */ {I_MOVHPD, 2, {XMM_L16,MEMORY|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4665, 130},
-    /* 1489 */ {I_MOVLPD, 2, {MEMORY|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4671, 130},
-    /* 1490 */ {I_MOVLPD, 2, {XMM_L16,MEMORY|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4677, 130},
-    /* 1491 */ {I_MOVMSKPD, 2, {REG_GPR|BITS32,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4683, 130},
-    /* 1492 */ {I_MOVMSKPD, 2, {REG_GPR|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2176, 136},
-    /* 1493 */ {I_MOVSD, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4689, 130},
-    /* 1494 */ {I_MOVSD, 2, {RM_XMM_L16|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4695, 130},
-    /* 1495 */ {I_MOVUPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4701, 130},
-    /* 1496 */ {I_MOVUPD, 2, {RM_XMM_L16|BITS128,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4707, 130},
-    /* 1497 */ {I_MULPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4713, 131},
-    /* 1498 */ {I_MULSD, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4719, 135},
-    /* 1499 */ {I_ORPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4725, 131},
-    /* 1500 */ {I_SHUFPD, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+2183, 130},
-    /* 1501 */ {I_SQRTPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4731, 131},
-    /* 1502 */ {I_SQRTSD, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4737, 130},
-    /* 1503 */ {I_SUBPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4743, 131},
-    /* 1504 */ {I_SUBSD, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4749, 130},
-    /* 1505 */ {I_UCOMISD, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4755, 130},
-    /* 1506 */ {I_UNPCKHPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4761, 130},
-    /* 1507 */ {I_UNPCKLPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4767, 130},
-    /* 1508 */ {I_XORPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4773, 130},
-    /* 1509 */ {I_ADDSUBPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4779, 145},
-    /* 1510 */ {I_ADDSUBPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4785, 145},
-    /* 1511 */ {I_HADDPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4791, 145},
-    /* 1512 */ {I_HADDPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4797, 145},
-    /* 1513 */ {I_HSUBPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4803, 145},
-    /* 1514 */ {I_HSUBPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4809, 145},
-    /* 1515 */ {I_LDDQU, 2, {XMM_L16,MEMORY|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4815, 145},
-    /* 1516 */ {I_MOVDDUP, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4821, 146},
-    /* 1517 */ {I_MOVSHDUP, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4827, 147},
-    /* 1518 */ {I_MOVSLDUP, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4833, 147},
-    /* 1519 */ {I_PABSB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2190, 148},
-    /* 1520 */ {I_PABSB, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2197, 149},
-    /* 1521 */ {I_PABSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2204, 148},
-    /* 1522 */ {I_PABSW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2211, 149},
-    /* 1523 */ {I_PABSD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2218, 148},
-    /* 1524 */ {I_PABSD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2225, 149},
-    /* 1525 */ {I_PALIGNR, 3, {MMXREG,RM_MMX,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+600, 148},
-    /* 1526 */ {I_PALIGNR, 3, {XMM_L16,RM_XMM_L16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+608, 149},
-    /* 1527 */ {I_PHADDW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2232, 148},
-    /* 1528 */ {I_PHADDW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2239, 149},
-    /* 1529 */ {I_PHADDD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2246, 148},
-    /* 1530 */ {I_PHADDD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2253, 149},
-    /* 1531 */ {I_PHADDSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2260, 148},
-    /* 1532 */ {I_PHADDSW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2267, 149},
-    /* 1533 */ {I_PHSUBW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2274, 148},
-    /* 1534 */ {I_PHSUBW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2281, 149},
-    /* 1535 */ {I_PHSUBD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2288, 148},
-    /* 1536 */ {I_PHSUBD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2295, 149},
-    /* 1537 */ {I_PHSUBSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2302, 148},
-    /* 1538 */ {I_PHSUBSW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2309, 149},
-    /* 1539 */ {I_PMADDUBSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2316, 148},
-    /* 1540 */ {I_PMADDUBSW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2323, 149},
-    /* 1541 */ {I_PMULHRSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2330, 148},
-    /* 1542 */ {I_PMULHRSW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2337, 149},
-    /* 1543 */ {I_PSHUFB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2344, 148},
-    /* 1544 */ {I_PSHUFB, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2351, 149},
-    /* 1545 */ {I_PSIGNB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2358, 148},
-    /* 1546 */ {I_PSIGNB, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2365, 149},
-    /* 1547 */ {I_PSIGNW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2372, 148},
-    /* 1548 */ {I_PSIGNW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2379, 149},
-    /* 1549 */ {I_PSIGND, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2386, 148},
-    /* 1550 */ {I_PSIGND, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2393, 149},
-    /* 1551 */ {I_EXTRQ, 3, {XMM_L16,IMMEDIATE,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+616, 150},
-    /* 1552 */ {I_EXTRQ, 2, {XMM_L16,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4839, 150},
-    /* 1553 */ {I_INSERTQ, 4, {XMM_L16,XMM_L16,IMMEDIATE,IMMEDIATE,0}, NO_DECORATOR, nasm_bytecodes+624, 150},
-    /* 1554 */ {I_INSERTQ, 2, {XMM_L16,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4845, 150},
-    /* 1555 */ {I_MOVNTSD, 2, {MEMORY|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4851, 151},
-    /* 1556 */ {I_MOVNTSS, 2, {MEMORY|BITS32,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4857, 152},
-    /* 1557 */ {I_LZCNT, 2, {REG_GPR|BITS16,RM_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2400, 153},
-    /* 1558 */ {I_LZCNT, 2, {REG_GPR|BITS32,RM_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2407, 153},
-    /* 1559 */ {I_LZCNT, 2, {REG_GPR|BITS64,RM_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2414, 54},
-    /* 1560 */ {I_BLENDPD, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+632, 154},
-    /* 1561 */ {I_BLENDPS, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+640, 154},
-    /* 1562 */ {I_BLENDVPD, 3, {XMM_L16,RM_XMM_L16|BITS128,XMM0,0,0}, NO_DECORATOR, nasm_bytecodes+2421, 154},
-    /* 1563 */ {I_BLENDVPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2421, 154},
-    /* 1564 */ {I_BLENDVPS, 3, {XMM_L16,RM_XMM_L16|BITS128,XMM0,0,0}, NO_DECORATOR, nasm_bytecodes+2428, 154},
-    /* 1565 */ {I_BLENDVPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2428, 154},
-    /* 1566 */ {I_DPPD, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+648, 154},
-    /* 1567 */ {I_DPPS, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+656, 154},
-    /* 1568 */ {I_EXTRACTPS, 3, {RM_GPR|BITS32,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+1, 154},
-    /* 1569 */ {I_EXTRACTPS, 3, {REG_GPR|BITS64,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+0, 155},
-    /* 1570 */ {I_INSERTPS, 3, {XMM_L16,RM_XMM_L16|BITS32,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+664, 154},
-    /* 1571 */ {I_MOVNTDQA, 2, {XMM_L16,MEMORY|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2435, 154},
-    /* 1572 */ {I_MPSADBW, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+672, 154},
-    /* 1573 */ {I_PACKUSDW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2442, 154},
-    /* 1574 */ {I_PBLENDVB, 3, {XMM_L16,RM_XMM_L16,XMM0,0,0}, NO_DECORATOR, nasm_bytecodes+2449, 154},
-    /* 1575 */ {I_PBLENDVB, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2449, 154},
-    /* 1576 */ {I_PBLENDW, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+680, 154},
-    /* 1577 */ {I_PCMPEQQ, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2456, 154},
-    /* 1578 */ {I_PEXTRB, 3, {REG_GPR|BITS32,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+10, 154},
-    /* 1579 */ {I_PEXTRB, 3, {MEMORY|BITS8,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+10, 154},
-    /* 1580 */ {I_PEXTRB, 3, {REG_GPR|BITS64,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+9, 155},
-    /* 1581 */ {I_PEXTRD, 3, {RM_GPR|BITS32,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+18, 154},
-    /* 1582 */ {I_PEXTRQ, 3, {RM_GPR|BITS64,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+27, 155},
-    /* 1583 */ {I_PEXTRW, 3, {REG_GPR|BITS32,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+37, 154},
-    /* 1584 */ {I_PEXTRW, 3, {MEMORY|BITS16,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+37, 154},
-    /* 1585 */ {I_PEXTRW, 3, {REG_GPR|BITS64,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+36, 155},
-    /* 1586 */ {I_PHMINPOSUW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2463, 154},
-    /* 1587 */ {I_PINSRB, 3, {XMM_L16,MEMORY,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+46, 156},
-    /* 1588 */ {I_PINSRB, 3, {XMM_L16,RM_GPR|BITS8,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+45, 156},
-    /* 1589 */ {I_PINSRB, 3, {XMM_L16,REG_GPR|BITS32,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+46, 156},
-    /* 1590 */ {I_PINSRD, 3, {XMM_L16,RM_GPR|BITS32,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+54, 156},
-    /* 1591 */ {I_PINSRQ, 3, {XMM_L16,RM_GPR|BITS64,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+63, 157},
-    /* 1592 */ {I_PMAXSB, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2470, 154},
-    /* 1593 */ {I_PMAXSD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2477, 154},
-    /* 1594 */ {I_PMAXUD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2484, 154},
-    /* 1595 */ {I_PMAXUW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2491, 154},
-    /* 1596 */ {I_PMINSB, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2498, 154},
-    /* 1597 */ {I_PMINSD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2505, 154},
-    /* 1598 */ {I_PMINUD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2512, 154},
-    /* 1599 */ {I_PMINUW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2519, 154},
-    /* 1600 */ {I_PMOVSXBW, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2526, 158},
-    /* 1601 */ {I_PMOVSXBD, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2533, 159},
-    /* 1602 */ {I_PMOVSXBQ, 2, {XMM_L16,RM_XMM_L16|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2540, 160},
-    /* 1603 */ {I_PMOVSXWD, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2547, 158},
-    /* 1604 */ {I_PMOVSXWQ, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2554, 159},
-    /* 1605 */ {I_PMOVSXDQ, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2561, 158},
-    /* 1606 */ {I_PMOVZXBW, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2568, 158},
-    /* 1607 */ {I_PMOVZXBD, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2575, 159},
-    /* 1608 */ {I_PMOVZXBQ, 2, {XMM_L16,RM_XMM_L16|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2582, 160},
-    /* 1609 */ {I_PMOVZXWD, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2589, 158},
-    /* 1610 */ {I_PMOVZXWQ, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2596, 159},
-    /* 1611 */ {I_PMOVZXDQ, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2603, 158},
-    /* 1612 */ {I_PMULDQ, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2610, 154},
-    /* 1613 */ {I_PMULLD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2617, 154},
-    /* 1614 */ {I_PTEST, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2624, 154},
-    /* 1615 */ {I_ROUNDPD, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+688, 154},
-    /* 1616 */ {I_ROUNDPS, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+696, 154},
-    /* 1617 */ {I_ROUNDSD, 3, {XMM_L16,RM_XMM_L16|BITS64,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+704, 154},
-    /* 1618 */ {I_ROUNDSS, 3, {XMM_L16,RM_XMM_L16|BITS32,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+712, 154},
+    /*  162 */ {I_CALL, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4905, 19},
+    /*  163 */ {I_CALL, 1, {IMMEDIATE|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4910, 20},
+    /*  164 */ {I_CALL, 1, {IMMEDIATE|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4915, 21},
+    /*  165 */ {I_CALL, 1, {IMMEDIATE|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4920, 22},
+    /*  166 */ {I_CALL, 2, {IMMEDIATE|COLON,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2732, 1},
+    /*  167 */ {I_CALL, 2, {IMMEDIATE|BITS16|COLON,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2738, 1},
+    /*  168 */ {I_CALL, 2, {IMMEDIATE|COLON,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2738, 1},
+    /*  169 */ {I_CALL, 2, {IMMEDIATE|BITS32|COLON,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2744, 17},
+    /*  170 */ {I_CALL, 2, {IMMEDIATE|COLON,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2744, 17},
+    /*  171 */ {I_CALL, 1, {MEMORY|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4925, 1},
+    /*  172 */ {I_CALL, 1, {MEMORY|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4930, 7},
+    /*  173 */ {I_CALL, 1, {MEMORY|BITS16|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4935, 0},
+    /*  174 */ {I_CALL, 1, {MEMORY|BITS32|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4940, 5},
+    /*  175 */ {I_CALL, 1, {MEMORY|BITS64|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4930, 7},
+    /*  176 */ {I_CALL, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4945, 19},
+    /*  177 */ {I_CALL, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4950, 20},
+    /*  178 */ {I_CALL, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4955, 21},
+    /*  179 */ {I_CALL, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4960, 22},
+    /*  180 */ {I_CBW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6504, 0},
+    /*  181 */ {I_CDQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6508, 5},
+    /*  182 */ {I_CDQE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6512, 7},
+    /*  183 */ {I_CLC, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7474, 0},
+    /*  184 */ {I_CLD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7477, 0},
+    /*  185 */ {I_CLI, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7480, 0},
+    /*  186 */ {I_CLTS, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6516, 23},
+    /*  187 */ {I_CMC, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7483, 0},
+    /*  188 */ {I_CMP, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6520, 8},
+    /*  189 */ {I_CMP, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6520, 0},
+    /*  190 */ {I_CMP, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4965, 8},
+    /*  191 */ {I_CMP, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4965, 0},
+    /*  192 */ {I_CMP, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+4970, 9},
+    /*  193 */ {I_CMP, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+4970, 5},
+    /*  194 */ {I_CMP, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4975, 10},
+    /*  195 */ {I_CMP, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4975, 7},
+    /*  196 */ {I_CMP, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6524, 8},
+    /*  197 */ {I_CMP, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6524, 0},
+    /*  198 */ {I_CMP, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4980, 8},
+    /*  199 */ {I_CMP, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4980, 0},
+    /*  200 */ {I_CMP, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4985, 9},
+    /*  201 */ {I_CMP, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+4985, 5},
+    /*  202 */ {I_CMP, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4990, 10},
+    /*  203 */ {I_CMP, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4990, 7},
+    /*  204 */ {I_CMP, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2750, 0},
+    /*  205 */ {I_CMP, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2756, 5},
+    /*  206 */ {I_CMP, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2762, 7},
+    /*  207 */ {I_CMP, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6528, 8},
+    /*  208 */ {I_CMP, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+4995, 8},
+    /*  209 */ {I_CMP, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5000, 9},
+    /*  210 */ {I_CMP, 2, {REG_RAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5005, 10},
+    /*  211 */ {I_CMP, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5010, 8},
+    /*  212 */ {I_CMP, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5015, 8},
+    /*  213 */ {I_CMP, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2768, 8},
+    /*  214 */ {I_CMP, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2774, 9},
+    /*  215 */ {I_CMP, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2780, 10},
+    /*  216 */ {I_CMP, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+5010, 8},
+    /*  217 */ {I_CMP, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+5015, 8},
+    /*  218 */ {I_CMP, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2768, 8},
+    /*  219 */ {I_CMP, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2774, 9},
+    /*  220 */ {I_CMPSB, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6532, 0},
+    /*  221 */ {I_CMPSD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5020, 5},
+    /*  222 */ {I_CMPSQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5025, 7},
+    /*  223 */ {I_CMPSW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5030, 0},
+    /*  224 */ {I_CMPXCHG, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2786, 24},
+    /*  225 */ {I_CMPXCHG, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2787, 25},
+    /*  226 */ {I_CMPXCHG, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+956, 24},
+    /*  227 */ {I_CMPXCHG, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+957, 25},
+    /*  228 */ {I_CMPXCHG, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+963, 24},
+    /*  229 */ {I_CMPXCHG, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+964, 25},
+    /*  230 */ {I_CMPXCHG, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+970, 6},
+    /*  231 */ {I_CMPXCHG, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+971, 7},
+    /*  232 */ {I_CMPXCHG8B, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+977, 28},
+    /*  233 */ {I_CMPXCHG16B, 1, {MEMORY|BITS128,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2804, 13},
+    /*  234 */ {I_CPUID, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6536, 25},
+    /*  235 */ {I_CQO, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6540, 7},
+    /*  236 */ {I_CWD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6544, 0},
+    /*  237 */ {I_CWDE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6548, 5},
+    /*  238 */ {I_DAA, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7486, 1},
+    /*  239 */ {I_DAS, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7489, 1},
+    /*  240 */ {I_DEC, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6552, 1},
+    /*  241 */ {I_DEC, 1, {REG_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6556, 17},
+    /*  242 */ {I_DEC, 1, {RM_GPR|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5040, 11},
+    /*  243 */ {I_DEC, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2810, 11},
+    /*  244 */ {I_DEC, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2816, 12},
+    /*  245 */ {I_DEC, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2822, 13},
+    /*  246 */ {I_DIV, 1, {RM_GPR|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6560, 0},
+    /*  247 */ {I_DIV, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5045, 0},
+    /*  248 */ {I_DIV, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5050, 5},
+    /*  249 */ {I_DIV, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5055, 7},
+    /*  250 */ {I_EMMS, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6564, 29},
+    /*  251 */ {I_ENTER, 2, {IMMEDIATE,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5060, 30},
+    /*  252 */ {I_EQU, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7548, 0},
+    /*  253 */ {I_EQU, 2, {IMMEDIATE|COLON,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+7548, 0},
+    /*  254 */ {I_F2XM1, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6568, 31},
+    /*  255 */ {I_FABS, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6572, 31},
+    /*  256 */ {I_FADD, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6576, 31},
+    /*  257 */ {I_FADD, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6580, 31},
+    /*  258 */ {I_FADD, 1, {FPUREG|TO,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5065, 31},
+    /*  259 */ {I_FADD, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5070, 31},
+    /*  260 */ {I_FADD, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5065, 31},
+    /*  261 */ {I_FADD, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5075, 31},
+    /*  262 */ {I_FADDP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5080, 31},
+    /*  263 */ {I_FADDP, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5080, 31},
+    /*  264 */ {I_FBLD, 1, {MEMORY|BITS80,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6588, 31},
+    /*  265 */ {I_FBLD, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6588, 31},
+    /*  266 */ {I_FBSTP, 1, {MEMORY|BITS80,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6592, 31},
+    /*  267 */ {I_FBSTP, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6592, 31},
+    /*  268 */ {I_FCHS, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6596, 31},
+    /*  269 */ {I_FCLEX, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5085, 31},
+    /*  270 */ {I_FCMOVB, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5090, 32},
+    /*  271 */ {I_FCMOVB, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5095, 32},
+    /*  272 */ {I_FCMOVBE, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5100, 32},
+    /*  273 */ {I_FCMOVBE, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5105, 32},
+    /*  274 */ {I_FCMOVE, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5110, 32},
+    /*  275 */ {I_FCMOVE, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5115, 32},
+    /*  276 */ {I_FCMOVNB, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5120, 32},
+    /*  277 */ {I_FCMOVNB, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5125, 32},
+    /*  278 */ {I_FCMOVNBE, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5130, 32},
+    /*  279 */ {I_FCMOVNBE, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5135, 32},
+    /*  280 */ {I_FCMOVNE, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5140, 32},
+    /*  281 */ {I_FCMOVNE, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5145, 32},
+    /*  282 */ {I_FCMOVNU, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5150, 32},
+    /*  283 */ {I_FCMOVNU, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5155, 32},
+    /*  284 */ {I_FCMOVU, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5160, 32},
+    /*  285 */ {I_FCMOVU, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5165, 32},
+    /*  286 */ {I_FCOM, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6632, 31},
+    /*  287 */ {I_FCOM, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6636, 31},
+    /*  288 */ {I_FCOM, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5170, 31},
+    /*  289 */ {I_FCOM, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5175, 31},
+    /*  290 */ {I_FCOMI, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5180, 32},
+    /*  291 */ {I_FCOMI, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5185, 32},
+    /*  292 */ {I_FCOMIP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5190, 32},
+    /*  293 */ {I_FCOMIP, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5195, 32},
+    /*  294 */ {I_FCOMP, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6652, 31},
+    /*  295 */ {I_FCOMP, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6656, 31},
+    /*  296 */ {I_FCOMP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5200, 31},
+    /*  297 */ {I_FCOMP, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5205, 31},
+    /*  298 */ {I_FCOMPP, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6664, 31},
+    /*  299 */ {I_FCOS, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6668, 33},
+    /*  300 */ {I_FDECSTP, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6672, 31},
+    /*  301 */ {I_FDISI, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5210, 31},
+    /*  302 */ {I_FDIV, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6676, 31},
+    /*  303 */ {I_FDIV, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6680, 31},
+    /*  304 */ {I_FDIV, 1, {FPUREG|TO,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5215, 31},
+    /*  305 */ {I_FDIV, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5220, 31},
+    /*  306 */ {I_FDIV, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5215, 31},
+    /*  307 */ {I_FDIV, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5225, 31},
+    /*  308 */ {I_FDIVP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5230, 31},
+    /*  309 */ {I_FDIVP, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5230, 31},
+    /*  310 */ {I_FDIVR, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6688, 31},
+    /*  311 */ {I_FDIVR, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6692, 31},
+    /*  312 */ {I_FDIVR, 1, {FPUREG|TO,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5235, 31},
+    /*  313 */ {I_FDIVR, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5235, 31},
+    /*  314 */ {I_FDIVR, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5240, 31},
+    /*  315 */ {I_FDIVR, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5245, 31},
+    /*  316 */ {I_FDIVRP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5250, 31},
+    /*  317 */ {I_FDIVRP, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5250, 31},
+    /*  318 */ {I_FEMMS, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6700, 34},
+    /*  319 */ {I_FENI, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5255, 31},
+    /*  320 */ {I_FFREE, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5260, 31},
+    /*  321 */ {I_FFREE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6704, 31},
+    /*  322 */ {I_FFREEP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5265, 35},
+    /*  323 */ {I_FFREEP, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6708, 35},
+    /*  324 */ {I_FIADD, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6712, 31},
+    /*  325 */ {I_FIADD, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6716, 31},
+    /*  326 */ {I_FICOM, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6720, 31},
+    /*  327 */ {I_FICOM, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6724, 31},
+    /*  328 */ {I_FICOMP, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6728, 31},
+    /*  329 */ {I_FICOMP, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6732, 31},
+    /*  330 */ {I_FIDIV, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6736, 31},
+    /*  331 */ {I_FIDIV, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6740, 31},
+    /*  332 */ {I_FIDIVR, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6744, 31},
+    /*  333 */ {I_FIDIVR, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6748, 31},
+    /*  334 */ {I_FILD, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6752, 31},
+    /*  335 */ {I_FILD, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6756, 31},
+    /*  336 */ {I_FILD, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6760, 31},
+    /*  337 */ {I_FIMUL, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6764, 31},
+    /*  338 */ {I_FIMUL, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6768, 31},
+    /*  339 */ {I_FINCSTP, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6772, 31},
+    /*  340 */ {I_FINIT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5270, 31},
+    /*  341 */ {I_FIST, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6776, 31},
+    /*  342 */ {I_FIST, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6780, 31},
+    /*  343 */ {I_FISTP, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6784, 31},
+    /*  344 */ {I_FISTP, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6788, 31},
+    /*  345 */ {I_FISTP, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6792, 31},
+    /*  346 */ {I_FISTTP, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6796, 36},
+    /*  347 */ {I_FISTTP, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6800, 36},
+    /*  348 */ {I_FISTTP, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6804, 36},
+    /*  349 */ {I_FISUB, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6808, 31},
+    /*  350 */ {I_FISUB, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6812, 31},
+    /*  351 */ {I_FISUBR, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6816, 31},
+    /*  352 */ {I_FISUBR, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6820, 31},
+    /*  353 */ {I_FLD, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6824, 31},
+    /*  354 */ {I_FLD, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6828, 31},
+    /*  355 */ {I_FLD, 1, {MEMORY|BITS80,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6832, 31},
+    /*  356 */ {I_FLD, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5275, 31},
+    /*  357 */ {I_FLD1, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6840, 31},
+    /*  358 */ {I_FLDCW, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6844, 37},
+    /*  359 */ {I_FLDENV, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6848, 31},
+    /*  360 */ {I_FLDL2E, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6852, 31},
+    /*  361 */ {I_FLDL2T, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6856, 31},
+    /*  362 */ {I_FLDLG2, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6860, 31},
+    /*  363 */ {I_FLDLN2, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6864, 31},
+    /*  364 */ {I_FLDPI, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6868, 31},
+    /*  365 */ {I_FLDZ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6872, 31},
+    /*  366 */ {I_FMUL, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6876, 31},
+    /*  367 */ {I_FMUL, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6880, 31},
+    /*  368 */ {I_FMUL, 1, {FPUREG|TO,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5280, 31},
+    /*  369 */ {I_FMUL, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5280, 31},
+    /*  370 */ {I_FMUL, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5285, 31},
+    /*  371 */ {I_FMUL, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5290, 31},
+    /*  372 */ {I_FMULP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5295, 31},
+    /*  373 */ {I_FMULP, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5295, 31},
+    /*  374 */ {I_FNCLEX, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5086, 31},
+    /*  375 */ {I_FNDISI, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5211, 31},
+    /*  376 */ {I_FNENI, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5256, 31},
+    /*  377 */ {I_FNINIT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5271, 31},
+    /*  378 */ {I_FNOP, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6888, 31},
+    /*  379 */ {I_FNSAVE, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5301, 31},
+    /*  380 */ {I_FNSTCW, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5311, 37},
+    /*  381 */ {I_FNSTENV, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5316, 31},
+    /*  382 */ {I_FNSTSW, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5326, 37},
+    /*  383 */ {I_FNSTSW, 1, {REG_AX,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5331, 38},
+    /*  384 */ {I_FPATAN, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6892, 31},
+    /*  385 */ {I_FPREM, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6896, 31},
+    /*  386 */ {I_FPREM1, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6900, 33},
+    /*  387 */ {I_FPTAN, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6904, 31},
+    /*  388 */ {I_FRNDINT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6908, 31},
+    /*  389 */ {I_FRSTOR, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6912, 31},
+    /*  390 */ {I_FSAVE, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5300, 31},
+    /*  391 */ {I_FSCALE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6916, 31},
+    /*  392 */ {I_FSETPM, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6920, 38},
+    /*  393 */ {I_FSIN, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6924, 33},
+    /*  394 */ {I_FSINCOS, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6928, 33},
+    /*  395 */ {I_FSQRT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6932, 31},
+    /*  396 */ {I_FST, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6936, 31},
+    /*  397 */ {I_FST, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6940, 31},
+    /*  398 */ {I_FST, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5305, 31},
+    /*  399 */ {I_FSTCW, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5310, 37},
+    /*  400 */ {I_FSTENV, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5315, 31},
+    /*  401 */ {I_FSTP, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6948, 31},
+    /*  402 */ {I_FSTP, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6952, 31},
+    /*  403 */ {I_FSTP, 1, {MEMORY|BITS80,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6956, 31},
+    /*  404 */ {I_FSTP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5320, 31},
+    /*  405 */ {I_FSTSW, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5325, 37},
+    /*  406 */ {I_FSTSW, 1, {REG_AX,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5330, 38},
+    /*  407 */ {I_FSUB, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6964, 31},
+    /*  408 */ {I_FSUB, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6968, 31},
+    /*  409 */ {I_FSUB, 1, {FPUREG|TO,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5335, 31},
+    /*  410 */ {I_FSUB, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5335, 31},
+    /*  411 */ {I_FSUB, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5340, 31},
+    /*  412 */ {I_FSUB, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5345, 31},
+    /*  413 */ {I_FSUBP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5350, 31},
+    /*  414 */ {I_FSUBP, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5350, 31},
+    /*  415 */ {I_FSUBR, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6976, 31},
+    /*  416 */ {I_FSUBR, 1, {MEMORY|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6980, 31},
+    /*  417 */ {I_FSUBR, 1, {FPUREG|TO,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5355, 31},
+    /*  418 */ {I_FSUBR, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5355, 31},
+    /*  419 */ {I_FSUBR, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5360, 31},
+    /*  420 */ {I_FSUBR, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5365, 31},
+    /*  421 */ {I_FSUBRP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5370, 31},
+    /*  422 */ {I_FSUBRP, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5370, 31},
+    /*  423 */ {I_FTST, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6988, 31},
+    /*  424 */ {I_FUCOM, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5375, 33},
+    /*  425 */ {I_FUCOM, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5380, 33},
+    /*  426 */ {I_FUCOMI, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5385, 32},
+    /*  427 */ {I_FUCOMI, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5390, 32},
+    /*  428 */ {I_FUCOMIP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5395, 32},
+    /*  429 */ {I_FUCOMIP, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5400, 32},
+    /*  430 */ {I_FUCOMP, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5405, 33},
+    /*  431 */ {I_FUCOMP, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5410, 33},
+    /*  432 */ {I_FUCOMPP, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7008, 33},
+    /*  433 */ {I_FXAM, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7012, 31},
+    /*  434 */ {I_FXCH, 1, {FPUREG,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5415, 31},
+    /*  435 */ {I_FXCH, 2, {FPUREG,FPU0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5415, 31},
+    /*  436 */ {I_FXCH, 2, {FPU0,FPUREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5420, 31},
+    /*  437 */ {I_FXTRACT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7020, 31},
+    /*  438 */ {I_FYL2X, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7024, 31},
+    /*  439 */ {I_FYL2XP1, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7028, 31},
+    /*  440 */ {I_HLT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7492, 39},
+    /*  441 */ {I_IDIV, 1, {RM_GPR|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7032, 0},
+    /*  442 */ {I_IDIV, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5425, 0},
+    /*  443 */ {I_IDIV, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5430, 5},
+    /*  444 */ {I_IDIV, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5435, 7},
+    /*  445 */ {I_IMUL, 1, {RM_GPR|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7036, 0},
+    /*  446 */ {I_IMUL, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5440, 0},
+    /*  447 */ {I_IMUL, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5445, 5},
+    /*  448 */ {I_IMUL, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5450, 7},
+    /*  449 */ {I_IMUL, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+2828, 9},
+    /*  450 */ {I_IMUL, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2828, 5},
+    /*  451 */ {I_IMUL, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+2834, 9},
+    /*  452 */ {I_IMUL, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2834, 5},
+    /*  453 */ {I_IMUL, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+2840, 10},
+    /*  454 */ {I_IMUL, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2840, 7},
+    /*  455 */ {I_IMUL, 3, {REG_GPR|BITS16,MEMORY,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+2846, 43},
+    /*  456 */ {I_IMUL, 3, {REG_GPR|BITS16,MEMORY,IMMEDIATE|BITS16,0,0}, NO_DECORATOR, nasm_bytecodes+2852, 44},
+    /*  457 */ {I_IMUL, 3, {REG_GPR|BITS16,REG_GPR|BITS16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+2846, 30},
+    /*  458 */ {I_IMUL, 3, {REG_GPR|BITS16,REG_GPR|BITS16,IMMEDIATE|BITS16,0,0}, NO_DECORATOR, nasm_bytecodes+2852, 30},
+    /*  459 */ {I_IMUL, 3, {REG_GPR|BITS32,MEMORY,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+2858, 45},
+    /*  460 */ {I_IMUL, 3, {REG_GPR|BITS32,MEMORY,IMMEDIATE|BITS32,0,0}, NO_DECORATOR, nasm_bytecodes+2864, 9},
+    /*  461 */ {I_IMUL, 3, {REG_GPR|BITS32,REG_GPR|BITS32,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+2858, 5},
+    /*  462 */ {I_IMUL, 3, {REG_GPR|BITS32,REG_GPR|BITS32,IMMEDIATE|BITS32,0,0}, NO_DECORATOR, nasm_bytecodes+2864, 5},
+    /*  463 */ {I_IMUL, 3, {REG_GPR|BITS64,MEMORY,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+2870, 46},
+    /*  464 */ {I_IMUL, 3, {REG_GPR|BITS64,MEMORY,IMMEDIATE|BITS32,0,0}, NO_DECORATOR, nasm_bytecodes+2876, 46},
+    /*  465 */ {I_IMUL, 3, {REG_GPR|BITS64,REG_GPR|BITS64,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+2870, 7},
+    /*  466 */ {I_IMUL, 3, {REG_GPR|BITS64,REG_GPR|BITS64,IMMEDIATE|BITS32,0,0}, NO_DECORATOR, nasm_bytecodes+2876, 7},
+    /*  467 */ {I_IMUL, 2, {REG_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2888, 30},
+    /*  468 */ {I_IMUL, 2, {REG_GPR|BITS16,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2894, 30},
+    /*  469 */ {I_IMUL, 2, {REG_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2900, 5},
+    /*  470 */ {I_IMUL, 2, {REG_GPR|BITS32,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2906, 5},
+    /*  471 */ {I_IMUL, 2, {REG_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+2912, 7},
+    /*  472 */ {I_IMUL, 2, {REG_GPR|BITS64,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2918, 7},
+    /*  473 */ {I_IN, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+7040, 47},
+    /*  474 */ {I_IN, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5455, 47},
+    /*  475 */ {I_IN, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5460, 48},
+    /*  476 */ {I_IN, 2, {REG_AL,REG_DX,0,0,0}, NO_DECORATOR, nasm_bytecodes+7498, 0},
+    /*  477 */ {I_IN, 2, {REG_AX,REG_DX,0,0,0}, NO_DECORATOR, nasm_bytecodes+7044, 0},
+    /*  478 */ {I_IN, 2, {REG_EAX,REG_DX,0,0,0}, NO_DECORATOR, nasm_bytecodes+7048, 5},
+    /*  479 */ {I_INC, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7052, 1},
+    /*  480 */ {I_INC, 1, {REG_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7056, 17},
+    /*  481 */ {I_INC, 1, {RM_GPR|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5465, 11},
+    /*  482 */ {I_INC, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2924, 11},
+    /*  483 */ {I_INC, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2930, 12},
+    /*  484 */ {I_INC, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2936, 13},
+    /*  485 */ {I_INSB, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7501, 30},
+    /*  486 */ {I_INSD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7060, 5},
+    /*  487 */ {I_INSW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7064, 30},
+    /*  488 */ {I_INT, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7068, 47},
+    /*  489 */ {I_INT1, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7495, 5},
+    /*  490 */ {I_INT3, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7504, 0},
+    /*  491 */ {I_INTO, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7507, 1},
+    /*  492 */ {I_INVD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7072, 49},
+    /*  493 */ {I_INVPCID, 2, {REG_GPR|BITS32,MEMORY|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+984, 50},
+    /*  494 */ {I_INVPCID, 2, {REG_GPR|BITS64,MEMORY|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+984, 51},
+    /*  495 */ {I_INVLPG, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5470, 49},
+    /*  496 */ {I_IRET, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7076, 0},
+    /*  497 */ {I_IRETD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7080, 5},
+    /*  498 */ {I_IRETQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7084, 7},
+    /*  499 */ {I_IRETW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7088, 0},
+    /*  500 */ {I_JCXZ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5475, 1},
+    /*  501 */ {I_JECXZ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5480, 5},
+    /*  502 */ {I_JRCXZ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+2942, 7},
+    /*  503 */ {I_JMP, 1, {IMMEDIATE|SHORT,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5486, 0},
+    /*  504 */ {I_JMP, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5490, 19},
+    /*  505 */ {I_JMP, 1, {IMMEDIATE|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5495, 20},
+    /*  506 */ {I_JMP, 1, {IMMEDIATE|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5500, 21},
+    /*  507 */ {I_JMP, 1, {IMMEDIATE|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5505, 22},
+    /*  508 */ {I_JMP, 2, {IMMEDIATE|COLON,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2966, 1},
+    /*  509 */ {I_JMP, 2, {IMMEDIATE|BITS16|COLON,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2972, 1},
+    /*  510 */ {I_JMP, 2, {IMMEDIATE|COLON,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2972, 1},
+    /*  511 */ {I_JMP, 2, {IMMEDIATE|BITS32|COLON,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2978, 17},
+    /*  512 */ {I_JMP, 2, {IMMEDIATE|COLON,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2978, 17},
+    /*  513 */ {I_JMP, 1, {MEMORY|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5510, 1},
+    /*  514 */ {I_JMP, 1, {MEMORY|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5515, 7},
+    /*  515 */ {I_JMP, 1, {MEMORY|BITS16|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5520, 0},
+    /*  516 */ {I_JMP, 1, {MEMORY|BITS32|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5525, 5},
+    /*  517 */ {I_JMP, 1, {MEMORY|BITS64|FAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5515, 7},
+    /*  518 */ {I_JMP, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5530, 19},
+    /*  519 */ {I_JMP, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5535, 20},
+    /*  520 */ {I_JMP, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5540, 21},
+    /*  521 */ {I_JMP, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5545, 22},
+    /*  522 */ {I_JMPE, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+991, 52},
+    /*  523 */ {I_JMPE, 1, {IMMEDIATE|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+998, 52},
+    /*  524 */ {I_JMPE, 1, {IMMEDIATE|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1005, 52},
+    /*  525 */ {I_LAHF, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7510, 0},
+    /*  526 */ {I_LAR, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+2984, 53},
+    /*  527 */ {I_LAR, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2984, 54},
+    /*  528 */ {I_LAR, 2, {REG_GPR|BITS16,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2984, 55},
+    /*  529 */ {I_LAR, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+2990, 57},
+    /*  530 */ {I_LAR, 2, {REG_GPR|BITS32,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2990, 55},
+    /*  531 */ {I_LAR, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2990, 55},
+    /*  532 */ {I_LAR, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+2996, 58},
+    /*  533 */ {I_LAR, 2, {REG_GPR|BITS64,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2996, 56},
+    /*  534 */ {I_LAR, 2, {REG_GPR|BITS64,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2996, 56},
+    /*  535 */ {I_LAR, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2996, 56},
+    /*  536 */ {I_LDS, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5550, 1},
+    /*  537 */ {I_LDS, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5555, 17},
+    /*  538 */ {I_LEA, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5560, 59},
+    /*  539 */ {I_LEA, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5565, 60},
+    /*  540 */ {I_LEA, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5570, 61},
+    /*  541 */ {I_LEAVE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5812, 30},
+    /*  542 */ {I_LES, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5575, 1},
+    /*  543 */ {I_LES, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5580, 17},
+    /*  544 */ {I_LFENCE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3002, 62},
+    /*  545 */ {I_LFS, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3008, 5},
+    /*  546 */ {I_LFS, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3014, 5},
+    /*  547 */ {I_LFS, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3020, 7},
+    /*  548 */ {I_LGDT, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5585, 23},
+    /*  549 */ {I_LGS, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3026, 5},
+    /*  550 */ {I_LGS, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3032, 5},
+    /*  551 */ {I_LGS, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3038, 7},
+    /*  552 */ {I_LIDT, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5590, 23},
+    /*  553 */ {I_LLDT, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5595, 63},
+    /*  554 */ {I_LLDT, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5595, 63},
+    /*  555 */ {I_LLDT, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5595, 63},
+    /*  556 */ {I_LMSW, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5600, 23},
+    /*  557 */ {I_LMSW, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5600, 23},
+    /*  558 */ {I_LMSW, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5600, 23},
+    /*  559 */ {I_LODSB, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7513, 0},
+    /*  560 */ {I_LODSD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7100, 5},
+    /*  561 */ {I_LODSQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7104, 7},
+    /*  562 */ {I_LODSW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7108, 0},
+    /*  563 */ {I_LOOP, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5605, 0},
+    /*  564 */ {I_LOOP, 2, {IMMEDIATE,REG_CX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5610, 1},
+    /*  565 */ {I_LOOP, 2, {IMMEDIATE,REG_ECX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5615, 5},
+    /*  566 */ {I_LOOP, 2, {IMMEDIATE,REG_RCX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5620, 7},
+    /*  567 */ {I_LOOPE, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5625, 0},
+    /*  568 */ {I_LOOPE, 2, {IMMEDIATE,REG_CX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5630, 1},
+    /*  569 */ {I_LOOPE, 2, {IMMEDIATE,REG_ECX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5635, 5},
+    /*  570 */ {I_LOOPE, 2, {IMMEDIATE,REG_RCX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5640, 7},
+    /*  571 */ {I_LOOPNE, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5645, 0},
+    /*  572 */ {I_LOOPNE, 2, {IMMEDIATE,REG_CX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5650, 1},
+    /*  573 */ {I_LOOPNE, 2, {IMMEDIATE,REG_ECX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5655, 5},
+    /*  574 */ {I_LOOPNE, 2, {IMMEDIATE,REG_RCX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5660, 7},
+    /*  575 */ {I_LOOPNZ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5645, 0},
+    /*  576 */ {I_LOOPNZ, 2, {IMMEDIATE,REG_CX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5650, 1},
+    /*  577 */ {I_LOOPNZ, 2, {IMMEDIATE,REG_ECX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5655, 5},
+    /*  578 */ {I_LOOPNZ, 2, {IMMEDIATE,REG_RCX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5660, 7},
+    /*  579 */ {I_LOOPZ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5625, 0},
+    /*  580 */ {I_LOOPZ, 2, {IMMEDIATE,REG_CX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5630, 1},
+    /*  581 */ {I_LOOPZ, 2, {IMMEDIATE,REG_ECX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5635, 5},
+    /*  582 */ {I_LOOPZ, 2, {IMMEDIATE,REG_RCX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5640, 7},
+    /*  583 */ {I_LSL, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3044, 53},
+    /*  584 */ {I_LSL, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3044, 54},
+    /*  585 */ {I_LSL, 2, {REG_GPR|BITS16,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3044, 55},
+    /*  586 */ {I_LSL, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3050, 57},
+    /*  587 */ {I_LSL, 2, {REG_GPR|BITS32,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3050, 55},
+    /*  588 */ {I_LSL, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3050, 55},
+    /*  589 */ {I_LSL, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3056, 58},
+    /*  590 */ {I_LSL, 2, {REG_GPR|BITS64,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3056, 56},
+    /*  591 */ {I_LSL, 2, {REG_GPR|BITS64,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3056, 56},
+    /*  592 */ {I_LSL, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3056, 56},
+    /*  593 */ {I_LSS, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3062, 5},
+    /*  594 */ {I_LSS, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3068, 5},
+    /*  595 */ {I_LSS, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3074, 7},
+    /*  596 */ {I_LTR, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5665, 63},
+    /*  597 */ {I_LTR, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5665, 63},
+    /*  598 */ {I_LTR, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5665, 63},
+    /*  599 */ {I_MFENCE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3080, 62},
+    /*  600 */ {I_MONITOR, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5670, 65},
+    /*  601 */ {I_MOV, 2, {MEMORY,REG_SREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5691, 67},
+    /*  602 */ {I_MOV, 2, {REG_GPR|BITS16,REG_SREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5675, 0},
+    /*  603 */ {I_MOV, 2, {REG_GPR|BITS32,REG_SREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5680, 5},
+    /*  604 */ {I_MOV, 2, {RM_GPR|BITS64,REG_SREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+5690, 7},
+    /*  605 */ {I_MOV, 2, {REG_SREG,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5711, 67},
+    /*  606 */ {I_MOV, 2, {REG_SREG,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+5700, 0},
+    /*  607 */ {I_MOV, 2, {REG_SREG,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+5705, 5},
+    /*  608 */ {I_MOV, 2, {REG_SREG,RM_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+5710, 7},
+    /*  609 */ {I_MOV, 2, {REG_AL,MEM_OFFS,0,0,0}, NO_DECORATOR, nasm_bytecodes+7112, 8},
+    /*  610 */ {I_MOV, 2, {REG_AX,MEM_OFFS,0,0,0}, NO_DECORATOR, nasm_bytecodes+5715, 8},
+    /*  611 */ {I_MOV, 2, {REG_EAX,MEM_OFFS,0,0,0}, NO_DECORATOR, nasm_bytecodes+5720, 9},
+    /*  612 */ {I_MOV, 2, {REG_RAX,MEM_OFFS,0,0,0}, NO_DECORATOR, nasm_bytecodes+5725, 10},
+    /*  613 */ {I_MOV, 2, {MEM_OFFS,REG_AL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7116, 71},
+    /*  614 */ {I_MOV, 2, {MEM_OFFS,REG_AX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5730, 71},
+    /*  615 */ {I_MOV, 2, {MEM_OFFS,REG_EAX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5735, 72},
+    /*  616 */ {I_MOV, 2, {MEM_OFFS,REG_RAX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5740, 73},
+    /*  617 */ {I_MOV, 2, {REG_GPR|BITS32,REG_CREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+3086, 74},
+    /*  618 */ {I_MOV, 2, {REG_GPR|BITS64,REG_CREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+3092, 75},
+    /*  619 */ {I_MOV, 2, {REG_CREG,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3098, 74},
+    /*  620 */ {I_MOV, 2, {REG_CREG,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3104, 75},
+    /*  621 */ {I_MOV, 2, {REG_GPR|BITS32,REG_DREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+3111, 74},
+    /*  622 */ {I_MOV, 2, {REG_GPR|BITS64,REG_DREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+3110, 75},
+    /*  623 */ {I_MOV, 2, {REG_DREG,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3117, 74},
+    /*  624 */ {I_MOV, 2, {REG_DREG,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3116, 75},
+    /*  625 */ {I_MOV, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+5755, 8},
+    /*  626 */ {I_MOV, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+5756, 0},
+    /*  627 */ {I_MOV, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3122, 8},
+    /*  628 */ {I_MOV, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3123, 0},
+    /*  629 */ {I_MOV, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3128, 9},
+    /*  630 */ {I_MOV, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3129, 5},
+    /*  631 */ {I_MOV, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3134, 10},
+    /*  632 */ {I_MOV, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3135, 7},
+    /*  633 */ {I_MOV, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7120, 8},
+    /*  634 */ {I_MOV, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+7120, 0},
+    /*  635 */ {I_MOV, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5760, 8},
+    /*  636 */ {I_MOV, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+5760, 0},
+    /*  637 */ {I_MOV, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5765, 9},
+    /*  638 */ {I_MOV, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+5765, 5},
+    /*  639 */ {I_MOV, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5770, 10},
+    /*  640 */ {I_MOV, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+5770, 7},
+    /*  641 */ {I_MOV, 2, {REG_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+7124, 8},
+    /*  642 */ {I_MOV, 2, {REG_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5775, 8},
+    /*  643 */ {I_MOV, 2, {REG_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5780, 9},
+    /*  644 */ {I_MOV, 2, {REG_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5790, 10},
+    /*  645 */ {I_MOV, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3140, 8},
+    /*  646 */ {I_MOV, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1040, 8},
+    /*  647 */ {I_MOV, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1047, 9},
+    /*  648 */ {I_MOV, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1054, 10},
+    /*  649 */ {I_MOV, 2, {RM_GPR|BITS64,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1054, 7},
+    /*  650 */ {I_MOV, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3140, 8},
+    /*  651 */ {I_MOV, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1040, 8},
+    /*  652 */ {I_MOV, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1047, 9},
+    /*  653 */ {I_MOVD, 2, {MMXREG,RM_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3146, 77},
+    /*  654 */ {I_MOVD, 2, {RM_GPR|BITS32,MMXREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+3152, 77},
+    /*  655 */ {I_MOVQ, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+3158, 79},
+    /*  656 */ {I_MOVQ, 2, {RM_MMX,MMXREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+3164, 79},
+    /*  657 */ {I_MOVQ, 2, {MMXREG,RM_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+1061, 80},
+    /*  658 */ {I_MOVQ, 2, {RM_GPR|BITS64,MMXREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+1068, 80},
+    /*  659 */ {I_MOVSB, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+205, 0},
+    /*  660 */ {I_MOVSD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7128, 5},
+    /*  661 */ {I_MOVSQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7132, 7},
+    /*  662 */ {I_MOVSW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7136, 0},
+    /*  663 */ {I_MOVSX, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3170, 48},
+    /*  664 */ {I_MOVSX, 2, {REG_GPR|BITS16,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3170, 5},
+    /*  665 */ {I_MOVSX, 2, {REG_GPR|BITS32,RM_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3176, 5},
+    /*  666 */ {I_MOVSX, 2, {REG_GPR|BITS32,RM_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3182, 5},
+    /*  667 */ {I_MOVSX, 2, {REG_GPR|BITS64,RM_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3188, 7},
+    /*  668 */ {I_MOVSX, 2, {REG_GPR|BITS64,RM_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3194, 7},
+    /*  669 */ {I_MOVZX, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3200, 48},
+    /*  670 */ {I_MOVZX, 2, {REG_GPR|BITS16,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3200, 5},
+    /*  671 */ {I_MOVZX, 2, {REG_GPR|BITS32,RM_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3206, 5},
+    /*  672 */ {I_MOVZX, 2, {REG_GPR|BITS32,RM_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3212, 5},
+    /*  673 */ {I_MOVZX, 2, {REG_GPR|BITS64,RM_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3218, 7},
+    /*  674 */ {I_MOVZX, 2, {REG_GPR|BITS64,RM_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3224, 7},
+    /*  675 */ {I_MUL, 1, {RM_GPR|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7140, 0},
+    /*  676 */ {I_MUL, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5795, 0},
+    /*  677 */ {I_MUL, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5800, 5},
+    /*  678 */ {I_MUL, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5805, 7},
+    /*  679 */ {I_MWAIT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5810, 65},
+    /*  680 */ {I_NEG, 1, {RM_GPR|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5815, 11},
+    /*  681 */ {I_NEG, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3230, 11},
+    /*  682 */ {I_NEG, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3236, 12},
+    /*  683 */ {I_NEG, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3242, 13},
+    /*  684 */ {I_NOP, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5820, 0},
+    /*  685 */ {I_NOP, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3248, 81},
+    /*  686 */ {I_NOP, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3254, 81},
+    /*  687 */ {I_NOP, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3260, 7},
+    /*  688 */ {I_NOT, 1, {RM_GPR|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5825, 11},
+    /*  689 */ {I_NOT, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3266, 11},
+    /*  690 */ {I_NOT, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3272, 12},
+    /*  691 */ {I_NOT, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3278, 13},
+    /*  692 */ {I_OR, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+5830, 3},
+    /*  693 */ {I_OR, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+5831, 0},
+    /*  694 */ {I_OR, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3284, 3},
+    /*  695 */ {I_OR, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3285, 0},
+    /*  696 */ {I_OR, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3290, 4},
+    /*  697 */ {I_OR, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3291, 5},
+    /*  698 */ {I_OR, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3296, 6},
+    /*  699 */ {I_OR, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3297, 7},
+    /*  700 */ {I_OR, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7144, 8},
+    /*  701 */ {I_OR, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+7144, 0},
+    /*  702 */ {I_OR, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5835, 8},
+    /*  703 */ {I_OR, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+5835, 0},
+    /*  704 */ {I_OR, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5840, 9},
+    /*  705 */ {I_OR, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+5840, 5},
+    /*  706 */ {I_OR, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5845, 10},
+    /*  707 */ {I_OR, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+5845, 7},
+    /*  708 */ {I_OR, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1075, 11},
+    /*  709 */ {I_OR, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1082, 12},
+    /*  710 */ {I_OR, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1089, 13},
+    /*  711 */ {I_OR, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+7148, 8},
+    /*  712 */ {I_OR, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5850, 8},
+    /*  713 */ {I_OR, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5855, 9},
+    /*  714 */ {I_OR, 2, {REG_RAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+5860, 10},
+    /*  715 */ {I_OR, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3302, 3},
+    /*  716 */ {I_OR, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3308, 3},
+    /*  717 */ {I_OR, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1096, 3},
+    /*  718 */ {I_OR, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1103, 4},
+    /*  719 */ {I_OR, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1110, 6},
+    /*  720 */ {I_OR, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3302, 3},
+    /*  721 */ {I_OR, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3308, 3},
+    /*  722 */ {I_OR, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1096, 3},
+    /*  723 */ {I_OR, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1103, 4},
+    /*  724 */ {I_OUT, 2, {IMMEDIATE,REG_AL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7152, 47},
+    /*  725 */ {I_OUT, 2, {IMMEDIATE,REG_AX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5865, 47},
+    /*  726 */ {I_OUT, 2, {IMMEDIATE,REG_EAX,0,0,0}, NO_DECORATOR, nasm_bytecodes+5870, 48},
+    /*  727 */ {I_OUT, 2, {REG_DX,REG_AL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7516, 0},
+    /*  728 */ {I_OUT, 2, {REG_DX,REG_AX,0,0,0}, NO_DECORATOR, nasm_bytecodes+7156, 0},
+    /*  729 */ {I_OUT, 2, {REG_DX,REG_EAX,0,0,0}, NO_DECORATOR, nasm_bytecodes+7160, 5},
+    /*  730 */ {I_OUTSB, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7519, 30},
+    /*  731 */ {I_OUTSD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7164, 5},
+    /*  732 */ {I_OUTSW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7168, 30},
+    /*  733 */ {I_PACKSSDW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1117, 79},
+    /*  734 */ {I_PACKSSWB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1124, 79},
+    /*  735 */ {I_PACKUSWB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1131, 79},
+    /*  736 */ {I_PADDB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1138, 79},
+    /*  737 */ {I_PADDD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1145, 79},
+    /*  738 */ {I_PADDSB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1152, 79},
+    /*  739 */ {I_PADDSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1159, 79},
+    /*  740 */ {I_PADDUSB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1166, 79},
+    /*  741 */ {I_PADDUSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1173, 79},
+    /*  742 */ {I_PADDW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1180, 79},
+    /*  743 */ {I_PAND, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1187, 79},
+    /*  744 */ {I_PANDN, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1194, 79},
+    /*  745 */ {I_PAUSE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7172, 0},
+    /*  746 */ {I_PAVGUSB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+144, 82},
+    /*  747 */ {I_PCMPEQB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1201, 79},
+    /*  748 */ {I_PCMPEQD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1208, 79},
+    /*  749 */ {I_PCMPEQW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1215, 79},
+    /*  750 */ {I_PCMPGTB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1222, 79},
+    /*  751 */ {I_PCMPGTD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1229, 79},
+    /*  752 */ {I_PCMPGTW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1236, 79},
+    /*  753 */ {I_PF2ID, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+152, 82},
+    /*  754 */ {I_PFACC, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+160, 82},
+    /*  755 */ {I_PFADD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+168, 82},
+    /*  756 */ {I_PFCMPEQ, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+176, 82},
+    /*  757 */ {I_PFCMPGE, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+184, 82},
+    /*  758 */ {I_PFCMPGT, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+192, 82},
+    /*  759 */ {I_PFMAX, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+200, 82},
+    /*  760 */ {I_PFMIN, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+208, 82},
+    /*  761 */ {I_PFMUL, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+216, 82},
+    /*  762 */ {I_PFRCP, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+224, 82},
+    /*  763 */ {I_PFRCPIT1, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+232, 82},
+    /*  764 */ {I_PFRCPIT2, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+240, 82},
+    /*  765 */ {I_PFRSQIT1, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+248, 82},
+    /*  766 */ {I_PFRSQRT, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+256, 82},
+    /*  767 */ {I_PFSUB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+264, 82},
+    /*  768 */ {I_PFSUBR, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+272, 82},
+    /*  769 */ {I_PI2FD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+280, 82},
+    /*  770 */ {I_PMADDWD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1243, 79},
+    /*  771 */ {I_PMULHRWA, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+288, 82},
+    /*  772 */ {I_PMULHW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1250, 79},
+    /*  773 */ {I_PMULLW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1257, 79},
+    /*  774 */ {I_POP, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7176, 0},
+    /*  775 */ {I_POP, 1, {REG_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7180, 17},
+    /*  776 */ {I_POP, 1, {REG_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7184, 7},
+    /*  777 */ {I_POP, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5875, 0},
+    /*  778 */ {I_POP, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5880, 17},
+    /*  779 */ {I_POP, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5885, 7},
+    /*  780 */ {I_POP, 1, {REG_ES,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+581, 1},
+    /*  781 */ {I_POP, 1, {REG_SS,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7525, 1},
+    /*  782 */ {I_POP, 1, {REG_DS,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7528, 1},
+    /*  783 */ {I_POP, 1, {REG_FS,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7188, 5},
+    /*  784 */ {I_POP, 1, {REG_GS,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7192, 5},
+    /*  785 */ {I_POPA, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7196, 16},
+    /*  786 */ {I_POPAD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7200, 17},
+    /*  787 */ {I_POPAW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7204, 16},
+    /*  788 */ {I_POPF, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7208, 0},
+    /*  789 */ {I_POPFD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7212, 17},
+    /*  790 */ {I_POPFQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7212, 7},
+    /*  791 */ {I_POPFW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7216, 0},
+    /*  792 */ {I_POR, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1264, 79},
+    /*  793 */ {I_PREFETCH, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5890, 82},
+    /*  794 */ {I_PREFETCHW, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5895, 82},
+    /*  795 */ {I_PSLLD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1271, 79},
+    /*  796 */ {I_PSLLD, 2, {MMXREG,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1278, 29},
+    /*  797 */ {I_PSLLQ, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1285, 79},
+    /*  798 */ {I_PSLLQ, 2, {MMXREG,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1292, 29},
+    /*  799 */ {I_PSLLW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1299, 79},
+    /*  800 */ {I_PSLLW, 2, {MMXREG,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1306, 29},
+    /*  801 */ {I_PSRAD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1313, 79},
+    /*  802 */ {I_PSRAD, 2, {MMXREG,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1320, 29},
+    /*  803 */ {I_PSRAW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1327, 79},
+    /*  804 */ {I_PSRAW, 2, {MMXREG,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1334, 29},
+    /*  805 */ {I_PSRLD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1341, 79},
+    /*  806 */ {I_PSRLD, 2, {MMXREG,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1348, 29},
+    /*  807 */ {I_PSRLQ, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1355, 79},
+    /*  808 */ {I_PSRLQ, 2, {MMXREG,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1362, 29},
+    /*  809 */ {I_PSRLW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1369, 79},
+    /*  810 */ {I_PSRLW, 2, {MMXREG,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1376, 29},
+    /*  811 */ {I_PSUBB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1383, 79},
+    /*  812 */ {I_PSUBD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1390, 79},
+    /*  813 */ {I_PSUBSB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1397, 79},
+    /*  814 */ {I_PSUBSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1404, 79},
+    /*  815 */ {I_PSUBUSB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1411, 79},
+    /*  816 */ {I_PSUBUSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1418, 79},
+    /*  817 */ {I_PSUBW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1425, 79},
+    /*  818 */ {I_PUNPCKHBW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1432, 79},
+    /*  819 */ {I_PUNPCKHDQ, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1439, 79},
+    /*  820 */ {I_PUNPCKHWD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1446, 79},
+    /*  821 */ {I_PUNPCKLBW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1453, 79},
+    /*  822 */ {I_PUNPCKLDQ, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1460, 79},
+    /*  823 */ {I_PUNPCKLWD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1467, 79},
+    /*  824 */ {I_PUSH, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7220, 0},
+    /*  825 */ {I_PUSH, 1, {REG_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7224, 17},
+    /*  826 */ {I_PUSH, 1, {REG_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7228, 7},
+    /*  827 */ {I_PUSH, 1, {RM_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5900, 0},
+    /*  828 */ {I_PUSH, 1, {RM_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5905, 17},
+    /*  829 */ {I_PUSH, 1, {RM_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5910, 7},
+    /*  830 */ {I_PUSH, 1, {REG_ES,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+549, 1},
+    /*  831 */ {I_PUSH, 1, {REG_CS,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7531, 1},
+    /*  832 */ {I_PUSH, 1, {REG_SS,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7534, 1},
+    /*  833 */ {I_PUSH, 1, {REG_DS,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7537, 1},
+    /*  834 */ {I_PUSH, 1, {REG_FS,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7232, 5},
+    /*  835 */ {I_PUSH, 1, {REG_GS,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7236, 5},
+    /*  836 */ {I_PUSH, 1, {IMMEDIATE|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5936, 30},
+    /*  837 */ {I_PUSH, 1, {IMMEDIATE|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5920, 84},
+    /*  838 */ {I_PUSH, 1, {IMMEDIATE|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5930, 85},
+    /*  839 */ {I_PUSH, 1, {IMMEDIATE|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5930, 86},
+    /*  840 */ {I_PUSH, 1, {IMMEDIATE|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5940, 87},
+    /*  841 */ {I_PUSH, 1, {IMMEDIATE|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+5940, 87},
+    /*  842 */ {I_PUSHA, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7240, 16},
+    /*  843 */ {I_PUSHAD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7244, 17},
+    /*  844 */ {I_PUSHAW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7248, 16},
+    /*  845 */ {I_PUSHF, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7252, 0},
+    /*  846 */ {I_PUSHFD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7256, 17},
+    /*  847 */ {I_PUSHFQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7256, 7},
+    /*  848 */ {I_PUSHFW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7260, 0},
+    /*  849 */ {I_PXOR, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1474, 79},
+    /*  850 */ {I_RCL, 2, {RM_GPR|BITS8,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7264, 0},
+    /*  851 */ {I_RCL, 2, {RM_GPR|BITS8,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7268, 0},
+    /*  852 */ {I_RCL, 2, {RM_GPR|BITS8,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+5945, 30},
+    /*  853 */ {I_RCL, 2, {RM_GPR|BITS16,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5950, 0},
+    /*  854 */ {I_RCL, 2, {RM_GPR|BITS16,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+5955, 0},
+    /*  855 */ {I_RCL, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3314, 30},
+    /*  856 */ {I_RCL, 2, {RM_GPR|BITS32,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5960, 5},
+    /*  857 */ {I_RCL, 2, {RM_GPR|BITS32,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+5965, 5},
+    /*  858 */ {I_RCL, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3320, 5},
+    /*  859 */ {I_RCL, 2, {RM_GPR|BITS64,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5970, 7},
+    /*  860 */ {I_RCL, 2, {RM_GPR|BITS64,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+5975, 7},
+    /*  861 */ {I_RCL, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3326, 7},
+    /*  862 */ {I_RCR, 2, {RM_GPR|BITS8,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7272, 0},
+    /*  863 */ {I_RCR, 2, {RM_GPR|BITS8,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7276, 0},
+    /*  864 */ {I_RCR, 2, {RM_GPR|BITS8,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+5980, 30},
+    /*  865 */ {I_RCR, 2, {RM_GPR|BITS16,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5985, 0},
+    /*  866 */ {I_RCR, 2, {RM_GPR|BITS16,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+5990, 0},
+    /*  867 */ {I_RCR, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3332, 30},
+    /*  868 */ {I_RCR, 2, {RM_GPR|BITS32,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+5995, 5},
+    /*  869 */ {I_RCR, 2, {RM_GPR|BITS32,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6000, 5},
+    /*  870 */ {I_RCR, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3338, 5},
+    /*  871 */ {I_RCR, 2, {RM_GPR|BITS64,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6005, 7},
+    /*  872 */ {I_RCR, 2, {RM_GPR|BITS64,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6010, 7},
+    /*  873 */ {I_RCR, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3344, 7},
+    /*  874 */ {I_RDMSR, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7280, 88},
+    /*  875 */ {I_RDPMC, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7284, 81},
+    /*  876 */ {I_RDTSC, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7288, 25},
+    /*  877 */ {I_RDTSCP, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6015, 89},
+    /*  878 */ {I_RET, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7309, 19},
+    /*  879 */ {I_RET, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6041, 90},
+    /*  880 */ {I_RETF, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7313, 0},
+    /*  881 */ {I_RETF, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6046, 67},
+    /*  882 */ {I_RETN, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7309, 19},
+    /*  883 */ {I_RETN, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6041, 90},
+    /*  884 */ {I_RETW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7292, 19},
+    /*  885 */ {I_RETW, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6041, 90},
+    /*  886 */ {I_RETFW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7296, 0},
+    /*  887 */ {I_RETFW, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6020, 67},
+    /*  888 */ {I_RETNW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7292, 19},
+    /*  889 */ {I_RETNW, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6025, 90},
+    /*  890 */ {I_RETD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7300, 20},
+    /*  891 */ {I_RETD, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6030, 91},
+    /*  892 */ {I_RETFD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7304, 0},
+    /*  893 */ {I_RETFD, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6035, 67},
+    /*  894 */ {I_RETND, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7300, 20},
+    /*  895 */ {I_RETND, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6030, 91},
+    /*  896 */ {I_RETQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7308, 22},
+    /*  897 */ {I_RETQ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6040, 92},
+    /*  898 */ {I_RETFQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7312, 7},
+    /*  899 */ {I_RETFQ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6045, 93},
+    /*  900 */ {I_RETNQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7308, 22},
+    /*  901 */ {I_RETNQ, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6040, 92},
+    /*  902 */ {I_ROL, 2, {RM_GPR|BITS8,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7316, 0},
+    /*  903 */ {I_ROL, 2, {RM_GPR|BITS8,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7320, 0},
+    /*  904 */ {I_ROL, 2, {RM_GPR|BITS8,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6050, 30},
+    /*  905 */ {I_ROL, 2, {RM_GPR|BITS16,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6055, 0},
+    /*  906 */ {I_ROL, 2, {RM_GPR|BITS16,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6060, 0},
+    /*  907 */ {I_ROL, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3350, 30},
+    /*  908 */ {I_ROL, 2, {RM_GPR|BITS32,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6065, 5},
+    /*  909 */ {I_ROL, 2, {RM_GPR|BITS32,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6070, 5},
+    /*  910 */ {I_ROL, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3356, 5},
+    /*  911 */ {I_ROL, 2, {RM_GPR|BITS64,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6075, 7},
+    /*  912 */ {I_ROL, 2, {RM_GPR|BITS64,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6080, 7},
+    /*  913 */ {I_ROL, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3362, 7},
+    /*  914 */ {I_ROR, 2, {RM_GPR|BITS8,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7324, 0},
+    /*  915 */ {I_ROR, 2, {RM_GPR|BITS8,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7328, 0},
+    /*  916 */ {I_ROR, 2, {RM_GPR|BITS8,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6085, 30},
+    /*  917 */ {I_ROR, 2, {RM_GPR|BITS16,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6090, 0},
+    /*  918 */ {I_ROR, 2, {RM_GPR|BITS16,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6095, 0},
+    /*  919 */ {I_ROR, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3368, 30},
+    /*  920 */ {I_ROR, 2, {RM_GPR|BITS32,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6100, 5},
+    /*  921 */ {I_ROR, 2, {RM_GPR|BITS32,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6105, 5},
+    /*  922 */ {I_ROR, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3374, 5},
+    /*  923 */ {I_ROR, 2, {RM_GPR|BITS64,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6110, 7},
+    /*  924 */ {I_ROR, 2, {RM_GPR|BITS64,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6115, 7},
+    /*  925 */ {I_ROR, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3380, 7},
+    /*  926 */ {I_RSM, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7332, 94},
+    /*  927 */ {I_SAHF, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+173, 0},
+    /*  928 */ {I_SAR, 2, {RM_GPR|BITS8,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7344, 0},
+    /*  929 */ {I_SAR, 2, {RM_GPR|BITS8,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7348, 0},
+    /*  930 */ {I_SAR, 2, {RM_GPR|BITS8,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6155, 30},
+    /*  931 */ {I_SAR, 2, {RM_GPR|BITS16,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6160, 0},
+    /*  932 */ {I_SAR, 2, {RM_GPR|BITS16,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6165, 0},
+    /*  933 */ {I_SAR, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3404, 30},
+    /*  934 */ {I_SAR, 2, {RM_GPR|BITS32,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6170, 5},
+    /*  935 */ {I_SAR, 2, {RM_GPR|BITS32,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6175, 5},
+    /*  936 */ {I_SAR, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3410, 5},
+    /*  937 */ {I_SAR, 2, {RM_GPR|BITS64,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6180, 7},
+    /*  938 */ {I_SAR, 2, {RM_GPR|BITS64,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6185, 7},
+    /*  939 */ {I_SAR, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3416, 7},
+    /*  940 */ {I_SBB, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6190, 3},
+    /*  941 */ {I_SBB, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6191, 0},
+    /*  942 */ {I_SBB, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3422, 3},
+    /*  943 */ {I_SBB, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3423, 0},
+    /*  944 */ {I_SBB, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3428, 4},
+    /*  945 */ {I_SBB, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3429, 5},
+    /*  946 */ {I_SBB, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3434, 6},
+    /*  947 */ {I_SBB, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3435, 7},
+    /*  948 */ {I_SBB, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7352, 8},
+    /*  949 */ {I_SBB, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+7352, 0},
+    /*  950 */ {I_SBB, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6195, 8},
+    /*  951 */ {I_SBB, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+6195, 0},
+    /*  952 */ {I_SBB, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6200, 9},
+    /*  953 */ {I_SBB, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+6200, 5},
+    /*  954 */ {I_SBB, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6205, 10},
+    /*  955 */ {I_SBB, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+6205, 7},
+    /*  956 */ {I_SBB, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1481, 11},
+    /*  957 */ {I_SBB, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1488, 12},
+    /*  958 */ {I_SBB, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1495, 13},
+    /*  959 */ {I_SBB, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+7356, 8},
+    /*  960 */ {I_SBB, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6210, 8},
+    /*  961 */ {I_SBB, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6215, 9},
+    /*  962 */ {I_SBB, 2, {REG_RAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6220, 10},
+    /*  963 */ {I_SBB, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3440, 3},
+    /*  964 */ {I_SBB, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3446, 3},
+    /*  965 */ {I_SBB, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1502, 3},
+    /*  966 */ {I_SBB, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1509, 4},
+    /*  967 */ {I_SBB, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1516, 6},
+    /*  968 */ {I_SBB, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3440, 3},
+    /*  969 */ {I_SBB, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3446, 3},
+    /*  970 */ {I_SBB, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1502, 3},
+    /*  971 */ {I_SBB, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1509, 4},
+    /*  972 */ {I_SCASB, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7360, 0},
+    /*  973 */ {I_SCASD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6225, 5},
+    /*  974 */ {I_SCASQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6230, 7},
+    /*  975 */ {I_SCASW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6235, 0},
+    /*  976 */ {I_SFENCE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3452, 62},
+    /*  977 */ {I_SGDT, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6240, 95},
+    /*  978 */ {I_SHL, 2, {RM_GPR|BITS8,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7336, 0},
+    /*  979 */ {I_SHL, 2, {RM_GPR|BITS8,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7340, 0},
+    /*  980 */ {I_SHL, 2, {RM_GPR|BITS8,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6120, 30},
+    /*  981 */ {I_SHL, 2, {RM_GPR|BITS16,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6125, 0},
+    /*  982 */ {I_SHL, 2, {RM_GPR|BITS16,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6130, 0},
+    /*  983 */ {I_SHL, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3386, 30},
+    /*  984 */ {I_SHL, 2, {RM_GPR|BITS32,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6135, 5},
+    /*  985 */ {I_SHL, 2, {RM_GPR|BITS32,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6140, 5},
+    /*  986 */ {I_SHL, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3392, 5},
+    /*  987 */ {I_SHL, 2, {RM_GPR|BITS64,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6145, 7},
+    /*  988 */ {I_SHL, 2, {RM_GPR|BITS64,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6150, 7},
+    /*  989 */ {I_SHL, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3398, 7},
+    /*  990 */ {I_SHLD, 3, {MEMORY,REG_GPR|BITS16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1523, 96},
+    /*  991 */ {I_SHLD, 3, {REG_GPR|BITS16,REG_GPR|BITS16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1523, 96},
+    /*  992 */ {I_SHLD, 3, {MEMORY,REG_GPR|BITS32,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1530, 96},
+    /*  993 */ {I_SHLD, 3, {REG_GPR|BITS32,REG_GPR|BITS32,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1530, 96},
+    /*  994 */ {I_SHLD, 3, {MEMORY,REG_GPR|BITS64,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1537, 97},
+    /*  995 */ {I_SHLD, 3, {REG_GPR|BITS64,REG_GPR|BITS64,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1537, 97},
+    /*  996 */ {I_SHLD, 3, {MEMORY,REG_GPR|BITS16,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3458, 9},
+    /*  997 */ {I_SHLD, 3, {REG_GPR|BITS16,REG_GPR|BITS16,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3458, 5},
+    /*  998 */ {I_SHLD, 3, {MEMORY,REG_GPR|BITS32,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3464, 9},
+    /*  999 */ {I_SHLD, 3, {REG_GPR|BITS32,REG_GPR|BITS32,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3464, 5},
+    /* 1000 */ {I_SHLD, 3, {MEMORY,REG_GPR|BITS64,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3470, 10},
+    /* 1001 */ {I_SHLD, 3, {REG_GPR|BITS64,REG_GPR|BITS64,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3470, 7},
+    /* 1002 */ {I_SHR, 2, {RM_GPR|BITS8,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7364, 0},
+    /* 1003 */ {I_SHR, 2, {RM_GPR|BITS8,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+7368, 0},
+    /* 1004 */ {I_SHR, 2, {RM_GPR|BITS8,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6245, 30},
+    /* 1005 */ {I_SHR, 2, {RM_GPR|BITS16,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6250, 0},
+    /* 1006 */ {I_SHR, 2, {RM_GPR|BITS16,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6255, 0},
+    /* 1007 */ {I_SHR, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3476, 30},
+    /* 1008 */ {I_SHR, 2, {RM_GPR|BITS32,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6260, 5},
+    /* 1009 */ {I_SHR, 2, {RM_GPR|BITS32,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6265, 5},
+    /* 1010 */ {I_SHR, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3482, 5},
+    /* 1011 */ {I_SHR, 2, {RM_GPR|BITS64,UNITY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6270, 7},
+    /* 1012 */ {I_SHR, 2, {RM_GPR|BITS64,REG_CL,0,0,0}, NO_DECORATOR, nasm_bytecodes+6275, 7},
+    /* 1013 */ {I_SHR, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3488, 7},
+    /* 1014 */ {I_SHRD, 3, {MEMORY,REG_GPR|BITS16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1544, 96},
+    /* 1015 */ {I_SHRD, 3, {REG_GPR|BITS16,REG_GPR|BITS16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1544, 96},
+    /* 1016 */ {I_SHRD, 3, {MEMORY,REG_GPR|BITS32,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1551, 96},
+    /* 1017 */ {I_SHRD, 3, {REG_GPR|BITS32,REG_GPR|BITS32,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1551, 96},
+    /* 1018 */ {I_SHRD, 3, {MEMORY,REG_GPR|BITS64,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1558, 97},
+    /* 1019 */ {I_SHRD, 3, {REG_GPR|BITS64,REG_GPR|BITS64,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1558, 97},
+    /* 1020 */ {I_SHRD, 3, {MEMORY,REG_GPR|BITS16,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3494, 9},
+    /* 1021 */ {I_SHRD, 3, {REG_GPR|BITS16,REG_GPR|BITS16,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3494, 5},
+    /* 1022 */ {I_SHRD, 3, {MEMORY,REG_GPR|BITS32,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3500, 9},
+    /* 1023 */ {I_SHRD, 3, {REG_GPR|BITS32,REG_GPR|BITS32,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3500, 5},
+    /* 1024 */ {I_SHRD, 3, {MEMORY,REG_GPR|BITS64,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3506, 10},
+    /* 1025 */ {I_SHRD, 3, {REG_GPR|BITS64,REG_GPR|BITS64,REG_CL,0,0}, NO_DECORATOR, nasm_bytecodes+3506, 7},
+    /* 1026 */ {I_SIDT, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6280, 95},
+    /* 1027 */ {I_SLDT, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3531, 95},
+    /* 1028 */ {I_SLDT, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3531, 95},
+    /* 1029 */ {I_SLDT, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3512, 95},
+    /* 1030 */ {I_SLDT, 1, {REG_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3518, 5},
+    /* 1031 */ {I_SLDT, 1, {REG_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3530, 7},
+    /* 1032 */ {I_SMI, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7495, 98},
+    /* 1033 */ {I_SMSW, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3549, 95},
+    /* 1034 */ {I_SMSW, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3549, 95},
+    /* 1035 */ {I_SMSW, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3536, 95},
+    /* 1036 */ {I_SMSW, 1, {REG_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3542, 5},
+    /* 1037 */ {I_SMSW, 1, {REG_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3548, 7},
+    /* 1038 */ {I_STC, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6017, 0},
+    /* 1039 */ {I_STD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7540, 0},
+    /* 1040 */ {I_STI, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7543, 0},
+    /* 1041 */ {I_STOSB, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+277, 0},
+    /* 1042 */ {I_STOSD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7372, 5},
+    /* 1043 */ {I_STOSQ, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7376, 7},
+    /* 1044 */ {I_STOSW, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7380, 0},
+    /* 1045 */ {I_STR, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3567, 54},
+    /* 1046 */ {I_STR, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3567, 54},
+    /* 1047 */ {I_STR, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3554, 54},
+    /* 1048 */ {I_STR, 1, {REG_GPR|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3560, 55},
+    /* 1049 */ {I_STR, 1, {REG_GPR|BITS64,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3566, 7},
+    /* 1050 */ {I_SUB, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6285, 3},
+    /* 1051 */ {I_SUB, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6286, 0},
+    /* 1052 */ {I_SUB, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3572, 3},
+    /* 1053 */ {I_SUB, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3573, 0},
+    /* 1054 */ {I_SUB, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3578, 4},
+    /* 1055 */ {I_SUB, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3579, 5},
+    /* 1056 */ {I_SUB, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3584, 6},
+    /* 1057 */ {I_SUB, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3585, 7},
+    /* 1058 */ {I_SUB, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7384, 8},
+    /* 1059 */ {I_SUB, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+7384, 0},
+    /* 1060 */ {I_SUB, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6290, 8},
+    /* 1061 */ {I_SUB, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+6290, 0},
+    /* 1062 */ {I_SUB, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6295, 9},
+    /* 1063 */ {I_SUB, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+6295, 5},
+    /* 1064 */ {I_SUB, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6300, 10},
+    /* 1065 */ {I_SUB, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+6300, 7},
+    /* 1066 */ {I_SUB, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1565, 11},
+    /* 1067 */ {I_SUB, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1572, 12},
+    /* 1068 */ {I_SUB, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1579, 13},
+    /* 1069 */ {I_SUB, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+7388, 8},
+    /* 1070 */ {I_SUB, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6305, 8},
+    /* 1071 */ {I_SUB, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6310, 9},
+    /* 1072 */ {I_SUB, 2, {REG_RAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6315, 10},
+    /* 1073 */ {I_SUB, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3590, 3},
+    /* 1074 */ {I_SUB, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3596, 3},
+    /* 1075 */ {I_SUB, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1586, 3},
+    /* 1076 */ {I_SUB, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1593, 4},
+    /* 1077 */ {I_SUB, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1600, 6},
+    /* 1078 */ {I_SUB, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3590, 3},
+    /* 1079 */ {I_SUB, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3596, 3},
+    /* 1080 */ {I_SUB, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1586, 3},
+    /* 1081 */ {I_SUB, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1593, 4},
+    /* 1082 */ {I_SYSENTER, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7392, 81},
+    /* 1083 */ {I_SYSEXIT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7396, 99},
+    /* 1084 */ {I_TEST, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+7400, 8},
+    /* 1085 */ {I_TEST, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+7400, 0},
+    /* 1086 */ {I_TEST, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+6320, 8},
+    /* 1087 */ {I_TEST, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+6320, 0},
+    /* 1088 */ {I_TEST, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+6325, 9},
+    /* 1089 */ {I_TEST, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+6325, 5},
+    /* 1090 */ {I_TEST, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+6330, 10},
+    /* 1091 */ {I_TEST, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+6330, 7},
+    /* 1092 */ {I_TEST, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7404, 8},
+    /* 1093 */ {I_TEST, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6335, 8},
+    /* 1094 */ {I_TEST, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6340, 9},
+    /* 1095 */ {I_TEST, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6345, 10},
+    /* 1096 */ {I_TEST, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+7408, 8},
+    /* 1097 */ {I_TEST, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6350, 8},
+    /* 1098 */ {I_TEST, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6355, 9},
+    /* 1099 */ {I_TEST, 2, {REG_RAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6360, 10},
+    /* 1100 */ {I_TEST, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6365, 8},
+    /* 1101 */ {I_TEST, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3602, 8},
+    /* 1102 */ {I_TEST, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3608, 9},
+    /* 1103 */ {I_TEST, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3614, 10},
+    /* 1104 */ {I_TEST, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6365, 8},
+    /* 1105 */ {I_TEST, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3602, 8},
+    /* 1106 */ {I_TEST, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3608, 9},
+    /* 1107 */ {I_UD0, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7412, 100},
+    /* 1108 */ {I_UD0, 2, {REG_GPR|BITS16,RM_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3620, 30},
+    /* 1109 */ {I_UD0, 2, {REG_GPR|BITS32,RM_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3626, 30},
+    /* 1110 */ {I_UD0, 2, {REG_GPR|BITS64,RM_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3632, 30},
+    /* 1111 */ {I_UD1, 2, {REG_GPR|BITS16,RM_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3638, 30},
+    /* 1112 */ {I_UD1, 2, {REG_GPR|BITS32,RM_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3644, 30},
+    /* 1113 */ {I_UD1, 2, {REG_GPR|BITS64,RM_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3650, 30},
+    /* 1114 */ {I_UD2, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7420, 30},
+    /* 1115 */ {I_VERR, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6370, 54},
+    /* 1116 */ {I_VERR, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6370, 54},
+    /* 1117 */ {I_VERR, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6370, 54},
+    /* 1118 */ {I_VERW, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6375, 54},
+    /* 1119 */ {I_VERW, 1, {MEMORY|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6375, 54},
+    /* 1120 */ {I_VERW, 1, {REG_GPR|BITS16,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6375, 54},
+    /* 1121 */ {I_FWAIT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6994, 0},
+    /* 1122 */ {I_WBINVD, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7424, 49},
+    /* 1123 */ {I_WRMSR, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7428, 88},
+    /* 1124 */ {I_XADD, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3668, 102},
+    /* 1125 */ {I_XADD, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3669, 18},
+    /* 1126 */ {I_XADD, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1635, 102},
+    /* 1127 */ {I_XADD, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1636, 18},
+    /* 1128 */ {I_XADD, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1642, 102},
+    /* 1129 */ {I_XADD, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1643, 18},
+    /* 1130 */ {I_XADD, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+1649, 6},
+    /* 1131 */ {I_XADD, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+1650, 7},
+    /* 1132 */ {I_XCHG, 2, {REG_AX,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+7432, 0},
+    /* 1133 */ {I_XCHG, 2, {REG_EAX,REG32NA,0,0,0}, NO_DECORATOR, nasm_bytecodes+7436, 5},
+    /* 1134 */ {I_XCHG, 2, {REG_RAX,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+7440, 7},
+    /* 1135 */ {I_XCHG, 2, {REG_GPR|BITS16,REG_AX,0,0,0}, NO_DECORATOR, nasm_bytecodes+7444, 0},
+    /* 1136 */ {I_XCHG, 2, {REG32NA,REG_EAX,0,0,0}, NO_DECORATOR, nasm_bytecodes+7448, 5},
+    /* 1137 */ {I_XCHG, 2, {REG_GPR|BITS64,REG_RAX,0,0,0}, NO_DECORATOR, nasm_bytecodes+7452, 7},
+    /* 1138 */ {I_XCHG, 2, {REG_EAX,REG_EAX,0,0,0}, NO_DECORATOR, nasm_bytecodes+7456, 17},
+    /* 1139 */ {I_XCHG, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6380, 3},
+    /* 1140 */ {I_XCHG, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6381, 0},
+    /* 1141 */ {I_XCHG, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3686, 3},
+    /* 1142 */ {I_XCHG, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3687, 0},
+    /* 1143 */ {I_XCHG, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3692, 4},
+    /* 1144 */ {I_XCHG, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3693, 5},
+    /* 1145 */ {I_XCHG, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+3698, 6},
+    /* 1146 */ {I_XCHG, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3699, 7},
+    /* 1147 */ {I_XCHG, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6385, 3},
+    /* 1148 */ {I_XCHG, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6386, 0},
+    /* 1149 */ {I_XCHG, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3704, 3},
+    /* 1150 */ {I_XCHG, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3705, 0},
+    /* 1151 */ {I_XCHG, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3710, 4},
+    /* 1152 */ {I_XCHG, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3711, 5},
+    /* 1153 */ {I_XCHG, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3716, 6},
+    /* 1154 */ {I_XCHG, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3717, 7},
+    /* 1155 */ {I_XLATB, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7546, 0},
+    /* 1156 */ {I_XLAT, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+7546, 0},
+    /* 1157 */ {I_XOR, 2, {MEMORY,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6390, 3},
+    /* 1158 */ {I_XOR, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+6391, 0},
+    /* 1159 */ {I_XOR, 2, {MEMORY,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3722, 3},
+    /* 1160 */ {I_XOR, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3723, 0},
+    /* 1161 */ {I_XOR, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3728, 4},
+    /* 1162 */ {I_XOR, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3729, 5},
+    /* 1163 */ {I_XOR, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3734, 6},
+    /* 1164 */ {I_XOR, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3735, 7},
+    /* 1165 */ {I_XOR, 2, {REG_GPR|BITS8,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+7460, 8},
+    /* 1166 */ {I_XOR, 2, {REG_GPR|BITS8,REG_GPR|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+7460, 0},
+    /* 1167 */ {I_XOR, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6395, 8},
+    /* 1168 */ {I_XOR, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+6395, 0},
+    /* 1169 */ {I_XOR, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6400, 9},
+    /* 1170 */ {I_XOR, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+6400, 5},
+    /* 1171 */ {I_XOR, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+6405, 10},
+    /* 1172 */ {I_XOR, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+6405, 7},
+    /* 1173 */ {I_XOR, 2, {RM_GPR|BITS16,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1656, 11},
+    /* 1174 */ {I_XOR, 2, {RM_GPR|BITS32,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1663, 12},
+    /* 1175 */ {I_XOR, 2, {RM_GPR|BITS64,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+1670, 13},
+    /* 1176 */ {I_XOR, 2, {REG_AL,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+7464, 8},
+    /* 1177 */ {I_XOR, 2, {REG_AX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6410, 8},
+    /* 1178 */ {I_XOR, 2, {REG_EAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6415, 9},
+    /* 1179 */ {I_XOR, 2, {REG_RAX,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+6420, 10},
+    /* 1180 */ {I_XOR, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3740, 3},
+    /* 1181 */ {I_XOR, 2, {RM_GPR|BITS8,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+3746, 3},
+    /* 1182 */ {I_XOR, 2, {RM_GPR|BITS16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1677, 3},
+    /* 1183 */ {I_XOR, 2, {RM_GPR|BITS32,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1684, 4},
+    /* 1184 */ {I_XOR, 2, {RM_GPR|BITS64,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+1691, 6},
+    /* 1185 */ {I_XOR, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3740, 3},
+    /* 1186 */ {I_XOR, 2, {MEMORY,IMMEDIATE|BITS8,0,0,0}, NO_DECORATOR, nasm_bytecodes+3746, 3},
+    /* 1187 */ {I_XOR, 2, {MEMORY,IMMEDIATE|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1677, 3},
+    /* 1188 */ {I_XOR, 2, {MEMORY,IMMEDIATE|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1684, 4},
+    /* 1189 */ {I_CMOVcc, 2, {REG_GPR|BITS16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+1698, 105},
+    /* 1190 */ {I_CMOVcc, 2, {REG_GPR|BITS16,REG_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1698, 81},
+    /* 1191 */ {I_CMOVcc, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+1705, 105},
+    /* 1192 */ {I_CMOVcc, 2, {REG_GPR|BITS32,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1705, 81},
+    /* 1193 */ {I_CMOVcc, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+1712, 10},
+    /* 1194 */ {I_CMOVcc, 2, {REG_GPR|BITS64,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+1712, 7},
+    /* 1195 */ {I_Jcc, 1, {IMMEDIATE|NEAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1719, 106},
+    /* 1196 */ {I_Jcc, 1, {IMMEDIATE|BITS16|NEAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1726, 21},
+    /* 1197 */ {I_Jcc, 1, {IMMEDIATE|BITS32|NEAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1733, 21},
+    /* 1198 */ {I_Jcc, 1, {IMMEDIATE|BITS64|NEAR,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1740, 22},
+    /* 1199 */ {I_Jcc, 1, {IMMEDIATE,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6426, 19},
+    /* 1200 */ {I_SETcc, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3752, 48},
+    /* 1201 */ {I_SETcc, 1, {REG_GPR|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3752, 5},
+    /* 1202 */ {I_ADDPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3758, 107},
+    /* 1203 */ {I_ADDSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3764, 107},
+    /* 1204 */ {I_ANDNPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3770, 107},
+    /* 1205 */ {I_ANDPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3776, 107},
+    /* 1206 */ {I_CMPEQPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+296, 107},
+    /* 1207 */ {I_CMPEQSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+304, 107},
+    /* 1208 */ {I_CMPLEPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+312, 107},
+    /* 1209 */ {I_CMPLESS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+320, 107},
+    /* 1210 */ {I_CMPLTPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+328, 107},
+    /* 1211 */ {I_CMPLTSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+336, 107},
+    /* 1212 */ {I_CMPNEQPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+344, 107},
+    /* 1213 */ {I_CMPNEQSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+352, 107},
+    /* 1214 */ {I_CMPNLEPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+360, 107},
+    /* 1215 */ {I_CMPNLESS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+368, 107},
+    /* 1216 */ {I_CMPNLTPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+376, 107},
+    /* 1217 */ {I_CMPNLTSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+384, 107},
+    /* 1218 */ {I_CMPORDPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+392, 107},
+    /* 1219 */ {I_CMPORDSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+400, 107},
+    /* 1220 */ {I_CMPUNORDPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+408, 107},
+    /* 1221 */ {I_CMPUNORDSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+416, 107},
+    /* 1222 */ {I_CMPPS, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+1754, 107},
+    /* 1223 */ {I_CMPSS, 3, {XMM_L16,RM_XMM_L16|BITS32,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+1761, 107},
+    /* 1224 */ {I_COMISS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3782, 107},
+    /* 1225 */ {I_CVTPI2PS, 2, {XMM_L16,RM_MMX|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3788, 108},
+    /* 1226 */ {I_CVTPS2PI, 2, {MMXREG,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3794, 108},
+    /* 1227 */ {I_CVTSI2SS, 2, {XMM_L16,RM_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1769, 109},
+    /* 1228 */ {I_CVTSI2SS, 2, {XMM_L16,RM_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+1768, 110},
+    /* 1229 */ {I_CVTSS2SI, 2, {REG_GPR|BITS32,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1776, 109},
+    /* 1230 */ {I_CVTSS2SI, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+1776, 109},
+    /* 1231 */ {I_CVTSS2SI, 2, {REG_GPR|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1775, 111},
+    /* 1232 */ {I_CVTSS2SI, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+1775, 111},
+    /* 1233 */ {I_CVTTPS2PI, 2, {MMXREG,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3800, 112},
+    /* 1234 */ {I_CVTTSS2SI, 2, {REG_GPR|BITS32,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1783, 109},
+    /* 1235 */ {I_CVTTSS2SI, 2, {REG_GPR|BITS64,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1782, 111},
+    /* 1236 */ {I_DIVPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3806, 107},
+    /* 1237 */ {I_DIVSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3812, 107},
+    /* 1238 */ {I_LDMXCSR, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3818, 107},
+    /* 1239 */ {I_MAXPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3824, 107},
+    /* 1240 */ {I_MAXSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3830, 107},
+    /* 1241 */ {I_MINPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3836, 107},
+    /* 1242 */ {I_MINSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3842, 107},
+    /* 1243 */ {I_MOVAPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3848, 107},
+    /* 1244 */ {I_MOVAPS, 2, {RM_XMM_L16|BITS128,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3854, 107},
+    /* 1245 */ {I_MOVHPS, 2, {XMM_L16,MEMORY|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3860, 107},
+    /* 1246 */ {I_MOVHPS, 2, {MEMORY|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3866, 107},
+    /* 1247 */ {I_MOVLHPS, 2, {XMM_L16,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3860, 107},
+    /* 1248 */ {I_MOVLPS, 2, {XMM_L16,MEMORY|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+3662, 107},
+    /* 1249 */ {I_MOVLPS, 2, {MEMORY|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3872, 107},
+    /* 1250 */ {I_MOVHLPS, 2, {XMM_L16,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3662, 107},
+    /* 1251 */ {I_MOVMSKPS, 2, {REG_GPR|BITS32,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3878, 107},
+    /* 1252 */ {I_MOVMSKPS, 2, {REG_GPR|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1789, 113},
+    /* 1253 */ {I_MOVNTPS, 2, {MEMORY|BITS128,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3884, 107},
+    /* 1254 */ {I_MOVSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3890, 107},
+    /* 1255 */ {I_MOVSS, 2, {RM_XMM_L16|BITS32,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3896, 107},
+    /* 1256 */ {I_MOVUPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3902, 107},
+    /* 1257 */ {I_MOVUPS, 2, {RM_XMM_L16|BITS128,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+3908, 107},
+    /* 1258 */ {I_MULPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3914, 107},
+    /* 1259 */ {I_MULSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3920, 107},
+    /* 1260 */ {I_ORPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3926, 107},
+    /* 1261 */ {I_RCPPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3932, 107},
+    /* 1262 */ {I_RCPSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3938, 107},
+    /* 1263 */ {I_RSQRTPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3944, 107},
+    /* 1264 */ {I_RSQRTSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3950, 107},
+    /* 1265 */ {I_SHUFPS, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+1796, 107},
+    /* 1266 */ {I_SQRTPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3956, 107},
+    /* 1267 */ {I_SQRTSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3962, 107},
+    /* 1268 */ {I_STMXCSR, 1, {MEMORY|BITS32,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3968, 107},
+    /* 1269 */ {I_SUBPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3974, 107},
+    /* 1270 */ {I_SUBSS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3980, 107},
+    /* 1271 */ {I_UCOMISS, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+3986, 107},
+    /* 1272 */ {I_UNPCKHPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3992, 107},
+    /* 1273 */ {I_UNPCKLPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+3998, 107},
+    /* 1274 */ {I_XORPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4004, 107},
+    /* 1275 */ {I_FXRSTOR, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1804, 114},
+    /* 1276 */ {I_FXRSTOR64, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1803, 115},
+    /* 1277 */ {I_FXSAVE, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1811, 114},
+    /* 1278 */ {I_FXSAVE64, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1810, 115},
+    /* 1279 */ {I_XGETBV, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6430, 116},
+    /* 1280 */ {I_XSETBV, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6435, 117},
+    /* 1281 */ {I_XSAVE, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1818, 116},
+    /* 1282 */ {I_XSAVE64, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1817, 118},
+    /* 1283 */ {I_XSAVEC, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1825, 119},
+    /* 1284 */ {I_XSAVEC64, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1824, 120},
+    /* 1285 */ {I_XSAVEOPT, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1832, 119},
+    /* 1286 */ {I_XSAVEOPT64, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1831, 120},
+    /* 1287 */ {I_XSAVES, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1839, 119},
+    /* 1288 */ {I_XSAVES64, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1838, 120},
+    /* 1289 */ {I_XRSTOR, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1846, 116},
+    /* 1290 */ {I_XRSTOR64, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1845, 118},
+    /* 1291 */ {I_XRSTORS, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1853, 119},
+    /* 1292 */ {I_XRSTORS64, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+1852, 120},
+    /* 1293 */ {I_PREFETCHNTA, 1, {MEMORY|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6440, 121},
+    /* 1294 */ {I_PREFETCHT0, 1, {MEMORY|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6445, 121},
+    /* 1295 */ {I_PREFETCHT1, 1, {MEMORY|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6450, 121},
+    /* 1296 */ {I_PREFETCHT2, 1, {MEMORY|BITS8,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+6455, 121},
+    /* 1297 */ {I_SFENCE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3452, 121},
+    /* 1298 */ {I_MASKMOVQ, 2, {MMXREG,MMXREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+4010, 122},
+    /* 1299 */ {I_MOVNTQ, 2, {MEMORY,MMXREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+4016, 123},
+    /* 1300 */ {I_PAVGB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1859, 123},
+    /* 1301 */ {I_PAVGW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1866, 123},
+    /* 1302 */ {I_PEXTRW, 3, {REG_GPR|BITS32,MMXREG,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1873, 124},
+    /* 1303 */ {I_PINSRW, 3, {MMXREG,MEMORY,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1880, 124},
+    /* 1304 */ {I_PINSRW, 3, {MMXREG,RM_GPR|BITS16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1880, 124},
+    /* 1305 */ {I_PINSRW, 3, {MMXREG,REG_GPR|BITS32,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1880, 124},
+    /* 1306 */ {I_PMAXSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1887, 123},
+    /* 1307 */ {I_PMAXUB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1894, 123},
+    /* 1308 */ {I_PMINSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1901, 123},
+    /* 1309 */ {I_PMINUB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1908, 123},
+    /* 1310 */ {I_PMOVMSKB, 2, {REG_GPR|BITS32,MMXREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+4022, 122},
+    /* 1311 */ {I_PMULHUW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1915, 123},
+    /* 1312 */ {I_PSADBW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1922, 123},
+    /* 1313 */ {I_PSHUFW, 3, {MMXREG,RM_MMX,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+424, 125},
+    /* 1314 */ {I_PF2IW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+432, 82},
+    /* 1315 */ {I_PFNACC, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+440, 82},
+    /* 1316 */ {I_PFPNACC, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+448, 82},
+    /* 1317 */ {I_PI2FW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+456, 82},
+    /* 1318 */ {I_PSWAPD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+464, 82},
+    /* 1319 */ {I_MASKMOVDQU, 2, {XMM_L16,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4028, 126},
+    /* 1320 */ {I_CLFLUSH, 1, {MEMORY,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+4034, 126},
+    /* 1321 */ {I_MOVNTDQ, 2, {MEMORY,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4040, 127},
+    /* 1322 */ {I_MOVNTI, 2, {MEMORY,REG_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1930, 128},
+    /* 1323 */ {I_MOVNTI, 2, {MEMORY,REG_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+1929, 129},
+    /* 1324 */ {I_MOVNTPD, 2, {MEMORY,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4046, 127},
+    /* 1325 */ {I_LFENCE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3002, 126},
+    /* 1326 */ {I_MFENCE, 0, {0,0,0,0,0}, NO_DECORATOR, nasm_bytecodes+3080, 126},
+    /* 1327 */ {I_MOVD, 2, {MEMORY,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1936, 130},
+    /* 1328 */ {I_MOVD, 2, {XMM_L16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+1943, 130},
+    /* 1329 */ {I_MOVD, 2, {XMM_L16,RM_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+1943, 126},
+    /* 1330 */ {I_MOVD, 2, {RM_GPR|BITS32,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1936, 126},
+    /* 1331 */ {I_MOVDQA, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4052, 127},
+    /* 1332 */ {I_MOVDQA, 2, {RM_XMM_L16|BITS128,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4058, 127},
+    /* 1333 */ {I_MOVDQU, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4064, 127},
+    /* 1334 */ {I_MOVDQU, 2, {RM_XMM_L16|BITS128,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4070, 127},
+    /* 1335 */ {I_MOVDQ2Q, 2, {MMXREG,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4076, 126},
+    /* 1336 */ {I_MOVQ, 2, {XMM_L16,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4082, 126},
+    /* 1337 */ {I_MOVQ, 2, {XMM_L16,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4088, 126},
+    /* 1338 */ {I_MOVQ, 2, {MEMORY,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4088, 131},
+    /* 1339 */ {I_MOVQ, 2, {XMM_L16,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+4082, 131},
+    /* 1340 */ {I_MOVQ, 2, {XMM_L16,RM_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+1950, 132},
+    /* 1341 */ {I_MOVQ, 2, {RM_GPR|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+1957, 132},
+    /* 1342 */ {I_MOVQ2DQ, 2, {XMM_L16,MMXREG,0,0,0}, NO_DECORATOR, nasm_bytecodes+4094, 126},
+    /* 1343 */ {I_PACKSSWB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4100, 127},
+    /* 1344 */ {I_PACKSSDW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4106, 127},
+    /* 1345 */ {I_PACKUSWB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4112, 127},
+    /* 1346 */ {I_PADDB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4118, 127},
+    /* 1347 */ {I_PADDW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4124, 127},
+    /* 1348 */ {I_PADDD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4130, 127},
+    /* 1349 */ {I_PADDQ, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+4136, 133},
+    /* 1350 */ {I_PADDQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4142, 127},
+    /* 1351 */ {I_PADDSB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4148, 127},
+    /* 1352 */ {I_PADDSW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4154, 127},
+    /* 1353 */ {I_PADDUSB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4160, 127},
+    /* 1354 */ {I_PADDUSW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4166, 127},
+    /* 1355 */ {I_PAND, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4172, 127},
+    /* 1356 */ {I_PANDN, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4178, 127},
+    /* 1357 */ {I_PAVGB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4184, 127},
+    /* 1358 */ {I_PAVGW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4190, 127},
+    /* 1359 */ {I_PCMPEQB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4196, 127},
+    /* 1360 */ {I_PCMPEQW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4202, 127},
+    /* 1361 */ {I_PCMPEQD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4208, 127},
+    /* 1362 */ {I_PCMPGTB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4214, 127},
+    /* 1363 */ {I_PCMPGTW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4220, 127},
+    /* 1364 */ {I_PCMPGTD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4226, 127},
+    /* 1365 */ {I_PEXTRW, 3, {REG_GPR|BITS32,XMM_L16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1964, 134},
+    /* 1366 */ {I_PINSRW, 3, {XMM_L16,REG_GPR|BITS16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1971, 134},
+    /* 1367 */ {I_PINSRW, 3, {XMM_L16,MEMORY,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1971, 134},
+    /* 1368 */ {I_PINSRW, 3, {XMM_L16,MEMORY|BITS16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1971, 134},
+    /* 1369 */ {I_PMADDWD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4232, 127},
+    /* 1370 */ {I_PMAXSW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4238, 127},
+    /* 1371 */ {I_PMAXUB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4244, 127},
+    /* 1372 */ {I_PMINSW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4250, 127},
+    /* 1373 */ {I_PMINUB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4256, 127},
+    /* 1374 */ {I_PMOVMSKB, 2, {REG_GPR|BITS32,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4262, 126},
+    /* 1375 */ {I_PMULHUW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4268, 127},
+    /* 1376 */ {I_PMULHW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4274, 127},
+    /* 1377 */ {I_PMULLW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4280, 127},
+    /* 1378 */ {I_PMULUDQ, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+1978, 127},
+    /* 1379 */ {I_PMULUDQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4286, 127},
+    /* 1380 */ {I_POR, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4292, 127},
+    /* 1381 */ {I_PSADBW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4298, 127},
+    /* 1382 */ {I_PSHUFD, 3, {XMM_L16,XMM_L16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1985, 134},
+    /* 1383 */ {I_PSHUFD, 3, {XMM_L16,MEMORY,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1985, 136},
+    /* 1384 */ {I_PSHUFHW, 3, {XMM_L16,XMM_L16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1992, 134},
+    /* 1385 */ {I_PSHUFHW, 3, {XMM_L16,MEMORY,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1992, 136},
+    /* 1386 */ {I_PSHUFLW, 3, {XMM_L16,XMM_L16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1999, 134},
+    /* 1387 */ {I_PSHUFLW, 3, {XMM_L16,MEMORY,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+1999, 136},
+    /* 1388 */ {I_PSLLDQ, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2006, 137},
+    /* 1389 */ {I_PSLLW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4304, 127},
+    /* 1390 */ {I_PSLLW, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2013, 137},
+    /* 1391 */ {I_PSLLD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4310, 127},
+    /* 1392 */ {I_PSLLD, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2020, 137},
+    /* 1393 */ {I_PSLLQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4316, 127},
+    /* 1394 */ {I_PSLLQ, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2027, 137},
+    /* 1395 */ {I_PSRAW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4322, 127},
+    /* 1396 */ {I_PSRAW, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2034, 137},
+    /* 1397 */ {I_PSRAD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4328, 127},
+    /* 1398 */ {I_PSRAD, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2041, 137},
+    /* 1399 */ {I_PSRLDQ, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2048, 137},
+    /* 1400 */ {I_PSRLW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4334, 127},
+    /* 1401 */ {I_PSRLW, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2055, 137},
+    /* 1402 */ {I_PSRLD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4340, 127},
+    /* 1403 */ {I_PSRLD, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2062, 137},
+    /* 1404 */ {I_PSRLQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4346, 127},
+    /* 1405 */ {I_PSRLQ, 2, {XMM_L16,IMMEDIATE,0,0,0}, NO_DECORATOR, nasm_bytecodes+2069, 137},
+    /* 1406 */ {I_PSUBB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4352, 127},
+    /* 1407 */ {I_PSUBW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4358, 127},
+    /* 1408 */ {I_PSUBD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4364, 127},
+    /* 1409 */ {I_PSUBQ, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2076, 127},
+    /* 1410 */ {I_PSUBQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4370, 127},
+    /* 1411 */ {I_PSUBSB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4376, 127},
+    /* 1412 */ {I_PSUBSW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4382, 127},
+    /* 1413 */ {I_PSUBUSB, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4388, 127},
+    /* 1414 */ {I_PSUBUSW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4394, 127},
+    /* 1415 */ {I_PUNPCKHBW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4400, 127},
+    /* 1416 */ {I_PUNPCKHWD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4406, 127},
+    /* 1417 */ {I_PUNPCKHDQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4412, 127},
+    /* 1418 */ {I_PUNPCKHQDQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4418, 127},
+    /* 1419 */ {I_PUNPCKLBW, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4424, 127},
+    /* 1420 */ {I_PUNPCKLWD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4430, 127},
+    /* 1421 */ {I_PUNPCKLDQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4436, 127},
+    /* 1422 */ {I_PUNPCKLQDQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4442, 127},
+    /* 1423 */ {I_PXOR, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4448, 127},
+    /* 1424 */ {I_ADDPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4454, 127},
+    /* 1425 */ {I_ADDSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4460, 131},
+    /* 1426 */ {I_ANDNPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4466, 127},
+    /* 1427 */ {I_ANDPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4472, 127},
+    /* 1428 */ {I_CMPEQPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+472, 127},
+    /* 1429 */ {I_CMPEQSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+480, 131},
+    /* 1430 */ {I_CMPLEPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+488, 127},
+    /* 1431 */ {I_CMPLESD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+496, 131},
+    /* 1432 */ {I_CMPLTPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+504, 127},
+    /* 1433 */ {I_CMPLTSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+512, 131},
+    /* 1434 */ {I_CMPNEQPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+520, 127},
+    /* 1435 */ {I_CMPNEQSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+528, 131},
+    /* 1436 */ {I_CMPNLEPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+536, 127},
+    /* 1437 */ {I_CMPNLESD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+544, 131},
+    /* 1438 */ {I_CMPNLTPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+552, 127},
+    /* 1439 */ {I_CMPNLTSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+560, 131},
+    /* 1440 */ {I_CMPORDPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+568, 127},
+    /* 1441 */ {I_CMPORDSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+576, 131},
+    /* 1442 */ {I_CMPUNORDPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+584, 127},
+    /* 1443 */ {I_CMPUNORDSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+592, 131},
+    /* 1444 */ {I_CMPPD, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+2083, 126},
+    /* 1445 */ {I_CMPSD, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+2090, 126},
+    /* 1446 */ {I_COMISD, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4478, 126},
+    /* 1447 */ {I_CVTDQ2PD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4484, 131},
+    /* 1448 */ {I_CVTDQ2PS, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4490, 127},
+    /* 1449 */ {I_CVTPD2DQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4496, 127},
+    /* 1450 */ {I_CVTPD2PI, 2, {MMXREG,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4502, 127},
+    /* 1451 */ {I_CVTPD2PS, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4508, 127},
+    /* 1452 */ {I_CVTPI2PD, 2, {XMM_L16,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+4514, 131},
+    /* 1453 */ {I_CVTPS2DQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4520, 127},
+    /* 1454 */ {I_CVTPS2PD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4526, 131},
+    /* 1455 */ {I_CVTSD2SI, 2, {REG_GPR|BITS32,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2097, 138},
+    /* 1456 */ {I_CVTSD2SI, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+2097, 138},
+    /* 1457 */ {I_CVTSD2SI, 2, {REG_GPR|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2104, 139},
+    /* 1458 */ {I_CVTSD2SI, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+2104, 139},
+    /* 1459 */ {I_CVTSD2SS, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4532, 131},
+    /* 1460 */ {I_CVTSI2SD, 2, {XMM_L16,RM_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2111, 140},
+    /* 1461 */ {I_CVTSI2SD, 2, {XMM_L16,RM_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2118, 139},
+    /* 1462 */ {I_CVTSS2SD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4538, 130},
+    /* 1463 */ {I_CVTTPD2PI, 2, {MMXREG,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4544, 127},
+    /* 1464 */ {I_CVTTPD2DQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4550, 127},
+    /* 1465 */ {I_CVTTPS2DQ, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4556, 127},
+    /* 1466 */ {I_CVTTSD2SI, 2, {REG_GPR|BITS32,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2125, 138},
+    /* 1467 */ {I_CVTTSD2SI, 2, {REG_GPR|BITS32,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+2125, 138},
+    /* 1468 */ {I_CVTTSD2SI, 2, {REG_GPR|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2132, 139},
+    /* 1469 */ {I_CVTTSD2SI, 2, {REG_GPR|BITS64,MEMORY,0,0,0}, NO_DECORATOR, nasm_bytecodes+2132, 139},
+    /* 1470 */ {I_DIVPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4562, 127},
+    /* 1471 */ {I_DIVSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4568, 131},
+    /* 1472 */ {I_MAXPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4574, 127},
+    /* 1473 */ {I_MAXSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4580, 131},
+    /* 1474 */ {I_MINPD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4586, 127},
+    /* 1475 */ {I_MINSD, 2, {XMM_L16,RM_XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4592, 131},
+    /* 1476 */ {I_MOVAPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4598, 126},
+    /* 1477 */ {I_MOVAPD, 2, {RM_XMM_L16|BITS128,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4604, 126},
+    /* 1478 */ {I_MOVHPD, 2, {MEMORY|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4610, 126},
+    /* 1479 */ {I_MOVHPD, 2, {XMM_L16,MEMORY|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4616, 126},
+    /* 1480 */ {I_MOVLPD, 2, {MEMORY|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4622, 126},
+    /* 1481 */ {I_MOVLPD, 2, {XMM_L16,MEMORY|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4628, 126},
+    /* 1482 */ {I_MOVMSKPD, 2, {REG_GPR|BITS32,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4634, 126},
+    /* 1483 */ {I_MOVMSKPD, 2, {REG_GPR|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2139, 132},
+    /* 1484 */ {I_MOVSD, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4640, 126},
+    /* 1485 */ {I_MOVSD, 2, {RM_XMM_L16|BITS64,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4646, 126},
+    /* 1486 */ {I_MOVUPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4652, 126},
+    /* 1487 */ {I_MOVUPD, 2, {RM_XMM_L16|BITS128,XMM_L16,0,0,0}, NO_DECORATOR, nasm_bytecodes+4658, 126},
+    /* 1488 */ {I_MULPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4664, 127},
+    /* 1489 */ {I_MULSD, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4670, 131},
+    /* 1490 */ {I_ORPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4676, 127},
+    /* 1491 */ {I_SHUFPD, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+2146, 126},
+    /* 1492 */ {I_SQRTPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4682, 127},
+    /* 1493 */ {I_SQRTSD, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4688, 126},
+    /* 1494 */ {I_SUBPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4694, 127},
+    /* 1495 */ {I_SUBSD, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4700, 126},
+    /* 1496 */ {I_UCOMISD, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4706, 126},
+    /* 1497 */ {I_UNPCKHPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4712, 126},
+    /* 1498 */ {I_UNPCKLPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4718, 126},
+    /* 1499 */ {I_XORPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4724, 126},
+    /* 1500 */ {I_ADDSUBPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4730, 141},
+    /* 1501 */ {I_ADDSUBPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4736, 141},
+    /* 1502 */ {I_HADDPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4742, 141},
+    /* 1503 */ {I_HADDPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4748, 141},
+    /* 1504 */ {I_HSUBPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4754, 141},
+    /* 1505 */ {I_HSUBPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4760, 141},
+    /* 1506 */ {I_LDDQU, 2, {XMM_L16,MEMORY|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4766, 141},
+    /* 1507 */ {I_MOVDDUP, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+4772, 142},
+    /* 1508 */ {I_MOVSHDUP, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4778, 143},
+    /* 1509 */ {I_MOVSLDUP, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+4784, 143},
+    /* 1510 */ {I_PABSB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2153, 144},
+    /* 1511 */ {I_PABSB, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2160, 145},
+    /* 1512 */ {I_PABSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2167, 144},
+    /* 1513 */ {I_PABSW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2174, 145},
+    /* 1514 */ {I_PABSD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2181, 144},
+    /* 1515 */ {I_PABSD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2188, 145},
+    /* 1516 */ {I_PALIGNR, 3, {MMXREG,RM_MMX,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+600, 144},
+    /* 1517 */ {I_PALIGNR, 3, {XMM_L16,RM_XMM_L16,IMMEDIATE,0,0}, NO_DECORATOR, nasm_bytecodes+608, 145},
+    /* 1518 */ {I_PHADDW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2195, 144},
+    /* 1519 */ {I_PHADDW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2202, 145},
+    /* 1520 */ {I_PHADDD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2209, 144},
+    /* 1521 */ {I_PHADDD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2216, 145},
+    /* 1522 */ {I_PHADDSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2223, 144},
+    /* 1523 */ {I_PHADDSW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2230, 145},
+    /* 1524 */ {I_PHSUBW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2237, 144},
+    /* 1525 */ {I_PHSUBW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2244, 145},
+    /* 1526 */ {I_PHSUBD, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2251, 144},
+    /* 1527 */ {I_PHSUBD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2258, 145},
+    /* 1528 */ {I_PHSUBSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2265, 144},
+    /* 1529 */ {I_PHSUBSW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2272, 145},
+    /* 1530 */ {I_PMADDUBSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2279, 144},
+    /* 1531 */ {I_PMADDUBSW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2286, 145},
+    /* 1532 */ {I_PMULHRSW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2293, 144},
+    /* 1533 */ {I_PMULHRSW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2300, 145},
+    /* 1534 */ {I_PSHUFB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2307, 144},
+    /* 1535 */ {I_PSHUFB, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2314, 145},
+    /* 1536 */ {I_PSIGNB, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2321, 144},
+    /* 1537 */ {I_PSIGNB, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2328, 145},
+    /* 1538 */ {I_PSIGNW, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2335, 144},
+    /* 1539 */ {I_PSIGNW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2342, 145},
+    /* 1540 */ {I_PSIGND, 2, {MMXREG,RM_MMX,0,0,0}, NO_DECORATOR, nasm_bytecodes+2349, 144},
+    /* 1541 */ {I_PSIGND, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2356, 145},
+    /* 1542 */ {I_LZCNT, 2, {REG_GPR|BITS16,RM_GPR|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2363, 146},
+    /* 1543 */ {I_LZCNT, 2, {REG_GPR|BITS32,RM_GPR|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2370, 146},
+    /* 1544 */ {I_LZCNT, 2, {REG_GPR|BITS64,RM_GPR|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2377, 62},
+    /* 1545 */ {I_BLENDPD, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+616, 147},
+    /* 1546 */ {I_BLENDPS, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+624, 147},
+    /* 1547 */ {I_BLENDVPD, 3, {XMM_L16,RM_XMM_L16|BITS128,XMM0,0,0}, NO_DECORATOR, nasm_bytecodes+2384, 147},
+    /* 1548 */ {I_BLENDVPD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2384, 147},
+    /* 1549 */ {I_BLENDVPS, 3, {XMM_L16,RM_XMM_L16|BITS128,XMM0,0,0}, NO_DECORATOR, nasm_bytecodes+2391, 147},
+    /* 1550 */ {I_BLENDVPS, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2391, 147},
+    /* 1551 */ {I_DPPD, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+632, 147},
+    /* 1552 */ {I_DPPS, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+640, 147},
+    /* 1553 */ {I_EXTRACTPS, 3, {RM_GPR|BITS32,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+1, 147},
+    /* 1554 */ {I_EXTRACTPS, 3, {REG_GPR|BITS64,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+0, 148},
+    /* 1555 */ {I_INSERTPS, 3, {XMM_L16,RM_XMM_L16|BITS32,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+648, 147},
+    /* 1556 */ {I_MOVNTDQA, 2, {XMM_L16,MEMORY|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2398, 147},
+    /* 1557 */ {I_MPSADBW, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+656, 147},
+    /* 1558 */ {I_PACKUSDW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2405, 147},
+    /* 1559 */ {I_PBLENDVB, 3, {XMM_L16,RM_XMM_L16,XMM0,0,0}, NO_DECORATOR, nasm_bytecodes+2412, 147},
+    /* 1560 */ {I_PBLENDVB, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2412, 147},
+    /* 1561 */ {I_PBLENDW, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+664, 147},
+    /* 1562 */ {I_PCMPEQQ, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2419, 147},
+    /* 1563 */ {I_PEXTRB, 3, {REG_GPR|BITS32,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+10, 147},
+    /* 1564 */ {I_PEXTRB, 3, {MEMORY|BITS8,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+10, 147},
+    /* 1565 */ {I_PEXTRB, 3, {REG_GPR|BITS64,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+9, 148},
+    /* 1566 */ {I_PEXTRD, 3, {RM_GPR|BITS32,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+18, 147},
+    /* 1567 */ {I_PEXTRQ, 3, {RM_GPR|BITS64,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+27, 148},
+    /* 1568 */ {I_PEXTRW, 3, {REG_GPR|BITS32,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+37, 147},
+    /* 1569 */ {I_PEXTRW, 3, {MEMORY|BITS16,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+37, 147},
+    /* 1570 */ {I_PEXTRW, 3, {REG_GPR|BITS64,XMM_L16,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+36, 148},
+    /* 1571 */ {I_PHMINPOSUW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2426, 147},
+    /* 1572 */ {I_PINSRB, 3, {XMM_L16,MEMORY,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+46, 149},
+    /* 1573 */ {I_PINSRB, 3, {XMM_L16,RM_GPR|BITS8,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+45, 149},
+    /* 1574 */ {I_PINSRB, 3, {XMM_L16,REG_GPR|BITS32,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+46, 149},
+    /* 1575 */ {I_PINSRD, 3, {XMM_L16,RM_GPR|BITS32,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+54, 149},
+    /* 1576 */ {I_PINSRQ, 3, {XMM_L16,RM_GPR|BITS64,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+63, 150},
+    /* 1577 */ {I_PMAXSB, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2433, 147},
+    /* 1578 */ {I_PMAXSD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2440, 147},
+    /* 1579 */ {I_PMAXUD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2447, 147},
+    /* 1580 */ {I_PMAXUW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2454, 147},
+    /* 1581 */ {I_PMINSB, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2461, 147},
+    /* 1582 */ {I_PMINSD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2468, 147},
+    /* 1583 */ {I_PMINUD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2475, 147},
+    /* 1584 */ {I_PMINUW, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2482, 147},
+    /* 1585 */ {I_PMOVSXBW, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2489, 151},
+    /* 1586 */ {I_PMOVSXBD, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2496, 152},
+    /* 1587 */ {I_PMOVSXBQ, 2, {XMM_L16,RM_XMM_L16|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2503, 153},
+    /* 1588 */ {I_PMOVSXWD, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2510, 151},
+    /* 1589 */ {I_PMOVSXWQ, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2517, 152},
+    /* 1590 */ {I_PMOVSXDQ, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2524, 151},
+    /* 1591 */ {I_PMOVZXBW, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2531, 151},
+    /* 1592 */ {I_PMOVZXBD, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2538, 152},
+    /* 1593 */ {I_PMOVZXBQ, 2, {XMM_L16,RM_XMM_L16|BITS16,0,0,0}, NO_DECORATOR, nasm_bytecodes+2545, 153},
+    /* 1594 */ {I_PMOVZXWD, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2552, 151},
+    /* 1595 */ {I_PMOVZXWQ, 2, {XMM_L16,RM_XMM_L16|BITS32,0,0,0}, NO_DECORATOR, nasm_bytecodes+2559, 152},
+    /* 1596 */ {I_PMOVZXDQ, 2, {XMM_L16,RM_XMM_L16|BITS64,0,0,0}, NO_DECORATOR, nasm_bytecodes+2566, 151},
+    /* 1597 */ {I_PMULDQ, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2573, 147},
+    /* 1598 */ {I_PMULLD, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2580, 147},
+    /* 1599 */ {I_PTEST, 2, {XMM_L16,RM_XMM_L16|BITS128,0,0,0}, NO_DECORATOR, nasm_bytecodes+2587, 147},
+    /* 1600 */ {I_ROUNDPD, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+672, 147},
+    /* 1601 */ {I_ROUNDPS, 3, {XMM_L16,RM_XMM_L16|BITS128,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+680, 147},
+    /* 1602 */ {I_ROUNDSD, 3, {XMM_L16,RM_XMM_L16|BITS64,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+688, 147},
+    /* 1603 */ {I_ROUNDSS, 3, {XMM_L16,RM_XMM_L16|BITS32,IMMEDIATE|BITS8,0,0}, NO_DECORATOR, nasm_bytecodes+696, 147},
 };
 
 static const struct itemplate * const itable_00[] = {
@@ -1664,19 +1649,33 @@ static const struct itemplate * const itable_05[] = {
 };
 
 static const struct itemplate * const itable_06[] = {
-    instrux + 838,
+    instrux + 830,
 };
 
 static const struct itemplate * const itable_07[] = {
-    instrux + 788,
+    instrux + 780,
 };
 
 static const struct itemplate * const itable_08[] = {
+    instrux + 692,
+    instrux + 693,
+};
+
+static const struct itemplate * const itable_09[] = {
+    instrux + 694,
+    instrux + 695,
+    instrux + 696,
+    instrux + 697,
+    instrux + 698,
+    instrux + 699,
+};
+
+static const struct itemplate * const itable_0A[] = {
     instrux + 700,
     instrux + 701,
 };
 
-static const struct itemplate * const itable_09[] = {
+static const struct itemplate * const itable_0B[] = {
     instrux + 702,
     instrux + 703,
     instrux + 704,
@@ -1685,112 +1684,90 @@ static const struct itemplate * const itable_09[] = {
     instrux + 707,
 };
 
-static const struct itemplate * const itable_0A[] = {
-    instrux + 708,
-    instrux + 709,
-};
-
-static const struct itemplate * const itable_0B[] = {
-    instrux + 710,
-    instrux + 711,
-    instrux + 712,
-    instrux + 713,
-    instrux + 714,
-    instrux + 715,
-};
-
 static const struct itemplate * const itable_0C[] = {
-    instrux + 719,
+    instrux + 711,
 };
 
 static const struct itemplate * const itable_0D[] = {
-    instrux + 720,
-    instrux + 721,
-    instrux + 722,
+    instrux + 712,
+    instrux + 713,
+    instrux + 714,
 };
 
 static const struct itemplate * const itable_0E[] = {
-    instrux + 839,
+    instrux + 831,
 };
 
 static const struct itemplate * const itable_0F00[] = {
-    instrux + 529,
-    instrux + 530,
-    instrux + 559,
-    instrux + 560,
-    instrux + 561,
-    instrux + 602,
-    instrux + 603,
-    instrux + 604,
-    instrux + 1036,
-    instrux + 1037,
-    instrux + 1038,
-    instrux + 1039,
-    instrux + 1040,
-    instrux + 1054,
-    instrux + 1055,
-    instrux + 1056,
-    instrux + 1057,
-    instrux + 1058,
-    instrux + 1124,
-    instrux + 1125,
-    instrux + 1126,
-    instrux + 1127,
-    instrux + 1128,
-    instrux + 1129,
+    instrux + 553,
+    instrux + 554,
+    instrux + 555,
+    instrux + 596,
+    instrux + 597,
+    instrux + 598,
+    instrux + 1027,
+    instrux + 1028,
+    instrux + 1029,
+    instrux + 1030,
+    instrux + 1031,
+    instrux + 1045,
+    instrux + 1046,
+    instrux + 1047,
+    instrux + 1048,
+    instrux + 1049,
+    instrux + 1115,
+    instrux + 1116,
+    instrux + 1117,
+    instrux + 1118,
+    instrux + 1119,
+    instrux + 1120,
 };
 
 static const struct itemplate * const itable_0F01[] = {
     instrux + 495,
-    instrux + 496,
-    instrux + 497,
-    instrux + 498,
-    instrux + 499,
-    instrux + 554,
+    instrux + 548,
+    instrux + 552,
+    instrux + 556,
+    instrux + 557,
     instrux + 558,
-    instrux + 562,
-    instrux + 563,
-    instrux + 564,
-    instrux + 606,
-    instrux + 607,
-    instrux + 686,
-    instrux + 687,
-    instrux + 885,
-    instrux + 986,
+    instrux + 600,
+    instrux + 679,
+    instrux + 877,
+    instrux + 977,
+    instrux + 1026,
+    instrux + 1033,
+    instrux + 1034,
     instrux + 1035,
-    instrux + 1042,
-    instrux + 1043,
-    instrux + 1044,
-    instrux + 1045,
-    instrux + 1046,
-    instrux + 1288,
-    instrux + 1289,
+    instrux + 1036,
+    instrux + 1037,
+    instrux + 1279,
+    instrux + 1280,
 };
 
 static const struct itemplate * const itable_0F02[] = {
+    instrux + 526,
+    instrux + 527,
+    instrux + 528,
+    instrux + 529,
+    instrux + 530,
+    instrux + 531,
     instrux + 532,
     instrux + 533,
     instrux + 534,
     instrux + 535,
-    instrux + 536,
-    instrux + 537,
-    instrux + 538,
-    instrux + 539,
-    instrux + 540,
-    instrux + 541,
 };
 
 static const struct itemplate * const itable_0F03[] = {
+    instrux + 583,
+    instrux + 584,
+    instrux + 585,
+    instrux + 586,
+    instrux + 587,
+    instrux + 588,
     instrux + 589,
     instrux + 590,
     instrux + 591,
     instrux + 592,
-    instrux + 593,
-    instrux + 594,
-    instrux + 595,
-    instrux + 596,
-    instrux + 597,
-    instrux + 598,
 };
 
 static const struct itemplate * const itable_0F06[] = {
@@ -1802,16 +1779,16 @@ static const struct itemplate * const itable_0F08[] = {
 };
 
 static const struct itemplate * const itable_0F09[] = {
-    instrux + 1131,
+    instrux + 1122,
 };
 
 static const struct itemplate * const itable_0F0B[] = {
-    instrux + 1123,
+    instrux + 1114,
 };
 
 static const struct itemplate * const itable_0F0D[] = {
-    instrux + 801,
-    instrux + 802,
+    instrux + 793,
+    instrux + 794,
 };
 
 static const struct itemplate * const itable_0F0E[] = {
@@ -1819,7 +1796,15 @@ static const struct itemplate * const itable_0F0E[] = {
 };
 
 static const struct itemplate * const itable_0F0F[] = {
+    instrux + 746,
+    instrux + 753,
     instrux + 754,
+    instrux + 755,
+    instrux + 756,
+    instrux + 757,
+    instrux + 758,
+    instrux + 759,
+    instrux + 760,
     instrux + 761,
     instrux + 762,
     instrux + 763,
@@ -1829,384 +1814,374 @@ static const struct itemplate * const itable_0F0F[] = {
     instrux + 767,
     instrux + 768,
     instrux + 769,
-    instrux + 770,
     instrux + 771,
-    instrux + 772,
-    instrux + 773,
-    instrux + 774,
-    instrux + 775,
-    instrux + 776,
-    instrux + 777,
-    instrux + 779,
-    instrux + 1323,
-    instrux + 1324,
-    instrux + 1325,
-    instrux + 1326,
-    instrux + 1327,
+    instrux + 1314,
+    instrux + 1315,
+    instrux + 1316,
+    instrux + 1317,
+    instrux + 1318,
 };
 
 static const struct itemplate * const itable_0F10[] = {
-    instrux + 1263,
-    instrux + 1265,
-    instrux + 1493,
-    instrux + 1495,
-};
-
-static const struct itemplate * const itable_0F11[] = {
-    instrux + 1264,
-    instrux + 1266,
-    instrux + 1494,
-    instrux + 1496,
-};
-
-static const struct itemplate * const itable_0F12[] = {
-    instrux + 1257,
-    instrux + 1259,
-    instrux + 1490,
-    instrux + 1516,
-    instrux + 1518,
-};
-
-static const struct itemplate * const itable_0F13[] = {
-    instrux + 1258,
-    instrux + 1489,
-};
-
-static const struct itemplate * const itable_0F14[] = {
-    instrux + 1282,
-    instrux + 1507,
-};
-
-static const struct itemplate * const itable_0F15[] = {
-    instrux + 1281,
-    instrux + 1506,
-};
-
-static const struct itemplate * const itable_0F16[] = {
     instrux + 1254,
     instrux + 1256,
-    instrux + 1488,
-    instrux + 1517,
-};
-
-static const struct itemplate * const itable_0F17[] = {
-    instrux + 1255,
-    instrux + 1487,
-};
-
-static const struct itemplate * const itable_0F18[] = {
-    instrux + 1302,
-    instrux + 1303,
-    instrux + 1304,
-    instrux + 1305,
-};
-
-static const struct itemplate * const itable_0F1F[] = {
-    instrux + 693,
-    instrux + 694,
-    instrux + 695,
-};
-
-static const struct itemplate * const itable_0F20[] = {
-    instrux + 624,
-    instrux + 625,
-};
-
-static const struct itemplate * const itable_0F21[] = {
-    instrux + 628,
-    instrux + 629,
-};
-
-static const struct itemplate * const itable_0F22[] = {
-    instrux + 626,
-    instrux + 627,
-};
-
-static const struct itemplate * const itable_0F23[] = {
-    instrux + 630,
-    instrux + 631,
-};
-
-static const struct itemplate * const itable_0F28[] = {
-    instrux + 1252,
-    instrux + 1485,
-};
-
-static const struct itemplate * const itable_0F29[] = {
-    instrux + 1253,
+    instrux + 1484,
     instrux + 1486,
 };
 
-static const struct itemplate * const itable_0F2A[] = {
-    instrux + 1234,
-    instrux + 1236,
-    instrux + 1237,
-    instrux + 1461,
-    instrux + 1469,
-    instrux + 1470,
+static const struct itemplate * const itable_0F11[] = {
+    instrux + 1255,
+    instrux + 1257,
+    instrux + 1485,
+    instrux + 1487,
 };
 
-static const struct itemplate * const itable_0F2B[] = {
-    instrux + 1262,
-    instrux + 1333,
-    instrux + 1555,
-    instrux + 1556,
+static const struct itemplate * const itable_0F12[] = {
+    instrux + 1248,
+    instrux + 1250,
+    instrux + 1481,
+    instrux + 1507,
+    instrux + 1509,
 };
 
-static const struct itemplate * const itable_0F2C[] = {
-    instrux + 1242,
-    instrux + 1243,
-    instrux + 1244,
-    instrux + 1472,
-    instrux + 1475,
-    instrux + 1476,
-    instrux + 1477,
+static const struct itemplate * const itable_0F13[] = {
+    instrux + 1249,
+    instrux + 1480,
+};
+
+static const struct itemplate * const itable_0F14[] = {
+    instrux + 1273,
+    instrux + 1498,
+};
+
+static const struct itemplate * const itable_0F15[] = {
+    instrux + 1272,
+    instrux + 1497,
+};
+
+static const struct itemplate * const itable_0F16[] = {
+    instrux + 1245,
+    instrux + 1247,
+    instrux + 1479,
+    instrux + 1508,
+};
+
+static const struct itemplate * const itable_0F17[] = {
+    instrux + 1246,
     instrux + 1478,
 };
 
-static const struct itemplate * const itable_0F2D[] = {
+static const struct itemplate * const itable_0F18[] = {
+    instrux + 1293,
+    instrux + 1294,
+    instrux + 1295,
+    instrux + 1296,
+};
+
+static const struct itemplate * const itable_0F1F[] = {
+    instrux + 685,
+    instrux + 686,
+    instrux + 687,
+};
+
+static const struct itemplate * const itable_0F20[] = {
+    instrux + 617,
+    instrux + 618,
+};
+
+static const struct itemplate * const itable_0F21[] = {
+    instrux + 621,
+    instrux + 622,
+};
+
+static const struct itemplate * const itable_0F22[] = {
+    instrux + 619,
+    instrux + 620,
+};
+
+static const struct itemplate * const itable_0F23[] = {
+    instrux + 623,
+    instrux + 624,
+};
+
+static const struct itemplate * const itable_0F28[] = {
+    instrux + 1243,
+    instrux + 1476,
+};
+
+static const struct itemplate * const itable_0F29[] = {
+    instrux + 1244,
+    instrux + 1477,
+};
+
+static const struct itemplate * const itable_0F2A[] = {
+    instrux + 1225,
+    instrux + 1227,
+    instrux + 1228,
+    instrux + 1452,
+    instrux + 1460,
+    instrux + 1461,
+};
+
+static const struct itemplate * const itable_0F2B[] = {
+    instrux + 1253,
+    instrux + 1324,
+};
+
+static const struct itemplate * const itable_0F2C[] = {
+    instrux + 1233,
+    instrux + 1234,
     instrux + 1235,
-    instrux + 1238,
-    instrux + 1239,
-    instrux + 1240,
-    instrux + 1241,
-    instrux + 1459,
-    instrux + 1464,
-    instrux + 1465,
+    instrux + 1463,
     instrux + 1466,
     instrux + 1467,
+    instrux + 1468,
+    instrux + 1469,
+};
+
+static const struct itemplate * const itable_0F2D[] = {
+    instrux + 1226,
+    instrux + 1229,
+    instrux + 1230,
+    instrux + 1231,
+    instrux + 1232,
+    instrux + 1450,
+    instrux + 1455,
+    instrux + 1456,
+    instrux + 1457,
+    instrux + 1458,
 };
 
 static const struct itemplate * const itable_0F2E[] = {
-    instrux + 1280,
-    instrux + 1505,
+    instrux + 1271,
+    instrux + 1496,
 };
 
 static const struct itemplate * const itable_0F2F[] = {
-    instrux + 1233,
-    instrux + 1455,
+    instrux + 1224,
+    instrux + 1446,
 };
 
 static const struct itemplate * const itable_0F30[] = {
-    instrux + 1132,
+    instrux + 1123,
 };
 
 static const struct itemplate * const itable_0F31[] = {
-    instrux + 884,
+    instrux + 876,
 };
 
 static const struct itemplate * const itable_0F32[] = {
-    instrux + 882,
+    instrux + 874,
 };
 
 static const struct itemplate * const itable_0F33[] = {
-    instrux + 883,
+    instrux + 875,
 };
 
 static const struct itemplate * const itable_0F34[] = {
-    instrux + 1091,
+    instrux + 1082,
 };
 
 static const struct itemplate * const itable_0F35[] = {
-    instrux + 1092,
+    instrux + 1083,
 };
 
 static const struct itemplate * const itable_0F3800[] = {
-    instrux + 1543,
-    instrux + 1544,
+    instrux + 1534,
+    instrux + 1535,
 };
 
 static const struct itemplate * const itable_0F3801[] = {
-    instrux + 1527,
-    instrux + 1528,
+    instrux + 1518,
+    instrux + 1519,
 };
 
 static const struct itemplate * const itable_0F3802[] = {
-    instrux + 1529,
-    instrux + 1530,
+    instrux + 1520,
+    instrux + 1521,
 };
 
 static const struct itemplate * const itable_0F3803[] = {
-    instrux + 1531,
-    instrux + 1532,
+    instrux + 1522,
+    instrux + 1523,
 };
 
 static const struct itemplate * const itable_0F3804[] = {
-    instrux + 1539,
-    instrux + 1540,
+    instrux + 1530,
+    instrux + 1531,
 };
 
 static const struct itemplate * const itable_0F3805[] = {
-    instrux + 1533,
-    instrux + 1534,
+    instrux + 1524,
+    instrux + 1525,
 };
 
 static const struct itemplate * const itable_0F3806[] = {
-    instrux + 1535,
-    instrux + 1536,
+    instrux + 1526,
+    instrux + 1527,
 };
 
 static const struct itemplate * const itable_0F3807[] = {
-    instrux + 1537,
-    instrux + 1538,
+    instrux + 1528,
+    instrux + 1529,
 };
 
 static const struct itemplate * const itable_0F3808[] = {
-    instrux + 1545,
-    instrux + 1546,
+    instrux + 1536,
+    instrux + 1537,
 };
 
 static const struct itemplate * const itable_0F3809[] = {
-    instrux + 1547,
-    instrux + 1548,
+    instrux + 1538,
+    instrux + 1539,
 };
 
 static const struct itemplate * const itable_0F380A[] = {
+    instrux + 1540,
+    instrux + 1541,
+};
+
+static const struct itemplate * const itable_0F380B[] = {
+    instrux + 1532,
+    instrux + 1533,
+};
+
+static const struct itemplate * const itable_0F3810[] = {
+    instrux + 1559,
+    instrux + 1560,
+};
+
+static const struct itemplate * const itable_0F3814[] = {
     instrux + 1549,
     instrux + 1550,
 };
 
-static const struct itemplate * const itable_0F380B[] = {
-    instrux + 1541,
-    instrux + 1542,
-};
-
-static const struct itemplate * const itable_0F3810[] = {
-    instrux + 1574,
-    instrux + 1575,
-};
-
-static const struct itemplate * const itable_0F3814[] = {
-    instrux + 1564,
-    instrux + 1565,
-};
-
 static const struct itemplate * const itable_0F3815[] = {
-    instrux + 1562,
-    instrux + 1563,
+    instrux + 1547,
+    instrux + 1548,
 };
 
 static const struct itemplate * const itable_0F3817[] = {
-    instrux + 1614,
-};
-
-static const struct itemplate * const itable_0F381C[] = {
-    instrux + 1519,
-    instrux + 1520,
-};
-
-static const struct itemplate * const itable_0F381D[] = {
-    instrux + 1521,
-    instrux + 1522,
-};
-
-static const struct itemplate * const itable_0F381E[] = {
-    instrux + 1523,
-    instrux + 1524,
-};
-
-static const struct itemplate * const itable_0F3820[] = {
-    instrux + 1600,
-};
-
-static const struct itemplate * const itable_0F3821[] = {
-    instrux + 1601,
-};
-
-static const struct itemplate * const itable_0F3822[] = {
-    instrux + 1602,
-};
-
-static const struct itemplate * const itable_0F3823[] = {
-    instrux + 1603,
-};
-
-static const struct itemplate * const itable_0F3824[] = {
-    instrux + 1604,
-};
-
-static const struct itemplate * const itable_0F3825[] = {
-    instrux + 1605,
-};
-
-static const struct itemplate * const itable_0F3828[] = {
-    instrux + 1612,
-};
-
-static const struct itemplate * const itable_0F3829[] = {
-    instrux + 1577,
-};
-
-static const struct itemplate * const itable_0F382A[] = {
-    instrux + 1571,
-};
-
-static const struct itemplate * const itable_0F382B[] = {
-    instrux + 1573,
-};
-
-static const struct itemplate * const itable_0F3830[] = {
-    instrux + 1606,
-};
-
-static const struct itemplate * const itable_0F3831[] = {
-    instrux + 1607,
-};
-
-static const struct itemplate * const itable_0F3832[] = {
-    instrux + 1608,
-};
-
-static const struct itemplate * const itable_0F3833[] = {
-    instrux + 1609,
-};
-
-static const struct itemplate * const itable_0F3834[] = {
-    instrux + 1610,
-};
-
-static const struct itemplate * const itable_0F3835[] = {
-    instrux + 1611,
-};
-
-static const struct itemplate * const itable_0F3838[] = {
-    instrux + 1596,
-};
-
-static const struct itemplate * const itable_0F3839[] = {
-    instrux + 1597,
-};
-
-static const struct itemplate * const itable_0F383A[] = {
     instrux + 1599,
 };
 
-static const struct itemplate * const itable_0F383B[] = {
-    instrux + 1598,
+static const struct itemplate * const itable_0F381C[] = {
+    instrux + 1510,
+    instrux + 1511,
 };
 
-static const struct itemplate * const itable_0F383C[] = {
+static const struct itemplate * const itable_0F381D[] = {
+    instrux + 1512,
+    instrux + 1513,
+};
+
+static const struct itemplate * const itable_0F381E[] = {
+    instrux + 1514,
+    instrux + 1515,
+};
+
+static const struct itemplate * const itable_0F3820[] = {
+    instrux + 1585,
+};
+
+static const struct itemplate * const itable_0F3821[] = {
+    instrux + 1586,
+};
+
+static const struct itemplate * const itable_0F3822[] = {
+    instrux + 1587,
+};
+
+static const struct itemplate * const itable_0F3823[] = {
+    instrux + 1588,
+};
+
+static const struct itemplate * const itable_0F3824[] = {
+    instrux + 1589,
+};
+
+static const struct itemplate * const itable_0F3825[] = {
+    instrux + 1590,
+};
+
+static const struct itemplate * const itable_0F3828[] = {
+    instrux + 1597,
+};
+
+static const struct itemplate * const itable_0F3829[] = {
+    instrux + 1562,
+};
+
+static const struct itemplate * const itable_0F382A[] = {
+    instrux + 1556,
+};
+
+static const struct itemplate * const itable_0F382B[] = {
+    instrux + 1558,
+};
+
+static const struct itemplate * const itable_0F3830[] = {
+    instrux + 1591,
+};
+
+static const struct itemplate * const itable_0F3831[] = {
     instrux + 1592,
 };
 
-static const struct itemplate * const itable_0F383D[] = {
+static const struct itemplate * const itable_0F3832[] = {
     instrux + 1593,
 };
 
-static const struct itemplate * const itable_0F383E[] = {
-    instrux + 1595,
-};
-
-static const struct itemplate * const itable_0F383F[] = {
+static const struct itemplate * const itable_0F3833[] = {
     instrux + 1594,
 };
 
+static const struct itemplate * const itable_0F3834[] = {
+    instrux + 1595,
+};
+
+static const struct itemplate * const itable_0F3835[] = {
+    instrux + 1596,
+};
+
+static const struct itemplate * const itable_0F3838[] = {
+    instrux + 1581,
+};
+
+static const struct itemplate * const itable_0F3839[] = {
+    instrux + 1582,
+};
+
+static const struct itemplate * const itable_0F383A[] = {
+    instrux + 1584,
+};
+
+static const struct itemplate * const itable_0F383B[] = {
+    instrux + 1583,
+};
+
+static const struct itemplate * const itable_0F383C[] = {
+    instrux + 1577,
+};
+
+static const struct itemplate * const itable_0F383D[] = {
+    instrux + 1578,
+};
+
+static const struct itemplate * const itable_0F383E[] = {
+    instrux + 1580,
+};
+
+static const struct itemplate * const itable_0F383F[] = {
+    instrux + 1579,
+};
+
 static const struct itemplate * const itable_0F3840[] = {
-    instrux + 1613,
+    instrux + 1598,
 };
 
 static const struct itemplate * const itable_0F3841[] = {
-    instrux + 1586,
+    instrux + 1571,
 };
 
 static const struct itemplate * const itable_0F3882[] = {
@@ -2215,702 +2190,692 @@ static const struct itemplate * const itable_0F3882[] = {
 };
 
 static const struct itemplate * const itable_0F3A08[] = {
-    instrux + 1616,
+    instrux + 1601,
 };
 
 static const struct itemplate * const itable_0F3A09[] = {
-    instrux + 1615,
+    instrux + 1600,
 };
 
 static const struct itemplate * const itable_0F3A0A[] = {
-    instrux + 1618,
+    instrux + 1603,
 };
 
 static const struct itemplate * const itable_0F3A0B[] = {
-    instrux + 1617,
+    instrux + 1602,
 };
 
 static const struct itemplate * const itable_0F3A0C[] = {
-    instrux + 1561,
+    instrux + 1546,
 };
 
 static const struct itemplate * const itable_0F3A0D[] = {
-    instrux + 1560,
+    instrux + 1545,
 };
 
 static const struct itemplate * const itable_0F3A0E[] = {
-    instrux + 1576,
+    instrux + 1561,
 };
 
 static const struct itemplate * const itable_0F3A0F[] = {
-    instrux + 1525,
-    instrux + 1526,
+    instrux + 1516,
+    instrux + 1517,
 };
 
 static const struct itemplate * const itable_0F3A14[] = {
-    instrux + 1578,
-    instrux + 1579,
-    instrux + 1580,
+    instrux + 1563,
+    instrux + 1564,
+    instrux + 1565,
 };
 
 static const struct itemplate * const itable_0F3A15[] = {
-    instrux + 1583,
-    instrux + 1584,
-    instrux + 1585,
-};
-
-static const struct itemplate * const itable_0F3A16[] = {
-    instrux + 1581,
-    instrux + 1582,
-};
-
-static const struct itemplate * const itable_0F3A17[] = {
     instrux + 1568,
     instrux + 1569,
-};
-
-static const struct itemplate * const itable_0F3A20[] = {
-    instrux + 1587,
-    instrux + 1588,
-    instrux + 1589,
-};
-
-static const struct itemplate * const itable_0F3A21[] = {
     instrux + 1570,
 };
 
-static const struct itemplate * const itable_0F3A22[] = {
-    instrux + 1590,
-    instrux + 1591,
-};
-
-static const struct itemplate * const itable_0F3A40[] = {
+static const struct itemplate * const itable_0F3A16[] = {
+    instrux + 1566,
     instrux + 1567,
 };
 
+static const struct itemplate * const itable_0F3A17[] = {
+    instrux + 1553,
+    instrux + 1554,
+};
+
+static const struct itemplate * const itable_0F3A20[] = {
+    instrux + 1572,
+    instrux + 1573,
+    instrux + 1574,
+};
+
+static const struct itemplate * const itable_0F3A21[] = {
+    instrux + 1555,
+};
+
+static const struct itemplate * const itable_0F3A22[] = {
+    instrux + 1575,
+    instrux + 1576,
+};
+
+static const struct itemplate * const itable_0F3A40[] = {
+    instrux + 1552,
+};
+
 static const struct itemplate * const itable_0F3A41[] = {
-    instrux + 1566,
+    instrux + 1551,
 };
 
 static const struct itemplate * const itable_0F3A42[] = {
-    instrux + 1572,
+    instrux + 1557,
 };
 
 static const struct itemplate * const itable_0F40[] = {
-    instrux + 1198,
-    instrux + 1199,
-    instrux + 1200,
-    instrux + 1201,
-    instrux + 1202,
-    instrux + 1203,
+    instrux + 1189,
+    instrux + 1190,
+    instrux + 1191,
+    instrux + 1192,
+    instrux + 1193,
+    instrux + 1194,
 };
 
 static const struct itemplate * const itable_0F41[] = {
-    instrux + 1198,
-    instrux + 1199,
-    instrux + 1200,
-    instrux + 1201,
-    instrux + 1202,
-    instrux + 1203,
+    instrux + 1189,
+    instrux + 1190,
+    instrux + 1191,
+    instrux + 1192,
+    instrux + 1193,
+    instrux + 1194,
 };
 
 static const struct itemplate * const itable_0F42[] = {
-    instrux + 1198,
-    instrux + 1199,
-    instrux + 1200,
-    instrux + 1201,
-    instrux + 1202,
-    instrux + 1203,
+    instrux + 1189,
+    instrux + 1190,
+    instrux + 1191,
+    instrux + 1192,
+    instrux + 1193,
+    instrux + 1194,
 };
 
 static const struct itemplate * const itable_0F43[] = {
-    instrux + 1198,
-    instrux + 1199,
-    instrux + 1200,
-    instrux + 1201,
-    instrux + 1202,
-    instrux + 1203,
+    instrux + 1189,
+    instrux + 1190,
+    instrux + 1191,
+    instrux + 1192,
+    instrux + 1193,
+    instrux + 1194,
 };
 
 static const struct itemplate * const itable_0F44[] = {
-    instrux + 1198,
-    instrux + 1199,
-    instrux + 1200,
-    instrux + 1201,
-    instrux + 1202,
-    instrux + 1203,
+    instrux + 1189,
+    instrux + 1190,
+    instrux + 1191,
+    instrux + 1192,
+    instrux + 1193,
+    instrux + 1194,
 };
 
 static const struct itemplate * const itable_0F45[] = {
-    instrux + 1198,
-    instrux + 1199,
-    instrux + 1200,
-    instrux + 1201,
-    instrux + 1202,
-    instrux + 1203,
+    instrux + 1189,
+    instrux + 1190,
+    instrux + 1191,
+    instrux + 1192,
+    instrux + 1193,
+    instrux + 1194,
 };
 
 static const struct itemplate * const itable_0F46[] = {
-    instrux + 1198,
-    instrux + 1199,
-    instrux + 1200,
-    instrux + 1201,
-    instrux + 1202,
-    instrux + 1203,
+    instrux + 1189,
+    instrux + 1190,
+    instrux + 1191,
+    instrux + 1192,
+    instrux + 1193,
+    instrux + 1194,
 };
 
 static const struct itemplate * const itable_0F47[] = {
-    instrux + 1198,
-    instrux + 1199,
-    instrux + 1200,
-    instrux + 1201,
-    instrux + 1202,
-    instrux + 1203,
+    instrux + 1189,
+    instrux + 1190,
+    instrux + 1191,
+    instrux + 1192,
+    instrux + 1193,
+    instrux + 1194,
 };
 
 static const struct itemplate * const itable_0F48[] = {
-    instrux + 1198,
-    instrux + 1199,
-    instrux + 1200,
-    instrux + 1201,
-    instrux + 1202,
-    instrux + 1203,
+    instrux + 1189,
+    instrux + 1190,
+    instrux + 1191,
+    instrux + 1192,
+    instrux + 1193,
+    instrux + 1194,
 };
 
 static const struct itemplate * const itable_0F49[] = {
-    instrux + 1198,
-    instrux + 1199,
-    instrux + 1200,
-    instrux + 1201,
-    instrux + 1202,
-    instrux + 1203,
+    instrux + 1189,
+    instrux + 1190,
+    instrux + 1191,
+    instrux + 1192,
+    instrux + 1193,
+    instrux + 1194,
 };
 
 static const struct itemplate * const itable_0F4A[] = {
-    instrux + 1198,
-    instrux + 1199,
-    instrux + 1200,
-    instrux + 1201,
-    instrux + 1202,
-    instrux + 1203,
+    instrux + 1189,
+    instrux + 1190,
+    instrux + 1191,
+    instrux + 1192,
+    instrux + 1193,
+    instrux + 1194,
 };
 
 static const struct itemplate * const itable_0F4B[] = {
-    instrux + 1198,
-    instrux + 1199,
-    instrux + 1200,
-    instrux + 1201,
-    instrux + 1202,
-    instrux + 1203,
+    instrux + 1189,
+    instrux + 1190,
+    instrux + 1191,
+    instrux + 1192,
+    instrux + 1193,
+    instrux + 1194,
 };
 
 static const struct itemplate * const itable_0F4C[] = {
-    instrux + 1198,
-    instrux + 1199,
-    instrux + 1200,
-    instrux + 1201,
-    instrux + 1202,
-    instrux + 1203,
+    instrux + 1189,
+    instrux + 1190,
+    instrux + 1191,
+    instrux + 1192,
+    instrux + 1193,
+    instrux + 1194,
 };
 
 static const struct itemplate * const itable_0F4D[] = {
-    instrux + 1198,
-    instrux + 1199,
-    instrux + 1200,
-    instrux + 1201,
-    instrux + 1202,
-    instrux + 1203,
+    instrux + 1189,
+    instrux + 1190,
+    instrux + 1191,
+    instrux + 1192,
+    instrux + 1193,
+    instrux + 1194,
 };
 
 static const struct itemplate * const itable_0F4E[] = {
-    instrux + 1198,
-    instrux + 1199,
-    instrux + 1200,
-    instrux + 1201,
-    instrux + 1202,
-    instrux + 1203,
+    instrux + 1189,
+    instrux + 1190,
+    instrux + 1191,
+    instrux + 1192,
+    instrux + 1193,
+    instrux + 1194,
 };
 
 static const struct itemplate * const itable_0F4F[] = {
-    instrux + 1198,
-    instrux + 1199,
-    instrux + 1200,
-    instrux + 1201,
-    instrux + 1202,
-    instrux + 1203,
+    instrux + 1189,
+    instrux + 1190,
+    instrux + 1191,
+    instrux + 1192,
+    instrux + 1193,
+    instrux + 1194,
 };
 
 static const struct itemplate * const itable_0F50[] = {
-    instrux + 1260,
-    instrux + 1261,
-    instrux + 1491,
-    instrux + 1492,
+    instrux + 1251,
+    instrux + 1252,
+    instrux + 1482,
+    instrux + 1483,
 };
 
 static const struct itemplate * const itable_0F51[] = {
-    instrux + 1275,
-    instrux + 1276,
-    instrux + 1501,
-    instrux + 1502,
+    instrux + 1266,
+    instrux + 1267,
+    instrux + 1492,
+    instrux + 1493,
 };
 
 static const struct itemplate * const itable_0F52[] = {
-    instrux + 1272,
-    instrux + 1273,
+    instrux + 1263,
+    instrux + 1264,
 };
 
 static const struct itemplate * const itable_0F53[] = {
-    instrux + 1270,
-    instrux + 1271,
+    instrux + 1261,
+    instrux + 1262,
 };
 
 static const struct itemplate * const itable_0F54[] = {
-    instrux + 1214,
-    instrux + 1436,
-};
-
-static const struct itemplate * const itable_0F55[] = {
-    instrux + 1213,
-    instrux + 1435,
-};
-
-static const struct itemplate * const itable_0F56[] = {
-    instrux + 1269,
-    instrux + 1499,
-};
-
-static const struct itemplate * const itable_0F57[] = {
-    instrux + 1283,
-    instrux + 1508,
-};
-
-static const struct itemplate * const itable_0F58[] = {
-    instrux + 1211,
-    instrux + 1212,
-    instrux + 1433,
-    instrux + 1434,
-};
-
-static const struct itemplate * const itable_0F59[] = {
-    instrux + 1267,
-    instrux + 1268,
-    instrux + 1497,
-    instrux + 1498,
-};
-
-static const struct itemplate * const itable_0F5A[] = {
-    instrux + 1460,
-    instrux + 1463,
-    instrux + 1468,
-    instrux + 1471,
-};
-
-static const struct itemplate * const itable_0F5B[] = {
-    instrux + 1457,
-    instrux + 1462,
-    instrux + 1474,
-};
-
-static const struct itemplate * const itable_0F5C[] = {
-    instrux + 1278,
-    instrux + 1279,
-    instrux + 1503,
-    instrux + 1504,
-};
-
-static const struct itemplate * const itable_0F5D[] = {
-    instrux + 1250,
-    instrux + 1251,
-    instrux + 1483,
-    instrux + 1484,
-};
-
-static const struct itemplate * const itable_0F5E[] = {
-    instrux + 1245,
-    instrux + 1246,
-    instrux + 1479,
-    instrux + 1480,
-};
-
-static const struct itemplate * const itable_0F5F[] = {
-    instrux + 1248,
-    instrux + 1249,
-    instrux + 1481,
-    instrux + 1482,
-};
-
-static const struct itemplate * const itable_0F60[] = {
-    instrux + 829,
-    instrux + 1428,
-};
-
-static const struct itemplate * const itable_0F61[] = {
-    instrux + 831,
-    instrux + 1429,
-};
-
-static const struct itemplate * const itable_0F62[] = {
-    instrux + 830,
-    instrux + 1430,
-};
-
-static const struct itemplate * const itable_0F63[] = {
-    instrux + 742,
-    instrux + 1352,
-};
-
-static const struct itemplate * const itable_0F64[] = {
-    instrux + 758,
-    instrux + 1371,
-};
-
-static const struct itemplate * const itable_0F65[] = {
-    instrux + 760,
-    instrux + 1372,
-};
-
-static const struct itemplate * const itable_0F66[] = {
-    instrux + 759,
-    instrux + 1373,
-};
-
-static const struct itemplate * const itable_0F67[] = {
-    instrux + 743,
-    instrux + 1354,
-};
-
-static const struct itemplate * const itable_0F68[] = {
-    instrux + 826,
-    instrux + 1424,
-};
-
-static const struct itemplate * const itable_0F69[] = {
-    instrux + 828,
-    instrux + 1425,
-};
-
-static const struct itemplate * const itable_0F6A[] = {
-    instrux + 827,
-    instrux + 1426,
-};
-
-static const struct itemplate * const itable_0F6B[] = {
-    instrux + 741,
-    instrux + 1353,
-};
-
-static const struct itemplate * const itable_0F6C[] = {
-    instrux + 1431,
-};
-
-static const struct itemplate * const itable_0F6D[] = {
+    instrux + 1205,
     instrux + 1427,
 };
 
+static const struct itemplate * const itable_0F55[] = {
+    instrux + 1204,
+    instrux + 1426,
+};
+
+static const struct itemplate * const itable_0F56[] = {
+    instrux + 1260,
+    instrux + 1490,
+};
+
+static const struct itemplate * const itable_0F57[] = {
+    instrux + 1274,
+    instrux + 1499,
+};
+
+static const struct itemplate * const itable_0F58[] = {
+    instrux + 1202,
+    instrux + 1203,
+    instrux + 1424,
+    instrux + 1425,
+};
+
+static const struct itemplate * const itable_0F59[] = {
+    instrux + 1258,
+    instrux + 1259,
+    instrux + 1488,
+    instrux + 1489,
+};
+
+static const struct itemplate * const itable_0F5A[] = {
+    instrux + 1451,
+    instrux + 1454,
+    instrux + 1459,
+    instrux + 1462,
+};
+
+static const struct itemplate * const itable_0F5B[] = {
+    instrux + 1448,
+    instrux + 1453,
+    instrux + 1465,
+};
+
+static const struct itemplate * const itable_0F5C[] = {
+    instrux + 1269,
+    instrux + 1270,
+    instrux + 1494,
+    instrux + 1495,
+};
+
+static const struct itemplate * const itable_0F5D[] = {
+    instrux + 1241,
+    instrux + 1242,
+    instrux + 1474,
+    instrux + 1475,
+};
+
+static const struct itemplate * const itable_0F5E[] = {
+    instrux + 1236,
+    instrux + 1237,
+    instrux + 1470,
+    instrux + 1471,
+};
+
+static const struct itemplate * const itable_0F5F[] = {
+    instrux + 1239,
+    instrux + 1240,
+    instrux + 1472,
+    instrux + 1473,
+};
+
+static const struct itemplate * const itable_0F60[] = {
+    instrux + 821,
+    instrux + 1419,
+};
+
+static const struct itemplate * const itable_0F61[] = {
+    instrux + 823,
+    instrux + 1420,
+};
+
+static const struct itemplate * const itable_0F62[] = {
+    instrux + 822,
+    instrux + 1421,
+};
+
+static const struct itemplate * const itable_0F63[] = {
+    instrux + 734,
+    instrux + 1343,
+};
+
+static const struct itemplate * const itable_0F64[] = {
+    instrux + 750,
+    instrux + 1362,
+};
+
+static const struct itemplate * const itable_0F65[] = {
+    instrux + 752,
+    instrux + 1363,
+};
+
+static const struct itemplate * const itable_0F66[] = {
+    instrux + 751,
+    instrux + 1364,
+};
+
+static const struct itemplate * const itable_0F67[] = {
+    instrux + 735,
+    instrux + 1345,
+};
+
+static const struct itemplate * const itable_0F68[] = {
+    instrux + 818,
+    instrux + 1415,
+};
+
+static const struct itemplate * const itable_0F69[] = {
+    instrux + 820,
+    instrux + 1416,
+};
+
+static const struct itemplate * const itable_0F6A[] = {
+    instrux + 819,
+    instrux + 1417,
+};
+
+static const struct itemplate * const itable_0F6B[] = {
+    instrux + 733,
+    instrux + 1344,
+};
+
+static const struct itemplate * const itable_0F6C[] = {
+    instrux + 1422,
+};
+
+static const struct itemplate * const itable_0F6D[] = {
+    instrux + 1418,
+};
+
 static const struct itemplate * const itable_0F6E[] = {
-    instrux + 660,
-    instrux + 664,
-    instrux + 1337,
-    instrux + 1338,
-    instrux + 1349,
+    instrux + 653,
+    instrux + 657,
+    instrux + 1328,
+    instrux + 1329,
+    instrux + 1340,
 };
 
 static const struct itemplate * const itable_0F6F[] = {
-    instrux + 662,
-    instrux + 1340,
-    instrux + 1342,
+    instrux + 655,
+    instrux + 1331,
+    instrux + 1333,
 };
 
 static const struct itemplate * const itable_0F70[] = {
-    instrux + 1322,
-    instrux + 1391,
-    instrux + 1392,
-    instrux + 1393,
-    instrux + 1394,
-    instrux + 1395,
-    instrux + 1396,
+    instrux + 1313,
+    instrux + 1382,
+    instrux + 1383,
+    instrux + 1384,
+    instrux + 1385,
+    instrux + 1386,
+    instrux + 1387,
 };
 
 static const struct itemplate * const itable_0F71[] = {
-    instrux + 808,
-    instrux + 812,
-    instrux + 818,
-    instrux + 1399,
-    instrux + 1405,
-    instrux + 1410,
+    instrux + 800,
+    instrux + 804,
+    instrux + 810,
+    instrux + 1390,
+    instrux + 1396,
+    instrux + 1401,
 };
 
 static const struct itemplate * const itable_0F72[] = {
-    instrux + 804,
-    instrux + 810,
-    instrux + 814,
-    instrux + 1401,
-    instrux + 1407,
-    instrux + 1412,
+    instrux + 796,
+    instrux + 802,
+    instrux + 806,
+    instrux + 1392,
+    instrux + 1398,
+    instrux + 1403,
 };
 
 static const struct itemplate * const itable_0F73[] = {
-    instrux + 806,
-    instrux + 816,
-    instrux + 1397,
-    instrux + 1403,
-    instrux + 1408,
-    instrux + 1414,
+    instrux + 798,
+    instrux + 808,
+    instrux + 1388,
+    instrux + 1394,
+    instrux + 1399,
+    instrux + 1405,
 };
 
 static const struct itemplate * const itable_0F74[] = {
-    instrux + 755,
-    instrux + 1368,
+    instrux + 747,
+    instrux + 1359,
 };
 
 static const struct itemplate * const itable_0F75[] = {
-    instrux + 757,
-    instrux + 1369,
+    instrux + 749,
+    instrux + 1360,
 };
 
 static const struct itemplate * const itable_0F76[] = {
-    instrux + 756,
-    instrux + 1370,
+    instrux + 748,
+    instrux + 1361,
 };
 
 static const struct itemplate * const itable_0F77[] = {
     instrux + 250,
 };
 
-static const struct itemplate * const itable_0F78[] = {
-    instrux + 1551,
-    instrux + 1553,
-};
-
-static const struct itemplate * const itable_0F79[] = {
-    instrux + 1552,
-    instrux + 1554,
-};
-
 static const struct itemplate * const itable_0F7C[] = {
-    instrux + 1511,
-    instrux + 1512,
+    instrux + 1502,
+    instrux + 1503,
 };
 
 static const struct itemplate * const itable_0F7D[] = {
-    instrux + 1513,
-    instrux + 1514,
+    instrux + 1504,
+    instrux + 1505,
 };
 
 static const struct itemplate * const itable_0F7E[] = {
-    instrux + 661,
-    instrux + 665,
+    instrux + 654,
+    instrux + 658,
+    instrux + 1327,
+    instrux + 1330,
     instrux + 1336,
     instrux + 1339,
-    instrux + 1345,
-    instrux + 1348,
-    instrux + 1350,
+    instrux + 1341,
 };
 
 static const struct itemplate * const itable_0F7F[] = {
-    instrux + 663,
-    instrux + 1341,
-    instrux + 1343,
+    instrux + 656,
+    instrux + 1332,
+    instrux + 1334,
 };
 
 static const struct itemplate * const itable_0F80[] = {
-    instrux + 1204,
-    instrux + 1205,
-    instrux + 1206,
-    instrux + 1207,
+    instrux + 1195,
+    instrux + 1196,
+    instrux + 1197,
+    instrux + 1198,
 };
 
 static const struct itemplate * const itable_0F81[] = {
-    instrux + 1204,
-    instrux + 1205,
-    instrux + 1206,
-    instrux + 1207,
+    instrux + 1195,
+    instrux + 1196,
+    instrux + 1197,
+    instrux + 1198,
 };
 
 static const struct itemplate * const itable_0F82[] = {
-    instrux + 1204,
-    instrux + 1205,
-    instrux + 1206,
-    instrux + 1207,
+    instrux + 1195,
+    instrux + 1196,
+    instrux + 1197,
+    instrux + 1198,
 };
 
 static const struct itemplate * const itable_0F83[] = {
-    instrux + 1204,
-    instrux + 1205,
-    instrux + 1206,
-    instrux + 1207,
+    instrux + 1195,
+    instrux + 1196,
+    instrux + 1197,
+    instrux + 1198,
 };
 
 static const struct itemplate * const itable_0F84[] = {
-    instrux + 1204,
-    instrux + 1205,
-    instrux + 1206,
-    instrux + 1207,
+    instrux + 1195,
+    instrux + 1196,
+    instrux + 1197,
+    instrux + 1198,
 };
 
 static const struct itemplate * const itable_0F85[] = {
-    instrux + 1204,
-    instrux + 1205,
-    instrux + 1206,
-    instrux + 1207,
+    instrux + 1195,
+    instrux + 1196,
+    instrux + 1197,
+    instrux + 1198,
 };
 
 static const struct itemplate * const itable_0F86[] = {
-    instrux + 1204,
-    instrux + 1205,
-    instrux + 1206,
-    instrux + 1207,
+    instrux + 1195,
+    instrux + 1196,
+    instrux + 1197,
+    instrux + 1198,
 };
 
 static const struct itemplate * const itable_0F87[] = {
-    instrux + 1204,
-    instrux + 1205,
-    instrux + 1206,
-    instrux + 1207,
+    instrux + 1195,
+    instrux + 1196,
+    instrux + 1197,
+    instrux + 1198,
 };
 
 static const struct itemplate * const itable_0F88[] = {
-    instrux + 1204,
-    instrux + 1205,
-    instrux + 1206,
-    instrux + 1207,
+    instrux + 1195,
+    instrux + 1196,
+    instrux + 1197,
+    instrux + 1198,
 };
 
 static const struct itemplate * const itable_0F89[] = {
-    instrux + 1204,
-    instrux + 1205,
-    instrux + 1206,
-    instrux + 1207,
+    instrux + 1195,
+    instrux + 1196,
+    instrux + 1197,
+    instrux + 1198,
 };
 
 static const struct itemplate * const itable_0F8A[] = {
-    instrux + 1204,
-    instrux + 1205,
-    instrux + 1206,
-    instrux + 1207,
+    instrux + 1195,
+    instrux + 1196,
+    instrux + 1197,
+    instrux + 1198,
 };
 
 static const struct itemplate * const itable_0F8B[] = {
-    instrux + 1204,
-    instrux + 1205,
-    instrux + 1206,
-    instrux + 1207,
+    instrux + 1195,
+    instrux + 1196,
+    instrux + 1197,
+    instrux + 1198,
 };
 
 static const struct itemplate * const itable_0F8C[] = {
-    instrux + 1204,
-    instrux + 1205,
-    instrux + 1206,
-    instrux + 1207,
+    instrux + 1195,
+    instrux + 1196,
+    instrux + 1197,
+    instrux + 1198,
 };
 
 static const struct itemplate * const itable_0F8D[] = {
-    instrux + 1204,
-    instrux + 1205,
-    instrux + 1206,
-    instrux + 1207,
+    instrux + 1195,
+    instrux + 1196,
+    instrux + 1197,
+    instrux + 1198,
 };
 
 static const struct itemplate * const itable_0F8E[] = {
-    instrux + 1204,
-    instrux + 1205,
-    instrux + 1206,
-    instrux + 1207,
+    instrux + 1195,
+    instrux + 1196,
+    instrux + 1197,
+    instrux + 1198,
 };
 
 static const struct itemplate * const itable_0F8F[] = {
-    instrux + 1204,
-    instrux + 1205,
-    instrux + 1206,
-    instrux + 1207,
+    instrux + 1195,
+    instrux + 1196,
+    instrux + 1197,
+    instrux + 1198,
 };
 
 static const struct itemplate * const itable_0F90[] = {
-    instrux + 1209,
-    instrux + 1210,
+    instrux + 1200,
+    instrux + 1201,
 };
 
 static const struct itemplate * const itable_0F91[] = {
-    instrux + 1209,
-    instrux + 1210,
+    instrux + 1200,
+    instrux + 1201,
 };
 
 static const struct itemplate * const itable_0F92[] = {
-    instrux + 1209,
-    instrux + 1210,
+    instrux + 1200,
+    instrux + 1201,
 };
 
 static const struct itemplate * const itable_0F93[] = {
-    instrux + 1209,
-    instrux + 1210,
+    instrux + 1200,
+    instrux + 1201,
 };
 
 static const struct itemplate * const itable_0F94[] = {
-    instrux + 1209,
-    instrux + 1210,
+    instrux + 1200,
+    instrux + 1201,
 };
 
 static const struct itemplate * const itable_0F95[] = {
-    instrux + 1209,
-    instrux + 1210,
+    instrux + 1200,
+    instrux + 1201,
 };
 
 static const struct itemplate * const itable_0F96[] = {
-    instrux + 1209,
-    instrux + 1210,
+    instrux + 1200,
+    instrux + 1201,
 };
 
 static const struct itemplate * const itable_0F97[] = {
-    instrux + 1209,
-    instrux + 1210,
+    instrux + 1200,
+    instrux + 1201,
 };
 
 static const struct itemplate * const itable_0F98[] = {
-    instrux + 1209,
-    instrux + 1210,
+    instrux + 1200,
+    instrux + 1201,
 };
 
 static const struct itemplate * const itable_0F99[] = {
-    instrux + 1209,
-    instrux + 1210,
+    instrux + 1200,
+    instrux + 1201,
 };
 
 static const struct itemplate * const itable_0F9A[] = {
-    instrux + 1209,
-    instrux + 1210,
+    instrux + 1200,
+    instrux + 1201,
 };
 
 static const struct itemplate * const itable_0F9B[] = {
-    instrux + 1209,
-    instrux + 1210,
+    instrux + 1200,
+    instrux + 1201,
 };
 
 static const struct itemplate * const itable_0F9C[] = {
-    instrux + 1209,
-    instrux + 1210,
+    instrux + 1200,
+    instrux + 1201,
 };
 
 static const struct itemplate * const itable_0F9D[] = {
-    instrux + 1209,
-    instrux + 1210,
+    instrux + 1200,
+    instrux + 1201,
 };
 
 static const struct itemplate * const itable_0F9E[] = {
-    instrux + 1209,
-    instrux + 1210,
+    instrux + 1200,
+    instrux + 1201,
 };
 
 static const struct itemplate * const itable_0F9F[] = {
-    instrux + 1209,
-    instrux + 1210,
+    instrux + 1200,
+    instrux + 1201,
 };
 
 static const struct itemplate * const itable_0FA0[] = {
-    instrux + 842,
+    instrux + 834,
 };
 
 static const struct itemplate * const itable_0FA1[] = {
-    instrux + 791,
+    instrux + 783,
 };
 
 static const struct itemplate * const itable_0FA2[] = {
@@ -2927,33 +2892,33 @@ static const struct itemplate * const itable_0FA3[] = {
 };
 
 static const struct itemplate * const itable_0FA4[] = {
-    instrux + 999,
-    instrux + 1000,
-    instrux + 1001,
-    instrux + 1002,
-    instrux + 1003,
-    instrux + 1004,
+    instrux + 990,
+    instrux + 991,
+    instrux + 992,
+    instrux + 993,
+    instrux + 994,
+    instrux + 995,
 };
 
 static const struct itemplate * const itable_0FA5[] = {
-    instrux + 1005,
-    instrux + 1006,
-    instrux + 1007,
-    instrux + 1008,
-    instrux + 1009,
-    instrux + 1010,
+    instrux + 996,
+    instrux + 997,
+    instrux + 998,
+    instrux + 999,
+    instrux + 1000,
+    instrux + 1001,
 };
 
 static const struct itemplate * const itable_0FA8[] = {
-    instrux + 843,
+    instrux + 835,
 };
 
 static const struct itemplate * const itable_0FA9[] = {
-    instrux + 792,
+    instrux + 784,
 };
 
 static const struct itemplate * const itable_0FAA[] = {
-    instrux + 934,
+    instrux + 926,
 };
 
 static const struct itemplate * const itable_0FAB[] = {
@@ -2966,43 +2931,43 @@ static const struct itemplate * const itable_0FAB[] = {
 };
 
 static const struct itemplate * const itable_0FAC[] = {
-    instrux + 1023,
-    instrux + 1024,
-    instrux + 1025,
-    instrux + 1026,
-    instrux + 1027,
-    instrux + 1028,
+    instrux + 1014,
+    instrux + 1015,
+    instrux + 1016,
+    instrux + 1017,
+    instrux + 1018,
+    instrux + 1019,
 };
 
 static const struct itemplate * const itable_0FAD[] = {
-    instrux + 1029,
-    instrux + 1030,
-    instrux + 1031,
-    instrux + 1032,
-    instrux + 1033,
-    instrux + 1034,
+    instrux + 1020,
+    instrux + 1021,
+    instrux + 1022,
+    instrux + 1023,
+    instrux + 1024,
+    instrux + 1025,
 };
 
 static const struct itemplate * const itable_0FAE[] = {
-    instrux + 550,
-    instrux + 605,
-    instrux + 985,
-    instrux + 1247,
+    instrux + 544,
+    instrux + 599,
+    instrux + 976,
+    instrux + 1238,
+    instrux + 1268,
+    instrux + 1275,
+    instrux + 1276,
     instrux + 1277,
-    instrux + 1284,
+    instrux + 1278,
+    instrux + 1281,
+    instrux + 1282,
     instrux + 1285,
     instrux + 1286,
-    instrux + 1287,
+    instrux + 1289,
     instrux + 1290,
-    instrux + 1291,
-    instrux + 1294,
-    instrux + 1295,
-    instrux + 1298,
-    instrux + 1299,
-    instrux + 1306,
-    instrux + 1329,
-    instrux + 1334,
-    instrux + 1335,
+    instrux + 1297,
+    instrux + 1320,
+    instrux + 1325,
+    instrux + 1326,
 };
 
 static const struct itemplate * const itable_0FAF[] = {
@@ -3029,9 +2994,9 @@ static const struct itemplate * const itable_0FB1[] = {
 };
 
 static const struct itemplate * const itable_0FB2[] = {
-    instrux + 599,
-    instrux + 600,
-    instrux + 601,
+    instrux + 593,
+    instrux + 594,
+    instrux + 595,
 };
 
 static const struct itemplate * const itable_0FB3[] = {
@@ -3044,39 +3009,39 @@ static const struct itemplate * const itable_0FB3[] = {
 };
 
 static const struct itemplate * const itable_0FB4[] = {
-    instrux + 551,
-    instrux + 552,
-    instrux + 553,
+    instrux + 545,
+    instrux + 546,
+    instrux + 547,
 };
 
 static const struct itemplate * const itable_0FB5[] = {
-    instrux + 555,
-    instrux + 556,
-    instrux + 557,
+    instrux + 549,
+    instrux + 550,
+    instrux + 551,
 };
 
 static const struct itemplate * const itable_0FB6[] = {
-    instrux + 676,
-    instrux + 677,
-    instrux + 678,
-    instrux + 680,
+    instrux + 669,
+    instrux + 670,
+    instrux + 671,
+    instrux + 673,
 };
 
 static const struct itemplate * const itable_0FB7[] = {
-    instrux + 679,
-    instrux + 681,
+    instrux + 672,
+    instrux + 674,
 };
 
 static const struct itemplate * const itable_0FB8[] = {
-    instrux + 526,
-    instrux + 527,
-    instrux + 528,
+    instrux + 522,
+    instrux + 523,
+    instrux + 524,
 };
 
 static const struct itemplate * const itable_0FB9[] = {
-    instrux + 1120,
-    instrux + 1121,
-    instrux + 1122,
+    instrux + 1111,
+    instrux + 1112,
+    instrux + 1113,
 };
 
 static const struct itemplate * const itable_0FBA[] = {
@@ -3119,38 +3084,47 @@ static const struct itemplate * const itable_0FBD[] = {
     instrux + 121,
     instrux + 122,
     instrux + 123,
-    instrux + 1557,
-    instrux + 1558,
-    instrux + 1559,
+    instrux + 1542,
+    instrux + 1543,
+    instrux + 1544,
 };
 
 static const struct itemplate * const itable_0FBE[] = {
-    instrux + 670,
-    instrux + 671,
-    instrux + 672,
-    instrux + 674,
+    instrux + 663,
+    instrux + 664,
+    instrux + 665,
+    instrux + 667,
 };
 
 static const struct itemplate * const itable_0FBF[] = {
-    instrux + 673,
-    instrux + 675,
+    instrux + 666,
+    instrux + 668,
 };
 
 static const struct itemplate * const itable_0FC0[] = {
-    instrux + 1133,
-    instrux + 1134,
+    instrux + 1124,
+    instrux + 1125,
 };
 
 static const struct itemplate * const itable_0FC1[] = {
-    instrux + 1135,
-    instrux + 1136,
-    instrux + 1137,
-    instrux + 1138,
-    instrux + 1139,
-    instrux + 1140,
+    instrux + 1126,
+    instrux + 1127,
+    instrux + 1128,
+    instrux + 1129,
+    instrux + 1130,
+    instrux + 1131,
 };
 
 static const struct itemplate * const itable_0FC2[] = {
+    instrux + 1206,
+    instrux + 1207,
+    instrux + 1208,
+    instrux + 1209,
+    instrux + 1210,
+    instrux + 1211,
+    instrux + 1212,
+    instrux + 1213,
+    instrux + 1214,
     instrux + 1215,
     instrux + 1216,
     instrux + 1217,
@@ -3160,15 +3134,15 @@ static const struct itemplate * const itable_0FC2[] = {
     instrux + 1221,
     instrux + 1222,
     instrux + 1223,
-    instrux + 1224,
-    instrux + 1225,
-    instrux + 1226,
-    instrux + 1227,
-    instrux + 1228,
-    instrux + 1229,
-    instrux + 1230,
-    instrux + 1231,
-    instrux + 1232,
+    instrux + 1428,
+    instrux + 1429,
+    instrux + 1430,
+    instrux + 1431,
+    instrux + 1432,
+    instrux + 1433,
+    instrux + 1434,
+    instrux + 1435,
+    instrux + 1436,
     instrux + 1437,
     instrux + 1438,
     instrux + 1439,
@@ -3178,50 +3152,41 @@ static const struct itemplate * const itable_0FC2[] = {
     instrux + 1443,
     instrux + 1444,
     instrux + 1445,
-    instrux + 1446,
-    instrux + 1447,
-    instrux + 1448,
-    instrux + 1449,
-    instrux + 1450,
-    instrux + 1451,
-    instrux + 1452,
-    instrux + 1453,
-    instrux + 1454,
 };
 
 static const struct itemplate * const itable_0FC3[] = {
-    instrux + 1331,
-    instrux + 1332,
+    instrux + 1322,
+    instrux + 1323,
 };
 
 static const struct itemplate * const itable_0FC4[] = {
-    instrux + 1312,
-    instrux + 1313,
-    instrux + 1314,
-    instrux + 1375,
-    instrux + 1376,
-    instrux + 1377,
+    instrux + 1303,
+    instrux + 1304,
+    instrux + 1305,
+    instrux + 1366,
+    instrux + 1367,
+    instrux + 1368,
 };
 
 static const struct itemplate * const itable_0FC5[] = {
-    instrux + 1311,
-    instrux + 1374,
+    instrux + 1302,
+    instrux + 1365,
 };
 
 static const struct itemplate * const itable_0FC6[] = {
-    instrux + 1274,
-    instrux + 1500,
+    instrux + 1265,
+    instrux + 1491,
 };
 
 static const struct itemplate * const itable_0FC7[] = {
     instrux + 232,
     instrux + 233,
+    instrux + 1283,
+    instrux + 1284,
+    instrux + 1287,
+    instrux + 1288,
+    instrux + 1291,
     instrux + 1292,
-    instrux + 1293,
-    instrux + 1296,
-    instrux + 1297,
-    instrux + 1300,
-    instrux + 1301,
 };
 
 static const struct itemplate * const itable_0FC8[] = {
@@ -3265,247 +3230,247 @@ static const struct itemplate * const itable_0FCF[] = {
 };
 
 static const struct itemplate * const itable_0FD0[] = {
-    instrux + 1509,
-    instrux + 1510,
+    instrux + 1500,
+    instrux + 1501,
 };
 
 static const struct itemplate * const itable_0FD1[] = {
-    instrux + 817,
-    instrux + 1409,
-};
-
-static const struct itemplate * const itable_0FD2[] = {
-    instrux + 813,
-    instrux + 1411,
-};
-
-static const struct itemplate * const itable_0FD3[] = {
-    instrux + 815,
-    instrux + 1413,
-};
-
-static const struct itemplate * const itable_0FD4[] = {
-    instrux + 1358,
-    instrux + 1359,
-};
-
-static const struct itemplate * const itable_0FD5[] = {
-    instrux + 781,
-    instrux + 1386,
-};
-
-static const struct itemplate * const itable_0FD6[] = {
-    instrux + 1344,
-    instrux + 1346,
-    instrux + 1347,
-    instrux + 1351,
-};
-
-static const struct itemplate * const itable_0FD7[] = {
-    instrux + 1319,
-    instrux + 1383,
-};
-
-static const struct itemplate * const itable_0FD8[] = {
-    instrux + 823,
-    instrux + 1422,
-};
-
-static const struct itemplate * const itable_0FD9[] = {
-    instrux + 824,
-    instrux + 1423,
-};
-
-static const struct itemplate * const itable_0FDA[] = {
-    instrux + 1318,
-    instrux + 1382,
-};
-
-static const struct itemplate * const itable_0FDB[] = {
-    instrux + 751,
-    instrux + 1364,
-};
-
-static const struct itemplate * const itable_0FDC[] = {
-    instrux + 748,
-    instrux + 1362,
-};
-
-static const struct itemplate * const itable_0FDD[] = {
-    instrux + 749,
-    instrux + 1363,
-};
-
-static const struct itemplate * const itable_0FDE[] = {
-    instrux + 1316,
-    instrux + 1380,
-};
-
-static const struct itemplate * const itable_0FDF[] = {
-    instrux + 752,
-    instrux + 1365,
-};
-
-static const struct itemplate * const itable_0FE0[] = {
-    instrux + 1309,
-    instrux + 1366,
-};
-
-static const struct itemplate * const itable_0FE1[] = {
-    instrux + 811,
-    instrux + 1404,
-};
-
-static const struct itemplate * const itable_0FE2[] = {
     instrux + 809,
-    instrux + 1406,
-};
-
-static const struct itemplate * const itable_0FE3[] = {
-    instrux + 1310,
-    instrux + 1367,
-};
-
-static const struct itemplate * const itable_0FE4[] = {
-    instrux + 1320,
-    instrux + 1384,
-};
-
-static const struct itemplate * const itable_0FE5[] = {
-    instrux + 780,
-    instrux + 1385,
-};
-
-static const struct itemplate * const itable_0FE6[] = {
-    instrux + 1456,
-    instrux + 1458,
-    instrux + 1473,
-};
-
-static const struct itemplate * const itable_0FE7[] = {
-    instrux + 1308,
-    instrux + 1330,
-};
-
-static const struct itemplate * const itable_0FE8[] = {
-    instrux + 821,
-    instrux + 1420,
-};
-
-static const struct itemplate * const itable_0FE9[] = {
-    instrux + 822,
-    instrux + 1421,
-};
-
-static const struct itemplate * const itable_0FEA[] = {
-    instrux + 1317,
-    instrux + 1381,
-};
-
-static const struct itemplate * const itable_0FEB[] = {
-    instrux + 800,
-    instrux + 1389,
-};
-
-static const struct itemplate * const itable_0FEC[] = {
-    instrux + 746,
-    instrux + 1360,
-};
-
-static const struct itemplate * const itable_0FED[] = {
-    instrux + 747,
-    instrux + 1361,
-};
-
-static const struct itemplate * const itable_0FEE[] = {
-    instrux + 1315,
-    instrux + 1379,
-};
-
-static const struct itemplate * const itable_0FEF[] = {
-    instrux + 857,
-    instrux + 1432,
-};
-
-static const struct itemplate * const itable_0FF0[] = {
-    instrux + 1515,
-};
-
-static const struct itemplate * const itable_0FF1[] = {
-    instrux + 807,
-    instrux + 1398,
-};
-
-static const struct itemplate * const itable_0FF2[] = {
-    instrux + 803,
     instrux + 1400,
 };
 
-static const struct itemplate * const itable_0FF3[] = {
+static const struct itemplate * const itable_0FD2[] = {
     instrux + 805,
     instrux + 1402,
 };
 
-static const struct itemplate * const itable_0FF4[] = {
-    instrux + 1387,
-    instrux + 1388,
+static const struct itemplate * const itable_0FD3[] = {
+    instrux + 807,
+    instrux + 1404,
 };
 
-static const struct itemplate * const itable_0FF5[] = {
-    instrux + 778,
-    instrux + 1378,
+static const struct itemplate * const itable_0FD4[] = {
+    instrux + 1349,
+    instrux + 1350,
 };
 
-static const struct itemplate * const itable_0FF6[] = {
-    instrux + 1321,
-    instrux + 1390,
+static const struct itemplate * const itable_0FD5[] = {
+    instrux + 773,
+    instrux + 1377,
 };
 
-static const struct itemplate * const itable_0FF7[] = {
-    instrux + 1307,
-    instrux + 1328,
+static const struct itemplate * const itable_0FD6[] = {
+    instrux + 1335,
+    instrux + 1337,
+    instrux + 1338,
+    instrux + 1342,
 };
 
-static const struct itemplate * const itable_0FF8[] = {
-    instrux + 819,
-    instrux + 1415,
+static const struct itemplate * const itable_0FD7[] = {
+    instrux + 1310,
+    instrux + 1374,
 };
 
-static const struct itemplate * const itable_0FF9[] = {
-    instrux + 825,
-    instrux + 1416,
+static const struct itemplate * const itable_0FD8[] = {
+    instrux + 815,
+    instrux + 1413,
 };
 
-static const struct itemplate * const itable_0FFA[] = {
-    instrux + 820,
-    instrux + 1417,
+static const struct itemplate * const itable_0FD9[] = {
+    instrux + 816,
+    instrux + 1414,
 };
 
-static const struct itemplate * const itable_0FFB[] = {
-    instrux + 1418,
-    instrux + 1419,
+static const struct itemplate * const itable_0FDA[] = {
+    instrux + 1309,
+    instrux + 1373,
 };
 
-static const struct itemplate * const itable_0FFC[] = {
-    instrux + 744,
+static const struct itemplate * const itable_0FDB[] = {
+    instrux + 743,
     instrux + 1355,
 };
 
-static const struct itemplate * const itable_0FFD[] = {
-    instrux + 750,
+static const struct itemplate * const itable_0FDC[] = {
+    instrux + 740,
+    instrux + 1353,
+};
+
+static const struct itemplate * const itable_0FDD[] = {
+    instrux + 741,
+    instrux + 1354,
+};
+
+static const struct itemplate * const itable_0FDE[] = {
+    instrux + 1307,
+    instrux + 1371,
+};
+
+static const struct itemplate * const itable_0FDF[] = {
+    instrux + 744,
     instrux + 1356,
 };
 
-static const struct itemplate * const itable_0FFE[] = {
-    instrux + 745,
+static const struct itemplate * const itable_0FE0[] = {
+    instrux + 1300,
     instrux + 1357,
 };
 
+static const struct itemplate * const itable_0FE1[] = {
+    instrux + 803,
+    instrux + 1395,
+};
+
+static const struct itemplate * const itable_0FE2[] = {
+    instrux + 801,
+    instrux + 1397,
+};
+
+static const struct itemplate * const itable_0FE3[] = {
+    instrux + 1301,
+    instrux + 1358,
+};
+
+static const struct itemplate * const itable_0FE4[] = {
+    instrux + 1311,
+    instrux + 1375,
+};
+
+static const struct itemplate * const itable_0FE5[] = {
+    instrux + 772,
+    instrux + 1376,
+};
+
+static const struct itemplate * const itable_0FE6[] = {
+    instrux + 1447,
+    instrux + 1449,
+    instrux + 1464,
+};
+
+static const struct itemplate * const itable_0FE7[] = {
+    instrux + 1299,
+    instrux + 1321,
+};
+
+static const struct itemplate * const itable_0FE8[] = {
+    instrux + 813,
+    instrux + 1411,
+};
+
+static const struct itemplate * const itable_0FE9[] = {
+    instrux + 814,
+    instrux + 1412,
+};
+
+static const struct itemplate * const itable_0FEA[] = {
+    instrux + 1308,
+    instrux + 1372,
+};
+
+static const struct itemplate * const itable_0FEB[] = {
+    instrux + 792,
+    instrux + 1380,
+};
+
+static const struct itemplate * const itable_0FEC[] = {
+    instrux + 738,
+    instrux + 1351,
+};
+
+static const struct itemplate * const itable_0FED[] = {
+    instrux + 739,
+    instrux + 1352,
+};
+
+static const struct itemplate * const itable_0FEE[] = {
+    instrux + 1306,
+    instrux + 1370,
+};
+
+static const struct itemplate * const itable_0FEF[] = {
+    instrux + 849,
+    instrux + 1423,
+};
+
+static const struct itemplate * const itable_0FF0[] = {
+    instrux + 1506,
+};
+
+static const struct itemplate * const itable_0FF1[] = {
+    instrux + 799,
+    instrux + 1389,
+};
+
+static const struct itemplate * const itable_0FF2[] = {
+    instrux + 795,
+    instrux + 1391,
+};
+
+static const struct itemplate * const itable_0FF3[] = {
+    instrux + 797,
+    instrux + 1393,
+};
+
+static const struct itemplate * const itable_0FF4[] = {
+    instrux + 1378,
+    instrux + 1379,
+};
+
+static const struct itemplate * const itable_0FF5[] = {
+    instrux + 770,
+    instrux + 1369,
+};
+
+static const struct itemplate * const itable_0FF6[] = {
+    instrux + 1312,
+    instrux + 1381,
+};
+
+static const struct itemplate * const itable_0FF7[] = {
+    instrux + 1298,
+    instrux + 1319,
+};
+
+static const struct itemplate * const itable_0FF8[] = {
+    instrux + 811,
+    instrux + 1406,
+};
+
+static const struct itemplate * const itable_0FF9[] = {
+    instrux + 817,
+    instrux + 1407,
+};
+
+static const struct itemplate * const itable_0FFA[] = {
+    instrux + 812,
+    instrux + 1408,
+};
+
+static const struct itemplate * const itable_0FFB[] = {
+    instrux + 1409,
+    instrux + 1410,
+};
+
+static const struct itemplate * const itable_0FFC[] = {
+    instrux + 736,
+    instrux + 1346,
+};
+
+static const struct itemplate * const itable_0FFD[] = {
+    instrux + 742,
+    instrux + 1347,
+};
+
+static const struct itemplate * const itable_0FFE[] = {
+    instrux + 737,
+    instrux + 1348,
+};
+
 static const struct itemplate * const itable_0FFF[] = {
-    instrux + 1116,
-    instrux + 1117,
-    instrux + 1118,
-    instrux + 1119,
+    instrux + 1107,
+    instrux + 1108,
+    instrux + 1109,
+    instrux + 1110,
 };
 
 static const struct itemplate * const itable_10[] = {
@@ -3547,57 +3512,57 @@ static const struct itemplate * const itable_15[] = {
 };
 
 static const struct itemplate * const itable_16[] = {
-    instrux + 840,
+    instrux + 832,
 };
 
 static const struct itemplate * const itable_17[] = {
-    instrux + 789,
+    instrux + 781,
 };
 
 static const struct itemplate * const itable_18[] = {
-    instrux + 949,
-    instrux + 950,
+    instrux + 940,
+    instrux + 941,
 };
 
 static const struct itemplate * const itable_19[] = {
+    instrux + 942,
+    instrux + 943,
+    instrux + 944,
+    instrux + 945,
+    instrux + 946,
+    instrux + 947,
+};
+
+static const struct itemplate * const itable_1A[] = {
+    instrux + 948,
+    instrux + 949,
+};
+
+static const struct itemplate * const itable_1B[] = {
+    instrux + 950,
     instrux + 951,
     instrux + 952,
     instrux + 953,
     instrux + 954,
     instrux + 955,
-    instrux + 956,
-};
-
-static const struct itemplate * const itable_1A[] = {
-    instrux + 957,
-    instrux + 958,
-};
-
-static const struct itemplate * const itable_1B[] = {
-    instrux + 959,
-    instrux + 960,
-    instrux + 961,
-    instrux + 962,
-    instrux + 963,
-    instrux + 964,
 };
 
 static const struct itemplate * const itable_1C[] = {
-    instrux + 968,
+    instrux + 959,
 };
 
 static const struct itemplate * const itable_1D[] = {
-    instrux + 969,
-    instrux + 970,
-    instrux + 971,
+    instrux + 960,
+    instrux + 961,
+    instrux + 962,
 };
 
 static const struct itemplate * const itable_1E[] = {
-    instrux + 841,
+    instrux + 833,
 };
 
 static const struct itemplate * const itable_1F[] = {
-    instrux + 790,
+    instrux + 782,
 };
 
 static const struct itemplate * const itable_20[] = {
@@ -3643,41 +3608,41 @@ static const struct itemplate * const itable_27[] = {
 };
 
 static const struct itemplate * const itable_28[] = {
-    instrux + 1059,
-    instrux + 1060,
+    instrux + 1050,
+    instrux + 1051,
 };
 
 static const struct itemplate * const itable_29[] = {
+    instrux + 1052,
+    instrux + 1053,
+    instrux + 1054,
+    instrux + 1055,
+    instrux + 1056,
+    instrux + 1057,
+};
+
+static const struct itemplate * const itable_2A[] = {
+    instrux + 1058,
+    instrux + 1059,
+};
+
+static const struct itemplate * const itable_2B[] = {
+    instrux + 1060,
     instrux + 1061,
     instrux + 1062,
     instrux + 1063,
     instrux + 1064,
     instrux + 1065,
-    instrux + 1066,
-};
-
-static const struct itemplate * const itable_2A[] = {
-    instrux + 1067,
-    instrux + 1068,
-};
-
-static const struct itemplate * const itable_2B[] = {
-    instrux + 1069,
-    instrux + 1070,
-    instrux + 1071,
-    instrux + 1072,
-    instrux + 1073,
-    instrux + 1074,
 };
 
 static const struct itemplate * const itable_2C[] = {
-    instrux + 1078,
+    instrux + 1069,
 };
 
 static const struct itemplate * const itable_2D[] = {
-    instrux + 1079,
-    instrux + 1080,
-    instrux + 1081,
+    instrux + 1070,
+    instrux + 1071,
+    instrux + 1072,
 };
 
 static const struct itemplate * const itable_2F[] = {
@@ -3685,41 +3650,41 @@ static const struct itemplate * const itable_2F[] = {
 };
 
 static const struct itemplate * const itable_30[] = {
-    instrux + 1166,
-    instrux + 1167,
+    instrux + 1157,
+    instrux + 1158,
 };
 
 static const struct itemplate * const itable_31[] = {
+    instrux + 1159,
+    instrux + 1160,
+    instrux + 1161,
+    instrux + 1162,
+    instrux + 1163,
+    instrux + 1164,
+};
+
+static const struct itemplate * const itable_32[] = {
+    instrux + 1165,
+    instrux + 1166,
+};
+
+static const struct itemplate * const itable_33[] = {
+    instrux + 1167,
     instrux + 1168,
     instrux + 1169,
     instrux + 1170,
     instrux + 1171,
     instrux + 1172,
-    instrux + 1173,
-};
-
-static const struct itemplate * const itable_32[] = {
-    instrux + 1174,
-    instrux + 1175,
-};
-
-static const struct itemplate * const itable_33[] = {
-    instrux + 1176,
-    instrux + 1177,
-    instrux + 1178,
-    instrux + 1179,
-    instrux + 1180,
-    instrux + 1181,
 };
 
 static const struct itemplate * const itable_34[] = {
-    instrux + 1185,
+    instrux + 1176,
 };
 
 static const struct itemplate * const itable_35[] = {
-    instrux + 1186,
-    instrux + 1187,
-    instrux + 1188,
+    instrux + 1177,
+    instrux + 1178,
+    instrux + 1179,
 };
 
 static const struct itemplate * const itable_37[] = {
@@ -3849,111 +3814,111 @@ static const struct itemplate * const itable_4F[] = {
 };
 
 static const struct itemplate * const itable_50[] = {
-    instrux + 832,
-    instrux + 833,
-    instrux + 834,
+    instrux + 824,
+    instrux + 825,
+    instrux + 826,
 };
 
 static const struct itemplate * const itable_51[] = {
-    instrux + 832,
-    instrux + 833,
-    instrux + 834,
+    instrux + 824,
+    instrux + 825,
+    instrux + 826,
 };
 
 static const struct itemplate * const itable_52[] = {
-    instrux + 832,
-    instrux + 833,
-    instrux + 834,
+    instrux + 824,
+    instrux + 825,
+    instrux + 826,
 };
 
 static const struct itemplate * const itable_53[] = {
-    instrux + 832,
-    instrux + 833,
-    instrux + 834,
+    instrux + 824,
+    instrux + 825,
+    instrux + 826,
 };
 
 static const struct itemplate * const itable_54[] = {
-    instrux + 832,
-    instrux + 833,
-    instrux + 834,
+    instrux + 824,
+    instrux + 825,
+    instrux + 826,
 };
 
 static const struct itemplate * const itable_55[] = {
-    instrux + 832,
-    instrux + 833,
-    instrux + 834,
+    instrux + 824,
+    instrux + 825,
+    instrux + 826,
 };
 
 static const struct itemplate * const itable_56[] = {
-    instrux + 832,
-    instrux + 833,
-    instrux + 834,
+    instrux + 824,
+    instrux + 825,
+    instrux + 826,
 };
 
 static const struct itemplate * const itable_57[] = {
-    instrux + 832,
-    instrux + 833,
-    instrux + 834,
+    instrux + 824,
+    instrux + 825,
+    instrux + 826,
 };
 
 static const struct itemplate * const itable_58[] = {
-    instrux + 782,
-    instrux + 783,
-    instrux + 784,
+    instrux + 774,
+    instrux + 775,
+    instrux + 776,
 };
 
 static const struct itemplate * const itable_59[] = {
-    instrux + 782,
-    instrux + 783,
-    instrux + 784,
+    instrux + 774,
+    instrux + 775,
+    instrux + 776,
 };
 
 static const struct itemplate * const itable_5A[] = {
-    instrux + 782,
-    instrux + 783,
-    instrux + 784,
+    instrux + 774,
+    instrux + 775,
+    instrux + 776,
 };
 
 static const struct itemplate * const itable_5B[] = {
-    instrux + 782,
-    instrux + 783,
-    instrux + 784,
+    instrux + 774,
+    instrux + 775,
+    instrux + 776,
 };
 
 static const struct itemplate * const itable_5C[] = {
-    instrux + 782,
-    instrux + 783,
-    instrux + 784,
+    instrux + 774,
+    instrux + 775,
+    instrux + 776,
 };
 
 static const struct itemplate * const itable_5D[] = {
-    instrux + 782,
-    instrux + 783,
-    instrux + 784,
+    instrux + 774,
+    instrux + 775,
+    instrux + 776,
 };
 
 static const struct itemplate * const itable_5E[] = {
-    instrux + 782,
-    instrux + 783,
-    instrux + 784,
+    instrux + 774,
+    instrux + 775,
+    instrux + 776,
 };
 
 static const struct itemplate * const itable_5F[] = {
-    instrux + 782,
-    instrux + 783,
-    instrux + 784,
+    instrux + 774,
+    instrux + 775,
+    instrux + 776,
 };
 
 static const struct itemplate * const itable_60[] = {
-    instrux + 850,
-    instrux + 851,
-    instrux + 852,
+    instrux + 842,
+    instrux + 843,
+    instrux + 844,
 };
 
 static const struct itemplate * const itable_61[] = {
-    instrux + 793,
-    instrux + 794,
-    instrux + 795,
+    instrux + 785,
+    instrux + 786,
+    instrux + 787,
 };
 
 static const struct itemplate * const itable_62[] = {
@@ -3967,11 +3932,11 @@ static const struct itemplate * const itable_63[] = {
 };
 
 static const struct itemplate * const itable_68[] = {
-    instrux + 845,
-    instrux + 846,
-    instrux + 847,
-    instrux + 848,
-    instrux + 849,
+    instrux + 837,
+    instrux + 838,
+    instrux + 839,
+    instrux + 840,
+    instrux + 841,
 };
 
 static const struct itemplate * const itable_69[] = {
@@ -3987,7 +3952,7 @@ static const struct itemplate * const itable_69[] = {
 };
 
 static const struct itemplate * const itable_6A[] = {
-    instrux + 844,
+    instrux + 836,
 };
 
 static const struct itemplate * const itable_6B[] = {
@@ -4012,76 +3977,76 @@ static const struct itemplate * const itable_6D[] = {
 };
 
 static const struct itemplate * const itable_6E[] = {
-    instrux + 738,
+    instrux + 730,
 };
 
 static const struct itemplate * const itable_6F[] = {
-    instrux + 739,
-    instrux + 740,
+    instrux + 731,
+    instrux + 732,
 };
 
 static const struct itemplate * const itable_70[] = {
-    instrux + 1208,
+    instrux + 1199,
 };
 
 static const struct itemplate * const itable_71[] = {
-    instrux + 1208,
+    instrux + 1199,
 };
 
 static const struct itemplate * const itable_72[] = {
-    instrux + 1208,
+    instrux + 1199,
 };
 
 static const struct itemplate * const itable_73[] = {
-    instrux + 1208,
+    instrux + 1199,
 };
 
 static const struct itemplate * const itable_74[] = {
-    instrux + 1208,
+    instrux + 1199,
 };
 
 static const struct itemplate * const itable_75[] = {
-    instrux + 1208,
+    instrux + 1199,
 };
 
 static const struct itemplate * const itable_76[] = {
-    instrux + 1208,
+    instrux + 1199,
 };
 
 static const struct itemplate * const itable_77[] = {
-    instrux + 1208,
+    instrux + 1199,
 };
 
 static const struct itemplate * const itable_78[] = {
-    instrux + 1208,
+    instrux + 1199,
 };
 
 static const struct itemplate * const itable_79[] = {
-    instrux + 1208,
+    instrux + 1199,
 };
 
 static const struct itemplate * const itable_7A[] = {
-    instrux + 1208,
+    instrux + 1199,
 };
 
 static const struct itemplate * const itable_7B[] = {
-    instrux + 1208,
+    instrux + 1199,
 };
 
 static const struct itemplate * const itable_7C[] = {
-    instrux + 1208,
+    instrux + 1199,
 };
 
 static const struct itemplate * const itable_7D[] = {
-    instrux + 1208,
+    instrux + 1199,
 };
 
 static const struct itemplate * const itable_7E[] = {
-    instrux + 1208,
+    instrux + 1199,
 };
 
 static const struct itemplate * const itable_7F[] = {
-    instrux + 1208,
+    instrux + 1199,
 };
 
 static const struct itemplate * const itable_80[] = {
@@ -4092,14 +4057,14 @@ static const struct itemplate * const itable_80[] = {
     instrux + 104,
     instrux + 211,
     instrux + 216,
-    instrux + 723,
-    instrux + 728,
-    instrux + 972,
-    instrux + 977,
-    instrux + 1082,
-    instrux + 1087,
-    instrux + 1189,
-    instrux + 1194,
+    instrux + 715,
+    instrux + 720,
+    instrux + 963,
+    instrux + 968,
+    instrux + 1073,
+    instrux + 1078,
+    instrux + 1180,
+    instrux + 1185,
 };
 
 static const struct itemplate * const itable_81[] = {
@@ -4123,26 +4088,26 @@ static const struct itemplate * const itable_81[] = {
     instrux + 215,
     instrux + 218,
     instrux + 219,
-    instrux + 725,
-    instrux + 726,
-    instrux + 727,
-    instrux + 730,
-    instrux + 731,
-    instrux + 974,
-    instrux + 975,
-    instrux + 976,
-    instrux + 979,
-    instrux + 980,
-    instrux + 1084,
-    instrux + 1085,
-    instrux + 1086,
-    instrux + 1089,
-    instrux + 1090,
-    instrux + 1191,
-    instrux + 1192,
-    instrux + 1193,
-    instrux + 1196,
-    instrux + 1197,
+    instrux + 717,
+    instrux + 718,
+    instrux + 719,
+    instrux + 722,
+    instrux + 723,
+    instrux + 965,
+    instrux + 966,
+    instrux + 967,
+    instrux + 970,
+    instrux + 971,
+    instrux + 1075,
+    instrux + 1076,
+    instrux + 1077,
+    instrux + 1080,
+    instrux + 1081,
+    instrux + 1182,
+    instrux + 1183,
+    instrux + 1184,
+    instrux + 1187,
+    instrux + 1188,
 };
 
 static const struct itemplate * const itable_82[] = {
@@ -4153,14 +4118,14 @@ static const struct itemplate * const itable_82[] = {
     instrux + 105,
     instrux + 212,
     instrux + 217,
-    instrux + 724,
-    instrux + 729,
-    instrux + 973,
-    instrux + 978,
-    instrux + 1083,
-    instrux + 1088,
-    instrux + 1190,
-    instrux + 1195,
+    instrux + 716,
+    instrux + 721,
+    instrux + 964,
+    instrux + 969,
+    instrux + 1074,
+    instrux + 1079,
+    instrux + 1181,
+    instrux + 1186,
 };
 
 static const struct itemplate * const itable_83[] = {
@@ -4176,187 +4141,187 @@ static const struct itemplate * const itable_83[] = {
     instrux + 204,
     instrux + 205,
     instrux + 206,
-    instrux + 716,
-    instrux + 717,
-    instrux + 718,
-    instrux + 965,
-    instrux + 966,
-    instrux + 967,
-    instrux + 1075,
-    instrux + 1076,
-    instrux + 1077,
-    instrux + 1182,
-    instrux + 1183,
-    instrux + 1184,
+    instrux + 708,
+    instrux + 709,
+    instrux + 710,
+    instrux + 956,
+    instrux + 957,
+    instrux + 958,
+    instrux + 1066,
+    instrux + 1067,
+    instrux + 1068,
+    instrux + 1173,
+    instrux + 1174,
+    instrux + 1175,
 };
 
 static const struct itemplate * const itable_84[] = {
-    instrux + 1093,
-    instrux + 1094,
-    instrux + 1101,
+    instrux + 1084,
+    instrux + 1085,
+    instrux + 1092,
 };
 
 static const struct itemplate * const itable_85[] = {
+    instrux + 1086,
+    instrux + 1087,
+    instrux + 1088,
+    instrux + 1089,
+    instrux + 1090,
+    instrux + 1091,
+    instrux + 1093,
+    instrux + 1094,
     instrux + 1095,
-    instrux + 1096,
-    instrux + 1097,
-    instrux + 1098,
-    instrux + 1099,
-    instrux + 1100,
-    instrux + 1102,
-    instrux + 1103,
-    instrux + 1104,
 };
 
 static const struct itemplate * const itable_86[] = {
+    instrux + 1139,
+    instrux + 1140,
+    instrux + 1147,
     instrux + 1148,
-    instrux + 1149,
-    instrux + 1156,
-    instrux + 1157,
 };
 
 static const struct itemplate * const itable_87[] = {
+    instrux + 1141,
+    instrux + 1142,
+    instrux + 1143,
+    instrux + 1144,
+    instrux + 1145,
+    instrux + 1146,
+    instrux + 1149,
     instrux + 1150,
     instrux + 1151,
     instrux + 1152,
     instrux + 1153,
     instrux + 1154,
-    instrux + 1155,
-    instrux + 1158,
-    instrux + 1159,
-    instrux + 1160,
-    instrux + 1161,
-    instrux + 1162,
-    instrux + 1163,
 };
 
 static const struct itemplate * const itable_88[] = {
-    instrux + 632,
-    instrux + 633,
+    instrux + 625,
+    instrux + 626,
 };
 
 static const struct itemplate * const itable_89[] = {
+    instrux + 627,
+    instrux + 628,
+    instrux + 629,
+    instrux + 630,
+    instrux + 631,
+    instrux + 632,
+};
+
+static const struct itemplate * const itable_8A[] = {
+    instrux + 633,
     instrux + 634,
+};
+
+static const struct itemplate * const itable_8B[] = {
     instrux + 635,
     instrux + 636,
     instrux + 637,
     instrux + 638,
     instrux + 639,
-};
-
-static const struct itemplate * const itable_8A[] = {
     instrux + 640,
-    instrux + 641,
-};
-
-static const struct itemplate * const itable_8B[] = {
-    instrux + 642,
-    instrux + 643,
-    instrux + 644,
-    instrux + 645,
-    instrux + 646,
-    instrux + 647,
 };
 
 static const struct itemplate * const itable_8C[] = {
-    instrux + 608,
-    instrux + 609,
-    instrux + 610,
-    instrux + 611,
+    instrux + 601,
+    instrux + 602,
+    instrux + 603,
+    instrux + 604,
 };
 
 static const struct itemplate * const itable_8D[] = {
-    instrux + 544,
-    instrux + 545,
-    instrux + 546,
+    instrux + 538,
+    instrux + 539,
+    instrux + 540,
 };
 
 static const struct itemplate * const itable_8E[] = {
-    instrux + 612,
-    instrux + 613,
-    instrux + 614,
-    instrux + 615,
+    instrux + 605,
+    instrux + 606,
+    instrux + 607,
+    instrux + 608,
 };
 
 static const struct itemplate * const itable_8F[] = {
-    instrux + 785,
-    instrux + 786,
-    instrux + 787,
+    instrux + 777,
+    instrux + 778,
+    instrux + 779,
 };
 
 static const struct itemplate * const itable_90[] = {
-    instrux + 692,
-    instrux + 753,
-    instrux + 1141,
-    instrux + 1142,
-    instrux + 1143,
-    instrux + 1144,
-    instrux + 1145,
-    instrux + 1146,
-    instrux + 1147,
+    instrux + 684,
+    instrux + 745,
+    instrux + 1132,
+    instrux + 1133,
+    instrux + 1134,
+    instrux + 1135,
+    instrux + 1136,
+    instrux + 1137,
+    instrux + 1138,
 };
 
 static const struct itemplate * const itable_91[] = {
-    instrux + 1141,
-    instrux + 1142,
-    instrux + 1143,
-    instrux + 1144,
-    instrux + 1145,
-    instrux + 1146,
+    instrux + 1132,
+    instrux + 1133,
+    instrux + 1134,
+    instrux + 1135,
+    instrux + 1136,
+    instrux + 1137,
 };
 
 static const struct itemplate * const itable_92[] = {
-    instrux + 1141,
-    instrux + 1142,
-    instrux + 1143,
-    instrux + 1144,
-    instrux + 1145,
-    instrux + 1146,
+    instrux + 1132,
+    instrux + 1133,
+    instrux + 1134,
+    instrux + 1135,
+    instrux + 1136,
+    instrux + 1137,
 };
 
 static const struct itemplate * const itable_93[] = {
-    instrux + 1141,
-    instrux + 1142,
-    instrux + 1143,
-    instrux + 1144,
-    instrux + 1145,
-    instrux + 1146,
+    instrux + 1132,
+    instrux + 1133,
+    instrux + 1134,
+    instrux + 1135,
+    instrux + 1136,
+    instrux + 1137,
 };
 
 static const struct itemplate * const itable_94[] = {
-    instrux + 1141,
-    instrux + 1142,
-    instrux + 1143,
-    instrux + 1144,
-    instrux + 1145,
-    instrux + 1146,
+    instrux + 1132,
+    instrux + 1133,
+    instrux + 1134,
+    instrux + 1135,
+    instrux + 1136,
+    instrux + 1137,
 };
 
 static const struct itemplate * const itable_95[] = {
-    instrux + 1141,
-    instrux + 1142,
-    instrux + 1143,
-    instrux + 1144,
-    instrux + 1145,
-    instrux + 1146,
+    instrux + 1132,
+    instrux + 1133,
+    instrux + 1134,
+    instrux + 1135,
+    instrux + 1136,
+    instrux + 1137,
 };
 
 static const struct itemplate * const itable_96[] = {
-    instrux + 1141,
-    instrux + 1142,
-    instrux + 1143,
-    instrux + 1144,
-    instrux + 1145,
-    instrux + 1146,
+    instrux + 1132,
+    instrux + 1133,
+    instrux + 1134,
+    instrux + 1135,
+    instrux + 1136,
+    instrux + 1137,
 };
 
 static const struct itemplate * const itable_97[] = {
-    instrux + 1141,
-    instrux + 1142,
-    instrux + 1143,
-    instrux + 1144,
-    instrux + 1145,
-    instrux + 1146,
+    instrux + 1132,
+    instrux + 1133,
+    instrux + 1134,
+    instrux + 1135,
+    instrux + 1136,
+    instrux + 1137,
 };
 
 static const struct itemplate * const itable_98[] = {
@@ -4380,55 +4345,55 @@ static const struct itemplate * const itable_9A[] = {
 };
 
 static const struct itemplate * const itable_9C[] = {
-    instrux + 853,
-    instrux + 854,
-    instrux + 855,
-    instrux + 856,
+    instrux + 845,
+    instrux + 846,
+    instrux + 847,
+    instrux + 848,
 };
 
 static const struct itemplate * const itable_9D[] = {
-    instrux + 796,
-    instrux + 797,
-    instrux + 798,
-    instrux + 799,
+    instrux + 788,
+    instrux + 789,
+    instrux + 790,
+    instrux + 791,
 };
 
 static const struct itemplate * const itable_9E[] = {
-    instrux + 935,
+    instrux + 927,
 };
 
 static const struct itemplate * const itable_9F[] = {
-    instrux + 531,
+    instrux + 525,
 };
 
 static const struct itemplate * const itable_A0[] = {
-    instrux + 616,
+    instrux + 609,
 };
 
 static const struct itemplate * const itable_A1[] = {
-    instrux + 617,
-    instrux + 618,
-    instrux + 619,
+    instrux + 610,
+    instrux + 611,
+    instrux + 612,
 };
 
 static const struct itemplate * const itable_A2[] = {
-    instrux + 620,
+    instrux + 613,
 };
 
 static const struct itemplate * const itable_A3[] = {
-    instrux + 621,
-    instrux + 622,
-    instrux + 623,
+    instrux + 614,
+    instrux + 615,
+    instrux + 616,
 };
 
 static const struct itemplate * const itable_A4[] = {
-    instrux + 666,
+    instrux + 659,
 };
 
 static const struct itemplate * const itable_A5[] = {
-    instrux + 667,
-    instrux + 668,
-    instrux + 669,
+    instrux + 660,
+    instrux + 661,
+    instrux + 662,
 };
 
 static const struct itemplate * const itable_A6[] = {
@@ -4442,203 +4407,203 @@ static const struct itemplate * const itable_A7[] = {
 };
 
 static const struct itemplate * const itable_A8[] = {
-    instrux + 1105,
+    instrux + 1096,
 };
 
 static const struct itemplate * const itable_A9[] = {
-    instrux + 1106,
-    instrux + 1107,
-    instrux + 1108,
+    instrux + 1097,
+    instrux + 1098,
+    instrux + 1099,
 };
 
 static const struct itemplate * const itable_AA[] = {
-    instrux + 1050,
+    instrux + 1041,
 };
 
 static const struct itemplate * const itable_AB[] = {
-    instrux + 1051,
-    instrux + 1052,
-    instrux + 1053,
+    instrux + 1042,
+    instrux + 1043,
+    instrux + 1044,
 };
 
 static const struct itemplate * const itable_AC[] = {
-    instrux + 565,
+    instrux + 559,
 };
 
 static const struct itemplate * const itable_AD[] = {
-    instrux + 566,
-    instrux + 567,
-    instrux + 568,
+    instrux + 560,
+    instrux + 561,
+    instrux + 562,
 };
 
 static const struct itemplate * const itable_AE[] = {
-    instrux + 981,
+    instrux + 972,
 };
 
 static const struct itemplate * const itable_AF[] = {
-    instrux + 982,
-    instrux + 983,
-    instrux + 984,
+    instrux + 973,
+    instrux + 974,
+    instrux + 975,
 };
 
 static const struct itemplate * const itable_B0[] = {
-    instrux + 648,
+    instrux + 641,
 };
 
 static const struct itemplate * const itable_B1[] = {
-    instrux + 648,
+    instrux + 641,
 };
 
 static const struct itemplate * const itable_B2[] = {
-    instrux + 648,
+    instrux + 641,
 };
 
 static const struct itemplate * const itable_B3[] = {
-    instrux + 648,
+    instrux + 641,
 };
 
 static const struct itemplate * const itable_B4[] = {
-    instrux + 648,
+    instrux + 641,
 };
 
 static const struct itemplate * const itable_B5[] = {
-    instrux + 648,
+    instrux + 641,
 };
 
 static const struct itemplate * const itable_B6[] = {
-    instrux + 648,
+    instrux + 641,
 };
 
 static const struct itemplate * const itable_B7[] = {
-    instrux + 648,
+    instrux + 641,
 };
 
 static const struct itemplate * const itable_B8[] = {
-    instrux + 649,
-    instrux + 650,
-    instrux + 651,
+    instrux + 642,
+    instrux + 643,
+    instrux + 644,
 };
 
 static const struct itemplate * const itable_B9[] = {
-    instrux + 649,
-    instrux + 650,
-    instrux + 651,
+    instrux + 642,
+    instrux + 643,
+    instrux + 644,
 };
 
 static const struct itemplate * const itable_BA[] = {
-    instrux + 649,
-    instrux + 650,
-    instrux + 651,
+    instrux + 642,
+    instrux + 643,
+    instrux + 644,
 };
 
 static const struct itemplate * const itable_BB[] = {
-    instrux + 649,
-    instrux + 650,
-    instrux + 651,
+    instrux + 642,
+    instrux + 643,
+    instrux + 644,
 };
 
 static const struct itemplate * const itable_BC[] = {
-    instrux + 649,
-    instrux + 650,
-    instrux + 651,
+    instrux + 642,
+    instrux + 643,
+    instrux + 644,
 };
 
 static const struct itemplate * const itable_BD[] = {
-    instrux + 649,
-    instrux + 650,
-    instrux + 651,
+    instrux + 642,
+    instrux + 643,
+    instrux + 644,
 };
 
 static const struct itemplate * const itable_BE[] = {
-    instrux + 649,
-    instrux + 650,
-    instrux + 651,
+    instrux + 642,
+    instrux + 643,
+    instrux + 644,
 };
 
 static const struct itemplate * const itable_BF[] = {
-    instrux + 649,
-    instrux + 650,
-    instrux + 651,
+    instrux + 642,
+    instrux + 643,
+    instrux + 644,
 };
 
 static const struct itemplate * const itable_C0[] = {
-    instrux + 860,
-    instrux + 872,
-    instrux + 912,
-    instrux + 924,
-    instrux + 939,
-    instrux + 989,
-    instrux + 1013,
+    instrux + 852,
+    instrux + 864,
+    instrux + 904,
+    instrux + 916,
+    instrux + 930,
+    instrux + 980,
+    instrux + 1004,
 };
 
 static const struct itemplate * const itable_C1[] = {
-    instrux + 863,
-    instrux + 866,
-    instrux + 869,
-    instrux + 875,
-    instrux + 878,
-    instrux + 881,
-    instrux + 915,
-    instrux + 918,
-    instrux + 921,
-    instrux + 927,
-    instrux + 930,
+    instrux + 855,
+    instrux + 858,
+    instrux + 861,
+    instrux + 867,
+    instrux + 870,
+    instrux + 873,
+    instrux + 907,
+    instrux + 910,
+    instrux + 913,
+    instrux + 919,
+    instrux + 922,
+    instrux + 925,
     instrux + 933,
-    instrux + 942,
-    instrux + 945,
-    instrux + 948,
-    instrux + 992,
-    instrux + 995,
-    instrux + 998,
-    instrux + 1016,
-    instrux + 1019,
-    instrux + 1022,
+    instrux + 936,
+    instrux + 939,
+    instrux + 983,
+    instrux + 986,
+    instrux + 989,
+    instrux + 1007,
+    instrux + 1010,
+    instrux + 1013,
 };
 
 static const struct itemplate * const itable_C2[] = {
-    instrux + 887,
+    instrux + 879,
+    instrux + 883,
+    instrux + 885,
+    instrux + 889,
     instrux + 891,
-    instrux + 893,
+    instrux + 895,
     instrux + 897,
-    instrux + 899,
-    instrux + 903,
-    instrux + 905,
-    instrux + 909,
+    instrux + 901,
 };
 
 static const struct itemplate * const itable_C3[] = {
-    instrux + 886,
+    instrux + 878,
+    instrux + 882,
+    instrux + 884,
+    instrux + 888,
     instrux + 890,
-    instrux + 892,
+    instrux + 894,
     instrux + 896,
-    instrux + 898,
-    instrux + 902,
-    instrux + 904,
-    instrux + 908,
+    instrux + 900,
 };
 
 static const struct itemplate * const itable_C4[] = {
-    instrux + 548,
-    instrux + 549,
-};
-
-static const struct itemplate * const itable_C5[] = {
     instrux + 542,
     instrux + 543,
 };
 
+static const struct itemplate * const itable_C5[] = {
+    instrux + 536,
+    instrux + 537,
+};
+
 static const struct itemplate * const itable_C6[] = {
-    instrux + 652,
-    instrux + 657,
+    instrux + 645,
+    instrux + 650,
 };
 
 static const struct itemplate * const itable_C7[] = {
-    instrux + 653,
-    instrux + 654,
-    instrux + 655,
-    instrux + 656,
-    instrux + 658,
-    instrux + 659,
+    instrux + 646,
+    instrux + 647,
+    instrux + 648,
+    instrux + 649,
+    instrux + 651,
+    instrux + 652,
 };
 
 static const struct itemplate * const itable_C8[] = {
@@ -4646,21 +4611,21 @@ static const struct itemplate * const itable_C8[] = {
 };
 
 static const struct itemplate * const itable_C9[] = {
-    instrux + 547,
+    instrux + 541,
 };
 
 static const struct itemplate * const itable_CA[] = {
-    instrux + 889,
-    instrux + 895,
-    instrux + 901,
-    instrux + 907,
+    instrux + 881,
+    instrux + 887,
+    instrux + 893,
+    instrux + 899,
 };
 
 static const struct itemplate * const itable_CB[] = {
-    instrux + 888,
-    instrux + 894,
-    instrux + 900,
-    instrux + 906,
+    instrux + 880,
+    instrux + 886,
+    instrux + 892,
+    instrux + 898,
 };
 
 static const struct itemplate * const itable_CC[] = {
@@ -4676,78 +4641,78 @@ static const struct itemplate * const itable_CE[] = {
 };
 
 static const struct itemplate * const itable_CF[] = {
-    instrux + 500,
-    instrux + 501,
-    instrux + 502,
-    instrux + 503,
+    instrux + 496,
+    instrux + 497,
+    instrux + 498,
+    instrux + 499,
 };
 
 static const struct itemplate * const itable_D0[] = {
-    instrux + 858,
-    instrux + 870,
-    instrux + 910,
-    instrux + 922,
-    instrux + 937,
-    instrux + 987,
-    instrux + 1011,
+    instrux + 850,
+    instrux + 862,
+    instrux + 902,
+    instrux + 914,
+    instrux + 928,
+    instrux + 978,
+    instrux + 1002,
 };
 
 static const struct itemplate * const itable_D1[] = {
-    instrux + 861,
-    instrux + 864,
-    instrux + 867,
-    instrux + 873,
-    instrux + 876,
-    instrux + 879,
-    instrux + 913,
-    instrux + 916,
-    instrux + 919,
-    instrux + 925,
-    instrux + 928,
+    instrux + 853,
+    instrux + 856,
+    instrux + 859,
+    instrux + 865,
+    instrux + 868,
+    instrux + 871,
+    instrux + 905,
+    instrux + 908,
+    instrux + 911,
+    instrux + 917,
+    instrux + 920,
+    instrux + 923,
     instrux + 931,
-    instrux + 940,
-    instrux + 943,
-    instrux + 946,
-    instrux + 990,
-    instrux + 993,
-    instrux + 996,
-    instrux + 1014,
-    instrux + 1017,
-    instrux + 1020,
+    instrux + 934,
+    instrux + 937,
+    instrux + 981,
+    instrux + 984,
+    instrux + 987,
+    instrux + 1005,
+    instrux + 1008,
+    instrux + 1011,
 };
 
 static const struct itemplate * const itable_D2[] = {
-    instrux + 859,
-    instrux + 871,
-    instrux + 911,
-    instrux + 923,
-    instrux + 938,
-    instrux + 988,
-    instrux + 1012,
+    instrux + 851,
+    instrux + 863,
+    instrux + 903,
+    instrux + 915,
+    instrux + 929,
+    instrux + 979,
+    instrux + 1003,
 };
 
 static const struct itemplate * const itable_D3[] = {
-    instrux + 862,
-    instrux + 865,
-    instrux + 868,
-    instrux + 874,
-    instrux + 877,
-    instrux + 880,
-    instrux + 914,
-    instrux + 917,
-    instrux + 920,
-    instrux + 926,
-    instrux + 929,
+    instrux + 854,
+    instrux + 857,
+    instrux + 860,
+    instrux + 866,
+    instrux + 869,
+    instrux + 872,
+    instrux + 906,
+    instrux + 909,
+    instrux + 912,
+    instrux + 918,
+    instrux + 921,
+    instrux + 924,
     instrux + 932,
-    instrux + 941,
-    instrux + 944,
-    instrux + 947,
-    instrux + 991,
-    instrux + 994,
-    instrux + 997,
-    instrux + 1015,
-    instrux + 1018,
-    instrux + 1021,
+    instrux + 935,
+    instrux + 938,
+    instrux + 982,
+    instrux + 985,
+    instrux + 988,
+    instrux + 1006,
+    instrux + 1009,
+    instrux + 1012,
 };
 
 static const struct itemplate * const itable_D4[] = {
@@ -4760,13 +4725,9 @@ static const struct itemplate * const itable_D5[] = {
     instrux + 10,
 };
 
-static const struct itemplate * const itable_D6[] = {
-    instrux + 936,
-};
-
 static const struct itemplate * const itable_D7[] = {
-    instrux + 1164,
-    instrux + 1165,
+    instrux + 1155,
+    instrux + 1156,
 };
 
 static const struct itemplate * const itable_D8[] = {
@@ -4979,38 +4940,38 @@ static const struct itemplate * const itable_DF[] = {
 };
 
 static const struct itemplate * const itable_E0[] = {
-    instrux + 577,
-    instrux + 578,
-    instrux + 579,
-    instrux + 580,
-    instrux + 581,
-    instrux + 582,
-    instrux + 583,
-    instrux + 584,
-};
-
-static const struct itemplate * const itable_E1[] = {
+    instrux + 571,
+    instrux + 572,
     instrux + 573,
     instrux + 574,
     instrux + 575,
     instrux + 576,
-    instrux + 585,
-    instrux + 586,
-    instrux + 587,
-    instrux + 588,
+    instrux + 577,
+    instrux + 578,
+};
+
+static const struct itemplate * const itable_E1[] = {
+    instrux + 567,
+    instrux + 568,
+    instrux + 569,
+    instrux + 570,
+    instrux + 579,
+    instrux + 580,
+    instrux + 581,
+    instrux + 582,
 };
 
 static const struct itemplate * const itable_E2[] = {
-    instrux + 569,
-    instrux + 570,
-    instrux + 571,
-    instrux + 572,
+    instrux + 563,
+    instrux + 564,
+    instrux + 565,
+    instrux + 566,
 };
 
 static const struct itemplate * const itable_E3[] = {
-    instrux + 504,
-    instrux + 505,
-    instrux + 506,
+    instrux + 500,
+    instrux + 501,
+    instrux + 502,
 };
 
 static const struct itemplate * const itable_E4[] = {
@@ -5023,12 +4984,12 @@ static const struct itemplate * const itable_E5[] = {
 };
 
 static const struct itemplate * const itable_E6[] = {
-    instrux + 732,
+    instrux + 724,
 };
 
 static const struct itemplate * const itable_E7[] = {
-    instrux + 733,
-    instrux + 734,
+    instrux + 725,
+    instrux + 726,
 };
 
 static const struct itemplate * const itable_E8[] = {
@@ -5039,22 +5000,22 @@ static const struct itemplate * const itable_E8[] = {
 };
 
 static const struct itemplate * const itable_E9[] = {
+    instrux + 504,
+    instrux + 505,
+    instrux + 506,
+    instrux + 507,
+};
+
+static const struct itemplate * const itable_EA[] = {
     instrux + 508,
     instrux + 509,
     instrux + 510,
     instrux + 511,
-};
-
-static const struct itemplate * const itable_EA[] = {
     instrux + 512,
-    instrux + 513,
-    instrux + 514,
-    instrux + 515,
-    instrux + 516,
 };
 
 static const struct itemplate * const itable_EB[] = {
-    instrux + 507,
+    instrux + 503,
 };
 
 static const struct itemplate * const itable_EC[] = {
@@ -5067,17 +5028,17 @@ static const struct itemplate * const itable_ED[] = {
 };
 
 static const struct itemplate * const itable_EE[] = {
-    instrux + 735,
+    instrux + 727,
 };
 
 static const struct itemplate * const itable_EF[] = {
-    instrux + 736,
-    instrux + 737,
+    instrux + 728,
+    instrux + 729,
 };
 
 static const struct itemplate * const itable_F1[] = {
     instrux + 489,
-    instrux + 1041,
+    instrux + 1032,
 };
 
 static const struct itemplate * const itable_F4[] = {
@@ -5092,11 +5053,11 @@ static const struct itemplate * const itable_F6[] = {
     instrux + 246,
     instrux + 441,
     instrux + 445,
-    instrux + 682,
+    instrux + 675,
+    instrux + 680,
     instrux + 688,
-    instrux + 696,
-    instrux + 1109,
-    instrux + 1113,
+    instrux + 1100,
+    instrux + 1104,
 };
 
 static const struct itemplate * const itable_F7[] = {
@@ -5109,20 +5070,20 @@ static const struct itemplate * const itable_F7[] = {
     instrux + 446,
     instrux + 447,
     instrux + 448,
+    instrux + 676,
+    instrux + 677,
+    instrux + 678,
+    instrux + 681,
+    instrux + 682,
     instrux + 683,
-    instrux + 684,
-    instrux + 685,
     instrux + 689,
     instrux + 690,
     instrux + 691,
-    instrux + 697,
-    instrux + 698,
-    instrux + 699,
-    instrux + 1110,
-    instrux + 1111,
-    instrux + 1112,
-    instrux + 1114,
-    instrux + 1115,
+    instrux + 1101,
+    instrux + 1102,
+    instrux + 1103,
+    instrux + 1105,
+    instrux + 1106,
 };
 
 static const struct itemplate * const itable_F8[] = {
@@ -5130,7 +5091,7 @@ static const struct itemplate * const itable_F8[] = {
 };
 
 static const struct itemplate * const itable_F9[] = {
-    instrux + 1047,
+    instrux + 1038,
 };
 
 static const struct itemplate * const itable_FA[] = {
@@ -5138,7 +5099,7 @@ static const struct itemplate * const itable_FA[] = {
 };
 
 static const struct itemplate * const itable_FB[] = {
-    instrux + 1049,
+    instrux + 1040,
 };
 
 static const struct itemplate * const itable_FC[] = {
@@ -5146,7 +5107,7 @@ static const struct itemplate * const itable_FC[] = {
 };
 
 static const struct itemplate * const itable_FD[] = {
-    instrux + 1048,
+    instrux + 1039,
 };
 
 static const struct itemplate * const itable_FE[] = {
@@ -5170,18 +5131,18 @@ static const struct itemplate * const itable_FF[] = {
     instrux + 482,
     instrux + 483,
     instrux + 484,
+    instrux + 513,
+    instrux + 514,
+    instrux + 515,
+    instrux + 516,
     instrux + 517,
     instrux + 518,
     instrux + 519,
     instrux + 520,
     instrux + 521,
-    instrux + 522,
-    instrux + 523,
-    instrux + 524,
-    instrux + 525,
-    instrux + 835,
-    instrux + 836,
-    instrux + 837,
+    instrux + 827,
+    instrux + 828,
+    instrux + 829,
 };
 
 static const struct disasm_index itable_0F38[256] = {
@@ -5703,8 +5664,8 @@ static const struct disasm_index itable_0F3A[256] = {
 };
 
 static const struct disasm_index itable_0F[256] = {
-    /* 0x00 */ { itable_0F00, 24 },
-    /* 0x01 */ { itable_0F01, 24 },
+    /* 0x00 */ { itable_0F00, 22 },
+    /* 0x01 */ { itable_0F01, 18 },
     /* 0x02 */ { itable_0F02, 10 },
     /* 0x03 */ { itable_0F03, 10 },
     /* 0x04 */ { NULL, 0 },
@@ -5746,7 +5707,7 @@ static const struct disasm_index itable_0F[256] = {
     /* 0x28 */ { itable_0F28, 2 },
     /* 0x29 */ { itable_0F29, 2 },
     /* 0x2a */ { itable_0F2A, 6 },
-    /* 0x2b */ { itable_0F2B, 4 },
+    /* 0x2b */ { itable_0F2B, 2 },
     /* 0x2c */ { itable_0F2C, 8 },
     /* 0x2d */ { itable_0F2D, 10 },
     /* 0x2e */ { itable_0F2E, 2 },
@@ -5823,8 +5784,8 @@ static const struct disasm_index itable_0F[256] = {
     /* 0x75 */ { itable_0F75, 2 },
     /* 0x76 */ { itable_0F76, 2 },
     /* 0x77 */ { itable_0F77, 1 },
-    /* 0x78 */ { itable_0F78, 2 },
-    /* 0x79 */ { itable_0F79, 2 },
+    /* 0x78 */ { NULL, 0 },
+    /* 0x79 */ { NULL, 0 },
     /* 0x7a */ { NULL, 0 },
     /* 0x7b */ { NULL, 0 },
     /* 0x7c */ { itable_0F7C, 2 },
@@ -6176,7 +6137,7 @@ const struct disasm_index itable[256] = {
     /* 0xd3 */ { itable_D3, 21 },
     /* 0xd4 */ { itable_D4, 2 },
     /* 0xd5 */ { itable_D5, 2 },
-    /* 0xd6 */ { itable_D6, 1 },
+    /* 0xd6 */ { NULL, 0 },
     /* 0xd7 */ { itable_D7, 2 },
     /* 0xd8 */ { itable_D8, 24 },
     /* 0xd9 */ { itable_D9, 41 },
