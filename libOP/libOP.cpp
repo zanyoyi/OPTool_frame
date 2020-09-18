@@ -1499,7 +1499,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         // highlight those that are not so sure
                         if (UncertainModify(eOPTab, OpIdx, OP_2/*, PrefixIdx*/))
                         {
-
+                            pOpEntry->Attr |= PF_Uncertain;
                         }
                         pOpEntry++;
                         lFound++;
@@ -1511,7 +1511,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         // highlight those that are not so sure
                         if (UncertainModify(eOPTab, OpIdx, OP_2/*, PrefixIdx*/))
                         {
-
+                            pOpEntry->Attr |= PF_Uncertain;
                         }
                         pOpEntry++;
                         lFound++;
@@ -1547,7 +1547,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         // highlight those that are not so sure
                         if (UncertainModify(eOPTab, OpIdx, OP_2/*, PrefixIdx*/))
                         {
-
+                            pOpEntry->Attr |= PF_Uncertain;
                         }
                         pOpEntry++;
                         lFound++;
@@ -1559,7 +1559,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         // highlight those that are not so sure
                         if (UncertainModify(eOPTab, OpIdx, OP_2/*, PrefixIdx*/))
                         {
-
+                            pOpEntry->Attr |= PF_Uncertain;
                         }
                         pOpEntry++;
                         lFound++;
@@ -1604,7 +1604,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         // highlight those that are not so sure
                         if (UncertainModify(eOPTab, OpIdx, OP_2/*, PrefixIdx*/))
                         {
-
+                            pOpEntry->Attr |= PF_Uncertain;
                         }
                         pOpEntry++;
                         lFound++;
@@ -1616,7 +1616,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         // highlight those that are not so sure
                         if (UncertainModify(eOPTab, OpIdx, OP_2/*, PrefixIdx*/))
                         {
-
+                            pOpEntry->Attr |= PF_Uncertain;
                         }
                         pOpEntry++;
                         lFound++;
