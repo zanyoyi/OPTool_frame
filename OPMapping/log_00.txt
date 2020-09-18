@@ -243,9 +243,7 @@ C4          VEX+2byte (Prefix)
 C5          LDS Gz,Mp (i64)
 C5          VEX+1byte (Prefix)
 C6/0        MOV Eb,Ib
-C6/7        XABORT Ib (000),(11B)
 C7/0        MOV Ev,Iz
-C7/7        XBEGIN Jz (000),(11B)
 C8          ENTER Iw,Ib
 C9          LEAVE (d64)
 CA          RETF Iw

@@ -4141,7 +4141,6 @@ D3/7 [11B] sar rSI,cl
 D3/7 [11B] sar rDI,cl
 D4         aam imm
 D5         aad imm
-D6         salc
 D7         xlatb
 D8/0 [mem] fadd dword[eax]
 D8/0 [mem] fadd dword[ecx]

@@ -190,38 +190,6 @@
 00/5 [11B] verw bp
 00/5 [11B] verw si
 00/5 [11B] verw di
-00/6 [mem] jmpe word/dword[bx+si]
-00/6 [mem] jmpe word/dword[bx+di]
-00/6 [mem] jmpe word/dword[bp+si]
-00/6 [mem] jmpe word/dword[bp+di]
-00/6 [mem] jmpe word/dword[si]
-00/6 [mem] jmpe word/dword[di]
-00/6 [mem] jmpe word/dword[disp16]
-00/6 [mem] jmpe word/dword[bx]
-00/6 [mem] jmpe word/dword[bx+si+disp8]
-00/6 [mem] jmpe word/dword[bx+di+disp8]
-00/6 [mem] jmpe word/dword[bp+si+disp8]
-00/6 [mem] jmpe word/dword[bp+di+disp8]
-00/6 [mem] jmpe word/dword[si+disp8]
-00/6 [mem] jmpe word/dword[di+disp8]
-00/6 [mem] jmpe word/dword[bp+disp8]
-00/6 [mem] jmpe word/dword[bx+disp8]
-00/6 [mem] jmpe word/dword[bx+si+disp16]
-00/6 [mem] jmpe word/dword[bx+di+disp16]
-00/6 [mem] jmpe word/dword[bp+si+disp16]
-00/6 [mem] jmpe word/dword[bp+di+disp16]
-00/6 [mem] jmpe word/dword[si+disp16]
-00/6 [mem] jmpe word/dword[di+disp16]
-00/6 [mem] jmpe word/dword[bp+disp16]
-00/6 [mem] jmpe word/dword[bx+disp16]
-00/6 [11B] jmpe eAX
-00/6 [11B] jmpe eCX
-00/6 [11B] jmpe eDX
-00/6 [11B] jmpe eBX
-00/6 [11B] jmpe eSP
-00/6 [11B] jmpe eBP
-00/6 [11B] jmpe eSI
-00/6 [11B] jmpe eDI
 01/0 [mem] sgdt [bx+si]
 01/0 [mem] sgdt [bx+di]
 01/0 [mem] sgdt [bp+si]
@@ -322,7 +290,6 @@
 01/3 [mem] lidt [di+disp16]
 01/3 [mem] lidt [bp+disp16]
 01/3 [mem] lidt [bx+disp16]
-01/3 [11B] invlpga rAX,ecx
 01/4 [mem] smsw [bx+si]
 01/4 [mem] smsw [bx+di]
 01/4 [mem] smsw [bp+si]
@@ -412,8 +379,6 @@
 01/7 [mem] invlpg [bp+disp16]
 01/7 [mem] invlpg [bx+disp16]
 01/7 [11B] rdtscp
-01/7 [11B] monitorx
-01/7 [11B] mwaitx
 02   [mem] lar r16/r32/r64,[bx+si]
 02   [mem] lar r16/r32/r64,[bx+di]
 02   [mem] lar r16/r32/r64,[bp+si]
@@ -1637,100 +1602,52 @@
 2A   [11B] cvtsi2ss xmm,edi (REP)
 2B   [mem] movntps oword[bx+si],xmm
 2B   [mem] movntpd [bx+si],xmm (opdsize)
-2B   [mem] movntsd qword[bx+si],xmm (REPNE)
-2B   [mem] movntss dword[bx+si],xmm (REP)
 2B   [mem] movntps oword[bx+di],xmm
 2B   [mem] movntpd [bx+di],xmm (opdsize)
-2B   [mem] movntsd qword[bx+di],xmm (REPNE)
-2B   [mem] movntss dword[bx+di],xmm (REP)
 2B   [mem] movntps oword[bp+si],xmm
 2B   [mem] movntpd [bp+si],xmm (opdsize)
-2B   [mem] movntsd qword[bp+si],xmm (REPNE)
-2B   [mem] movntss dword[bp+si],xmm (REP)
 2B   [mem] movntps oword[bp+di],xmm
 2B   [mem] movntpd [bp+di],xmm (opdsize)
-2B   [mem] movntsd qword[bp+di],xmm (REPNE)
-2B   [mem] movntss dword[bp+di],xmm (REP)
 2B   [mem] movntps oword[si],xmm
 2B   [mem] movntpd [si],xmm (opdsize)
-2B   [mem] movntsd qword[si],xmm (REPNE)
-2B   [mem] movntss dword[si],xmm (REP)
 2B   [mem] movntps oword[di],xmm
 2B   [mem] movntpd [di],xmm (opdsize)
-2B   [mem] movntsd qword[di],xmm (REPNE)
-2B   [mem] movntss dword[di],xmm (REP)
 2B   [mem] movntps oword[disp16],xmm
 2B   [mem] movntpd [disp16],xmm (opdsize)
-2B   [mem] movntsd qword[disp16],xmm (REPNE)
-2B   [mem] movntss dword[disp16],xmm (REP)
 2B   [mem] movntps oword[bx],xmm
 2B   [mem] movntpd [bx],xmm (opdsize)
-2B   [mem] movntsd qword[bx],xmm (REPNE)
-2B   [mem] movntss dword[bx],xmm (REP)
 2B   [mem] movntps oword[bx+si+disp8],xmm
 2B   [mem] movntpd [bx+si+disp8],xmm (opdsize)
-2B   [mem] movntsd qword[bx+si+disp8],xmm (REPNE)
-2B   [mem] movntss dword[bx+si+disp8],xmm (REP)
 2B   [mem] movntps oword[bx+di+disp8],xmm
 2B   [mem] movntpd [bx+di+disp8],xmm (opdsize)
-2B   [mem] movntsd qword[bx+di+disp8],xmm (REPNE)
-2B   [mem] movntss dword[bx+di+disp8],xmm (REP)
 2B   [mem] movntps oword[bp+si+disp8],xmm
 2B   [mem] movntpd [bp+si+disp8],xmm (opdsize)
-2B   [mem] movntsd qword[bp+si+disp8],xmm (REPNE)
-2B   [mem] movntss dword[bp+si+disp8],xmm (REP)
 2B   [mem] movntps oword[bp+di+disp8],xmm
 2B   [mem] movntpd [bp+di+disp8],xmm (opdsize)
-2B   [mem] movntsd qword[bp+di+disp8],xmm (REPNE)
-2B   [mem] movntss dword[bp+di+disp8],xmm (REP)
 2B   [mem] movntps oword[si+disp8],xmm
 2B   [mem] movntpd [si+disp8],xmm (opdsize)
-2B   [mem] movntsd qword[si+disp8],xmm (REPNE)
-2B   [mem] movntss dword[si+disp8],xmm (REP)
 2B   [mem] movntps oword[di+disp8],xmm
 2B   [mem] movntpd [di+disp8],xmm (opdsize)
-2B   [mem] movntsd qword[di+disp8],xmm (REPNE)
-2B   [mem] movntss dword[di+disp8],xmm (REP)
 2B   [mem] movntps oword[bp+disp8],xmm
 2B   [mem] movntpd [bp+disp8],xmm (opdsize)
-2B   [mem] movntsd qword[bp+disp8],xmm (REPNE)
-2B   [mem] movntss dword[bp+disp8],xmm (REP)
 2B   [mem] movntps oword[bx+disp8],xmm
 2B   [mem] movntpd [bx+disp8],xmm (opdsize)
-2B   [mem] movntsd qword[bx+disp8],xmm (REPNE)
-2B   [mem] movntss dword[bx+disp8],xmm (REP)
 2B   [mem] movntps oword[bx+si+disp16],xmm
 2B   [mem] movntpd [bx+si+disp16],xmm (opdsize)
-2B   [mem] movntsd qword[bx+si+disp16],xmm (REPNE)
-2B   [mem] movntss dword[bx+si+disp16],xmm (REP)
 2B   [mem] movntps oword[bx+di+disp16],xmm
 2B   [mem] movntpd [bx+di+disp16],xmm (opdsize)
-2B   [mem] movntsd qword[bx+di+disp16],xmm (REPNE)
-2B   [mem] movntss dword[bx+di+disp16],xmm (REP)
 2B   [mem] movntps oword[bp+si+disp16],xmm
 2B   [mem] movntpd [bp+si+disp16],xmm (opdsize)
-2B   [mem] movntsd qword[bp+si+disp16],xmm (REPNE)
-2B   [mem] movntss dword[bp+si+disp16],xmm (REP)
 2B   [mem] movntps oword[bp+di+disp16],xmm
 2B   [mem] movntpd [bp+di+disp16],xmm (opdsize)
-2B   [mem] movntsd qword[bp+di+disp16],xmm (REPNE)
-2B   [mem] movntss dword[bp+di+disp16],xmm (REP)
 2B   [mem] movntps oword[si+disp16],xmm
 2B   [mem] movntpd [si+disp16],xmm (opdsize)
-2B   [mem] movntsd qword[si+disp16],xmm (REPNE)
-2B   [mem] movntss dword[si+disp16],xmm (REP)
 2B   [mem] movntps oword[di+disp16],xmm
 2B   [mem] movntpd [di+disp16],xmm (opdsize)
-2B   [mem] movntsd qword[di+disp16],xmm (REPNE)
-2B   [mem] movntss dword[di+disp16],xmm (REP)
 2B   [mem] movntps oword[bp+disp16],xmm
 2B   [mem] movntpd [bp+disp16],xmm (opdsize)
-2B   [mem] movntsd qword[bp+disp16],xmm (REPNE)
-2B   [mem] movntss dword[bp+disp16],xmm (REP)
 2B   [mem] movntps oword[bx+disp16],xmm
 2B   [mem] movntpd [bx+disp16],xmm (opdsize)
-2B   [mem] movntsd qword[bx+disp16],xmm (REPNE)
-2B   [mem] movntss dword[bx+disp16],xmm (REP)
 2C   [mem] cvttps2pi mm,[bx+si]
 2C   [mem] cvttpd2pi mm,[bx+si] (opdsize)
 2C   [mem] cvttsd2si r32,[bx+si] (REPNE)
@@ -5610,38 +5527,6 @@
 76   [11B] pcmpeqd mm,mm7
 76   [11B] pcmpeqd xmm,xmm7 (opdsize)
 77         emms
-78   [11B] extrq xmm0,imm,imm (opdsize)
-78   [11B] insertq xmm,xmm0,imm,imm (REPNE)
-78   [11B] extrq xmm1,imm,imm (opdsize)
-78   [11B] insertq xmm,xmm1,imm,imm (REPNE)
-78   [11B] extrq xmm2,imm,imm (opdsize)
-78   [11B] insertq xmm,xmm2,imm,imm (REPNE)
-78   [11B] extrq xmm3,imm,imm (opdsize)
-78   [11B] insertq xmm,xmm3,imm,imm (REPNE)
-78   [11B] extrq xmm4,imm,imm (opdsize)
-78   [11B] insertq xmm,xmm4,imm,imm (REPNE)
-78   [11B] extrq xmm5,imm,imm (opdsize)
-78   [11B] insertq xmm,xmm5,imm,imm (REPNE)
-78   [11B] extrq xmm6,imm,imm (opdsize)
-78   [11B] insertq xmm,xmm6,imm,imm (REPNE)
-78   [11B] extrq xmm7,imm,imm (opdsize)
-78   [11B] insertq xmm,xmm7,imm,imm (REPNE)
-79   [11B] extrq xmm,xmm0 (opdsize)
-79   [11B] insertq xmm,xmm0 (REPNE)
-79   [11B] extrq xmm,xmm1 (opdsize)
-79   [11B] insertq xmm,xmm1 (REPNE)
-79   [11B] extrq xmm,xmm2 (opdsize)
-79   [11B] insertq xmm,xmm2 (REPNE)
-79   [11B] extrq xmm,xmm3 (opdsize)
-79   [11B] insertq xmm,xmm3 (REPNE)
-79   [11B] extrq xmm,xmm4 (opdsize)
-79   [11B] insertq xmm,xmm4 (REPNE)
-79   [11B] extrq xmm,xmm5 (opdsize)
-79   [11B] insertq xmm,xmm5 (REPNE)
-79   [11B] extrq xmm,xmm6 (opdsize)
-79   [11B] insertq xmm,xmm6 (REPNE)
-79   [11B] extrq xmm,xmm7 (opdsize)
-79   [11B] insertq xmm,xmm7 (REPNE)
 7C   [mem] haddpd xmm,oword[bx+si] (opdsize)
 7C   [mem] haddps xmm,oword[bx+si] (REPNE)
 7C   [mem] haddpd xmm,oword[bx+di] (opdsize)

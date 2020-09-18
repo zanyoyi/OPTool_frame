@@ -58,8 +58,4 @@
 3F          vpmaxud Vx,Hx,Wx (66),(v1) (opdsize)
 40          vpmulld Vx,Hx,Wx (66),(v1) (opdsize)
 41          vphminposuw Vdq,Wdq (66),(v1) (opdsize)
-80          INVEPT Gy,Mdq (66) (opdsize)
-81          INVVPID Gy,Mdq (66) (opdsize)
 82          INVPCID Gy,Mdq (66) (opdsize)
-DB          vaesimc Vdq,Wdq (66),(v1) (opdsize)
-F9          MOVDIRI My,Gy

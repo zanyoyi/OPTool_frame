@@ -8,8 +8,6 @@
 01/1        SIDT Ms
 01/1        MONITOR (000),(11B)
 01/1        MWAIT (001),(11B)
-01/1        CLAC (010),(11B)
-01/1        STAC (011),(11B)
 01/2        LGDT Ms
 01/2        XGETBV (000),(11B)
 01/2        XSETBV (001),(11B)
@@ -23,12 +21,10 @@
 06          CLTS
 08          INVD
 09          WBINVD
-09          WBNOINVD (F3) (REP)
 0B          UD2 (1B)
 0D/0        PREFETCH
 0D/1        PREFETCHW
 0E          FEMMS
-0F          3DNow! Pq,Qq,Ib
 10          vmovups Vps,Wps
 10          vmovupd Vpd,Wpd (66) (opdsize)
 10          vmovss Vx,Hx,Wss (F3),(v1) (REP)
@@ -91,7 +87,6 @@
 33          RDPMC
 34          SYSENTER
 35          SYSEXIT
-37          GETSEC
 38          escape # 3-byte escape 1
 3A          escape # 3-byte escape 2
 40          CMOVO Gv,Ev
@@ -128,9 +123,10 @@
 56          vorpd Vpd,Hpd,Wpd (66) (opdsize)
 57          vxorps Vps,Hps,Wps
 57          vxorpd Vpd,Hpd,Wpd (66) (opdsize)
-58          vcvtdq2ps Vps,Wdq
-58          vcvtps2dq Vdq,Wps (66) (opdsize)
-58          vcvttps2dq Vdq,Wps (F3) (REP)
+58          vaddps Vps,Hps,Wps
+58          vaddpd Vpd,Hpd,Wpd (66) (opdsize)
+58          vaddss Vss,Hss,Wss (F3),(v1) (REP)
+58          vaddsd Vsd,Hsd,Wsd (F2),(v1) (REPNE)
 59          vmulps Vps,Hps,Wps
 59          vmulpd Vpd,Hpd,Wpd (66) (opdsize)
 59          vmulss Vss,Hss,Wss (F3),(v1) (REP)
@@ -218,8 +214,6 @@
 76          pcmpeqd Pq,Qq
 76          vpcmpeqd Vx,Hx,Wx (66),(v1) (opdsize)
 77          emms
-78          VMREAD Ey,Gy
-79          VMWRITE Gy,Ey
 7C          vhaddpd Vpd,Hpd,Wpd (66) (opdsize)
 7C          vhaddps Vps,Hps,Wps (F2) (REPNE)
 7D          vhsubpd Vpd,Hpd,Wpd (66) (opdsize)
@@ -275,27 +269,15 @@ AB          BTS Ev,Gv
 AC          SHRD Ev,Gv,Ib
 AD          SHRD Ev,Gv,CL
 AE/0        fxsave
-AE/0        RDFSBASE Ry (F3),(11B) (REP)
 AE/1        fxstor
-AE/1        RDGSBASE Ry (F3),(11B) (REP)
 AE/2        vldmxcsr Md (v1)
-AE/2        WRFSBASE Ry (F3),(11B) (REP)
 AE/3        vstmxcsr Md (v1)
-AE/3        WRGSBASE Ry (F3),(11B) (REP)
 AE/4        XSAVE
-AE/4        ptwrite Ey (F3),(11B) (REP)
 AE/5        XRSTOR
 AE/5        lfence (11B)
-AE/5        INCSSPD/Q Ry (F3),(11B) (REP)
 AE/6        XSAVEOPT
-AE/6        clwb (66) (opdsize)
 AE/6        mfence (11B)
-AE/6        TPAUSE Rd (66),(11B) (opdsize)
-AE/6        UMONITOR Rv (F3),(11B) (REP)
-AE/6        UMWAIT Rd (F2),(11B) (REPNE)
-AE/6        CLRSSBSY Mq (F3) (REP)
 AE/7        clflush
-AE/7        clflushopt (66) (opdsize)
 AE/7        sfence (11B)
 AF          IMUL Gv,Ev
 B0          CMPXCHG Eb,Gb
@@ -307,7 +289,6 @@ B5          LGS Gv,Mp
 B6          MOVZX Gv,Eb
 B7          MOVZX Gv,Ew
 B8          JMPE (!F3)
-B8          POPCNT Gv,Ev (F3) (REP)
 B9/0        UD1
 B9/1        UD1
 B9/2        UD1
@@ -322,7 +303,6 @@ BA/6        BTR Ev,Ib
 BA/7        BTC Ev,Ib
 BB          BTC Ev,Gv
 BC          BSF Gv,Ev (!F3)
-BC          TZCNT Gv,Ev (F3) (REP)
 BD          BSR Gv,Ev (!F3)
 BD          LZCNT Gv,Ev (F3) (REP)
 BE          MOVSX Gv,Eb
@@ -344,13 +324,6 @@ C7/1        CMPXCHG8B/16B Mq/Mdq
 C7/3        xrstors
 C7/4        xsavec
 C7/5        xsaves
-C7/6        VMPTRLD Mq
-C7/6        VMCLEAR Mq (66) (opdsize)
-C7/6        VMXON Mq (F3) (REP)
-C7/6        RDRAND Rv (11B)
-C7/7        VMPTRST Mq
-C7/7        VMPTRST Mq (F3) (REP)
-C7/7        RDSEED Rv (11B)
 C8          BSWAP RAX/EAX/R8/R8D
 C9          BSWAP RCX/ECX/R9/R9D
 CA          BSWAP RDX/EDX/R10/R10D

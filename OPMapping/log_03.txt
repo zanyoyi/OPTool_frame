@@ -17,5 +17,3 @@
 40          vdpps Vx,Hx,Wx,Ib (66) (opdsize)
 41          vdppd Vdq,Hdq,Wdq,Ib (66),(v1) (opdsize)
 42          vmpsadbw Vx,Hx,Wx,Ib (66),(v1) (opdsize)
-44          vpclmulqdq Vx,Hx,Wx,Ib (66) (opdsize)
-4C          vpblendvb Vx,Hx,Wx,Lx (66),(v1) (opdsize)
