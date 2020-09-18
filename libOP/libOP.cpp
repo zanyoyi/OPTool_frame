@@ -162,69 +162,85 @@ static BOOL OpcodeGroupCheck(E_XB_OP eOPTab, BYTE buffer)
 }
 
 // uncertain
-static BOOL UncertainModify(E_XB_OP eOPTab, int OpIdx, int OPExtIdx, int PrefixIdx)
+static BOOL UncertainModify(E_XB_OP eOPTab, int OpIdx, int OPExtIdx/*, int PrefixIdx*/)
 {
-    if ((eOPTab == E_1B_OP) && (PrefixIdx == 0x00))
+    if (eOPTab == E_1B_OP)
     {
 
     }
-    else if ((eOPTab == E_1B_OP) && (PrefixIdx == 0x66))
+    else if (eOPTab == E_2B_OP)
     {
-
+        switch (OpIdx)
+        {
+        case 0x00:
+            switch ((OPExtIdx >> 3) & 0x7)
+            {
+            case 0x6:       // jmpe
+                return TRUE;
+            default:
+                break;
+            }
+            break;
+        case 0x01:
+            switch ((OPExtIdx >> 3) & 0x7)
+            {
+            case 0x1:       // monitor, mwait
+                if (OPExtIdx >= 0xC0)
+                {
+                    return TRUE;
+                }
+                break;
+            case 0x2:       // xgetbv, xsetbv
+                if (OPExtIdx >= 0xC0)
+                {
+                    return TRUE;
+                }
+                break;
+            case 0x3:       // invlpga
+                if (OPExtIdx >= 0xC0)
+                {
+                    return TRUE;
+                }
+                break;
+            case 0x7:       // rdtscp, monitorx, mwaitx
+                if (OPExtIdx >= 0xC0)
+                {
+                    return TRUE;
+                }
+                break;
+            default:
+                break;
+            }
+            break;
+        case 0x0D:          // prefetch, prefetchw
+            return TRUE;
+        case 0x18:          // prefetchnta, prefetcht0, prefetcht1, prefetcht2
+            return TRUE;
+        case 0x33:          // rdpmc
+            return TRUE;
+        case 0x77:          // emms
+            return TRUE;
+        case 0xAE:          // Grp
+            return TRUE;
+        case 0xB8:          // jmpe
+            return TRUE;
+        case 0xC7:          // Grp
+            return TRUE;
+        default:
+            break;
+        }
     }
-    else if ((eOPTab == E_1B_OP) && (PrefixIdx == 0xF2))
+    else if (eOPTab == E_3B_OP_0F38)
     {
-
+        switch (OpIdx)
+        {
+        case 0x82:          // invpcid
+            return TRUE;
+        default:
+            break;
+        }
     }
-    else if ((eOPTab == E_1B_OP) && (PrefixIdx == 0xF3))
-    {
-
-    }
-    else if ((eOPTab == E_2B_OP) && (PrefixIdx == 0x00))
-    {
-
-    }
-    else if ((eOPTab == E_2B_OP) && (PrefixIdx == 0x66))
-    {
-
-    }
-    else if ((eOPTab == E_2B_OP) && (PrefixIdx == 0xF2))
-    {
-
-    }
-    else if ((eOPTab == E_2B_OP) && (PrefixIdx == 0xF3))
-    {
-
-    }
-    else if ((eOPTab == E_3B_OP_0F38) && (PrefixIdx == 0x00))
-    {
-
-    }
-    else if ((eOPTab == E_3B_OP_0F38) && (PrefixIdx == 0x66))
-    {
-
-    }
-    else if ((eOPTab == E_3B_OP_0F38) && (PrefixIdx == 0xF2))
-    {
-
-    }
-    else if ((eOPTab == E_3B_OP_0F38) && (PrefixIdx == 0xF3))
-    {
-
-    }
-    else if ((eOPTab == E_3B_OP_0F3A) && (PrefixIdx == 0x00))
-    {
-
-    }
-    else if ((eOPTab == E_3B_OP_0F3A) && (PrefixIdx == 0x66))
-    {
-
-    }
-    else if ((eOPTab == E_3B_OP_0F3A) && (PrefixIdx == 0xF2))
-    {
-
-    }
-    else if ((eOPTab == E_3B_OP_0F3A) && (PrefixIdx == 0xF3))
+    else if (eOPTab == E_3B_OP_0F3A)
     {
 
     }
@@ -1481,7 +1497,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     if (lendis && (options & 0x00F00000) && PrefixIdx_next)
                     {
                         // highlight those that are not so sure
-                        if (UncertainModify(eOPTab, OpIdx, OP_2, PrefixIdx))
+                        if (UncertainModify(eOPTab, OpIdx, OP_2/*, PrefixIdx*/))
                         {
 
                         }
@@ -1493,7 +1509,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     else if (lendis)
                     {
                         // highlight those that are not so sure
-                        if (UncertainModify(eOPTab, OpIdx, OP_2, PrefixIdx))
+                        if (UncertainModify(eOPTab, OpIdx, OP_2/*, PrefixIdx*/))
                         {
 
                         }
@@ -1529,7 +1545,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     if (lendis && (options & 0x00F00000) && PrefixIdx_next)
                     {
                         // highlight those that are not so sure
-                        if (UncertainModify(eOPTab, OpIdx, OP_2, PrefixIdx))
+                        if (UncertainModify(eOPTab, OpIdx, OP_2/*, PrefixIdx*/))
                         {
 
                         }
@@ -1541,7 +1557,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     else if (lendis)
                     {
                         // highlight those that are not so sure
-                        if (UncertainModify(eOPTab, OpIdx, OP_2, PrefixIdx))
+                        if (UncertainModify(eOPTab, OpIdx, OP_2/*, PrefixIdx*/))
                         {
 
                         }
@@ -1586,7 +1602,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     if (lendis && (options & 0x00F00000) && PrefixIdx_next)
                     {
                         // highlight those that are not so sure
-                        if (UncertainModify(eOPTab, OpIdx, OP_2, PrefixIdx))
+                        if (UncertainModify(eOPTab, OpIdx, OP_2/*, PrefixIdx*/))
                         {
 
                         }
@@ -1598,7 +1614,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     else if (lendis)
                     {
                         // highlight those that are not so sure
-                        if (UncertainModify(eOPTab, OpIdx, OP_2, PrefixIdx))
+                        if (UncertainModify(eOPTab, OpIdx, OP_2/*, PrefixIdx*/))
                         {
 
                         }
