@@ -7993,14 +7993,6 @@ C7/5 [mem] xsaves [si+disp16]
 C7/5 [mem] xsaves [di+disp16]
 C7/5 [mem] xsaves [bp+disp16]
 C7/5 [mem] xsaves [bx+disp16]
-C8         bswap eax (opdsize)
-C9         bswap ecx (opdsize)
-CA         bswap edx (opdsize)
-CB         bswap ebx (opdsize)
-CC         bswap esp (opdsize)
-CD         bswap ebp (opdsize)
-CE         bswap esi (opdsize)
-CF         bswap edi (opdsize)
 D0   [mem] addsubpd xmm,oword[bx+si] (opdsize)
 D0   [mem] addsubps xmm,oword[bx+si] (REPNE)
 D0   [mem] addsubpd xmm,oword[bx+di] (opdsize)

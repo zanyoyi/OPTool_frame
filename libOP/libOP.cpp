@@ -1677,6 +1677,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         }
                         pOpEntry++;
                         lFound++;
+                        PrefixIdx_previous = PrefixIdx;
                         OPExtIdx = 256; // skip rest
                         //lFound2 = lFound;   // update found entries
                     }
