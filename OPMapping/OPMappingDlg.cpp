@@ -225,7 +225,7 @@ void COPMappingDlg::OnBnClickedButton2()
 		strTemp.Format(_T("%i item in listbox"),lOpMatch);
 		SetDlgItemText(IDC_STATUS,strTemp);
 		m_strAsmList.ResetContent();
-		for(DWORD i = 0 ; i < lOpMatch ; i++)
+		for(i = 0 ; i < (int)lOpMatch ; i++)
 		{
 			if (OpEntry[i].ReqPrefix & PF_Operand)
 			{
@@ -411,6 +411,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = FWAIT;
 		}
+		else
+		{
+			prefixes = NULL;
+		}
 		if (ptr_OpEntry[i].ReqPrefix & 0x01)
 		{
 			// group, prefixes
@@ -486,6 +490,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = FWAIT;
 		}
+		else
+		{
+			prefixes = NULL;
+		}
 		if (ptr_OpEntry[i].ReqPrefix & 0x01)
 		{
 			// group, prefixes
@@ -560,6 +568,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		else if (ptr_OpEntry[i].ReqPrefix & PF_FWAIT)
 		{
 			prefixes = FWAIT;
+		}
+		else
+		{
+			prefixes = NULL;
 		}
 		if (ptr_OpEntry[i].ReqPrefix & 0x01)
 		{
@@ -637,6 +649,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = FWAIT;
 		}
+		else
+		{
+			prefixes = NULL;
+		}
 		if (ptr_OpEntry[i].ReqPrefix & 0x01)
 		{
 			// group, prefixes
@@ -711,6 +727,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		else if (ptr_OpEntry[i].ReqPrefix & PF_FWAIT)
 		{
 			prefixes = FWAIT;
+		}
+		else
+		{
+			prefixes = NULL;
 		}
 		if (ptr_OpEntry[i].ReqPrefix & 0x01)
 		{
@@ -787,6 +807,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = FWAIT;
 		}
+		else
+		{
+			prefixes = NULL;
+		}
 		if (ptr_OpEntry[i].ReqPrefix & 0x01)
 		{
 			// group, prefixes
@@ -862,6 +886,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = FWAIT;
 		}
+		else
+		{
+			prefixes = NULL;
+		}
 		if (ptr_OpEntry[i].ReqPrefix & 0x01)
 		{
 			// group, prefixes
@@ -910,7 +938,7 @@ void COPMappingDlg::OnBnClickedButton1()
 	// release file stream
 	fclose(File_Handler);
 
-	// Phase 08. 3-byte opcode 0FEA-- / 16-bit address -- / EXPAND_MODRM
+	// Phase 08. 3-byte opcode 0F3A-- / 16-bit address -- / EXPAND_MODRM
 
 	// point to valid file
 	File_Handler = File_Handler_07;
@@ -936,6 +964,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		else if (ptr_OpEntry[i].ReqPrefix & PF_FWAIT)
 		{
 			prefixes = FWAIT;
+		}
+		else
+		{
+			prefixes = NULL;
 		}
 		if (ptr_OpEntry[i].ReqPrefix & 0x01)
 		{
@@ -1012,6 +1044,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = FWAIT;
 		}
+		else
+		{
+			prefixes = NULL;
+		}
 		if (ptr_OpEntry[i].ReqPrefix & 0x01)
 		{
 			// group, prefixes
@@ -1086,6 +1122,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		else if (ptr_OpEntry[i].ReqPrefix & PF_FWAIT)
 		{
 			prefixes = FWAIT;
+		}
+		else
+		{
+			prefixes = NULL;
 		}
 		if (ptr_OpEntry[i].ReqPrefix & 0x01)
 		{
@@ -1163,6 +1203,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		{
 			prefixes = FWAIT;
 		}
+		else
+		{
+			prefixes = NULL;
+		}
 		if (ptr_OpEntry[i].ReqPrefix & 0x01)
 		{
 			// group, prefixes
@@ -1238,6 +1282,10 @@ void COPMappingDlg::OnBnClickedButton1()
 		else if (ptr_OpEntry[i].ReqPrefix & PF_FWAIT)
 		{
 			prefixes = FWAIT;
+		}
+		else
+		{
+			prefixes = NULL;
 		}
 		if (ptr_OpEntry[i].ReqPrefix & 0x01)
 		{
