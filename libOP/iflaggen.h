@@ -241,6 +241,6 @@ typedef struct {
 } iflag_t;
 
 /* All combinations of instruction flags used in instruction patterns */
-extern const iflag_t insns_flags[159];
+extern const iflag_t insns_flags[136];
 
 #endif /* NASM_IFLAGGEN_H */
