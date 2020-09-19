@@ -9,8 +9,8 @@
 
 extern "C" int ndisasm(unsigned char* data, OPENTRY * pOpEntry, E_ADM eADM, unsigned int* flags);
 
-// find 8 throughput
-static BOOL GrpMatch(WCHAR* strModRM, BYTE bGrpIdx)
+// match group octal number
+static BOOL GrpMatch(WCHAR* strModRM, int bGrpIdx)
 {
     BYTE BitMap[8] = { 0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01 };
     for (int i = 2; i < 5; i++)
@@ -28,7 +28,8 @@ static BOOL GrpMatch(WCHAR* strModRM, BYTE bGrpIdx)
     return TRUE;
 }
 
-static BOOL OPMatch(WCHAR* strOP, BYTE bOP)
+// match last byte (or the only byte in 1-byte opcode)
+static BOOL OPMatch(WCHAR* strOP, int bOP)
 {
     BYTE BitMap[8] = { 0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01 };
 
@@ -47,6 +48,7 @@ static BOOL OPMatch(WCHAR* strOP, BYTE bOP)
     return TRUE;
 }
 
+// skip 
 static BOOL ByteMapHitPrefix(E_ADM eADM, BYTE data)
 {
     if (eADM == E_AD64)
@@ -133,6 +135,7 @@ static BOOL ByteMapHitPrefix(E_ADM eADM, BYTE data)
     }
 }
 
+// check is group?
 static BOOL OpcodeGroupCheck(E_XB_OP eOPTab, BYTE buffer)
 {
     if (eOPTab == E_1B_OP)
@@ -158,31 +161,178 @@ static BOOL OpcodeGroupCheck(E_XB_OP eOPTab, BYTE buffer)
     return FALSE;
 }
 
+// uncertain
+static BOOL UncertainModify(E_XB_OP eOPTab, int OpIdx, int OPExtIdx/*, int PrefixIdx*/)
+{
+    if (eOPTab == E_1B_OP)
+    {
+
+    }
+    else if (eOPTab == E_2B_OP)
+    {
+        switch (OpIdx)
+        {
+        case 0x01:          // Grp07
+            switch ((OPExtIdx >> 3) & 0x7)
+            {
+            case 0x1:       // monitor, mwait
+                if (OPExtIdx >= 0xC0)
+                {
+                    return TRUE;
+                }
+                break;
+            case 0x2:       // xgetbv, xsetbv
+                if (OPExtIdx >= 0xC0)
+                {
+                    return TRUE;
+                }
+                break;
+            case 0x7:       // rdtscp
+                if (OPExtIdx >= 0xC0)
+                {
+                    return TRUE;
+                }
+                break;
+            default:
+                break;
+            }
+            break;
+        case 0x0D:          // GrpP
+            switch ((OPExtIdx >> 3) & 0x7)
+            {
+            case 0x0:       // prefetch
+                if (!(OPExtIdx >= 0xC0))
+                {
+                    return TRUE;
+                }
+                break;
+            case 0x1:       // prefetchw
+                if (!(OPExtIdx >= 0xC0))
+                {
+                    return TRUE;
+                }
+                break;
+            default:
+                break;
+            }
+            return TRUE;
+        case 0x18:          // Grp16
+            switch ((OPExtIdx >> 3) & 0x7)
+            {
+            case 0x0:       // prefetchnta
+                if (!(OPExtIdx >= 0xC0))
+                {
+                    return TRUE;
+                }
+                break;
+            case 0x1:       // prefetcht0
+                if (!(OPExtIdx >= 0xC0))
+                {
+                    return TRUE;
+                }
+                break;
+            case 0x2:       // prefetcht1
+                if (!(OPExtIdx >= 0xC0))
+                {
+                    return TRUE;
+                }
+                break;
+            case 0x3:       // prefetcht2
+                if (!(OPExtIdx >= 0xC0))
+                {
+                    return TRUE;
+                }
+                break;
+            default:
+                break;
+            }
+            return TRUE;
+        case 0x33:          // rdpmc
+            return TRUE;
+        case 0xAE:          // Grp15 
+            switch ((OPExtIdx >> 3) & 0x7)
+            {
+            case 0x4:       // xsave
+                return TRUE;
+            case 0x5:       // xrstor, lfence
+                return TRUE;
+            case 0x6:       // xsaveopt
+                if (!(OPExtIdx >= 0xC0))
+                {
+                    return TRUE;
+                }
+                break;
+            case 0x7:       // clflush, sfence
+                return TRUE;
+            default:
+                break;
+            }
+            break;
+        case 0xB8:          // jmpe, popcnt
+            return TRUE;
+        case 0xBC:          // bsf, tzcnt
+            return TRUE;
+        case 0xBD:          // bsr, lzcnt
+            return TRUE;
+        case 0xC7:          // Grp09
+            switch ((OPExtIdx >> 3) & 0x7)
+            {
+            case 0x3:       // xrstors
+                return TRUE;
+            case 0x4:       // xsavec
+                return TRUE;
+            case 0x5:       // xsaves
+                return TRUE;
+            default:
+                break;
+            }
+            break;
+        default:
+            break;
+        }
+    }
+    else if (eOPTab == E_3B_OP_0F38)
+    {
+        switch (OpIdx)
+        {
+        case 0x82:          // invpcid
+            return TRUE;
+        default:
+            break;
+        }
+    }
+    else if (eOPTab == E_3B_OP_0F3A)
+    {
+
+    }
+    return FALSE;
+}
+
 // kill, override, invalid
-static BOOL SpuriousCheck(E_XB_OP eOPTab, BYTE OpIdx, BYTE OPExtIdx, int PrefixIdx)
+static BOOL SpuriousCheck(E_XB_OP eOPTab, int OpIdx, /*int OPExtIdx,*/ int PrefixIdx)
 {
     if ((eOPTab == E_1B_OP) && (PrefixIdx == 0x66))
     {
         switch (OpIdx)
         {
-        case 0x60:          // pushaw / pushad / pushaq
-        case 0x61:          // popaw / popad / popaq
-        case 0x6D:          // insw / insd
-        case 0x6F:          // outsw /outsd
-        case 0x98:          // cbw / cwde
-        case 0x99:          // cwd / cwq
-        case 0x9C:          // pushfw / pushfd / pushfq
-        case 0x9D:          // popfw /popfd / popfq
-        case 0xA5:          // movsw / movsd / movsq
-        case 0xA7:          // cmpsw / cmpsd / cmpsq
-        case 0xAB:          // stosw / stosd / sotsq
-        case 0xAD:          // lodsw / lodsd / lodsq
-        case 0xAF:          // scasw / scasd / scasq
-        case 0xC2:          // ret imm16/ ret imm32 / ret imm64
-        case 0xC3:          // retw / retd / retq
-        case 0xCA:          // retf imm16 / retf imm32 / retf imm64
-        case 0xCB:          // retfw / retfd / retfq
-        case 0xCF:          // iretw / iretd / iretq
+        case 0x60:          // pusha / pushaw / pushad / pushaq
+        case 0x61:          // popa / popaw / popad / popaq
+        case 0x6D:          // ins / insw / insd
+        case 0x6F:          // outs / outsw /outsd
+        case 0x98:          // cbw / cwde / cdqe
+        case 0x99:          // cwd / cwq / cwo
+        case 0x9C:          // pushf / pushfw / pushfd / pushfq
+        case 0x9D:          // popf / popfw /popfd / popfq
+        case 0xA5:          // movs / movsw / movsd / movsq
+        case 0xA7:          // cmps / cmpsw / cmpsd / cmpsq
+        case 0xAB:          // stos / stosw / stosd / sotsq
+        case 0xAD:          // lods / lodsw / lodsd / lodsq
+        case 0xAF:          // scas / scasw / scasd / scasq
+        case 0xC2:          // ret imm / ret imm16/ ret imm32 / ret imm64
+        case 0xC3:          // ret / retw / retd / retq
+        case 0xCA:          // retf imm / retf imm16 / retf imm32 / retf imm64
+        case 0xCB:          // retf / retfw / retfd / retfq
+        case 0xCF:          // iret / iretw / iretd / iretq
             return TRUE;
         default:
             break;
@@ -190,11 +340,27 @@ static BOOL SpuriousCheck(E_XB_OP eOPTab, BYTE OpIdx, BYTE OPExtIdx, int PrefixI
     }
     else if ((eOPTab == E_2B_OP) && (PrefixIdx == 0x66))
     {
+        switch (OpIdx)
+        {
+        case 0xB7:      // movzx
+        case 0xBF:      // movsx
+        case 0xC8:      // bswap EAX/E08
+        case 0xC9:      // bswap ECX/E09
+        case 0xCA:      // bswap EDX/E10
+        case 0xCB:      // bswap EBX/E11
+        case 0xCC:      // bswap ESP/E12
+        case 0xCD:      // bswap EBP/E13
+        case 0xCE:      // bswap ESI/E14
+        case 0xCF:      // bswap EDI/E15
+            return TRUE;
+        default:
+            break;
+        }
     }
     return FALSE;
 }
 
-static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
+static DWORD lPrefixes(E_XB_OP eOPTab, int OpIdx, int GrpIdx, OP_ENTRY** pGrp)
 {
     if (eOPTab == E_1B_OP)
     {
@@ -483,10 +649,10 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             return sizeof(OP_0F6A) / sizeof(OP_ENTRY);
         case 0x6B:
             *pGrp = OP_0F6B;
-            return sizeof(OP_0F7B) / sizeof(OP_ENTRY);
+            return sizeof(OP_0F6B) / sizeof(OP_ENTRY);
         case 0x6E:
             *pGrp = OP_0F6E;
-            return sizeof(OP_0F7E) / sizeof(OP_ENTRY);
+            return sizeof(OP_0F6E) / sizeof(OP_ENTRY);
         case 0x6F:
             *pGrp = OP_0F6F;
             return sizeof(OP_0F6F) / sizeof(OP_ENTRY);
@@ -761,37 +927,37 @@ static DWORD lPrefixes(E_XB_OP eOPTab, BYTE OpIdx, BYTE GrpIdx, OP_ENTRY** pGrp)
             return sizeof(OP_0FF2) / sizeof(OP_ENTRY);
         case 0xF3:
             *pGrp = OP_0FF3;
-            return sizeof(OP_0FF4) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FF3) / sizeof(OP_ENTRY);
         case 0xF4:
             *pGrp = OP_0FF4;
-            return sizeof(OP_0FE5) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FF4) / sizeof(OP_ENTRY);
         case 0xF5:
             *pGrp = OP_0FF5;
-            return sizeof(OP_0FE5) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FF5) / sizeof(OP_ENTRY);
         case 0xF6:
             *pGrp = OP_0FF6;
-            return sizeof(OP_0FE6) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FF6) / sizeof(OP_ENTRY);
         case 0xF7:
             *pGrp = OP_0FF7;
-            return sizeof(OP_0FE7) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FF7) / sizeof(OP_ENTRY);
         case 0xF8:
             *pGrp = OP_0FF8;
-            return sizeof(OP_0FE8) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FF8) / sizeof(OP_ENTRY);
         case 0xF9:
             *pGrp = OP_0FF9;
-            return sizeof(OP_0FE9) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FF9) / sizeof(OP_ENTRY);
         case 0xFA:
             *pGrp = OP_0FFA;
-            return sizeof(OP_0FEA) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FFA) / sizeof(OP_ENTRY);
         case 0xFB:
             *pGrp = OP_0FFB;
-            return sizeof(OP_0FEB) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FFB) / sizeof(OP_ENTRY);
         case 0xFC:
             *pGrp = OP_0FFC;
-            return sizeof(OP_0FEC) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FFC) / sizeof(OP_ENTRY);
         case 0xFD:
             *pGrp = OP_0FFD;
-            return sizeof(OP_0FED) / sizeof(OP_ENTRY);
+            return sizeof(OP_0FFD) / sizeof(OP_ENTRY);
         case 0xFE:
             *pGrp = OP_0FFE;
             return sizeof(OP_0FFE) / sizeof(OP_ENTRY);
@@ -1078,7 +1244,7 @@ static DWORD EnumPrefixes(OP_ENTRY* ptr_PrefixGroup, DWORD length, OPENTRY* pOpE
 
     for (DWORD PrefixIdx = 0; (PrefixIdx < length) && (lFound < nOpEntryMax); PrefixIdx++)
     {
-        pOpEntry->ReqPrefix = ptr_PrefixGroup[PrefixIdx].PF;
+        pOpEntry->Attr = ptr_PrefixGroup[PrefixIdx].Attr;
         pOpEntry->OP = OpIdx;
         pOpEntry->OPExt = GrpIdx;
         swprintf(pOpEntry->strDisasm, 128, _T("%hs"), ptr_PrefixGroup[PrefixIdx].strFmt);
@@ -1107,19 +1273,19 @@ static DWORD EnumGrp(E_XB_OP eOPTab, OP_ENTRY* pGrp, WCHAR* strModRMMatch, OPENT
             if (pGrp[GrpIdx].strFmt)
             {
                 pOpEntry->OP = OpIdx;
-                pOpEntry->OPExt = GrpIdx | 0x80; //set [bit 7] for group valid
+                pOpEntry->OPExt = (BYTE)(GrpIdx | 0x80); //set [bit 7] for group valid
                 // get prefix group address and prefix group size
                 if (DWORD lPrefixEntry = lPrefixes(eOPTab, OpIdx, GrpIdx, ptr_ptr_PrefixGroup))
                 {
                     DWORD lGrpFound = 0;
-                    // fill pOpEntry->ReqPrefix in EnumPrefixes()
+                    // fill pOpEntry->Attr in EnumPrefixes()
                     lGrpFound = EnumPrefixes(ptr_PrefixGroup, lPrefixEntry, pOpEntry, nOpEntryMax - lFound);
                     pOpEntry += lGrpFound;
                     lFound += lGrpFound;
                 }
                 else
                 {
-                    pOpEntry->ReqPrefix = pGrp[GrpIdx].PF;
+                    pOpEntry->Attr = pGrp[GrpIdx].Attr;
                     swprintf(pOpEntry->strDisasm, 128, _T("%hs"), pGrp[GrpIdx].strFmt);
                     pOpEntry++;
                     lFound++;
@@ -1385,12 +1551,17 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 // no prefix instruction go here
                 else if (options & 0x08000000)
                 {
-                    pOpEntry->ReqPrefix = prefixes;
-                    pOpEntry->OP = OpIdx;
+                    pOpEntry->Attr = prefixes;
+                    pOpEntry->OP = (BYTE)OpIdx;
                     // group indicator | mod indicator | 11B indicator | group number
                     pOpEntry->OPExt = 0x80 | 0x20 | ((OP_2 >= 0xC0) << 3) | ((OP_2 >> 3) & 0x07);
                     if (lendis && (options & 0x00F00000) && PrefixIdx_next)
                     {
+                        // highlight those that are not so sure
+                        if (UncertainModify(eOPTab, OpIdx, OP_2/*, PrefixIdx*/))
+                        {
+                            pOpEntry->Attr |= PF_Uncertain;
+                        }
                         pOpEntry++;
                         lFound++;
                         PrefixIdx_previous = PrefixIdx;
@@ -1398,10 +1569,16 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     }
                     else if (lendis)
                     {
+                        // highlight those that are not so sure
+                        if (UncertainModify(eOPTab, OpIdx, OP_2/*, PrefixIdx*/))
+                        {
+                            pOpEntry->Attr |= PF_Uncertain;
+                        }
                         pOpEntry++;
                         lFound++;
-                        // reset to default prefix
+                        // needed for test coverage
                         PrefixIdx_previous = PrefixIdx;
+                        // reset to default prefix
                         PrefixIdx = 0;
                         OPExtIdx++;         // find next member
                         //lFound2 = lFound;   // update found entries
@@ -1413,8 +1590,9 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     }
                     else
                     {
-                        // reset to default prefix
+                        // needed for test coverage
                         PrefixIdx_previous = PrefixIdx;
+                        // reset to default prefix
                         PrefixIdx = 0;
                         OPExtIdx++;         // find next member
                         //lFound2 = lFound;   // update found entries
@@ -1423,12 +1601,17 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 // no group instruction go here
                 else if (options & 0x04000000)
                 {
-                    pOpEntry->ReqPrefix = prefixes;
-                    pOpEntry->OP = OpIdx;
+                    pOpEntry->Attr = prefixes;
+                    pOpEntry->OP = (BYTE)OpIdx;
                     // mod indicator | 11B indicator
                     pOpEntry->OPExt = 0x20 | ((OP_2 >= 0xC0) << 3);
                     if (lendis && (options & 0x00F00000) && PrefixIdx_next)
                     {
+                        // highlight those that are not so sure
+                        if (UncertainModify(eOPTab, OpIdx, OP_2/*, PrefixIdx*/))
+                        {
+                            pOpEntry->Attr |= PF_Uncertain;
+                        }
                         pOpEntry++;
                         lFound++;
                         PrefixIdx_previous = PrefixIdx;
@@ -1436,10 +1619,15 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     }
                     else if (lendis)
                     {
+                        // highlight those that are not so sure
+                        if (UncertainModify(eOPTab, OpIdx, OP_2/*, PrefixIdx*/))
+                        {
+                            pOpEntry->Attr |= PF_Uncertain;
+                        }
                         pOpEntry++;
                         lFound++;
-                        // reset to default prefix
                         PrefixIdx_previous = PrefixIdx;
+                        // reset to default prefix
                         PrefixIdx = 0;
                         OPExtIdx |= 0x07;   // skip rest
                         OPExtIdx++;         // find next member
@@ -1453,15 +1641,16 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     }
                     else if(lFound2 == lFound)
                     {
+                        //PrefixIdx_previous = PrefixIdx;
                         // reset to default prefixs
-                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx++;         // always check next member
                     }
                     else
                     {
-                        // reset to default prefixs
+                        // needed for test coverage
                         PrefixIdx_previous = PrefixIdx;
+                        // reset to default prefixs
                         PrefixIdx = 0;
                         OPExtIdx |= 0x07;   // skip rest
                         OPExtIdx++;         // find next member
@@ -1471,11 +1660,16 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 // no modrm instruction go here
                 else
                 {
-                    pOpEntry->ReqPrefix = prefixes;
-                    pOpEntry->OP = OpIdx;
+                    pOpEntry->Attr = prefixes;
+                    pOpEntry->OP = (BYTE)OpIdx;
                     pOpEntry->OPExt = 0;
                     if (lendis && (options & 0x00F00000) && PrefixIdx_next)
                     {
+                        // highlight those that are not so sure
+                        if (UncertainModify(eOPTab, OpIdx, OP_2/*, PrefixIdx*/))
+                        {
+                            pOpEntry->Attr |= PF_Uncertain;
+                        }
                         pOpEntry++;
                         lFound++;
                         PrefixIdx_previous = PrefixIdx;
@@ -1483,8 +1677,15 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     }
                     else if (lendis)
                     {
+                        // highlight those that are not so sure
+                        if (UncertainModify(eOPTab, OpIdx, OP_2/*, PrefixIdx*/))
+                        {
+                            pOpEntry->Attr |= PF_Uncertain;
+                        }
                         pOpEntry++;
                         lFound++;
+                        // needed for test coverage
+                        PrefixIdx_previous = PrefixIdx;
                         OPExtIdx = 256; // skip rest
                         //lFound2 = lFound;   // update found entries
                     }
@@ -1495,15 +1696,15 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     }
                     else if (lFound2 == lFound)
                     {
+                        //PrefixIdx_previous = PrefixIdx;
                         // reset to default prefix
-                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx++;         // always check next member
                     }
                     else
                     {
+                        //PrefixIdx_previous = PrefixIdx;
                         // reset to default prefix
-                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx = 256;     // skip rest
                         //lFound2 = lFound;   // update found entries
@@ -1511,7 +1712,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 }
 
                 // final check
-                if (SpuriousCheck(eOPTab, OpIdx, OP_2, PrefixIdx_previous))
+                if (SpuriousCheck(eOPTab, OpIdx, /*OP_2,*/ PrefixIdx_previous))
                 {
                     pOpEntry--;
                     lFound--;
@@ -1554,11 +1755,29 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     case 0x8f://Grp1A 
                         pGrp = Grp01A_8Fh;
                         break;
+                    case 0xc0://Grp02
+                        pGrp = Grp02_C0h;
+                        break;
+                    case 0xc1://Grp02 
+                        pGrp = Grp02_C1h;
+                        break;
                     case 0xc6://Grp11A 
                         pGrp = Grp11A_C6h;
                         break;
                     case 0xc7://Grp11B 
                         pGrp = Grp11B_C7h;
+                        break;
+                    case 0xd0://Grp02 
+                        pGrp = Grp02_D0h;
+                        break;
+                    case 0xd1://Grp02 
+                        pGrp = Grp02_D1h;
+                        break;
+                    case 0xd2://Grp02 
+                        pGrp = Grp02_D2h;
+                        break;
+                    case 0xd3://Grp02 
+                        pGrp = Grp02_D3h;
                         break;
                     case 0xf6://Grp3_1 
                         pGrp = Grp03_F6h;
@@ -1579,7 +1798,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     if (pGrp)
                     {
                         DWORD lGrpFound = 0;
-                        pOpEntry->OP = OpIdx;
+                        pOpEntry->OP = (BYTE)OpIdx;
                         // pOpEntry->OPExt = 0x80;
                         lGrpFound = EnumGrp(eOPTab, pGrp, &strOPMatch[8], pOpEntry, nOpEntryMax - lFound);
                         pOpEntry += lGrpFound;
@@ -1588,7 +1807,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         // check for group/prefix cases. i.e. 0x8F
                         if (DWORD lPrefixEntry = lPrefixes(eOPTab, OpIdx, 8, ptr_ptr_PrefixGroup))
                         {
-                            pOpEntry->OP = OpIdx;
+                            pOpEntry->OP = (BYTE)OpIdx;
                             pOpEntry->OPExt = 0;
                             lGrpFound = EnumPrefixes(ptr_PrefixGroup, lPrefixEntry, pOpEntry, nOpEntryMax - lFound);
                             pOpEntry += lGrpFound;
@@ -1601,7 +1820,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         if (DWORD lPrefixEntry = lPrefixes(eOPTab,OpIdx,8, ptr_ptr_PrefixGroup))
                         {
                             DWORD lGrpFound = 0;
-                            pOpEntry->OP = OpIdx;
+                            pOpEntry->OP = (BYTE)OpIdx;
                             pOpEntry->OPExt = 0;
                             lGrpFound = EnumPrefixes(ptr_PrefixGroup, lPrefixEntry, pOpEntry, nOpEntryMax - lFound);
                             pOpEntry += lGrpFound;
@@ -1609,9 +1828,9 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         }
                         else
                         {
-                            pOpEntry->OP = OpIdx;
+                            pOpEntry->OP = (BYTE)OpIdx;
                             pOpEntry->OPExt = 0;
-                            pOpEntry->ReqPrefix = OP1BMap[OpIdx].PF;
+                            pOpEntry->Attr = OP1BMap[OpIdx].Attr;
                             swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP1BMap[OpIdx].strFmt);
                             pOpEntry++;
                             lFound++;
@@ -1639,7 +1858,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     if (pGrp)
                     {
                         DWORD lGrpFound = 0;
-                        pOpEntry->OP = OpIdx;
+                        pOpEntry->OP = (BYTE)OpIdx;
                         // pOpEntry->OPExt = 0x80;
                         lGrpFound = EnumGrp(eOPTab, pGrp, &strOPMatch[8], pOpEntry, nOpEntryMax - lFound);
                         pOpEntry += lGrpFound;
@@ -1651,7 +1870,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         if (DWORD lPrefixEntry = lPrefixes(eOPTab, OpIdx, 8, ptr_ptr_PrefixGroup))
                         {
                             DWORD lGrpFound = 0;
-                            pOpEntry->OP = OpIdx;
+                            pOpEntry->OP = (BYTE)OpIdx;
                             pOpEntry->OPExt = 0;
                             lGrpFound = EnumPrefixes(ptr_PrefixGroup, lPrefixEntry, pOpEntry, nOpEntryMax - lFound);
                             pOpEntry += lGrpFound;
@@ -1659,9 +1878,9 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         }
                         else
                         {
-                            pOpEntry->OP = OpIdx;
+                            pOpEntry->OP = (BYTE)OpIdx;
                             pOpEntry->OPExt = 0;
-                            pOpEntry->ReqPrefix = OP3BMap_0F38[OpIdx].PF;
+                            pOpEntry->Attr = OP3BMap_0F38[OpIdx].Attr;
                             swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP3BMap_0F38[OpIdx].strFmt);
                             pOpEntry++;
                             lFound++;
@@ -1677,7 +1896,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         if (DWORD lPrefixEntry = lPrefixes(eOPTab, OpIdx, 8, ptr_ptr_PrefixGroup))
                         {
                             DWORD lGrpFound = 0;
-                            pOpEntry->OP = OpIdx;
+                            pOpEntry->OP = (BYTE)OpIdx;
                             pOpEntry->OPExt = 0;
                             lGrpFound = EnumPrefixes(ptr_PrefixGroup, lPrefixEntry, pOpEntry, nOpEntryMax - lFound);
                             pOpEntry += lGrpFound;
@@ -1685,9 +1904,9 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         }
                         else
                         {
-                            pOpEntry->OP = OpIdx;
+                            pOpEntry->OP = (BYTE)OpIdx;
                             pOpEntry->OPExt = 0;
-                            pOpEntry->ReqPrefix = OP3BMap_0F3A[OpIdx].PF;
+                            pOpEntry->Attr = OP3BMap_0F3A[OpIdx].Attr;
                             swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP3BMap_0F3A[OpIdx].strFmt);
                             pOpEntry++;
                             lFound++;
@@ -1750,14 +1969,14 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     if (pGrp)
                     {
                         DWORD lGrpFound = 0;
-                        pOpEntry->OP = OpIdx;
+                        pOpEntry->OP = (BYTE)OpIdx;
                         lGrpFound = EnumGrp(eOPTab, pGrp, &strOPMatch[8], pOpEntry, nOpEntryMax - lFound);
                         pOpEntry += lGrpFound;
                         lFound += lGrpFound;
                     }
                     else if (OP2BMap[OpIdx].strFmt)
                     {
-                        pOpEntry->OP = OpIdx;
+                        pOpEntry->OP = (BYTE)OpIdx;
                         pOpEntry->OPExt = 0;
                         // get prefix group address and prefix group size
                         if (DWORD lPrefixEntry = lPrefixes(eOPTab, OpIdx, 8, ptr_ptr_PrefixGroup))
@@ -1769,7 +1988,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         }
                         else
                         {
-                            pOpEntry->ReqPrefix = OP2BMap[OpIdx].PF;
+                            pOpEntry->Attr = OP2BMap[OpIdx].Attr;
                             swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP2BMap[OpIdx].strFmt);
                             pOpEntry++;
                             lFound++;

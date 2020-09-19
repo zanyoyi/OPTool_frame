@@ -75,6 +75,7 @@ BEGIN_MESSAGE_MAP(COPMappingDlg, CDialog)
 	ON_WM_QUERYDRAGICON()
 	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDC_BUTTON2, &COPMappingDlg::OnBnClickedButton2)
+	ON_BN_CLICKED(IDC_BUTTON1, &COPMappingDlg::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -224,32 +225,32 @@ void COPMappingDlg::OnBnClickedButton2()
 		strTemp.Format(_T("%i item in listbox"),lOpMatch);
 		SetDlgItemText(IDC_STATUS,strTemp);
 		m_strAsmList.ResetContent();
-		for(DWORD i = 0 ; i < lOpMatch ; i++)
+		for(i = 0 ; i < (int)lOpMatch ; i++)
 		{
-			if (OpEntry[i].ReqPrefix & PF_Operand)
+			if (OpEntry[i].Attr & PF_Operand)
 			{
 				memcpy(prefixes, L"opdsize", sizeof(L"opdsize"));
 			}
-			else if (OpEntry[i].ReqPrefix & PF_REPNE)
+			else if (OpEntry[i].Attr & PF_REPNE)
 			{
 				memcpy(prefixes, L"REPNE", sizeof(L"REPNE"));
 			}
-			else if (OpEntry[i].ReqPrefix & PF_REP)
+			else if (OpEntry[i].Attr & PF_REP)
 			{
 				memcpy(prefixes, L"REP", sizeof(L"REP"));
 			}
-			else if (OpEntry[i].ReqPrefix & PF_FWAIT)
+			else if (OpEntry[i].Attr & PF_FWAIT)
 			{
 				memcpy(prefixes, L"FWAIT", sizeof(L"FWAIT"));
 			}
 
 			// debug mode
 			#ifdef SHOW_VALID
-			if (OpEntry[i].ReqPrefix & 0x01)
+			if (OpEntry[i].Attr & 0x01)
 			{
 			#endif /* SHOW_VALID */
 				// group, prefixes
-				if ((OpEntry[i].OPExt & 0x80) && (OpEntry[i].ReqPrefix & 0xFE))
+				if ((OpEntry[i].OPExt & 0x80) && (OpEntry[i].Attr & 0xFC))
 				{
 					if ((OpEntry[i].OPExt & 0x20) && (OpEntry[i].OPExt & 0x08))
 						strTemp.Format(_T("%02X/%x [11B] %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
@@ -259,7 +260,7 @@ void COPMappingDlg::OnBnClickedButton2()
 						strTemp.Format(_T("%02X/%x       %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
 				}
 				// prefixes
-				else if (OpEntry[i].ReqPrefix & 0xFE)
+				else if (OpEntry[i].Attr & 0xFC)
 				{
 					if ((OpEntry[i].OPExt & 0x20) && (OpEntry[i].OPExt & 0x08))
 						strTemp.Format(_T("%02X   [11B] %s (%s)"), OpEntry[i].OP, OpEntry[i].strDisasm, prefixes);
@@ -294,4 +295,1053 @@ void COPMappingDlg::OnBnClickedButton2()
 			#endif /* SHOW_VALID */
 		}
 	}
+}
+
+
+void COPMappingDlg::OnBnClickedButton1()
+{
+	unsigned int lOpMatch;
+	//unsigned int lOption;
+	wchar_t opdsize[8];
+	wchar_t REPNE[6];
+	wchar_t REP[4];
+	wchar_t FWAIT[7];
+
+	// pointer to the string
+	wchar_t* prefixes;
+
+	// declare file stream
+	FILE *File_Handler_00;
+	FILE* File_Handler_01;
+	FILE* File_Handler_02;
+	FILE* File_Handler_03;
+	FILE* File_Handler_04;
+	FILE* File_Handler_05;
+	FILE* File_Handler_06;
+	FILE* File_Handler_07;
+	FILE* File_Handler_08;
+	FILE* File_Handler_09;
+	FILE* File_Handler_10;
+	FILE* File_Handler_11;
+	FILE* File_Handler_12;
+
+	// pointer to the file handler
+	FILE* File_Handler;
+
+	// Open file stream for write only
+	fopen_s(&File_Handler_00, "log_00.txt","w");
+	fopen_s(&File_Handler_01, "log_01.txt", "w");
+	fopen_s(&File_Handler_02, "log_02.txt", "w");
+	fopen_s(&File_Handler_03, "log_03.txt", "w");
+	fopen_s(&File_Handler_04, "log_04.txt", "w");
+	fopen_s(&File_Handler_05, "log_05.txt", "w");
+	fopen_s(&File_Handler_06, "log_06.txt", "w");
+	fopen_s(&File_Handler_07, "log_07.txt", "w");
+	fopen_s(&File_Handler_08, "log_08.txt", "w");
+	fopen_s(&File_Handler_09, "log_09.txt", "w");
+	fopen_s(&File_Handler_10, "log_10.txt", "w");
+	fopen_s(&File_Handler_11, "log_11.txt", "w");
+	fopen_s(&File_Handler_12, "log_12.txt", "w");
+
+	// Close stream if it is not NULL
+	if (
+		(File_Handler_00 && File_Handler_01 && File_Handler_02 && File_Handler_03 && 
+			File_Handler_04 && File_Handler_05 && File_Handler_06 && File_Handler_07 && 
+			File_Handler_08 && File_Handler_09 && File_Handler_10 && File_Handler_11 &&
+			File_Handler_12) == NULL
+		)
+	{
+		return;
+	}
+
+	// go on if Destination file is ready
+
+	// allocate large memory pool for temp data
+	OPENTRY*  ptr_OpEntry = (OPENTRY*) malloc(15887 * sizeof(OPENTRY));
+	memcpy(opdsize, L"opdsize", sizeof(L"opdsize"));
+	memcpy(REPNE, L"REPNE", sizeof(L"REPNE"));
+	memcpy(REP, L"REP", sizeof(L"REP"));
+	memcpy(FWAIT, L"FWAIT", sizeof(L"FWAIT"));
+
+	// ouch, that's 15887 * 264 = 3.999 M-Byte memory
+	if (ptr_OpEntry == NULL)
+	{
+		return;
+	}
+
+	// default setting
+
+	//if (m_bDecodeOPMap)
+	//{
+	//	lOption = OPTION_DECODE_OPMAP;
+	//}
+	//else if (m_bExpandEA)
+	//{
+	//	lOption = OPTION_EXPAND_MODRM_EA;
+	//}
+	//else
+	//{
+	//	lOption = 0;
+	//}
+
+	// Phase 01. 1-byte opcode ------ / 16-bit address -- / DECODE_OPMAP
+
+	// point to valid file
+	File_Handler = File_Handler_00;
+	// do the actual query
+	lOpMatch = xEnumOPCode((E_XB_OP)E_1B_OP, (E_ADM)E_AD16,
+		L"xxxxxxxxxxxxxxxx", ptr_OpEntry, 15887, (DWORD)OPTION_DECODE_OPMAP);
+	
+	// do the actual write
+	for (unsigned int i = 0; i < lOpMatch; i++)
+	{
+		if (ptr_OpEntry[i].Attr & PF_Operand)
+		{
+			prefixes = opdsize;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
+		{
+			prefixes = REPNE;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REP)
+		{
+			prefixes = REP;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
+		{
+			prefixes = FWAIT;
+		}
+		else
+		{
+			prefixes = NULL;
+		}
+		if (ptr_OpEntry[i].Attr & 0x01)
+		{
+			// group, prefixes
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// prefixes
+			else if (ptr_OpEntry[i].Attr & 0xFC)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// group
+			else if (ptr_OpEntry[i].OPExt & 0x80)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+			}
+			// default
+			else
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+			}
+		}
+	}
+
+	// release file stream
+	fclose(File_Handler);
+
+	// Phase 02. 2-byte opcode 0F---- / 16-bit address -- / DECODE_OPMAP
+
+	// point to valid file
+	File_Handler = File_Handler_01;
+	// do the actual query
+	lOpMatch = xEnumOPCode((E_XB_OP)E_2B_OP, (E_ADM)E_AD16,
+		L"xxxxxxxxxxxxxxxx", ptr_OpEntry, 15887, (DWORD)OPTION_DECODE_OPMAP);
+
+	// do the actual write
+	for (unsigned int i = 0; i < lOpMatch; i++)
+	{
+		if (ptr_OpEntry[i].Attr & PF_Operand)
+		{
+			prefixes = opdsize;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
+		{
+			prefixes = REPNE;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REP)
+		{
+			prefixes = REP;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
+		{
+			prefixes = FWAIT;
+		}
+		else
+		{
+			prefixes = NULL;
+		}
+		if (ptr_OpEntry[i].Attr & 0x01)
+		{
+			// group, prefixes
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// prefixes
+			else if (ptr_OpEntry[i].Attr & 0xFC)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// group
+			else if (ptr_OpEntry[i].OPExt & 0x80)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+			}
+			// default
+			else
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+			}
+		}
+	}
+
+	// release file stream
+	fclose(File_Handler);
+
+	// Phase 03. 3-byte opcode 0F38-- / 16-bit address -- / DECODE_OPMAP
+
+	// point to valid file
+	File_Handler = File_Handler_02;
+	// do the actual query
+	lOpMatch = xEnumOPCode((E_XB_OP)E_3B_OP_0F38, (E_ADM)E_AD16,
+		L"xxxxxxxxxxxxxxxx", ptr_OpEntry, 15887, (DWORD)OPTION_DECODE_OPMAP);
+
+	// do the actual write
+	for (unsigned int i = 0; i < lOpMatch; i++)
+	{
+		if (ptr_OpEntry[i].Attr & PF_Operand)
+		{
+			prefixes = opdsize;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
+		{
+			prefixes = REPNE;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REP)
+		{
+			prefixes = REP;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
+		{
+			prefixes = FWAIT;
+		}
+		else
+		{
+			prefixes = NULL;
+		}
+		if (ptr_OpEntry[i].Attr & 0x01)
+		{
+			// group, prefixes
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// prefixes
+			else if (ptr_OpEntry[i].Attr & 0xFC)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// group
+			else if (ptr_OpEntry[i].OPExt & 0x80)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+			}
+			// default
+			else
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+			}
+		}
+	}
+
+	// release file stream
+	fclose(File_Handler);
+
+
+	// Phase 04. 3-byte opcode 0F3A-- / 16-bit address -- / DECODE_OPMAP
+
+	// point to valid file
+	File_Handler = File_Handler_03;
+	// do the actual query
+	lOpMatch = xEnumOPCode((E_XB_OP)E_3B_OP_0F3A, (E_ADM)E_AD16,
+		L"xxxxxxxxxxxxxxxx", ptr_OpEntry, 15887, (DWORD)OPTION_DECODE_OPMAP);
+
+	// do the actual write
+	for (unsigned int i = 0; i < lOpMatch; i++)
+	{
+		if (ptr_OpEntry[i].Attr & PF_Operand)
+		{
+			prefixes = opdsize;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
+		{
+			prefixes = REPNE;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REP)
+		{
+			prefixes = REP;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
+		{
+			prefixes = FWAIT;
+		}
+		else
+		{
+			prefixes = NULL;
+		}
+		if (ptr_OpEntry[i].Attr & 0x01)
+		{
+			// group, prefixes
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// prefixes
+			else if (ptr_OpEntry[i].Attr & 0xFC)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// group
+			else if (ptr_OpEntry[i].OPExt & 0x80)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+			}
+			// default
+			else
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+			}
+		}
+	}
+
+	// release file stream
+	fclose(File_Handler);
+
+	// Phase 05. 1-byte opcode ------ / 16-bit address -- / EXPAND_MODRM
+
+	// point to valid file
+	File_Handler = File_Handler_04;
+	// do the actual query
+	lOpMatch = xEnumOPCode((E_XB_OP)E_1B_OP, (E_ADM)E_AD16,
+		L"xxxxxxxxxxxxxxxx", ptr_OpEntry, 15887, (DWORD)OPTION_EXPAND_MODRM_EA);
+
+	// do the actual write
+	for (unsigned int i = 0; i < lOpMatch; i++)
+	{
+		if (ptr_OpEntry[i].Attr & PF_Operand)
+		{
+			prefixes = opdsize;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
+		{
+			prefixes = REPNE;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REP)
+		{
+			prefixes = REP;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
+		{
+			prefixes = FWAIT;
+		}
+		else
+		{
+			prefixes = NULL;
+		}
+		if (ptr_OpEntry[i].Attr & 0x01)
+		{
+			// group, prefixes
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// prefixes
+			else if (ptr_OpEntry[i].Attr & 0xFC)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// group
+			else if (ptr_OpEntry[i].OPExt & 0x80)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+			}
+			// default
+			else
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+			}
+		}
+	}
+
+	// release file stream
+	fclose(File_Handler);
+
+	// Phase 06. 2-byte opcode 0F---- / 16-bit address -- / EXPAND_MODRM
+
+	// point to valid file
+	File_Handler = File_Handler_05;
+	// do the actual query
+	lOpMatch = xEnumOPCode((E_XB_OP)E_2B_OP, (E_ADM)E_AD16,
+		L"xxxxxxxxxxxxxxxx", ptr_OpEntry, 15887, (DWORD)OPTION_EXPAND_MODRM_EA);
+
+	// do the actual write
+	for (unsigned int i = 0; i < lOpMatch; i++)
+	{
+		if (ptr_OpEntry[i].Attr & PF_Operand)
+		{
+			prefixes = opdsize;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
+		{
+			prefixes = REPNE;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REP)
+		{
+			prefixes = REP;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
+		{
+			prefixes = FWAIT;
+		}
+		else
+		{
+			prefixes = NULL;
+		}
+		if (ptr_OpEntry[i].Attr & 0x01)
+		{
+			// group, prefixes
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// prefixes
+			else if (ptr_OpEntry[i].Attr & 0xFC)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// group
+			else if (ptr_OpEntry[i].OPExt & 0x80)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+			}
+			// default
+			else
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+			}
+		}
+	}
+
+	// release file stream
+	fclose(File_Handler);
+
+	// Phase 07. 3-byte opcode 0FE8-- / 16-bit address -- / EXPAND_MODRM
+
+	// point to valid file
+	File_Handler = File_Handler_06;
+	// do the actual query
+	lOpMatch = xEnumOPCode((E_XB_OP)E_3B_OP_0F38, (E_ADM)E_AD16,
+		L"xxxxxxxxxxxxxxxx", ptr_OpEntry, 15887, (DWORD)OPTION_EXPAND_MODRM_EA);
+
+	// do the actual write
+	for (unsigned int i = 0; i < lOpMatch; i++)
+	{
+		if (ptr_OpEntry[i].Attr & PF_Operand)
+		{
+			prefixes = opdsize;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
+		{
+			prefixes = REPNE;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REP)
+		{
+			prefixes = REP;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
+		{
+			prefixes = FWAIT;
+		}
+		else
+		{
+			prefixes = NULL;
+		}
+		if (ptr_OpEntry[i].Attr & 0x01)
+		{
+			// group, prefixes
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// prefixes
+			else if (ptr_OpEntry[i].Attr & 0xFC)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// group
+			else if (ptr_OpEntry[i].OPExt & 0x80)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+			}
+			// default
+			else
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+			}
+		}
+	}
+
+	// release file stream
+	fclose(File_Handler);
+
+	// Phase 08. 3-byte opcode 0F3A-- / 16-bit address -- / EXPAND_MODRM
+
+	// point to valid file
+	File_Handler = File_Handler_07;
+	// do the actual query
+	lOpMatch = xEnumOPCode((E_XB_OP)E_3B_OP_0F3A, (E_ADM)E_AD16,
+		L"xxxxxxxxxxxxxxxx", ptr_OpEntry, 15887, (DWORD)OPTION_EXPAND_MODRM_EA);
+
+	// do the actual write
+	for (unsigned int i = 0; i < lOpMatch; i++)
+	{
+		if (ptr_OpEntry[i].Attr & PF_Operand)
+		{
+			prefixes = opdsize;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
+		{
+			prefixes = REPNE;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REP)
+		{
+			prefixes = REP;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
+		{
+			prefixes = FWAIT;
+		}
+		else
+		{
+			prefixes = NULL;
+		}
+		if (ptr_OpEntry[i].Attr & 0x01)
+		{
+			// group, prefixes
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// prefixes
+			else if (ptr_OpEntry[i].Attr & 0xFC)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// group
+			else if (ptr_OpEntry[i].OPExt & 0x80)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+			}
+			// default
+			else
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+			}
+		}
+	}
+
+	// release file stream
+	fclose(File_Handler);
+
+	// Phase 09. 1-byte opcode ------ / 32-bit address -- / EXPAND_MODRM
+
+	// point to valid file
+	File_Handler = File_Handler_08;
+	// do the actual query
+	lOpMatch = xEnumOPCode((E_XB_OP)E_1B_OP, (E_ADM)E_AD32,
+		L"xxxxxxxxxxxxxxxx", ptr_OpEntry, 15887, (DWORD)OPTION_EXPAND_MODRM_EA);
+
+	// do the actual write
+	for (unsigned int i = 0; i < lOpMatch; i++)
+	{
+		if (ptr_OpEntry[i].Attr & PF_Operand)
+		{
+			prefixes = opdsize;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
+		{
+			prefixes = REPNE;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REP)
+		{
+			prefixes = REP;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
+		{
+			prefixes = FWAIT;
+		}
+		else
+		{
+			prefixes = NULL;
+		}
+		if (ptr_OpEntry[i].Attr & 0x01)
+		{
+			// group, prefixes
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// prefixes
+			else if (ptr_OpEntry[i].Attr & 0xFC)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// group
+			else if (ptr_OpEntry[i].OPExt & 0x80)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+			}
+			// default
+			else
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+			}
+		}
+	}
+
+	// release file stream
+	fclose(File_Handler);
+
+	// Phase 10. 2-byte opcode 0F---- / 32-bit address -- / EXPAND_MODRM
+
+	// point to valid file
+	File_Handler = File_Handler_09;
+	// do the actual query
+	lOpMatch = xEnumOPCode((E_XB_OP)E_2B_OP, (E_ADM)E_AD32,
+		L"xxxxxxxxxxxxxxxx", ptr_OpEntry, 15887, (DWORD)OPTION_EXPAND_MODRM_EA);
+
+	// do the actual write
+	for (unsigned int i = 0; i < lOpMatch; i++)
+	{
+		if (ptr_OpEntry[i].Attr & PF_Operand)
+		{
+			prefixes = opdsize;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
+		{
+			prefixes = REPNE;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REP)
+		{
+			prefixes = REP;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
+		{
+			prefixes = FWAIT;
+		}
+		else
+		{
+			prefixes = NULL;
+		}
+		if (ptr_OpEntry[i].Attr & 0x01)
+		{
+			// group, prefixes
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// prefixes
+			else if (ptr_OpEntry[i].Attr & 0xFC)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// group
+			else if (ptr_OpEntry[i].OPExt & 0x80)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+			}
+			// default
+			else
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+			}
+		}
+	}
+
+	// release file stream
+	fclose(File_Handler);
+
+
+	// Phase 11. 3-byte opcode 0F38-- / 32-bit address -- / EXPAND_MODRM
+
+	// point to valid file
+	File_Handler = File_Handler_10;
+	// do the actual query
+	lOpMatch = xEnumOPCode((E_XB_OP)E_3B_OP_0F38, (E_ADM)E_AD32,
+		L"xxxxxxxxxxxxxxxx", ptr_OpEntry, 15887, (DWORD)OPTION_EXPAND_MODRM_EA);
+
+	// do the actual write
+	for (unsigned int i = 0; i < lOpMatch; i++)
+	{
+		if (ptr_OpEntry[i].Attr & PF_Operand)
+		{
+			prefixes = opdsize;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
+		{
+			prefixes = REPNE;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REP)
+		{
+			prefixes = REP;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
+		{
+			prefixes = FWAIT;
+		}
+		else
+		{
+			prefixes = NULL;
+		}
+		if (ptr_OpEntry[i].Attr & 0x01)
+		{
+			// group, prefixes
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// prefixes
+			else if (ptr_OpEntry[i].Attr & 0xFC)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// group
+			else if (ptr_OpEntry[i].OPExt & 0x80)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+			}
+			// default
+			else
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+			}
+		}
+	}
+
+	// release file stream
+	fclose(File_Handler);
+
+
+	// Phase 12. 1-byte opcode 0F3A-- / 32-bit address -- / EXPAND_MODRM
+
+	// point to valid file
+	File_Handler = File_Handler_11;
+	// do the actual query
+	lOpMatch = xEnumOPCode((E_XB_OP)E_3B_OP_0F3A, (E_ADM)E_AD32,
+		L"xxxxxxxxxxxxxxxx", ptr_OpEntry, 15887, (DWORD)OPTION_EXPAND_MODRM_EA);
+
+	// do the actual write
+	for (unsigned int i = 0; i < lOpMatch; i++)
+	{
+		if (ptr_OpEntry[i].Attr & PF_Operand)
+		{
+			prefixes = opdsize;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REPNE)
+		{
+			prefixes = REPNE;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_REP)
+		{
+			prefixes = REP;
+		}
+		else if (ptr_OpEntry[i].Attr & PF_FWAIT)
+		{
+			prefixes = FWAIT;
+		}
+		else
+		{
+			prefixes = NULL;
+		}
+		if (ptr_OpEntry[i].Attr & 0x01)
+		{
+			// group, prefixes
+			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// prefixes
+			else if (ptr_OpEntry[i].Attr & 0xFC)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+				else
+					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+			}
+			// group
+			else if (ptr_OpEntry[i].OPExt & 0x80)
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+			}
+			// default
+			else
+			{
+				if ((ptr_OpEntry[i].OPExt & 0x20) && (ptr_OpEntry[i].OPExt & 0x08))
+					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else if (ptr_OpEntry[i].OPExt & 0x20)
+					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+				else
+					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+			}
+		}
+	}
+
+	// release file stream
+	fclose(File_Handler);
+
+	// point to valid file
+	File_Handler = File_Handler_12;
+	// release file stream
+	fclose(File_Handler);
+
+	// de-allocate large memory pool for temp data
+	free(ptr_OpEntry);
+
+
 }

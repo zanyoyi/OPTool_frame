@@ -1,4 +1,4 @@
-#ifndef __LIB_OP_H__
+    #ifndef __LIB_OP_H__
 #define __LIB_OP_H__
 
 
@@ -23,7 +23,7 @@ extern  "C" {
 typedef struct{
 	BYTE OP;         //OP code
 	BYTE OPExt;      //Op extension:OPExt[7]set to 1 indicate OPExt[2:0] is valid.
-    DWORD ReqPrefix;
+    DWORD Attr;
     WCHAR strDisasm[128];
 }OPENTRY;
 
@@ -50,6 +50,7 @@ typedef enum{
 
 typedef enum {
     E_Valid,
+    E_Uncertain,
     E_Operand,
     E_REPNE,
     E_REP,
@@ -94,7 +95,8 @@ typedef enum {
     E_PREFETCHWT1,
 }E_FEATURE;
 
-#define PF_Valid        1 << E_Valid        // architecture support flags
+#define PF_Valid        1 << E_Valid        // architecture valid flags
+#define PF_Uncertain    1 << E_Uncertain    // architecture support uncertained flags
 #define PF_Operand      1 << E_Operand      // mandatory prefix 0x66 (66)
 #define PF_REPNE        1 << E_REPNE        // mandatory prefix 0xF2 (F2)
 #define PF_REP          1 << E_REP          // mandatory prefix 0xF3 (F3)
@@ -143,7 +145,7 @@ typedef enum {
 typedef struct {
     BYTE OP;
     BYTE OPExt;         /*[7] indicated valid,[2:0] = ModRm.REG;*/
-    BYTE PF;
+    BYTE Attr;
     char* strFmt;
 }OP_ENTRY;
 
@@ -286,10 +288,10 @@ OP_ENTRY OP1BMap[256] = {
     {0x7e,0x00,0 | PF_Valid," JLE/JNG Jb"},
     {0x7f,0x00,0 | PF_Valid," JNLE/JG Jb"},
     //# 0x80 - 0x8f
-    {0x80,0x80,0," Grp1 Eb,Ib (1A)"},
-    {0x81,0x80,0," Grp1 Ev,Iz (1A)"},
-    {0x82,0x80,0," Grp1 Eb,Ib (1A),(i64)"},
-    {0x83,0x80,0," Grp1 Ev,Ib (1A)"},
+    {0x80,0x80,0 | PF_Valid," Grp1 Eb,Ib (1A)"},
+    {0x81,0x80,0 | PF_Valid," Grp1 Ev,Iz (1A)"},
+    {0x82,0x80,0 | PF_Valid," Grp1 Eb,Ib (1A),(i64)"},
+    {0x83,0x80,0 | PF_Valid," Grp1 Ev,Ib (1A)"},
     {0x84,0x00,0 | PF_Valid," TEST Eb,Gb"},
     {0x85,0x00,0 | PF_Valid," TEST Ev,Gv"},
     {0x86,0x00,0 | PF_Valid," XCHG Eb,Gb"},
@@ -301,7 +303,7 @@ OP_ENTRY OP1BMap[256] = {
     {0x8c,0x00,0 | PF_Valid," MOV Ev,Sw"},
     {0x8d,0x00,0 | PF_Valid," LEA Gv,M"},
     {0x8e,0x00,0 | PF_Valid," MOV Sw,Ew"},
-    {0x8f,0x80,0," Grp1A (1A) | POP Ev (d64)"},
+    {0x8f,0x80,0 | PF_Valid," Grp1A (1A) | POP Ev (d64)"},
     //# 0x90 - 0x9f
     {0x90,0x00,0," NOP | PAUSE (F3) | XCHG rAX/r8,rAX"},
     {0x91,0x00,0 | PF_Valid," XCHG rCX/r9,rAX"},
@@ -356,14 +358,14 @@ OP_ENTRY OP1BMap[256] = {
     {0xbe,0x00,0 | PF_Valid," MOV rSI/r14,Iv"},
     {0xbf,0x00,0 | PF_Valid," MOV rDI/r15,Iv"},
     //# 0xc0 - 0xcf
-    {0xc0,0x80,0," Grp2 Eb,Ib (1A)"},
-    {0xc1,0x80,0," Grp2 Ev,Ib (1A)"},
+    {0xc0,0x80,0 | PF_Valid," Grp2 Eb,Ib (1A)"},
+    {0xc1,0x80,0 | PF_Valid," Grp2 Ev,Ib (1A)"},
     {0xc2,0x00,0 | PF_Valid," RETN Iw (f64)"},
     {0xc3,0x00,0 | PF_Valid," RETN"},
     {0xc4,0x00,0," LES Gz,Mp (i64) | VEX+2byte (Prefix)"},
     {0xc5,0x00,0," LDS Gz,Mp (i64) | VEX+1byte (Prefix)"},
-    {0xc6,0x80,0," Grp11A Eb,Ib (1A)"},
-    {0xc7,0x80,0," Grp11B Ev,Iz (1A)"},
+    {0xc6,0x80,0 | PF_Valid," Grp11A Eb,Ib (1A)"},
+    {0xc7,0x80,0 | PF_Valid," Grp11B Ev,Iz (1A)"},
     {0xc8,0x00,0 | PF_Valid," ENTER Iw,Ib"},
     {0xc9,0x00,0 | PF_Valid," LEAVE (d64)"},
     {0xca,0x00,0 | PF_Valid," RETF Iw"},
@@ -373,10 +375,10 @@ OP_ENTRY OP1BMap[256] = {
     {0xce,0x00,0 | PF_Valid," INTO (i64)"},
     {0xcf,0x00,0 | PF_Valid," IRET/D/Q"},
     //# 0xd0 - 0xdf
-    {0xd0,0x80,0," Grp2 Eb,1 (1A)"},
-    {0xd1,0x80,0," Grp2 Ev,1 (1A)"},
-    {0xd2,0x80,0," Grp2 Eb,CL (1A)"},
-    {0xd3,0x80,0," Grp2 Ev,CL (1A)"},
+    {0xd0,0x80,0 | PF_Valid," Grp2 Eb,1 (1A)"},
+    {0xd1,0x80,0 | PF_Valid," Grp2 Ev,1 (1A)"},
+    {0xd2,0x80,0 | PF_Valid," Grp2 Eb,CL (1A)"},
+    {0xd3,0x80,0 | PF_Valid," Grp2 Ev,CL (1A)"},
     {0xd4,0x00,0 | PF_Valid," AAM Ib (i64)"},
     {0xd5,0x00,0 | PF_Valid," AAD Ib (i64)"},
     {0xd6,0x00,0 | PF_Valid,NULL},
@@ -420,37 +422,37 @@ OP_ENTRY OP1BMap[256] = {
     {0xf3,0x00,0," REP/REPE (Prefix) | XRELEASE (Prefix)"},
     {0xf4,0x00,0 | PF_Valid," HLT"},
     {0xf5,0x00,0 | PF_Valid," CMC"},
-    {0xf6,0x80,0," Grp3_1 Eb (1A)"},
-    {0xf7,0x80,0," Grp3_2 Ev (1A)"},
+    {0xf6,0x80,0 | PF_Valid," Grp3_1 Eb (1A)"},
+    {0xf7,0x80,0 | PF_Valid," Grp3_2 Ev (1A)"},
     {0xf8,0x00,0 | PF_Valid," CLC"},
     {0xf9,0x00,0 | PF_Valid," STC"},
     {0xfa,0x00,0 | PF_Valid," CLI"},
     {0xfb,0x00,0 | PF_Valid," STI"},
     {0xfc,0x00,0 | PF_Valid," CLD"},
     {0xfd,0x00,0 | PF_Valid," STD"},
-    {0xfe,0x80,0," Grp4 (1A)"},
-    {0xff,0x80,0," Grp5 (1A)"},
+    {0xfe,0x80,0 | PF_Valid," Grp4 (1A)"},
+    {0xff,0x80,0 | PF_Valid," Grp5 (1A)"},
 };
 OP_ENTRY OP2BMap[256] = {
     //# 0x0f 0x00-0x0f
-    {0x00,0x80,0," Grp6 (1A)"},
-    {0x01,0x80,0," Grp7 (1A)"},
+    {0x00,0x80,0 | PF_Valid," Grp6 (1A)"},
+    {0x01,0x80,0 | PF_Valid," Grp7 (1A)"},
     {0x02,0x00,0 | PF_Valid," LAR Gv,Ew"},
     {0x03,0x00,0 | PF_Valid," LSL Gv,Ew"},
     {0x04,0x00,0 | PF_Valid,NULL},
-    {0x05,0x00,0 | PF_Valid," SYSCALL (o64)"},
+    {0x05,0x00,0," SYSCALL (o64)"},
     {0x06,0x00,0 | PF_Valid," CLTS"},
-    {0x07,0x00,0 | PF_Valid," SYSRET (o64)"},
+    {0x07,0x00,0," SYSRET (o64)"},
     {0x08,0x00,0 | PF_Valid," INVD"},
     {0x09,0x00,0," WBINVD | WBNOINVD (F3)"},
     {0x0a,0x00,0 | PF_Valid,NULL},
     {0x0b,0x00,0 | PF_Valid," UD2 (1B)"},
     {0x0c,0x00,0 | PF_Valid,NULL},
     //# AMD's prefetch group. Intel supports prefetchw(/1) only.
-    {0x0d,0x80,0," GrpP"},
+    {0x0d,0x80,0 | PF_Valid," GrpP"},
     {0x0e,0x00,0 | PF_Valid," FEMMS"},
     //# 3DNow! uses the last imm byte as opcode extension.
-    {0x0f,0x00,0 | PF_Valid," 3DNow! Pq,Qq,Ib"},
+    {0x0f,0x00,0," 3DNow! Pq,Qq,Ib"},
     //# 0x0f 0x10-0x1f
     //# NOTE: According to Intel SDM opcode map, vmovups and vmovupd has no operands
     //# but it actually has operands. And also, vmovss and vmovsd only accept 128bit.
@@ -465,7 +467,7 @@ OP_ENTRY OP2BMap[256] = {
     {0x15,0x00,0," vunpckhps Vx,Hx,Wx | vunpckhpd Vx,Hx,Wx (66)"},
     {0x16,0x00,0," vmovhps Vdq,Hq,Mq (v1) | vmovlhps Vdq,Hq,Uq (v1) | vmovhpd Vdq,Hq,Mq (66),(v1) | vmovshdup Vx,Wx (F3)"},
     {0x17,0x00,0," vmovhps Mq,Vq (v1) | vmovhpd Mq,Vq (66),(v1)"},
-    {0x18,0x80,0," Grp16 (1A)"},
+    {0x18,0x80,0 | PF_Valid," Grp16 (1A)"},
     {0x19,0x00,0 | PF_Valid,NULL},
     //# Intel SDM opcode map does not list MPX instructions. For now using Gv for
     //# bnd registers and Ev for everything else is OK because the instruction
@@ -473,9 +475,9 @@ OP_ENTRY OP2BMap[256] = {
     //# a ModR/M byte.
     {0x1a,0x00,0," BNDCL Gv,Ev (F3) | BNDCU Gv,Ev (F2) | BNDMOV Gv,Ev (66) | BNDLDX Gv,Ev"},
     {0x1b,0x00,0," BNDCN Gv,Ev (F2) | BNDMOV Ev,Gv (66) | BNDMK Gv,Ev (F3) | BNDSTX Ev,Gv"},
-    {0x1c,0x80,0," Grp20 (1A),(1C)"},
+    {0x1c,0x80,0 | PF_Valid," Grp20 (1A),(1C)"},
     {0x1d,0x00,0 | PF_Valid,NULL},
-    {0x1e,0x80,0," Grp21 (1A)"},
+    {0x1e,0x80,0 | PF_Valid," Grp21 (1A)"},
     {0x1f,0x00,0 | PF_Valid," NOP Ev"},
     //# 0x0f 0x20-0x2f
     {0x20,0x00,0 | PF_Valid," MOV Rd,Cd"},
@@ -498,11 +500,11 @@ OP_ENTRY OP2BMap[256] = {
     {0x30,0x00,0 | PF_Valid," WRMSR"},
     {0x31,0x00,0 | PF_Valid," RDTSC"},
     {0x32,0x00,0 | PF_Valid," RDMSR"},
-    {0x33,0x00,0 | PF_Valid," RDPMC"},
+    {0x33,0x00,0 | PF_Valid | PF_Uncertain," RDPMC"},
     {0x34,0x00,0 | PF_Valid," SYSENTER"},
     {0x35,0x00,0 | PF_Valid," SYSEXIT"},
     {0x36,0x00,0 | PF_Valid,NULL},
-    {0x37,0x00,0 | PF_Valid," GETSEC"},
+    {0x37,0x00,0," GETSEC"},
     {0x38,0x00,0 | PF_Valid," escape # 3-byte escape 1"},
     {0x39,0x00,0 | PF_Valid,NULL},
     {0x3a,0x00,0 | PF_Valid," escape # 3-byte escape 2"},
@@ -564,9 +566,9 @@ OP_ENTRY OP2BMap[256] = {
     {0x6f,0x00,0," movq Pq,Qq | vmovdqa Vx,Wx (66) | vmovdqa32/64 Vx,Wx (66),(evo) | vmovdqu Vx,Wx (F3) | vmovdqu32/64 Vx,Wx (F3),(evo) | vmovdqu"},
     //# 0x0f 0x70-0x7f
     {0x70,0x00,0," pshufw Pq,Qq,Ib | vpshufd Vx,Wx,Ib (66),(v1) | vpshufhw Vx,Wx,Ib (F3),(v1) | vpshuflw Vx,Wx,Ib (F2),(v1)"},
-    {0x71,0x80,0," Grp12 (1A)"},
-    {0x72,0x80,0," Grp13 (1A)"},
-    {0x73,0x80,0," Grp14 (1A)"},
+    {0x71,0x80,0 | PF_Valid," Grp12 (1A)"},
+    {0x72,0x80,0 | PF_Valid," Grp13 (1A)"},
+    {0x73,0x80,0 | PF_Valid," Grp14 (1A)"},
     {0x74,0x00,0," pcmpeqb Pq,Qq | vpcmpeqb Vx,Hx,Wx (66),(v1)"},
     {0x75,0x00,0," pcmpeqw Pq,Qq | vpcmpeqw Vx,Hx,Wx (66),(v1)"},
     {0x76,0x00,0," pcmpeqd Pq,Qq | vpcmpeqd Vx,Hx,Wx (66),(v1)"},
@@ -622,15 +624,15 @@ OP_ENTRY OP2BMap[256] = {
     {0xa3,0x00,0 | PF_Valid," BT Ev,Gv"},
     {0xa4,0x00,0 | PF_Valid," SHLD Ev,Gv,Ib"},
     {0xa5,0x00,0 | PF_Valid," SHLD Ev,Gv,CL"},
-    {0xa6,0x80,0," GrpPDLK"},
-    {0xa7,0x80,0," GrpRNG"},
+    {0xa6,0x80,0 | PF_Valid," GrpPDLK"},
+    {0xa7,0x80,0 | PF_Valid," GrpRNG"},
     {0xa8,0x00,0 | PF_Valid," PUSH GS (d64)"},
     {0xa9,0x00,0 | PF_Valid," POP GS (d64)"},
     {0xaa,0x00,0 | PF_Valid," RSM"},
     {0xab,0x00,0 | PF_Valid," BTS Ev,Gv"},
     {0xac,0x00,0 | PF_Valid," SHRD Ev,Gv,Ib"},
     {0xad,0x00,0 | PF_Valid," SHRD Ev,Gv,CL"},
-    {0xae,0x80,0," Grp15 (1A),(1C)"},
+    {0xae,0x80,0 | PF_Valid," Grp15 (1A),(1C)"},
     {0xaf,0x00,0 | PF_Valid," IMUL Gv,Ev"},
     //# 0x0f 0xb0-0xbf
     {0xb0,0x00,0 | PF_Valid," CMPXCHG Eb,Gb"},
@@ -642,8 +644,8 @@ OP_ENTRY OP2BMap[256] = {
     {0xb6,0x00,0 | PF_Valid," MOVZX Gv,Eb"},
     {0xb7,0x00,0 | PF_Valid," MOVZX Gv,Ew"},
     {0xb8,0x00,0," JMPE (!F3) | POPCNT Gv,Ev (F3)"},
-    {0xb9,0x80,0," Grp10 (1A)"},
-    {0xba,0x80,0," Grp8 Ev,Ib (1A)"},
+    {0xb9,0x80,0 | PF_Valid," Grp10 (1A)"},
+    {0xba,0x80,0 | PF_Valid," Grp8 Ev,Ib (1A)"},
     {0xbb,0x00,0 | PF_Valid," BTC Ev,Gv"},
     {0xbc,0x00,0," BSF Gv,Ev (!F3) | TZCNT Gv,Ev (F3)"},
     {0xbd,0x00,0," BSR Gv,Ev (!F3) | LZCNT Gv,Ev (F3)"},
@@ -657,7 +659,7 @@ OP_ENTRY OP2BMap[256] = {
     {0xc4,0x00,0," pinsrw Pq,Ry/Mw,Ib | vpinsrw Vdq,Hdq,Ry/Mw,Ib (66),(v1)"},
     {0xc5,0x00,0," pextrw Gd,Nq,Ib | vpextrw Gd,Udq,Ib (66),(v1)"},
     {0xc6,0x00,0," vshufps Vps,Hps,Wps,Ib | vshufpd Vpd,Hpd,Wpd,Ib (66)"},
-    {0xc7,0x80,0," Grp9 (1A)"},
+    {0xc7,0x80,0 | PF_Valid," Grp9 (1A)"},
     {0xc8,0x00,0 | PF_Valid," BSWAP RAX/EAX/R8/R8D"},
     {0xc9,0x00,0 | PF_Valid," BSWAP RCX/ECX/R9/R9D"},
     {0xca,0x00,0 | PF_Valid," BSWAP RDX/EDX/R10/R10D"},
@@ -732,10 +734,10 @@ OP_ENTRY OP3BMap_0F38[256] = {
     {0x09,0x00,0," psignw Pq,Qq | vpsignw Vx,Hx,Wx (66),(v1)"},
     {0x0A,0x00,0," psignd Pq,Qq | vpsignd Vx,Hx,Wx (66),(v1)"},
     {0x0B,0x00,0," pmulhrsw Pq,Qq | vpmulhrsw Vx,Hx,Wx (66),(v1)"},
-    {0x0C,0x00,0 | PF_Valid | PF_Operand," vpermilps Vx,Hx,Wx (66),(v)"},
-    {0x0D,0x00,0 | PF_Valid | PF_Operand," vpermilpd Vx,Hx,Wx (66),(v)"},
-    {0x0E,0x00,0 | PF_Valid | PF_Operand," vtestps Vx,Wx (66),(v)"},
-    {0x0F,0x00,0 | PF_Valid | PF_Operand," vtestpd Vx,Wx (66),(v)"},
+    {0x0C,0x00,0 | PF_Operand," vpermilps Vx,Hx,Wx (66),(v)"},
+    {0x0D,0x00,0 | PF_Operand," vpermilpd Vx,Hx,Wx (66),(v)"},
+    {0x0E,0x00,0 | PF_Operand," vtestps Vx,Wx (66),(v)"},
+    {0x0F,0x00,0 | PF_Operand," vtestpd Vx,Wx (66),(v)"},
     //# 0x0f 0x38 0x10-0x1f
     {0x10,0x00,0," pblendvb Vdq,Wdq (66) | vpsrlvw Vx,Hx,Wx (66),(evo) | vpmovuswb Wx,Vx (F3),(ev)"},
     {0x11,0x00,0," vpmovusdb Wx,Vd (F3),(ev) | vpsravw Vx,Hx,Wx (66),(ev)"},
@@ -745,14 +747,14 @@ OP_ENTRY OP3BMap_0F38[256] = {
     {0x15,0x00,0," blendvpd Vdq,Wdq (66) | vpmovusqd Wx,Vq (F3),(ev) | vprolvd/q Vx,Hx,Wx (66),(evo)"},
     {0x16,0x00,0," vpermps Vqq,Hqq,Wqq (66),(v) | vpermps/d Vqq,Hqq,Wqq (66),(evo)"},
     {0x17,0x00,0 | PF_Valid | PF_Operand," vptest Vx,Wx (66)"},
-    {0x18,0x00,0 | PF_Valid | PF_Operand," vbroadcastss Vx,Wd (66),(v)"},
+    {0x18,0x00,0 | PF_Operand," vbroadcastss Vx,Wd (66),(v)"},
     {0x19,0x00,0," vbroadcastsd Vqq,Wq (66),(v) | vbroadcastf32x2 Vqq,Wq (66),(evo)"},
     {0x1A,0x00,0," vbroadcastf128 Vqq,Mdq (66),(v) | vbroadcastf32x4/64x2 Vqq,Wq (66),(evo)"},
-    {0x1B,0x00,0 | PF_Valid | PF_Operand," vbroadcastf32x8/64x4 Vqq,Mdq (66),(ev)"},
+    {0x1B,0x00,0 | PF_Operand," vbroadcastf32x8/64x4 Vqq,Mdq (66),(ev)"},
     {0x1C,0x00,0," pabsb Pq,Qq | vpabsb Vx,Wx (66),(v1)"},
     {0x1D,0x00,0," pabsw Pq,Qq | vpabsw Vx,Wx (66),(v1)"},
     {0x1E,0x00,0," pabsd Pq,Qq | vpabsd Vx,Wx (66),(v1)"},
-    {0x1F,0x00,0 | PF_Valid | PF_Operand," vpabsq Vx,Wx (66),(ev)"},
+    {0x1F,0x00,0 | PF_Operand," vpabsq Vx,Wx (66),(ev)"},
     //# 0x0f 0x38 0x20-0x2f
     {0x20,0x00,0," vpmovsxbw Vx,Ux/Mq (66),(v1) | vpmovswb Wx,Vx (F3),(ev)"},
     {0x21,0x00,0," vpmovsxbd Vx,Ux/Md (66),(v1) | vpmovsdb Wx,Vd (F3),(ev)"},
@@ -768,8 +770,8 @@ OP_ENTRY OP3BMap_0F38[256] = {
     {0x2B,0x00,0 | PF_Valid | PF_Operand," vpackusdw Vx,Hx,Wx (66),(v1)"},
     {0x2C,0x00,0," vmaskmovps Vx,Hx,Mx (66),(v) | vscalefps/d Vx,Hx,Wx (66),(evo)"},
     {0x2D,0x00,0," vmaskmovpd Vx,Hx,Mx (66),(v) | vscalefss/d Vx,Hx,Wx (66),(evo)"},
-    {0x2E,0x00,0 | PF_Valid | PF_Operand," vmaskmovps Mx,Hx,Vx (66),(v)"},
-    {0x2F,0x00,0 | PF_Valid | PF_Operand," vmaskmovpd Mx,Hx,Vx (66),(v)"},
+    {0x2E,0x00,0 | PF_Operand," vmaskmovps Mx,Hx,Vx (66),(v)"},
+    {0x2F,0x00,0 | PF_Operand," vmaskmovpd Mx,Hx,Vx (66),(v)"},
     //# 0x0f 0x38 0x30-0x3f
     {0x30,0x00,0," vpmovzxbw Vx,Ux/Mq (66),(v1) | vpmovwb Wx,Vx (F3),(ev)"},
     {0x31,0x00,0," vpmovzxbd Vx,Ux/Md (66),(v1) | vpmovdb Wx,Vd (F3),(ev)"},
@@ -778,7 +780,7 @@ OP_ENTRY OP3BMap_0F38[256] = {
     {0x34,0x00,0," vpmovzxwq Vx,Ux/Md (66),(v1) | vpmovqw Wx,Vq (F3),(ev)"},
     {0x35,0x00,0," vpmovzxdq Vx,Ux/Mq (66),(v1) | vpmovqd Wx,Vq (F3),(ev)"},
     {0x36,0x00,0," vpermd Vqq,Hqq,Wqq (66),(v) | vpermd/q Vqq,Hqq,Wqq (66),(evo)"},
-    {0x37,0x00,0 | PF_Valid | PF_Operand," vpcmpgtq Vx,Hx,Wx (66),(v1)"},
+    {0x37,0x00,0 | PF_Operand," vpcmpgtq Vx,Hx,Wx (66),(v1)"},
     {0x38,0x00,0," vpminsb Vx,Hx,Wx (66),(v1) | vpmovm2d/q Vx,Uk (F3),(ev)"},
     {0x39,0x00,0," vpminsd Vx,Hx,Wx (66),(v1) | vpminsd/q Vx,Hx,Wx (66),(evo) | vpmovd2m/q2m Vk,Ux (F3),(ev)"},
     {0x3A,0x00,0," vpminuw Vx,Hx,Wx (66),(v1) | vpbroadcastmw2d Vx,Uk (F3),(ev)"},
@@ -790,33 +792,33 @@ OP_ENTRY OP3BMap_0F38[256] = {
     //# 0x0f 0x38 0x40-0x8f
     {0x40,0x00,0," vpmulld Vx,Hx,Wx (66),(v1) | vpmulld/q Vx,Hx,Wx (66),(evo)"},
     {0x41,0x00,0 | PF_Valid | PF_Operand," vphminposuw Vdq,Wdq (66),(v1)"},
-    {0x42,0x00,0 | PF_Valid | PF_Operand," vgetexpps/d Vx,Wx (66),(ev)"},
-    {0x43,0x00,0 | PF_Valid | PF_Operand," vgetexpss/d Vx,Hx,Wx (66),(ev)"},
-    {0x44,0x00,0 | PF_Valid | PF_Operand," vplzcntd/q Vx,Wx (66),(ev)"},
-    {0x45,0x00,0 | PF_Valid | PF_Operand," vpsrlvd/q Vx,Hx,Wx (66),(v)"},
+    {0x42,0x00,0 | PF_Operand," vgetexpps/d Vx,Wx (66),(ev)"},
+    {0x43,0x00,0 | PF_Operand," vgetexpss/d Vx,Hx,Wx (66),(ev)"},
+    {0x44,0x00,0 | PF_Operand," vplzcntd/q Vx,Wx (66),(ev)"},
+    {0x45,0x00,0 | PF_Operand," vpsrlvd/q Vx,Hx,Wx (66),(v)"},
     {0x46,0x00,0," vpsravd Vx,Hx,Wx (66),(v) | vpsravd/q Vx,Hx,Wx (66),(evo)"},
-    {0x47,0x00,0 | PF_Valid | PF_Operand," vpsllvd/q Vx,Hx,Wx (66),(v)"},
+    {0x47,0x00,0 | PF_Operand," vpsllvd/q Vx,Hx,Wx (66),(v)"},
     {0x48,0x00,0 | PF_Valid,NULL},
     //# Skip 0x48-0x4b
     {0x49,0x00,0 | PF_Valid,NULL},
     {0x4A,0x00,0 | PF_Valid,NULL},
     {0x4B,0x00,0 | PF_Valid,NULL},
-    {0x4C,0x00,0 | PF_Valid | PF_Operand," vrcp14ps/d Vpd,Wpd (66),(ev)"},
-    {0x4D,0x00,0 | PF_Valid | PF_Operand," vrcp14ss/d Vsd,Hpd,Wsd (66),(ev)"},
-    {0x4E,0x00,0 | PF_Valid | PF_Operand," vrsqrt14ps/d Vpd,Wpd (66),(ev)"},
-    {0x4F,0x00,0 | PF_Valid | PF_Operand," vrsqrt14ss/d Vsd,Hsd,Wsd (66),(ev)"},
-    {0x50,0x00,0 | PF_Valid | PF_Operand," vpdpbusd Vx,Hx,Wx (66),(ev)"},
-    {0x51,0x00,0 | PF_Valid | PF_Operand," vpdpbusds Vx,Hx,Wx (66),(ev)"},
+    {0x4C,0x00,0 | PF_Operand," vrcp14ps/d Vpd,Wpd (66),(ev)"},
+    {0x4D,0x00,0 | PF_Operand," vrcp14ss/d Vsd,Hpd,Wsd (66),(ev)"},
+    {0x4E,0x00,0 | PF_Operand," vrsqrt14ps/d Vpd,Wpd (66),(ev)"},
+    {0x4F,0x00,0 | PF_Operand," vrsqrt14ss/d Vsd,Hsd,Wsd (66),(ev)"},
+    {0x50,0x00,0 | PF_Operand," vpdpbusd Vx,Hx,Wx (66),(ev)"},
+    {0x51,0x00,0 | PF_Operand," vpdpbusds Vx,Hx,Wx (66),(ev)"},
     {0x52,0x00,0," vdpbf16ps Vx,Hx,Wx (F3),(ev) | vpdpwssd Vx,Hx,Wx (66),(ev) | vp4dpwssd Vdqq,Hdqq,Wdq (F2),(ev)"},
     {0x53,0x00,0," vpdpwssds Vx,Hx,Wx (66),(ev) | vp4dpwssds Vdqq,Hdqq,Wdq (F2),(ev)"},
-    {0x54,0x00,0 | PF_Valid | PF_Operand," vpopcntb/w Vx,Wx (66),(ev)"},
-    {0x55,0x00,0 | PF_Valid | PF_Operand," vpopcntd/q Vx,Wx (66),(ev)"},
+    {0x54,0x00,0 | PF_Operand," vpopcntb/w Vx,Wx (66),(ev)"},
+    {0x55,0x00,0 | PF_Operand," vpopcntd/q Vx,Wx (66),(ev)"},
     {0x56,0x00,0 | PF_Valid,NULL},
     {0x57,0x00,0 | PF_Valid,NULL},
-    {0x58,0x00,0 | PF_Valid | PF_Operand," vpbroadcastd Vx,Wx (66),(v)"},
+    {0x58,0x00,0 | PF_Operand," vpbroadcastd Vx,Wx (66),(v)"},
     {0x59,0x00,0," vpbroadcastq Vx,Wx (66),(v) | vbroadcasti32x2 Vx,Wx (66),(evo)"},
     {0x5A,0x00,0," vbroadcasti128 Vqq,Mdq (66),(v) | vbroadcasti32x4/64x2 Vx,Wx (66),(evo)"},
-    {0x5B,0x00,0 | PF_Valid | PF_Operand," vbroadcasti32x8/64x4 Vqq,Mdq (66),(ev)"},
+    {0x5B,0x00,0 | PF_Operand," vbroadcasti32x8/64x4 Vqq,Mdq (66),(ev)"},
     //# Skip 0x5c-0x61
     {0x5C,0x00,0 | PF_Valid,NULL},
     {0x5D,0x00,0 | PF_Valid,NULL},
@@ -824,13 +826,13 @@ OP_ENTRY OP3BMap_0F38[256] = {
     {0x5F,0x00,0 | PF_Valid,NULL},
     {0x60,0x00,0 | PF_Valid,NULL},
     {0x61,0x00,0 | PF_Valid,NULL},
-    {0x62,0x00,0 | PF_Valid | PF_Operand," vpexpandb/w Vx,Wx (66),(ev)"},
-    {0x63,0x00,0 | PF_Valid | PF_Operand," vpcompressb/w Wx,Vx (66),(ev)"},
-    {0x64,0x00,0 | PF_Valid | PF_Operand," vpblendmd/q Vx,Hx,Wx (66),(ev)"},
-    {0x65,0x00,0 | PF_Valid | PF_Operand," vblendmps/d Vx,Hx,Wx (66),(ev)"},
-    {0x66,0x00,0 | PF_Valid | PF_Operand," vpblendmb/w Vx,Hx,Wx (66),(ev)"},
+    {0x62,0x00,0 | PF_Operand," vpexpandb/w Vx,Wx (66),(ev)"},
+    {0x63,0x00,0 | PF_Operand," vpcompressb/w Wx,Vx (66),(ev)"},
+    {0x64,0x00,0 | PF_Operand," vpblendmd/q Vx,Hx,Wx (66),(ev)"},
+    {0x65,0x00,0 | PF_Operand," vblendmps/d Vx,Hx,Wx (66),(ev)"},
+    {0x66,0x00,0 | PF_Operand," vpblendmb/w Vx,Hx,Wx (66),(ev)"},
     {0x67,0x00,0 | PF_Valid,NULL},
-    {0x68,0x00,0 | PF_Valid | PF_REPNE," vp2intersectd/q Kx,Hx,Wx (F2),(ev)"},
+    {0x68,0x00,0 | PF_REPNE," vp2intersectd/q Kx,Hx,Wx (F2),(ev)"},
     //# Skip 0x69-0x6f
     {0x69,0x00,0 | PF_Valid,NULL},
     {0x6A,0x00,0 | PF_Valid,NULL},
@@ -839,104 +841,104 @@ OP_ENTRY OP3BMap_0F38[256] = {
     {0x6D,0x00,0 | PF_Valid,NULL},
     {0x6E,0x00,0 | PF_Valid,NULL},
     {0x6F,0x00,0 | PF_Valid,NULL},
-    {0x70,0x00,0 | PF_Valid | PF_Operand," vpshldvw Vx,Hx,Wx (66),(ev)"},
-    {0x71,0x00,0 | PF_Valid | PF_Operand," vpshldvd/q Vx,Hx,Wx (66),(ev)"},
+    {0x70,0x00,0 | PF_Operand," vpshldvw Vx,Hx,Wx (66),(ev)"},
+    {0x71,0x00,0 | PF_Operand," vpshldvd/q Vx,Hx,Wx (66),(ev)"},
     {0x72,0x00,0," vcvtne2ps2bf16 Vx,Hx,Wx (F2),(ev) | vcvtneps2bf16 Vx,Wx (F3),(ev) | vpshrdvw Vx,Hx,Wx (66),(ev)"},
-    {0x73,0x00,0 | PF_Valid | PF_Operand," vpshrdvd/q Vx,Hx,Wx (66),(ev)"},
+    {0x73,0x00,0 | PF_Operand," vpshrdvd/q Vx,Hx,Wx (66),(ev)"},
     {0x74,0x00,0 | PF_Valid,NULL},
-    {0x75,0x00,0 | PF_Valid | PF_Operand," vpermi2b/w Vx,Hx,Wx (66),(ev)"},
-    {0x76,0x00,0 | PF_Valid | PF_Operand," vpermi2d/q Vx,Hx,Wx (66),(ev)"},
-    {0x77,0x00,0 | PF_Valid | PF_Operand," vpermi2ps/d Vx,Hx,Wx (66),(ev)"},
-    {0x78,0x00,0 | PF_Valid | PF_Operand," vpbroadcastb Vx,Wx (66),(v)"},
-    {0x79,0x00,0 | PF_Valid | PF_Operand," vpbroadcastw Vx,Wx (66),(v)"},
-    {0x7A,0x00,0 | PF_Valid | PF_Operand," vpbroadcastb Vx,Rv (66),(ev)"},
-    {0x7B,0x00,0 | PF_Valid | PF_Operand," vpbroadcastw Vx,Rv (66),(ev)"},
-    {0x7C,0x00,0 | PF_Valid | PF_Operand," vpbroadcastd/q Vx,Rv (66),(ev)"},
-    {0x7D,0x00,0 | PF_Valid | PF_Operand," vpermt2b/w Vx,Hx,Wx (66),(ev)"},
-    {0x7E,0x00,0 | PF_Valid | PF_Operand," vpermt2d/q Vx,Hx,Wx (66),(ev)"},
-    {0x7F,0x00,0 | PF_Valid | PF_Operand," vpermt2ps/d Vx,Hx,Wx (66),(ev)"},
-    {0x80,0x00,0 | PF_Valid | PF_Operand," INVEPT Gy,Mdq (66)"},
-    {0x81,0x00,0 | PF_Valid | PF_Operand," INVVPID Gy,Mdq (66)"},
-    {0x82,0x00,0 | PF_Valid | PF_Operand," INVPCID Gy,Mdq (66)"},
-    {0x83,0x00,0 | PF_Valid | PF_Operand," vpmultishiftqb Vx,Hx,Wx (66),(ev)"},
+    {0x75,0x00,0 | PF_Operand," vpermi2b/w Vx,Hx,Wx (66),(ev)"},
+    {0x76,0x00,0 | PF_Operand," vpermi2d/q Vx,Hx,Wx (66),(ev)"},
+    {0x77,0x00,0 | PF_Operand," vpermi2ps/d Vx,Hx,Wx (66),(ev)"},
+    {0x78,0x00,0 | PF_Operand," vpbroadcastb Vx,Wx (66),(v)"},
+    {0x79,0x00,0 | PF_Operand," vpbroadcastw Vx,Wx (66),(v)"},
+    {0x7A,0x00,0 | PF_Operand," vpbroadcastb Vx,Rv (66),(ev)"},
+    {0x7B,0x00,0 | PF_Operand," vpbroadcastw Vx,Rv (66),(ev)"},
+    {0x7C,0x00,0 | PF_Operand," vpbroadcastd/q Vx,Rv (66),(ev)"},
+    {0x7D,0x00,0 | PF_Operand," vpermt2b/w Vx,Hx,Wx (66),(ev)"},
+    {0x7E,0x00,0 | PF_Operand," vpermt2d/q Vx,Hx,Wx (66),(ev)"},
+    {0x7F,0x00,0 | PF_Operand," vpermt2ps/d Vx,Hx,Wx (66),(ev)"},
+    {0x80,0x00,0 | PF_Operand," INVEPT Gy,Mdq (66)"},
+    {0x81,0x00,0 | PF_Operand," INVVPID Gy,Mdq (66)"},
+    {0x82,0x00,0 | PF_Valid | PF_Uncertain | PF_Operand," INVPCID Gy,Mdq (66)"},
+    {0x83,0x00,0 | PF_Operand," vpmultishiftqb Vx,Hx,Wx (66),(ev)"},
     {0x84,0x00,0 | PF_Valid,NULL},
     {0x85,0x00,0 | PF_Valid,NULL},
     {0x86,0x00,0 | PF_Valid,NULL},
     {0x87,0x00,0 | PF_Valid,NULL},
-    {0x88,0x00,0 | PF_Valid | PF_Operand," vexpandps/d Vpd,Wpd (66),(ev)"},
-    {0x89,0x00,0 | PF_Valid | PF_Operand," vpexpandd/q Vx,Wx (66),(ev)"},
-    {0x8A,0x00,0 | PF_Valid | PF_Operand," vcompressps/d Wx,Vx (66),(ev)"},
-    {0x8B,0x00,0 | PF_Valid | PF_Operand," vpcompressd/q Wx,Vx (66),(ev)"},
-    {0x8C,0x00,0 | PF_Valid | PF_Operand," vpmaskmovd/q Vx,Hx,Mx (66),(v)"},
-    {0x8D,0x00,0 | PF_Valid | PF_Operand," vpermb/w Vx,Hx,Wx (66),(ev)"},
-    {0x8E,0x00,0 | PF_Valid | PF_Operand," vpmaskmovd/q Mx,Vx,Hx (66),(v)"},
-    {0x8F,0x00,0 | PF_Valid | PF_Operand," vpshufbitqmb Kx,Hx,Wx (66),(ev)"},
+    {0x88,0x00,0 | PF_Operand," vexpandps/d Vpd,Wpd (66),(ev)"},
+    {0x89,0x00,0 | PF_Operand," vpexpandd/q Vx,Wx (66),(ev)"},
+    {0x8A,0x00,0 | PF_Operand," vcompressps/d Wx,Vx (66),(ev)"},
+    {0x8B,0x00,0 | PF_Operand," vpcompressd/q Wx,Vx (66),(ev)"},
+    {0x8C,0x00,0 | PF_Operand," vpmaskmovd/q Vx,Hx,Mx (66),(v)"},
+    {0x8D,0x00,0 | PF_Operand," vpermb/w Vx,Hx,Wx (66),(ev)"},
+    {0x8E,0x00,0 | PF_Operand," vpmaskmovd/q Mx,Vx,Hx (66),(v)"},
+    {0x8F,0x00,0 | PF_Operand," vpshufbitqmb Kx,Hx,Wx (66),(ev)"},
     //# 0x0f 0x38 0x90-0xbf (FMA)
     {0x90,0x00,0," vgatherdd/q Vx,Hx,Wx (66),(v) | vpgatherdd/q Vx,Wx (66),(evo)"},
     {0x91,0x00,0," vgatherqd/q Vx,Hx,Wx (66),(v) | vpgatherqd/q Vx,Wx (66),(evo)"},
-    {0x92,0x00,0 | PF_Valid | PF_Operand," vgatherdps/d Vx,Hx,Wx (66),(v)"},
-    {0x93,0x00,0 | PF_Valid | PF_Operand," vgatherqps/d Vx,Hx,Wx (66),(v)"},
-    {0xff,0x00,0 | PF_Valid," UD0"},
-    {0xff,0x00,0 | PF_Valid," UD0"},
-    {0x96,0x00,0 | PF_Valid | PF_Operand," vfmaddsub132ps/d Vx,Hx,Wx (66),(v)"},
-    {0x97,0x00,0 | PF_Valid | PF_Operand," vfmsubadd132ps/d Vx,Hx,Wx (66),(v)"},
-    {0x98,0x00,0 | PF_Valid | PF_Operand," vfmadd132ps/d Vx,Hx,Wx (66),(v)"},
-    {0x99,0x00,0 | PF_Valid | PF_Operand," vfmadd132ss/d Vx,Hx,Wx (66),(v),(v1)"},
+    {0x92,0x00,0 | PF_Operand," vgatherdps/d Vx,Hx,Wx (66),(v)"},
+    {0x93,0x00,0 | PF_Operand," vgatherqps/d Vx,Hx,Wx (66),(v)"},
+    {0x94,0x00,0 | PF_Valid,NULL},
+    {0x95,0x00,0 | PF_Valid,NULL},
+    {0x96,0x00,0 | PF_Operand," vfmaddsub132ps/d Vx,Hx,Wx (66),(v)"},
+    {0x97,0x00,0 | PF_Operand," vfmsubadd132ps/d Vx,Hx,Wx (66),(v)"},
+    {0x98,0x00,0 | PF_Operand," vfmadd132ps/d Vx,Hx,Wx (66),(v)"},
+    {0x99,0x00,0 | PF_Operand," vfmadd132ss/d Vx,Hx,Wx (66),(v),(v1)"},
     {0x9A,0x00,0," vfmsub132ps/d Vx,Hx,Wx (66),(v) | v4fmaddps Vdqq,Hdqq,Wdq (F2),(ev)"},
     {0x9B,0x00,0," vfmsub132ss/d Vx,Hx,Wx (66),(v),(v1) | v4fmaddss Vdq,Hdq,Wdq (F2),(ev)"},
-    {0x9C,0x00,0 | PF_Valid | PF_Operand," vfnmadd132ps/d Vx,Hx,Wx (66),(v)"},
-    {0x9D,0x00,0 | PF_Valid | PF_Operand," vfnmadd132ss/d Vx,Hx,Wx (66),(v),(v1)"},
-    {0x9E,0x00,0 | PF_Valid | PF_Operand," vfnmsub132ps/d Vx,Hx,Wx (66),(v)"},
-    {0x9F,0x00,0 | PF_Valid | PF_Operand," vfnmsub132ss/d Vx,Hx,Wx (66),(v),(v1)"},
-    {0xA0,0x00,0 | PF_Valid | PF_Operand," vpscatterdd/q Wx,Vx (66),(ev)"},
-    {0xA1,0x00,0 | PF_Valid | PF_Operand," vpscatterqd/q Wx,Vx (66),(ev)"},
-    {0xA2,0x00,0 | PF_Valid | PF_Operand," vscatterdps/d Wx,Vx (66),(ev)"},
-    {0xA3,0x00,0 | PF_Valid | PF_Operand," vscatterqps/d Wx,Vx (66),(ev)"},
+    {0x9C,0x00,0 | PF_Operand," vfnmadd132ps/d Vx,Hx,Wx (66),(v)"},
+    {0x9D,0x00,0 | PF_Operand," vfnmadd132ss/d Vx,Hx,Wx (66),(v),(v1)"},
+    {0x9E,0x00,0 | PF_Operand," vfnmsub132ps/d Vx,Hx,Wx (66),(v)"},
+    {0x9F,0x00,0 | PF_Operand," vfnmsub132ss/d Vx,Hx,Wx (66),(v),(v1)"},
+    {0xA0,0x00,0 | PF_Operand," vpscatterdd/q Wx,Vx (66),(ev)"},
+    {0xA1,0x00,0 | PF_Operand," vpscatterqd/q Wx,Vx (66),(ev)"},
+    {0xA2,0x00,0 | PF_Operand," vscatterdps/d Wx,Vx (66),(ev)"},
+    {0xA3,0x00,0 | PF_Operand," vscatterqps/d Wx,Vx (66),(ev)"},
     {0xA4,0x00,0 | PF_Valid,NULL},
     {0xA5,0x00,0 | PF_Valid,NULL},
-    {0xA6,0x00,0 | PF_Valid | PF_Operand," vfmaddsub213ps/d Vx,Hx,Wx (66),(v)"},
-    {0xA7,0x00,0 | PF_Valid | PF_Operand," vfmsubadd213ps/d Vx,Hx,Wx (66),(v)"},
-    {0xA8,0x00,0 | PF_Valid | PF_Operand," vfmadd213ps/d Vx,Hx,Wx (66),(v)"},
-    {0xA9,0x00,0 | PF_Valid | PF_Operand," vfmadd213ss/d Vx,Hx,Wx (66),(v),(v1)"},
+    {0xA6,0x00,0 | PF_Operand," vfmaddsub213ps/d Vx,Hx,Wx (66),(v)"},
+    {0xA7,0x00,0 | PF_Operand," vfmsubadd213ps/d Vx,Hx,Wx (66),(v)"},
+    {0xA8,0x00,0 | PF_Operand," vfmadd213ps/d Vx,Hx,Wx (66),(v)"},
+    {0xA9,0x00,0 | PF_Operand," vfmadd213ss/d Vx,Hx,Wx (66),(v),(v1)"},
     {0xAA,0x00,0," vfmsub213ps/d Vx,Hx,Wx (66),(v) | v4fnmaddps Vdqq,Hdqq,Wdq (F2),(ev)"},
     {0xAB,0x00,0," vfmsub213ss/d Vx,Hx,Wx (66),(v),(v1) | v4fnmaddss Vdq,Hdq,Wdq (F2),(ev)"},
-    {0xAC,0x00,0 | PF_Valid | PF_Operand," vfnmadd213ps/d Vx,Hx,Wx (66),(v)"},
-    {0xAD,0x00,0 | PF_Valid | PF_Operand," vfnmadd213ss/d Vx,Hx,Wx (66),(v),(v1)"},
-    {0xAE,0x00,0 | PF_Valid | PF_Operand," vfnmsub213ps/d Vx,Hx,Wx (66),(v)"},
-    {0xAF,0x00,0 | PF_Valid | PF_Operand," vfnmsub213ss/d Vx,Hx,Wx (66),(v),(v1)"},
+    {0xAC,0x00,0 | PF_Operand," vfnmadd213ps/d Vx,Hx,Wx (66),(v)"},
+    {0xAD,0x00,0 | PF_Operand," vfnmadd213ss/d Vx,Hx,Wx (66),(v),(v1)"},
+    {0xAE,0x00,0 | PF_Operand," vfnmsub213ps/d Vx,Hx,Wx (66),(v)"},
+    {0xAF,0x00,0 | PF_Operand," vfnmsub213ss/d Vx,Hx,Wx (66),(v),(v1)"},
     {0xB0,0x00,0 | PF_Valid,NULL},
     {0xB1,0x00,0 | PF_Valid,NULL},
     {0xB2,0x00,0 | PF_Valid,NULL},
     {0xB3,0x00,0 | PF_Valid,NULL},
-    {0xB4,0x00,0 | PF_Valid | PF_Operand," vpmadd52luq Vx,Hx,Wx (66),(ev)"},
-    {0xB5,0x00,0 | PF_Valid | PF_Operand," vpmadd52huq Vx,Hx,Wx (66),(ev)"},
-    {0xB6,0x00,0 | PF_Valid | PF_Operand," vfmaddsub231ps/d Vx,Hx,Wx (66),(v)"},
-    {0xB7,0x00,0 | PF_Valid | PF_Operand," vfmsubadd231ps/d Vx,Hx,Wx (66),(v)"},
-    {0xB8,0x00,0 | PF_Valid | PF_Operand," vfmadd231ps/d Vx,Hx,Wx (66),(v)"},
-    {0xB9,0x00,0 | PF_Valid | PF_Operand," vfmadd231ss/d Vx,Hx,Wx (66),(v),(v1)"},
-    {0xBA,0x00,0 | PF_Valid | PF_Operand," vfmsub231ps/d Vx,Hx,Wx (66),(v)"},
-    {0xBB,0x00,0 | PF_Valid | PF_Operand," vfmsub231ss/d Vx,Hx,Wx (66),(v),(v1)"},
-    {0xBC,0x00,0 | PF_Valid | PF_Operand," vfnmadd231ps/d Vx,Hx,Wx (66),(v)"},
-    {0xBD,0x00,0 | PF_Valid | PF_Operand," vfnmadd231ss/d Vx,Hx,Wx (66),(v),(v1)"},
-    {0xBE,0x00,0 | PF_Valid | PF_Operand," vfnmsub231ps/d Vx,Hx,Wx (66),(v)"},
-    {0xBF,0x00,0 | PF_Valid | PF_Operand," vfnmsub231ss/d Vx,Hx,Wx (66),(v),(v1)"},
+    {0xB4,0x00,0 | PF_Operand," vpmadd52luq Vx,Hx,Wx (66),(ev)"},
+    {0xB5,0x00,0 | PF_Operand," vpmadd52huq Vx,Hx,Wx (66),(ev)"},
+    {0xB6,0x00,0 | PF_Operand," vfmaddsub231ps/d Vx,Hx,Wx (66),(v)"},
+    {0xB7,0x00,0 | PF_Operand," vfmsubadd231ps/d Vx,Hx,Wx (66),(v)"},
+    {0xB8,0x00,0 | PF_Operand," vfmadd231ps/d Vx,Hx,Wx (66),(v)"},
+    {0xB9,0x00,0 | PF_Operand," vfmadd231ss/d Vx,Hx,Wx (66),(v),(v1)"},
+    {0xBA,0x00,0 | PF_Operand," vfmsub231ps/d Vx,Hx,Wx (66),(v)"},
+    {0xBB,0x00,0 | PF_Operand," vfmsub231ss/d Vx,Hx,Wx (66),(v),(v1)"},
+    {0xBC,0x00,0 | PF_Operand," vfnmadd231ps/d Vx,Hx,Wx (66),(v)"},
+    {0xBD,0x00,0 | PF_Operand," vfnmadd231ss/d Vx,Hx,Wx (66),(v),(v1)"},
+    {0xBE,0x00,0 | PF_Operand," vfnmsub231ps/d Vx,Hx,Wx (66),(v)"},
+    {0xBF,0x00,0 | PF_Operand," vfnmsub231ss/d Vx,Hx,Wx (66),(v),(v1)"},
     //# 0x0f 0x38 0xc0-0xff
     {0xC0,0x00,0 | PF_Valid,NULL},
     {0xC1,0x00,0 | PF_Valid,NULL},
     {0xC2,0x00,0 | PF_Valid,NULL},
     {0xC3,0x00,0 | PF_Valid,NULL},
-    {0xC4,0x00,0 | PF_Valid | PF_Operand," vpconflictd/q Vx,Wx (66),(ev)"},
+    {0xC4,0x00,0 | PF_Operand," vpconflictd/q Vx,Wx (66),(ev)"},
     {0xC5,0x00,0 | PF_Valid,NULL},
-    {0xC6,0x80,0," Grp18 (1A)"},
-    {0xC7,0x80,0," Grp19 (1A)"},
+    {0xC6,0x80,0 | PF_Valid," Grp18 (1A)"},
+    {0xC7,0x80,0 | PF_Valid," Grp19 (1A)"},
     {0xC8,0x00,0," sha1nexte Vdq,Wdq | vexp2ps/d Vx,Wx (66),(ev)"},
-    {0xC9,0x00,0 | PF_Valid," sha1msg1 Vdq,Wdq"},
+    {0xC9,0x00,0," sha1msg1 Vdq,Wdq"},
     {0xCA,0x00,0," sha1msg2 Vdq,Wdq | vrcp28ps/d Vx,Wx (66),(ev)"},
     {0xCB,0x00,0," sha256rnds2 Vdq,Wdq | vrcp28ss/d Vx,Hx,Wx (66),(ev)"},
     {0xCC,0x00,0," sha256msg1 Vdq,Wdq | vrsqrt28ps/d Vx,Wx (66),(ev)"},
     {0xCD,0x00,0," sha256msg2 Vdq,Wdq | vrsqrt28ss/d Vx,Hx,Wx (66),(ev)"},
     {0xCE,0x00,0 | PF_Valid,NULL},
-    {0xCF,0x00,0 | PF_Valid | PF_Operand," vgf2p8mulb Vx,Wx (66)"},
+    {0xCF,0x00,0 | PF_Operand," vgf2p8mulb Vx,Wx (66)"},
     {0xD0,0x00,0 | PF_Valid,NULL},
     {0xD1,0x00,0 | PF_Valid,NULL},
     {0xD2,0x00,0 | PF_Valid,NULL},
@@ -948,11 +950,11 @@ OP_ENTRY OP3BMap_0F38[256] = {
     {0xD8,0x00,0 | PF_Valid,NULL},
     {0xD9,0x00,0 | PF_Valid,NULL},
     {0xDA,0x00,0 | PF_Valid,NULL},
-    {0xDB,0x00,0 | PF_Valid | PF_Operand," VAESIMC Vdq,Wdq (66),(v1)"},
-    {0xDC,0x00,0 | PF_Valid | PF_Operand," vaesenc Vx,Hx,Wx (66)"},
-    {0xDD,0x00,0 | PF_Valid | PF_Operand," vaesenclast Vx,Hx,Wx (66)"},
-    {0xDE,0x00,0 | PF_Valid | PF_Operand," vaesdec Vx,Hx,Wx (66)"},
-    {0xDF,0x00,0 | PF_Valid | PF_Operand," vaesdeclast Vx,Hx,Wx (66)"},
+    {0xDB,0x00,0 | PF_Operand," vaesimc Vdq,Wdq (66),(v1)"},
+    {0xDC,0x00,0 | PF_Operand," vaesenc Vx,Hx,Wx (66)"},
+    {0xDD,0x00,0 | PF_Operand," vaesenclast Vx,Hx,Wx (66)"},
+    {0xDE,0x00,0 | PF_Operand," vaesdec Vx,Hx,Wx (66)"},
+    {0xDF,0x00,0 | PF_Operand," vaesdeclast Vx,Hx,Wx (66)"},
     {0xE0,0x00,0 | PF_Valid,NULL},
     {0xE1,0x00,0 | PF_Valid,NULL},
     {0xE2,0x00,0 | PF_Valid,NULL},
@@ -971,14 +973,14 @@ OP_ENTRY OP3BMap_0F38[256] = {
     {0xEF,0x00,0 | PF_Valid,NULL},
     {0xF0,0x00,0," MOVBE Gy,My | MOVBE Gw,Mw (66) | CRC32 Gd,Eb (F2) | CRC32 Gd,Eb (66&F2)"},
     {0xF1,0x00,0," MOVBE My,Gy | MOVBE Mw,Gw (66) | CRC32 Gd,Ey (F2) | CRC32 Gd,Ew (66&F2)"},
-    {0xF2,0x00,0 | PF_Valid," ANDN Gy,By,Ey (v)"},
-    {0xF3,0x80,0," Grp17 (1A)"},
+    {0xF2,0x00,0," ANDN Gy,By,Ey (v)"},
+    {0xF3,0x80,0 | PF_Valid," Grp17 (1A)"},
     {0xF4,0x00,0 | PF_Valid,NULL},
     {0xF5,0x00,0," BZHI Gy,Ey,By (v) | PEXT Gy,By,Ey (F3),(v) | PDEP Gy,By,Ey (F2),(v) | WRUSSD/Q My,Gy (66)"},
     {0xF6,0x00,0," ADCX Gy,Ey (66) | ADOX Gy,Ey (F3) | MULX By,Gy,rDX,Ey (F2),(v) | WRSSD/Q My,Gy"},
     {0xF7,0x00,0," BEXTR Gy,Ey,By (v) | SHLX Gy,Ey,By (66),(v) | SARX Gy,Ey,By (F3),(v) | SHRX Gy,Ey,By (F2),(v)"},
     {0xF8,0x00,0," MOVDIR64B Gv,Mdqq (66) | ENQCMD Gv,Mdqq (F2) | ENQCMDS Gv,Mdqq (F3)"},
-    {0xF9,0x00,0 | PF_Valid," MOVDIRI My,Gy"},
+    {0xF9,0x00,0," MOVDIRI My,Gy"},
     {0xFA,0x00,0 | PF_Valid,NULL},
     {0xFB,0x00,0 | PF_Valid,NULL},
     {0xFC,0x00,0 | PF_Valid,NULL},
@@ -988,13 +990,13 @@ OP_ENTRY OP3BMap_0F38[256] = {
 };
 OP_ENTRY OP3BMap_0F3A[256] = {
     //# 0x0f 0x3a 0x00-0xff
-    {0x00,0x00,0 | PF_Valid | PF_Operand," vpermq Vqq,Wqq,Ib (66),(v)"},
-    {0x01,0x00,0 | PF_Valid | PF_Operand," vpermpd Vqq,Wqq,Ib (66),(v)"},
-    {0x02,0x00,0 | PF_Valid | PF_Operand," vpblendd Vx,Hx,Wx,Ib (66),(v)"},
-    {0x03,0x00,0 | PF_Valid | PF_Operand," valignd/q Vx,Hx,Wx,Ib (66),(ev)"},
-    {0x04,0x00,0 | PF_Valid | PF_Operand," vpermilps Vx,Wx,Ib (66),(v)"},
-    {0x05,0x00,0 | PF_Valid | PF_Operand," vpermilpd Vx,Wx,Ib (66),(v)"},
-    {0x06,0x00,0 | PF_Valid | PF_Operand," vperm2f128 Vqq,Hqq,Wqq,Ib (66),(v)"},
+    {0x00,0x00,0 | PF_Operand," vpermq Vqq,Wqq,Ib (66),(v)"},
+    {0x01,0x00,0 | PF_Operand," vpermpd Vqq,Wqq,Ib (66),(v)"},
+    {0x02,0x00,0 | PF_Operand," vpblendd Vx,Hx,Wx,Ib (66),(v)"},
+    {0x03,0x00,0 | PF_Operand," valignd/q Vx,Hx,Wx,Ib (66),(ev)"},
+    {0x04,0x00,0 | PF_Operand," vpermilps Vx,Wx,Ib (66),(v)"},
+    {0x05,0x00,0 | PF_Operand," vpermilpd Vx,Wx,Ib (66),(v)"},
+    {0x06,0x00,0 | PF_Operand," vperm2f128 Vqq,Hqq,Wqq,Ib (66),(v)"},
     {0x07,0x00,0 | PF_Valid,NULL},
     {0x08,0x00,0," vroundps Vx,Wx,Ib (66) | vrndscaleps Vx,Wx,Ib (66),(evo)"},
     {0x09,0x00,0," vroundpd Vx,Wx,Ib (66) | vrndscalepd Vx,Wx,Ib (66),(evo)"},
@@ -1014,20 +1016,20 @@ OP_ENTRY OP3BMap_0F3A[256] = {
     {0x17,0x00,0 | PF_Valid | PF_Operand," vextractps Ed,Vdq,Ib (66),(v1)"},
     {0x18,0x00,0," vinsertf128 Vqq,Hqq,Wqq,Ib (66),(v) | vinsertf32x4/64x2 Vqq,Hqq,Wqq,Ib (66),(evo)"},
     {0x19,0x00,0," vextractf128 Wdq,Vqq,Ib (66),(v) | vextractf32x4/64x2 Wdq,Vqq,Ib (66),(evo)"},
-    {0x1A,0x00,0 | PF_Valid | PF_Operand," vinsertf32x8/64x4 Vqq,Hqq,Wqq,Ib (66),(ev)"},
-    {0x1B,0x00,0 | PF_Valid | PF_Operand," vextractf32x8/64x4 Wdq,Vqq,Ib (66),(ev)"},
+    {0x1A,0x00,0 | PF_Operand," vinsertf32x8/64x4 Vqq,Hqq,Wqq,Ib (66),(ev)"},
+    {0x1B,0x00,0 | PF_Operand," vextractf32x8/64x4 Wdq,Vqq,Ib (66),(ev)"},
     {0x1C,0x00,0 | PF_Valid,NULL},
-    {0x1D,0x00,0 | PF_Valid | PF_Operand," vcvtps2ph Wx,Vx,Ib (66),(v)"},
-    {0x1E,0x00,0 | PF_Valid | PF_Operand," vpcmpud/q Vk,Hd,Wd,Ib (66),(ev)"},
-    {0x1F,0x00,0 | PF_Valid | PF_Operand," vpcmpd/q Vk,Hd,Wd,Ib (66),(ev)"},
+    {0x1D,0x00,0 | PF_Operand," vcvtps2ph Wx,Vx,Ib (66),(v)"},
+    {0x1E,0x00,0 | PF_Operand," vpcmpud/q Vk,Hd,Wd,Ib (66),(ev)"},
+    {0x1F,0x00,0 | PF_Operand," vpcmpd/q Vk,Hd,Wd,Ib (66),(ev)"},
     {0x20,0x00,0 | PF_Valid | PF_Operand," vpinsrb Vdq,Hdq,Ry/Mb,Ib (66),(v1)"},
     {0x21,0x00,0 | PF_Valid | PF_Operand," vinsertps Vdq,Hdq,Udq/Md,Ib (66),(v1)"},
     {0x22,0x00,0 | PF_Valid | PF_Operand," vpinsrd/q Vdq,Hdq,Ey,Ib (66),(v1)"},
-    {0x23,0x00,0 | PF_Valid | PF_Operand," vshuff32x4/64x2 Vx,Hx,Wx,Ib (66),(ev)"},
+    {0x23,0x00,0 | PF_Operand," vshuff32x4/64x2 Vx,Hx,Wx,Ib (66),(ev)"},
     {0x24,0x00,0 | PF_Valid,NULL},
-    {0x25,0x00,0 | PF_Valid | PF_Operand," vpternlogd/q Vx,Hx,Wx,Ib (66),(ev)"},
-    {0x26,0x00,0 | PF_Valid | PF_Operand," vgetmantps/d Vx,Wx,Ib (66),(ev)"},
-    {0x27,0x00,0 | PF_Valid | PF_Operand," vgetmantss/d Vx,Hx,Wx,Ib (66),(ev)"},
+    {0x25,0x00,0 | PF_Operand," vpternlogd/q Vx,Hx,Wx,Ib (66),(ev)"},
+    {0x26,0x00,0 | PF_Operand," vgetmantps/d Vx,Wx,Ib (66),(ev)"},
+    {0x27,0x00,0 | PF_Operand," vgetmantss/d Vx,Hx,Wx,Ib (66),(ev)"},
     {0x28,0x00,0 | PF_Valid,NULL},
     {0x29,0x00,0 | PF_Valid,NULL},
     {0x2A,0x00,0 | PF_Valid,NULL},
@@ -1036,46 +1038,46 @@ OP_ENTRY OP3BMap_0F3A[256] = {
     {0x2D,0x00,0 | PF_Valid,NULL},
     {0x2E,0x00,0 | PF_Valid,NULL},
     {0x2F,0x00,0 | PF_Valid,NULL},
-    {0x30,0x00,0 | PF_Valid | PF_Operand," kshiftrb/w Vk,Uk,Ib (66),(v)"},
-    {0x31,0x00,0 | PF_Valid | PF_Operand," kshiftrd/q Vk,Uk,Ib (66),(v)"},
-    {0x32,0x00,0 | PF_Valid | PF_Operand," kshiftlb/w Vk,Uk,Ib (66),(v)"},
-    {0x33,0x00,0 | PF_Valid | PF_Operand," kshiftld/q Vk,Uk,Ib (66),(v)"},
+    {0x30,0x00,0 | PF_Operand," kshiftrb/w Vk,Uk,Ib (66),(v)"},
+    {0x31,0x00,0 | PF_Operand," kshiftrd/q Vk,Uk,Ib (66),(v)"},
+    {0x32,0x00,0 | PF_Operand," kshiftlb/w Vk,Uk,Ib (66),(v)"},
+    {0x33,0x00,0 | PF_Operand," kshiftld/q Vk,Uk,Ib (66),(v)"},
     {0x34,0x00,0 | PF_Valid,NULL},
     {0x35,0x00,0 | PF_Valid,NULL},
     {0x36,0x00,0 | PF_Valid,NULL},
     {0x37,0x00,0 | PF_Valid,NULL},
     {0x38,0x00,0," vinserti128 Vqq,Hqq,Wqq,Ib (66),(v) | vinserti32x4/64x2 Vqq,Hqq,Wqq,Ib (66),(evo)"},
     {0x39,0x00,0," vextracti128 Wdq,Vqq,Ib (66),(v) | vextracti32x4/64x2 Wdq,Vqq,Ib (66),(evo)"},
-    {0x3A,0x00,0 | PF_Valid | PF_Operand," vinserti32x8/64x4 Vqq,Hqq,Wqq,Ib (66),(ev)"},
-    {0x3B,0x00,0 | PF_Valid | PF_Operand," vextracti32x8/64x4 Wdq,Vqq,Ib (66),(ev)"},
+    {0x3A,0x00,0 | PF_Operand," vinserti32x8/64x4 Vqq,Hqq,Wqq,Ib (66),(ev)"},
+    {0x3B,0x00,0 | PF_Operand," vextracti32x8/64x4 Wdq,Vqq,Ib (66),(ev)"},
     {0x3C,0x00,0 | PF_Valid,NULL},
     {0x3D,0x00,0 | PF_Valid,NULL},
-    {0x3E,0x00,0 | PF_Valid | PF_Operand," vpcmpub/w Vk,Hk,Wx,Ib (66),(ev)"},
-    {0x3F,0x00,0 | PF_Valid | PF_Operand," vpcmpb/w Vk,Hk,Wx,Ib (66),(ev)"},
+    {0x3E,0x00,0 | PF_Operand," vpcmpub/w Vk,Hk,Wx,Ib (66),(ev)"},
+    {0x3F,0x00,0 | PF_Operand," vpcmpb/w Vk,Hk,Wx,Ib (66),(ev)"},
     {0x40,0x00,0 | PF_Valid | PF_Operand," vdpps Vx,Hx,Wx,Ib (66)"},
     {0x41,0x00,0 | PF_Valid | PF_Operand," vdppd Vdq,Hdq,Wdq,Ib (66),(v1)"},
     {0x42,0x00,0," vmpsadbw Vx,Hx,Wx,Ib (66),(v1) | vdbpsadbw Vx,Hx,Wx,Ib (66),(evo)"},
-    {0x43,0x00,0 | PF_Valid | PF_Operand," vshufi32x4/64x2 Vx,Hx,Wx,Ib (66),(ev)"},
-    {0x44,0x00,0 | PF_Valid | PF_Operand," vpclmulqdq Vx,Hx,Wx,Ib (66)"},
+    {0x43,0x00,0 | PF_Operand," vshufi32x4/64x2 Vx,Hx,Wx,Ib (66),(ev)"},
+    {0x44,0x00,0 | PF_Operand," vpclmulqdq Vx,Hx,Wx,Ib (66)"},
     {0x45,0x00,0 | PF_Valid,NULL},
-    {0x46,0x00,0 | PF_Valid | PF_Operand," vperm2i128 Vqq,Hqq,Wqq,Ib (66),(v)"},
+    {0x46,0x00,0 | PF_Operand," vperm2i128 Vqq,Hqq,Wqq,Ib (66),(v)"},
     {0x47,0x00,0 | PF_Valid,NULL},
     {0x48,0x00,0 | PF_Valid,NULL},
     {0x49,0x00,0 | PF_Valid,NULL},
-    {0x4A,0x00,0 | PF_Valid | PF_Operand," vblendvps Vx,Hx,Wx,Lx (66),(v)"},
-    {0x4B,0x00,0 | PF_Valid | PF_Operand," vblendvpd Vx,Hx,Wx,Lx (66),(v)"},
-    {0x4C,0x00,0 | PF_Valid | PF_Operand," vpblendvb Vx,Hx,Wx,Lx (66),(v1)"},
+    {0x4A,0x00,0 | PF_Operand," vblendvps Vx,Hx,Wx,Lx (66),(v)"},
+    {0x4B,0x00,0 | PF_Operand," vblendvpd Vx,Hx,Wx,Lx (66),(v)"},
+    {0x4C,0x00,0 | PF_Operand," vpblendvb Vx,Hx,Wx,Lx (66),(v)"},
     {0x4D,0x00,0 | PF_Valid,NULL},
     {0x4E,0x00,0 | PF_Valid,NULL},
     {0x4F,0x00,0 | PF_Valid,NULL},
-    {0x50,0x00,0 | PF_Valid | PF_Operand," vrangeps/d Vx,Hx,Wx,Ib (66),(ev)"},
-    {0x51,0x00,0 | PF_Valid | PF_Operand," vrangess/d Vx,Hx,Wx,Ib (66),(ev)"},
+    {0x50,0x00,0 | PF_Operand," vrangeps/d Vx,Hx,Wx,Ib (66),(ev)"},
+    {0x51,0x00,0 | PF_Operand," vrangess/d Vx,Hx,Wx,Ib (66),(ev)"},
     {0x52,0x00,0 | PF_Valid,NULL},
     {0x53,0x00,0 | PF_Valid,NULL},
-    {0x54,0x00,0 | PF_Valid | PF_Operand," vfixupimmps/d Vx,Hx,Wx,Ib (66),(ev)"},
-    {0x55,0x00,0 | PF_Valid | PF_Operand," vfixupimmss/d Vx,Hx,Wx,Ib (66),(ev)"},
-    {0x56,0x00,0 | PF_Valid | PF_Operand," vreduceps/d Vx,Wx,Ib (66),(ev)"},
-    {0x57,0x00,0 | PF_Valid | PF_Operand," vreducess/d Vx,Hx,Wx,Ib (66),(ev)"},
+    {0x54,0x00,0 | PF_Operand," vfixupimmps/d Vx,Hx,Wx,Ib (66),(ev)"},
+    {0x55,0x00,0 | PF_Operand," vfixupimmss/d Vx,Hx,Wx,Ib (66),(ev)"},
+    {0x56,0x00,0 | PF_Operand," vreduceps/d Vx,Wx,Ib (66),(ev)"},
+    {0x57,0x00,0 | PF_Operand," vreducess/d Vx,Hx,Wx,Ib (66),(ev)"},
     {0x58,0x00,0 | PF_Valid,NULL},
     {0x59,0x00,0 | PF_Valid,NULL},
     {0x5A,0x00,0 | PF_Valid,NULL},
@@ -1084,14 +1086,14 @@ OP_ENTRY OP3BMap_0F3A[256] = {
     {0x5D,0x00,0 | PF_Valid,NULL},
     {0x5E,0x00,0 | PF_Valid,NULL},
     {0x5F,0x00,0 | PF_Valid,NULL},
-    {0x60,0x00,0 | PF_Valid | PF_Operand," vpcmpestrm Vdq,Wdq,Ib (66),(v1)"},
-    {0x61,0x00,0 | PF_Valid | PF_Operand," vpcmpestri Vdq,Wdq,Ib (66),(v1)"},
-    {0x62,0x00,0 | PF_Valid | PF_Operand," vpcmpistrm Vdq,Wdq,Ib (66),(v1)"},
-    {0x63,0x00,0 | PF_Valid | PF_Operand," vpcmpistri Vdq,Wdq,Ib (66),(v1)"},
+    {0x60,0x00,0 | PF_Operand," vpcmpestrm Vdq,Wdq,Ib (66),(v1)"},
+    {0x61,0x00,0 | PF_Operand," vpcmpestri Vdq,Wdq,Ib (66),(v1)"},
+    {0x62,0x00,0 | PF_Operand," vpcmpistrm Vdq,Wdq,Ib (66),(v1)"},
+    {0x63,0x00,0 | PF_Operand," vpcmpistri Vdq,Wdq,Ib (66),(v1)"},
     {0x64,0x00,0 | PF_Valid,NULL},
     {0x65,0x00,0 | PF_Valid,NULL},
-    {0x66,0x00,0 | PF_Valid | PF_Operand," vfpclassps/d Vk,Wx,Ib (66),(ev)"},
-    {0x67,0x00,0 | PF_Valid | PF_Operand," vfpclassss/d Vk,Wx,Ib (66),(ev)"},
+    {0x66,0x00,0 | PF_Operand," vfpclassps/d Vk,Wx,Ib (66),(ev)"},
+    {0x67,0x00,0 | PF_Operand," vfpclassss/d Vk,Wx,Ib (66),(ev)"},
     {0x68,0x00,0 | PF_Valid,NULL},
     {0x69,0x00,0 | PF_Valid,NULL},
     {0x6A,0x00,0 | PF_Valid,NULL},
@@ -1100,10 +1102,10 @@ OP_ENTRY OP3BMap_0F3A[256] = {
     {0x6D,0x00,0 | PF_Valid,NULL},
     {0x6E,0x00,0 | PF_Valid,NULL},
     {0x6F,0x00,0 | PF_Valid,NULL},
-    {0x70,0x00,0 | PF_Valid | PF_Operand," vpshldw Vx,Hx,Wx,Ib (66),(ev)"},
-    {0x71,0x00,0 | PF_Valid | PF_Operand," vpshldd/q Vx,Hx,Wx,Ib (66),(ev)"},
-    {0x72,0x00,0 | PF_Valid | PF_Operand," vpshrdw Vx,Hx,Wx,Ib (66),(ev)"},
-    {0x73,0x00,0 | PF_Valid | PF_Operand," vpshrdd/q Vx,Hx,Wx,Ib (66),(ev)"},
+    {0x70,0x00,0 | PF_Operand," vpshldw Vx,Hx,Wx,Ib (66),(ev)"},
+    {0x71,0x00,0 | PF_Operand," vpshldd/q Vx,Hx,Wx,Ib (66),(ev)"},
+    {0x72,0x00,0 | PF_Operand," vpshrdw Vx,Hx,Wx,Ib (66),(ev)"},
+    {0x73,0x00,0 | PF_Operand," vpshrdd/q Vx,Hx,Wx,Ib (66),(ev)"},
     {0x74,0x00,0 | PF_Valid,NULL},
     {0x75,0x00,0 | PF_Valid,NULL},
     {0x76,0x00,0 | PF_Valid,NULL},
@@ -1192,10 +1194,10 @@ OP_ENTRY OP3BMap_0F3A[256] = {
     {0xC9,0x00,0 | PF_Valid,NULL},
     {0xCA,0x00,0 | PF_Valid,NULL},
     {0xCB,0x00,0 | PF_Valid,NULL},
-    {0xCC,0x00,0 | PF_Valid," sha1rnds4 Vdq,Wdq,Ib"},
+    {0xCC,0x00,0," sha1rnds4 Vdq,Wdq,Ib"},
     {0xCD,0x00,0 | PF_Valid,NULL},
-    {0xCE,0x00,0 | PF_Valid | PF_Operand," vgf2p8affineqb Vx,Wx,Ib (66)"},
-    {0xCF,0x00,0 | PF_Valid | PF_Operand," vgf2p8affineinvqb Vx,Wx,Ib (66)"},
+    {0xCE,0x00,0 | PF_Operand," vgf2p8affineqb Vx,Wx,Ib (66)"},
+    {0xCF,0x00,0 | PF_Operand," vgf2p8affineinvqb Vx,Wx,Ib (66)"},
     {0xD0,0x00,0 | PF_Valid,NULL},
     {0xD1,0x00,0 | PF_Valid,NULL},
     {0xD2,0x00,0 | PF_Valid,NULL},
@@ -1211,7 +1213,7 @@ OP_ENTRY OP3BMap_0F3A[256] = {
     {0xDC,0x00,0 | PF_Valid,NULL},
     {0xDD,0x00,0 | PF_Valid,NULL},
     {0xDE,0x00,0 | PF_Valid,NULL},
-    {0xDF,0x00,0 | PF_Valid | PF_Operand," VAESKEYGEN Vdq,Wdq,Ib (66),(v1)"},
+    {0xDF,0x00,0 | PF_Operand," vaeskeygen Vdq,Wdq,Ib (66),(v1)"},
     {0xE0,0x00,0 | PF_Valid,NULL},
     {0xE1,0x00,0 | PF_Valid,NULL},
     {0xE2,0x00,0 | PF_Valid,NULL},
@@ -1228,7 +1230,7 @@ OP_ENTRY OP3BMap_0F3A[256] = {
     {0xED,0x00,0 | PF_Valid,NULL},
     {0xEE,0x00,0 | PF_Valid,NULL},
     {0xEF,0x00,0 | PF_Valid,NULL},
-    {0xF0,0x00,0 | PF_Valid | PF_REPNE," RORX Gy,Ey,Ib (F2),(v)"},
+    {0xF0,0x00,0 | PF_REPNE," RORX Gy,Ey,Ib (F2),(v)"},
     {0xF1,0x00,0 | PF_Valid,NULL},
     {0xF2,0x00,0 | PF_Valid,NULL},
     {0xF3,0x00,0 | PF_Valid,NULL},
@@ -1429,9 +1431,9 @@ OP_ENTRY Grp09_C7h[8] = {
     {0xC7,0x80,0 | PF_Valid,NULL},
     {0xC7,0x81,0 | PF_Valid," CMPXCHG8B/16B Mq/Mdq"},
     {0xC7,0x82,0 | PF_Valid,NULL},
-    {0xC7,0x83,0 | PF_Valid," xrstors"},
-    {0xC7,0x84,0 | PF_Valid," xsavec"},
-    {0xC7,0x85,0 | PF_Valid," xsaves"},
+    {0xC7,0x83,0 | PF_Valid | PF_Uncertain," xrstors"},
+    {0xC7,0x84,0 | PF_Valid | PF_Uncertain," xsavec"},
+    {0xC7,0x85,0 | PF_Valid | PF_Uncertain," xsaves"},
     {0xC7,0x86,0," VMPTRLD Mq | VMCLEAR Mq (66) | VMXON Mq (F3) | RDRAND Rv (11B)"},
     {0xC7,0x87,0," VMPTRST Mq | VMPTRST Mq (F3) | RDSEED Rv (11B)"},
 };
@@ -1453,7 +1455,7 @@ OP_ENTRY Grp11A_C6h[8] = {
     {0xC6,0x84,0 | PF_Valid,NULL},
     {0xC6,0x85,0 | PF_Valid,NULL},
     {0xC6,0x86,0 | PF_Valid,NULL},
-    {0xC6,0x87,0 | PF_Valid," XABORT Ib (000),(11B)"},
+    {0xC6,0x87,0," XABORT Ib (000),(11B)"},
 };
 OP_ENTRY Grp11B_C7h[8] = {
     {0xC7,0x80,0 | PF_Valid," MOV Ev,Iz"},
@@ -1463,7 +1465,7 @@ OP_ENTRY Grp11B_C7h[8] = {
     {0xC7,0x84,0 | PF_Valid,NULL},
     {0xC7,0x85,0 | PF_Valid,NULL},
     {0xC7,0x86,0 | PF_Valid,NULL},
-    {0xC7,0x87,0 | PF_Valid," XBEGIN Jz (000),(11B)"},
+    {0xC7,0x87,0," XBEGIN Jz (000),(11B)"},
 };
 OP_ENTRY Grp12_71h[8] = {
     {0x71,0x80,0 | PF_Valid,NULL},
@@ -1476,8 +1478,8 @@ OP_ENTRY Grp12_71h[8] = {
     {0x71,0x87,0 | PF_Valid,NULL},
 };
 OP_ENTRY Grp13_72h[8] = {
-    {0x72,0x80,0 | PF_Valid | PF_Operand," vprord/q Hx,Wx,Ib (66),(ev)"},
-    {0x72,0x81,0 | PF_Valid | PF_Operand," vprold/q Hx,Wx,Ib (66),(ev)"},
+    {0x72,0x80,0 | PF_Operand," vprord/q Hx,Wx,Ib (66),(ev)"},
+    {0x72,0x81,0 | PF_Operand," vprold/q Hx,Wx,Ib (66),(ev)"},
     {0x72,0x82,0," psrld Nq,Ib (11B) | vpsrld Hx,Ux,Ib (66),(11B),(v1)"},
     {0x72,0x83,0 | PF_Valid,NULL},
     {0x72,0x84,0," psrad Nq,Ib (11B) | vpsrad Hx,Ux,Ib (66),(11B),(v1) | vpsrad/q Hx,Ux,Ib (66),(evo)"},
@@ -1506,10 +1508,10 @@ OP_ENTRY Grp15_AEh[8] = {
     {0xAE,0x87,0," clflush | clflushopt (66) | sfence (11B)"},
 };
 OP_ENTRY Grp16_18h[8] = {
-    {0x18,0x80,0 | PF_Valid," prefetch NTA"},
-    {0x18,0x81,0 | PF_Valid," prefetch T0"},
-    {0x18,0x82,0 | PF_Valid," prefetch T1"},
-    {0x18,0x83,0 | PF_Valid," prefetch T2"},
+    {0x18,0x80,0 | PF_Valid | PF_Uncertain," prefetch NTA"},
+    {0x18,0x81,0 | PF_Valid | PF_Uncertain," prefetch T0"},
+    {0x18,0x82,0 | PF_Valid | PF_Uncertain," prefetch T1"},
+    {0x18,0x83,0 | PF_Valid | PF_Uncertain," prefetch T2"},
     {0x18,0x84,0 | PF_Valid,NULL},
     {0x18,0x85,0 | PF_Valid,NULL},
     {0x18,0x86,0 | PF_Valid,NULL},
@@ -1517,9 +1519,9 @@ OP_ENTRY Grp16_18h[8] = {
 };
 OP_ENTRY Grp17_F3h[8] = {
     {0xF3,0x80,0 | PF_Valid,NULL},
-    {0xF3,0x81,0 | PF_Valid," BLSR By,Ey (v)"},
-    {0xF3,0x82,0 | PF_Valid," BLSMSK By,Ey (v)"},
-    {0xF3,0x83,0 | PF_Valid," BLSI By,Ey (v)"},
+    {0xF3,0x81,0," BLSR By,Ey (v)"},
+    {0xF3,0x82,0," BLSMSK By,Ey (v)"},
+    {0xF3,0x83,0," BLSI By,Ey (v)"},
     {0xF3,0x84,0 | PF_Valid,NULL},
     {0xF3,0x85,0 | PF_Valid,NULL},
     {0xF3,0x86,0 | PF_Valid,NULL},
@@ -1527,26 +1529,26 @@ OP_ENTRY Grp17_F3h[8] = {
 };
 OP_ENTRY Grp18_C6h[8] = {
     {0xC6,0x80,0 | PF_Valid,NULL},
-    {0xC6,0x81,0 | PF_Valid | PF_Operand," vgatherpf0dps/d Wx (66),(ev)"},
-    {0xC6,0x82,0 | PF_Valid | PF_Operand," vgatherpf1dps/d Wx (66),(ev)"},
+    {0xC6,0x81,0 | PF_Operand," vgatherpf0dps/d Wx (66),(ev)"},
+    {0xC6,0x82,0 | PF_Operand," vgatherpf1dps/d Wx (66),(ev)"},
     {0xC6,0x83,0 | PF_Valid,NULL},
     {0xC6,0x84,0 | PF_Valid,NULL},
-    {0xC6,0x85,0 | PF_Valid | PF_Operand," vscatterpf0dps/d Wx (66),(ev)"},
-    {0xC6,0x86,0 | PF_Valid | PF_Operand," vscatterpf1dps/d Wx (66),(ev)"},
+    {0xC6,0x85,0 | PF_Operand," vscatterpf0dps/d Wx (66),(ev)"},
+    {0xC6,0x86,0 | PF_Operand," vscatterpf1dps/d Wx (66),(ev)"},
     {0xC6,0x87,0 | PF_Valid,NULL},
 };
 OP_ENTRY Grp19_C7h[8] = {
     {0xC7,0x80,0 | PF_Valid,NULL},
-    {0xC7,0x81,0 | PF_Valid | PF_Operand," vgatherpf0qps/d Wx (66),(ev)"},
-    {0xC7,0x82,0 | PF_Valid | PF_Operand," vgatherpf1qps/d Wx (66),(ev)"},
+    {0xC7,0x81,0 | PF_Operand," vgatherpf0qps/d Wx (66),(ev)"},
+    {0xC7,0x82,0 | PF_Operand," vgatherpf1qps/d Wx (66),(ev)"},
     {0xC7,0x83,0 | PF_Valid,NULL},
     {0xC7,0x84,0 | PF_Valid,NULL},
-    {0xC7,0x85,0 | PF_Valid | PF_Operand," vscatterpf0qps/d Wx (66),(ev)"},
-    {0xC7,0x86,0 | PF_Valid | PF_Operand," vscatterpf1qps/d Wx (66),(ev)"},
+    {0xC7,0x85,0 | PF_Operand," vscatterpf0qps/d Wx (66),(ev)"},
+    {0xC7,0x86,0 | PF_Operand," vscatterpf1qps/d Wx (66),(ev)"},
     {0xC7,0x87,0 | PF_Valid,NULL},
 };
 OP_ENTRY Grp20_1Ch[8] = {
-    {0x1C,0x80,0 | PF_Valid," cldemote Mb"},
+    {0x1C,0x80,0," cldemote Mb"},
     {0x1C,0x81,0 | PF_Valid,NULL},
     {0x1C,0x82,0 | PF_Valid,NULL},
     {0x1C,0x83,0 | PF_Valid,NULL},
@@ -1557,7 +1559,7 @@ OP_ENTRY Grp20_1Ch[8] = {
 };
 OP_ENTRY Grp21_1Eh[8] = {
     {0x1E,0x80,0 | PF_Valid,NULL},
-    {0x1E,0x81,0 | PF_Valid | PF_REP," RDSSPD/Q Ry (F3),(11B)"},
+    {0x1E,0x81,0 | PF_REP," RDSSPD/Q Ry (F3),(11B)"},
     {0x1E,0x82,0 | PF_Valid,NULL},
     {0x1E,0x83,0 | PF_Valid,NULL},
     {0x1E,0x84,0 | PF_Valid,NULL},
@@ -1566,8 +1568,8 @@ OP_ENTRY Grp21_1Eh[8] = {
     {0x1E,0x87,0," ENDBR64 (F3),(010),(11B) | ENDBR32 (F3),(011),(11B)"},
 };
 OP_ENTRY GrpP_0Dh[8] = {
-    {0x0D,0x80,0 | PF_Valid," PREFETCH"},
-    {0x0D,0x81,0 | PF_Valid," PREFETCHW"},
+    {0x0D,0x80,0 | PF_Valid | PF_Uncertain," PREFETCH"},
+    {0x0D,0x81,0 | PF_Valid | PF_Uncertain," PREFETCHW"},
     {0x0D,0x82,0 | PF_Valid,NULL},
     {0x0D,0x83,0 | PF_Valid,NULL},
     {0x0D,0x84,0 | PF_Valid,NULL},
@@ -1576,9 +1578,9 @@ OP_ENTRY GrpP_0Dh[8] = {
     {0x0D,0x87,0 | PF_Valid,NULL},
 };
 OP_ENTRY GrpPDLK_A6h[8] = {
-    {0xA6,0x80,0 | PF_Valid," MONTMUL"},
-    {0xA6,0x81,0 | PF_Valid," XSHA1"},
-    {0xA6,0x82,0 | PF_Valid," XSHA2"},
+    {0xA6,0x80,0," MONTMUL"},
+    {0xA6,0x81,0," XSHA1"},
+    {0xA6,0x82,0," XSHA2"},
     {0xA6,0x83,0 | PF_Valid,NULL},
     {0xA6,0x84,0 | PF_Valid,NULL},
     {0xA6,0x85,0 | PF_Valid,NULL},
@@ -1586,11 +1588,11 @@ OP_ENTRY GrpPDLK_A6h[8] = {
     {0xA6,0x87,0 | PF_Valid,NULL},
 };
 OP_ENTRY GrpRNG_A7h[8] = {
-    {0xA7,0x80,0 | PF_Valid," xstore-rng"},
-    {0xA7,0x81,0 | PF_Valid," xcrypt-ecb"},
-    {0xA7,0x82,0 | PF_Valid," xcrypt-cbc"},
-    {0xA7,0x84,0 | PF_Valid," xcrypt-cfb"},
-    {0xA7,0x85,0 | PF_Valid," xcrypt-ofb"},
+    {0xA7,0x80,0," xstore-rng"},
+    {0xA7,0x81,0," xcrypt-ecb"},
+    {0xA7,0x82,0," xcrypt-cbc"},
+    {0xA7,0x84,0," xcrypt-cfb"},
+    {0xA7,0x85,0," xcrypt-ofb"},
     {0xA7,0x85,0 | PF_Valid,NULL},
     {0xA7,0x86,0 | PF_Valid,NULL},
     {0xA7,0x87,0 | PF_Valid,NULL},
@@ -1598,67 +1600,67 @@ OP_ENTRY GrpRNG_A7h[8] = {
 
 OP_ENTRY OP_40[2] = {
     {0x40,0x00,0 | PF_Valid," INC eAX (i64)"},
-    {0x40,0x00,0 | PF_Valid," REX (o64)"},
+    {0x40,0x00,0," REX (o64)"},
 };
 OP_ENTRY OP_41[2] = {
     {0x41,0x00,0 | PF_Valid," INC eCX (i64)"},
-    {0x41,0x00,0 | PF_Valid," REX.B (o64)"},
+    {0x41,0x00,0," REX.B (o64)"},
 };
 OP_ENTRY OP_42[2] = {
     {0x42,0x00,0 | PF_Valid," INC eDX (i64)"},
-    {0x42,0x00,0 | PF_Valid," REX.X (o64)"},
+    {0x42,0x00,0," REX.X (o64)"},
 };
 OP_ENTRY OP_43[2] = {
     {0x43,0x00,0 | PF_Valid," INC eBX (i64)"},
-    {0x43,0x00,0 | PF_Valid," REX.XB (o64)"},
+    {0x43,0x00,0," REX.XB (o64)"},
 };
 OP_ENTRY OP_44[2] = {
     {0x44,0x00,0 | PF_Valid," INC eSP (i64)"},
-    {0x44,0x00,0 | PF_Valid," REX.R (o64)"},
+    {0x44,0x00,0," REX.R (o64)"},
 };
 OP_ENTRY OP_45[2] = {
     {0x45,0x00,0 | PF_Valid," INC eBP (i64)"},
-    {0x45,0x00,0 | PF_Valid," REX.RB (o64)"},
+    {0x45,0x00,0," REX.RB (o64)"},
 };
 OP_ENTRY OP_46[2] = {
     {0x46,0x00,0 | PF_Valid," INC eSI (i64)"},
-    {0x46,0x00,0 | PF_Valid," REX.RX (o64)"},
+    {0x46,0x00,0," REX.RX (o64)"},
 };
 OP_ENTRY OP_47[2] = {
     {0x47,0x00,0 | PF_Valid," INC eDI (i64)"},
-    {0x47,0x00,0 | PF_Valid," REX.RXB (o64)"},
+    {0x47,0x00,0," REX.RXB (o64)"},
 };
 OP_ENTRY OP_48[2] = {
     {0x48,0x00,0 | PF_Valid," DEC eAX (i64)"},
-    {0x48,0x00,0 | PF_Valid," REX.W (o64)"},
+    {0x48,0x00,0," REX.W (o64)"},
 };
 OP_ENTRY OP_49[2] = {
     {0x49,0x00,0 | PF_Valid," DEC eCX (i64)"},
-    {0x49,0x00,0 | PF_Valid," REX.WB (o64)"},
+    {0x49,0x00,0," REX.WB (o64)"},
 };
 OP_ENTRY OP_4A[2] = {
     {0x4a,0x00,0 | PF_Valid," DEC eDX (i64)"},
-    {0x4a,0x00,0 | PF_Valid," REX.WX (o64)"},
+    {0x4a,0x00,0," REX.WX (o64)"},
 };
 OP_ENTRY OP_4B[2] = {
     {0x4b,0x00,0 | PF_Valid," DEC eBX (i64)"},
-    {0x4b,0x00,0 | PF_Valid," REX.WXB (o64)"},
+    {0x4b,0x00,0," REX.WXB (o64)"},
 };
 OP_ENTRY OP_4C[2] = {
     {0x4c,0x00,0 | PF_Valid," DEC eSP (i64)"},
-    {0x4c,0x00,0 | PF_Valid," REX.WR (o64)"},
+    {0x4c,0x00,0," REX.WR (o64)"},
 };
 OP_ENTRY OP_4D[2] = {
     {0x4d,0x00,0 | PF_Valid," DEC eBP (i64)"},
-    {0x4d,0x00,0 | PF_Valid," REX.WRB (o64)"},
+    {0x4d,0x00,0," REX.WRB (o64)"},
 };
 OP_ENTRY OP_4E[2] = {
     {0x4e,0x00,0 | PF_Valid," DEC eSI (i64)"},
-    {0x4e,0x00,0 | PF_Valid," REX.WRX (o64)"},
+    {0x4e,0x00,0," REX.WRX (o64)"},
 };
 OP_ENTRY OP_4F[2] = {
     {0x4f,0x00,0 | PF_Valid," DEC eDI (i64)"},
-    {0x4f,0x00,0 | PF_Valid," REX.WRXB (o64)"},
+    {0x4f,0x00,0," REX.WRXB (o64)"},
 };
 OP_ENTRY OP_62[2] = {
     {0x62,0x00,0 | PF_Valid," BOUND Gv,Ma (i64)"},
@@ -1666,7 +1668,7 @@ OP_ENTRY OP_62[2] = {
 };
 OP_ENTRY OP_63[2] = {
     {0x63,0x00,0 | PF_Valid," ARPL Ew,Gw (i64)"},
-    {0x63,0x00,0 | PF_Valid," MOVSXD Gv,Ev (o64)"},
+    {0x63,0x00,0," MOVSXD Gv,Ev (o64)"},
 };
 OP_ENTRY OP_8F[1] = {
     {0x8f,0x00,0 | PF_Valid," POP Ev (d64)"},
@@ -1694,7 +1696,7 @@ OP_ENTRY OP_F3[2] = {
 };
 OP_ENTRY OP_0F09[2] = {
     {0x09,0x00,0 | PF_Valid," WBINVD"},
-    {0x09,0x00,0 | PF_Valid | PF_REP," WBNOINVD (F3)"},
+    {0x09,0x00,0 | PF_REP," WBNOINVD (F3)"},
 };
 OP_ENTRY OP_0F10[4] = {
     {0x10,0x00,0 | PF_Valid," vmovups Vps,Wps"},
@@ -1738,16 +1740,16 @@ OP_ENTRY OP_0F17[2] = {
     {0x17,0x00,0 | PF_Valid | PF_Operand," vmovhpd Mq,Vq (66),(v1)"},
 };
 OP_ENTRY OP_0F1A[4] = {
-    {0x1a,0x00,0 | PF_Valid | PF_REP," BNDCL Gv,Ev (F3)"},
-    {0x1a,0x00,0 | PF_Valid | PF_REPNE," BNDCU Gv,Ev (F2)"},
-    {0x1a,0x00,0 | PF_Valid | PF_Operand," BNDMOV Gv,Ev (66)"},
-    {0x1a,0x00,0 | PF_Valid," BNDLDX Gv,Ev"},
+    {0x1a,0x00,0 | PF_REP," BNDCL Gv,Ev (F3)"},
+    {0x1a,0x00,0 | PF_REPNE," BNDCU Gv,Ev (F2)"},
+    {0x1a,0x00,0 | PF_Operand," BNDMOV Gv,Ev (66)"},
+    {0x1a,0x00,0," BNDLDX Gv,Ev"},
 };
 OP_ENTRY OP_0F1B[4] = {
-    {0x1b,0x00,0 | PF_Valid | PF_REPNE," BNDCN Gv,Ev (F2)"},
-    {0x1b,0x00,0 | PF_Valid | PF_Operand," BNDMOV Ev,Gv (66)"},
-    {0x1b,0x00,0 | PF_Valid | PF_REP," BNDMK Gv,Ev (F3)"},
-    {0x1b,0x00,0 | PF_Valid," BNDSTX Ev,Gv"},
+    {0x1b,0x00,0 | PF_REPNE," BNDCN Gv,Ev (F2)"},
+    {0x1b,0x00,0 | PF_Operand," BNDMOV Ev,Gv (66)"},
+    {0x1b,0x00,0 | PF_REP," BNDMK Gv,Ev (F3)"},
+    {0x1b,0x00,0," BNDSTX Ev,Gv"},
 };
 OP_ENTRY OP_0F28[2] = {
     {0x28,0x00,0 | PF_Valid," vmovaps Vps,Wps"},
@@ -1789,43 +1791,43 @@ OP_ENTRY OP_0F2F[2] = {
 };
 OP_ENTRY OP_0F41[3] = {
     {0x41,0x00,0 | PF_Valid," CMOVNO Gv,Ev"},
-    {0x41,0x00,0 | PF_Valid," kandw/q Vk,Hk,Uk"},
-    {0x41,0x00,0 | PF_Valid | PF_Operand," kandb/d Vk,Hk,Uk (66)"},
+    {0x41,0x00,0," kandw/q Vk,Hk,Uk"},
+    {0x41,0x00,0 | PF_Operand," kandb/d Vk,Hk,Uk (66)"},
 };
 OP_ENTRY OP_0F42[3] = {
     {0x42,0x00,0 | PF_Valid," CMOVB/C/NAE Gv,Ev"},
-    {0x42,0x00,0 | PF_Valid," kandnw/q Vk,Hk,Uk"},
-    {0x42,0x00,0 | PF_Valid | PF_Operand," kandnb/d Vk,Hk,Uk (66)"},
+    {0x42,0x00,0," kandnw/q Vk,Hk,Uk"},
+    {0x42,0x00,0 | PF_Operand," kandnb/d Vk,Hk,Uk (66)"},
 };
 OP_ENTRY OP_0F44[3] = {
     {0x44,0x00,0 | PF_Valid," CMOVE/Z Gv,Ev"},
-    {0x44,0x00,0 | PF_Valid," knotw/q Vk,Uk"},
-    {0x44,0x00,0 | PF_Valid | PF_Operand," knotb/d Vk,Uk (66)"},
+    {0x44,0x00,0," knotw/q Vk,Uk"},
+    {0x44,0x00,0 | PF_Operand," knotb/d Vk,Uk (66)"},
 };
 OP_ENTRY OP_0F45[3] = {
     {0x45,0x00,0 | PF_Valid," CMOVNE/NZ Gv,Ev"},
-    {0x45,0x00,0 | PF_Valid," korw/q Vk,Hk,Uk"},
-    {0x45,0x00,0 | PF_Valid | PF_Operand," korb/d Vk,Hk,Uk (66)"},
+    {0x45,0x00,0," korw/q Vk,Hk,Uk"},
+    {0x45,0x00,0 | PF_Operand," korb/d Vk,Hk,Uk (66)"},
 };
 OP_ENTRY OP_0F46[3] = {
     {0x46,0x00,0 | PF_Valid," CMOVBE/NA Gv,Ev"},
-    {0x46,0x00,0 | PF_Valid," kxnorw/q Vk,Hk,Uk"},
-    {0x46,0x00,0 | PF_Valid | PF_Operand," kxnorb/d Vk,Hk,Uk (66)"},
+    {0x46,0x00,0," kxnorw/q Vk,Hk,Uk"},
+    {0x46,0x00,0 | PF_Operand," kxnorb/d Vk,Hk,Uk (66)"},
 };
 OP_ENTRY OP_0F47[3] = {
     {0x47,0x00,0 | PF_Valid," CMOVA/NBE Gv,Ev"},
-    {0x47,0x00,0 | PF_Valid," kxorw/q Vk,Hk,Uk"},
-    {0x47,0x00,0 | PF_Valid | PF_Operand," kxorb/d Vk,Hk,Uk (66)"},
+    {0x47,0x00,0," kxorw/q Vk,Hk,Uk"},
+    {0x47,0x00,0 | PF_Operand," kxorb/d Vk,Hk,Uk (66)"},
 };
 OP_ENTRY OP_0F4A[3] = {
     {0x4a,0x00,0 | PF_Valid," CMOVP/PE Gv,Ev"},
-    {0x4a,0x00,0 | PF_Valid," kaddw/q Vk,Hk,Uk"},
-    {0x4a,0x00,0 | PF_Valid | PF_Operand," kaddb/d Vk,Hk,Uk (66)"},
+    {0x4a,0x00,0," kaddw/q Vk,Hk,Uk"},
+    {0x4a,0x00,0 | PF_Operand," kaddb/d Vk,Hk,Uk (66)"},
 };
 OP_ENTRY OP_0F4B[3] = {
     {0x4b,0x00,0 | PF_Valid," CMOVNP/PO Gv,Ev"},
-    {0x4b,0x00,0 | PF_Valid | PF_Operand," kunpckbw Vk,Hk,Uk (66)"},
-    {0x4b,0x00,0 | PF_Valid," kunpckwd/dq Vk,Hk,Uk"},
+    {0x4b,0x00,0 | PF_Operand," kunpckbw Vk,Hk,Uk (66)"},
+    {0x4b,0x00,0," kunpckwd/dq Vk,Hk,Uk"},
 };
 OP_ENTRY OP_0F50[2] = {
     {0x50,0x00,0 | PF_Valid," vmovmskps Gy,Ups"},
@@ -1881,7 +1883,7 @@ OP_ENTRY OP_0F5A[4] = {
 };
 OP_ENTRY OP_0F5B[4] = {
     {0x5b,0x00,0 | PF_Valid," vcvtdq2ps Vps,Wdq"},
-    {0x5b,0x00,0 | PF_Valid," vcvtqq2ps Vps,Wqq (evo)"},
+    {0x5b,0x00,0," vcvtqq2ps Vps,Wqq (evo)"},
     {0x5b,0x00,0 | PF_Valid | PF_Operand," vcvtps2dq Vdq,Wps (66)"},
     {0x5b,0x00,0 | PF_Valid | PF_REP," vcvttps2dq Vdq,Wps (F3)"},
 };
@@ -1964,10 +1966,10 @@ OP_ENTRY OP_0F6E[2] = {
 OP_ENTRY OP_0F6F[6] = {
     {0x6f,0x00,0 | PF_Valid," movq Pq,Qq"},
     {0x6f,0x00,0 | PF_Valid | PF_Operand," vmovdqa Vx,Wx (66)"},
-    {0x6f,0x00,0 | PF_Valid | PF_Operand," vmovdqa32/64 Vx,Wx (66),(evo)"},
+    {0x6f,0x00,0 | PF_Operand," vmovdqa32/64 Vx,Wx (66),(evo)"},
     {0x6f,0x00,0 | PF_Valid | PF_REP," vmovdqu Vx,Wx (F3)"},
-    {0x6f,0x00,0 | PF_Valid | PF_REP," vmovdqu32/64 Vx,Wx (F3),(evo)"},
-    {0x6f,0x00,0 | PF_Valid | PF_REPNE," vmovdqu8/16 Vx,Wx (F2),(ev)"},
+    {0x6f,0x00,0 | PF_REP," vmovdqu32/64 Vx,Wx (F3),(evo)"},
+    {0x6f,0x00,0 | PF_REPNE," vmovdqu8/16 Vx,Wx (F2),(ev)"},
 };
 OP_ENTRY OP_0F70[4] = {
     {0x70,0x00,0 | PF_Valid," pshufw Pq,Qq,Ib"},
@@ -1989,32 +1991,32 @@ OP_ENTRY OP_0F76[2] = {
 };
 OP_ENTRY OP_0F77[3] = {
     {0x77,0x00,0 | PF_Valid," emms"},
-    {0x77,0x00,0 | PF_Valid," vzeroupper (v)"},
-    {0x77,0x00,0 | PF_Valid," vzeroall (v)"},
+    {0x77,0x00,0," vzeroupper (v)"},
+    {0x77,0x00,0," vzeroall (v)"},
 };
 OP_ENTRY OP_0F78[5] = {
-    {0x78,0x00,0 | PF_Valid," VMREAD Ey,Gy"},
-    {0x78,0x00,0 | PF_Valid," vcvttps2udq/pd2udq Vx,Wpd (evo)"},
-    {0x78,0x00,0 | PF_Valid | PF_REPNE," vcvttsd2usi Gv,Wx (F2),(ev)"},
-    {0x78,0x00,0 | PF_Valid | PF_REP," vcvttss2usi Gv,Wx (F3),(ev)"},
-    {0x78,0x00,0 | PF_Valid | PF_Operand," vcvttps2uqq/pd2uqq Vx,Wx (66),(ev)"},
+    {0x78,0x00,0," VMREAD Ey,Gy"},
+    {0x78,0x00,0," vcvttps2udq/pd2udq Vx,Wpd (evo)"},
+    {0x78,0x00,0 | PF_REPNE," vcvttsd2usi Gv,Wx (F2),(ev)"},
+    {0x78,0x00,0 | PF_REP," vcvttss2usi Gv,Wx (F3),(ev)"},
+    {0x78,0x00,0 | PF_Operand," vcvttps2uqq/pd2uqq Vx,Wx (66),(ev)"},
 };
 OP_ENTRY OP_0F79[5] = {
-    {0x79,0x00,0 | PF_Valid," VMWRITE Gy,Ey"},
-    {0x79,0x00,0 | PF_Valid," vcvtps2udq/pd2udq Vx,Wpd (evo)"},
-    {0x79,0x00,0 | PF_Valid | PF_REPNE," vcvtsd2usi Gv,Wx (F2),(ev)"},
-    {0x79,0x00,0 | PF_Valid | PF_REP," vcvtss2usi Gv,Wx (F3),(ev)"},
-    {0x79,0x00,0 | PF_Valid | PF_Operand," vcvtps2uqq/pd2uqq Vx,Wx (66),(ev)"},
+    {0x79,0x00,0," VMWRITE Gy,Ey"},
+    {0x79,0x00,0," vcvtps2udq/pd2udq Vx,Wpd (evo)"},
+    {0x79,0x00,0 | PF_REPNE," vcvtsd2usi Gv,Wx (F2),(ev)"},
+    {0x79,0x00,0 | PF_REP," vcvtss2usi Gv,Wx (F3),(ev)"},
+    {0x79,0x00,0 | PF_Operand," vcvtps2uqq/pd2uqq Vx,Wx (66),(ev)"},
 };
 OP_ENTRY OP_0F7A[3] = {
-    {0x7a,0x00,0 | PF_Valid | PF_REP," vcvtudq2pd/uqq2pd Vpd,Wx (F3),(ev)"},
-    {0x7a,0x00,0 | PF_Valid | PF_REPNE," vcvtudq2ps/uqq2ps Vpd,Wx (F2),(ev)"},
-    {0x7a,0x00,0 | PF_Valid | PF_Operand," vcvttps2qq/pd2qq Vx,Wx (66),(ev)"},
+    {0x7a,0x00,0 | PF_REP," vcvtudq2pd/uqq2pd Vpd,Wx (F3),(ev)"},
+    {0x7a,0x00,0 | PF_REPNE," vcvtudq2ps/uqq2ps Vpd,Wx (F2),(ev)"},
+    {0x7a,0x00,0 | PF_Operand," vcvttps2qq/pd2qq Vx,Wx (66),(ev)"},
 };
 OP_ENTRY OP_0F7B[3] = {
-    {0x7b,0x00,0 | PF_Valid | PF_REPNE," vcvtusi2sd Vpd,Hpd,Ev (F2),(ev)"},
-    {0x7b,0x00,0 | PF_Valid | PF_REP," vcvtusi2ss Vps,Hps,Ev (F3),(ev)"},
-    {0x7b,0x00,0 | PF_Valid | PF_Operand," vcvtps2qq/pd2qq Vx,Wx (66),(ev)"},
+    {0x7b,0x00,0 | PF_REPNE," vcvtusi2sd Vpd,Hpd,Ev (F2),(ev)"},
+    {0x7b,0x00,0 | PF_REP," vcvtusi2ss Vps,Hps,Ev (F3),(ev)"},
+    {0x7b,0x00,0 | PF_Operand," vcvtps2qq/pd2qq Vx,Wx (66),(ev)"},
 };
 OP_ENTRY OP_0F7C[2] = {
     {0x7c,0x00,0 | PF_Valid | PF_Operand," vhaddpd Vpd,Hpd,Wpd (66)"},
@@ -2032,54 +2034,54 @@ OP_ENTRY OP_0F7E[3] = {
 OP_ENTRY OP_0F7F[6] = {
     {0x7f,0x00,0 | PF_Valid," movq Qq,Pq"},
     {0x7f,0x00,0 | PF_Valid | PF_Operand," vmovdqa Wx,Vx (66)"},
-    {0x7f,0x00,0 | PF_Valid | PF_Operand," vmovdqa32/64 Wx,Vx (66),(evo)"},
+    {0x7f,0x00,0 | PF_Operand," vmovdqa32/64 Wx,Vx (66),(evo)"},
     {0x7f,0x00,0 | PF_Valid | PF_REP," vmovdqu Wx,Vx (F3)"},
-    {0x7f,0x00,0 | PF_Valid | PF_REP," vmovdqu32/64 Wx,Vx (F3),(evo)"},
-    {0x7f,0x00,0 | PF_Valid | PF_REPNE," vmovdqu8/16 Wx,Vx (F2),(ev)"},
+    {0x7f,0x00,0 | PF_REP," vmovdqu32/64 Wx,Vx (F3),(evo)"},
+    {0x7f,0x00,0 | PF_REPNE," vmovdqu8/16 Wx,Vx (F2),(ev)"},
 };
 OP_ENTRY OP_0F90[3] = {
     {0x90,0x00,0 | PF_Valid," SETO Eb"},
-    {0x90,0x00,0 | PF_Valid," kmovw/q Vk,Wk"},
-    {0x90,0x00,0 | PF_Valid | PF_Operand," kmovb/d Vk,Wk (66)"},
+    {0x90,0x00,0," kmovw/q Vk,Wk"},
+    {0x90,0x00,0 | PF_Operand," kmovb/d Vk,Wk (66)"},
 };
 OP_ENTRY OP_0F91[3] = {
     {0x91,0x00,0 | PF_Valid," SETNO Eb"},
-    {0x91,0x00,0 | PF_Valid," kmovw/q Mv,Vk"},
-    {0x91,0x00,0 | PF_Valid | PF_Operand," kmovb/d Mv,Vk (66)"},
+    {0x91,0x00,0," kmovw/q Mv,Vk"},
+    {0x91,0x00,0 | PF_Operand," kmovb/d Mv,Vk (66)"},
 };
 OP_ENTRY OP_0F92[4] = {
     {0x92,0x00,0 | PF_Valid," SETB/C/NAE Eb"},
-    {0x92,0x00,0 | PF_Valid," kmovw Vk,Rv"},
-    {0x92,0x00,0 | PF_Valid | PF_Operand," kmovb Vk,Rv (66)"},
-    {0x92,0x00,0 | PF_Valid | PF_REPNE," kmovq/d Vk,Rv (F2)"},
+    {0x92,0x00,0," kmovw Vk,Rv"},
+    {0x92,0x00,0 | PF_Operand," kmovb Vk,Rv (66)"},
+    {0x92,0x00,0 | PF_REPNE," kmovq/d Vk,Rv (F2)"},
 };
 OP_ENTRY OP_0F93[4] = {
     {0x93,0x00,0 | PF_Valid," SETAE/NB/NC Eb"},
-    {0x93,0x00,0 | PF_Valid," kmovw Gv,Uk"},
-    {0x93,0x00,0 | PF_Valid | PF_Operand," kmovb Gv,Uk (66)"},
-    {0x93,0x00,0 | PF_Valid | PF_REPNE," kmovq/d Gv,Uk (F2)"},
+    {0x93,0x00,0," kmovw Gv,Uk"},
+    {0x93,0x00,0 | PF_Operand," kmovb Gv,Uk (66)"},
+    {0x93,0x00,0 | PF_REPNE," kmovq/d Gv,Uk (F2)"},
 };
 OP_ENTRY OP_0F98[3] = {
     {0x98,0x00,0 | PF_Valid," SETS Eb"},
-    {0x98,0x00,0 | PF_Valid," kortestw/q Vk,Uk"},
-    {0x98,0x00,0 | PF_Valid | PF_Operand," kortestb/d Vk,Uk (66)"},
+    {0x98,0x00,0," kortestw/q Vk,Uk"},
+    {0x98,0x00,0 | PF_Operand," kortestb/d Vk,Uk (66)"},
 };
 OP_ENTRY OP_0F99[3] = {
     {0x99,0x00,0 | PF_Valid," SETNS Eb"},
-    {0x99,0x00,0 | PF_Valid," ktestw/q Vk,Uk"},
-    {0x99,0x00,0 | PF_Valid | PF_Operand," ktestb/d Vk,Uk (66)"},
+    {0x99,0x00,0," ktestw/q Vk,Uk"},
+    {0x99,0x00,0 | PF_Operand," ktestb/d Vk,Uk (66)"},
 };
 OP_ENTRY OP_0FB8[2] = {
-    {0xb8,0x00,0 | PF_Valid," JMPE (!F3)"},
-    {0xb8,0x00,0 | PF_Valid | PF_REP," POPCNT Gv,Ev (F3)"},
+    {0xb8,0x00,0 | PF_Valid | PF_Uncertain," JMPE (!F3)"},
+    {0xb8,0x00,0 | PF_Valid | PF_Uncertain | PF_REP," POPCNT Gv,Ev (F3)"},
 };
 OP_ENTRY OP_0FBC[2] = {
-    {0xbc,0x00,0 | PF_Valid," BSF Gv,Ev (!F3)"},
-    {0xbc,0x00,0 | PF_Valid | PF_REP," TZCNT Gv,Ev (F3)"},
+    {0xbc,0x00,0 | PF_Valid | PF_Uncertain," BSF Gv,Ev (!F3)"},
+    {0xbc,0x00,0 | PF_Valid | PF_Uncertain | PF_REP," TZCNT Gv,Ev (F3)"},
 };
 OP_ENTRY OP_0FBD[2] = {
-    {0xbd,0x00,0 | PF_Valid," BSR Gv,Ev (!F3)"},
-    {0xbd,0x00,0 | PF_Valid | PF_REP," LZCNT Gv,Ev (F3)"},
+    {0xbd,0x00,0 | PF_Valid | PF_Uncertain," BSR Gv,Ev (!F3)"},
+    {0xbd,0x00,0 | PF_Valid | PF_Uncertain | PF_REP," LZCNT Gv,Ev (F3)"},
 };
 OP_ENTRY OP_0FC2[4] = {
     {0xc2,0x00,0 | PF_Valid," vcmpps Vps,Hps,Wps,Ib"},
@@ -2147,7 +2149,7 @@ OP_ENTRY OP_0FDA[2] = {
 OP_ENTRY OP_0FDB[3] = {
     {0xdb,0x00,0 | PF_Valid," pand Pq,Qq"},
     {0xdb,0x00,0 | PF_Valid | PF_Operand," vpand Vx,Hx,Wx (66),(v1)"},
-    {0xdb,0x00,0 | PF_Valid | PF_Operand," vpandd/q Vx,Hx,Wx (66),(evo)"},
+    {0xdb,0x00,0 | PF_Operand," vpandd/q Vx,Hx,Wx (66),(evo)"},
 };
 OP_ENTRY OP_0FDC[2] = {
     {0xdc,0x00,0 | PF_Valid," paddusb Pq,Qq"},
@@ -2164,7 +2166,7 @@ OP_ENTRY OP_0FDE[2] = {
 OP_ENTRY OP_0FDF[3] = {
     {0xdf,0x00,0 | PF_Valid," pandn Pq,Qq"},
     {0xdf,0x00,0 | PF_Valid | PF_Operand," vpandn Vx,Hx,Wx (66),(v1)"},
-    {0xdf,0x00,0 | PF_Valid | PF_Operand," vpandnd/q Vx,Hx,Wx (66),(evo)"},
+    {0xdf,0x00,0 | PF_Operand," vpandnd/q Vx,Hx,Wx (66),(evo)"},
 };
 OP_ENTRY OP_0FE0[2] = {
     {0xe0,0x00,0 | PF_Valid," pavgb Pq,Qq"},
@@ -2193,7 +2195,7 @@ OP_ENTRY OP_0FE5[2] = {
 OP_ENTRY OP_0FE6[4] = {
     {0xe6,0x00,0 | PF_Valid | PF_Operand," vcvttpd2dq Vx,Wpd (66)"},
     {0xe6,0x00,0 | PF_Valid | PF_REP," vcvtdq2pd Vx,Wdq (F3)"},
-    {0xe6,0x00,0 | PF_Valid | PF_REP," vcvtdq2pd/qq2pd Vx,Wdq (F3),(evo)"},
+    {0xe6,0x00,0 | PF_REP," vcvtdq2pd/qq2pd Vx,Wdq (F3),(evo)"},
     {0xe6,0x00,0 | PF_Valid | PF_REPNE," vcvtpd2dq Vx,Wpd (F2)"},
 };
 OP_ENTRY OP_0FE7[2] = {
@@ -2215,7 +2217,7 @@ OP_ENTRY OP_0FEA[2] = {
 OP_ENTRY OP_0FEB[3] = {
     {0xeb,0x00,0 | PF_Valid," por Pq,Qq"},
     {0xeb,0x00,0 | PF_Valid | PF_Operand," vpor Vx,Hx,Wx (66),(v1)"},
-    {0xeb,0x00,0 | PF_Valid | PF_Operand," vpord/q Vx,Hx,Wx (66),(evo)"},
+    {0xeb,0x00,0 | PF_Operand," vpord/q Vx,Hx,Wx (66),(evo)"},
 };
 OP_ENTRY OP_0FEC[2] = {
     {0xec,0x00,0 | PF_Valid," paddsb Pq,Qq"},
@@ -2232,7 +2234,7 @@ OP_ENTRY OP_0FEE[2] = {
 OP_ENTRY OP_0FEF[3] = {
     {0xef,0x00,0 | PF_Valid," pxor Pq,Qq"},
     {0xef,0x00,0 | PF_Valid | PF_Operand," vpxor Vx,Hx,Wx (66),(v1)"},
-    {0xef,0x00,0 | PF_Valid | PF_Operand," vpxord/q Vx,Hx,Wx (66),(evo)"},
+    {0xef,0x00,0 | PF_Operand," vpxord/q Vx,Hx,Wx (66),(evo)"},
 };
 OP_ENTRY OP_0FF1[2] = {
     {0xf1,0x00,0 | PF_Valid," psllw Pq,Qq"},
@@ -2340,42 +2342,42 @@ OP_ENTRY OP_0F380B[2] = {
 };
 OP_ENTRY OP_0F3810[3] = {
     {0x10,0x00,0 | PF_Valid | PF_Operand," pblendvb Vdq,Wdq (66)"},
-    {0x10,0x00,0 | PF_Valid | PF_Operand," vpsrlvw Vx,Hx,Wx (66),(evo)"},
-    {0x10,0x00,0 | PF_Valid | PF_REP," vpmovuswb Wx,Vx (F3),(ev)"},
+    {0x10,0x00,0 | PF_Operand," vpsrlvw Vx,Hx,Wx (66),(evo)"},
+    {0x10,0x00,0 | PF_REP," vpmovuswb Wx,Vx (F3),(ev)"},
 };
 OP_ENTRY OP_0F3811[2] = {
-    {0x11,0x00,0 | PF_Valid | PF_REP," vpmovusdb Wx,Vd (F3),(ev)"},
-    {0x11,0x00,0 | PF_Valid | PF_Operand," vpsravw Vx,Hx,Wx (66),(ev)"},
+    {0x11,0x00,0 | PF_REP," vpmovusdb Wx,Vd (F3),(ev)"},
+    {0x11,0x00,0 | PF_Operand," vpsravw Vx,Hx,Wx (66),(ev)"},
 };
 OP_ENTRY OP_0F3812[2] = {
-    {0x12,0x00,0 | PF_Valid | PF_REP," vpmovusqb Wx,Vq (F3),(ev)"},
-    {0x12,0x00,0 | PF_Valid | PF_Operand," vpsllvw Vx,Hx,Wx (66),(ev)"},
+    {0x12,0x00,0 | PF_REP," vpmovusqb Wx,Vq (F3),(ev)"},
+    {0x12,0x00,0 | PF_Operand," vpsllvw Vx,Hx,Wx (66),(ev)"},
 };
 OP_ENTRY OP_0F3813[2] = {
-    {0x13,0x00,0 | PF_Valid | PF_Operand," vcvtph2ps Vx,Wx (66),(v)"},
-    {0x13,0x00,0 | PF_Valid | PF_REP," vpmovusdw Wx,Vd (F3),(ev)"},
+    {0x13,0x00,0 | PF_Operand," vcvtph2ps Vx,Wx (66),(v)"},
+    {0x13,0x00,0 | PF_REP," vpmovusdw Wx,Vd (F3),(ev)"},
 };
 OP_ENTRY OP_0F3814[3] = {
     {0x14,0x00,0 | PF_Valid | PF_Operand," blendvps Vdq,Wdq (66)"},
-    {0x14,0x00,0 | PF_Valid | PF_REP," vpmovusqw Wx,Vq (F3),(ev)"},
-    {0x14,0x00,0 | PF_Valid | PF_Operand," vprorvd/q Vx,Hx,Wx (66),(evo)"},
+    {0x14,0x00,0 | PF_REP," vpmovusqw Wx,Vq (F3),(ev)"},
+    {0x14,0x00,0 | PF_Operand," vprorvd/q Vx,Hx,Wx (66),(evo)"},
 };
 OP_ENTRY OP_0F3815[3] = {
     {0x15,0x00,0 | PF_Valid | PF_Operand," blendvpd Vdq,Wdq (66)"},
-    {0x15,0x00,0 | PF_Valid | PF_REP," vpmovusqd Wx,Vq (F3),(ev)"},
-    {0x15,0x00,0 | PF_Valid | PF_Operand," vprolvd/q Vx,Hx,Wx (66),(evo)"},
+    {0x15,0x00,0 | PF_REP," vpmovusqd Wx,Vq (F3),(ev)"},
+    {0x15,0x00,0 | PF_Operand," vprolvd/q Vx,Hx,Wx (66),(evo)"},
 };
 OP_ENTRY OP_0F3816[2] = {
-    {0x16,0x00,0 | PF_Valid | PF_Operand," vpermps Vqq,Hqq,Wqq (66),(v)"},
-    {0x16,0x00,0 | PF_Valid | PF_Operand," vpermps/d Vqq,Hqq,Wqq (66),(evo)"},
+    {0x16,0x00,0 | PF_Operand," vpermps Vqq,Hqq,Wqq (66),(v)"},
+    {0x16,0x00,0 | PF_Operand," vpermps/d Vqq,Hqq,Wqq (66),(evo)"},
 };
 OP_ENTRY OP_0F3819[2] = {
-    {0x19,0x00,0 | PF_Valid | PF_Operand," vbroadcastsd Vqq,Wq (66),(v)"},
-    {0x19,0x00,0 | PF_Valid | PF_Operand," vbroadcastf32x2 Vqq,Wq (66),(evo)"},
+    {0x19,0x00,0 | PF_Operand," vbroadcastsd Vqq,Wq (66),(v)"},
+    {0x19,0x00,0 | PF_Operand," vbroadcastf32x2 Vqq,Wq (66),(evo)"},
 };
 OP_ENTRY OP_0F381A[2] = {
-    {0x1a,0x00,0 | PF_Valid | PF_Operand," vbroadcastf128 Vqq,Mdq (66),(v)"},
-    {0x1a,0x00,0 | PF_Valid | PF_Operand," vbroadcastf32x4/64x2 Vqq,Wq (66),(evo)"},
+    {0x1a,0x00,0 | PF_Operand," vbroadcastf128 Vqq,Mdq (66),(v)"},
+    {0x1a,0x00,0 | PF_Operand," vbroadcastf32x4/64x2 Vqq,Wq (66),(evo)"},
 };
 OP_ENTRY OP_0F381C[2] = {
     {0x1c,0x00,0 | PF_Valid," pabsb Pq,Qq"},
@@ -2391,307 +2393,307 @@ OP_ENTRY OP_0F381E[2] = {
 };
 OP_ENTRY OP_0F3820[2] = {
     {0x20,0x00,0 | PF_Valid | PF_Operand," vpmovsxbw Vx,Ux/Mq (66),(v1)"},
-    {0x20,0x00,0 | PF_Valid | PF_REP," vpmovswb Wx,Vx (F3),(ev)"},
+    {0x20,0x00,0 | PF_REP," vpmovswb Wx,Vx (F3),(ev)"},
 };
 OP_ENTRY OP_0F3821[2] = {
     {0x21,0x00,0 | PF_Valid | PF_Operand," vpmovsxbd Vx,Ux/Md (66),(v1)"},
-    {0x21,0x00,0 | PF_Valid | PF_REP," vpmovsdb Wx,Vd (F3),(ev)"},
+    {0x21,0x00,0 | PF_REP," vpmovsdb Wx,Vd (F3),(ev)"},
 };
 OP_ENTRY OP_0F3822[2] = {
     {0x22,0x00,0 | PF_Valid | PF_Operand," vpmovsxbq Vx,Ux/Mw (66),(v1)"},
-    {0x22,0x00,0 | PF_Valid | PF_REP," vpmovsqb Wx,Vq (F3),(ev)"},
+    {0x22,0x00,0 | PF_REP," vpmovsqb Wx,Vq (F3),(ev)"},
 };
 OP_ENTRY OP_0F3823[2] = {
     {0x23,0x00,0 | PF_Valid | PF_Operand," vpmovsxwd Vx,Ux/Mq (66),(v1)"},
-    {0x23,0x00,0 | PF_Valid | PF_REP," vpmovsdw Wx,Vd (F3),(ev)"},
+    {0x23,0x00,0 | PF_REP," vpmovsdw Wx,Vd (F3),(ev)"},
 };
 OP_ENTRY OP_0F3824[2] = {
     {0x24,0x00,0 | PF_Valid | PF_Operand," vpmovsxwq Vx,Ux/Md (66),(v1)"},
-    {0x24,0x00,0 | PF_Valid | PF_REP," vpmovsqw Wx,Vq (F3),(ev)"},
+    {0x24,0x00,0 | PF_REP," vpmovsqw Wx,Vq (F3),(ev)"},
 };
 OP_ENTRY OP_0F3825[2] = {
     {0x25,0x00,0 | PF_Valid | PF_Operand," vpmovsxdq Vx,Ux/Mq (66),(v1)"},
-    {0x25,0x00,0 | PF_Valid | PF_REP," vpmovsqd Wx,Vq (F3),(ev)"},
+    {0x25,0x00,0 | PF_REP," vpmovsqd Wx,Vq (F3),(ev)"},
 };
 OP_ENTRY OP_0F3826[2] = {
-    {0x26,0x00,0 | PF_Valid | PF_Operand," vptestmb/w Vk,Hx,Wx (66),(ev)"},
-    {0x26,0x00,0 | PF_Valid | PF_REP," vptestnmb/w Vk,Hx,Wx (F3),(ev)"},
+    {0x26,0x00,0 | PF_Operand," vptestmb/w Vk,Hx,Wx (66),(ev)"},
+    {0x26,0x00,0 | PF_REP," vptestnmb/w Vk,Hx,Wx (F3),(ev)"},
 };
 OP_ENTRY OP_0F3827[2] = {
-    {0x27,0x00,0 | PF_Valid | PF_Operand," vptestmd/q Vk,Hx,Wx (66),(ev)"},
-    {0x27,0x00,0 | PF_Valid | PF_REP," vptestnmd/q Vk,Hx,Wx (F3),(ev)"},
+    {0x27,0x00,0 | PF_Operand," vptestmd/q Vk,Hx,Wx (66),(ev)"},
+    {0x27,0x00,0 | PF_REP," vptestnmd/q Vk,Hx,Wx (F3),(ev)"},
 };
 OP_ENTRY OP_0F3828[2] = {
     {0x28,0x00,0 | PF_Valid | PF_Operand," vpmuldq Vx,Hx,Wx (66),(v1)"},
-    {0x28,0x00,0 | PF_Valid | PF_REP," vpmovm2b/w Vx,Uk (F3),(ev)"},
+    {0x28,0x00,0 | PF_REP," vpmovm2b/w Vx,Uk (F3),(ev)"},
 };
 OP_ENTRY OP_0F3829[2] = {
     {0x29,0x00,0 | PF_Valid | PF_Operand," vpcmpeqq Vx,Hx,Wx (66),(v1)"},
-    {0x29,0x00,0 | PF_Valid | PF_REP," vpmovb2m/w2m Vk,Ux (F3),(ev)"},
+    {0x29,0x00,0 | PF_REP," vpmovb2m/w2m Vk,Ux (F3),(ev)"},
 };
 OP_ENTRY OP_0F382A[2] = {
     {0x2a,0x00,0 | PF_Valid | PF_Operand," vmovntdqa Vx,Mx (66),(v1)"},
-    {0x2a,0x00,0 | PF_Valid | PF_REP," vpbroadcastmb2q Vx,Uk (F3),(ev)"},
+    {0x2a,0x00,0 | PF_REP," vpbroadcastmb2q Vx,Uk (F3),(ev)"},
 };
 OP_ENTRY OP_0F382C[2] = {
-    {0x2c,0x00,0 | PF_Valid | PF_Operand," vmaskmovps Vx,Hx,Mx (66),(v)"},
-    {0x2c,0x00,0 | PF_Valid | PF_Operand," vscalefps/d Vx,Hx,Wx (66),(evo)"},
+    {0x2c,0x00,0 | PF_Operand," vmaskmovps Vx,Hx,Mx (66),(v)"},
+    {0x2c,0x00,0 | PF_Operand," vscalefps/d Vx,Hx,Wx (66),(evo)"},
 };
 OP_ENTRY OP_0F382D[2] = {
-    {0x2d,0x00,0 | PF_Valid | PF_Operand," vmaskmovpd Vx,Hx,Mx (66),(v)"},
-    {0x2d,0x00,0 | PF_Valid | PF_Operand," vscalefss/d Vx,Hx,Wx (66),(evo)"},
+    {0x2d,0x00,0 | PF_Operand," vmaskmovpd Vx,Hx,Mx (66),(v)"},
+    {0x2d,0x00,0 | PF_Operand," vscalefss/d Vx,Hx,Wx (66),(evo)"},
 };
 OP_ENTRY OP_0F3830[2] = {
     {0x30,0x00,0 | PF_Valid | PF_Operand," vpmovzxbw Vx,Ux/Mq (66),(v1)"},
-    {0x30,0x00,0 | PF_Valid | PF_REP," vpmovwb Wx,Vx (F3),(ev)"},
+    {0x30,0x00,0 | PF_REP," vpmovwb Wx,Vx (F3),(ev)"},
 };
 OP_ENTRY OP_0F3831[2] = {
     {0x31,0x00,0 | PF_Valid | PF_Operand," vpmovzxbd Vx,Ux/Md (66),(v1)"},
-    {0x31,0x00,0 | PF_Valid | PF_REP," vpmovdb Wx,Vd (F3),(ev)"},
+    {0x31,0x00,0 | PF_REP," vpmovdb Wx,Vd (F3),(ev)"},
 };
 OP_ENTRY OP_0F3832[2] = {
     {0x32,0x00,0 | PF_Valid | PF_Operand," vpmovzxbq Vx,Ux/Mw (66),(v1)"},
-    {0x32,0x00,0 | PF_Valid | PF_REP," vpmovqb Wx,Vq (F3),(ev)"},
+    {0x32,0x00,0 | PF_REP," vpmovqb Wx,Vq (F3),(ev)"},
 };
 OP_ENTRY OP_0F3833[2] = {
     {0x33,0x00,0 | PF_Valid | PF_Operand," vpmovzxwd Vx,Ux/Mq (66),(v1)"},
-    {0x33,0x00,0 | PF_Valid | PF_REP," vpmovdw Wx,Vd (F3),(ev)"},
+    {0x33,0x00,0 | PF_REP," vpmovdw Wx,Vd (F3),(ev)"},
 };
 OP_ENTRY OP_0F3834[2] = {
     {0x34,0x00,0 | PF_Valid | PF_Operand," vpmovzxwq Vx,Ux/Md (66),(v1)"},
-    {0x34,0x00,0 | PF_Valid | PF_REP," vpmovqw Wx,Vq (F3),(ev)"},
+    {0x34,0x00,0 | PF_REP," vpmovqw Wx,Vq (F3),(ev)"},
 };
 OP_ENTRY OP_0F3835[2] = {
     {0x35,0x00,0 | PF_Valid | PF_Operand," vpmovzxdq Vx,Ux/Mq (66),(v1)"},
-    {0x35,0x00,0 | PF_Valid | PF_REP," vpmovqd Wx,Vq (F3),(ev)"},
+    {0x35,0x00,0 | PF_REP," vpmovqd Wx,Vq (F3),(ev)"},
 };
 OP_ENTRY OP_0F3836[2] = {
-    {0x36,0x00,0 | PF_Valid | PF_Operand," vpermd Vqq,Hqq,Wqq (66),(v)"},
-    {0x36,0x00,0 | PF_Valid | PF_Operand," vpermd/q Vqq,Hqq,Wqq (66),(evo)"},
+    {0x36,0x00,0 | PF_Operand," vpermd Vqq,Hqq,Wqq (66),(v)"},
+    {0x36,0x00,0 | PF_Operand," vpermd/q Vqq,Hqq,Wqq (66),(evo)"},
 };
 OP_ENTRY OP_0F3838[2] = {
     {0x38,0x00,0 | PF_Valid | PF_Operand," vpminsb Vx,Hx,Wx (66),(v1)"},
-    {0x38,0x00,0 | PF_Valid | PF_REP," vpmovm2d/q Vx,Uk (F3),(ev)"},
+    {0x38,0x00,0 | PF_REP," vpmovm2d/q Vx,Uk (F3),(ev)"},
 };
 OP_ENTRY OP_0F3839[3] = {
     {0x39,0x00,0 | PF_Valid | PF_Operand," vpminsd Vx,Hx,Wx (66),(v1)"},
-    {0x39,0x00,0 | PF_Valid | PF_Operand," vpminsd/q Vx,Hx,Wx (66),(evo)"},
-    {0x39,0x00,0 | PF_Valid | PF_REP," vpmovd2m/q2m Vk,Ux (F3),(ev)"},
+    {0x39,0x00,0 | PF_Operand," vpminsd/q Vx,Hx,Wx (66),(evo)"},
+    {0x39,0x00,0 | PF_REP," vpmovd2m/q2m Vk,Ux (F3),(ev)"},
 };
 OP_ENTRY OP_0F383A[2] = {
     {0x3a,0x00,0 | PF_Valid | PF_Operand," vpminuw Vx,Hx,Wx (66),(v1)"},
-    {0x3a,0x00,0 | PF_Valid | PF_REP," vpbroadcastmw2d Vx,Uk (F3),(ev)"},
+    {0x3a,0x00,0 | PF_REP," vpbroadcastmw2d Vx,Uk (F3),(ev)"},
 };
 OP_ENTRY OP_0F383B[2] = {
     {0x3b,0x00,0 | PF_Valid | PF_Operand," vpminud Vx,Hx,Wx (66),(v1)"},
-    {0x3b,0x00,0 | PF_Valid | PF_Operand," vpminud/q Vx,Hx,Wx (66),(evo)"},
+    {0x3b,0x00,0 | PF_Operand," vpminud/q Vx,Hx,Wx (66),(evo)"},
 };
 OP_ENTRY OP_0F383D[2] = {
     {0x3d,0x00,0 | PF_Valid | PF_Operand," vpmaxsd Vx,Hx,Wx (66),(v1)"},
-    {0x3d,0x00,0 | PF_Valid | PF_Operand," vpmaxsd/q Vx,Hx,Wx (66),(evo)"},
+    {0x3d,0x00,0 | PF_Operand," vpmaxsd/q Vx,Hx,Wx (66),(evo)"},
 };
 OP_ENTRY OP_0F383F[2] = {
     {0x3f,0x00,0 | PF_Valid | PF_Operand," vpmaxud Vx,Hx,Wx (66),(v1)"},
-    {0x3f,0x00,0 | PF_Valid | PF_Operand," vpmaxud/q Vx,Hx,Wx (66),(evo)"},
+    {0x3f,0x00,0 | PF_Operand," vpmaxud/q Vx,Hx,Wx (66),(evo)"},
 };
 OP_ENTRY OP_0F3840[2] = {
     {0x40,0x00,0 | PF_Valid | PF_Operand," vpmulld Vx,Hx,Wx (66),(v1)"},
-    {0x40,0x00,0 | PF_Valid | PF_Operand," vpmulld/q Vx,Hx,Wx (66),(evo)"},
+    {0x40,0x00,0 | PF_Operand," vpmulld/q Vx,Hx,Wx (66),(evo)"},
 };
 OP_ENTRY OP_0F3846[2] = {
-    {0x46,0x00,0 | PF_Valid | PF_Operand," vpsravd Vx,Hx,Wx (66),(v)"},
-    {0x46,0x00,0 | PF_Valid | PF_Operand," vpsravd/q Vx,Hx,Wx (66),(evo)"},
+    {0x46,0x00,0 | PF_Operand," vpsravd Vx,Hx,Wx (66),(v)"},
+    {0x46,0x00,0 | PF_Operand," vpsravd/q Vx,Hx,Wx (66),(evo)"},
 };
 OP_ENTRY OP_0F3852[3] = {
-    {0x52,0x00,0 | PF_Valid | PF_REP," vdpbf16ps Vx,Hx,Wx (F3),(ev)"},
-    {0x52,0x00,0 | PF_Valid | PF_Operand," vpdpwssd Vx,Hx,Wx (66),(ev)"},
-    {0x52,0x00,0 | PF_Valid | PF_REPNE," vp4dpwssd Vdqq,Hdqq,Wdq (F2),(ev)"},
+    {0x52,0x00,0 | PF_REP," vdpbf16ps Vx,Hx,Wx (F3),(ev)"},
+    {0x52,0x00,0 | PF_Operand," vpdpwssd Vx,Hx,Wx (66),(ev)"},
+    {0x52,0x00,0 | PF_REPNE," vp4dpwssd Vdqq,Hdqq,Wdq (F2),(ev)"},
 };
 OP_ENTRY OP_0F3853[2] = {
-    {0x53,0x00,0 | PF_Valid | PF_Operand," vpdpwssds Vx,Hx,Wx (66),(ev)"},
-    {0x53,0x00,0 | PF_Valid | PF_REPNE," vp4dpwssds Vdqq,Hdqq,Wdq (F2),(ev)"},
+    {0x53,0x00,0 | PF_Operand," vpdpwssds Vx,Hx,Wx (66),(ev)"},
+    {0x53,0x00,0 | PF_REPNE," vp4dpwssds Vdqq,Hdqq,Wdq (F2),(ev)"},
 };
 OP_ENTRY OP_0F3859[2] = {
-    {0x59,0x00,0 | PF_Valid | PF_Operand," vpbroadcastq Vx,Wx (66),(v)"},
-    {0x59,0x00,0 | PF_Valid | PF_Operand," vbroadcasti32x2 Vx,Wx (66),(evo)"},
+    {0x59,0x00,0 | PF_Operand," vpbroadcastq Vx,Wx (66),(v)"},
+    {0x59,0x00,0 | PF_Operand," vbroadcasti32x2 Vx,Wx (66),(evo)"},
 };
 OP_ENTRY OP_0F385A[2] = {
-    {0x5a,0x00,0 | PF_Valid | PF_Operand," vbroadcasti128 Vqq,Mdq (66),(v)"},
-    {0x5a,0x00,0 | PF_Valid | PF_Operand," vbroadcasti32x4/64x2 Vx,Wx (66),(evo)"},
+    {0x5a,0x00,0 | PF_Operand," vbroadcasti128 Vqq,Mdq (66),(v)"},
+    {0x5a,0x00,0 | PF_Operand," vbroadcasti32x4/64x2 Vx,Wx (66),(evo)"},
 };
 OP_ENTRY OP_0F3872[2] = {
-    {0x72,0x00,0 | PF_Valid | PF_REPNE," vcvtne2ps2bf16 Vx,Hx,Wx (F2),(ev)"},
-    {0x72,0x00,0 | PF_Valid | PF_REP," vcvtneps2bf16 Vx,Wx (F3),(ev)"},
+    {0x72,0x00,0 | PF_REPNE," vcvtne2ps2bf16 Vx,Hx,Wx (F2),(ev)"},
+    {0x72,0x00,0 | PF_REP," vcvtneps2bf16 Vx,Wx (F3),(ev)"},
 };
 OP_ENTRY OP_0F3890[2] = {
-    {0x90,0x00,0 | PF_Valid | PF_Operand," vgatherdd/q Vx,Hx,Wx (66),(v)"},
-    {0x90,0x00,0 | PF_Valid | PF_Operand," vpgatherdd/q Vx,Wx (66),(evo)"},
+    {0x90,0x00,0 | PF_Operand," vgatherdd/q Vx,Hx,Wx (66),(v)"},
+    {0x90,0x00,0 | PF_Operand," vpgatherdd/q Vx,Wx (66),(evo)"},
 };
 OP_ENTRY OP_0F3891[2] = {
-    {0x91,0x00,0 | PF_Valid | PF_Operand," vgatherqd/q Vx,Hx,Wx (66),(v)"},
-    {0x91,0x00,0 | PF_Valid | PF_Operand," vpgatherqd/q Vx,Wx (66),(evo)"},
+    {0x91,0x00,0 | PF_Operand," vgatherqd/q Vx,Hx,Wx (66),(v)"},
+    {0x91,0x00,0 | PF_Operand," vpgatherqd/q Vx,Wx (66),(evo)"},
 };
 OP_ENTRY OP_0F389A[2] = {
-    {0x9a,0x00,0 | PF_Valid | PF_Operand," vfmsub132ps/d Vx,Hx,Wx (66),(v)"},
-    {0x9a,0x00,0 | PF_Valid | PF_REPNE," v4fmaddps Vdqq,Hdqq,Wdq (F2),(ev)"},
+    {0x9a,0x00,0 | PF_Operand," vfmsub132ps/d Vx,Hx,Wx (66),(v)"},
+    {0x9a,0x00,0 | PF_REPNE," v4fmaddps Vdqq,Hdqq,Wdq (F2),(ev)"},
 };
 OP_ENTRY OP_0F389B[2] = {
-    {0x9b,0x00,0 | PF_Valid | PF_Operand," vfmsub132ss/d Vx,Hx,Wx (66),(v),(v1)"},
-    {0x9b,0x00,0 | PF_Valid | PF_REPNE," v4fmaddss Vdq,Hdq,Wdq (F2),(ev)"},
+    {0x9b,0x00,0 | PF_Operand," vfmsub132ss/d Vx,Hx,Wx (66),(v),(v1)"},
+    {0x9b,0x00,0 | PF_REPNE," v4fmaddss Vdq,Hdq,Wdq (F2),(ev)"},
 };
 OP_ENTRY OP_0F38AA[2] = {
-    {0xaa,0x00,0 | PF_Valid | PF_Operand," vfmsub213ps/d Vx,Hx,Wx (66),(v)"},
-    {0xaa,0x00,0 | PF_Valid | PF_REPNE," v4fnmaddps Vdqq,Hdqq,Wdq (F2),(ev)"},
+    {0xaa,0x00,0 | PF_Operand," vfmsub213ps/d Vx,Hx,Wx (66),(v)"},
+    {0xaa,0x00,0 | PF_REPNE," v4fnmaddps Vdqq,Hdqq,Wdq (F2),(ev)"},
 };
 OP_ENTRY OP_0F38AB[2] = {
-    {0xab,0x00,0 | PF_Valid | PF_Operand," vfmsub213ss/d Vx,Hx,Wx (66),(v),(v1)"},
-    {0xab,0x00,0 | PF_Valid | PF_REPNE," v4fnmaddss Vdq,Hdq,Wdq (F2),(ev)"},
+    {0xab,0x00,0 | PF_Operand," vfmsub213ss/d Vx,Hx,Wx (66),(v),(v1)"},
+    {0xab,0x00,0 | PF_REPNE," v4fnmaddss Vdq,Hdq,Wdq (F2),(ev)"},
 };
 OP_ENTRY OP_0F38C8[2] = {
-    {0xc8,0x00,0 | PF_Valid," sha1nexte Vdq,Wdq"},
-    {0xc8,0x00,0 | PF_Valid | PF_Operand," vexp2ps/d Vx,Wx (66),(ev)"},
+    {0xc8,0x00,0," sha1nexte Vdq,Wdq"},
+    {0xc8,0x00,0 | PF_Operand," vexp2ps/d Vx,Wx (66),(ev)"},
 };
 OP_ENTRY OP_0F38CA[2] = {
-    {0xca,0x00,0 | PF_Valid," sha1msg2 Vdq,Wdq"},
-    {0xca,0x00,0 | PF_Valid | PF_Operand," vrcp28ps/d Vx,Wx (66),(ev)"},
+    {0xca,0x00,0," sha1msg2 Vdq,Wdq"},
+    {0xca,0x00,0 | PF_Operand," vrcp28ps/d Vx,Wx (66),(ev)"},
 };
 OP_ENTRY OP_0F38CB[2] = {
-    {0xcb,0x00,0 | PF_Valid," sha256rnds2 Vdq,Wdq"},
-    {0xcb,0x00,0 | PF_Valid | PF_Operand," vrcp28ss/d Vx,Hx,Wx (66),(ev)"},
+    {0xcb,0x00,0," sha256rnds2 Vdq,Wdq"},
+    {0xcb,0x00,0 | PF_Operand," vrcp28ss/d Vx,Hx,Wx (66),(ev)"},
 };
 OP_ENTRY OP_0F38CC[2] = {
-    {0xcc,0x00,0 | PF_Valid," sha256msg1 Vdq,Wdq"},
-    {0xcc,0x00,0 | PF_Valid | PF_Operand," vrsqrt28ps/d Vx,Wx (66),(ev)"},
+    {0xcc,0x00,0," sha256msg1 Vdq,Wdq"},
+    {0xcc,0x00,0 | PF_Operand," vrsqrt28ps/d Vx,Wx (66),(ev)"},
 };
 OP_ENTRY OP_0F38CD[2] = {
-    {0xcd,0x00,0 | PF_Valid," sha256msg2 Vdq,Wdq"},
-    {0xcd,0x00,0 | PF_Valid | PF_Operand," vrsqrt28ss/d Vx,Hx,Wx (66),(ev)"},
+    {0xcd,0x00,0," sha256msg2 Vdq,Wdq"},
+    {0xcd,0x00,0 | PF_Operand," vrsqrt28ss/d Vx,Hx,Wx (66),(ev)"},
 };
 OP_ENTRY OP_0F38F0[4] = {
-    {0xf0,0x00,0 | PF_Valid," MOVBE Gy,My"},
-    {0xf0,0x00,0 | PF_Valid | PF_Operand," MOVBE Gw,Mw (66)"},
-    {0xf0,0x00,0 | PF_Valid | PF_REPNE," CRC32 Gd,Eb (F2)"},
-    {0xf0,0x00,0 | PF_Valid | PF_Operand | PF_REPNE," CRC32 Gd,Eb (66&F2)"},
+    {0xf0,0x00,0," MOVBE Gy,My"},
+    {0xf0,0x00,0 | PF_Operand," MOVBE Gw,Mw (66)"},
+    {0xf0,0x00,0 | PF_REPNE," CRC32 Gd,Eb (F2)"},
+    {0xf0,0x00,0 | PF_Operand | PF_REPNE," CRC32 Gd,Eb (66&F2)"},
 };
 OP_ENTRY OP_0F38F1[4] = {
-    {0xf1,0x00,0 | PF_Valid," MOVBE My,Gy"},
-    {0xf1,0x00,0 | PF_Valid | PF_Operand," MOVBE Mw,Gw (66)"},
-    {0xf1,0x00,0 | PF_Valid | PF_REPNE," CRC32 Gd,Ey (F2)"},
-    {0xf1,0x00,0 | PF_Valid | PF_Operand | PF_REPNE," CRC32 Gd,Ew (66&F2)"},
+    {0xf1,0x00,0," MOVBE My,Gy"},
+    {0xf1,0x00,0 | PF_Operand," MOVBE Mw,Gw (66)"},
+    {0xf1,0x00,0 | PF_REPNE," CRC32 Gd,Ey (F2)"},
+    {0xf1,0x00,0 | PF_Operand | PF_REPNE," CRC32 Gd,Ew (66&F2)"},
 };
 OP_ENTRY OP_0F38F5[4] = {
-    {0xf5,0x00,0 | PF_Valid," BZHI Gy,Ey,By (v)"},
-    {0xf5,0x00,0 | PF_Valid | PF_REP," PEXT Gy,By,Ey (F3),(v)"},
-    {0xf5,0x00,0 | PF_Valid | PF_REPNE," PDEP Gy,By,Ey (F2),(v)"},
-    {0xf5,0x00,0 | PF_Valid | PF_Operand," WRUSSD/Q My,Gy (66)"},
+    {0xf5,0x00,0," BZHI Gy,Ey,By (v)"},
+    {0xf5,0x00,0 | PF_REP," PEXT Gy,By,Ey (F3),(v)"},
+    {0xf5,0x00,0 | PF_REPNE," PDEP Gy,By,Ey (F2),(v)"},
+    {0xf5,0x00,0 | PF_Operand," WRUSSD/Q My,Gy (66)"},
 };
 OP_ENTRY OP_0F38F6[4] = {
-    {0xf6,0x00,0 | PF_Valid | PF_Operand," ADCX Gy,Ey (66)"},
-    {0xf6,0x00,0 | PF_Valid | PF_REP," ADOX Gy,Ey (F3)"},
-    {0xf6,0x00,0 | PF_Valid | PF_REPNE," MULX By,Gy,rDX,Ey (F2),(v)"},
-    {0xf6,0x00,0 | PF_Valid," WRSSD/Q My,Gy"},
+    {0xf6,0x00,0 | PF_Operand," ADCX Gy,Ey (66)"},
+    {0xf6,0x00,0 | PF_REP," ADOX Gy,Ey (F3)"},
+    {0xf6,0x00,0 | PF_REPNE," MULX By,Gy,rDX,Ey (F2),(v)"},
+    {0xf6,0x00,0," WRSSD/Q My,Gy"},
 };
 OP_ENTRY OP_0F38F7[4] = {
-    {0xf7,0x00,0 | PF_Valid," BEXTR Gy,Ey,By (v)"},
-    {0xf7,0x00,0 | PF_Valid | PF_Operand," SHLX Gy,Ey,By (66),(v)"},
-    {0xf7,0x00,0 | PF_Valid | PF_REP," SARX Gy,Ey,By (F3),(v)"},
-    {0xf7,0x00,0 | PF_Valid | PF_REPNE," SHRX Gy,Ey,By (F2),(v)"},
+     {0xf7,0x00,0," BEXTR Gy,Ey,By (v)"},
+    {0xf7,0x00,0 | PF_Operand," SHLX Gy,Ey,By (66),(v)"},
+    {0xf7,0x00,0 | PF_REP," SARX Gy,Ey,By (F3),(v)"},
+    {0xf7,0x00,0 | PF_REPNE," SHRX Gy,Ey,By (F2),(v)"},
 };
 OP_ENTRY OP_0F38F8[2] = {
-    {0xf8,0x00,0 | PF_Valid | PF_REPNE," ENQCMD Gv,Mdqq (F2)"},
-    {0xf8,0x00,0 | PF_Valid | PF_REP," ENQCMDS Gv,Mdqq (F3)"},
+    {0xf8,0x00,0 | PF_REPNE," ENQCMD Gv,Mdqq (F2)"},
+    {0xf8,0x00,0 | PF_REP," ENQCMDS Gv,Mdqq (F3)"},
 };
 OP_ENTRY OP_0F3A08[2] = {
     {0x08,0x00,0 | PF_Valid | PF_Operand," vroundps Vx,Wx,Ib (66)"},
-    {0x08,0x00,0 | PF_Valid | PF_Operand," vrndscaleps Vx,Wx,Ib (66),(evo)"},
+    {0x08,0x00,0 | PF_Operand," vrndscaleps Vx,Wx,Ib (66),(evo)"},
 };
 OP_ENTRY OP_0F3A09[2] = {
     {0x09,0x00,0 | PF_Valid | PF_Operand," vroundpd Vx,Wx,Ib (66)"},
-    {0x09,0x00,0 | PF_Valid | PF_Operand," vrndscalepd Vx,Wx,Ib (66),(evo)"},
+    {0x09,0x00,0 | PF_Operand," vrndscalepd Vx,Wx,Ib (66),(evo)"},
 };
 OP_ENTRY OP_0F3A0A[2] = {
     {0x0a,0x00,0 | PF_Valid | PF_Operand," vroundss Vss,Wss,Ib (66),(v1)"},
-    {0x0a,0x00,0 | PF_Valid | PF_Operand," vrndscaless Vx,Hx,Wx,Ib (66),(evo)"},
+    {0x0a,0x00,0 | PF_Operand," vrndscaless Vx,Hx,Wx,Ib (66),(evo)"},
 };
 OP_ENTRY OP_0F3A0B[2] = {
     {0x0b,0x00,0 | PF_Valid | PF_Operand," vroundsd Vsd,Wsd,Ib (66),(v1)"},
-    {0x0b,0x00,0 | PF_Valid | PF_Operand," vrndscalesd Vx,Hx,Wx,Ib (66),(evo)"},
+    {0x0b,0x00,0 | PF_Operand," vrndscalesd Vx,Hx,Wx,Ib (66),(evo)"},
 };
 OP_ENTRY OP_0F3A0F[2] = {
     {0x0f,0x00,0 | PF_Valid," palignr Pq,Qq,Ib"},
     {0x0f,0x00,0 | PF_Valid | PF_Operand," vpalignr Vx,Hx,Wx,Ib (66),(v1)"},
 };
 OP_ENTRY OP_0F3A18[2] = {
-    {0x18,0x00,0 | PF_Valid | PF_Operand," vinsertf128 Vqq,Hqq,Wqq,Ib (66),(v)"},
-    {0x18,0x00,0 | PF_Valid | PF_Operand," vinsertf32x4/64x2 Vqq,Hqq,Wqq,Ib (66),(evo)"},
+    {0x18,0x00,0 | PF_Operand," vinsertf128 Vqq,Hqq,Wqq,Ib (66),(v)"},
+    {0x18,0x00,0 | PF_Operand," vinsertf32x4/64x2 Vqq,Hqq,Wqq,Ib (66),(evo)"},
 };
 OP_ENTRY OP_0F3A19[2] = {
-    {0x19,0x00,0 | PF_Valid | PF_Operand," vextractf128 Wdq,Vqq,Ib (66),(v)"},
-    {0x19,0x00,0 | PF_Valid | PF_Operand," vextractf32x4/64x2 Wdq,Vqq,Ib (66),(evo)"},
+    {0x19,0x00,0 | PF_Operand," vextractf128 Wdq,Vqq,Ib (66),(v)"},
+    {0x19,0x00,0 | PF_Operand," vextractf32x4/64x2 Wdq,Vqq,Ib (66),(evo)"},
 };
 OP_ENTRY OP_0F3A38[2] = {
-    {0x38,0x00,0 | PF_Valid | PF_Operand," vinserti128 Vqq,Hqq,Wqq,Ib (66),(v)"},
-    {0x38,0x00,0 | PF_Valid | PF_Operand," vinserti32x4/64x2 Vqq,Hqq,Wqq,Ib (66),(evo)"},
+    {0x38,0x00,0 | PF_Operand," vinserti128 Vqq,Hqq,Wqq,Ib (66),(v)"},
+    {0x38,0x00,0 | PF_Operand," vinserti32x4/64x2 Vqq,Hqq,Wqq,Ib (66),(evo)"},
 };
 OP_ENTRY OP_0F3A39[2] = {
-    {0x39,0x00,0 | PF_Valid | PF_Operand," vextracti128 Wdq,Vqq,Ib (66),(v)"},
-    {0x39,0x00,0 | PF_Valid | PF_Operand," vextracti32x4/64x2 Wdq,Vqq,Ib (66),(evo)"},
+    {0x39,0x00,0 | PF_Operand," vextracti128 Wdq,Vqq,Ib (66),(v)"},
+    {0x39,0x00,0 | PF_Operand," vextracti32x4/64x2 Wdq,Vqq,Ib (66),(evo)"},
 };
 OP_ENTRY OP_0F3A42[2] = {
     {0x42,0x00,0 | PF_Valid | PF_Operand," vmpsadbw Vx,Hx,Wx,Ib (66),(v1)"},
-    {0x42,0x00,0 | PF_Valid | PF_Operand," vdbpsadbw Vx,Hx,Wx,Ib (66),(evo)"},
+    {0x42,0x00,0 | PF_Operand," vdbpsadbw Vx,Hx,Wx,Ib (66),(evo)"},
 };
 
 // Grp07_0F01
 OP_ENTRY OP_0F01_0[7] = {
     {0x01,0x80,0 | PF_Valid," SGDT Ms"},
-    {0x01,0x80,0 | PF_Valid," VMCALL (001),(11B)"},
-    {0x01,0x80,0 | PF_Valid," VMLAUNCH (010),(11B)"},
-    {0x01,0x80,0 | PF_Valid," VMRESUME (011),(11B)"},
-    {0x01,0x80,0 | PF_Valid," VMXOFF (100),(11B)"},
-    {0x01,0x80,0 | PF_Valid," PCONFIG (101),(11B)"},
-    {0x01,0x80,0 | PF_Valid," ENCLV (000),(11B)"},
+    {0x01,0x80,0," VMCALL (001),(11B)"},
+    {0x01,0x80,0," VMLAUNCH (010),(11B)"},
+    {0x01,0x80,0," VMRESUME (011),(11B)"},
+    {0x01,0x80,0," VMXOFF (100),(11B)"},
+    {0x01,0x80,0," PCONFIG (101),(11B)"},
+    {0x01,0x80,0," ENCLV (000),(11B)"},
 };
 OP_ENTRY OP_0F01_1[6] = {
     {0x01,0x81,0 | PF_Valid," SIDT Ms"},
-    {0x01,0x81,0 | PF_Valid," MONITOR (000),(11B)"},
-    {0x01,0x81,0 | PF_Valid," MWAIT (001),(11B)"},
-    {0x01,0x81,0 | PF_Valid," CLAC (010),(11B)"},
-    {0x01,0x81,0 | PF_Valid," STAC (011),(11B)"},
-    {0x01,0x81,0 | PF_Valid," ENCLS (111),(11B)"},
+    {0x01,0x81,0 | PF_Valid | PF_Uncertain," MONITOR (000),(11B)"},
+    {0x01,0x81,0 | PF_Valid | PF_Uncertain," MWAIT (001),(11B)"},
+    {0x01,0x81,0," CLAC (010),(11B)"},
+    {0x01,0x81,0," STAC (011),(11B)"},
+    {0x01,0x81,0," ENCLS (111),(11B)"},
 };
 OP_ENTRY OP_0F01_2[7] = {
     {0x01,0x82,0 | PF_Valid," LGDT Ms"},
-    {0x01,0x82,0 | PF_Valid," XGETBV (000),(11B)"},
-    {0x01,0x82,0 | PF_Valid," XSETBV (001),(11B)"},
-    {0x01,0x82,0 | PF_Valid," VMFUNC (100),(11B)"},
-    {0x01,0x82,0 | PF_Valid," XEND (101)(11B)"},
-    {0x01,0x82,0 | PF_Valid," XTEST (110)(11B)"},
-    {0x01,0x82,0 | PF_Valid," ENCLU (111),(11B)"},
+    {0x01,0x82,0 | PF_Valid | PF_Uncertain," XGETBV (000),(11B)"},
+    {0x01,0x82,0 | PF_Valid | PF_Uncertain," XSETBV (001),(11B)"},
+    {0x01,0x82,0," VMFUNC (100),(11B)"},
+    {0x01,0x82,0," XEND (101)(11B)"},
+    {0x01,0x82,0," XTEST (110)(11B)"},
+    {0x01,0x82,0," ENCLU (111),(11B)"},
 };
 OP_ENTRY OP_0F01_5[5] = {
-    {0x01,0x85,0 | PF_Valid," rdpkru (110),(11B)"},
-    {0x01,0x85,0 | PF_Valid," wrpkru (111),(11B)"},
-    {0x01,0x85,0 | PF_Valid | PF_REP," SAVEPREVSSP (F3),(010),(11B)"},
-    {0x01,0x85,0 | PF_Valid | PF_REP," RSTORSSP Mq (F3)"},
-    {0x01,0x85,0 | PF_Valid | PF_REP," SETSSBSY (F3),(000),(11B)"},
+    {0x01,0x85,0," rdpkru (110),(11B)"},
+    {0x01,0x85,0," wrpkru (111),(11B)"},
+    {0x01,0x85,0 | PF_REP," SAVEPREVSSP (F3),(010),(11B)"},
+    {0x01,0x85,0 | PF_REP," RSTORSSP Mq (F3)"},
+    {0x01,0x85,0 | PF_REP," SETSSBSY (F3),(000),(11B)"},
 };
 OP_ENTRY OP_0F01_7[3] = {
     {0x01,0x87,0 | PF_Valid," INVLPG Mb"},
-    {0x01,0x87,0 | PF_Valid," SWAPGS (o64),(000),(11B)"},
-    {0x01,0x87,0 | PF_Valid," RDTSCP (001),(11B)"},
+    {0x01,0x87,0," SWAPGS (o64),(000),(11B)"},
+    {0x01,0x87,0 | PF_Valid | PF_Uncertain," RDTSCP (001),(11B)"},
 };
 // Grp09_0FC7
 OP_ENTRY OP_0FC7_6[4] = {
-    {0xc7,0x86,0 | PF_Valid," VMPTRLD Mq"},
-    {0xc7,0x86,0 | PF_Valid | PF_Operand," VMCLEAR Mq (66)"},
-    {0xc7,0x86,0 | PF_Valid | PF_REP," VMXON Mq (F3)"},
-    {0xc7,0x86,0 | PF_Valid," RDRAND Rv (11B)"},
+    {0xc7,0x86,0," VMPTRLD Mq"},
+    {0xc7,0x86,0 | PF_Operand," VMCLEAR Mq (66)"},
+    {0xc7,0x86,0 | PF_REP," VMXON Mq (F3)"},
+    {0xc7,0x86,0," RDRAND Rv (11B)"},
 };
 OP_ENTRY OP_0FC7_7[3] = {
-    {0xc7,0x87,0 | PF_Valid," VMPTRST Mq"},
-    {0xc7,0x87,0 | PF_Valid | PF_REP," VMPTRST Mq (F3)"},
-    {0xc7,0x87,0 | PF_Valid," RDSEED Rv (11B)"},
+    {0xc7,0x87,0," VMPTRST Mq"},
+    {0xc7,0x87,0 | PF_REP," VMPTRST Mq (F3)"},
+    {0xc7,0x87,0," RDSEED Rv (11B)"},
 };
 // Grp12_0F71
 OP_ENTRY OP_0F71_2[2] = {
@@ -2714,7 +2716,7 @@ OP_ENTRY OP_0F72_2[2] = {
 OP_ENTRY OP_0F72_4[3] = {
     {0x72,0x84,0 | PF_Valid," psrad Nq,Ib (11B)"},
     {0x72,0x84,0 | PF_Valid | PF_Operand," vpsrad Hx,Ux,Ib (66),(11B),(v1)"},
-    {0x72,0x84,0 | PF_Valid | PF_Operand," vpsrad/q Hx,Ux,Ib (66),(evo)"},
+    {0x72,0x84,0 | PF_Operand," vpsrad/q Hx,Ux,Ib (66),(evo)"},
 };
 OP_ENTRY OP_0F72_6[2] = {
     {0x72,0x86,0 | PF_Valid," pslld Nq,Ib (11B)"},
@@ -2732,47 +2734,47 @@ OP_ENTRY OP_0F73_6[2] = {
 // Grp15_0FAE
 OP_ENTRY OP_0FAE_0[2] = {
     {0xae,0x80,0 | PF_Valid," fxsave"},
-    {0xae,0x80,0 | PF_Valid | PF_REP," RDFSBASE Ry (F3),(11B)"},
+    {0xae,0x80,0 | PF_REP," RDFSBASE Ry (F3),(11B)"},
 };
 OP_ENTRY OP_0FAE_1[2] = {
     {0xae,0x81,0 | PF_Valid," fxstor"},
-    {0xae,0x81,0 | PF_Valid | PF_REP," RDGSBASE Ry (F3),(11B)"},
+    {0xae,0x81,0 | PF_REP," RDGSBASE Ry (F3),(11B)"},
 };
 OP_ENTRY OP_0FAE_2[2] = {
     {0xae,0x82,0 | PF_Valid," vldmxcsr Md (v1)"},
-    {0xae,0x82,0 | PF_Valid | PF_REP," WRFSBASE Ry (F3),(11B)"},
+    {0xae,0x82,0 | PF_REP," WRFSBASE Ry (F3),(11B)"},
 };
 OP_ENTRY OP_0FAE_3[2] = {
     {0xae,0x83,0 | PF_Valid," vstmxcsr Md (v1)"},
-    {0xae,0x83,0 | PF_Valid | PF_REP," WRGSBASE Ry (F3),(11B)"},
+    {0xae,0x83,0 | PF_REP," WRGSBASE Ry (F3),(11B)"},
 };
 OP_ENTRY OP_0FAE_4[2] = {
-    {0xae,0x84,0 | PF_Valid," XSAVE"},
-    {0xae,0x84,0 | PF_Valid | PF_REP," ptwrite Ey (F3),(11B)"},
+    {0xae,0x84,0 | PF_Valid | PF_Uncertain," XSAVE"},
+    {0xae,0x84,0 | PF_REP," ptwrite Ey (F3),(11B)"},
 };
 OP_ENTRY OP_0FAE_5[3] = {
-    {0xae,0x85,0 | PF_Valid," XRSTOR"},
-    {0xae,0x85,0 | PF_Valid," lfence (11B)"},
-    {0xae,0x85,0 | PF_Valid | PF_REP," INCSSPD/Q Ry (F3),(11B)"},
+    {0xae,0x85,0 | PF_Valid | PF_Uncertain," XRSTOR"},
+    {0xae,0x85,0 | PF_Valid | PF_Uncertain," lfence (11B)"},
+    {0xae,0x85,0 | PF_REP," INCSSPD/Q Ry (F3),(11B)"},
 };
 OP_ENTRY OP_0FAE_6[7] = {
-    {0xae,0x86,0 | PF_Valid," XSAVEOPT"},
-    {0xae,0x86,0 | PF_Valid | PF_Operand," clwb (66)"},
+    {0xae,0x86,0 | PF_Valid | PF_Uncertain," XSAVEOPT"},
+    {0xae,0x86,0 | PF_Operand," clwb (66)"},
     {0xae,0x86,0 | PF_Valid," mfence (11B)"},
-    {0xae,0x86,0 | PF_Valid | PF_Operand," TPAUSE Rd (66),(11B)"},
-    {0xae,0x86,0 | PF_Valid | PF_REP," UMONITOR Rv (F3),(11B)"},
-    {0xae,0x86,0 | PF_Valid | PF_REPNE," UMWAIT Rd (F2),(11B)"},
-    {0xae,0x86,0 | PF_Valid | PF_REP," CLRSSBSY Mq (F3)"},
+    {0x01,0x86,0 | PF_Operand," TPAUSE Rd (66),(11B)"},
+    {0x01,0x86,0 | PF_REP," UMONITOR Rv (F3),(11B)"},
+    {0x01,0x86,0 | PF_REPNE," UMWAIT Rd (F2),(11B)"},
+    {0x01,0x86,0 | PF_REP," CLRSSBSY Mq (F3)"},
 };
 OP_ENTRY OP_0FAE_7[3] = {
-    {0xae,0x87,0 | PF_Valid," clflush"},
-    {0xae,0x87,0 | PF_Valid | PF_Operand," clflushopt (66)"},
-    {0xae,0x87,0 | PF_Valid," sfence (11B)"},
+    {0xae,0x87,0 | PF_Valid | PF_Uncertain," clflush"},
+    {0xae,0x87,0 | PF_Operand," clflushopt (66)"},
+    {0xae,0x87,0 | PF_Valid | PF_Uncertain," sfence (11B)"},
 };
 // Grp21_0F1E
 OP_ENTRY OP_0F1E_7[2] = {
-    {0x1e,0x87,0 | PF_Valid | PF_REP," ENDBR64 (F3),(010),(11B)"},
-    {0x1e,0x87,0 | PF_Valid | PF_REP," ENDBR32 (F3),(011),(11B)"},
+    {0x1e,0x87,0 | PF_REP," ENDBR64 (F3),(010),(11B)"},
+    {0x1e,0x87,0 | PF_REP," ENDBR32 (F3),(011),(11B)"},
 };
 
 // WCHAR* strOPMatch : opcode string to match strOPMatch =>{OP[7:0],MODRM[7:0]}

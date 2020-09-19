@@ -1,0 +1,432 @@
+00/0        SLDT Rv/Mw
+00/1        STR Rv/Mw
+00/2        LLDT Ew
+00/3        LTR Ew
+00/4        VERR Ew
+00/5        VERW Ew
+01/0        SGDT Ms
+01/1        SIDT Ms
+01/1        MONITOR (000),(11B)
+01/1        MWAIT (001),(11B)
+01/2        LGDT Ms
+01/2        XGETBV (000),(11B)
+01/2        XSETBV (001),(11B)
+01/3        LIDT Ms
+01/4        SMSW Mw/Rv
+01/6        LMSW Ew
+01/7        INVLPG Mb
+01/7        RDTSCP (001),(11B)
+02          LAR Gv,Ew
+03          LSL Gv,Ew
+06          CLTS
+08          INVD
+09          WBINVD
+0B          UD2 (1B)
+0D/0        PREFETCH
+0D/1        PREFETCHW
+0E          FEMMS
+10          vmovups Vps,Wps
+10          vmovupd Vpd,Wpd (66) (opdsize)
+10          vmovss Vx,Hx,Wss (F3),(v1) (REP)
+10          vmovsd Vx,Hx,Wsd (F2),(v1) (REPNE)
+11          vmovups Wps,Vps
+11          vmovupd Wpd,Vpd (66) (opdsize)
+11          vmovss Wss,Hx,Vss (F3),(v1) (REP)
+11          vmovsd Wsd,Hx,Vsd (F2),(v1) (REPNE)
+12          vmovlps Vq,Hq,Mq (v1)
+12          vmovhlps Vq,Hq,Uq (v1)
+12          vmovlpd Vq,Hq,Mq (66),(v1) (opdsize)
+12          vmovsldup Vx,Wx (F3) (REP)
+12          vmovddup Vx,Wx (F2) (REPNE)
+13          vmovlps Mq,Vq (v1)
+13          vmovlpd Mq,Vq (66),(v1) (opdsize)
+14          vunpcklps Vx,Hx,Wx
+14          vunpcklpd Vx,Hx,Wx (66) (opdsize)
+15          vunpckhps Vx,Hx,Wx
+15          vunpckhpd Vx,Hx,Wx (66) (opdsize)
+16          vmovhps Vdq,Hq,Mq (v1)
+16          vmovlhps Vdq,Hq,Uq (v1)
+16          vmovhpd Vdq,Hq,Mq (66),(v1) (opdsize)
+16          vmovshdup Vx,Wx (F3) (REP)
+17          vmovhps Mq,Vq (v1)
+17          vmovhpd Mq,Vq (66),(v1) (opdsize)
+18/0        prefetch NTA
+18/1        prefetch T0
+18/2        prefetch T1
+18/3        prefetch T2
+1F          NOP Ev
+20          MOV Rd,Cd
+21          MOV Rd,Dd
+22          MOV Cd,Rd
+23          MOV Dd,Rd
+28          vmovaps Vps,Wps
+28          vmovapd Vpd,Wpd (66) (opdsize)
+29          vmovaps Wps,Vps
+29          vmovapd Wpd,Vpd (66) (opdsize)
+2A          cvtpi2ps Vps,Qpi
+2A          cvtpi2pd Vpd,Qpi (66) (opdsize)
+2A          vcvtsi2ss Vss,Hss,Ey (F3),(v1) (REP)
+2A          vcvtsi2sd Vsd,Hsd,Ey (F2),(v1) (REPNE)
+2B          vmovntps Mps,Vps
+2B          vmovntpd Mpd,Vpd (66) (opdsize)
+2C          cvttps2pi Ppi,Wps
+2C          cvttpd2pi Ppi,Wpd (66) (opdsize)
+2C          vcvttss2si Gy,Wss (F3),(v1) (REP)
+2C          vcvttsd2si Gy,Wsd (F2),(v1) (REPNE)
+2D          cvtps2pi Ppi,Wps
+2D          cvtpd2pi Qpi,Wpd (66) (opdsize)
+2D          vcvtss2si Gy,Wss (F3),(v1) (REP)
+2D          vcvtsd2si Gy,Wsd (F2),(v1) (REPNE)
+2E          vucomiss Vss,Wss (v1)
+2E          vucomisd  Vsd,Wsd (66),(v1) (opdsize)
+2F          vcomiss Vss,Wss (v1)
+2F          vcomisd  Vsd,Wsd (66),(v1) (opdsize)
+30          WRMSR
+31          RDTSC
+32          RDMSR
+33          RDPMC
+34          SYSENTER
+35          SYSEXIT
+38          escape # 3-byte escape 1
+3A          escape # 3-byte escape 2
+40          CMOVO Gv,Ev
+41          CMOVNO Gv,Ev
+42          CMOVB/C/NAE Gv,Ev
+43          CMOVAE/NB/NC Gv,Ev
+44          CMOVE/Z Gv,Ev
+45          CMOVNE/NZ Gv,Ev
+46          CMOVBE/NA Gv,Ev
+47          CMOVA/NBE Gv,Ev
+48          CMOVS Gv,Ev
+49          CMOVNS Gv,Ev
+4A          CMOVP/PE Gv,Ev
+4B          CMOVNP/PO Gv,Ev
+4C          CMOVL/NGE Gv,Ev
+4D          CMOVNL/GE Gv,Ev
+4E          CMOVLE/NG Gv,Ev
+4F          CMOVNLE/G Gv,Ev
+50          vmovmskps Gy,Ups
+50          vmovmskpd Gy,Upd (66) (opdsize)
+51          vsqrtps Vps,Wps
+51          vsqrtpd Vpd,Wpd (66) (opdsize)
+51          vsqrtss Vss,Hss,Wss (F3),(v1) (REP)
+51          vsqrtsd Vsd,Hsd,Wsd (F2),(v1) (REPNE)
+52          vrsqrtps Vps,Wps
+52          vrsqrtss Vss,Hss,Wss (F3),(v1) (REP)
+53          vrcpps Vps,Wps
+53          vrcpss Vss,Hss,Wss (F3),(v1) (REP)
+54          vandps Vps,Hps,Wps
+54          vandpd Vpd,Hpd,Wpd (66) (opdsize)
+55          vandnps Vps,Hps,Wps
+55          vandnpd Vpd,Hpd,Wpd (66) (opdsize)
+56          vorps Vps,Hps,Wps
+56          vorpd Vpd,Hpd,Wpd (66) (opdsize)
+57          vxorps Vps,Hps,Wps
+57          vxorpd Vpd,Hpd,Wpd (66) (opdsize)
+58          vaddps Vps,Hps,Wps
+58          vaddpd Vpd,Hpd,Wpd (66) (opdsize)
+58          vaddss Vss,Hss,Wss (F3),(v1) (REP)
+58          vaddsd Vsd,Hsd,Wsd (F2),(v1) (REPNE)
+59          vmulps Vps,Hps,Wps
+59          vmulpd Vpd,Hpd,Wpd (66) (opdsize)
+59          vmulss Vss,Hss,Wss (F3),(v1) (REP)
+59          vmulsd Vsd,Hsd,Wsd (F2),(v1) (REPNE)
+5A          vcvtps2pd Vpd,Wps
+5A          vcvtpd2ps Vps,Wpd (66) (opdsize)
+5A          vcvtss2sd Vsd,Hx,Wss (F3),(v1) (REP)
+5A          vcvtsd2ss Vss,Hx,Wsd (F2),(v1) (REPNE)
+5B          vcvtdq2ps Vps,Wdq
+5B          vcvtps2dq Vdq,Wps (66) (opdsize)
+5B          vcvttps2dq Vdq,Wps (F3) (REP)
+5C          vsubps Vps,Hps,Wps
+5C          vsubpd Vpd,Hpd,Wpd (66) (opdsize)
+5C          vsubss Vss,Hss,Wss (F3),(v1) (REP)
+5C          vsubsd Vsd,Hsd,Wsd (F2),(v1) (REPNE)
+5D          vminps Vps,Hps,Wps
+5D          vminpd Vpd,Hpd,Wpd (66) (opdsize)
+5D          vminss Vss,Hss,Wss (F3),(v1) (REP)
+5D          vminsd Vsd,Hsd,Wsd (F2),(v1) (REPNE)
+5E          vdivps Vps,Hps,Wps
+5E          vdivpd Vpd,Hpd,Wpd (66) (opdsize)
+5E          vdivss Vss,Hss,Wss (F3),(v1) (REP)
+5E          vdivsd Vsd,Hsd,Wsd (F2),(v1) (REPNE)
+5F          vmaxps Vps,Hps,Wps
+5F          vmaxpd Vpd,Hpd,Wpd (66) (opdsize)
+5F          vmaxss Vss,Hss,Wss (F3),(v1) (REP)
+5F          vmaxsd Vsd,Hsd,Wsd (F2),(v1) (REPNE)
+60          punpcklbw Pq,Qd
+60          vpunpcklbw Vx,Hx,Wx (66),(v1) (opdsize)
+61          punpcklwd Pq,Qd
+61          vpunpcklwd Vx,Hx,Wx (66),(v1) (opdsize)
+62          punpckldq Pq,Qd
+62          vpunpckldq Vx,Hx,Wx (66),(v1) (opdsize)
+63          packsswb Pq,Qq
+63          vpacksswb Vx,Hx,Wx (66),(v1) (opdsize)
+64          pcmpgtb Pq,Qq
+64          vpcmpgtb Vx,Hx,Wx (66),(v1) (opdsize)
+65          pcmpgtw Pq,Qq
+65          vpcmpgtw Vx,Hx,Wx (66),(v1) (opdsize)
+66          pcmpgtd Pq,Qq
+66          vpcmpgtd Vx,Hx,Wx (66),(v1) (opdsize)
+67          packuswb Pq,Qq
+67          vpackuswb Vx,Hx,Wx (66),(v1) (opdsize)
+68          punpckhbw Pq,Qd
+68          vpunpckhbw Vx,Hx,Wx (66),(v1) (opdsize)
+69          punpckhwd Pq,Qd
+69          vpunpckhwd Vx,Hx,Wx (66),(v1) (opdsize)
+6A          punpckhdq Pq,Qd
+6A          vpunpckhdq Vx,Hx,Wx (66),(v1) (opdsize)
+6B          packssdw Pq,Qd
+6B          vpackssdw Vx,Hx,Wx (66),(v1) (opdsize)
+6C          vpunpcklqdq Vx,Hx,Wx (66),(v1) (opdsize)
+6D          vpunpckhqdq Vx,Hx,Wx (66),(v1) (opdsize)
+6E          movd/q Pd,Ey
+6E          vmovd/q Vy,Ey (66),(v1) (opdsize)
+6F          movq Pq,Qq
+6F          vmovdqa Vx,Wx (66) (opdsize)
+6F          vmovdqu Vx,Wx (F3) (REP)
+70          pshufw Pq,Qq,Ib
+70          vpshufd Vx,Wx,Ib (66),(v1) (opdsize)
+70          vpshufhw Vx,Wx,Ib (F3),(v1) (REP)
+70          vpshuflw Vx,Wx,Ib (F2),(v1) (REPNE)
+71/2        psrlw Nq,Ib (11B)
+71/2        vpsrlw Hx,Ux,Ib (66),(11B),(v1) (opdsize)
+71/4        psraw Nq,Ib (11B)
+71/4        vpsraw Hx,Ux,Ib (66),(11B),(v1) (opdsize)
+71/6        psllw Nq,Ib (11B)
+71/6        vpsllw Hx,Ux,Ib (66),(11B),(v1) (opdsize)
+72/2        psrld Nq,Ib (11B)
+72/2        vpsrld Hx,Ux,Ib (66),(11B),(v1) (opdsize)
+72/4        psrad Nq,Ib (11B)
+72/4        vpsrad Hx,Ux,Ib (66),(11B),(v1) (opdsize)
+72/6        pslld Nq,Ib (11B)
+72/6        vpslld Hx,Ux,Ib (66),(11B),(v1) (opdsize)
+73/2        psrlq Nq,Ib (11B)
+73/2        vpsrlq Hx,Ux,Ib (66),(11B),(v1) (opdsize)
+73/3        vpsrldq Hx,Ux,Ib (66),(11B),(v1) (opdsize)
+73/6        psllq Nq,Ib (11B)
+73/6        vpsllq Hx,Ux,Ib (66),(11B),(v1) (opdsize)
+73/7        vpslldq Hx,Ux,Ib (66),(11B),(v1) (opdsize)
+74          pcmpeqb Pq,Qq
+74          vpcmpeqb Vx,Hx,Wx (66),(v1) (opdsize)
+75          pcmpeqw Pq,Qq
+75          vpcmpeqw Vx,Hx,Wx (66),(v1) (opdsize)
+76          pcmpeqd Pq,Qq
+76          vpcmpeqd Vx,Hx,Wx (66),(v1) (opdsize)
+77          emms
+7C          vhaddpd Vpd,Hpd,Wpd (66) (opdsize)
+7C          vhaddps Vps,Hps,Wps (F2) (REPNE)
+7D          vhsubpd Vpd,Hpd,Wpd (66) (opdsize)
+7D          vhsubps Vps,Hps,Wps (F2) (REPNE)
+7E          movd/q Ey,Pd
+7E          vmovd/q Ey,Vy (66),(v1) (opdsize)
+7E          vmovq Vq,Wq (F3),(v1) (REP)
+7F          movq Qq,Pq
+7F          vmovdqa Wx,Vx (66) (opdsize)
+7F          vmovdqu Wx,Vx (F3) (REP)
+80          JO Jz (f64)
+81          JNO Jz (f64)
+82          JB/JC/JNAE Jz (f64)
+83          JAE/JNB/JNC Jz (f64)
+84          JE/JZ Jz (f64)
+85          JNE/JNZ Jz (f64)
+86          JBE/JNA Jz (f64)
+87          JA/JNBE Jz (f64)
+88          JS Jz (f64)
+89          JNS Jz (f64)
+8A          JP/JPE Jz (f64)
+8B          JNP/JPO Jz (f64)
+8C          JL/JNGE Jz (f64)
+8D          JNL/JGE Jz (f64)
+8E          JLE/JNG Jz (f64)
+8F          JNLE/JG Jz (f64)
+90          SETO Eb
+91          SETNO Eb
+92          SETB/C/NAE Eb
+93          SETAE/NB/NC Eb
+94          SETE/Z Eb
+95          SETNE/NZ Eb
+96          SETBE/NA Eb
+97          SETA/NBE Eb
+98          SETS Eb
+99          SETNS Eb
+9A          SETP/PE Eb
+9B          SETNP/PO Eb
+9C          SETL/NGE Eb
+9D          SETNL/GE Eb
+9E          SETLE/NG Eb
+9F          SETNLE/G Eb
+A0          PUSH FS (d64)
+A1          POP FS (d64)
+A2          CPUID
+A3          BT Ev,Gv
+A4          SHLD Ev,Gv,Ib
+A5          SHLD Ev,Gv,CL
+A8          PUSH GS (d64)
+A9          POP GS (d64)
+AA          RSM
+AB          BTS Ev,Gv
+AC          SHRD Ev,Gv,Ib
+AD          SHRD Ev,Gv,CL
+AE/0        fxsave
+AE/1        fxstor
+AE/2        vldmxcsr Md (v1)
+AE/3        vstmxcsr Md (v1)
+AE/4        XSAVE
+AE/5        XRSTOR
+AE/5        lfence (11B)
+AE/6        XSAVEOPT
+AE/6        mfence (11B)
+AE/7        clflush
+AE/7        sfence (11B)
+AF          IMUL Gv,Ev
+B0          CMPXCHG Eb,Gb
+B1          CMPXCHG Ev,Gv
+B2          LSS Gv,Mp
+B3          BTR Ev,Gv
+B4          LFS Gv,Mp
+B5          LGS Gv,Mp
+B6          MOVZX Gv,Eb
+B7          MOVZX Gv,Ew
+B8          JMPE (!F3)
+B8          POPCNT Gv,Ev (F3) (REP)
+B9/0        UD1
+B9/1        UD1
+B9/2        UD1
+B9/3        UD1
+B9/4        UD1
+B9/5        UD1
+B9/6        UD1
+B9/7        UD1
+BA/4        BT Ev,Ib
+BA/5        BTS Ev,Ib
+BA/6        BTR Ev,Ib
+BA/7        BTC Ev,Ib
+BB          BTC Ev,Gv
+BC          BSF Gv,Ev (!F3)
+BC          TZCNT Gv,Ev (F3) (REP)
+BD          BSR Gv,Ev (!F3)
+BD          LZCNT Gv,Ev (F3) (REP)
+BE          MOVSX Gv,Eb
+BF          MOVSX Gv,Ew
+C0          XADD Eb,Gb
+C1          XADD Ev,Gv
+C2          vcmpps Vps,Hps,Wps,Ib
+C2          vcmppd Vpd,Hpd,Wpd,Ib (66) (opdsize)
+C2          vcmpss Vss,Hss,Wss,Ib (F3),(v1) (REP)
+C2          vcmpsd Vsd,Hsd,Wsd,Ib (F2),(v1) (REPNE)
+C3          movnti My,Gy
+C4          pinsrw Pq,Ry/Mw,Ib
+C4          vpinsrw Vdq,Hdq,Ry/Mw,Ib (66),(v1) (opdsize)
+C5          pextrw Gd,Nq,Ib
+C5          vpextrw Gd,Udq,Ib (66),(v1) (opdsize)
+C6          vshufps Vps,Hps,Wps,Ib
+C6          vshufpd Vpd,Hpd,Wpd,Ib (66) (opdsize)
+C7/1        CMPXCHG8B/16B Mq/Mdq
+C7/3        xrstors
+C7/4        xsavec
+C7/5        xsaves
+C8          BSWAP RAX/EAX/R8/R8D
+C9          BSWAP RCX/ECX/R9/R9D
+CA          BSWAP RDX/EDX/R10/R10D
+CB          BSWAP RBX/EBX/R11/R11D
+CC          BSWAP RSP/ESP/R12/R12D
+CD          BSWAP RBP/EBP/R13/R13D
+CE          BSWAP RSI/ESI/R14/R14D
+CF          BSWAP RDI/EDI/R15/R15D
+D0          vaddsubpd Vpd,Hpd,Wpd (66) (opdsize)
+D0          vaddsubps Vps,Hps,Wps (F2) (REPNE)
+D1          psrlw Pq,Qq
+D1          vpsrlw Vx,Hx,Wx (66),(v1) (opdsize)
+D2          psrld Pq,Qq
+D2          vpsrld Vx,Hx,Wx (66),(v1) (opdsize)
+D3          psrlq Pq,Qq
+D3          vpsrlq Vx,Hx,Wx (66),(v1) (opdsize)
+D4          paddq Pq,Qq
+D4          vpaddq Vx,Hx,Wx (66),(v1) (opdsize)
+D5          pmullw Pq,Qq
+D5          vpmullw Vx,Hx,Wx (66),(v1) (opdsize)
+D6          vmovq Wq,Vq (66),(v1) (opdsize)
+D6          movq2dq Vdq,Nq (F3) (REP)
+D6          movdq2q Pq,Uq (F2) (REPNE)
+D7          pmovmskb Gd,Nq
+D7          vpmovmskb Gd,Ux (66),(v1) (opdsize)
+D8          psubusb Pq,Qq
+D8          vpsubusb Vx,Hx,Wx (66),(v1) (opdsize)
+D9          psubusw Pq,Qq
+D9          vpsubusw Vx,Hx,Wx (66),(v1) (opdsize)
+DA          pminub Pq,Qq
+DA          vpminub Vx,Hx,Wx (66),(v1) (opdsize)
+DB          pand Pq,Qq
+DB          vpand Vx,Hx,Wx (66),(v1) (opdsize)
+DC          paddusb Pq,Qq
+DC          vpaddusb Vx,Hx,Wx (66),(v1) (opdsize)
+DD          paddusw Pq,Qq
+DD          vpaddusw Vx,Hx,Wx (66),(v1) (opdsize)
+DE          pmaxub Pq,Qq
+DE          vpmaxub Vx,Hx,Wx (66),(v1) (opdsize)
+DF          pandn Pq,Qq
+DF          vpandn Vx,Hx,Wx (66),(v1) (opdsize)
+E0          pavgb Pq,Qq
+E0          vpavgb Vx,Hx,Wx (66),(v1) (opdsize)
+E1          psraw Pq,Qq
+E1          vpsraw Vx,Hx,Wx (66),(v1) (opdsize)
+E2          psrad Pq,Qq
+E2          vpsrad Vx,Hx,Wx (66),(v1) (opdsize)
+E3          pavgw Pq,Qq
+E3          vpavgw Vx,Hx,Wx (66),(v1) (opdsize)
+E4          pmulhuw Pq,Qq
+E4          vpmulhuw Vx,Hx,Wx (66),(v1) (opdsize)
+E5          pmulhw Pq,Qq
+E5          vpmulhw Vx,Hx,Wx (66),(v1) (opdsize)
+E6          vcvttpd2dq Vx,Wpd (66) (opdsize)
+E6          vcvtdq2pd Vx,Wdq (F3) (REP)
+E6          vcvtpd2dq Vx,Wpd (F2) (REPNE)
+E7          movntq Mq,Pq
+E7          vmovntdq Mx,Vx (66) (opdsize)
+E8          psubsb Pq,Qq
+E8          vpsubsb Vx,Hx,Wx (66),(v1) (opdsize)
+E9          psubsw Pq,Qq
+E9          vpsubsw Vx,Hx,Wx (66),(v1) (opdsize)
+EA          pminsw Pq,Qq
+EA          vpminsw Vx,Hx,Wx (66),(v1) (opdsize)
+EB          por Pq,Qq
+EB          vpor Vx,Hx,Wx (66),(v1) (opdsize)
+EC          paddsb Pq,Qq
+EC          vpaddsb Vx,Hx,Wx (66),(v1) (opdsize)
+ED          paddsw Pq,Qq
+ED          vpaddsw Vx,Hx,Wx (66),(v1) (opdsize)
+EE          pmaxsw Pq,Qq
+EE          vpmaxsw Vx,Hx,Wx (66),(v1) (opdsize)
+EF          pxor Pq,Qq
+EF          vpxor Vx,Hx,Wx (66),(v1) (opdsize)
+F0          vlddqu Vx,Mx (F2) (REPNE)
+F1          psllw Pq,Qq
+F1          vpsllw Vx,Hx,Wx (66),(v1) (opdsize)
+F2          pslld Pq,Qq
+F2          vpslld Vx,Hx,Wx (66),(v1) (opdsize)
+F3          psllq Pq,Qq
+F3          vpsllq Vx,Hx,Wx (66),(v1) (opdsize)
+F4          pmuludq Pq,Qq
+F4          vpmuludq Vx,Hx,Wx (66),(v1) (opdsize)
+F5          pmaddwd Pq,Qq
+F5          vpmaddwd Vx,Hx,Wx (66),(v1) (opdsize)
+F6          psadbw Pq,Qq
+F6          vpsadbw Vx,Hx,Wx (66),(v1) (opdsize)
+F7          maskmovq Pq,Nq
+F7          vmaskmovdqu Vx,Ux (66),(v1) (opdsize)
+F8          psubb Pq,Qq
+F8          vpsubb Vx,Hx,Wx (66),(v1) (opdsize)
+F9          psubw Pq,Qq
+F9          vpsubw Vx,Hx,Wx (66),(v1) (opdsize)
+FA          psubd Pq,Qq
+FA          vpsubd Vx,Hx,Wx (66),(v1) (opdsize)
+FB          psubq Pq,Qq
+FB          vpsubq Vx,Hx,Wx (66),(v1) (opdsize)
+FC          paddb Pq,Qq
+FC          vpaddb Vx,Hx,Wx (66),(v1) (opdsize)
+FD          paddw Pq,Qq
+FD          vpaddw Vx,Hx,Wx (66),(v1) (opdsize)
+FE          paddd Pq,Qq
+FE          vpaddd Vx,Hx,Wx (66),(v1) (opdsize)
+FF          UD0
