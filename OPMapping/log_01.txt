@@ -289,6 +289,7 @@ B5          LGS Gv,Mp
 B6          MOVZX Gv,Eb
 B7          MOVZX Gv,Ew
 B8          JMPE (!F3)
+B8          POPCNT Gv,Ev (F3) (REP)
 B9/0        UD1
 B9/1        UD1
 B9/2        UD1
@@ -303,6 +304,7 @@ BA/6        BTR Ev,Ib
 BA/7        BTC Ev,Ib
 BB          BTC Ev,Gv
 BC          BSF Gv,Ev (!F3)
+BC          TZCNT Gv,Ev (F3) (REP)
 BD          BSR Gv,Ev (!F3)
 BD          LZCNT Gv,Ev (F3) (REP)
 BE          MOVSX Gv,Eb

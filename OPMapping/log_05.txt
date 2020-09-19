@@ -7001,6 +7001,69 @@ B6   [11B] movzx r16/r32/r64,ch
 B6   [11B] movzx r16/r32/r64,dh
 B6   [11B] movzx r16/r32/r64,bh
 B8         jmpe imm
+B8   [mem] popcnt r16,word[bx+si] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[bx+di] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[bp+si] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[bp+di] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[si] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[di] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[disp16] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[bx] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[bx+si+disp8] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[bx+di+disp8] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[bp+si+disp8] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[bp+di+disp8] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[si+disp8] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[di+disp8] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[bp+disp8] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[bx+disp8] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[bx+si+disp16] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[bx+di+disp16] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[bp+si+disp16] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[bp+di+disp16] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[si+disp16] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[di+disp16] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[bp+disp16] (REP)
+B8   [mem] jmpe imm
+B8   [mem] popcnt r16,word[bx+disp16] (REP)
+B8   [11B] jmpe imm
+B8   [11B] popcnt r16,ax (REP)
+B8   [11B] jmpe imm
+B8   [11B] popcnt r16,cx (REP)
+B8   [11B] jmpe imm
+B8   [11B] popcnt r16,dx (REP)
+B8   [11B] jmpe imm
+B8   [11B] popcnt r16,bx (REP)
+B8   [11B] jmpe imm
+B8   [11B] popcnt r16,sp (REP)
+B8   [11B] jmpe imm
+B8   [11B] popcnt r16,bp (REP)
+B8   [11B] jmpe imm
+B8   [11B] popcnt r16,si (REP)
+B8   [11B] jmpe imm
+B8   [11B] popcnt r16,di (REP)
 B9/0 [mem] ud1 rAX,word/dword/qword[bx+si]
 B9/0 [mem] ud1 rAX,word/dword/qword[bx+di]
 B9/0 [mem] ud1 rAX,word/dword/qword[bp+si]
@@ -7418,37 +7481,69 @@ BB   [11B] btc rBP,r16/r32/r64
 BB   [11B] btc rSI,r16/r32/r64
 BB   [11B] btc rDI,r16/r32/r64
 BC   [mem] bsf r16/r32/r64,[bx+si]
+BC   [mem] tzcnt r16,word[bx+si] (REP)
 BC   [mem] bsf r16/r32/r64,[bx+di]
+BC   [mem] tzcnt r16,word[bx+di] (REP)
 BC   [mem] bsf r16/r32/r64,[bp+si]
+BC   [mem] tzcnt r16,word[bp+si] (REP)
 BC   [mem] bsf r16/r32/r64,[bp+di]
+BC   [mem] tzcnt r16,word[bp+di] (REP)
 BC   [mem] bsf r16/r32/r64,[si]
+BC   [mem] tzcnt r16,word[si] (REP)
 BC   [mem] bsf r16/r32/r64,[di]
+BC   [mem] tzcnt r16,word[di] (REP)
 BC   [mem] bsf r16/r32/r64,[disp16]
+BC   [mem] tzcnt r16,word[disp16] (REP)
 BC   [mem] bsf r16/r32/r64,[bx]
+BC   [mem] tzcnt r16,word[bx] (REP)
 BC   [mem] bsf r16/r32/r64,[bx+si+disp8]
+BC   [mem] tzcnt r16,word[bx+si+disp8] (REP)
 BC   [mem] bsf r16/r32/r64,[bx+di+disp8]
+BC   [mem] tzcnt r16,word[bx+di+disp8] (REP)
 BC   [mem] bsf r16/r32/r64,[bp+si+disp8]
+BC   [mem] tzcnt r16,word[bp+si+disp8] (REP)
 BC   [mem] bsf r16/r32/r64,[bp+di+disp8]
+BC   [mem] tzcnt r16,word[bp+di+disp8] (REP)
 BC   [mem] bsf r16/r32/r64,[si+disp8]
+BC   [mem] tzcnt r16,word[si+disp8] (REP)
 BC   [mem] bsf r16/r32/r64,[di+disp8]
+BC   [mem] tzcnt r16,word[di+disp8] (REP)
 BC   [mem] bsf r16/r32/r64,[bp+disp8]
+BC   [mem] tzcnt r16,word[bp+disp8] (REP)
 BC   [mem] bsf r16/r32/r64,[bx+disp8]
+BC   [mem] tzcnt r16,word[bx+disp8] (REP)
 BC   [mem] bsf r16/r32/r64,[bx+si+disp16]
+BC   [mem] tzcnt r16,word[bx+si+disp16] (REP)
 BC   [mem] bsf r16/r32/r64,[bx+di+disp16]
+BC   [mem] tzcnt r16,word[bx+di+disp16] (REP)
 BC   [mem] bsf r16/r32/r64,[bp+si+disp16]
+BC   [mem] tzcnt r16,word[bp+si+disp16] (REP)
 BC   [mem] bsf r16/r32/r64,[bp+di+disp16]
+BC   [mem] tzcnt r16,word[bp+di+disp16] (REP)
 BC   [mem] bsf r16/r32/r64,[si+disp16]
+BC   [mem] tzcnt r16,word[si+disp16] (REP)
 BC   [mem] bsf r16/r32/r64,[di+disp16]
+BC   [mem] tzcnt r16,word[di+disp16] (REP)
 BC   [mem] bsf r16/r32/r64,[bp+disp16]
+BC   [mem] tzcnt r16,word[bp+disp16] (REP)
 BC   [mem] bsf r16/r32/r64,[bx+disp16]
+BC   [mem] tzcnt r16,word[bx+disp16] (REP)
 BC   [11B] bsf r16/r32/r64,rAX
+BC   [11B] tzcnt r16,ax (REP)
 BC   [11B] bsf r16/r32/r64,rCX
+BC   [11B] tzcnt r16,cx (REP)
 BC   [11B] bsf r16/r32/r64,rDX
+BC   [11B] tzcnt r16,dx (REP)
 BC   [11B] bsf r16/r32/r64,rBX
+BC   [11B] tzcnt r16,bx (REP)
 BC   [11B] bsf r16/r32/r64,rSP
+BC   [11B] tzcnt r16,sp (REP)
 BC   [11B] bsf r16/r32/r64,rBP
+BC   [11B] tzcnt r16,bp (REP)
 BC   [11B] bsf r16/r32/r64,rSI
+BC   [11B] tzcnt r16,si (REP)
 BC   [11B] bsf r16/r32/r64,rDI
+BC   [11B] tzcnt r16,di (REP)
 BD   [mem] bsr r16/r32/r64,[bx+si]
 BD   [mem] lzcnt r16,word[bx+si] (REP)
 BD   [mem] bsr r16/r32/r64,[bx+di]
