@@ -1576,8 +1576,9 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         }
                         pOpEntry++;
                         lFound++;
-                        // reset to default prefix
+                        // needed for test coverage
                         PrefixIdx_previous = PrefixIdx;
+                        // reset to default prefix
                         PrefixIdx = 0;
                         OPExtIdx++;         // find next member
                         //lFound2 = lFound;   // update found entries
@@ -1589,8 +1590,9 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     }
                     else
                     {
-                        // reset to default prefix
+                        // needed for test coverage
                         PrefixIdx_previous = PrefixIdx;
+                        // reset to default prefix
                         PrefixIdx = 0;
                         OPExtIdx++;         // find next member
                         //lFound2 = lFound;   // update found entries
@@ -1624,8 +1626,8 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         }
                         pOpEntry++;
                         lFound++;
-                        // reset to default prefix
                         PrefixIdx_previous = PrefixIdx;
+                        // reset to default prefix
                         PrefixIdx = 0;
                         OPExtIdx |= 0x07;   // skip rest
                         OPExtIdx++;         // find next member
@@ -1639,15 +1641,16 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     }
                     else if(lFound2 == lFound)
                     {
+                        //PrefixIdx_previous = PrefixIdx;
                         // reset to default prefixs
-                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx++;         // always check next member
                     }
                     else
                     {
-                        // reset to default prefixs
+                        // needed for test coverage
                         PrefixIdx_previous = PrefixIdx;
+                        // reset to default prefixs
                         PrefixIdx = 0;
                         OPExtIdx |= 0x07;   // skip rest
                         OPExtIdx++;         // find next member
@@ -1681,6 +1684,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         }
                         pOpEntry++;
                         lFound++;
+                        // needed for test coverage
                         PrefixIdx_previous = PrefixIdx;
                         OPExtIdx = 256; // skip rest
                         //lFound2 = lFound;   // update found entries
@@ -1692,15 +1696,15 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     }
                     else if (lFound2 == lFound)
                     {
+                        //PrefixIdx_previous = PrefixIdx;
                         // reset to default prefix
-                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx++;         // always check next member
                     }
                     else
                     {
+                        //PrefixIdx_previous = PrefixIdx;
                         // reset to default prefix
-                        PrefixIdx_previous = PrefixIdx;
                         PrefixIdx = 0;
                         OPExtIdx = 256;     // skip rest
                         //lFound2 = lFound;   // update found entries
