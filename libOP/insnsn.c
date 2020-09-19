@@ -648,6 +648,8 @@ const char * const nasm_insn_names[] = {
 	"roundps",
 	"roundsd",
 	"roundss",
+	"popcnt",
+	"tzcnt",
 	"cmov",
 	"j",
 	"set"

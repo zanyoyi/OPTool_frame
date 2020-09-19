@@ -268,7 +268,11 @@ static BOOL UncertainModify(E_XB_OP eOPTab, int OpIdx, int OPExtIdx/*, int Prefi
                 break;
             }
             break;
-        case 0xB8:          // jmpe
+        case 0xB8:          // jmpe, popcnt
+            return TRUE;
+        case 0xBC:          // bsf, tzcnt
+            return TRUE;
+        case 0xBD:          // bsr, lzcnt
             return TRUE;
         case 0xC7:          // Grp09
             switch ((OPExtIdx >> 3) & 0x7)

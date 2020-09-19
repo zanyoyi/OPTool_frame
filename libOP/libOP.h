@@ -1,4 +1,4 @@
-#ifndef __LIB_OP_H__
+    #ifndef __LIB_OP_H__
 #define __LIB_OP_H__
 
 
@@ -2073,14 +2073,14 @@ OP_ENTRY OP_0F99[3] = {
 };
 OP_ENTRY OP_0FB8[2] = {
     {0xb8,0x00,0 | PF_Valid | PF_Uncertain," JMPE (!F3)"},
-    {0xb8,0x00,0 | PF_REP," POPCNT Gv,Ev (F3)"},
+    {0xb8,0x00,0 | PF_Valid | PF_Uncertain | PF_REP," POPCNT Gv,Ev (F3)"},
 };
 OP_ENTRY OP_0FBC[2] = {
-    {0xbc,0x00,0 | PF_Valid," BSF Gv,Ev (!F3)"},
-    {0xbc,0x00,0 | PF_REP," TZCNT Gv,Ev (F3)"},
+    {0xbc,0x00,0 | PF_Valid | PF_Uncertain," BSF Gv,Ev (!F3)"},
+    {0xbc,0x00,0 | PF_Valid | PF_Uncertain | PF_REP," TZCNT Gv,Ev (F3)"},
 };
 OP_ENTRY OP_0FBD[2] = {
-    {0xbd,0x00,0 | PF_Valid," BSR Gv,Ev (!F3)"},
+    {0xbd,0x00,0 | PF_Valid | PF_Uncertain," BSR Gv,Ev (!F3)"},
     {0xbd,0x00,0 | PF_Valid | PF_Uncertain | PF_REP," LZCNT Gv,Ev (F3)"},
 };
 OP_ENTRY OP_0FC2[4] = {

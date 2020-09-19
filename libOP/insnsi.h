@@ -653,6 +653,8 @@ enum opcode {
 	I_ROUNDPS,
 	I_ROUNDSD,
 	I_ROUNDSS,
+	I_POPCNT,
+	I_TZCNT,
 	I_CMOVcc,
 	I_Jcc,
 	I_SETcc,
