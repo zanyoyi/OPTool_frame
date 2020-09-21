@@ -78,16 +78,16 @@
 4D          DEC eBP (i64)
 4E          DEC eSI (i64)
 4F          DEC eDI (i64)
-50          PUSH rAX/r8 (d64)
-51          PUSH rCX/r9 (d64)
+50          PUSH rAX/r08 (d64)
+51          PUSH rCX/r09 (d64)
 52          PUSH rDX/r10 (d64)
 53          PUSH rBX/r11 (d64)
 54          PUSH rSP/r12 (d64)
 55          PUSH rBP/r13 (d64)
 56          PUSH rSI/r14 (d64)
 57          PUSH rDI/r15 (d64)
-58          POP rAX/r8 (d64)
-59          POP rCX/r9 (d64)
+58          POP rAX/r08 (d64)
+59          POP rCX/r09 (d64)
 5A          POP rDX/r10 (d64)
 5B          POP rBX/r11 (d64)
 5C          POP rSP/r12 (d64)
@@ -174,14 +174,14 @@
 8F          POP Ev (d64)
 90          NOP
 90          PAUSE (F3) (REP)
-90          XCHG rAX/r8,rAX
-91          XCHG rCX/r9,rAX
-92          XCHG rDX/r10,rAX
-93          XCHG rBX/r11,rAX
-94          XCHG rSP/r12,rAX
-95          XCHG rBP/r13,rAX
-96          XCHG rSI/r14,rAX
-97          XCHG rDI/r15,rAX
+90          XCHG rAX,rAX/r08
+91          XCHG rAX,rCX/r09
+92          XCHG rAX,rDX/r10
+93          XCHG rAX,rBX/r11
+94          XCHG rAX,rSP/r12
+95          XCHG rAX,rBP/r13
+96          XCHG rAX,rSI/r14
+97          XCHG rAX,rDI/r15
 98          CBW/CWDE/CDQE
 99          CWD/CDQ/CQO
 9A          CALLF Ap (i64)
@@ -206,16 +206,16 @@ AC          LODS/B AL,Xb
 AD          LODS/W/D/Q rAX,Xv
 AE          SCAS/B AL,Yb
 AF          SCAS/W/D/Q rAX,Yv
-B0          MOV AL/R8L,Ib
-B1          MOV CL/R9L,Ib
+B0          MOV AL/R08L,Ib
+B1          MOV CL/R09L,Ib
 B2          MOV DL/R10L,Ib
 B3          MOV BL/R11L,Ib
 B4          MOV AH/R12L,Ib
 B5          MOV CH/R13L,Ib
 B6          MOV DH/R14L,Ib
 B7          MOV BH/R15L,Ib
-B8          MOV rAX/r8,Iv
-B9          MOV rCX/r9,Iv
+B8          MOV rAX/r08,Iv
+B9          MOV rCX/r09,Iv
 BA          MOV rDX/r10,Iv
 BB          MOV rBX/r11,Iv
 BC          MOV rSP/r12,Iv

@@ -326,8 +326,8 @@ C7/1        CMPXCHG8B/16B Mq/Mdq
 C7/3        xrstors
 C7/4        xsavec
 C7/5        xsaves
-C8          BSWAP RAX/EAX/R8/R8D
-C9          BSWAP RCX/ECX/R9/R9D
+C8          BSWAP RAX/EAX/R08/R08D
+C9          BSWAP RCX/ECX/R09/R09D
 CA          BSWAP RDX/EDX/R10/R10D
 CB          BSWAP RBX/EBX/R11/R11D
 CC          BSWAP RSP/ESP/R12/R12D
