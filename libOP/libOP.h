@@ -317,7 +317,7 @@ OP_ENTRY OP1BMap[256] = {
     {0x97,0x00,0 | PF_Valid," XCHG rAX,rDI/r15"},
     {0x98,0x00,0 | PF_Valid," CBW/CWDE/CDQE"},
     {0x99,0x00,0 | PF_Valid," CWD/CDQ/CQO"},
-    {0x9a,0x00,0 | PF_Valid," CALLF Ap (i64)"},
+    {0x9a,0x00,0 | PF_Valid," CALL Ap (i64)"},
     {0x9b,0x00,0 | PF_Valid," FWAIT/WAIT"},
     {0x9c,0x00,0 | PF_Valid," PUSHF/D/Q Fv (d64)"},
     {0x9d,0x00,0 | PF_Valid," POPF/D/Q Fv (d64)"},
@@ -362,8 +362,8 @@ OP_ENTRY OP1BMap[256] = {
     //# 0xc0 - 0xcf
     {0xc0,0x80,0 | PF_Valid," Grp2 Eb,Ib (1A)"},
     {0xc1,0x80,0 | PF_Valid," Grp2 Ev,Ib (1A)"},
-    {0xc2,0x00,0 | PF_Valid," RETN Iw (f64)"},
-    {0xc3,0x00,0 | PF_Valid," RETN"},
+    {0xc2,0x00,0 | PF_Valid," RET Iw (f64)"},
+    {0xc3,0x00,0 | PF_Valid," RET"},
     {0xc4,0x00,0," LES Gz,Mp (i64) | VEX+2byte (Prefix)"},
     {0xc5,0x00,0," LDS Gz,Mp (i64) | VEX+1byte (Prefix)"},
     {0xc6,0x80,0 | PF_Valid," Grp11A Eb,Ib (1A)"},
@@ -410,16 +410,16 @@ OP_ENTRY OP1BMap[256] = {
     //# push of return address is 16-bit wide, RSP is decremented by 2
     //# but is not truncated to 16 bits, unlike RIP.
     {0xe8,0x00,0 | PF_Valid," CALL Jz (f64)"},
-    {0xe9,0x00,0 | PF_Valid," JMP-near Jz (f64)"},
-    {0xea,0x00,0 | PF_Valid," JMP-far Ap (i64)"},
-    {0xeb,0x00,0 | PF_Valid," JMP-short Jb (f64)"},
+    {0xe9,0x00,0 | PF_Valid," JMP Jz (f64)"},
+    {0xea,0x00,0 | PF_Valid," JMP Ap (i64)"},
+    {0xeb,0x00,0 | PF_Valid," JMP short Jb (f64)"},
     {0xec,0x00,0 | PF_Valid," IN AL,DX"},
     {0xed,0x00,0 | PF_Valid," IN eAX,DX"},
     {0xee,0x00,0 | PF_Valid," OUT DX,AL"},
     {0xef,0x00,0 | PF_Valid," OUT DX,eAX"},
     //# 0xf0 - 0xff
     {0xf0,0x00,0 | PF_Valid," LOCK (Prefix)"},
-    {0xf1,0x00,0 | PF_Valid,NULL},
+    {0xf1,0x00,0 | PF_Valid," INT1"},
     {0xf2,0x00,0," REPNE (Prefix) | XACQUIRE (Prefix)"},
     {0xf3,0x00,0," REP/REPE (Prefix) | XRELEASE (Prefix)"},
     {0xf4,0x00,0 | PF_Valid," HLT"},
@@ -1501,7 +1501,7 @@ OP_ENTRY Grp14_73h[8] = {
 };
 OP_ENTRY Grp15_AEh[8] = {
     {0xAE,0x80,0," fxsave | RDFSBASE Ry (F3),(11B)"},
-    {0xAE,0x81,0," fxstor | RDGSBASE Ry (F3),(11B)"},
+    {0xAE,0x81,0," fxrstor | RDGSBASE Ry (F3),(11B)"},
     {0xAE,0x82,0," vldmxcsr Md (v1) | WRFSBASE Ry (F3),(11B)"},
     {0xAE,0x83,0," vstmxcsr Md (v1) | WRGSBASE Ry (F3),(11B)"},
     {0xAE,0x84,0," XSAVE | ptwrite Ey (F3),(11B)"},
@@ -1510,10 +1510,10 @@ OP_ENTRY Grp15_AEh[8] = {
     {0xAE,0x87,0," clflush | clflushopt (66) | sfence (11B)"},
 };
 OP_ENTRY Grp16_18h[8] = {
-    {0x18,0x80,0 | PF_Valid | PF_Uncertain," prefetch NTA"},
-    {0x18,0x81,0 | PF_Valid | PF_Uncertain," prefetch T0"},
-    {0x18,0x82,0 | PF_Valid | PF_Uncertain," prefetch T1"},
-    {0x18,0x83,0 | PF_Valid | PF_Uncertain," prefetch T2"},
+    {0x18,0x80,0 | PF_Valid | PF_Uncertain," PREFETCHNTA"},
+    {0x18,0x81,0 | PF_Valid | PF_Uncertain," PREFETCHT0"},
+    {0x18,0x82,0 | PF_Valid | PF_Uncertain," PREFETCHT1"},
+    {0x18,0x83,0 | PF_Valid | PF_Uncertain," PREFETCHT2"},
     {0x18,0x84,0 | PF_Valid,NULL},
     {0x18,0x85,0 | PF_Valid,NULL},
     {0x18,0x86,0 | PF_Valid,NULL},
@@ -2739,8 +2739,8 @@ OP_ENTRY OP_0FAE_0[2] = {
     {0xae,0x80,0 | PF_REP," RDFSBASE Ry (F3),(11B)"},
 };
 OP_ENTRY OP_0FAE_1[2] = {
-    {0xae,0x81,0 | PF_Valid," fxstor"},
-    {0xae,0x81,0 | PF_REP," RDGSBASE Ry (F3),(11B)"},
+    {0x1e,0x81,0 | PF_Valid," fxrstor"},
+    {0x1e,0x81,0 | PF_REP," RDGSBASE Ry (F3),(11B)"},
 };
 OP_ENTRY OP_0FAE_2[2] = {
     {0xae,0x82,0 | PF_Valid," vldmxcsr Md (v1)"},

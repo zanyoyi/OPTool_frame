@@ -184,7 +184,7 @@
 97          XCHG rAX,rDI/r15
 98          CBW/CWDE/CDQE
 99          CWD/CDQ/CQO
-9A          CALLF Ap (i64)
+9A          CALL Ap (i64)
 9B          FWAIT/WAIT
 9C          PUSHF/D/Q Fv (d64)
 9D          POPF/D/Q Fv (d64)
@@ -236,8 +236,8 @@ C1/3        RCR Ev,Ib
 C1/4        SHL/SAL Ev,Ib
 C1/5        SHR Ev,Ib
 C1/7        SAR Ev,Ib
-C2          RETN Iw (f64)
-C3          RETN
+C2          RET Iw (f64)
+C3          RET
 C4          LES Gz,Mp (i64)
 C4          VEX+2byte (Prefix)
 C5          LDS Gz,Mp (i64)
@@ -300,14 +300,15 @@ E5          IN eAX,Ib
 E6          OUT Ib,AL
 E7          OUT Ib,eAX
 E8          CALL Jz (f64)
-E9          JMP-near Jz (f64)
-EA          JMP-far Ap (i64)
-EB          JMP-short Jb (f64)
+E9          JMP Jz (f64)
+EA          JMP Ap (i64)
+EB          JMP short Jb (f64)
 EC          IN AL,DX
 ED          IN eAX,DX
 EE          OUT DX,AL
 EF          OUT DX,eAX
 F0          LOCK (Prefix)
+F1          INT1
 F2          REPNE (Prefix)
 F2          XACQUIRE (Prefix)
 F3          REP/REPE (Prefix)

@@ -50,10 +50,10 @@
 16          vmovshdup Vx,Wx (F3) (REP)
 17          vmovhps Mq,Vq (v1)
 17          vmovhpd Mq,Vq (66),(v1) (opdsize)
-18/0        prefetch NTA
-18/1        prefetch T0
-18/2        prefetch T1
-18/3        prefetch T2
+18/0        PREFETCHNTA
+18/1        PREFETCHT0
+18/2        PREFETCHT1
+18/3        PREFETCHT2
 1F          NOP Ev
 20          MOV Rd,Cd
 21          MOV Rd,Dd
@@ -269,7 +269,7 @@ AB          BTS Ev,Gv
 AC          SHRD Ev,Gv,Ib
 AD          SHRD Ev,Gv,CL
 AE/0        fxsave
-AE/1        fxstor
+AE/1        fxrstor
 AE/2        vldmxcsr Md (v1)
 AE/3        vstmxcsr Md (v1)
 AE/4        XSAVE
