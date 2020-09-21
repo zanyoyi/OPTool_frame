@@ -23,6 +23,8 @@ extern  "C" {
 typedef struct{
 	BYTE OP;         //OP code
 	BYTE OPExt;      //Op extension:OPExt[7]set to 1 indicate OPExt[2:0] is valid.
+    BYTE OPExt2;
+    BYTE OPExt3;
     DWORD Attr;
     WCHAR strDisasm[128];
 }OPENTRY;

@@ -1330,6 +1330,11 @@ void COPMappingDlg::OnBnClickedButton1()
 					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
 			}
 		}
+		// bonus infomation
+		else if (ptr_OpEntry[i].Attr & 0x02)
+		{
+
+		}
 	}
 
 	// release file stream
