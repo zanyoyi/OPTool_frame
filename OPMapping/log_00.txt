@@ -13,7 +13,6 @@
 0C          OR AL,Ib
 0D          OR rAX,Iz
 0E          PUSH CS (i64)
-0F          escape # 2-byte escape
 10          ADC Eb,Gb
 11          ADC Ev,Gv
 12          ADC Gb,Eb
@@ -36,7 +35,6 @@
 23          AND Gv,Ev
 24          AND AL,Ib
 25          AND rAx,Iz
-26          SEG=ES (Prefix)
 27          DAA (i64)
 28          SUB Eb,Gb
 29          SUB Ev,Gv
@@ -44,7 +42,6 @@
 2B          SUB Gv,Ev
 2C          SUB AL,Ib
 2D          SUB rAX,Iz
-2E          SEG=CS (Prefix)
 2F          DAS (i64)
 30          XOR Eb,Gb
 31          XOR Ev,Gv
@@ -52,7 +49,6 @@
 33          XOR Gv,Ev
 34          XOR AL,Ib
 35          XOR rAX,Iz
-36          SEG=SS (Prefix)
 37          AAA (i64)
 38          CMP Eb,Gb
 39          CMP Ev,Gv
@@ -60,7 +56,6 @@
 3B          CMP Gv,Ev
 3C          CMP AL,Ib
 3D          CMP rAX,Iz
-3E          SEG=DS (Prefix)
 3F          AAS (i64)
 40          INC eAX (i64)
 41          INC eCX (i64)
@@ -97,12 +92,7 @@
 60          PUSHA/PUSHAD (i64)
 61          POPA/POPAD (i64)
 62          BOUND Gv,Ma (i64)
-62          EVEX (Prefix)
 63          ARPL Ew,Gw (i64)
-64          SEG=FS (Prefix)
-65          SEG=GS (Prefix)
-66          Operand-Size (Prefix)
-67          Address-Size (Prefix)
 68          PUSH Iz (d64)
 69          IMUL Gv,Ev,Iz
 6A          PUSH Ib (d64)
@@ -185,7 +175,6 @@
 98          CBW/CWDE/CDQE
 99          CWD/CDQ/CQO
 9A          CALL Ap (i64)
-9B          FWAIT/WAIT (Prefix)
 9C          PUSHF/D/Q Fv (d64)
 9D          POPF/D/Q Fv (d64)
 9E          SAHF
@@ -239,9 +228,7 @@ C1/7        SAR Ev,Ib
 C2          RET Iw (f64)
 C3          RET
 C4          LES Gz,Mp (i64)
-C4          VEX+2byte (Prefix)
 C5          LDS Gz,Mp (i64)
-C5          VEX+1byte (Prefix)
 C6/0        MOV Eb,Ib
 C7/0        MOV Ev,Iz
 C8          ENTER Iw,Ib
@@ -294,7 +281,7 @@ DF          ESC
 E0          LOOPNE/LOOPNZ Jb (f64)
 E1          LOOPE/LOOPZ Jb (f64)
 E2          LOOP Jb (f64)
-E3          JCXZ/JECXZ/JRCXZ Jb (f64)
+E3          JCXZ/JEXZ/JRXZ Jb (f64)
 E4          IN AL,Ib
 E5          IN eAX,Ib
 E6          OUT Ib,AL
@@ -307,12 +294,7 @@ EC          IN AL,DX
 ED          IN eAX,DX
 EE          OUT DX,AL
 EF          OUT DX,eAX
-F0          LOCK (Prefix)
 F1          INT1
-F2          REPNE (Prefix)
-F2          XACQUIRE (Prefix)
-F3          REP/REPE (Prefix)
-F3          XRELEASE (Prefix)
 F4          HLT
 F5          CMC
 F6/0        TEST Eb,Ib
