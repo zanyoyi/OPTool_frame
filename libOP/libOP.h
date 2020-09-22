@@ -1433,9 +1433,9 @@ OP_ENTRY Grp09_C7h[8] = {
     {0xC7,0x80,0 | PF_Valid,NULL},
     {0xC7,0x81,0 | PF_Valid," CMPXCHG8B/16B Mq/Mdq"},
     {0xC7,0x82,0 | PF_Valid,NULL},
-    {0xC7,0x83,0 | PF_Valid | PF_Uncertain," xrstors"},
-    {0xC7,0x84,0 | PF_Valid | PF_Uncertain," xsavec"},
-    {0xC7,0x85,0 | PF_Valid | PF_Uncertain," xsaves"},
+    {0xC7,0x83,0 | PF_Valid | PF_Uncertain," xrstors M"},
+    {0xC7,0x84,0 | PF_Valid | PF_Uncertain," xsavec M"},
+    {0xC7,0x85,0 | PF_Valid | PF_Uncertain," xsaves M"},
     {0xC7,0x86,0," VMPTRLD Mq | VMCLEAR Mq (66) | VMXON Mq (F3) | RDRAND Rv (11B)"},
     {0xC7,0x87,0," VMPTRST Mq | VMPTRST Mq (F3) | RDSEED Rv (11B)"},
 };
@@ -1500,20 +1500,20 @@ OP_ENTRY Grp14_73h[8] = {
     {0x73,0x87,0 | PF_Valid | PF_Operand," vpslldq Hx,Ux,Ib (66),(11B),(v1)"},
 };
 OP_ENTRY Grp15_AEh[8] = {
-    {0xAE,0x80,0," fxsave | RDFSBASE Ry (F3),(11B)"},
-    {0xAE,0x81,0," fxrstor | RDGSBASE Ry (F3),(11B)"},
+    {0xAE,0x80,0," fxsave M | RDFSBASE Ry (F3),(11B)"},
+    {0xAE,0x81,0," fxrstor M | RDGSBASE Ry (F3),(11B)"},
     {0xAE,0x82,0," vldmxcsr Md (v1) | WRFSBASE Ry (F3),(11B)"},
     {0xAE,0x83,0," vstmxcsr Md (v1) | WRGSBASE Ry (F3),(11B)"},
-    {0xAE,0x84,0," XSAVE | ptwrite Ey (F3),(11B)"},
-    {0xAE,0x85,0," XRSTOR | lfence (11B) | INCSSPD/Q Ry (F3),(11B)"},
-    {0xAE,0x86,0," XSAVEOPT | clwb (66) | mfence (11B) | TPAUSE Rd (66),(11B) | UMONITOR Rv (F3),(11B) | UMWAIT Rd (F2),(11B) | CLRSSBSY Mq (F3)"},
-    {0xAE,0x87,0," clflush | clflushopt (66) | sfence (11B)"},
+    {0xAE,0x84,0," XSAVE M | ptwrite Ey (F3),(11B)"},
+    {0xAE,0x85,0," XRSTOR M | lfence (11B) | INCSSPD/Q Ry (F3),(11B)"},
+    {0xAE,0x86,0," XSAVEOPT M | clwb (66) | mfence (11B) | TPAUSE Rd (66),(11B) | UMONITOR Rv (F3),(11B) | UMWAIT Rd (F2),(11B) | CLRSSBSY Mq (F3"},
+    {0xAE,0x87,0," clflush Mb | clflushopt Mb (66) | sfence (11B)"},
 };
 OP_ENTRY Grp16_18h[8] = {
-    {0x18,0x80,0 | PF_Valid | PF_Uncertain," PREFETCHNTA"},
-    {0x18,0x81,0 | PF_Valid | PF_Uncertain," PREFETCHT0"},
-    {0x18,0x82,0 | PF_Valid | PF_Uncertain," PREFETCHT1"},
-    {0x18,0x83,0 | PF_Valid | PF_Uncertain," PREFETCHT2"},
+    {0x18,0x80,0 | PF_Valid | PF_Uncertain," PREFETCHNTA Mb"},
+    {0x18,0x81,0 | PF_Valid | PF_Uncertain," PREFETCHT0 Mb"},
+    {0x18,0x82,0 | PF_Valid | PF_Uncertain," PREFETCHT1 Mb"},
+    {0x18,0x83,0 | PF_Valid | PF_Uncertain," PREFETCHT2 Mb"},
     {0x18,0x84,0 | PF_Valid,NULL},
     {0x18,0x85,0 | PF_Valid,NULL},
     {0x18,0x86,0 | PF_Valid,NULL},
@@ -1570,8 +1570,8 @@ OP_ENTRY Grp21_1Eh[8] = {
     {0x1E,0x87,0," ENDBR64 (F3),(010),(11B) | ENDBR32 (F3),(011),(11B)"},
 };
 OP_ENTRY GrpP_0Dh[8] = {
-    {0x0D,0x80,0 | PF_Valid | PF_Uncertain," PREFETCH"},
-    {0x0D,0x81,0 | PF_Valid | PF_Uncertain," PREFETCHW"},
+    {0x0D,0x80,0 | PF_Valid | PF_Uncertain," PREFETCH Mb"},
+    {0x0D,0x81,0 | PF_Valid | PF_Uncertain," PREFETCHW Mb"},
     {0x0D,0x82,0 | PF_Valid,NULL},
     {0x0D,0x83,0 | PF_Valid,NULL},
     {0x0D,0x84,0 | PF_Valid,NULL},
@@ -2735,11 +2735,11 @@ OP_ENTRY OP_0F73_6[2] = {
 };
 // Grp15_0FAE
 OP_ENTRY OP_0FAE_0[2] = {
-    {0xae,0x80,0 | PF_Valid," fxsave"},
+    {0xae,0x80,0 | PF_Valid," fxsave M"},
     {0xae,0x80,0 | PF_REP," RDFSBASE Ry (F3),(11B)"},
 };
 OP_ENTRY OP_0FAE_1[2] = {
-    {0xae,0x81,0 | PF_Valid," fxrstor"},
+    {0xae,0x81,0 | PF_Valid," fxrstor M"},
     {0xae,0x81,0 | PF_REP," RDGSBASE Ry (F3),(11B)"},
 };
 OP_ENTRY OP_0FAE_2[2] = {
@@ -2751,16 +2751,16 @@ OP_ENTRY OP_0FAE_3[2] = {
     {0xae,0x83,0 | PF_REP," WRGSBASE Ry (F3),(11B)"},
 };
 OP_ENTRY OP_0FAE_4[2] = {
-    {0xae,0x84,0 | PF_Valid | PF_Uncertain," XSAVE"},
+    {0xae,0x84,0 | PF_Valid | PF_Uncertain," XSAVE M"},
     {0xae,0x84,0 | PF_REP," ptwrite Ey (F3),(11B)"},
 };
 OP_ENTRY OP_0FAE_5[3] = {
-    {0xae,0x85,0 | PF_Valid | PF_Uncertain," XRSTOR"},
+    {0xae,0x85,0 | PF_Valid | PF_Uncertain," XRSTOR M"},
     {0xae,0x85,0 | PF_Valid | PF_Uncertain," lfence (11B)"},
     {0xae,0x85,0 | PF_REP," INCSSPD/Q Ry (F3),(11B)"},
 };
 OP_ENTRY OP_0FAE_6[7] = {
-    {0xae,0x86,0 | PF_Valid | PF_Uncertain," XSAVEOPT"},
+    {0xae,0x86,0 | PF_Valid | PF_Uncertain," XSAVEOPT M"},
     {0xae,0x86,0 | PF_Operand," clwb (66)"},
     {0xae,0x86,0 | PF_Valid," mfence (11B)"},
     {0xae,0x86,0 | PF_Operand," TPAUSE Rd (66),(11B)"},
@@ -2769,8 +2769,8 @@ OP_ENTRY OP_0FAE_6[7] = {
     {0xae,0x86,0 | PF_REP," CLRSSBSY Mq (F3)"},
 };
 OP_ENTRY OP_0FAE_7[3] = {
-    {0xae,0x87,0 | PF_Valid | PF_Uncertain," clflush"},
-    {0xae,0x87,0 | PF_Operand," clflushopt (66)"},
+    {0xae,0x87,0 | PF_Valid | PF_Uncertain," clflush Mb"},
+    {0xae,0x87,0 | PF_Operand," clflushopt Mb (66)"},
     {0xae,0x87,0 | PF_Valid | PF_Uncertain," sfence (11B)"},
 };
 // Grp21_0F1E

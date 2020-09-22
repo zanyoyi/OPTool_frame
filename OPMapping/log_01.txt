@@ -22,8 +22,8 @@
 08          INVD
 09          WBINVD
 0B          UD2 (1B)
-0D/0        PREFETCH
-0D/1        PREFETCHW
+0D/0        PREFETCH Mb
+0D/1        PREFETCHW Mb
 0E          FEMMS
 10         (v)movups Vps,Wps
 10         (v)movupd Vpd,Wpd (66) (opdsize)
@@ -50,10 +50,10 @@
 16         (v)movshdup Vx,Wx (F3) (REP)
 17         (v)movhps Mq,Vq (v1)
 17         (v)movhpd Mq,Vq (66),(v1) (opdsize)
-18/0        PREFETCHNTA
-18/1        PREFETCHT0
-18/2        PREFETCHT1
-18/3        PREFETCHT2
+18/0        PREFETCHNTA Mb
+18/1        PREFETCHT0 Mb
+18/2        PREFETCHT1 Mb
+18/3        PREFETCHT2 Mb
 1F          NOP Ev
 20          MOV Rd,Cd
 21          MOV Rd,Dd
@@ -266,16 +266,16 @@ AA          RSM
 AB          BTS Ev,Gv
 AC          SHRD Ev,Gv,Ib
 AD          SHRD Ev,Gv,CL
-AE/0        fxsave
-AE/1        fxrstor
+AE/0        fxsave M
+AE/1        fxrstor M
 AE/2       (v)ldmxcsr Md (v1)
 AE/3       (v)stmxcsr Md (v1)
-AE/4        XSAVE
-AE/5        XRSTOR
+AE/4        XSAVE M
+AE/5        XRSTOR M
 AE/5        lfence (11B)
-AE/6        XSAVEOPT
+AE/6        XSAVEOPT M
 AE/6        mfence (11B)
-AE/7        clflush
+AE/7        clflush Mb
 AE/7        sfence (11B)
 AF          IMUL Gv,Ev
 B0          CMPXCHG Eb,Gb
@@ -321,9 +321,9 @@ C5         (v)pextrw Gd,Udq,Ib (66),(v1) (opdsize)
 C6         (v)shufps Vps,Hps,Wps,Ib
 C6         (v)shufpd Vpd,Hpd,Wpd,Ib (66) (opdsize)
 C7/1        CMPXCHG8B/16B Mq/Mdq
-C7/3        xrstors
-C7/4        xsavec
-C7/5        xsaves
+C7/3        xrstors M
+C7/4        xsavec M
+C7/5        xsaves M
 C8          BSWAP RAX/EAX/R08/R08D
 C9          BSWAP RCX/ECX/R09/R09D
 CA          BSWAP RDX/EDX/R10/R10D
