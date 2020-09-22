@@ -12,7 +12,7 @@
 01/2        XGETBV (000),(11B)
 01/2        XSETBV (001),(11B)
 01/3        LIDT Ms
-01/4        SMSW Mw/Rv
+01/4        SMSW Rv/Mw
 01/6        LMSW Ew
 01/7        INVLPG Mb
 01/7        RDTSCP (001),(11B)

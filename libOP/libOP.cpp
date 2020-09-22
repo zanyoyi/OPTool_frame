@@ -2035,6 +2035,12 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         }
                     }
                 }
+
+                // final check, in case
+                // M, Ma, Mb, Md, Mp, Mq, Ms, Mv, Mw, Mx, or My memory operand
+                // Nq register operand
+                // Rd, Rv, or Ry register operand
+                // Ud, Uk, Up, Uq, or Ux register operand
             }
         }
     }
