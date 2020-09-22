@@ -2739,8 +2739,8 @@ OP_ENTRY OP_0FAE_0[2] = {
     {0xae,0x80,0 | PF_REP," RDFSBASE Ry (F3),(11B)"},
 };
 OP_ENTRY OP_0FAE_1[2] = {
-    {0x1e,0x81,0 | PF_Valid," fxrstor"},
-    {0x1e,0x81,0 | PF_REP," RDGSBASE Ry (F3),(11B)"},
+    {0xae,0x81,0 | PF_Valid," fxrstor"},
+    {0xae,0x81,0 | PF_REP," RDGSBASE Ry (F3),(11B)"},
 };
 OP_ENTRY OP_0FAE_2[2] = {
     {0xae,0x82,0 | PF_Valid," vldmxcsr Md (v1)"},
@@ -2763,10 +2763,10 @@ OP_ENTRY OP_0FAE_6[7] = {
     {0xae,0x86,0 | PF_Valid | PF_Uncertain," XSAVEOPT"},
     {0xae,0x86,0 | PF_Operand," clwb (66)"},
     {0xae,0x86,0 | PF_Valid," mfence (11B)"},
-    {0x01,0x86,0 | PF_Operand," TPAUSE Rd (66),(11B)"},
-    {0x01,0x86,0 | PF_REP," UMONITOR Rv (F3),(11B)"},
-    {0x01,0x86,0 | PF_REPNE," UMWAIT Rd (F2),(11B)"},
-    {0x01,0x86,0 | PF_REP," CLRSSBSY Mq (F3)"},
+    {0xae,0x86,0 | PF_Operand," TPAUSE Rd (66),(11B)"},
+    {0xae,0x86,0 | PF_REP," UMONITOR Rv (F3),(11B)"},
+    {0xae,0x86,0 | PF_REPNE," UMWAIT Rd (F2),(11B)"},
+    {0xae,0x86,0 | PF_REP," CLRSSBSY Mq (F3)"},
 };
 OP_ENTRY OP_0FAE_7[3] = {
     {0xae,0x87,0 | PF_Valid | PF_Uncertain," clflush"},
