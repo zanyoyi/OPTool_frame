@@ -169,7 +169,7 @@ OP_ENTRY OP1BMap[256] = {
     {0x0c,0x00,0 | PF_Valid," OR AL,Ib"},
     {0x0d,0x00,0 | PF_Valid," OR rAX,Iz"},
     {0x0e,0x00,0 | PF_Valid," PUSH CS (i64)"},
-    {0x0f,0x00,0 | PF_Valid," escape # 2-byte escape"},
+    {0x0f,0x00,0," escape # 2-byte escape"},
     //# 0x10 - 0x1f
     {0x10,0x00,0 | PF_Valid," ADC Eb,Gb"},
     {0x11,0x00,0 | PF_Valid," ADC Ev,Gv"},
@@ -194,7 +194,7 @@ OP_ENTRY OP1BMap[256] = {
     {0x23,0x00,0 | PF_Valid," AND Gv,Ev"},
     {0x24,0x00,0 | PF_Valid," AND AL,Ib"},
     {0x25,0x00,0 | PF_Valid," AND rAx,Iz"},
-    {0x26,0x00,0 | PF_Valid," SEG=ES (Prefix)"},
+    {0x26,0x00,0," SEG=ES (Prefix)"},
     {0x27,0x00,0 | PF_Valid," DAA (i64)"},
     {0x28,0x00,0 | PF_Valid," SUB Eb,Gb"},
     {0x29,0x00,0 | PF_Valid," SUB Ev,Gv"},
@@ -202,7 +202,7 @@ OP_ENTRY OP1BMap[256] = {
     {0x2b,0x00,0 | PF_Valid," SUB Gv,Ev"},
     {0x2c,0x00,0 | PF_Valid," SUB AL,Ib"},
     {0x2d,0x00,0 | PF_Valid," SUB rAX,Iz"},
-    {0x2e,0x00,0 | PF_Valid," SEG=CS (Prefix)"},
+    {0x2e,0x00,0," SEG=CS (Prefix)"},
     {0x2f,0x00,0 | PF_Valid," DAS (i64)"},
     //# 0x30 - 0x3f
     {0x30,0x00,0 | PF_Valid," XOR Eb,Gb"},
@@ -211,7 +211,7 @@ OP_ENTRY OP1BMap[256] = {
     {0x33,0x00,0 | PF_Valid," XOR Gv,Ev"},
     {0x34,0x00,0 | PF_Valid," XOR AL,Ib"},
     {0x35,0x00,0 | PF_Valid," XOR rAX,Iz"},
-    {0x36,0x00,0 | PF_Valid," SEG=SS (Prefix)"},
+    {0x36,0x00,0," SEG=SS (Prefix)"},
     {0x37,0x00,0 | PF_Valid," AAA (i64)"},
     {0x38,0x00,0 | PF_Valid," CMP Eb,Gb"},
     {0x39,0x00,0 | PF_Valid," CMP Ev,Gv"},
@@ -219,7 +219,7 @@ OP_ENTRY OP1BMap[256] = {
     {0x3b,0x00,0 | PF_Valid," CMP Gv,Ev"},
     {0x3c,0x00,0 | PF_Valid," CMP AL,Ib"},
     {0x3d,0x00,0 | PF_Valid," CMP rAX,Iz"},
-    {0x3e,0x00,0 | PF_Valid," SEG=DS (Prefix)"},
+    {0x3e,0x00,0," SEG=DS (Prefix)"},
     {0x3f,0x00,0 | PF_Valid," AAS (i64)"},
     //# 0x40 - 0x4f
     {0x40,0x00,0," INC eAX (i64) | REX (o64)"},
@@ -260,10 +260,10 @@ OP_ENTRY OP1BMap[256] = {
     {0x61,0x00,0 | PF_Valid," POPA/POPAD (i64)"},
     {0x62,0x00,0," BOUND Gv,Ma (i64) | EVEX (Prefix)"},
     {0x63,0x00,0," ARPL Ew,Gw (i64) | MOVSXD Gv,Ev (o64)"},
-    {0x64,0x00,0 | PF_Valid," SEG=FS (Prefix)"},
-    {0x65,0x00,0 | PF_Valid," SEG=GS (Prefix)"},
-    {0x66,0x00,0 | PF_Valid," Operand-Size (Prefix)"},
-    {0x67,0x00,0 | PF_Valid," Address-Size (Prefix)"},
+    {0x64,0x00,0," SEG=FS (Prefix)"},
+    {0x65,0x00,0," SEG=GS (Prefix)"},
+    {0x66,0x00,0," Operand-Size (Prefix)"},
+    {0x67,0x00,0," Address-Size (Prefix)"},
     {0x68,0x00,0 | PF_Valid," PUSH Iz (d64)"},
     {0x69,0x00,0 | PF_Valid," IMUL Gv,Ev,Iz"},
     {0x6a,0x00,0 | PF_Valid," PUSH Ib (d64)"},
@@ -318,7 +318,7 @@ OP_ENTRY OP1BMap[256] = {
     {0x98,0x00,0 | PF_Valid," CBW/CWDE/CDQE"},
     {0x99,0x00,0 | PF_Valid," CWD/CDQ/CQO"},
     {0x9a,0x00,0 | PF_Valid," CALL Ap (i64)"},
-    {0x9b,0x00,0 | PF_Valid," FWAIT/WAIT (Prefix)"},
+    {0x9b,0x00,0," FWAIT/WAIT (Prefix)"},
     {0x9c,0x00,0 | PF_Valid," PUSHF/D/Q Fv (d64)"},
     {0x9d,0x00,0 | PF_Valid," POPF/D/Q Fv (d64)"},
     {0x9e,0x00,0 | PF_Valid," SAHF"},
@@ -400,7 +400,7 @@ OP_ENTRY OP1BMap[256] = {
     {0xe0,0x00,0 | PF_Valid," LOOPNE/LOOPNZ Jb (f64)"},
     {0xe1,0x00,0 | PF_Valid," LOOPE/LOOPZ Jb (f64)"},
     {0xe2,0x00,0 | PF_Valid," LOOP Jb (f64)"},
-    {0xe3,0x00,0 | PF_Valid," JCXZ/JECXZ/JRCXZ Jb (f64)"},
+    {0xe3,0x00,0 | PF_Valid," JCXZ/JEXZ/JRXZ Jb (f64)"},
     {0xe4,0x00,0 | PF_Valid," IN AL,Ib"},
     {0xe5,0x00,0 | PF_Valid," IN eAX,Ib"},
     {0xe6,0x00,0 | PF_Valid," OUT Ib,AL"},
@@ -418,7 +418,7 @@ OP_ENTRY OP1BMap[256] = {
     {0xee,0x00,0 | PF_Valid," OUT DX,AL"},
     {0xef,0x00,0 | PF_Valid," OUT DX,eAX"},
     //# 0xf0 - 0xff
-    {0xf0,0x00,0 | PF_Valid," LOCK (Prefix)"},
+    {0xf0,0x00,0," LOCK (Prefix)"},
     {0xf1,0x00,0 | PF_Valid," INT1"},
     {0xf2,0x00,0," REPNE (Prefix) | XACQUIRE (Prefix)"},
     {0xf3,0x00,0," REP/REPE (Prefix) | XRELEASE (Prefix)"},
@@ -507,9 +507,9 @@ OP_ENTRY OP2BMap[256] = {
     {0x35,0x00,0 | PF_Valid," SYSEXIT"},
     {0x36,0x00,0 | PF_Valid,NULL},
     {0x37,0x00,0," GETSEC"},
-    {0x38,0x00,0 | PF_Valid," escape # 3-byte escape 1"},
+    {0x38,0x00,0," escape # 3-byte escape 1"},
     {0x39,0x00,0 | PF_Valid,NULL},
-    {0x3a,0x00,0 | PF_Valid," escape # 3-byte escape 2"},
+    {0x3a,0x00,0," escape # 3-byte escape 2"},
     {0x3b,0x00,0 | PF_Valid,NULL},
     {0x3c,0x00,0 | PF_Valid,NULL},
     {0x3d,0x00,0 | PF_Valid,NULL},
@@ -1666,7 +1666,7 @@ OP_ENTRY OP_4F[2] = {
 };
 OP_ENTRY OP_62[2] = {
     {0x62,0x00,0 | PF_Valid," BOUND Gv,Ma (i64)"},
-    {0x62,0x00,0 | PF_Valid," EVEX (Prefix)"},
+    {0x62,0x00,0," EVEX (Prefix)"},
 };
 OP_ENTRY OP_63[2] = {
     {0x63,0x00,0 | PF_Valid," ARPL Ew,Gw (i64)"},
@@ -1682,19 +1682,19 @@ OP_ENTRY OP_90[3] = {
 };
 OP_ENTRY OP_C4[2] = {
     {0xc4,0x00,0 | PF_Valid," LES Gz,Mp (i64)"},
-    {0xc4,0x00,0 | PF_Valid," VEX+2byte (Prefix)"},
+    {0xc4,0x00,0," VEX+2byte (Prefix)"},
 };
 OP_ENTRY OP_C5[2] = {
     {0xc5,0x00,0 | PF_Valid," LDS Gz,Mp (i64)"},
-    {0xc5,0x00,0 | PF_Valid," VEX+1byte (Prefix)"},
+    {0xc5,0x00,0," VEX+1byte (Prefix)"},
 };
 OP_ENTRY OP_F2[2] = {
-    {0xf2,0x00,0 | PF_Valid," REPNE (Prefix)"},
-    {0xf2,0x00,0 | PF_Valid," XACQUIRE (Prefix)"},
+    {0xf2,0x00,0," REPNE (Prefix)"},
+    {0xf2,0x00,0," XACQUIRE (Prefix)"},
 };
 OP_ENTRY OP_F3[2] = {
-    {0xf3,0x00,0 | PF_Valid," REP/REPE (Prefix)"},
-    {0xf3,0x00,0 | PF_Valid," XRELEASE (Prefix)"},
+    {0xf3,0x00,0," REP/REPE (Prefix)"},
+    {0xf3,0x00,0," XRELEASE (Prefix)"},
 };
 OP_ENTRY OP_0F09[2] = {
     {0x09,0x00,0 | PF_Valid," WBINVD"},
