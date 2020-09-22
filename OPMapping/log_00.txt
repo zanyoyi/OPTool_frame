@@ -294,7 +294,7 @@ DF          ESC
 E0          LOOPNE/LOOPNZ Jb (f64)
 E1          LOOPE/LOOPZ Jb (f64)
 E2          LOOP Jb (f64)
-E3          JCXZ/JEXZ/JRXZ Jb (f64)
+E3          JCXZ/JECXZ/JRCXZ Jb (f64)
 E4          IN AL,Ib
 E5          IN eAX,Ib
 E6          OUT Ib,AL

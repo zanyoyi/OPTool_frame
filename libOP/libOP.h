@@ -400,7 +400,7 @@ OP_ENTRY OP1BMap[256] = {
     {0xe0,0x00,0 | PF_Valid," LOOPNE/LOOPNZ Jb (f64)"},
     {0xe1,0x00,0 | PF_Valid," LOOPE/LOOPZ Jb (f64)"},
     {0xe2,0x00,0 | PF_Valid," LOOP Jb (f64)"},
-    {0xe3,0x00,0 | PF_Valid," JCXZ/JEXZ/JRXZ Jb (f64)"},
+    {0xe3,0x00,0 | PF_Valid," JCXZ/JECXZ/JRCXZ Jb (f64)"},
     {0xe4,0x00,0 | PF_Valid," IN AL,Ib"},
     {0xe5,0x00,0 | PF_Valid," IN eAX,Ib"},
     {0xe6,0x00,0 | PF_Valid," OUT Ib,AL"},
