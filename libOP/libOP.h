@@ -146,7 +146,12 @@ typedef enum {
 
 typedef struct {
     BYTE OP;
-    BYTE OPExt;         /*[7] indicated valid,[2:0] = ModRm.REG;*/
+    // OPExt [bit 7]: group instruction
+    // OPExt [bit 6]: modrm:rm can only be memory operand
+    // OPExt [bit 5]: modrm:rm can only be register operand
+    // OPExt [bit 4]: group or modrm instruction (not ready)
+    // OPExt [bits 2:0]; if [bit 7] set, group number
+    BYTE OPExt;
     BYTE Attr;
     char* strFmt;
 }OP_ENTRY;
