@@ -185,7 +185,7 @@
 98          CBW/CWDE/CDQE
 99          CWD/CDQ/CQO
 9A          CALL Ap (i64)
-9B          FWAIT/WAIT
+9B          FWAIT/WAIT (Prefix)
 9C          PUSHF/D/Q Fv (d64)
 9D          POPF/D/Q Fv (d64)
 9E          SAHF
@@ -294,7 +294,7 @@ DF          ESC
 E0          LOOPNE/LOOPNZ Jb (f64)
 E1          LOOPE/LOOPZ Jb (f64)
 E2          LOOP Jb (f64)
-E3          JrCXZ Jb (f64)
+E3          JCXZ/JEXZ/JRXZ Jb (f64)
 E4          IN AL,Ib
 E5          IN eAX,Ib
 E6          OUT Ib,AL

@@ -1247,7 +1247,15 @@ static DWORD EnumPrefixes(OP_ENTRY* ptr_PrefixGroup, DWORD length, OPENTRY* pOpE
         pOpEntry->Attr = ptr_PrefixGroup[PrefixIdx].Attr;
         pOpEntry->OP = OpIdx;
         pOpEntry->OPExt = GrpIdx;
-        swprintf(pOpEntry->strDisasm, 128, _T("%hs"), ptr_PrefixGroup[PrefixIdx].strFmt);
+        // separate AVX hint and non-AVX default
+        if (ptr_PrefixGroup[PrefixIdx].strFmt[1] == 'v')
+        {
+            swprintf(pOpEntry->strDisasm, 128, _T("(v)%hs"), ptr_PrefixGroup[PrefixIdx].strFmt + 2);
+        }
+        else
+        {
+            swprintf(pOpEntry->strDisasm, 128, _T("%hs"), ptr_PrefixGroup[PrefixIdx].strFmt);
+        }
         pOpEntry++;
         lFound++;
     }
@@ -1286,7 +1294,15 @@ static DWORD EnumGrp(E_XB_OP eOPTab, OP_ENTRY* pGrp, WCHAR* strModRMMatch, OPENT
                 else
                 {
                     pOpEntry->Attr = pGrp[GrpIdx].Attr;
-                    swprintf(pOpEntry->strDisasm, 128, _T("%hs"), pGrp[GrpIdx].strFmt);
+                    // separate AVX hint and non-AVX default
+                    if (pGrp[GrpIdx].strFmt[1] == 'v')
+                    {
+                        swprintf(pOpEntry->strDisasm, 128, _T("(v)%hs"), pGrp[GrpIdx].strFmt + 2);
+                    }
+                    else
+                    {
+                        swprintf(pOpEntry->strDisasm, 128, _T("%hs"), pGrp[GrpIdx].strFmt);
+                    }
                     pOpEntry++;
                     lFound++;
                 }
@@ -1881,7 +1897,15 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                             pOpEntry->OP = (BYTE)OpIdx;
                             pOpEntry->OPExt = 0;
                             pOpEntry->Attr = OP3BMap_0F38[OpIdx].Attr;
-                            swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP3BMap_0F38[OpIdx].strFmt);
+                            // separate AVX hint and non-AVX default
+                            if (OP3BMap_0F38[OpIdx].strFmt[1] == 'v')
+                            {
+                                swprintf(pOpEntry->strDisasm, 128, _T("(v)%hs"), OP3BMap_0F38[OpIdx].strFmt + 2);
+                            }
+                            else
+                            {
+                                swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP3BMap_0F38[OpIdx].strFmt);
+                            }
                             pOpEntry++;
                             lFound++;
                         }
@@ -1907,7 +1931,15 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                             pOpEntry->OP = (BYTE)OpIdx;
                             pOpEntry->OPExt = 0;
                             pOpEntry->Attr = OP3BMap_0F3A[OpIdx].Attr;
-                            swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP3BMap_0F3A[OpIdx].strFmt);
+                            // separate AVX hint and non-AVX default
+                            if (OP3BMap_0F3A[OpIdx].strFmt[1] == 'v')
+                            {
+                                swprintf(pOpEntry->strDisasm, 128, _T("(v)%hs"), OP3BMap_0F3A[OpIdx].strFmt + 2);
+                            }
+                            else
+                            {
+                                swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP3BMap_0F3A[OpIdx].strFmt);
+                            }
                             pOpEntry++;
                             lFound++;
                         }
@@ -1989,7 +2021,15 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         else
                         {
                             pOpEntry->Attr = OP2BMap[OpIdx].Attr;
-                            swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP2BMap[OpIdx].strFmt);
+                            // separate AVX hint and non-AVX default
+                            if (OP2BMap[OpIdx].strFmt[1] == 'v')
+                            {
+                                swprintf(pOpEntry->strDisasm, 128, _T("(v)%hs"), OP2BMap[OpIdx].strFmt + 2);
+                            }
+                            else
+                            {
+                                swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP2BMap[OpIdx].strFmt);
+                            }
                             pOpEntry++;
                             lFound++;
                         }
