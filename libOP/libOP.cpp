@@ -1844,7 +1844,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         if (DWORD lPrefixEntry = lPrefixes(eOPTab, OpIdx, 8, ptr_ptr_PrefixGroup))
                         {
                             pOpEntry->OP = (BYTE)OpIdx;
-                            pOpEntry->OPExt = 0;
+                            //pOpEntry->OPExt = 0;
                             lGrpFound = EnumPrefixes(ptr_PrefixGroup, lPrefixEntry, pOpEntry, nOpEntryMax - lFound);
                             pOpEntry += lGrpFound;
                             lFound += lGrpFound;
@@ -1907,7 +1907,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         {
                             DWORD lGrpFound = 0;
                             pOpEntry->OP = (BYTE)OpIdx;
-                            pOpEntry->OPExt = 0;
+                            //pOpEntry->OPExt = 0;
                             lGrpFound = EnumPrefixes(ptr_PrefixGroup, lPrefixEntry, pOpEntry, nOpEntryMax - lFound);
                             pOpEntry += lGrpFound;
                             lFound += lGrpFound;
@@ -1915,7 +1915,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         else
                         {
                             pOpEntry->OP = (BYTE)OpIdx;
-                            pOpEntry->OPExt = 0;
+                            pOpEntry->OPExt = OP3BMap_0F38[OpIdx].OPExt;
                             pOpEntry->Attr = OP3BMap_0F38[OpIdx].Attr;
                             // separate AVX hint and non-AVX default
                             if (OP3BMap_0F38[OpIdx].strFmt[1] == 'v')
@@ -1941,7 +1941,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         {
                             DWORD lGrpFound = 0;
                             pOpEntry->OP = (BYTE)OpIdx;
-                            pOpEntry->OPExt = 0;
+                            //pOpEntry->OPExt = 0;
                             lGrpFound = EnumPrefixes(ptr_PrefixGroup, lPrefixEntry, pOpEntry, nOpEntryMax - lFound);
                             pOpEntry += lGrpFound;
                             lFound += lGrpFound;
@@ -1949,7 +1949,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         else
                         {
                             pOpEntry->OP = (BYTE)OpIdx;
-                            pOpEntry->OPExt = 0;
+                            pOpEntry->OPExt = OP3BMap_0F3A[OpIdx].OPExt;
                             pOpEntry->Attr = OP3BMap_0F3A[OpIdx].Attr;
                             // separate AVX hint and non-AVX default
                             if (OP3BMap_0F3A[OpIdx].strFmt[1] == 'v')
@@ -2022,6 +2022,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     {
                         DWORD lGrpFound = 0;
                         pOpEntry->OP = (BYTE)OpIdx;
+                        //pOpEntry->OPExt = 0x80;
                         lGrpFound = EnumGrp(eOPTab, pGrp, &strOPMatch[8], pOpEntry, nOpEntryMax - lFound);
                         pOpEntry += lGrpFound;
                         lFound += lGrpFound;
@@ -2029,7 +2030,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     else if (OP2BMap[OpIdx].strFmt)
                     {
                         pOpEntry->OP = (BYTE)OpIdx;
-                        pOpEntry->OPExt = 0;
+                        pOpEntry->OPExt = OP2BMap[OpIdx].OPExt;
                         // get prefix group address and prefix group size
                         if (DWORD lPrefixEntry = lPrefixes(eOPTab, OpIdx, 8, ptr_ptr_PrefixGroup))
                         {
