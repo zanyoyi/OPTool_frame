@@ -365,15 +365,20 @@ static void OperandCheck(WCHAR * buffer, OPENTRY* pOpEntry)
 {
     if ((buffer[0] == L'1') && (buffer[1] == L'1') && (pOpEntry->OPExt & 0x40))
     {
-        // explicit input mod == [11B], status !== [11B], die
-        pOpEntry->Attr &= -2;
+        // explicit input MOD == [11B], instruction status == [mem], die
+        pOpEntry->Attr &= -4;
     }
     else if (((buffer[0] == L'0') || (buffer[1] == L'0')) && (pOpEntry->OPExt & 0x20))
     {
-        // explicit input mod !== [11B], status == [11B], die
-        pOpEntry->Attr &= -2;
+        // explicit input MOD == [mem], instruction status == [11B], die
+        pOpEntry->Attr &= -4;
+    }
+    else
+    {
+        // instruction status == [11B] | [mem]
     }
 }
+
 static DWORD lPrefixes(E_XB_OP eOPTab, int OpIdx, int GrpIdx, OP_ENTRY** pGrp)
 {
     if (eOPTab == E_1B_OP)
