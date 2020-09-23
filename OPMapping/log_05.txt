@@ -7000,6 +7000,38 @@ B6   [11B] movzx r16/r32/r64,ah
 B6   [11B] movzx r16/r32/r64,ch
 B6   [11B] movzx r16/r32/r64,dh
 B6   [11B] movzx r16/r32/r64,bh
+B7   [mem] movzx r32,word[bx+si]
+B7   [mem] movzx r32,word[bx+di]
+B7   [mem] movzx r32,word[bp+si]
+B7   [mem] movzx r32,word[bp+di]
+B7   [mem] movzx r32,word[si]
+B7   [mem] movzx r32,word[di]
+B7   [mem] movzx r32,word[disp16]
+B7   [mem] movzx r32,word[bx]
+B7   [mem] movzx r32,word[bx+si+disp8]
+B7   [mem] movzx r32,word[bx+di+disp8]
+B7   [mem] movzx r32,word[bp+si+disp8]
+B7   [mem] movzx r32,word[bp+di+disp8]
+B7   [mem] movzx r32,word[si+disp8]
+B7   [mem] movzx r32,word[di+disp8]
+B7   [mem] movzx r32,word[bp+disp8]
+B7   [mem] movzx r32,word[bx+disp8]
+B7   [mem] movzx r32,word[bx+si+disp16]
+B7   [mem] movzx r32,word[bx+di+disp16]
+B7   [mem] movzx r32,word[bp+si+disp16]
+B7   [mem] movzx r32,word[bp+di+disp16]
+B7   [mem] movzx r32,word[si+disp16]
+B7   [mem] movzx r32,word[di+disp16]
+B7   [mem] movzx r32,word[bp+disp16]
+B7   [mem] movzx r32,word[bx+disp16]
+B7   [11B] movzx r32,ax
+B7   [11B] movzx r32,cx
+B7   [11B] movzx r32,dx
+B7   [11B] movzx r32,bx
+B7   [11B] movzx r32,sp
+B7   [11B] movzx r32,bp
+B7   [11B] movzx r32,si
+B7   [11B] movzx r32,di
 B8         jmpe imm
 B8   [mem] popcnt r16,word[bx+si] (REP)
 B8   [mem] jmpe imm
@@ -7640,6 +7672,38 @@ BE   [11B] movsx r16/r32/r64,ah
 BE   [11B] movsx r16/r32/r64,ch
 BE   [11B] movsx r16/r32/r64,dh
 BE   [11B] movsx r16/r32/r64,bh
+BF   [mem] movsx r32,word[bx+si]
+BF   [mem] movsx r32,word[bx+di]
+BF   [mem] movsx r32,word[bp+si]
+BF   [mem] movsx r32,word[bp+di]
+BF   [mem] movsx r32,word[si]
+BF   [mem] movsx r32,word[di]
+BF   [mem] movsx r32,word[disp16]
+BF   [mem] movsx r32,word[bx]
+BF   [mem] movsx r32,word[bx+si+disp8]
+BF   [mem] movsx r32,word[bx+di+disp8]
+BF   [mem] movsx r32,word[bp+si+disp8]
+BF   [mem] movsx r32,word[bp+di+disp8]
+BF   [mem] movsx r32,word[si+disp8]
+BF   [mem] movsx r32,word[di+disp8]
+BF   [mem] movsx r32,word[bp+disp8]
+BF   [mem] movsx r32,word[bx+disp8]
+BF   [mem] movsx r32,word[bx+si+disp16]
+BF   [mem] movsx r32,word[bx+di+disp16]
+BF   [mem] movsx r32,word[bp+si+disp16]
+BF   [mem] movsx r32,word[bp+di+disp16]
+BF   [mem] movsx r32,word[si+disp16]
+BF   [mem] movsx r32,word[di+disp16]
+BF   [mem] movsx r32,word[bp+disp16]
+BF   [mem] movsx r32,word[bx+disp16]
+BF   [11B] movsx r32,ax
+BF   [11B] movsx r32,cx
+BF   [11B] movsx r32,dx
+BF   [11B] movsx r32,bx
+BF   [11B] movsx r32,sp
+BF   [11B] movsx r32,bp
+BF   [11B] movsx r32,si
+BF   [11B] movsx r32,di
 C0   [mem] xadd [bx+si],r8
 C0   [mem] xadd [bx+di],r8
 C0   [mem] xadd [bp+si],r8
@@ -8088,6 +8152,14 @@ C7/5 [mem] xsaves [si+disp16]
 C7/5 [mem] xsaves [di+disp16]
 C7/5 [mem] xsaves [bp+disp16]
 C7/5 [mem] xsaves [bx+disp16]
+C8         bswap eax
+C9         bswap ecx
+CA         bswap edx
+CB         bswap ebx
+CC         bswap esp
+CD         bswap ebp
+CE         bswap esi
+CF         bswap edi
 D0   [mem] addsubpd xmm,oword[bx+si] (opdsize)
 D0   [mem] addsubps xmm,oword[bx+si] (REPNE)
 D0   [mem] addsubpd xmm,oword[bx+di] (opdsize)
