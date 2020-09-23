@@ -1438,9 +1438,9 @@ OP_ENTRY Grp09_C7h[8] = {
     {0xC7,0x80,0 | PF_Valid,NULL},
     {0xC7,0xC1,0 | PF_Valid," CMPXCHG8B/16B Mq/Mdq"},
     {0xC7,0x82,0 | PF_Valid,NULL},
-    {0xC7,0x83,0 | PF_Valid | PF_Uncertain," xrstors M"},
-    {0xC7,0x84,0 | PF_Valid | PF_Uncertain," xsavec M"},
-    {0xC7,0x85,0 | PF_Valid | PF_Uncertain," xsaves M"},
+    {0xC7,0xC3,0 | PF_Valid | PF_Uncertain," xrstors M"},
+    {0xC7,0xC4,0 | PF_Valid | PF_Uncertain," xsavec M"},
+    {0xC7,0xC5,0 | PF_Valid | PF_Uncertain," xsaves M"},
     {0xC7,0x86,0," VMPTRLD Mq | VMCLEAR Mq (66) | VMXON Mq (F3) | RDRAND Rv (11B)"},
     {0xC7,0x87,0," VMPTRST Mq | VMPTRST Mq (F3) | RDSEED Rv (11B)"},
 };
@@ -1511,7 +1511,7 @@ OP_ENTRY Grp15_AEh[8] = {
     {0xAE,0x83,0," vstmxcsr Md (v1) | WRGSBASE Ry (F3),(11B)"},
     {0xAE,0x84,0," XSAVE M | ptwrite Ey (F3),(11B)"},
     {0xAE,0x85,0," XRSTOR M | lfence (11B) | INCSSPD/Q Ry (F3),(11B)"},
-    {0xAE,0x86,0," XSAVEOPT M | clwb (66) | mfence (11B) | TPAUSE Rd (66),(11B) | UMONITOR Rv (F3),(11B) | UMWAIT Rd (F2),(11B) | CLRSSBSY Mq (F3"},
+    {0xAE,0x86,0," XSAVEOPT M | clwb Mb (66) | mfence (11B) | TPAUSE Rd (66),(11B) | UMONITOR Rv (F3),(11B) | UMWAIT Rd (F2),(11B) | CLRSSBSY Mq "},
     {0xAE,0x87,0," clflush Mb | clflushopt Mb (66) | sfence (11B)"},
 };
 OP_ENTRY Grp16_18h[8] = {
