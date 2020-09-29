@@ -1419,9 +1419,9 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
             {
                 // check op-code mismatch
                 if (
-                    (eOPTab == E_1B_OP && OpIdx == 0x0F) ||
+                    (eOPTab == E_1B_OP && OpIdx == 0x0F)/* ||
                     (eOPTab == E_2B_OP && OpIdx == 0x38) ||
-                    (eOPTab == E_2B_OP && OpIdx == 0x3A)
+                    (eOPTab == E_2B_OP && OpIdx == 0x3A)*/
                     // treat 0F A6 and 0F A7 as group instruction
                     )
                 {
@@ -2044,18 +2044,24 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     }
                     else if (OP2BMap[OpIdx].strFmt)
                     {
-                        pOpEntry->OP = (BYTE)OpIdx;
-                        pOpEntry->OPExt = OP2BMap[OpIdx].OPExt;
                         // get prefix group address and prefix group size
                         if (DWORD lPrefixEntry = lPrefixes(eOPTab, OpIdx, 8, ptr_ptr_PrefixGroup))
                         {
                             DWORD lGrpFound = 0;
+                            pOpEntry->OP = (BYTE)OpIdx;
+                            //pOpEntry->OPExt = OP2BMap[OpIdx].OPExt;
                             lGrpFound = EnumPrefixes(ptr_PrefixGroup, lPrefixEntry, pOpEntry, nOpEntryMax - lFound);
                             pOpEntry += lGrpFound;
                             lFound += lGrpFound;
                         }
                         else
                         {
+                            pOpEntry->OP = (BYTE)OpIdx;
+                            // for FPU instructions and escape instructions
+                            // their group enable are set, but used for internal only
+                            // should disable publicly
+                            //pOpEntry->OPExt = OP2BMap[OpIdx].OPExt;
+                            pOpEntry->OPExt = OP2BMap[OpIdx].OPExt & ~0x80;
                             pOpEntry->Attr = OP2BMap[OpIdx].Attr;
                             // separate AVX hint and non-AVX default
                             if (OP2BMap[OpIdx].strFmt[1] == 'v')

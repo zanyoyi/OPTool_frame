@@ -2038,6 +2038,84 @@
 33         rdpmc
 34         sysenter
 35         sysexit
+38/0 [mem] pshufb mm1,mm4
+38/0 [mem] pshufb xmm1,xmm4 (opdsize)
+38/0 [mem] phaddw mm1,mm4
+38/0 [mem] phaddw xmm1,xmm4 (opdsize)
+38/0 [mem] phaddd mm1,mm4
+38/0 [mem] phaddd xmm1,xmm4 (opdsize)
+38/0 [mem] phaddsw mm1,mm4
+38/0 [mem] phaddsw xmm1,xmm4 (opdsize)
+38/0 [mem] pmaddubsw mm1,mm4
+38/0 [mem] pmaddubsw xmm1,xmm4 (opdsize)
+38/0 [mem] phsubw mm1,mm4
+38/0 [mem] phsubw xmm1,xmm4 (opdsize)
+38/0 [mem] phsubd mm1,mm4
+38/0 [mem] phsubd xmm1,xmm4 (opdsize)
+38/0 [mem] phsubsw mm1,mm4
+38/0 [mem] phsubsw xmm1,xmm4 (opdsize)
+38/0 [mem] pmulld xmm1,xmm4 (opdsize)
+38/0 [mem] phminposuw xmm1,xmm4 (opdsize)
+38/1 [mem] psignb mm1,mm4
+38/1 [mem] psignb xmm1,xmm4 (opdsize)
+38/1 [mem] psignw mm1,mm4
+38/1 [mem] psignw xmm1,xmm4 (opdsize)
+38/1 [mem] psignd mm1,mm4
+38/1 [mem] psignd xmm1,xmm4 (opdsize)
+38/1 [mem] pmulhrsw mm1,mm4
+38/1 [mem] pmulhrsw xmm1,xmm4 (opdsize)
+38/2 [mem] pblendvb xmm1,xmm4,xmm0 (opdsize)
+38/2 [mem] blendvps xmm1,xmm4,xmm0 (opdsize)
+38/2 [mem] blendvpd xmm1,xmm4,xmm0 (opdsize)
+38/2 [mem] ptest xmm1,xmm4 (opdsize)
+38/3 [mem] pabsb mm1,mm4
+38/3 [mem] pabsb xmm1,xmm4 (opdsize)
+38/3 [mem] pabsw mm1,mm4
+38/3 [mem] pabsw xmm1,xmm4 (opdsize)
+38/3 [mem] pabsd mm1,mm4
+38/3 [mem] pabsd xmm1,xmm4 (opdsize)
+38/4 [mem] pmovsxbw xmm1,xmm4 (opdsize)
+38/4 [mem] pmovsxbd xmm1,xmm4 (opdsize)
+38/4 [mem] pmovsxbq xmm1,xmm4 (opdsize)
+38/4 [mem] pmovsxwd xmm1,xmm4 (opdsize)
+38/4 [mem] pmovsxwq xmm1,xmm4 (opdsize)
+38/4 [mem] pmovsxdq xmm1,xmm4 (opdsize)
+38/5 [mem] pmuldq xmm1,xmm4 (opdsize)
+38/5 [mem] pcmpeqq xmm1,xmm4 (opdsize)
+38/5 [mem] packusdw xmm1,xmm4 (opdsize)
+38/6 [mem] pmovzxbw xmm1,xmm4 (opdsize)
+38/6 [mem] pmovzxbd xmm1,xmm4 (opdsize)
+38/6 [mem] pmovzxbq xmm1,xmm4 (opdsize)
+38/6 [mem] pmovzxwd xmm1,xmm4 (opdsize)
+38/6 [mem] pmovzxwq xmm1,xmm4 (opdsize)
+38/6 [mem] pmovzxdq xmm1,xmm4 (opdsize)
+38/7 [mem] pminsb xmm1,xmm4 (opdsize)
+38/7 [mem] pminsd xmm1,xmm4 (opdsize)
+38/7 [mem] pminuw xmm1,xmm4 (opdsize)
+38/7 [mem] pminud xmm1,xmm4 (opdsize)
+38/7 [mem] pmaxsb xmm1,xmm4 (opdsize)
+38/7 [mem] pmaxsd xmm1,xmm4 (opdsize)
+38/7 [mem] pmaxuw xmm1,xmm4 (opdsize)
+38/7 [mem] pmaxud xmm1,xmm4 (opdsize)
+3A/0 [mem] dpps xmm1,xmm4,imm8 (opdsize)
+3A/0 [mem] dppd xmm1,xmm4,imm8 (opdsize)
+3A/0 [mem] mpsadbw xmm1,xmm4,imm8 (opdsize)
+3A/1 [mem] roundps xmm1,xmm4,imm8 (opdsize)
+3A/1 [mem] roundpd xmm1,xmm4,imm8 (opdsize)
+3A/1 [mem] roundss xmm1,xmm4,imm8 (opdsize)
+3A/1 [mem] roundsd xmm1,xmm4,imm8 (opdsize)
+3A/1 [mem] blendps xmm1,xmm4,imm8 (opdsize)
+3A/1 [mem] blendpd xmm1,xmm4,imm8 (opdsize)
+3A/1 [mem] pblendw xmm1,xmm4,imm8 (opdsize)
+3A/1 [mem] palignr mm1,mm4,imm
+3A/1 [mem] palignr xmm1,xmm4,imm (opdsize)
+3A/2 [mem] pextrb esp,xmm1,imm8 (opdsize)
+3A/2 [mem] pextrw esp,xmm1,imm8 (opdsize)
+3A/2 [mem] pextrd esp,xmm1,imm8 (opdsize)
+3A/2 [mem] extractps esp,xmm1,imm8 (opdsize)
+3A/4 [mem] pinsrb xmm1,spl,imm8 (opdsize)
+3A/4 [mem] insertps xmm1,xmm4,imm8 (opdsize)
+3A/4 [mem] pinsrd xmm1,esp,imm8 (opdsize)
 40   [mem] cmovo r16/r32/r64,[eax]
 40   [mem] cmovo r16/r32/r64,[ecx]
 40   [mem] cmovo r16/r32/r64,[edx]

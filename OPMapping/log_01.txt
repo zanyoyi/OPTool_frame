@@ -87,6 +87,8 @@
 33          RDPMC
 34          SYSENTER
 35          SYSEXIT
+38          escape # 3-byte escape 1
+3A          escape # 3-byte escape 2
 40          CMOVO Gv,Ev
 41          CMOVNO Gv,Ev
 42          CMOVB/C/NAE Gv,Ev
