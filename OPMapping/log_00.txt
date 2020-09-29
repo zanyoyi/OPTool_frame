@@ -270,14 +270,14 @@ D3/7        SAR Ev,CL
 D4          AAM Ib (i64)
 D5          AAD Ib (i64)
 D7          XLAT/XLATB
-D8/0        ESC
-D9/0        ESC
-DA/0        ESC
-DB/0        ESC
-DC/0        ESC
-DD/0        ESC
-DE/0        ESC
-DF/0        ESC
+D8          ESC
+D9          ESC
+DA          ESC
+DB          ESC
+DC          ESC
+DD          ESC
+DE          ESC
+DF          ESC
 E0          LOOPNE/LOOPNZ Jb (f64)
 E1          LOOPE/LOOPZ Jb (f64)
 E2          LOOP Jb (f64)
