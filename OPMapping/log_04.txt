@@ -1082,9 +1082,7 @@
 5E         pop rSI
 5F         pop rDI
 60         pusha
-60         pushad
 61         popa
-61         popad
 62   [mem] bound r16/r32,[bx+si]
 62   [mem] bound r16/r32,[bx+di]
 62   [mem] bound r16/r32,[bp+si]
@@ -1209,10 +1207,8 @@
 6B   [11B] imul r16/r32/r64,rDI,imm8
 6C         insb
 6D         insw
-6D         insd
 6E         outsb
 6F         outsw
-6F         outsd
 70         jo imm
 71         jno imm
 72         jc imm
@@ -2639,14 +2635,10 @@
 96         xchg rAX,rSI
 97         xchg rAX,rDI
 98         cbw
-98         cwde
 99         cwd
-99         cdq
 9A         call imm:imm
 9C         pushf
-9C         pushfd
 9D         popf
-9D         popfd
 9E         sahf
 9F         lahf
 A0         mov al,[moffs]
@@ -2655,21 +2647,16 @@ A2         mov [moffs],al
 A3         mov [moffs],rAX
 A4         movsb
 A5         movsw
-A5         movsd
 A6         cmpsb
 A7         cmpsw
-A7         cmpsd
 A8         test al,imm
 A9         test rAX,imm
 AA         stosb
 AB         stosw
-AB         stosd
 AC         lodsb
 AD         lodsw
-AD         lodsd
 AE         scasb
 AF         scasw
-AF         scasd
 B0         mov al,imm
 B1         mov cl,imm
 B2         mov dl,imm
@@ -3135,9 +3122,7 @@ C1/7 [11B] sar rBP,imm8
 C1/7 [11B] sar rSI,imm8
 C1/7 [11B] sar rDI,imm8
 C2         ret imm
-C2         retd imm
 C3         ret
-C3         retd
 C4   [mem] les r16/r32,[bx+si]
 C4   [mem] les r16/r32,[bx+di]
 C4   [mem] les r16/r32,[bp+si]
@@ -3253,14 +3238,11 @@ C7/0 [11B] mov rDI,imm
 C8         enter imm,imm
 C9         leave
 CA         retf imm
-CA         retfd imm
 CB         retf
-CB         retfd
 CC         int3
 CD         int imm
 CE         into
 CF         iret
-CF         iretd
 D0/0 [mem] rol byte[bx+si],1
 D0/0 [mem] rol byte[bx+di],1
 D0/0 [mem] rol byte[bp+si],1

@@ -334,7 +334,6 @@ static BOOL SpuriousCheck(E_XB_OP eOPTab, int OpIdx, /*int OPExtIdx,*/ int Prefi
         case 0xCB:          // retf / retfw / retfd / retfq
         case 0xCF:          // iret / iretw / iretd / iretq
             return TRUE;
-            //break;
         default:
             break;
         }
@@ -1752,11 +1751,8 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                 // final check
                 if (SpuriousCheck(eOPTab, OpIdx, /*OP_2,*/ PrefixIdx_previous))
                 {
-                    //pOpEntry--;
-                    //lFound--;
-                    // cancel the spurious mandatory prefix flag, instead
-                    (pOpEntry - 1)->Attr &=
-                        ~(PF_Operand | PF_REPNE | PF_REP | PF_FWAIT | PF_VEX | PF_EVEX);
+                    pOpEntry--;
+                    lFound--;
                 }
             }
         }
