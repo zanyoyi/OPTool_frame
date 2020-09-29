@@ -378,6 +378,7 @@ static void OperandCheck(WCHAR * buffer, OPENTRY* pOpEntry)
     {
         // instruction status == [11B] | [mem]
     }
+
 }
 
 static DWORD lPrefixes(E_XB_OP eOPTab, int OpIdx, int GrpIdx, OP_ENTRY** pGrp)
@@ -1859,10 +1860,11 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                             lFound += lGrpFound;
                         }
                     }
+                    // no group instruction go here
                     else if (OP1BMap[OpIdx].strFmt)
                     {
                         // get prefix group address and prefix group size
-                        if (DWORD lPrefixEntry = lPrefixes(eOPTab,OpIdx,8, ptr_ptr_PrefixGroup))
+                        if (DWORD lPrefixEntry = lPrefixes(eOPTab, OpIdx, 8, ptr_ptr_PrefixGroup))
                         {
                             DWORD lGrpFound = 0;
                             pOpEntry->OP = (BYTE)OpIdx;
@@ -1874,7 +1876,11 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                         else
                         {
                             pOpEntry->OP = (BYTE)OpIdx;
-                            pOpEntry->OPExt = OP1BMap[OpIdx].OPExt;
+                            // for FPU instructions and escape instructions
+                            // their group enable are set, but used for internal only
+                            // should disable publicly
+                            //pOpEntry->OPExt = OP1BMap[OpIdx].OPExt;
+                            pOpEntry->OPExt = OP1BMap[OpIdx].OPExt & ~0x80;
                             pOpEntry->Attr = OP1BMap[OpIdx].Attr;
                             swprintf(pOpEntry->strDisasm, 128, _T("%hs"), OP1BMap[OpIdx].strFmt);
                             pOpEntry++;
