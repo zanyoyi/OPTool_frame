@@ -1,1936 +1,1936 @@
-00   [mem] pshufb mm,[bx+si]
-00   [mem] pshufb xmm,oword[bx+si] (opdsize)
-00   [mem] pshufb mm,[bx+di]
-00   [mem] pshufb xmm,oword[bx+di] (opdsize)
-00   [mem] pshufb mm,[bp+si]
-00   [mem] pshufb xmm,oword[bp+si] (opdsize)
-00   [mem] pshufb mm,[bp+di]
-00   [mem] pshufb xmm,oword[bp+di] (opdsize)
-00   [mem] pshufb mm,[si]
-00   [mem] pshufb xmm,oword[si] (opdsize)
-00   [mem] pshufb mm,[di]
-00   [mem] pshufb xmm,oword[di] (opdsize)
-00   [mem] pshufb mm,[disp16]
-00   [mem] pshufb xmm,oword[disp16] (opdsize)
-00   [mem] pshufb mm,[bx]
-00   [mem] pshufb xmm,oword[bx] (opdsize)
-00   [mem] pshufb mm,[bx+si+disp8]
-00   [mem] pshufb xmm,oword[bx+si+disp8] (opdsize)
-00   [mem] pshufb mm,[bx+di+disp8]
-00   [mem] pshufb xmm,oword[bx+di+disp8] (opdsize)
-00   [mem] pshufb mm,[bp+si+disp8]
-00   [mem] pshufb xmm,oword[bp+si+disp8] (opdsize)
-00   [mem] pshufb mm,[bp+di+disp8]
-00   [mem] pshufb xmm,oword[bp+di+disp8] (opdsize)
-00   [mem] pshufb mm,[si+disp8]
-00   [mem] pshufb xmm,oword[si+disp8] (opdsize)
-00   [mem] pshufb mm,[di+disp8]
-00   [mem] pshufb xmm,oword[di+disp8] (opdsize)
-00   [mem] pshufb mm,[bp+disp8]
-00   [mem] pshufb xmm,oword[bp+disp8] (opdsize)
-00   [mem] pshufb mm,[bx+disp8]
-00   [mem] pshufb xmm,oword[bx+disp8] (opdsize)
-00   [mem] pshufb mm,[bx+si+disp16]
-00   [mem] pshufb xmm,oword[bx+si+disp16] (opdsize)
-00   [mem] pshufb mm,[bx+di+disp16]
-00   [mem] pshufb xmm,oword[bx+di+disp16] (opdsize)
-00   [mem] pshufb mm,[bp+si+disp16]
-00   [mem] pshufb xmm,oword[bp+si+disp16] (opdsize)
-00   [mem] pshufb mm,[bp+di+disp16]
-00   [mem] pshufb xmm,oword[bp+di+disp16] (opdsize)
-00   [mem] pshufb mm,[si+disp16]
-00   [mem] pshufb xmm,oword[si+disp16] (opdsize)
-00   [mem] pshufb mm,[di+disp16]
-00   [mem] pshufb xmm,oword[di+disp16] (opdsize)
-00   [mem] pshufb mm,[bp+disp16]
-00   [mem] pshufb xmm,oword[bp+disp16] (opdsize)
-00   [mem] pshufb mm,[bx+disp16]
-00   [mem] pshufb xmm,oword[bx+disp16] (opdsize)
-00   [11B] pshufb mm,mm0
-00   [11B] pshufb xmm,xmm0 (opdsize)
-00   [11B] pshufb mm,mm1
-00   [11B] pshufb xmm,xmm1 (opdsize)
-00   [11B] pshufb mm,mm2
-00   [11B] pshufb xmm,xmm2 (opdsize)
-00   [11B] pshufb mm,mm3
-00   [11B] pshufb xmm,xmm3 (opdsize)
-00   [11B] pshufb mm,mm4
-00   [11B] pshufb xmm,xmm4 (opdsize)
-00   [11B] pshufb mm,mm5
-00   [11B] pshufb xmm,xmm5 (opdsize)
-00   [11B] pshufb mm,mm6
-00   [11B] pshufb xmm,xmm6 (opdsize)
-00   [11B] pshufb mm,mm7
-00   [11B] pshufb xmm,xmm7 (opdsize)
-01   [mem] phaddw mm,[bx+si]
-01   [mem] phaddw xmm,oword[bx+si] (opdsize)
-01   [mem] phaddw mm,[bx+di]
-01   [mem] phaddw xmm,oword[bx+di] (opdsize)
-01   [mem] phaddw mm,[bp+si]
-01   [mem] phaddw xmm,oword[bp+si] (opdsize)
-01   [mem] phaddw mm,[bp+di]
-01   [mem] phaddw xmm,oword[bp+di] (opdsize)
-01   [mem] phaddw mm,[si]
-01   [mem] phaddw xmm,oword[si] (opdsize)
-01   [mem] phaddw mm,[di]
-01   [mem] phaddw xmm,oword[di] (opdsize)
-01   [mem] phaddw mm,[disp16]
-01   [mem] phaddw xmm,oword[disp16] (opdsize)
-01   [mem] phaddw mm,[bx]
-01   [mem] phaddw xmm,oword[bx] (opdsize)
-01   [mem] phaddw mm,[bx+si+disp8]
-01   [mem] phaddw xmm,oword[bx+si+disp8] (opdsize)
-01   [mem] phaddw mm,[bx+di+disp8]
-01   [mem] phaddw xmm,oword[bx+di+disp8] (opdsize)
-01   [mem] phaddw mm,[bp+si+disp8]
-01   [mem] phaddw xmm,oword[bp+si+disp8] (opdsize)
-01   [mem] phaddw mm,[bp+di+disp8]
-01   [mem] phaddw xmm,oword[bp+di+disp8] (opdsize)
-01   [mem] phaddw mm,[si+disp8]
-01   [mem] phaddw xmm,oword[si+disp8] (opdsize)
-01   [mem] phaddw mm,[di+disp8]
-01   [mem] phaddw xmm,oword[di+disp8] (opdsize)
-01   [mem] phaddw mm,[bp+disp8]
-01   [mem] phaddw xmm,oword[bp+disp8] (opdsize)
-01   [mem] phaddw mm,[bx+disp8]
-01   [mem] phaddw xmm,oword[bx+disp8] (opdsize)
-01   [mem] phaddw mm,[bx+si+disp16]
-01   [mem] phaddw xmm,oword[bx+si+disp16] (opdsize)
-01   [mem] phaddw mm,[bx+di+disp16]
-01   [mem] phaddw xmm,oword[bx+di+disp16] (opdsize)
-01   [mem] phaddw mm,[bp+si+disp16]
-01   [mem] phaddw xmm,oword[bp+si+disp16] (opdsize)
-01   [mem] phaddw mm,[bp+di+disp16]
-01   [mem] phaddw xmm,oword[bp+di+disp16] (opdsize)
-01   [mem] phaddw mm,[si+disp16]
-01   [mem] phaddw xmm,oword[si+disp16] (opdsize)
-01   [mem] phaddw mm,[di+disp16]
-01   [mem] phaddw xmm,oword[di+disp16] (opdsize)
-01   [mem] phaddw mm,[bp+disp16]
-01   [mem] phaddw xmm,oword[bp+disp16] (opdsize)
-01   [mem] phaddw mm,[bx+disp16]
-01   [mem] phaddw xmm,oword[bx+disp16] (opdsize)
-01   [11B] phaddw mm,mm0
-01   [11B] phaddw xmm,xmm0 (opdsize)
-01   [11B] phaddw mm,mm1
-01   [11B] phaddw xmm,xmm1 (opdsize)
-01   [11B] phaddw mm,mm2
-01   [11B] phaddw xmm,xmm2 (opdsize)
-01   [11B] phaddw mm,mm3
-01   [11B] phaddw xmm,xmm3 (opdsize)
-01   [11B] phaddw mm,mm4
-01   [11B] phaddw xmm,xmm4 (opdsize)
-01   [11B] phaddw mm,mm5
-01   [11B] phaddw xmm,xmm5 (opdsize)
-01   [11B] phaddw mm,mm6
-01   [11B] phaddw xmm,xmm6 (opdsize)
-01   [11B] phaddw mm,mm7
-01   [11B] phaddw xmm,xmm7 (opdsize)
-02   [mem] phaddd mm,[bx+si]
-02   [mem] phaddd xmm,oword[bx+si] (opdsize)
-02   [mem] phaddd mm,[bx+di]
-02   [mem] phaddd xmm,oword[bx+di] (opdsize)
-02   [mem] phaddd mm,[bp+si]
-02   [mem] phaddd xmm,oword[bp+si] (opdsize)
-02   [mem] phaddd mm,[bp+di]
-02   [mem] phaddd xmm,oword[bp+di] (opdsize)
-02   [mem] phaddd mm,[si]
-02   [mem] phaddd xmm,oword[si] (opdsize)
-02   [mem] phaddd mm,[di]
-02   [mem] phaddd xmm,oword[di] (opdsize)
-02   [mem] phaddd mm,[disp16]
-02   [mem] phaddd xmm,oword[disp16] (opdsize)
-02   [mem] phaddd mm,[bx]
-02   [mem] phaddd xmm,oword[bx] (opdsize)
-02   [mem] phaddd mm,[bx+si+disp8]
-02   [mem] phaddd xmm,oword[bx+si+disp8] (opdsize)
-02   [mem] phaddd mm,[bx+di+disp8]
-02   [mem] phaddd xmm,oword[bx+di+disp8] (opdsize)
-02   [mem] phaddd mm,[bp+si+disp8]
-02   [mem] phaddd xmm,oword[bp+si+disp8] (opdsize)
-02   [mem] phaddd mm,[bp+di+disp8]
-02   [mem] phaddd xmm,oword[bp+di+disp8] (opdsize)
-02   [mem] phaddd mm,[si+disp8]
-02   [mem] phaddd xmm,oword[si+disp8] (opdsize)
-02   [mem] phaddd mm,[di+disp8]
-02   [mem] phaddd xmm,oword[di+disp8] (opdsize)
-02   [mem] phaddd mm,[bp+disp8]
-02   [mem] phaddd xmm,oword[bp+disp8] (opdsize)
-02   [mem] phaddd mm,[bx+disp8]
-02   [mem] phaddd xmm,oword[bx+disp8] (opdsize)
-02   [mem] phaddd mm,[bx+si+disp16]
-02   [mem] phaddd xmm,oword[bx+si+disp16] (opdsize)
-02   [mem] phaddd mm,[bx+di+disp16]
-02   [mem] phaddd xmm,oword[bx+di+disp16] (opdsize)
-02   [mem] phaddd mm,[bp+si+disp16]
-02   [mem] phaddd xmm,oword[bp+si+disp16] (opdsize)
-02   [mem] phaddd mm,[bp+di+disp16]
-02   [mem] phaddd xmm,oword[bp+di+disp16] (opdsize)
-02   [mem] phaddd mm,[si+disp16]
-02   [mem] phaddd xmm,oword[si+disp16] (opdsize)
-02   [mem] phaddd mm,[di+disp16]
-02   [mem] phaddd xmm,oword[di+disp16] (opdsize)
-02   [mem] phaddd mm,[bp+disp16]
-02   [mem] phaddd xmm,oword[bp+disp16] (opdsize)
-02   [mem] phaddd mm,[bx+disp16]
-02   [mem] phaddd xmm,oword[bx+disp16] (opdsize)
-02   [11B] phaddd mm,mm0
-02   [11B] phaddd xmm,xmm0 (opdsize)
-02   [11B] phaddd mm,mm1
-02   [11B] phaddd xmm,xmm1 (opdsize)
-02   [11B] phaddd mm,mm2
-02   [11B] phaddd xmm,xmm2 (opdsize)
-02   [11B] phaddd mm,mm3
-02   [11B] phaddd xmm,xmm3 (opdsize)
-02   [11B] phaddd mm,mm4
-02   [11B] phaddd xmm,xmm4 (opdsize)
-02   [11B] phaddd mm,mm5
-02   [11B] phaddd xmm,xmm5 (opdsize)
-02   [11B] phaddd mm,mm6
-02   [11B] phaddd xmm,xmm6 (opdsize)
-02   [11B] phaddd mm,mm7
-02   [11B] phaddd xmm,xmm7 (opdsize)
-03   [mem] phaddsw mm,[bx+si]
-03   [mem] phaddsw xmm,oword[bx+si] (opdsize)
-03   [mem] phaddsw mm,[bx+di]
-03   [mem] phaddsw xmm,oword[bx+di] (opdsize)
-03   [mem] phaddsw mm,[bp+si]
-03   [mem] phaddsw xmm,oword[bp+si] (opdsize)
-03   [mem] phaddsw mm,[bp+di]
-03   [mem] phaddsw xmm,oword[bp+di] (opdsize)
-03   [mem] phaddsw mm,[si]
-03   [mem] phaddsw xmm,oword[si] (opdsize)
-03   [mem] phaddsw mm,[di]
-03   [mem] phaddsw xmm,oword[di] (opdsize)
-03   [mem] phaddsw mm,[disp16]
-03   [mem] phaddsw xmm,oword[disp16] (opdsize)
-03   [mem] phaddsw mm,[bx]
-03   [mem] phaddsw xmm,oword[bx] (opdsize)
-03   [mem] phaddsw mm,[bx+si+disp8]
-03   [mem] phaddsw xmm,oword[bx+si+disp8] (opdsize)
-03   [mem] phaddsw mm,[bx+di+disp8]
-03   [mem] phaddsw xmm,oword[bx+di+disp8] (opdsize)
-03   [mem] phaddsw mm,[bp+si+disp8]
-03   [mem] phaddsw xmm,oword[bp+si+disp8] (opdsize)
-03   [mem] phaddsw mm,[bp+di+disp8]
-03   [mem] phaddsw xmm,oword[bp+di+disp8] (opdsize)
-03   [mem] phaddsw mm,[si+disp8]
-03   [mem] phaddsw xmm,oword[si+disp8] (opdsize)
-03   [mem] phaddsw mm,[di+disp8]
-03   [mem] phaddsw xmm,oword[di+disp8] (opdsize)
-03   [mem] phaddsw mm,[bp+disp8]
-03   [mem] phaddsw xmm,oword[bp+disp8] (opdsize)
-03   [mem] phaddsw mm,[bx+disp8]
-03   [mem] phaddsw xmm,oword[bx+disp8] (opdsize)
-03   [mem] phaddsw mm,[bx+si+disp16]
-03   [mem] phaddsw xmm,oword[bx+si+disp16] (opdsize)
-03   [mem] phaddsw mm,[bx+di+disp16]
-03   [mem] phaddsw xmm,oword[bx+di+disp16] (opdsize)
-03   [mem] phaddsw mm,[bp+si+disp16]
-03   [mem] phaddsw xmm,oword[bp+si+disp16] (opdsize)
-03   [mem] phaddsw mm,[bp+di+disp16]
-03   [mem] phaddsw xmm,oword[bp+di+disp16] (opdsize)
-03   [mem] phaddsw mm,[si+disp16]
-03   [mem] phaddsw xmm,oword[si+disp16] (opdsize)
-03   [mem] phaddsw mm,[di+disp16]
-03   [mem] phaddsw xmm,oword[di+disp16] (opdsize)
-03   [mem] phaddsw mm,[bp+disp16]
-03   [mem] phaddsw xmm,oword[bp+disp16] (opdsize)
-03   [mem] phaddsw mm,[bx+disp16]
-03   [mem] phaddsw xmm,oword[bx+disp16] (opdsize)
-03   [11B] phaddsw mm,mm0
-03   [11B] phaddsw xmm,xmm0 (opdsize)
-03   [11B] phaddsw mm,mm1
-03   [11B] phaddsw xmm,xmm1 (opdsize)
-03   [11B] phaddsw mm,mm2
-03   [11B] phaddsw xmm,xmm2 (opdsize)
-03   [11B] phaddsw mm,mm3
-03   [11B] phaddsw xmm,xmm3 (opdsize)
-03   [11B] phaddsw mm,mm4
-03   [11B] phaddsw xmm,xmm4 (opdsize)
-03   [11B] phaddsw mm,mm5
-03   [11B] phaddsw xmm,xmm5 (opdsize)
-03   [11B] phaddsw mm,mm6
-03   [11B] phaddsw xmm,xmm6 (opdsize)
-03   [11B] phaddsw mm,mm7
-03   [11B] phaddsw xmm,xmm7 (opdsize)
-04   [mem] pmaddubsw mm,[bx+si]
-04   [mem] pmaddubsw xmm,oword[bx+si] (opdsize)
-04   [mem] pmaddubsw mm,[bx+di]
-04   [mem] pmaddubsw xmm,oword[bx+di] (opdsize)
-04   [mem] pmaddubsw mm,[bp+si]
-04   [mem] pmaddubsw xmm,oword[bp+si] (opdsize)
-04   [mem] pmaddubsw mm,[bp+di]
-04   [mem] pmaddubsw xmm,oword[bp+di] (opdsize)
-04   [mem] pmaddubsw mm,[si]
-04   [mem] pmaddubsw xmm,oword[si] (opdsize)
-04   [mem] pmaddubsw mm,[di]
-04   [mem] pmaddubsw xmm,oword[di] (opdsize)
-04   [mem] pmaddubsw mm,[disp16]
-04   [mem] pmaddubsw xmm,oword[disp16] (opdsize)
-04   [mem] pmaddubsw mm,[bx]
-04   [mem] pmaddubsw xmm,oword[bx] (opdsize)
-04   [mem] pmaddubsw mm,[bx+si+disp8]
-04   [mem] pmaddubsw xmm,oword[bx+si+disp8] (opdsize)
-04   [mem] pmaddubsw mm,[bx+di+disp8]
-04   [mem] pmaddubsw xmm,oword[bx+di+disp8] (opdsize)
-04   [mem] pmaddubsw mm,[bp+si+disp8]
-04   [mem] pmaddubsw xmm,oword[bp+si+disp8] (opdsize)
-04   [mem] pmaddubsw mm,[bp+di+disp8]
-04   [mem] pmaddubsw xmm,oword[bp+di+disp8] (opdsize)
-04   [mem] pmaddubsw mm,[si+disp8]
-04   [mem] pmaddubsw xmm,oword[si+disp8] (opdsize)
-04   [mem] pmaddubsw mm,[di+disp8]
-04   [mem] pmaddubsw xmm,oword[di+disp8] (opdsize)
-04   [mem] pmaddubsw mm,[bp+disp8]
-04   [mem] pmaddubsw xmm,oword[bp+disp8] (opdsize)
-04   [mem] pmaddubsw mm,[bx+disp8]
-04   [mem] pmaddubsw xmm,oword[bx+disp8] (opdsize)
-04   [mem] pmaddubsw mm,[bx+si+disp16]
-04   [mem] pmaddubsw xmm,oword[bx+si+disp16] (opdsize)
-04   [mem] pmaddubsw mm,[bx+di+disp16]
-04   [mem] pmaddubsw xmm,oword[bx+di+disp16] (opdsize)
-04   [mem] pmaddubsw mm,[bp+si+disp16]
-04   [mem] pmaddubsw xmm,oword[bp+si+disp16] (opdsize)
-04   [mem] pmaddubsw mm,[bp+di+disp16]
-04   [mem] pmaddubsw xmm,oword[bp+di+disp16] (opdsize)
-04   [mem] pmaddubsw mm,[si+disp16]
-04   [mem] pmaddubsw xmm,oword[si+disp16] (opdsize)
-04   [mem] pmaddubsw mm,[di+disp16]
-04   [mem] pmaddubsw xmm,oword[di+disp16] (opdsize)
-04   [mem] pmaddubsw mm,[bp+disp16]
-04   [mem] pmaddubsw xmm,oword[bp+disp16] (opdsize)
-04   [mem] pmaddubsw mm,[bx+disp16]
-04   [mem] pmaddubsw xmm,oword[bx+disp16] (opdsize)
-04   [11B] pmaddubsw mm,mm0
-04   [11B] pmaddubsw xmm,xmm0 (opdsize)
-04   [11B] pmaddubsw mm,mm1
-04   [11B] pmaddubsw xmm,xmm1 (opdsize)
-04   [11B] pmaddubsw mm,mm2
-04   [11B] pmaddubsw xmm,xmm2 (opdsize)
-04   [11B] pmaddubsw mm,mm3
-04   [11B] pmaddubsw xmm,xmm3 (opdsize)
-04   [11B] pmaddubsw mm,mm4
-04   [11B] pmaddubsw xmm,xmm4 (opdsize)
-04   [11B] pmaddubsw mm,mm5
-04   [11B] pmaddubsw xmm,xmm5 (opdsize)
-04   [11B] pmaddubsw mm,mm6
-04   [11B] pmaddubsw xmm,xmm6 (opdsize)
-04   [11B] pmaddubsw mm,mm7
-04   [11B] pmaddubsw xmm,xmm7 (opdsize)
-05   [mem] phsubw mm,[bx+si]
-05   [mem] phsubw xmm,oword[bx+si] (opdsize)
-05   [mem] phsubw mm,[bx+di]
-05   [mem] phsubw xmm,oword[bx+di] (opdsize)
-05   [mem] phsubw mm,[bp+si]
-05   [mem] phsubw xmm,oword[bp+si] (opdsize)
-05   [mem] phsubw mm,[bp+di]
-05   [mem] phsubw xmm,oword[bp+di] (opdsize)
-05   [mem] phsubw mm,[si]
-05   [mem] phsubw xmm,oword[si] (opdsize)
-05   [mem] phsubw mm,[di]
-05   [mem] phsubw xmm,oword[di] (opdsize)
-05   [mem] phsubw mm,[disp16]
-05   [mem] phsubw xmm,oword[disp16] (opdsize)
-05   [mem] phsubw mm,[bx]
-05   [mem] phsubw xmm,oword[bx] (opdsize)
-05   [mem] phsubw mm,[bx+si+disp8]
-05   [mem] phsubw xmm,oword[bx+si+disp8] (opdsize)
-05   [mem] phsubw mm,[bx+di+disp8]
-05   [mem] phsubw xmm,oword[bx+di+disp8] (opdsize)
-05   [mem] phsubw mm,[bp+si+disp8]
-05   [mem] phsubw xmm,oword[bp+si+disp8] (opdsize)
-05   [mem] phsubw mm,[bp+di+disp8]
-05   [mem] phsubw xmm,oword[bp+di+disp8] (opdsize)
-05   [mem] phsubw mm,[si+disp8]
-05   [mem] phsubw xmm,oword[si+disp8] (opdsize)
-05   [mem] phsubw mm,[di+disp8]
-05   [mem] phsubw xmm,oword[di+disp8] (opdsize)
-05   [mem] phsubw mm,[bp+disp8]
-05   [mem] phsubw xmm,oword[bp+disp8] (opdsize)
-05   [mem] phsubw mm,[bx+disp8]
-05   [mem] phsubw xmm,oword[bx+disp8] (opdsize)
-05   [mem] phsubw mm,[bx+si+disp16]
-05   [mem] phsubw xmm,oword[bx+si+disp16] (opdsize)
-05   [mem] phsubw mm,[bx+di+disp16]
-05   [mem] phsubw xmm,oword[bx+di+disp16] (opdsize)
-05   [mem] phsubw mm,[bp+si+disp16]
-05   [mem] phsubw xmm,oword[bp+si+disp16] (opdsize)
-05   [mem] phsubw mm,[bp+di+disp16]
-05   [mem] phsubw xmm,oword[bp+di+disp16] (opdsize)
-05   [mem] phsubw mm,[si+disp16]
-05   [mem] phsubw xmm,oword[si+disp16] (opdsize)
-05   [mem] phsubw mm,[di+disp16]
-05   [mem] phsubw xmm,oword[di+disp16] (opdsize)
-05   [mem] phsubw mm,[bp+disp16]
-05   [mem] phsubw xmm,oword[bp+disp16] (opdsize)
-05   [mem] phsubw mm,[bx+disp16]
-05   [mem] phsubw xmm,oword[bx+disp16] (opdsize)
-05   [11B] phsubw mm,mm0
-05   [11B] phsubw xmm,xmm0 (opdsize)
-05   [11B] phsubw mm,mm1
-05   [11B] phsubw xmm,xmm1 (opdsize)
-05   [11B] phsubw mm,mm2
-05   [11B] phsubw xmm,xmm2 (opdsize)
-05   [11B] phsubw mm,mm3
-05   [11B] phsubw xmm,xmm3 (opdsize)
-05   [11B] phsubw mm,mm4
-05   [11B] phsubw xmm,xmm4 (opdsize)
-05   [11B] phsubw mm,mm5
-05   [11B] phsubw xmm,xmm5 (opdsize)
-05   [11B] phsubw mm,mm6
-05   [11B] phsubw xmm,xmm6 (opdsize)
-05   [11B] phsubw mm,mm7
-05   [11B] phsubw xmm,xmm7 (opdsize)
-06   [mem] phsubd mm,[bx+si]
-06   [mem] phsubd xmm,oword[bx+si] (opdsize)
-06   [mem] phsubd mm,[bx+di]
-06   [mem] phsubd xmm,oword[bx+di] (opdsize)
-06   [mem] phsubd mm,[bp+si]
-06   [mem] phsubd xmm,oword[bp+si] (opdsize)
-06   [mem] phsubd mm,[bp+di]
-06   [mem] phsubd xmm,oword[bp+di] (opdsize)
-06   [mem] phsubd mm,[si]
-06   [mem] phsubd xmm,oword[si] (opdsize)
-06   [mem] phsubd mm,[di]
-06   [mem] phsubd xmm,oword[di] (opdsize)
-06   [mem] phsubd mm,[disp16]
-06   [mem] phsubd xmm,oword[disp16] (opdsize)
-06   [mem] phsubd mm,[bx]
-06   [mem] phsubd xmm,oword[bx] (opdsize)
-06   [mem] phsubd mm,[bx+si+disp8]
-06   [mem] phsubd xmm,oword[bx+si+disp8] (opdsize)
-06   [mem] phsubd mm,[bx+di+disp8]
-06   [mem] phsubd xmm,oword[bx+di+disp8] (opdsize)
-06   [mem] phsubd mm,[bp+si+disp8]
-06   [mem] phsubd xmm,oword[bp+si+disp8] (opdsize)
-06   [mem] phsubd mm,[bp+di+disp8]
-06   [mem] phsubd xmm,oword[bp+di+disp8] (opdsize)
-06   [mem] phsubd mm,[si+disp8]
-06   [mem] phsubd xmm,oword[si+disp8] (opdsize)
-06   [mem] phsubd mm,[di+disp8]
-06   [mem] phsubd xmm,oword[di+disp8] (opdsize)
-06   [mem] phsubd mm,[bp+disp8]
-06   [mem] phsubd xmm,oword[bp+disp8] (opdsize)
-06   [mem] phsubd mm,[bx+disp8]
-06   [mem] phsubd xmm,oword[bx+disp8] (opdsize)
-06   [mem] phsubd mm,[bx+si+disp16]
-06   [mem] phsubd xmm,oword[bx+si+disp16] (opdsize)
-06   [mem] phsubd mm,[bx+di+disp16]
-06   [mem] phsubd xmm,oword[bx+di+disp16] (opdsize)
-06   [mem] phsubd mm,[bp+si+disp16]
-06   [mem] phsubd xmm,oword[bp+si+disp16] (opdsize)
-06   [mem] phsubd mm,[bp+di+disp16]
-06   [mem] phsubd xmm,oword[bp+di+disp16] (opdsize)
-06   [mem] phsubd mm,[si+disp16]
-06   [mem] phsubd xmm,oword[si+disp16] (opdsize)
-06   [mem] phsubd mm,[di+disp16]
-06   [mem] phsubd xmm,oword[di+disp16] (opdsize)
-06   [mem] phsubd mm,[bp+disp16]
-06   [mem] phsubd xmm,oword[bp+disp16] (opdsize)
-06   [mem] phsubd mm,[bx+disp16]
-06   [mem] phsubd xmm,oword[bx+disp16] (opdsize)
-06   [11B] phsubd mm,mm0
-06   [11B] phsubd xmm,xmm0 (opdsize)
-06   [11B] phsubd mm,mm1
-06   [11B] phsubd xmm,xmm1 (opdsize)
-06   [11B] phsubd mm,mm2
-06   [11B] phsubd xmm,xmm2 (opdsize)
-06   [11B] phsubd mm,mm3
-06   [11B] phsubd xmm,xmm3 (opdsize)
-06   [11B] phsubd mm,mm4
-06   [11B] phsubd xmm,xmm4 (opdsize)
-06   [11B] phsubd mm,mm5
-06   [11B] phsubd xmm,xmm5 (opdsize)
-06   [11B] phsubd mm,mm6
-06   [11B] phsubd xmm,xmm6 (opdsize)
-06   [11B] phsubd mm,mm7
-06   [11B] phsubd xmm,xmm7 (opdsize)
-07   [mem] phsubsw mm,[bx+si]
-07   [mem] phsubsw xmm,oword[bx+si] (opdsize)
-07   [mem] phsubsw mm,[bx+di]
-07   [mem] phsubsw xmm,oword[bx+di] (opdsize)
-07   [mem] phsubsw mm,[bp+si]
-07   [mem] phsubsw xmm,oword[bp+si] (opdsize)
-07   [mem] phsubsw mm,[bp+di]
-07   [mem] phsubsw xmm,oword[bp+di] (opdsize)
-07   [mem] phsubsw mm,[si]
-07   [mem] phsubsw xmm,oword[si] (opdsize)
-07   [mem] phsubsw mm,[di]
-07   [mem] phsubsw xmm,oword[di] (opdsize)
-07   [mem] phsubsw mm,[disp16]
-07   [mem] phsubsw xmm,oword[disp16] (opdsize)
-07   [mem] phsubsw mm,[bx]
-07   [mem] phsubsw xmm,oword[bx] (opdsize)
-07   [mem] phsubsw mm,[bx+si+disp8]
-07   [mem] phsubsw xmm,oword[bx+si+disp8] (opdsize)
-07   [mem] phsubsw mm,[bx+di+disp8]
-07   [mem] phsubsw xmm,oword[bx+di+disp8] (opdsize)
-07   [mem] phsubsw mm,[bp+si+disp8]
-07   [mem] phsubsw xmm,oword[bp+si+disp8] (opdsize)
-07   [mem] phsubsw mm,[bp+di+disp8]
-07   [mem] phsubsw xmm,oword[bp+di+disp8] (opdsize)
-07   [mem] phsubsw mm,[si+disp8]
-07   [mem] phsubsw xmm,oword[si+disp8] (opdsize)
-07   [mem] phsubsw mm,[di+disp8]
-07   [mem] phsubsw xmm,oword[di+disp8] (opdsize)
-07   [mem] phsubsw mm,[bp+disp8]
-07   [mem] phsubsw xmm,oword[bp+disp8] (opdsize)
-07   [mem] phsubsw mm,[bx+disp8]
-07   [mem] phsubsw xmm,oword[bx+disp8] (opdsize)
-07   [mem] phsubsw mm,[bx+si+disp16]
-07   [mem] phsubsw xmm,oword[bx+si+disp16] (opdsize)
-07   [mem] phsubsw mm,[bx+di+disp16]
-07   [mem] phsubsw xmm,oword[bx+di+disp16] (opdsize)
-07   [mem] phsubsw mm,[bp+si+disp16]
-07   [mem] phsubsw xmm,oword[bp+si+disp16] (opdsize)
-07   [mem] phsubsw mm,[bp+di+disp16]
-07   [mem] phsubsw xmm,oword[bp+di+disp16] (opdsize)
-07   [mem] phsubsw mm,[si+disp16]
-07   [mem] phsubsw xmm,oword[si+disp16] (opdsize)
-07   [mem] phsubsw mm,[di+disp16]
-07   [mem] phsubsw xmm,oword[di+disp16] (opdsize)
-07   [mem] phsubsw mm,[bp+disp16]
-07   [mem] phsubsw xmm,oword[bp+disp16] (opdsize)
-07   [mem] phsubsw mm,[bx+disp16]
-07   [mem] phsubsw xmm,oword[bx+disp16] (opdsize)
-07   [11B] phsubsw mm,mm0
-07   [11B] phsubsw xmm,xmm0 (opdsize)
-07   [11B] phsubsw mm,mm1
-07   [11B] phsubsw xmm,xmm1 (opdsize)
-07   [11B] phsubsw mm,mm2
-07   [11B] phsubsw xmm,xmm2 (opdsize)
-07   [11B] phsubsw mm,mm3
-07   [11B] phsubsw xmm,xmm3 (opdsize)
-07   [11B] phsubsw mm,mm4
-07   [11B] phsubsw xmm,xmm4 (opdsize)
-07   [11B] phsubsw mm,mm5
-07   [11B] phsubsw xmm,xmm5 (opdsize)
-07   [11B] phsubsw mm,mm6
-07   [11B] phsubsw xmm,xmm6 (opdsize)
-07   [11B] phsubsw mm,mm7
-07   [11B] phsubsw xmm,xmm7 (opdsize)
-08   [mem] psignb mm,[bx+si]
-08   [mem] psignb xmm,oword[bx+si] (opdsize)
-08   [mem] psignb mm,[bx+di]
-08   [mem] psignb xmm,oword[bx+di] (opdsize)
-08   [mem] psignb mm,[bp+si]
-08   [mem] psignb xmm,oword[bp+si] (opdsize)
-08   [mem] psignb mm,[bp+di]
-08   [mem] psignb xmm,oword[bp+di] (opdsize)
-08   [mem] psignb mm,[si]
-08   [mem] psignb xmm,oword[si] (opdsize)
-08   [mem] psignb mm,[di]
-08   [mem] psignb xmm,oword[di] (opdsize)
-08   [mem] psignb mm,[disp16]
-08   [mem] psignb xmm,oword[disp16] (opdsize)
-08   [mem] psignb mm,[bx]
-08   [mem] psignb xmm,oword[bx] (opdsize)
-08   [mem] psignb mm,[bx+si+disp8]
-08   [mem] psignb xmm,oword[bx+si+disp8] (opdsize)
-08   [mem] psignb mm,[bx+di+disp8]
-08   [mem] psignb xmm,oword[bx+di+disp8] (opdsize)
-08   [mem] psignb mm,[bp+si+disp8]
-08   [mem] psignb xmm,oword[bp+si+disp8] (opdsize)
-08   [mem] psignb mm,[bp+di+disp8]
-08   [mem] psignb xmm,oword[bp+di+disp8] (opdsize)
-08   [mem] psignb mm,[si+disp8]
-08   [mem] psignb xmm,oword[si+disp8] (opdsize)
-08   [mem] psignb mm,[di+disp8]
-08   [mem] psignb xmm,oword[di+disp8] (opdsize)
-08   [mem] psignb mm,[bp+disp8]
-08   [mem] psignb xmm,oword[bp+disp8] (opdsize)
-08   [mem] psignb mm,[bx+disp8]
-08   [mem] psignb xmm,oword[bx+disp8] (opdsize)
-08   [mem] psignb mm,[bx+si+disp16]
-08   [mem] psignb xmm,oword[bx+si+disp16] (opdsize)
-08   [mem] psignb mm,[bx+di+disp16]
-08   [mem] psignb xmm,oword[bx+di+disp16] (opdsize)
-08   [mem] psignb mm,[bp+si+disp16]
-08   [mem] psignb xmm,oword[bp+si+disp16] (opdsize)
-08   [mem] psignb mm,[bp+di+disp16]
-08   [mem] psignb xmm,oword[bp+di+disp16] (opdsize)
-08   [mem] psignb mm,[si+disp16]
-08   [mem] psignb xmm,oword[si+disp16] (opdsize)
-08   [mem] psignb mm,[di+disp16]
-08   [mem] psignb xmm,oword[di+disp16] (opdsize)
-08   [mem] psignb mm,[bp+disp16]
-08   [mem] psignb xmm,oword[bp+disp16] (opdsize)
-08   [mem] psignb mm,[bx+disp16]
-08   [mem] psignb xmm,oword[bx+disp16] (opdsize)
-08   [11B] psignb mm,mm0
-08   [11B] psignb xmm,xmm0 (opdsize)
-08   [11B] psignb mm,mm1
-08   [11B] psignb xmm,xmm1 (opdsize)
-08   [11B] psignb mm,mm2
-08   [11B] psignb xmm,xmm2 (opdsize)
-08   [11B] psignb mm,mm3
-08   [11B] psignb xmm,xmm3 (opdsize)
-08   [11B] psignb mm,mm4
-08   [11B] psignb xmm,xmm4 (opdsize)
-08   [11B] psignb mm,mm5
-08   [11B] psignb xmm,xmm5 (opdsize)
-08   [11B] psignb mm,mm6
-08   [11B] psignb xmm,xmm6 (opdsize)
-08   [11B] psignb mm,mm7
-08   [11B] psignb xmm,xmm7 (opdsize)
-09   [mem] psignw mm,[bx+si]
-09   [mem] psignw xmm,oword[bx+si] (opdsize)
-09   [mem] psignw mm,[bx+di]
-09   [mem] psignw xmm,oword[bx+di] (opdsize)
-09   [mem] psignw mm,[bp+si]
-09   [mem] psignw xmm,oword[bp+si] (opdsize)
-09   [mem] psignw mm,[bp+di]
-09   [mem] psignw xmm,oword[bp+di] (opdsize)
-09   [mem] psignw mm,[si]
-09   [mem] psignw xmm,oword[si] (opdsize)
-09   [mem] psignw mm,[di]
-09   [mem] psignw xmm,oword[di] (opdsize)
-09   [mem] psignw mm,[disp16]
-09   [mem] psignw xmm,oword[disp16] (opdsize)
-09   [mem] psignw mm,[bx]
-09   [mem] psignw xmm,oword[bx] (opdsize)
-09   [mem] psignw mm,[bx+si+disp8]
-09   [mem] psignw xmm,oword[bx+si+disp8] (opdsize)
-09   [mem] psignw mm,[bx+di+disp8]
-09   [mem] psignw xmm,oword[bx+di+disp8] (opdsize)
-09   [mem] psignw mm,[bp+si+disp8]
-09   [mem] psignw xmm,oword[bp+si+disp8] (opdsize)
-09   [mem] psignw mm,[bp+di+disp8]
-09   [mem] psignw xmm,oword[bp+di+disp8] (opdsize)
-09   [mem] psignw mm,[si+disp8]
-09   [mem] psignw xmm,oword[si+disp8] (opdsize)
-09   [mem] psignw mm,[di+disp8]
-09   [mem] psignw xmm,oword[di+disp8] (opdsize)
-09   [mem] psignw mm,[bp+disp8]
-09   [mem] psignw xmm,oword[bp+disp8] (opdsize)
-09   [mem] psignw mm,[bx+disp8]
-09   [mem] psignw xmm,oword[bx+disp8] (opdsize)
-09   [mem] psignw mm,[bx+si+disp16]
-09   [mem] psignw xmm,oword[bx+si+disp16] (opdsize)
-09   [mem] psignw mm,[bx+di+disp16]
-09   [mem] psignw xmm,oword[bx+di+disp16] (opdsize)
-09   [mem] psignw mm,[bp+si+disp16]
-09   [mem] psignw xmm,oword[bp+si+disp16] (opdsize)
-09   [mem] psignw mm,[bp+di+disp16]
-09   [mem] psignw xmm,oword[bp+di+disp16] (opdsize)
-09   [mem] psignw mm,[si+disp16]
-09   [mem] psignw xmm,oword[si+disp16] (opdsize)
-09   [mem] psignw mm,[di+disp16]
-09   [mem] psignw xmm,oword[di+disp16] (opdsize)
-09   [mem] psignw mm,[bp+disp16]
-09   [mem] psignw xmm,oword[bp+disp16] (opdsize)
-09   [mem] psignw mm,[bx+disp16]
-09   [mem] psignw xmm,oword[bx+disp16] (opdsize)
-09   [11B] psignw mm,mm0
-09   [11B] psignw xmm,xmm0 (opdsize)
-09   [11B] psignw mm,mm1
-09   [11B] psignw xmm,xmm1 (opdsize)
-09   [11B] psignw mm,mm2
-09   [11B] psignw xmm,xmm2 (opdsize)
-09   [11B] psignw mm,mm3
-09   [11B] psignw xmm,xmm3 (opdsize)
-09   [11B] psignw mm,mm4
-09   [11B] psignw xmm,xmm4 (opdsize)
-09   [11B] psignw mm,mm5
-09   [11B] psignw xmm,xmm5 (opdsize)
-09   [11B] psignw mm,mm6
-09   [11B] psignw xmm,xmm6 (opdsize)
-09   [11B] psignw mm,mm7
-09   [11B] psignw xmm,xmm7 (opdsize)
-0A   [mem] psignd mm,[bx+si]
-0A   [mem] psignd xmm,oword[bx+si] (opdsize)
-0A   [mem] psignd mm,[bx+di]
-0A   [mem] psignd xmm,oword[bx+di] (opdsize)
-0A   [mem] psignd mm,[bp+si]
-0A   [mem] psignd xmm,oword[bp+si] (opdsize)
-0A   [mem] psignd mm,[bp+di]
-0A   [mem] psignd xmm,oword[bp+di] (opdsize)
-0A   [mem] psignd mm,[si]
-0A   [mem] psignd xmm,oword[si] (opdsize)
-0A   [mem] psignd mm,[di]
-0A   [mem] psignd xmm,oword[di] (opdsize)
-0A   [mem] psignd mm,[disp16]
-0A   [mem] psignd xmm,oword[disp16] (opdsize)
-0A   [mem] psignd mm,[bx]
-0A   [mem] psignd xmm,oword[bx] (opdsize)
-0A   [mem] psignd mm,[bx+si+disp8]
-0A   [mem] psignd xmm,oword[bx+si+disp8] (opdsize)
-0A   [mem] psignd mm,[bx+di+disp8]
-0A   [mem] psignd xmm,oword[bx+di+disp8] (opdsize)
-0A   [mem] psignd mm,[bp+si+disp8]
-0A   [mem] psignd xmm,oword[bp+si+disp8] (opdsize)
-0A   [mem] psignd mm,[bp+di+disp8]
-0A   [mem] psignd xmm,oword[bp+di+disp8] (opdsize)
-0A   [mem] psignd mm,[si+disp8]
-0A   [mem] psignd xmm,oword[si+disp8] (opdsize)
-0A   [mem] psignd mm,[di+disp8]
-0A   [mem] psignd xmm,oword[di+disp8] (opdsize)
-0A   [mem] psignd mm,[bp+disp8]
-0A   [mem] psignd xmm,oword[bp+disp8] (opdsize)
-0A   [mem] psignd mm,[bx+disp8]
-0A   [mem] psignd xmm,oword[bx+disp8] (opdsize)
-0A   [mem] psignd mm,[bx+si+disp16]
-0A   [mem] psignd xmm,oword[bx+si+disp16] (opdsize)
-0A   [mem] psignd mm,[bx+di+disp16]
-0A   [mem] psignd xmm,oword[bx+di+disp16] (opdsize)
-0A   [mem] psignd mm,[bp+si+disp16]
-0A   [mem] psignd xmm,oword[bp+si+disp16] (opdsize)
-0A   [mem] psignd mm,[bp+di+disp16]
-0A   [mem] psignd xmm,oword[bp+di+disp16] (opdsize)
-0A   [mem] psignd mm,[si+disp16]
-0A   [mem] psignd xmm,oword[si+disp16] (opdsize)
-0A   [mem] psignd mm,[di+disp16]
-0A   [mem] psignd xmm,oword[di+disp16] (opdsize)
-0A   [mem] psignd mm,[bp+disp16]
-0A   [mem] psignd xmm,oword[bp+disp16] (opdsize)
-0A   [mem] psignd mm,[bx+disp16]
-0A   [mem] psignd xmm,oword[bx+disp16] (opdsize)
-0A   [11B] psignd mm,mm0
-0A   [11B] psignd xmm,xmm0 (opdsize)
-0A   [11B] psignd mm,mm1
-0A   [11B] psignd xmm,xmm1 (opdsize)
-0A   [11B] psignd mm,mm2
-0A   [11B] psignd xmm,xmm2 (opdsize)
-0A   [11B] psignd mm,mm3
-0A   [11B] psignd xmm,xmm3 (opdsize)
-0A   [11B] psignd mm,mm4
-0A   [11B] psignd xmm,xmm4 (opdsize)
-0A   [11B] psignd mm,mm5
-0A   [11B] psignd xmm,xmm5 (opdsize)
-0A   [11B] psignd mm,mm6
-0A   [11B] psignd xmm,xmm6 (opdsize)
-0A   [11B] psignd mm,mm7
-0A   [11B] psignd xmm,xmm7 (opdsize)
-0B   [mem] pmulhrsw mm,[bx+si]
-0B   [mem] pmulhrsw xmm,oword[bx+si] (opdsize)
-0B   [mem] pmulhrsw mm,[bx+di]
-0B   [mem] pmulhrsw xmm,oword[bx+di] (opdsize)
-0B   [mem] pmulhrsw mm,[bp+si]
-0B   [mem] pmulhrsw xmm,oword[bp+si] (opdsize)
-0B   [mem] pmulhrsw mm,[bp+di]
-0B   [mem] pmulhrsw xmm,oword[bp+di] (opdsize)
-0B   [mem] pmulhrsw mm,[si]
-0B   [mem] pmulhrsw xmm,oword[si] (opdsize)
-0B   [mem] pmulhrsw mm,[di]
-0B   [mem] pmulhrsw xmm,oword[di] (opdsize)
-0B   [mem] pmulhrsw mm,[disp16]
-0B   [mem] pmulhrsw xmm,oword[disp16] (opdsize)
-0B   [mem] pmulhrsw mm,[bx]
-0B   [mem] pmulhrsw xmm,oword[bx] (opdsize)
-0B   [mem] pmulhrsw mm,[bx+si+disp8]
-0B   [mem] pmulhrsw xmm,oword[bx+si+disp8] (opdsize)
-0B   [mem] pmulhrsw mm,[bx+di+disp8]
-0B   [mem] pmulhrsw xmm,oword[bx+di+disp8] (opdsize)
-0B   [mem] pmulhrsw mm,[bp+si+disp8]
-0B   [mem] pmulhrsw xmm,oword[bp+si+disp8] (opdsize)
-0B   [mem] pmulhrsw mm,[bp+di+disp8]
-0B   [mem] pmulhrsw xmm,oword[bp+di+disp8] (opdsize)
-0B   [mem] pmulhrsw mm,[si+disp8]
-0B   [mem] pmulhrsw xmm,oword[si+disp8] (opdsize)
-0B   [mem] pmulhrsw mm,[di+disp8]
-0B   [mem] pmulhrsw xmm,oword[di+disp8] (opdsize)
-0B   [mem] pmulhrsw mm,[bp+disp8]
-0B   [mem] pmulhrsw xmm,oword[bp+disp8] (opdsize)
-0B   [mem] pmulhrsw mm,[bx+disp8]
-0B   [mem] pmulhrsw xmm,oword[bx+disp8] (opdsize)
-0B   [mem] pmulhrsw mm,[bx+si+disp16]
-0B   [mem] pmulhrsw xmm,oword[bx+si+disp16] (opdsize)
-0B   [mem] pmulhrsw mm,[bx+di+disp16]
-0B   [mem] pmulhrsw xmm,oword[bx+di+disp16] (opdsize)
-0B   [mem] pmulhrsw mm,[bp+si+disp16]
-0B   [mem] pmulhrsw xmm,oword[bp+si+disp16] (opdsize)
-0B   [mem] pmulhrsw mm,[bp+di+disp16]
-0B   [mem] pmulhrsw xmm,oword[bp+di+disp16] (opdsize)
-0B   [mem] pmulhrsw mm,[si+disp16]
-0B   [mem] pmulhrsw xmm,oword[si+disp16] (opdsize)
-0B   [mem] pmulhrsw mm,[di+disp16]
-0B   [mem] pmulhrsw xmm,oword[di+disp16] (opdsize)
-0B   [mem] pmulhrsw mm,[bp+disp16]
-0B   [mem] pmulhrsw xmm,oword[bp+disp16] (opdsize)
-0B   [mem] pmulhrsw mm,[bx+disp16]
-0B   [mem] pmulhrsw xmm,oword[bx+disp16] (opdsize)
-0B   [11B] pmulhrsw mm,mm0
-0B   [11B] pmulhrsw xmm,xmm0 (opdsize)
-0B   [11B] pmulhrsw mm,mm1
-0B   [11B] pmulhrsw xmm,xmm1 (opdsize)
-0B   [11B] pmulhrsw mm,mm2
-0B   [11B] pmulhrsw xmm,xmm2 (opdsize)
-0B   [11B] pmulhrsw mm,mm3
-0B   [11B] pmulhrsw xmm,xmm3 (opdsize)
-0B   [11B] pmulhrsw mm,mm4
-0B   [11B] pmulhrsw xmm,xmm4 (opdsize)
-0B   [11B] pmulhrsw mm,mm5
-0B   [11B] pmulhrsw xmm,xmm5 (opdsize)
-0B   [11B] pmulhrsw mm,mm6
-0B   [11B] pmulhrsw xmm,xmm6 (opdsize)
-0B   [11B] pmulhrsw mm,mm7
-0B   [11B] pmulhrsw xmm,xmm7 (opdsize)
-10   [mem] pblendvb xmm,[bx+si],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[bx+di],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[bp+si],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[bp+di],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[si],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[di],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[disp16],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[bx],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[bx+si+disp8],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[bx+di+disp8],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[bp+si+disp8],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[bp+di+disp8],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[si+disp8],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[di+disp8],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[bp+disp8],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[bx+disp8],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[bx+si+disp16],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[bx+di+disp16],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[bp+si+disp16],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[bp+di+disp16],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[si+disp16],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[di+disp16],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[bp+disp16],xmm0 (opdsize)
-10   [mem] pblendvb xmm,[bx+disp16],xmm0 (opdsize)
-10   [11B] pblendvb xmm,xmm0,xmm0 (opdsize)
-10   [11B] pblendvb xmm,xmm1,xmm0 (opdsize)
-10   [11B] pblendvb xmm,xmm2,xmm0 (opdsize)
-10   [11B] pblendvb xmm,xmm3,xmm0 (opdsize)
-10   [11B] pblendvb xmm,xmm4,xmm0 (opdsize)
-10   [11B] pblendvb xmm,xmm5,xmm0 (opdsize)
-10   [11B] pblendvb xmm,xmm6,xmm0 (opdsize)
-10   [11B] pblendvb xmm,xmm7,xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[bx+si],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[bx+di],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[bp+si],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[bp+di],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[si],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[di],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[disp16],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[bx],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[bx+si+disp8],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[bx+di+disp8],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[bp+si+disp8],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[bp+di+disp8],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[si+disp8],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[di+disp8],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[bp+disp8],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[bx+disp8],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[bx+si+disp16],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[bx+di+disp16],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[bp+si+disp16],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[bp+di+disp16],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[si+disp16],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[di+disp16],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[bp+disp16],xmm0 (opdsize)
-14   [mem] blendvps xmm,oword[bx+disp16],xmm0 (opdsize)
-14   [11B] blendvps xmm,xmm0,xmm0 (opdsize)
-14   [11B] blendvps xmm,xmm1,xmm0 (opdsize)
-14   [11B] blendvps xmm,xmm2,xmm0 (opdsize)
-14   [11B] blendvps xmm,xmm3,xmm0 (opdsize)
-14   [11B] blendvps xmm,xmm4,xmm0 (opdsize)
-14   [11B] blendvps xmm,xmm5,xmm0 (opdsize)
-14   [11B] blendvps xmm,xmm6,xmm0 (opdsize)
-14   [11B] blendvps xmm,xmm7,xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[bx+si],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[bx+di],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[bp+si],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[bp+di],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[si],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[di],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[disp16],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[bx],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[bx+si+disp8],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[bx+di+disp8],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[bp+si+disp8],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[bp+di+disp8],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[si+disp8],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[di+disp8],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[bp+disp8],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[bx+disp8],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[bx+si+disp16],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[bx+di+disp16],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[bp+si+disp16],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[bp+di+disp16],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[si+disp16],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[di+disp16],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[bp+disp16],xmm0 (opdsize)
-15   [mem] blendvpd xmm,oword[bx+disp16],xmm0 (opdsize)
-15   [11B] blendvpd xmm,xmm0,xmm0 (opdsize)
-15   [11B] blendvpd xmm,xmm1,xmm0 (opdsize)
-15   [11B] blendvpd xmm,xmm2,xmm0 (opdsize)
-15   [11B] blendvpd xmm,xmm3,xmm0 (opdsize)
-15   [11B] blendvpd xmm,xmm4,xmm0 (opdsize)
-15   [11B] blendvpd xmm,xmm5,xmm0 (opdsize)
-15   [11B] blendvpd xmm,xmm6,xmm0 (opdsize)
-15   [11B] blendvpd xmm,xmm7,xmm0 (opdsize)
-17   [mem] ptest xmm,oword[bx+si] (opdsize)
-17   [mem] ptest xmm,oword[bx+di] (opdsize)
-17   [mem] ptest xmm,oword[bp+si] (opdsize)
-17   [mem] ptest xmm,oword[bp+di] (opdsize)
-17   [mem] ptest xmm,oword[si] (opdsize)
-17   [mem] ptest xmm,oword[di] (opdsize)
-17   [mem] ptest xmm,oword[disp16] (opdsize)
-17   [mem] ptest xmm,oword[bx] (opdsize)
-17   [mem] ptest xmm,oword[bx+si+disp8] (opdsize)
-17   [mem] ptest xmm,oword[bx+di+disp8] (opdsize)
-17   [mem] ptest xmm,oword[bp+si+disp8] (opdsize)
-17   [mem] ptest xmm,oword[bp+di+disp8] (opdsize)
-17   [mem] ptest xmm,oword[si+disp8] (opdsize)
-17   [mem] ptest xmm,oword[di+disp8] (opdsize)
-17   [mem] ptest xmm,oword[bp+disp8] (opdsize)
-17   [mem] ptest xmm,oword[bx+disp8] (opdsize)
-17   [mem] ptest xmm,oword[bx+si+disp16] (opdsize)
-17   [mem] ptest xmm,oword[bx+di+disp16] (opdsize)
-17   [mem] ptest xmm,oword[bp+si+disp16] (opdsize)
-17   [mem] ptest xmm,oword[bp+di+disp16] (opdsize)
-17   [mem] ptest xmm,oword[si+disp16] (opdsize)
-17   [mem] ptest xmm,oword[di+disp16] (opdsize)
-17   [mem] ptest xmm,oword[bp+disp16] (opdsize)
-17   [mem] ptest xmm,oword[bx+disp16] (opdsize)
-17   [11B] ptest xmm,xmm0 (opdsize)
-17   [11B] ptest xmm,xmm1 (opdsize)
-17   [11B] ptest xmm,xmm2 (opdsize)
-17   [11B] ptest xmm,xmm3 (opdsize)
-17   [11B] ptest xmm,xmm4 (opdsize)
-17   [11B] ptest xmm,xmm5 (opdsize)
-17   [11B] ptest xmm,xmm6 (opdsize)
-17   [11B] ptest xmm,xmm7 (opdsize)
-1C   [mem] pabsb mm,[bx+si]
-1C   [mem] pabsb xmm,oword[bx+si] (opdsize)
-1C   [mem] pabsb mm,[bx+di]
-1C   [mem] pabsb xmm,oword[bx+di] (opdsize)
-1C   [mem] pabsb mm,[bp+si]
-1C   [mem] pabsb xmm,oword[bp+si] (opdsize)
-1C   [mem] pabsb mm,[bp+di]
-1C   [mem] pabsb xmm,oword[bp+di] (opdsize)
-1C   [mem] pabsb mm,[si]
-1C   [mem] pabsb xmm,oword[si] (opdsize)
-1C   [mem] pabsb mm,[di]
-1C   [mem] pabsb xmm,oword[di] (opdsize)
-1C   [mem] pabsb mm,[disp16]
-1C   [mem] pabsb xmm,oword[disp16] (opdsize)
-1C   [mem] pabsb mm,[bx]
-1C   [mem] pabsb xmm,oword[bx] (opdsize)
-1C   [mem] pabsb mm,[bx+si+disp8]
-1C   [mem] pabsb xmm,oword[bx+si+disp8] (opdsize)
-1C   [mem] pabsb mm,[bx+di+disp8]
-1C   [mem] pabsb xmm,oword[bx+di+disp8] (opdsize)
-1C   [mem] pabsb mm,[bp+si+disp8]
-1C   [mem] pabsb xmm,oword[bp+si+disp8] (opdsize)
-1C   [mem] pabsb mm,[bp+di+disp8]
-1C   [mem] pabsb xmm,oword[bp+di+disp8] (opdsize)
-1C   [mem] pabsb mm,[si+disp8]
-1C   [mem] pabsb xmm,oword[si+disp8] (opdsize)
-1C   [mem] pabsb mm,[di+disp8]
-1C   [mem] pabsb xmm,oword[di+disp8] (opdsize)
-1C   [mem] pabsb mm,[bp+disp8]
-1C   [mem] pabsb xmm,oword[bp+disp8] (opdsize)
-1C   [mem] pabsb mm,[bx+disp8]
-1C   [mem] pabsb xmm,oword[bx+disp8] (opdsize)
-1C   [mem] pabsb mm,[bx+si+disp16]
-1C   [mem] pabsb xmm,oword[bx+si+disp16] (opdsize)
-1C   [mem] pabsb mm,[bx+di+disp16]
-1C   [mem] pabsb xmm,oword[bx+di+disp16] (opdsize)
-1C   [mem] pabsb mm,[bp+si+disp16]
-1C   [mem] pabsb xmm,oword[bp+si+disp16] (opdsize)
-1C   [mem] pabsb mm,[bp+di+disp16]
-1C   [mem] pabsb xmm,oword[bp+di+disp16] (opdsize)
-1C   [mem] pabsb mm,[si+disp16]
-1C   [mem] pabsb xmm,oword[si+disp16] (opdsize)
-1C   [mem] pabsb mm,[di+disp16]
-1C   [mem] pabsb xmm,oword[di+disp16] (opdsize)
-1C   [mem] pabsb mm,[bp+disp16]
-1C   [mem] pabsb xmm,oword[bp+disp16] (opdsize)
-1C   [mem] pabsb mm,[bx+disp16]
-1C   [mem] pabsb xmm,oword[bx+disp16] (opdsize)
-1C   [11B] pabsb mm,mm0
-1C   [11B] pabsb xmm,xmm0 (opdsize)
-1C   [11B] pabsb mm,mm1
-1C   [11B] pabsb xmm,xmm1 (opdsize)
-1C   [11B] pabsb mm,mm2
-1C   [11B] pabsb xmm,xmm2 (opdsize)
-1C   [11B] pabsb mm,mm3
-1C   [11B] pabsb xmm,xmm3 (opdsize)
-1C   [11B] pabsb mm,mm4
-1C   [11B] pabsb xmm,xmm4 (opdsize)
-1C   [11B] pabsb mm,mm5
-1C   [11B] pabsb xmm,xmm5 (opdsize)
-1C   [11B] pabsb mm,mm6
-1C   [11B] pabsb xmm,xmm6 (opdsize)
-1C   [11B] pabsb mm,mm7
-1C   [11B] pabsb xmm,xmm7 (opdsize)
-1D   [mem] pabsw mm,[bx+si]
-1D   [mem] pabsw xmm,oword[bx+si] (opdsize)
-1D   [mem] pabsw mm,[bx+di]
-1D   [mem] pabsw xmm,oword[bx+di] (opdsize)
-1D   [mem] pabsw mm,[bp+si]
-1D   [mem] pabsw xmm,oword[bp+si] (opdsize)
-1D   [mem] pabsw mm,[bp+di]
-1D   [mem] pabsw xmm,oword[bp+di] (opdsize)
-1D   [mem] pabsw mm,[si]
-1D   [mem] pabsw xmm,oword[si] (opdsize)
-1D   [mem] pabsw mm,[di]
-1D   [mem] pabsw xmm,oword[di] (opdsize)
-1D   [mem] pabsw mm,[disp16]
-1D   [mem] pabsw xmm,oword[disp16] (opdsize)
-1D   [mem] pabsw mm,[bx]
-1D   [mem] pabsw xmm,oword[bx] (opdsize)
-1D   [mem] pabsw mm,[bx+si+disp8]
-1D   [mem] pabsw xmm,oword[bx+si+disp8] (opdsize)
-1D   [mem] pabsw mm,[bx+di+disp8]
-1D   [mem] pabsw xmm,oword[bx+di+disp8] (opdsize)
-1D   [mem] pabsw mm,[bp+si+disp8]
-1D   [mem] pabsw xmm,oword[bp+si+disp8] (opdsize)
-1D   [mem] pabsw mm,[bp+di+disp8]
-1D   [mem] pabsw xmm,oword[bp+di+disp8] (opdsize)
-1D   [mem] pabsw mm,[si+disp8]
-1D   [mem] pabsw xmm,oword[si+disp8] (opdsize)
-1D   [mem] pabsw mm,[di+disp8]
-1D   [mem] pabsw xmm,oword[di+disp8] (opdsize)
-1D   [mem] pabsw mm,[bp+disp8]
-1D   [mem] pabsw xmm,oword[bp+disp8] (opdsize)
-1D   [mem] pabsw mm,[bx+disp8]
-1D   [mem] pabsw xmm,oword[bx+disp8] (opdsize)
-1D   [mem] pabsw mm,[bx+si+disp16]
-1D   [mem] pabsw xmm,oword[bx+si+disp16] (opdsize)
-1D   [mem] pabsw mm,[bx+di+disp16]
-1D   [mem] pabsw xmm,oword[bx+di+disp16] (opdsize)
-1D   [mem] pabsw mm,[bp+si+disp16]
-1D   [mem] pabsw xmm,oword[bp+si+disp16] (opdsize)
-1D   [mem] pabsw mm,[bp+di+disp16]
-1D   [mem] pabsw xmm,oword[bp+di+disp16] (opdsize)
-1D   [mem] pabsw mm,[si+disp16]
-1D   [mem] pabsw xmm,oword[si+disp16] (opdsize)
-1D   [mem] pabsw mm,[di+disp16]
-1D   [mem] pabsw xmm,oword[di+disp16] (opdsize)
-1D   [mem] pabsw mm,[bp+disp16]
-1D   [mem] pabsw xmm,oword[bp+disp16] (opdsize)
-1D   [mem] pabsw mm,[bx+disp16]
-1D   [mem] pabsw xmm,oword[bx+disp16] (opdsize)
-1D   [11B] pabsw mm,mm0
-1D   [11B] pabsw xmm,xmm0 (opdsize)
-1D   [11B] pabsw mm,mm1
-1D   [11B] pabsw xmm,xmm1 (opdsize)
-1D   [11B] pabsw mm,mm2
-1D   [11B] pabsw xmm,xmm2 (opdsize)
-1D   [11B] pabsw mm,mm3
-1D   [11B] pabsw xmm,xmm3 (opdsize)
-1D   [11B] pabsw mm,mm4
-1D   [11B] pabsw xmm,xmm4 (opdsize)
-1D   [11B] pabsw mm,mm5
-1D   [11B] pabsw xmm,xmm5 (opdsize)
-1D   [11B] pabsw mm,mm6
-1D   [11B] pabsw xmm,xmm6 (opdsize)
-1D   [11B] pabsw mm,mm7
-1D   [11B] pabsw xmm,xmm7 (opdsize)
-1E   [mem] pabsd mm,[bx+si]
-1E   [mem] pabsd xmm,oword[bx+si] (opdsize)
-1E   [mem] pabsd mm,[bx+di]
-1E   [mem] pabsd xmm,oword[bx+di] (opdsize)
-1E   [mem] pabsd mm,[bp+si]
-1E   [mem] pabsd xmm,oword[bp+si] (opdsize)
-1E   [mem] pabsd mm,[bp+di]
-1E   [mem] pabsd xmm,oword[bp+di] (opdsize)
-1E   [mem] pabsd mm,[si]
-1E   [mem] pabsd xmm,oword[si] (opdsize)
-1E   [mem] pabsd mm,[di]
-1E   [mem] pabsd xmm,oword[di] (opdsize)
-1E   [mem] pabsd mm,[disp16]
-1E   [mem] pabsd xmm,oword[disp16] (opdsize)
-1E   [mem] pabsd mm,[bx]
-1E   [mem] pabsd xmm,oword[bx] (opdsize)
-1E   [mem] pabsd mm,[bx+si+disp8]
-1E   [mem] pabsd xmm,oword[bx+si+disp8] (opdsize)
-1E   [mem] pabsd mm,[bx+di+disp8]
-1E   [mem] pabsd xmm,oword[bx+di+disp8] (opdsize)
-1E   [mem] pabsd mm,[bp+si+disp8]
-1E   [mem] pabsd xmm,oword[bp+si+disp8] (opdsize)
-1E   [mem] pabsd mm,[bp+di+disp8]
-1E   [mem] pabsd xmm,oword[bp+di+disp8] (opdsize)
-1E   [mem] pabsd mm,[si+disp8]
-1E   [mem] pabsd xmm,oword[si+disp8] (opdsize)
-1E   [mem] pabsd mm,[di+disp8]
-1E   [mem] pabsd xmm,oword[di+disp8] (opdsize)
-1E   [mem] pabsd mm,[bp+disp8]
-1E   [mem] pabsd xmm,oword[bp+disp8] (opdsize)
-1E   [mem] pabsd mm,[bx+disp8]
-1E   [mem] pabsd xmm,oword[bx+disp8] (opdsize)
-1E   [mem] pabsd mm,[bx+si+disp16]
-1E   [mem] pabsd xmm,oword[bx+si+disp16] (opdsize)
-1E   [mem] pabsd mm,[bx+di+disp16]
-1E   [mem] pabsd xmm,oword[bx+di+disp16] (opdsize)
-1E   [mem] pabsd mm,[bp+si+disp16]
-1E   [mem] pabsd xmm,oword[bp+si+disp16] (opdsize)
-1E   [mem] pabsd mm,[bp+di+disp16]
-1E   [mem] pabsd xmm,oword[bp+di+disp16] (opdsize)
-1E   [mem] pabsd mm,[si+disp16]
-1E   [mem] pabsd xmm,oword[si+disp16] (opdsize)
-1E   [mem] pabsd mm,[di+disp16]
-1E   [mem] pabsd xmm,oword[di+disp16] (opdsize)
-1E   [mem] pabsd mm,[bp+disp16]
-1E   [mem] pabsd xmm,oword[bp+disp16] (opdsize)
-1E   [mem] pabsd mm,[bx+disp16]
-1E   [mem] pabsd xmm,oword[bx+disp16] (opdsize)
-1E   [11B] pabsd mm,mm0
-1E   [11B] pabsd xmm,xmm0 (opdsize)
-1E   [11B] pabsd mm,mm1
-1E   [11B] pabsd xmm,xmm1 (opdsize)
-1E   [11B] pabsd mm,mm2
-1E   [11B] pabsd xmm,xmm2 (opdsize)
-1E   [11B] pabsd mm,mm3
-1E   [11B] pabsd xmm,xmm3 (opdsize)
-1E   [11B] pabsd mm,mm4
-1E   [11B] pabsd xmm,xmm4 (opdsize)
-1E   [11B] pabsd mm,mm5
-1E   [11B] pabsd xmm,xmm5 (opdsize)
-1E   [11B] pabsd mm,mm6
-1E   [11B] pabsd xmm,xmm6 (opdsize)
-1E   [11B] pabsd mm,mm7
-1E   [11B] pabsd xmm,xmm7 (opdsize)
-20   [mem] pmovsxbw xmm,qword[bx+si] (opdsize)
-20   [mem] pmovsxbw xmm,qword[bx+di] (opdsize)
-20   [mem] pmovsxbw xmm,qword[bp+si] (opdsize)
-20   [mem] pmovsxbw xmm,qword[bp+di] (opdsize)
-20   [mem] pmovsxbw xmm,qword[si] (opdsize)
-20   [mem] pmovsxbw xmm,qword[di] (opdsize)
-20   [mem] pmovsxbw xmm,qword[disp16] (opdsize)
-20   [mem] pmovsxbw xmm,qword[bx] (opdsize)
-20   [mem] pmovsxbw xmm,qword[bx+si+disp8] (opdsize)
-20   [mem] pmovsxbw xmm,qword[bx+di+disp8] (opdsize)
-20   [mem] pmovsxbw xmm,qword[bp+si+disp8] (opdsize)
-20   [mem] pmovsxbw xmm,qword[bp+di+disp8] (opdsize)
-20   [mem] pmovsxbw xmm,qword[si+disp8] (opdsize)
-20   [mem] pmovsxbw xmm,qword[di+disp8] (opdsize)
-20   [mem] pmovsxbw xmm,qword[bp+disp8] (opdsize)
-20   [mem] pmovsxbw xmm,qword[bx+disp8] (opdsize)
-20   [mem] pmovsxbw xmm,qword[bx+si+disp16] (opdsize)
-20   [mem] pmovsxbw xmm,qword[bx+di+disp16] (opdsize)
-20   [mem] pmovsxbw xmm,qword[bp+si+disp16] (opdsize)
-20   [mem] pmovsxbw xmm,qword[bp+di+disp16] (opdsize)
-20   [mem] pmovsxbw xmm,qword[si+disp16] (opdsize)
-20   [mem] pmovsxbw xmm,qword[di+disp16] (opdsize)
-20   [mem] pmovsxbw xmm,qword[bp+disp16] (opdsize)
-20   [mem] pmovsxbw xmm,qword[bx+disp16] (opdsize)
-20   [11B] pmovsxbw xmm,xmm0 (opdsize)
-20   [11B] pmovsxbw xmm,xmm1 (opdsize)
-20   [11B] pmovsxbw xmm,xmm2 (opdsize)
-20   [11B] pmovsxbw xmm,xmm3 (opdsize)
-20   [11B] pmovsxbw xmm,xmm4 (opdsize)
-20   [11B] pmovsxbw xmm,xmm5 (opdsize)
-20   [11B] pmovsxbw xmm,xmm6 (opdsize)
-20   [11B] pmovsxbw xmm,xmm7 (opdsize)
-21   [mem] pmovsxbd xmm,dword[bx+si] (opdsize)
-21   [mem] pmovsxbd xmm,dword[bx+di] (opdsize)
-21   [mem] pmovsxbd xmm,dword[bp+si] (opdsize)
-21   [mem] pmovsxbd xmm,dword[bp+di] (opdsize)
-21   [mem] pmovsxbd xmm,dword[si] (opdsize)
-21   [mem] pmovsxbd xmm,dword[di] (opdsize)
-21   [mem] pmovsxbd xmm,dword[disp16] (opdsize)
-21   [mem] pmovsxbd xmm,dword[bx] (opdsize)
-21   [mem] pmovsxbd xmm,dword[bx+si+disp8] (opdsize)
-21   [mem] pmovsxbd xmm,dword[bx+di+disp8] (opdsize)
-21   [mem] pmovsxbd xmm,dword[bp+si+disp8] (opdsize)
-21   [mem] pmovsxbd xmm,dword[bp+di+disp8] (opdsize)
-21   [mem] pmovsxbd xmm,dword[si+disp8] (opdsize)
-21   [mem] pmovsxbd xmm,dword[di+disp8] (opdsize)
-21   [mem] pmovsxbd xmm,dword[bp+disp8] (opdsize)
-21   [mem] pmovsxbd xmm,dword[bx+disp8] (opdsize)
-21   [mem] pmovsxbd xmm,dword[bx+si+disp16] (opdsize)
-21   [mem] pmovsxbd xmm,dword[bx+di+disp16] (opdsize)
-21   [mem] pmovsxbd xmm,dword[bp+si+disp16] (opdsize)
-21   [mem] pmovsxbd xmm,dword[bp+di+disp16] (opdsize)
-21   [mem] pmovsxbd xmm,dword[si+disp16] (opdsize)
-21   [mem] pmovsxbd xmm,dword[di+disp16] (opdsize)
-21   [mem] pmovsxbd xmm,dword[bp+disp16] (opdsize)
-21   [mem] pmovsxbd xmm,dword[bx+disp16] (opdsize)
-21   [11B] pmovsxbd xmm,xmm0 (opdsize)
-21   [11B] pmovsxbd xmm,xmm1 (opdsize)
-21   [11B] pmovsxbd xmm,xmm2 (opdsize)
-21   [11B] pmovsxbd xmm,xmm3 (opdsize)
-21   [11B] pmovsxbd xmm,xmm4 (opdsize)
-21   [11B] pmovsxbd xmm,xmm5 (opdsize)
-21   [11B] pmovsxbd xmm,xmm6 (opdsize)
-21   [11B] pmovsxbd xmm,xmm7 (opdsize)
-22   [mem] pmovsxbq xmm,word[bx+si] (opdsize)
-22   [mem] pmovsxbq xmm,word[bx+di] (opdsize)
-22   [mem] pmovsxbq xmm,word[bp+si] (opdsize)
-22   [mem] pmovsxbq xmm,word[bp+di] (opdsize)
-22   [mem] pmovsxbq xmm,word[si] (opdsize)
-22   [mem] pmovsxbq xmm,word[di] (opdsize)
-22   [mem] pmovsxbq xmm,word[disp16] (opdsize)
-22   [mem] pmovsxbq xmm,word[bx] (opdsize)
-22   [mem] pmovsxbq xmm,word[bx+si+disp8] (opdsize)
-22   [mem] pmovsxbq xmm,word[bx+di+disp8] (opdsize)
-22   [mem] pmovsxbq xmm,word[bp+si+disp8] (opdsize)
-22   [mem] pmovsxbq xmm,word[bp+di+disp8] (opdsize)
-22   [mem] pmovsxbq xmm,word[si+disp8] (opdsize)
-22   [mem] pmovsxbq xmm,word[di+disp8] (opdsize)
-22   [mem] pmovsxbq xmm,word[bp+disp8] (opdsize)
-22   [mem] pmovsxbq xmm,word[bx+disp8] (opdsize)
-22   [mem] pmovsxbq xmm,word[bx+si+disp16] (opdsize)
-22   [mem] pmovsxbq xmm,word[bx+di+disp16] (opdsize)
-22   [mem] pmovsxbq xmm,word[bp+si+disp16] (opdsize)
-22   [mem] pmovsxbq xmm,word[bp+di+disp16] (opdsize)
-22   [mem] pmovsxbq xmm,word[si+disp16] (opdsize)
-22   [mem] pmovsxbq xmm,word[di+disp16] (opdsize)
-22   [mem] pmovsxbq xmm,word[bp+disp16] (opdsize)
-22   [mem] pmovsxbq xmm,word[bx+disp16] (opdsize)
-22   [11B] pmovsxbq xmm,xmm0 (opdsize)
-22   [11B] pmovsxbq xmm,xmm1 (opdsize)
-22   [11B] pmovsxbq xmm,xmm2 (opdsize)
-22   [11B] pmovsxbq xmm,xmm3 (opdsize)
-22   [11B] pmovsxbq xmm,xmm4 (opdsize)
-22   [11B] pmovsxbq xmm,xmm5 (opdsize)
-22   [11B] pmovsxbq xmm,xmm6 (opdsize)
-22   [11B] pmovsxbq xmm,xmm7 (opdsize)
-23   [mem] pmovsxwd xmm,qword[bx+si] (opdsize)
-23   [mem] pmovsxwd xmm,qword[bx+di] (opdsize)
-23   [mem] pmovsxwd xmm,qword[bp+si] (opdsize)
-23   [mem] pmovsxwd xmm,qword[bp+di] (opdsize)
-23   [mem] pmovsxwd xmm,qword[si] (opdsize)
-23   [mem] pmovsxwd xmm,qword[di] (opdsize)
-23   [mem] pmovsxwd xmm,qword[disp16] (opdsize)
-23   [mem] pmovsxwd xmm,qword[bx] (opdsize)
-23   [mem] pmovsxwd xmm,qword[bx+si+disp8] (opdsize)
-23   [mem] pmovsxwd xmm,qword[bx+di+disp8] (opdsize)
-23   [mem] pmovsxwd xmm,qword[bp+si+disp8] (opdsize)
-23   [mem] pmovsxwd xmm,qword[bp+di+disp8] (opdsize)
-23   [mem] pmovsxwd xmm,qword[si+disp8] (opdsize)
-23   [mem] pmovsxwd xmm,qword[di+disp8] (opdsize)
-23   [mem] pmovsxwd xmm,qword[bp+disp8] (opdsize)
-23   [mem] pmovsxwd xmm,qword[bx+disp8] (opdsize)
-23   [mem] pmovsxwd xmm,qword[bx+si+disp16] (opdsize)
-23   [mem] pmovsxwd xmm,qword[bx+di+disp16] (opdsize)
-23   [mem] pmovsxwd xmm,qword[bp+si+disp16] (opdsize)
-23   [mem] pmovsxwd xmm,qword[bp+di+disp16] (opdsize)
-23   [mem] pmovsxwd xmm,qword[si+disp16] (opdsize)
-23   [mem] pmovsxwd xmm,qword[di+disp16] (opdsize)
-23   [mem] pmovsxwd xmm,qword[bp+disp16] (opdsize)
-23   [mem] pmovsxwd xmm,qword[bx+disp16] (opdsize)
-23   [11B] pmovsxwd xmm,xmm0 (opdsize)
-23   [11B] pmovsxwd xmm,xmm1 (opdsize)
-23   [11B] pmovsxwd xmm,xmm2 (opdsize)
-23   [11B] pmovsxwd xmm,xmm3 (opdsize)
-23   [11B] pmovsxwd xmm,xmm4 (opdsize)
-23   [11B] pmovsxwd xmm,xmm5 (opdsize)
-23   [11B] pmovsxwd xmm,xmm6 (opdsize)
-23   [11B] pmovsxwd xmm,xmm7 (opdsize)
-24   [mem] pmovsxwq xmm,dword[bx+si] (opdsize)
-24   [mem] pmovsxwq xmm,dword[bx+di] (opdsize)
-24   [mem] pmovsxwq xmm,dword[bp+si] (opdsize)
-24   [mem] pmovsxwq xmm,dword[bp+di] (opdsize)
-24   [mem] pmovsxwq xmm,dword[si] (opdsize)
-24   [mem] pmovsxwq xmm,dword[di] (opdsize)
-24   [mem] pmovsxwq xmm,dword[disp16] (opdsize)
-24   [mem] pmovsxwq xmm,dword[bx] (opdsize)
-24   [mem] pmovsxwq xmm,dword[bx+si+disp8] (opdsize)
-24   [mem] pmovsxwq xmm,dword[bx+di+disp8] (opdsize)
-24   [mem] pmovsxwq xmm,dword[bp+si+disp8] (opdsize)
-24   [mem] pmovsxwq xmm,dword[bp+di+disp8] (opdsize)
-24   [mem] pmovsxwq xmm,dword[si+disp8] (opdsize)
-24   [mem] pmovsxwq xmm,dword[di+disp8] (opdsize)
-24   [mem] pmovsxwq xmm,dword[bp+disp8] (opdsize)
-24   [mem] pmovsxwq xmm,dword[bx+disp8] (opdsize)
-24   [mem] pmovsxwq xmm,dword[bx+si+disp16] (opdsize)
-24   [mem] pmovsxwq xmm,dword[bx+di+disp16] (opdsize)
-24   [mem] pmovsxwq xmm,dword[bp+si+disp16] (opdsize)
-24   [mem] pmovsxwq xmm,dword[bp+di+disp16] (opdsize)
-24   [mem] pmovsxwq xmm,dword[si+disp16] (opdsize)
-24   [mem] pmovsxwq xmm,dword[di+disp16] (opdsize)
-24   [mem] pmovsxwq xmm,dword[bp+disp16] (opdsize)
-24   [mem] pmovsxwq xmm,dword[bx+disp16] (opdsize)
-24   [11B] pmovsxwq xmm,xmm0 (opdsize)
-24   [11B] pmovsxwq xmm,xmm1 (opdsize)
-24   [11B] pmovsxwq xmm,xmm2 (opdsize)
-24   [11B] pmovsxwq xmm,xmm3 (opdsize)
-24   [11B] pmovsxwq xmm,xmm4 (opdsize)
-24   [11B] pmovsxwq xmm,xmm5 (opdsize)
-24   [11B] pmovsxwq xmm,xmm6 (opdsize)
-24   [11B] pmovsxwq xmm,xmm7 (opdsize)
-25   [mem] pmovsxdq xmm,qword[bx+si] (opdsize)
-25   [mem] pmovsxdq xmm,qword[bx+di] (opdsize)
-25   [mem] pmovsxdq xmm,qword[bp+si] (opdsize)
-25   [mem] pmovsxdq xmm,qword[bp+di] (opdsize)
-25   [mem] pmovsxdq xmm,qword[si] (opdsize)
-25   [mem] pmovsxdq xmm,qword[di] (opdsize)
-25   [mem] pmovsxdq xmm,qword[disp16] (opdsize)
-25   [mem] pmovsxdq xmm,qword[bx] (opdsize)
-25   [mem] pmovsxdq xmm,qword[bx+si+disp8] (opdsize)
-25   [mem] pmovsxdq xmm,qword[bx+di+disp8] (opdsize)
-25   [mem] pmovsxdq xmm,qword[bp+si+disp8] (opdsize)
-25   [mem] pmovsxdq xmm,qword[bp+di+disp8] (opdsize)
-25   [mem] pmovsxdq xmm,qword[si+disp8] (opdsize)
-25   [mem] pmovsxdq xmm,qword[di+disp8] (opdsize)
-25   [mem] pmovsxdq xmm,qword[bp+disp8] (opdsize)
-25   [mem] pmovsxdq xmm,qword[bx+disp8] (opdsize)
-25   [mem] pmovsxdq xmm,qword[bx+si+disp16] (opdsize)
-25   [mem] pmovsxdq xmm,qword[bx+di+disp16] (opdsize)
-25   [mem] pmovsxdq xmm,qword[bp+si+disp16] (opdsize)
-25   [mem] pmovsxdq xmm,qword[bp+di+disp16] (opdsize)
-25   [mem] pmovsxdq xmm,qword[si+disp16] (opdsize)
-25   [mem] pmovsxdq xmm,qword[di+disp16] (opdsize)
-25   [mem] pmovsxdq xmm,qword[bp+disp16] (opdsize)
-25   [mem] pmovsxdq xmm,qword[bx+disp16] (opdsize)
-25   [11B] pmovsxdq xmm,xmm0 (opdsize)
-25   [11B] pmovsxdq xmm,xmm1 (opdsize)
-25   [11B] pmovsxdq xmm,xmm2 (opdsize)
-25   [11B] pmovsxdq xmm,xmm3 (opdsize)
-25   [11B] pmovsxdq xmm,xmm4 (opdsize)
-25   [11B] pmovsxdq xmm,xmm5 (opdsize)
-25   [11B] pmovsxdq xmm,xmm6 (opdsize)
-25   [11B] pmovsxdq xmm,xmm7 (opdsize)
-28   [mem] pmuldq xmm,oword[bx+si] (opdsize)
-28   [mem] pmuldq xmm,oword[bx+di] (opdsize)
-28   [mem] pmuldq xmm,oword[bp+si] (opdsize)
-28   [mem] pmuldq xmm,oword[bp+di] (opdsize)
-28   [mem] pmuldq xmm,oword[si] (opdsize)
-28   [mem] pmuldq xmm,oword[di] (opdsize)
-28   [mem] pmuldq xmm,oword[disp16] (opdsize)
-28   [mem] pmuldq xmm,oword[bx] (opdsize)
-28   [mem] pmuldq xmm,oword[bx+si+disp8] (opdsize)
-28   [mem] pmuldq xmm,oword[bx+di+disp8] (opdsize)
-28   [mem] pmuldq xmm,oword[bp+si+disp8] (opdsize)
-28   [mem] pmuldq xmm,oword[bp+di+disp8] (opdsize)
-28   [mem] pmuldq xmm,oword[si+disp8] (opdsize)
-28   [mem] pmuldq xmm,oword[di+disp8] (opdsize)
-28   [mem] pmuldq xmm,oword[bp+disp8] (opdsize)
-28   [mem] pmuldq xmm,oword[bx+disp8] (opdsize)
-28   [mem] pmuldq xmm,oword[bx+si+disp16] (opdsize)
-28   [mem] pmuldq xmm,oword[bx+di+disp16] (opdsize)
-28   [mem] pmuldq xmm,oword[bp+si+disp16] (opdsize)
-28   [mem] pmuldq xmm,oword[bp+di+disp16] (opdsize)
-28   [mem] pmuldq xmm,oword[si+disp16] (opdsize)
-28   [mem] pmuldq xmm,oword[di+disp16] (opdsize)
-28   [mem] pmuldq xmm,oword[bp+disp16] (opdsize)
-28   [mem] pmuldq xmm,oword[bx+disp16] (opdsize)
-28   [11B] pmuldq xmm,xmm0 (opdsize)
-28   [11B] pmuldq xmm,xmm1 (opdsize)
-28   [11B] pmuldq xmm,xmm2 (opdsize)
-28   [11B] pmuldq xmm,xmm3 (opdsize)
-28   [11B] pmuldq xmm,xmm4 (opdsize)
-28   [11B] pmuldq xmm,xmm5 (opdsize)
-28   [11B] pmuldq xmm,xmm6 (opdsize)
-28   [11B] pmuldq xmm,xmm7 (opdsize)
-29   [mem] pcmpeqq xmm,oword[bx+si] (opdsize)
-29   [mem] pcmpeqq xmm,oword[bx+di] (opdsize)
-29   [mem] pcmpeqq xmm,oword[bp+si] (opdsize)
-29   [mem] pcmpeqq xmm,oword[bp+di] (opdsize)
-29   [mem] pcmpeqq xmm,oword[si] (opdsize)
-29   [mem] pcmpeqq xmm,oword[di] (opdsize)
-29   [mem] pcmpeqq xmm,oword[disp16] (opdsize)
-29   [mem] pcmpeqq xmm,oword[bx] (opdsize)
-29   [mem] pcmpeqq xmm,oword[bx+si+disp8] (opdsize)
-29   [mem] pcmpeqq xmm,oword[bx+di+disp8] (opdsize)
-29   [mem] pcmpeqq xmm,oword[bp+si+disp8] (opdsize)
-29   [mem] pcmpeqq xmm,oword[bp+di+disp8] (opdsize)
-29   [mem] pcmpeqq xmm,oword[si+disp8] (opdsize)
-29   [mem] pcmpeqq xmm,oword[di+disp8] (opdsize)
-29   [mem] pcmpeqq xmm,oword[bp+disp8] (opdsize)
-29   [mem] pcmpeqq xmm,oword[bx+disp8] (opdsize)
-29   [mem] pcmpeqq xmm,oword[bx+si+disp16] (opdsize)
-29   [mem] pcmpeqq xmm,oword[bx+di+disp16] (opdsize)
-29   [mem] pcmpeqq xmm,oword[bp+si+disp16] (opdsize)
-29   [mem] pcmpeqq xmm,oword[bp+di+disp16] (opdsize)
-29   [mem] pcmpeqq xmm,oword[si+disp16] (opdsize)
-29   [mem] pcmpeqq xmm,oword[di+disp16] (opdsize)
-29   [mem] pcmpeqq xmm,oword[bp+disp16] (opdsize)
-29   [mem] pcmpeqq xmm,oword[bx+disp16] (opdsize)
-29   [11B] pcmpeqq xmm,xmm0 (opdsize)
-29   [11B] pcmpeqq xmm,xmm1 (opdsize)
-29   [11B] pcmpeqq xmm,xmm2 (opdsize)
-29   [11B] pcmpeqq xmm,xmm3 (opdsize)
-29   [11B] pcmpeqq xmm,xmm4 (opdsize)
-29   [11B] pcmpeqq xmm,xmm5 (opdsize)
-29   [11B] pcmpeqq xmm,xmm6 (opdsize)
-29   [11B] pcmpeqq xmm,xmm7 (opdsize)
-2A   [mem] movntdqa xmm,oword[bx+si] (opdsize)
-2A   [mem] movntdqa xmm,oword[bx+di] (opdsize)
-2A   [mem] movntdqa xmm,oword[bp+si] (opdsize)
-2A   [mem] movntdqa xmm,oword[bp+di] (opdsize)
-2A   [mem] movntdqa xmm,oword[si] (opdsize)
-2A   [mem] movntdqa xmm,oword[di] (opdsize)
-2A   [mem] movntdqa xmm,oword[disp16] (opdsize)
-2A   [mem] movntdqa xmm,oword[bx] (opdsize)
-2A   [mem] movntdqa xmm,oword[bx+si+disp8] (opdsize)
-2A   [mem] movntdqa xmm,oword[bx+di+disp8] (opdsize)
-2A   [mem] movntdqa xmm,oword[bp+si+disp8] (opdsize)
-2A   [mem] movntdqa xmm,oword[bp+di+disp8] (opdsize)
-2A   [mem] movntdqa xmm,oword[si+disp8] (opdsize)
-2A   [mem] movntdqa xmm,oword[di+disp8] (opdsize)
-2A   [mem] movntdqa xmm,oword[bp+disp8] (opdsize)
-2A   [mem] movntdqa xmm,oword[bx+disp8] (opdsize)
-2A   [mem] movntdqa xmm,oword[bx+si+disp16] (opdsize)
-2A   [mem] movntdqa xmm,oword[bx+di+disp16] (opdsize)
-2A   [mem] movntdqa xmm,oword[bp+si+disp16] (opdsize)
-2A   [mem] movntdqa xmm,oword[bp+di+disp16] (opdsize)
-2A   [mem] movntdqa xmm,oword[si+disp16] (opdsize)
-2A   [mem] movntdqa xmm,oword[di+disp16] (opdsize)
-2A   [mem] movntdqa xmm,oword[bp+disp16] (opdsize)
-2A   [mem] movntdqa xmm,oword[bx+disp16] (opdsize)
-2B   [mem] packusdw xmm,oword[bx+si] (opdsize)
-2B   [mem] packusdw xmm,oword[bx+di] (opdsize)
-2B   [mem] packusdw xmm,oword[bp+si] (opdsize)
-2B   [mem] packusdw xmm,oword[bp+di] (opdsize)
-2B   [mem] packusdw xmm,oword[si] (opdsize)
-2B   [mem] packusdw xmm,oword[di] (opdsize)
-2B   [mem] packusdw xmm,oword[disp16] (opdsize)
-2B   [mem] packusdw xmm,oword[bx] (opdsize)
-2B   [mem] packusdw xmm,oword[bx+si+disp8] (opdsize)
-2B   [mem] packusdw xmm,oword[bx+di+disp8] (opdsize)
-2B   [mem] packusdw xmm,oword[bp+si+disp8] (opdsize)
-2B   [mem] packusdw xmm,oword[bp+di+disp8] (opdsize)
-2B   [mem] packusdw xmm,oword[si+disp8] (opdsize)
-2B   [mem] packusdw xmm,oword[di+disp8] (opdsize)
-2B   [mem] packusdw xmm,oword[bp+disp8] (opdsize)
-2B   [mem] packusdw xmm,oword[bx+disp8] (opdsize)
-2B   [mem] packusdw xmm,oword[bx+si+disp16] (opdsize)
-2B   [mem] packusdw xmm,oword[bx+di+disp16] (opdsize)
-2B   [mem] packusdw xmm,oword[bp+si+disp16] (opdsize)
-2B   [mem] packusdw xmm,oword[bp+di+disp16] (opdsize)
-2B   [mem] packusdw xmm,oword[si+disp16] (opdsize)
-2B   [mem] packusdw xmm,oword[di+disp16] (opdsize)
-2B   [mem] packusdw xmm,oword[bp+disp16] (opdsize)
-2B   [mem] packusdw xmm,oword[bx+disp16] (opdsize)
-2B   [11B] packusdw xmm,xmm0 (opdsize)
-2B   [11B] packusdw xmm,xmm1 (opdsize)
-2B   [11B] packusdw xmm,xmm2 (opdsize)
-2B   [11B] packusdw xmm,xmm3 (opdsize)
-2B   [11B] packusdw xmm,xmm4 (opdsize)
-2B   [11B] packusdw xmm,xmm5 (opdsize)
-2B   [11B] packusdw xmm,xmm6 (opdsize)
-2B   [11B] packusdw xmm,xmm7 (opdsize)
-30   [mem] pmovzxbw xmm,qword[bx+si] (opdsize)
-30   [mem] pmovzxbw xmm,qword[bx+di] (opdsize)
-30   [mem] pmovzxbw xmm,qword[bp+si] (opdsize)
-30   [mem] pmovzxbw xmm,qword[bp+di] (opdsize)
-30   [mem] pmovzxbw xmm,qword[si] (opdsize)
-30   [mem] pmovzxbw xmm,qword[di] (opdsize)
-30   [mem] pmovzxbw xmm,qword[disp16] (opdsize)
-30   [mem] pmovzxbw xmm,qword[bx] (opdsize)
-30   [mem] pmovzxbw xmm,qword[bx+si+disp8] (opdsize)
-30   [mem] pmovzxbw xmm,qword[bx+di+disp8] (opdsize)
-30   [mem] pmovzxbw xmm,qword[bp+si+disp8] (opdsize)
-30   [mem] pmovzxbw xmm,qword[bp+di+disp8] (opdsize)
-30   [mem] pmovzxbw xmm,qword[si+disp8] (opdsize)
-30   [mem] pmovzxbw xmm,qword[di+disp8] (opdsize)
-30   [mem] pmovzxbw xmm,qword[bp+disp8] (opdsize)
-30   [mem] pmovzxbw xmm,qword[bx+disp8] (opdsize)
-30   [mem] pmovzxbw xmm,qword[bx+si+disp16] (opdsize)
-30   [mem] pmovzxbw xmm,qword[bx+di+disp16] (opdsize)
-30   [mem] pmovzxbw xmm,qword[bp+si+disp16] (opdsize)
-30   [mem] pmovzxbw xmm,qword[bp+di+disp16] (opdsize)
-30   [mem] pmovzxbw xmm,qword[si+disp16] (opdsize)
-30   [mem] pmovzxbw xmm,qword[di+disp16] (opdsize)
-30   [mem] pmovzxbw xmm,qword[bp+disp16] (opdsize)
-30   [mem] pmovzxbw xmm,qword[bx+disp16] (opdsize)
-30   [11B] pmovzxbw xmm,xmm0 (opdsize)
-30   [11B] pmovzxbw xmm,xmm1 (opdsize)
-30   [11B] pmovzxbw xmm,xmm2 (opdsize)
-30   [11B] pmovzxbw xmm,xmm3 (opdsize)
-30   [11B] pmovzxbw xmm,xmm4 (opdsize)
-30   [11B] pmovzxbw xmm,xmm5 (opdsize)
-30   [11B] pmovzxbw xmm,xmm6 (opdsize)
-30   [11B] pmovzxbw xmm,xmm7 (opdsize)
-31   [mem] pmovzxbd xmm,dword[bx+si] (opdsize)
-31   [mem] pmovzxbd xmm,dword[bx+di] (opdsize)
-31   [mem] pmovzxbd xmm,dword[bp+si] (opdsize)
-31   [mem] pmovzxbd xmm,dword[bp+di] (opdsize)
-31   [mem] pmovzxbd xmm,dword[si] (opdsize)
-31   [mem] pmovzxbd xmm,dword[di] (opdsize)
-31   [mem] pmovzxbd xmm,dword[disp16] (opdsize)
-31   [mem] pmovzxbd xmm,dword[bx] (opdsize)
-31   [mem] pmovzxbd xmm,dword[bx+si+disp8] (opdsize)
-31   [mem] pmovzxbd xmm,dword[bx+di+disp8] (opdsize)
-31   [mem] pmovzxbd xmm,dword[bp+si+disp8] (opdsize)
-31   [mem] pmovzxbd xmm,dword[bp+di+disp8] (opdsize)
-31   [mem] pmovzxbd xmm,dword[si+disp8] (opdsize)
-31   [mem] pmovzxbd xmm,dword[di+disp8] (opdsize)
-31   [mem] pmovzxbd xmm,dword[bp+disp8] (opdsize)
-31   [mem] pmovzxbd xmm,dword[bx+disp8] (opdsize)
-31   [mem] pmovzxbd xmm,dword[bx+si+disp16] (opdsize)
-31   [mem] pmovzxbd xmm,dword[bx+di+disp16] (opdsize)
-31   [mem] pmovzxbd xmm,dword[bp+si+disp16] (opdsize)
-31   [mem] pmovzxbd xmm,dword[bp+di+disp16] (opdsize)
-31   [mem] pmovzxbd xmm,dword[si+disp16] (opdsize)
-31   [mem] pmovzxbd xmm,dword[di+disp16] (opdsize)
-31   [mem] pmovzxbd xmm,dword[bp+disp16] (opdsize)
-31   [mem] pmovzxbd xmm,dword[bx+disp16] (opdsize)
-31   [11B] pmovzxbd xmm,xmm0 (opdsize)
-31   [11B] pmovzxbd xmm,xmm1 (opdsize)
-31   [11B] pmovzxbd xmm,xmm2 (opdsize)
-31   [11B] pmovzxbd xmm,xmm3 (opdsize)
-31   [11B] pmovzxbd xmm,xmm4 (opdsize)
-31   [11B] pmovzxbd xmm,xmm5 (opdsize)
-31   [11B] pmovzxbd xmm,xmm6 (opdsize)
-31   [11B] pmovzxbd xmm,xmm7 (opdsize)
-32   [mem] pmovzxbq xmm,word[bx+si] (opdsize)
-32   [mem] pmovzxbq xmm,word[bx+di] (opdsize)
-32   [mem] pmovzxbq xmm,word[bp+si] (opdsize)
-32   [mem] pmovzxbq xmm,word[bp+di] (opdsize)
-32   [mem] pmovzxbq xmm,word[si] (opdsize)
-32   [mem] pmovzxbq xmm,word[di] (opdsize)
-32   [mem] pmovzxbq xmm,word[disp16] (opdsize)
-32   [mem] pmovzxbq xmm,word[bx] (opdsize)
-32   [mem] pmovzxbq xmm,word[bx+si+disp8] (opdsize)
-32   [mem] pmovzxbq xmm,word[bx+di+disp8] (opdsize)
-32   [mem] pmovzxbq xmm,word[bp+si+disp8] (opdsize)
-32   [mem] pmovzxbq xmm,word[bp+di+disp8] (opdsize)
-32   [mem] pmovzxbq xmm,word[si+disp8] (opdsize)
-32   [mem] pmovzxbq xmm,word[di+disp8] (opdsize)
-32   [mem] pmovzxbq xmm,word[bp+disp8] (opdsize)
-32   [mem] pmovzxbq xmm,word[bx+disp8] (opdsize)
-32   [mem] pmovzxbq xmm,word[bx+si+disp16] (opdsize)
-32   [mem] pmovzxbq xmm,word[bx+di+disp16] (opdsize)
-32   [mem] pmovzxbq xmm,word[bp+si+disp16] (opdsize)
-32   [mem] pmovzxbq xmm,word[bp+di+disp16] (opdsize)
-32   [mem] pmovzxbq xmm,word[si+disp16] (opdsize)
-32   [mem] pmovzxbq xmm,word[di+disp16] (opdsize)
-32   [mem] pmovzxbq xmm,word[bp+disp16] (opdsize)
-32   [mem] pmovzxbq xmm,word[bx+disp16] (opdsize)
-32   [11B] pmovzxbq xmm,xmm0 (opdsize)
-32   [11B] pmovzxbq xmm,xmm1 (opdsize)
-32   [11B] pmovzxbq xmm,xmm2 (opdsize)
-32   [11B] pmovzxbq xmm,xmm3 (opdsize)
-32   [11B] pmovzxbq xmm,xmm4 (opdsize)
-32   [11B] pmovzxbq xmm,xmm5 (opdsize)
-32   [11B] pmovzxbq xmm,xmm6 (opdsize)
-32   [11B] pmovzxbq xmm,xmm7 (opdsize)
-33   [mem] pmovzxwd xmm,qword[bx+si] (opdsize)
-33   [mem] pmovzxwd xmm,qword[bx+di] (opdsize)
-33   [mem] pmovzxwd xmm,qword[bp+si] (opdsize)
-33   [mem] pmovzxwd xmm,qword[bp+di] (opdsize)
-33   [mem] pmovzxwd xmm,qword[si] (opdsize)
-33   [mem] pmovzxwd xmm,qword[di] (opdsize)
-33   [mem] pmovzxwd xmm,qword[disp16] (opdsize)
-33   [mem] pmovzxwd xmm,qword[bx] (opdsize)
-33   [mem] pmovzxwd xmm,qword[bx+si+disp8] (opdsize)
-33   [mem] pmovzxwd xmm,qword[bx+di+disp8] (opdsize)
-33   [mem] pmovzxwd xmm,qword[bp+si+disp8] (opdsize)
-33   [mem] pmovzxwd xmm,qword[bp+di+disp8] (opdsize)
-33   [mem] pmovzxwd xmm,qword[si+disp8] (opdsize)
-33   [mem] pmovzxwd xmm,qword[di+disp8] (opdsize)
-33   [mem] pmovzxwd xmm,qword[bp+disp8] (opdsize)
-33   [mem] pmovzxwd xmm,qword[bx+disp8] (opdsize)
-33   [mem] pmovzxwd xmm,qword[bx+si+disp16] (opdsize)
-33   [mem] pmovzxwd xmm,qword[bx+di+disp16] (opdsize)
-33   [mem] pmovzxwd xmm,qword[bp+si+disp16] (opdsize)
-33   [mem] pmovzxwd xmm,qword[bp+di+disp16] (opdsize)
-33   [mem] pmovzxwd xmm,qword[si+disp16] (opdsize)
-33   [mem] pmovzxwd xmm,qword[di+disp16] (opdsize)
-33   [mem] pmovzxwd xmm,qword[bp+disp16] (opdsize)
-33   [mem] pmovzxwd xmm,qword[bx+disp16] (opdsize)
-33   [11B] pmovzxwd xmm,xmm0 (opdsize)
-33   [11B] pmovzxwd xmm,xmm1 (opdsize)
-33   [11B] pmovzxwd xmm,xmm2 (opdsize)
-33   [11B] pmovzxwd xmm,xmm3 (opdsize)
-33   [11B] pmovzxwd xmm,xmm4 (opdsize)
-33   [11B] pmovzxwd xmm,xmm5 (opdsize)
-33   [11B] pmovzxwd xmm,xmm6 (opdsize)
-33   [11B] pmovzxwd xmm,xmm7 (opdsize)
-34   [mem] pmovzxwq xmm,dword[bx+si] (opdsize)
-34   [mem] pmovzxwq xmm,dword[bx+di] (opdsize)
-34   [mem] pmovzxwq xmm,dword[bp+si] (opdsize)
-34   [mem] pmovzxwq xmm,dword[bp+di] (opdsize)
-34   [mem] pmovzxwq xmm,dword[si] (opdsize)
-34   [mem] pmovzxwq xmm,dword[di] (opdsize)
-34   [mem] pmovzxwq xmm,dword[disp16] (opdsize)
-34   [mem] pmovzxwq xmm,dword[bx] (opdsize)
-34   [mem] pmovzxwq xmm,dword[bx+si+disp8] (opdsize)
-34   [mem] pmovzxwq xmm,dword[bx+di+disp8] (opdsize)
-34   [mem] pmovzxwq xmm,dword[bp+si+disp8] (opdsize)
-34   [mem] pmovzxwq xmm,dword[bp+di+disp8] (opdsize)
-34   [mem] pmovzxwq xmm,dword[si+disp8] (opdsize)
-34   [mem] pmovzxwq xmm,dword[di+disp8] (opdsize)
-34   [mem] pmovzxwq xmm,dword[bp+disp8] (opdsize)
-34   [mem] pmovzxwq xmm,dword[bx+disp8] (opdsize)
-34   [mem] pmovzxwq xmm,dword[bx+si+disp16] (opdsize)
-34   [mem] pmovzxwq xmm,dword[bx+di+disp16] (opdsize)
-34   [mem] pmovzxwq xmm,dword[bp+si+disp16] (opdsize)
-34   [mem] pmovzxwq xmm,dword[bp+di+disp16] (opdsize)
-34   [mem] pmovzxwq xmm,dword[si+disp16] (opdsize)
-34   [mem] pmovzxwq xmm,dword[di+disp16] (opdsize)
-34   [mem] pmovzxwq xmm,dword[bp+disp16] (opdsize)
-34   [mem] pmovzxwq xmm,dword[bx+disp16] (opdsize)
-34   [11B] pmovzxwq xmm,xmm0 (opdsize)
-34   [11B] pmovzxwq xmm,xmm1 (opdsize)
-34   [11B] pmovzxwq xmm,xmm2 (opdsize)
-34   [11B] pmovzxwq xmm,xmm3 (opdsize)
-34   [11B] pmovzxwq xmm,xmm4 (opdsize)
-34   [11B] pmovzxwq xmm,xmm5 (opdsize)
-34   [11B] pmovzxwq xmm,xmm6 (opdsize)
-34   [11B] pmovzxwq xmm,xmm7 (opdsize)
-35   [mem] pmovzxdq xmm,qword[bx+si] (opdsize)
-35   [mem] pmovzxdq xmm,qword[bx+di] (opdsize)
-35   [mem] pmovzxdq xmm,qword[bp+si] (opdsize)
-35   [mem] pmovzxdq xmm,qword[bp+di] (opdsize)
-35   [mem] pmovzxdq xmm,qword[si] (opdsize)
-35   [mem] pmovzxdq xmm,qword[di] (opdsize)
-35   [mem] pmovzxdq xmm,qword[disp16] (opdsize)
-35   [mem] pmovzxdq xmm,qword[bx] (opdsize)
-35   [mem] pmovzxdq xmm,qword[bx+si+disp8] (opdsize)
-35   [mem] pmovzxdq xmm,qword[bx+di+disp8] (opdsize)
-35   [mem] pmovzxdq xmm,qword[bp+si+disp8] (opdsize)
-35   [mem] pmovzxdq xmm,qword[bp+di+disp8] (opdsize)
-35   [mem] pmovzxdq xmm,qword[si+disp8] (opdsize)
-35   [mem] pmovzxdq xmm,qword[di+disp8] (opdsize)
-35   [mem] pmovzxdq xmm,qword[bp+disp8] (opdsize)
-35   [mem] pmovzxdq xmm,qword[bx+disp8] (opdsize)
-35   [mem] pmovzxdq xmm,qword[bx+si+disp16] (opdsize)
-35   [mem] pmovzxdq xmm,qword[bx+di+disp16] (opdsize)
-35   [mem] pmovzxdq xmm,qword[bp+si+disp16] (opdsize)
-35   [mem] pmovzxdq xmm,qword[bp+di+disp16] (opdsize)
-35   [mem] pmovzxdq xmm,qword[si+disp16] (opdsize)
-35   [mem] pmovzxdq xmm,qword[di+disp16] (opdsize)
-35   [mem] pmovzxdq xmm,qword[bp+disp16] (opdsize)
-35   [mem] pmovzxdq xmm,qword[bx+disp16] (opdsize)
-35   [11B] pmovzxdq xmm,xmm0 (opdsize)
-35   [11B] pmovzxdq xmm,xmm1 (opdsize)
-35   [11B] pmovzxdq xmm,xmm2 (opdsize)
-35   [11B] pmovzxdq xmm,xmm3 (opdsize)
-35   [11B] pmovzxdq xmm,xmm4 (opdsize)
-35   [11B] pmovzxdq xmm,xmm5 (opdsize)
-35   [11B] pmovzxdq xmm,xmm6 (opdsize)
-35   [11B] pmovzxdq xmm,xmm7 (opdsize)
-38   [mem] pminsb xmm,oword[bx+si] (opdsize)
-38   [mem] pminsb xmm,oword[bx+di] (opdsize)
-38   [mem] pminsb xmm,oword[bp+si] (opdsize)
-38   [mem] pminsb xmm,oword[bp+di] (opdsize)
-38   [mem] pminsb xmm,oword[si] (opdsize)
-38   [mem] pminsb xmm,oword[di] (opdsize)
-38   [mem] pminsb xmm,oword[disp16] (opdsize)
-38   [mem] pminsb xmm,oword[bx] (opdsize)
-38   [mem] pminsb xmm,oword[bx+si+disp8] (opdsize)
-38   [mem] pminsb xmm,oword[bx+di+disp8] (opdsize)
-38   [mem] pminsb xmm,oword[bp+si+disp8] (opdsize)
-38   [mem] pminsb xmm,oword[bp+di+disp8] (opdsize)
-38   [mem] pminsb xmm,oword[si+disp8] (opdsize)
-38   [mem] pminsb xmm,oword[di+disp8] (opdsize)
-38   [mem] pminsb xmm,oword[bp+disp8] (opdsize)
-38   [mem] pminsb xmm,oword[bx+disp8] (opdsize)
-38   [mem] pminsb xmm,oword[bx+si+disp16] (opdsize)
-38   [mem] pminsb xmm,oword[bx+di+disp16] (opdsize)
-38   [mem] pminsb xmm,oword[bp+si+disp16] (opdsize)
-38   [mem] pminsb xmm,oword[bp+di+disp16] (opdsize)
-38   [mem] pminsb xmm,oword[si+disp16] (opdsize)
-38   [mem] pminsb xmm,oword[di+disp16] (opdsize)
-38   [mem] pminsb xmm,oword[bp+disp16] (opdsize)
-38   [mem] pminsb xmm,oword[bx+disp16] (opdsize)
-38   [11B] pminsb xmm,xmm0 (opdsize)
-38   [11B] pminsb xmm,xmm1 (opdsize)
-38   [11B] pminsb xmm,xmm2 (opdsize)
-38   [11B] pminsb xmm,xmm3 (opdsize)
-38   [11B] pminsb xmm,xmm4 (opdsize)
-38   [11B] pminsb xmm,xmm5 (opdsize)
-38   [11B] pminsb xmm,xmm6 (opdsize)
-38   [11B] pminsb xmm,xmm7 (opdsize)
-39   [mem] pminsd xmm,oword[bx+si] (opdsize)
-39   [mem] pminsd xmm,oword[bx+di] (opdsize)
-39   [mem] pminsd xmm,oword[bp+si] (opdsize)
-39   [mem] pminsd xmm,oword[bp+di] (opdsize)
-39   [mem] pminsd xmm,oword[si] (opdsize)
-39   [mem] pminsd xmm,oword[di] (opdsize)
-39   [mem] pminsd xmm,oword[disp16] (opdsize)
-39   [mem] pminsd xmm,oword[bx] (opdsize)
-39   [mem] pminsd xmm,oword[bx+si+disp8] (opdsize)
-39   [mem] pminsd xmm,oword[bx+di+disp8] (opdsize)
-39   [mem] pminsd xmm,oword[bp+si+disp8] (opdsize)
-39   [mem] pminsd xmm,oword[bp+di+disp8] (opdsize)
-39   [mem] pminsd xmm,oword[si+disp8] (opdsize)
-39   [mem] pminsd xmm,oword[di+disp8] (opdsize)
-39   [mem] pminsd xmm,oword[bp+disp8] (opdsize)
-39   [mem] pminsd xmm,oword[bx+disp8] (opdsize)
-39   [mem] pminsd xmm,oword[bx+si+disp16] (opdsize)
-39   [mem] pminsd xmm,oword[bx+di+disp16] (opdsize)
-39   [mem] pminsd xmm,oword[bp+si+disp16] (opdsize)
-39   [mem] pminsd xmm,oword[bp+di+disp16] (opdsize)
-39   [mem] pminsd xmm,oword[si+disp16] (opdsize)
-39   [mem] pminsd xmm,oword[di+disp16] (opdsize)
-39   [mem] pminsd xmm,oword[bp+disp16] (opdsize)
-39   [mem] pminsd xmm,oword[bx+disp16] (opdsize)
-39   [11B] pminsd xmm,xmm0 (opdsize)
-39   [11B] pminsd xmm,xmm1 (opdsize)
-39   [11B] pminsd xmm,xmm2 (opdsize)
-39   [11B] pminsd xmm,xmm3 (opdsize)
-39   [11B] pminsd xmm,xmm4 (opdsize)
-39   [11B] pminsd xmm,xmm5 (opdsize)
-39   [11B] pminsd xmm,xmm6 (opdsize)
-39   [11B] pminsd xmm,xmm7 (opdsize)
-3A   [mem] pminuw xmm,oword[bx+si] (opdsize)
-3A   [mem] pminuw xmm,oword[bx+di] (opdsize)
-3A   [mem] pminuw xmm,oword[bp+si] (opdsize)
-3A   [mem] pminuw xmm,oword[bp+di] (opdsize)
-3A   [mem] pminuw xmm,oword[si] (opdsize)
-3A   [mem] pminuw xmm,oword[di] (opdsize)
-3A   [mem] pminuw xmm,oword[disp16] (opdsize)
-3A   [mem] pminuw xmm,oword[bx] (opdsize)
-3A   [mem] pminuw xmm,oword[bx+si+disp8] (opdsize)
-3A   [mem] pminuw xmm,oword[bx+di+disp8] (opdsize)
-3A   [mem] pminuw xmm,oword[bp+si+disp8] (opdsize)
-3A   [mem] pminuw xmm,oword[bp+di+disp8] (opdsize)
-3A   [mem] pminuw xmm,oword[si+disp8] (opdsize)
-3A   [mem] pminuw xmm,oword[di+disp8] (opdsize)
-3A   [mem] pminuw xmm,oword[bp+disp8] (opdsize)
-3A   [mem] pminuw xmm,oword[bx+disp8] (opdsize)
-3A   [mem] pminuw xmm,oword[bx+si+disp16] (opdsize)
-3A   [mem] pminuw xmm,oword[bx+di+disp16] (opdsize)
-3A   [mem] pminuw xmm,oword[bp+si+disp16] (opdsize)
-3A   [mem] pminuw xmm,oword[bp+di+disp16] (opdsize)
-3A   [mem] pminuw xmm,oword[si+disp16] (opdsize)
-3A   [mem] pminuw xmm,oword[di+disp16] (opdsize)
-3A   [mem] pminuw xmm,oword[bp+disp16] (opdsize)
-3A   [mem] pminuw xmm,oword[bx+disp16] (opdsize)
-3A   [11B] pminuw xmm,xmm0 (opdsize)
-3A   [11B] pminuw xmm,xmm1 (opdsize)
-3A   [11B] pminuw xmm,xmm2 (opdsize)
-3A   [11B] pminuw xmm,xmm3 (opdsize)
-3A   [11B] pminuw xmm,xmm4 (opdsize)
-3A   [11B] pminuw xmm,xmm5 (opdsize)
-3A   [11B] pminuw xmm,xmm6 (opdsize)
-3A   [11B] pminuw xmm,xmm7 (opdsize)
-3B   [mem] pminud xmm,oword[bx+si] (opdsize)
-3B   [mem] pminud xmm,oword[bx+di] (opdsize)
-3B   [mem] pminud xmm,oword[bp+si] (opdsize)
-3B   [mem] pminud xmm,oword[bp+di] (opdsize)
-3B   [mem] pminud xmm,oword[si] (opdsize)
-3B   [mem] pminud xmm,oword[di] (opdsize)
-3B   [mem] pminud xmm,oword[disp16] (opdsize)
-3B   [mem] pminud xmm,oword[bx] (opdsize)
-3B   [mem] pminud xmm,oword[bx+si+disp8] (opdsize)
-3B   [mem] pminud xmm,oword[bx+di+disp8] (opdsize)
-3B   [mem] pminud xmm,oword[bp+si+disp8] (opdsize)
-3B   [mem] pminud xmm,oword[bp+di+disp8] (opdsize)
-3B   [mem] pminud xmm,oword[si+disp8] (opdsize)
-3B   [mem] pminud xmm,oword[di+disp8] (opdsize)
-3B   [mem] pminud xmm,oword[bp+disp8] (opdsize)
-3B   [mem] pminud xmm,oword[bx+disp8] (opdsize)
-3B   [mem] pminud xmm,oword[bx+si+disp16] (opdsize)
-3B   [mem] pminud xmm,oword[bx+di+disp16] (opdsize)
-3B   [mem] pminud xmm,oword[bp+si+disp16] (opdsize)
-3B   [mem] pminud xmm,oword[bp+di+disp16] (opdsize)
-3B   [mem] pminud xmm,oword[si+disp16] (opdsize)
-3B   [mem] pminud xmm,oword[di+disp16] (opdsize)
-3B   [mem] pminud xmm,oword[bp+disp16] (opdsize)
-3B   [mem] pminud xmm,oword[bx+disp16] (opdsize)
-3B   [11B] pminud xmm,xmm0 (opdsize)
-3B   [11B] pminud xmm,xmm1 (opdsize)
-3B   [11B] pminud xmm,xmm2 (opdsize)
-3B   [11B] pminud xmm,xmm3 (opdsize)
-3B   [11B] pminud xmm,xmm4 (opdsize)
-3B   [11B] pminud xmm,xmm5 (opdsize)
-3B   [11B] pminud xmm,xmm6 (opdsize)
-3B   [11B] pminud xmm,xmm7 (opdsize)
-3C   [mem] pmaxsb xmm,oword[bx+si] (opdsize)
-3C   [mem] pmaxsb xmm,oword[bx+di] (opdsize)
-3C   [mem] pmaxsb xmm,oword[bp+si] (opdsize)
-3C   [mem] pmaxsb xmm,oword[bp+di] (opdsize)
-3C   [mem] pmaxsb xmm,oword[si] (opdsize)
-3C   [mem] pmaxsb xmm,oword[di] (opdsize)
-3C   [mem] pmaxsb xmm,oword[disp16] (opdsize)
-3C   [mem] pmaxsb xmm,oword[bx] (opdsize)
-3C   [mem] pmaxsb xmm,oword[bx+si+disp8] (opdsize)
-3C   [mem] pmaxsb xmm,oword[bx+di+disp8] (opdsize)
-3C   [mem] pmaxsb xmm,oword[bp+si+disp8] (opdsize)
-3C   [mem] pmaxsb xmm,oword[bp+di+disp8] (opdsize)
-3C   [mem] pmaxsb xmm,oword[si+disp8] (opdsize)
-3C   [mem] pmaxsb xmm,oword[di+disp8] (opdsize)
-3C   [mem] pmaxsb xmm,oword[bp+disp8] (opdsize)
-3C   [mem] pmaxsb xmm,oword[bx+disp8] (opdsize)
-3C   [mem] pmaxsb xmm,oword[bx+si+disp16] (opdsize)
-3C   [mem] pmaxsb xmm,oword[bx+di+disp16] (opdsize)
-3C   [mem] pmaxsb xmm,oword[bp+si+disp16] (opdsize)
-3C   [mem] pmaxsb xmm,oword[bp+di+disp16] (opdsize)
-3C   [mem] pmaxsb xmm,oword[si+disp16] (opdsize)
-3C   [mem] pmaxsb xmm,oword[di+disp16] (opdsize)
-3C   [mem] pmaxsb xmm,oword[bp+disp16] (opdsize)
-3C   [mem] pmaxsb xmm,oword[bx+disp16] (opdsize)
-3C   [11B] pmaxsb xmm,xmm0 (opdsize)
-3C   [11B] pmaxsb xmm,xmm1 (opdsize)
-3C   [11B] pmaxsb xmm,xmm2 (opdsize)
-3C   [11B] pmaxsb xmm,xmm3 (opdsize)
-3C   [11B] pmaxsb xmm,xmm4 (opdsize)
-3C   [11B] pmaxsb xmm,xmm5 (opdsize)
-3C   [11B] pmaxsb xmm,xmm6 (opdsize)
-3C   [11B] pmaxsb xmm,xmm7 (opdsize)
-3D   [mem] pmaxsd xmm,oword[bx+si] (opdsize)
-3D   [mem] pmaxsd xmm,oword[bx+di] (opdsize)
-3D   [mem] pmaxsd xmm,oword[bp+si] (opdsize)
-3D   [mem] pmaxsd xmm,oword[bp+di] (opdsize)
-3D   [mem] pmaxsd xmm,oword[si] (opdsize)
-3D   [mem] pmaxsd xmm,oword[di] (opdsize)
-3D   [mem] pmaxsd xmm,oword[disp16] (opdsize)
-3D   [mem] pmaxsd xmm,oword[bx] (opdsize)
-3D   [mem] pmaxsd xmm,oword[bx+si+disp8] (opdsize)
-3D   [mem] pmaxsd xmm,oword[bx+di+disp8] (opdsize)
-3D   [mem] pmaxsd xmm,oword[bp+si+disp8] (opdsize)
-3D   [mem] pmaxsd xmm,oword[bp+di+disp8] (opdsize)
-3D   [mem] pmaxsd xmm,oword[si+disp8] (opdsize)
-3D   [mem] pmaxsd xmm,oword[di+disp8] (opdsize)
-3D   [mem] pmaxsd xmm,oword[bp+disp8] (opdsize)
-3D   [mem] pmaxsd xmm,oword[bx+disp8] (opdsize)
-3D   [mem] pmaxsd xmm,oword[bx+si+disp16] (opdsize)
-3D   [mem] pmaxsd xmm,oword[bx+di+disp16] (opdsize)
-3D   [mem] pmaxsd xmm,oword[bp+si+disp16] (opdsize)
-3D   [mem] pmaxsd xmm,oword[bp+di+disp16] (opdsize)
-3D   [mem] pmaxsd xmm,oword[si+disp16] (opdsize)
-3D   [mem] pmaxsd xmm,oword[di+disp16] (opdsize)
-3D   [mem] pmaxsd xmm,oword[bp+disp16] (opdsize)
-3D   [mem] pmaxsd xmm,oword[bx+disp16] (opdsize)
-3D   [11B] pmaxsd xmm,xmm0 (opdsize)
-3D   [11B] pmaxsd xmm,xmm1 (opdsize)
-3D   [11B] pmaxsd xmm,xmm2 (opdsize)
-3D   [11B] pmaxsd xmm,xmm3 (opdsize)
-3D   [11B] pmaxsd xmm,xmm4 (opdsize)
-3D   [11B] pmaxsd xmm,xmm5 (opdsize)
-3D   [11B] pmaxsd xmm,xmm6 (opdsize)
-3D   [11B] pmaxsd xmm,xmm7 (opdsize)
-3E   [mem] pmaxuw xmm,oword[bx+si] (opdsize)
-3E   [mem] pmaxuw xmm,oword[bx+di] (opdsize)
-3E   [mem] pmaxuw xmm,oword[bp+si] (opdsize)
-3E   [mem] pmaxuw xmm,oword[bp+di] (opdsize)
-3E   [mem] pmaxuw xmm,oword[si] (opdsize)
-3E   [mem] pmaxuw xmm,oword[di] (opdsize)
-3E   [mem] pmaxuw xmm,oword[disp16] (opdsize)
-3E   [mem] pmaxuw xmm,oword[bx] (opdsize)
-3E   [mem] pmaxuw xmm,oword[bx+si+disp8] (opdsize)
-3E   [mem] pmaxuw xmm,oword[bx+di+disp8] (opdsize)
-3E   [mem] pmaxuw xmm,oword[bp+si+disp8] (opdsize)
-3E   [mem] pmaxuw xmm,oword[bp+di+disp8] (opdsize)
-3E   [mem] pmaxuw xmm,oword[si+disp8] (opdsize)
-3E   [mem] pmaxuw xmm,oword[di+disp8] (opdsize)
-3E   [mem] pmaxuw xmm,oword[bp+disp8] (opdsize)
-3E   [mem] pmaxuw xmm,oword[bx+disp8] (opdsize)
-3E   [mem] pmaxuw xmm,oword[bx+si+disp16] (opdsize)
-3E   [mem] pmaxuw xmm,oword[bx+di+disp16] (opdsize)
-3E   [mem] pmaxuw xmm,oword[bp+si+disp16] (opdsize)
-3E   [mem] pmaxuw xmm,oword[bp+di+disp16] (opdsize)
-3E   [mem] pmaxuw xmm,oword[si+disp16] (opdsize)
-3E   [mem] pmaxuw xmm,oword[di+disp16] (opdsize)
-3E   [mem] pmaxuw xmm,oword[bp+disp16] (opdsize)
-3E   [mem] pmaxuw xmm,oword[bx+disp16] (opdsize)
-3E   [11B] pmaxuw xmm,xmm0 (opdsize)
-3E   [11B] pmaxuw xmm,xmm1 (opdsize)
-3E   [11B] pmaxuw xmm,xmm2 (opdsize)
-3E   [11B] pmaxuw xmm,xmm3 (opdsize)
-3E   [11B] pmaxuw xmm,xmm4 (opdsize)
-3E   [11B] pmaxuw xmm,xmm5 (opdsize)
-3E   [11B] pmaxuw xmm,xmm6 (opdsize)
-3E   [11B] pmaxuw xmm,xmm7 (opdsize)
-3F   [mem] pmaxud xmm,oword[bx+si] (opdsize)
-3F   [mem] pmaxud xmm,oword[bx+di] (opdsize)
-3F   [mem] pmaxud xmm,oword[bp+si] (opdsize)
-3F   [mem] pmaxud xmm,oword[bp+di] (opdsize)
-3F   [mem] pmaxud xmm,oword[si] (opdsize)
-3F   [mem] pmaxud xmm,oword[di] (opdsize)
-3F   [mem] pmaxud xmm,oword[disp16] (opdsize)
-3F   [mem] pmaxud xmm,oword[bx] (opdsize)
-3F   [mem] pmaxud xmm,oword[bx+si+disp8] (opdsize)
-3F   [mem] pmaxud xmm,oword[bx+di+disp8] (opdsize)
-3F   [mem] pmaxud xmm,oword[bp+si+disp8] (opdsize)
-3F   [mem] pmaxud xmm,oword[bp+di+disp8] (opdsize)
-3F   [mem] pmaxud xmm,oword[si+disp8] (opdsize)
-3F   [mem] pmaxud xmm,oword[di+disp8] (opdsize)
-3F   [mem] pmaxud xmm,oword[bp+disp8] (opdsize)
-3F   [mem] pmaxud xmm,oword[bx+disp8] (opdsize)
-3F   [mem] pmaxud xmm,oword[bx+si+disp16] (opdsize)
-3F   [mem] pmaxud xmm,oword[bx+di+disp16] (opdsize)
-3F   [mem] pmaxud xmm,oword[bp+si+disp16] (opdsize)
-3F   [mem] pmaxud xmm,oword[bp+di+disp16] (opdsize)
-3F   [mem] pmaxud xmm,oword[si+disp16] (opdsize)
-3F   [mem] pmaxud xmm,oword[di+disp16] (opdsize)
-3F   [mem] pmaxud xmm,oword[bp+disp16] (opdsize)
-3F   [mem] pmaxud xmm,oword[bx+disp16] (opdsize)
-3F   [11B] pmaxud xmm,xmm0 (opdsize)
-3F   [11B] pmaxud xmm,xmm1 (opdsize)
-3F   [11B] pmaxud xmm,xmm2 (opdsize)
-3F   [11B] pmaxud xmm,xmm3 (opdsize)
-3F   [11B] pmaxud xmm,xmm4 (opdsize)
-3F   [11B] pmaxud xmm,xmm5 (opdsize)
-3F   [11B] pmaxud xmm,xmm6 (opdsize)
-3F   [11B] pmaxud xmm,xmm7 (opdsize)
-40   [mem] pmulld xmm,oword[bx+si] (opdsize)
-40   [mem] pmulld xmm,oword[bx+di] (opdsize)
-40   [mem] pmulld xmm,oword[bp+si] (opdsize)
-40   [mem] pmulld xmm,oword[bp+di] (opdsize)
-40   [mem] pmulld xmm,oword[si] (opdsize)
-40   [mem] pmulld xmm,oword[di] (opdsize)
-40   [mem] pmulld xmm,oword[disp16] (opdsize)
-40   [mem] pmulld xmm,oword[bx] (opdsize)
-40   [mem] pmulld xmm,oword[bx+si+disp8] (opdsize)
-40   [mem] pmulld xmm,oword[bx+di+disp8] (opdsize)
-40   [mem] pmulld xmm,oword[bp+si+disp8] (opdsize)
-40   [mem] pmulld xmm,oword[bp+di+disp8] (opdsize)
-40   [mem] pmulld xmm,oword[si+disp8] (opdsize)
-40   [mem] pmulld xmm,oword[di+disp8] (opdsize)
-40   [mem] pmulld xmm,oword[bp+disp8] (opdsize)
-40   [mem] pmulld xmm,oword[bx+disp8] (opdsize)
-40   [mem] pmulld xmm,oword[bx+si+disp16] (opdsize)
-40   [mem] pmulld xmm,oword[bx+di+disp16] (opdsize)
-40   [mem] pmulld xmm,oword[bp+si+disp16] (opdsize)
-40   [mem] pmulld xmm,oword[bp+di+disp16] (opdsize)
-40   [mem] pmulld xmm,oword[si+disp16] (opdsize)
-40   [mem] pmulld xmm,oword[di+disp16] (opdsize)
-40   [mem] pmulld xmm,oword[bp+disp16] (opdsize)
-40   [mem] pmulld xmm,oword[bx+disp16] (opdsize)
-40   [11B] pmulld xmm,xmm0 (opdsize)
-40   [11B] pmulld xmm,xmm1 (opdsize)
-40   [11B] pmulld xmm,xmm2 (opdsize)
-40   [11B] pmulld xmm,xmm3 (opdsize)
-40   [11B] pmulld xmm,xmm4 (opdsize)
-40   [11B] pmulld xmm,xmm5 (opdsize)
-40   [11B] pmulld xmm,xmm6 (opdsize)
-40   [11B] pmulld xmm,xmm7 (opdsize)
-41   [mem] phminposuw xmm,oword[bx+si] (opdsize)
-41   [mem] phminposuw xmm,oword[bx+di] (opdsize)
-41   [mem] phminposuw xmm,oword[bp+si] (opdsize)
-41   [mem] phminposuw xmm,oword[bp+di] (opdsize)
-41   [mem] phminposuw xmm,oword[si] (opdsize)
-41   [mem] phminposuw xmm,oword[di] (opdsize)
-41   [mem] phminposuw xmm,oword[disp16] (opdsize)
-41   [mem] phminposuw xmm,oword[bx] (opdsize)
-41   [mem] phminposuw xmm,oword[bx+si+disp8] (opdsize)
-41   [mem] phminposuw xmm,oword[bx+di+disp8] (opdsize)
-41   [mem] phminposuw xmm,oword[bp+si+disp8] (opdsize)
-41   [mem] phminposuw xmm,oword[bp+di+disp8] (opdsize)
-41   [mem] phminposuw xmm,oword[si+disp8] (opdsize)
-41   [mem] phminposuw xmm,oword[di+disp8] (opdsize)
-41   [mem] phminposuw xmm,oword[bp+disp8] (opdsize)
-41   [mem] phminposuw xmm,oword[bx+disp8] (opdsize)
-41   [mem] phminposuw xmm,oword[bx+si+disp16] (opdsize)
-41   [mem] phminposuw xmm,oword[bx+di+disp16] (opdsize)
-41   [mem] phminposuw xmm,oword[bp+si+disp16] (opdsize)
-41   [mem] phminposuw xmm,oword[bp+di+disp16] (opdsize)
-41   [mem] phminposuw xmm,oword[si+disp16] (opdsize)
-41   [mem] phminposuw xmm,oword[di+disp16] (opdsize)
-41   [mem] phminposuw xmm,oword[bp+disp16] (opdsize)
-41   [mem] phminposuw xmm,oword[bx+disp16] (opdsize)
-41   [11B] phminposuw xmm,xmm0 (opdsize)
-41   [11B] phminposuw xmm,xmm1 (opdsize)
-41   [11B] phminposuw xmm,xmm2 (opdsize)
-41   [11B] phminposuw xmm,xmm3 (opdsize)
-41   [11B] phminposuw xmm,xmm4 (opdsize)
-41   [11B] phminposuw xmm,xmm5 (opdsize)
-41   [11B] phminposuw xmm,xmm6 (opdsize)
-41   [11B] phminposuw xmm,xmm7 (opdsize)
-82   [mem] invpcid r32,oword[bx+si] (opdsize)
-82   [mem] invpcid r32,oword[bx+di] (opdsize)
-82   [mem] invpcid r32,oword[bp+si] (opdsize)
-82   [mem] invpcid r32,oword[bp+di] (opdsize)
-82   [mem] invpcid r32,oword[si] (opdsize)
-82   [mem] invpcid r32,oword[di] (opdsize)
-82   [mem] invpcid r32,oword[disp16] (opdsize)
-82   [mem] invpcid r32,oword[bx] (opdsize)
-82   [mem] invpcid r32,oword[bx+si+disp8] (opdsize)
-82   [mem] invpcid r32,oword[bx+di+disp8] (opdsize)
-82   [mem] invpcid r32,oword[bp+si+disp8] (opdsize)
-82   [mem] invpcid r32,oword[bp+di+disp8] (opdsize)
-82   [mem] invpcid r32,oword[si+disp8] (opdsize)
-82   [mem] invpcid r32,oword[di+disp8] (opdsize)
-82   [mem] invpcid r32,oword[bp+disp8] (opdsize)
-82   [mem] invpcid r32,oword[bx+disp8] (opdsize)
-82   [mem] invpcid r32,oword[bx+si+disp16] (opdsize)
-82   [mem] invpcid r32,oword[bx+di+disp16] (opdsize)
-82   [mem] invpcid r32,oword[bp+si+disp16] (opdsize)
-82   [mem] invpcid r32,oword[bp+di+disp16] (opdsize)
-82   [mem] invpcid r32,oword[si+disp16] (opdsize)
-82   [mem] invpcid r32,oword[di+disp16] (opdsize)
-82   [mem] invpcid r32,oword[bp+disp16] (opdsize)
-82   [mem] invpcid r32,oword[bx+disp16] (opdsize)
+00   [mem](0) pshufb mm,[bx+si]
+00   [mem](0) pshufb xmm,oword[bx+si] (opdsize)
+00   [mem](1) pshufb mm,[bx+di]
+00   [mem](1) pshufb xmm,oword[bx+di] (opdsize)
+00   [mem](2) pshufb mm,[bp+si]
+00   [mem](2) pshufb xmm,oword[bp+si] (opdsize)
+00   [mem](3) pshufb mm,[bp+di]
+00   [mem](3) pshufb xmm,oword[bp+di] (opdsize)
+00   [mem](4) pshufb mm,[si]
+00   [mem](4) pshufb xmm,oword[si] (opdsize)
+00   [mem](5) pshufb mm,[di]
+00   [mem](5) pshufb xmm,oword[di] (opdsize)
+00   [mem](6) pshufb mm,[disp16]
+00   [mem](6) pshufb xmm,oword[disp16] (opdsize)
+00   [mem](7) pshufb mm,[bx]
+00   [mem](7) pshufb xmm,oword[bx] (opdsize)
+00   [mem](0) pshufb mm,[bx+si+disp8]
+00   [mem](0) pshufb xmm,oword[bx+si+disp8] (opdsize)
+00   [mem](1) pshufb mm,[bx+di+disp8]
+00   [mem](1) pshufb xmm,oword[bx+di+disp8] (opdsize)
+00   [mem](2) pshufb mm,[bp+si+disp8]
+00   [mem](2) pshufb xmm,oword[bp+si+disp8] (opdsize)
+00   [mem](3) pshufb mm,[bp+di+disp8]
+00   [mem](3) pshufb xmm,oword[bp+di+disp8] (opdsize)
+00   [mem](4) pshufb mm,[si+disp8]
+00   [mem](4) pshufb xmm,oword[si+disp8] (opdsize)
+00   [mem](5) pshufb mm,[di+disp8]
+00   [mem](5) pshufb xmm,oword[di+disp8] (opdsize)
+00   [mem](6) pshufb mm,[bp+disp8]
+00   [mem](6) pshufb xmm,oword[bp+disp8] (opdsize)
+00   [mem](7) pshufb mm,[bx+disp8]
+00   [mem](7) pshufb xmm,oword[bx+disp8] (opdsize)
+00   [mem](0) pshufb mm,[bx+si+disp16]
+00   [mem](0) pshufb xmm,oword[bx+si+disp16] (opdsize)
+00   [mem](1) pshufb mm,[bx+di+disp16]
+00   [mem](1) pshufb xmm,oword[bx+di+disp16] (opdsize)
+00   [mem](2) pshufb mm,[bp+si+disp16]
+00   [mem](2) pshufb xmm,oword[bp+si+disp16] (opdsize)
+00   [mem](3) pshufb mm,[bp+di+disp16]
+00   [mem](3) pshufb xmm,oword[bp+di+disp16] (opdsize)
+00   [mem](4) pshufb mm,[si+disp16]
+00   [mem](4) pshufb xmm,oword[si+disp16] (opdsize)
+00   [mem](5) pshufb mm,[di+disp16]
+00   [mem](5) pshufb xmm,oword[di+disp16] (opdsize)
+00   [mem](6) pshufb mm,[bp+disp16]
+00   [mem](6) pshufb xmm,oword[bp+disp16] (opdsize)
+00   [mem](7) pshufb mm,[bx+disp16]
+00   [mem](7) pshufb xmm,oword[bx+disp16] (opdsize)
+00   [11B](0) pshufb mm,mm0
+00   [11B](0) pshufb xmm,xmm0 (opdsize)
+00   [11B](1) pshufb mm,mm1
+00   [11B](1) pshufb xmm,xmm1 (opdsize)
+00   [11B](2) pshufb mm,mm2
+00   [11B](2) pshufb xmm,xmm2 (opdsize)
+00   [11B](3) pshufb mm,mm3
+00   [11B](3) pshufb xmm,xmm3 (opdsize)
+00   [11B](4) pshufb mm,mm4
+00   [11B](4) pshufb xmm,xmm4 (opdsize)
+00   [11B](5) pshufb mm,mm5
+00   [11B](5) pshufb xmm,xmm5 (opdsize)
+00   [11B](6) pshufb mm,mm6
+00   [11B](6) pshufb xmm,xmm6 (opdsize)
+00   [11B](7) pshufb mm,mm7
+00   [11B](7) pshufb xmm,xmm7 (opdsize)
+01   [mem](0) phaddw mm,[bx+si]
+01   [mem](0) phaddw xmm,oword[bx+si] (opdsize)
+01   [mem](1) phaddw mm,[bx+di]
+01   [mem](1) phaddw xmm,oword[bx+di] (opdsize)
+01   [mem](2) phaddw mm,[bp+si]
+01   [mem](2) phaddw xmm,oword[bp+si] (opdsize)
+01   [mem](3) phaddw mm,[bp+di]
+01   [mem](3) phaddw xmm,oword[bp+di] (opdsize)
+01   [mem](4) phaddw mm,[si]
+01   [mem](4) phaddw xmm,oword[si] (opdsize)
+01   [mem](5) phaddw mm,[di]
+01   [mem](5) phaddw xmm,oword[di] (opdsize)
+01   [mem](6) phaddw mm,[disp16]
+01   [mem](6) phaddw xmm,oword[disp16] (opdsize)
+01   [mem](7) phaddw mm,[bx]
+01   [mem](7) phaddw xmm,oword[bx] (opdsize)
+01   [mem](0) phaddw mm,[bx+si+disp8]
+01   [mem](0) phaddw xmm,oword[bx+si+disp8] (opdsize)
+01   [mem](1) phaddw mm,[bx+di+disp8]
+01   [mem](1) phaddw xmm,oword[bx+di+disp8] (opdsize)
+01   [mem](2) phaddw mm,[bp+si+disp8]
+01   [mem](2) phaddw xmm,oword[bp+si+disp8] (opdsize)
+01   [mem](3) phaddw mm,[bp+di+disp8]
+01   [mem](3) phaddw xmm,oword[bp+di+disp8] (opdsize)
+01   [mem](4) phaddw mm,[si+disp8]
+01   [mem](4) phaddw xmm,oword[si+disp8] (opdsize)
+01   [mem](5) phaddw mm,[di+disp8]
+01   [mem](5) phaddw xmm,oword[di+disp8] (opdsize)
+01   [mem](6) phaddw mm,[bp+disp8]
+01   [mem](6) phaddw xmm,oword[bp+disp8] (opdsize)
+01   [mem](7) phaddw mm,[bx+disp8]
+01   [mem](7) phaddw xmm,oword[bx+disp8] (opdsize)
+01   [mem](0) phaddw mm,[bx+si+disp16]
+01   [mem](0) phaddw xmm,oword[bx+si+disp16] (opdsize)
+01   [mem](1) phaddw mm,[bx+di+disp16]
+01   [mem](1) phaddw xmm,oword[bx+di+disp16] (opdsize)
+01   [mem](2) phaddw mm,[bp+si+disp16]
+01   [mem](2) phaddw xmm,oword[bp+si+disp16] (opdsize)
+01   [mem](3) phaddw mm,[bp+di+disp16]
+01   [mem](3) phaddw xmm,oword[bp+di+disp16] (opdsize)
+01   [mem](4) phaddw mm,[si+disp16]
+01   [mem](4) phaddw xmm,oword[si+disp16] (opdsize)
+01   [mem](5) phaddw mm,[di+disp16]
+01   [mem](5) phaddw xmm,oword[di+disp16] (opdsize)
+01   [mem](6) phaddw mm,[bp+disp16]
+01   [mem](6) phaddw xmm,oword[bp+disp16] (opdsize)
+01   [mem](7) phaddw mm,[bx+disp16]
+01   [mem](7) phaddw xmm,oword[bx+disp16] (opdsize)
+01   [11B](0) phaddw mm,mm0
+01   [11B](0) phaddw xmm,xmm0 (opdsize)
+01   [11B](1) phaddw mm,mm1
+01   [11B](1) phaddw xmm,xmm1 (opdsize)
+01   [11B](2) phaddw mm,mm2
+01   [11B](2) phaddw xmm,xmm2 (opdsize)
+01   [11B](3) phaddw mm,mm3
+01   [11B](3) phaddw xmm,xmm3 (opdsize)
+01   [11B](4) phaddw mm,mm4
+01   [11B](4) phaddw xmm,xmm4 (opdsize)
+01   [11B](5) phaddw mm,mm5
+01   [11B](5) phaddw xmm,xmm5 (opdsize)
+01   [11B](6) phaddw mm,mm6
+01   [11B](6) phaddw xmm,xmm6 (opdsize)
+01   [11B](7) phaddw mm,mm7
+01   [11B](7) phaddw xmm,xmm7 (opdsize)
+02   [mem](0) phaddd mm,[bx+si]
+02   [mem](0) phaddd xmm,oword[bx+si] (opdsize)
+02   [mem](1) phaddd mm,[bx+di]
+02   [mem](1) phaddd xmm,oword[bx+di] (opdsize)
+02   [mem](2) phaddd mm,[bp+si]
+02   [mem](2) phaddd xmm,oword[bp+si] (opdsize)
+02   [mem](3) phaddd mm,[bp+di]
+02   [mem](3) phaddd xmm,oword[bp+di] (opdsize)
+02   [mem](4) phaddd mm,[si]
+02   [mem](4) phaddd xmm,oword[si] (opdsize)
+02   [mem](5) phaddd mm,[di]
+02   [mem](5) phaddd xmm,oword[di] (opdsize)
+02   [mem](6) phaddd mm,[disp16]
+02   [mem](6) phaddd xmm,oword[disp16] (opdsize)
+02   [mem](7) phaddd mm,[bx]
+02   [mem](7) phaddd xmm,oword[bx] (opdsize)
+02   [mem](0) phaddd mm,[bx+si+disp8]
+02   [mem](0) phaddd xmm,oword[bx+si+disp8] (opdsize)
+02   [mem](1) phaddd mm,[bx+di+disp8]
+02   [mem](1) phaddd xmm,oword[bx+di+disp8] (opdsize)
+02   [mem](2) phaddd mm,[bp+si+disp8]
+02   [mem](2) phaddd xmm,oword[bp+si+disp8] (opdsize)
+02   [mem](3) phaddd mm,[bp+di+disp8]
+02   [mem](3) phaddd xmm,oword[bp+di+disp8] (opdsize)
+02   [mem](4) phaddd mm,[si+disp8]
+02   [mem](4) phaddd xmm,oword[si+disp8] (opdsize)
+02   [mem](5) phaddd mm,[di+disp8]
+02   [mem](5) phaddd xmm,oword[di+disp8] (opdsize)
+02   [mem](6) phaddd mm,[bp+disp8]
+02   [mem](6) phaddd xmm,oword[bp+disp8] (opdsize)
+02   [mem](7) phaddd mm,[bx+disp8]
+02   [mem](7) phaddd xmm,oword[bx+disp8] (opdsize)
+02   [mem](0) phaddd mm,[bx+si+disp16]
+02   [mem](0) phaddd xmm,oword[bx+si+disp16] (opdsize)
+02   [mem](1) phaddd mm,[bx+di+disp16]
+02   [mem](1) phaddd xmm,oword[bx+di+disp16] (opdsize)
+02   [mem](2) phaddd mm,[bp+si+disp16]
+02   [mem](2) phaddd xmm,oword[bp+si+disp16] (opdsize)
+02   [mem](3) phaddd mm,[bp+di+disp16]
+02   [mem](3) phaddd xmm,oword[bp+di+disp16] (opdsize)
+02   [mem](4) phaddd mm,[si+disp16]
+02   [mem](4) phaddd xmm,oword[si+disp16] (opdsize)
+02   [mem](5) phaddd mm,[di+disp16]
+02   [mem](5) phaddd xmm,oword[di+disp16] (opdsize)
+02   [mem](6) phaddd mm,[bp+disp16]
+02   [mem](6) phaddd xmm,oword[bp+disp16] (opdsize)
+02   [mem](7) phaddd mm,[bx+disp16]
+02   [mem](7) phaddd xmm,oword[bx+disp16] (opdsize)
+02   [11B](0) phaddd mm,mm0
+02   [11B](0) phaddd xmm,xmm0 (opdsize)
+02   [11B](1) phaddd mm,mm1
+02   [11B](1) phaddd xmm,xmm1 (opdsize)
+02   [11B](2) phaddd mm,mm2
+02   [11B](2) phaddd xmm,xmm2 (opdsize)
+02   [11B](3) phaddd mm,mm3
+02   [11B](3) phaddd xmm,xmm3 (opdsize)
+02   [11B](4) phaddd mm,mm4
+02   [11B](4) phaddd xmm,xmm4 (opdsize)
+02   [11B](5) phaddd mm,mm5
+02   [11B](5) phaddd xmm,xmm5 (opdsize)
+02   [11B](6) phaddd mm,mm6
+02   [11B](6) phaddd xmm,xmm6 (opdsize)
+02   [11B](7) phaddd mm,mm7
+02   [11B](7) phaddd xmm,xmm7 (opdsize)
+03   [mem](0) phaddsw mm,[bx+si]
+03   [mem](0) phaddsw xmm,oword[bx+si] (opdsize)
+03   [mem](1) phaddsw mm,[bx+di]
+03   [mem](1) phaddsw xmm,oword[bx+di] (opdsize)
+03   [mem](2) phaddsw mm,[bp+si]
+03   [mem](2) phaddsw xmm,oword[bp+si] (opdsize)
+03   [mem](3) phaddsw mm,[bp+di]
+03   [mem](3) phaddsw xmm,oword[bp+di] (opdsize)
+03   [mem](4) phaddsw mm,[si]
+03   [mem](4) phaddsw xmm,oword[si] (opdsize)
+03   [mem](5) phaddsw mm,[di]
+03   [mem](5) phaddsw xmm,oword[di] (opdsize)
+03   [mem](6) phaddsw mm,[disp16]
+03   [mem](6) phaddsw xmm,oword[disp16] (opdsize)
+03   [mem](7) phaddsw mm,[bx]
+03   [mem](7) phaddsw xmm,oword[bx] (opdsize)
+03   [mem](0) phaddsw mm,[bx+si+disp8]
+03   [mem](0) phaddsw xmm,oword[bx+si+disp8] (opdsize)
+03   [mem](1) phaddsw mm,[bx+di+disp8]
+03   [mem](1) phaddsw xmm,oword[bx+di+disp8] (opdsize)
+03   [mem](2) phaddsw mm,[bp+si+disp8]
+03   [mem](2) phaddsw xmm,oword[bp+si+disp8] (opdsize)
+03   [mem](3) phaddsw mm,[bp+di+disp8]
+03   [mem](3) phaddsw xmm,oword[bp+di+disp8] (opdsize)
+03   [mem](4) phaddsw mm,[si+disp8]
+03   [mem](4) phaddsw xmm,oword[si+disp8] (opdsize)
+03   [mem](5) phaddsw mm,[di+disp8]
+03   [mem](5) phaddsw xmm,oword[di+disp8] (opdsize)
+03   [mem](6) phaddsw mm,[bp+disp8]
+03   [mem](6) phaddsw xmm,oword[bp+disp8] (opdsize)
+03   [mem](7) phaddsw mm,[bx+disp8]
+03   [mem](7) phaddsw xmm,oword[bx+disp8] (opdsize)
+03   [mem](0) phaddsw mm,[bx+si+disp16]
+03   [mem](0) phaddsw xmm,oword[bx+si+disp16] (opdsize)
+03   [mem](1) phaddsw mm,[bx+di+disp16]
+03   [mem](1) phaddsw xmm,oword[bx+di+disp16] (opdsize)
+03   [mem](2) phaddsw mm,[bp+si+disp16]
+03   [mem](2) phaddsw xmm,oword[bp+si+disp16] (opdsize)
+03   [mem](3) phaddsw mm,[bp+di+disp16]
+03   [mem](3) phaddsw xmm,oword[bp+di+disp16] (opdsize)
+03   [mem](4) phaddsw mm,[si+disp16]
+03   [mem](4) phaddsw xmm,oword[si+disp16] (opdsize)
+03   [mem](5) phaddsw mm,[di+disp16]
+03   [mem](5) phaddsw xmm,oword[di+disp16] (opdsize)
+03   [mem](6) phaddsw mm,[bp+disp16]
+03   [mem](6) phaddsw xmm,oword[bp+disp16] (opdsize)
+03   [mem](7) phaddsw mm,[bx+disp16]
+03   [mem](7) phaddsw xmm,oword[bx+disp16] (opdsize)
+03   [11B](0) phaddsw mm,mm0
+03   [11B](0) phaddsw xmm,xmm0 (opdsize)
+03   [11B](1) phaddsw mm,mm1
+03   [11B](1) phaddsw xmm,xmm1 (opdsize)
+03   [11B](2) phaddsw mm,mm2
+03   [11B](2) phaddsw xmm,xmm2 (opdsize)
+03   [11B](3) phaddsw mm,mm3
+03   [11B](3) phaddsw xmm,xmm3 (opdsize)
+03   [11B](4) phaddsw mm,mm4
+03   [11B](4) phaddsw xmm,xmm4 (opdsize)
+03   [11B](5) phaddsw mm,mm5
+03   [11B](5) phaddsw xmm,xmm5 (opdsize)
+03   [11B](6) phaddsw mm,mm6
+03   [11B](6) phaddsw xmm,xmm6 (opdsize)
+03   [11B](7) phaddsw mm,mm7
+03   [11B](7) phaddsw xmm,xmm7 (opdsize)
+04   [mem](0) pmaddubsw mm,[bx+si]
+04   [mem](0) pmaddubsw xmm,oword[bx+si] (opdsize)
+04   [mem](1) pmaddubsw mm,[bx+di]
+04   [mem](1) pmaddubsw xmm,oword[bx+di] (opdsize)
+04   [mem](2) pmaddubsw mm,[bp+si]
+04   [mem](2) pmaddubsw xmm,oword[bp+si] (opdsize)
+04   [mem](3) pmaddubsw mm,[bp+di]
+04   [mem](3) pmaddubsw xmm,oword[bp+di] (opdsize)
+04   [mem](4) pmaddubsw mm,[si]
+04   [mem](4) pmaddubsw xmm,oword[si] (opdsize)
+04   [mem](5) pmaddubsw mm,[di]
+04   [mem](5) pmaddubsw xmm,oword[di] (opdsize)
+04   [mem](6) pmaddubsw mm,[disp16]
+04   [mem](6) pmaddubsw xmm,oword[disp16] (opdsize)
+04   [mem](7) pmaddubsw mm,[bx]
+04   [mem](7) pmaddubsw xmm,oword[bx] (opdsize)
+04   [mem](0) pmaddubsw mm,[bx+si+disp8]
+04   [mem](0) pmaddubsw xmm,oword[bx+si+disp8] (opdsize)
+04   [mem](1) pmaddubsw mm,[bx+di+disp8]
+04   [mem](1) pmaddubsw xmm,oword[bx+di+disp8] (opdsize)
+04   [mem](2) pmaddubsw mm,[bp+si+disp8]
+04   [mem](2) pmaddubsw xmm,oword[bp+si+disp8] (opdsize)
+04   [mem](3) pmaddubsw mm,[bp+di+disp8]
+04   [mem](3) pmaddubsw xmm,oword[bp+di+disp8] (opdsize)
+04   [mem](4) pmaddubsw mm,[si+disp8]
+04   [mem](4) pmaddubsw xmm,oword[si+disp8] (opdsize)
+04   [mem](5) pmaddubsw mm,[di+disp8]
+04   [mem](5) pmaddubsw xmm,oword[di+disp8] (opdsize)
+04   [mem](6) pmaddubsw mm,[bp+disp8]
+04   [mem](6) pmaddubsw xmm,oword[bp+disp8] (opdsize)
+04   [mem](7) pmaddubsw mm,[bx+disp8]
+04   [mem](7) pmaddubsw xmm,oword[bx+disp8] (opdsize)
+04   [mem](0) pmaddubsw mm,[bx+si+disp16]
+04   [mem](0) pmaddubsw xmm,oword[bx+si+disp16] (opdsize)
+04   [mem](1) pmaddubsw mm,[bx+di+disp16]
+04   [mem](1) pmaddubsw xmm,oword[bx+di+disp16] (opdsize)
+04   [mem](2) pmaddubsw mm,[bp+si+disp16]
+04   [mem](2) pmaddubsw xmm,oword[bp+si+disp16] (opdsize)
+04   [mem](3) pmaddubsw mm,[bp+di+disp16]
+04   [mem](3) pmaddubsw xmm,oword[bp+di+disp16] (opdsize)
+04   [mem](4) pmaddubsw mm,[si+disp16]
+04   [mem](4) pmaddubsw xmm,oword[si+disp16] (opdsize)
+04   [mem](5) pmaddubsw mm,[di+disp16]
+04   [mem](5) pmaddubsw xmm,oword[di+disp16] (opdsize)
+04   [mem](6) pmaddubsw mm,[bp+disp16]
+04   [mem](6) pmaddubsw xmm,oword[bp+disp16] (opdsize)
+04   [mem](7) pmaddubsw mm,[bx+disp16]
+04   [mem](7) pmaddubsw xmm,oword[bx+disp16] (opdsize)
+04   [11B](0) pmaddubsw mm,mm0
+04   [11B](0) pmaddubsw xmm,xmm0 (opdsize)
+04   [11B](1) pmaddubsw mm,mm1
+04   [11B](1) pmaddubsw xmm,xmm1 (opdsize)
+04   [11B](2) pmaddubsw mm,mm2
+04   [11B](2) pmaddubsw xmm,xmm2 (opdsize)
+04   [11B](3) pmaddubsw mm,mm3
+04   [11B](3) pmaddubsw xmm,xmm3 (opdsize)
+04   [11B](4) pmaddubsw mm,mm4
+04   [11B](4) pmaddubsw xmm,xmm4 (opdsize)
+04   [11B](5) pmaddubsw mm,mm5
+04   [11B](5) pmaddubsw xmm,xmm5 (opdsize)
+04   [11B](6) pmaddubsw mm,mm6
+04   [11B](6) pmaddubsw xmm,xmm6 (opdsize)
+04   [11B](7) pmaddubsw mm,mm7
+04   [11B](7) pmaddubsw xmm,xmm7 (opdsize)
+05   [mem](0) phsubw mm,[bx+si]
+05   [mem](0) phsubw xmm,oword[bx+si] (opdsize)
+05   [mem](1) phsubw mm,[bx+di]
+05   [mem](1) phsubw xmm,oword[bx+di] (opdsize)
+05   [mem](2) phsubw mm,[bp+si]
+05   [mem](2) phsubw xmm,oword[bp+si] (opdsize)
+05   [mem](3) phsubw mm,[bp+di]
+05   [mem](3) phsubw xmm,oword[bp+di] (opdsize)
+05   [mem](4) phsubw mm,[si]
+05   [mem](4) phsubw xmm,oword[si] (opdsize)
+05   [mem](5) phsubw mm,[di]
+05   [mem](5) phsubw xmm,oword[di] (opdsize)
+05   [mem](6) phsubw mm,[disp16]
+05   [mem](6) phsubw xmm,oword[disp16] (opdsize)
+05   [mem](7) phsubw mm,[bx]
+05   [mem](7) phsubw xmm,oword[bx] (opdsize)
+05   [mem](0) phsubw mm,[bx+si+disp8]
+05   [mem](0) phsubw xmm,oword[bx+si+disp8] (opdsize)
+05   [mem](1) phsubw mm,[bx+di+disp8]
+05   [mem](1) phsubw xmm,oword[bx+di+disp8] (opdsize)
+05   [mem](2) phsubw mm,[bp+si+disp8]
+05   [mem](2) phsubw xmm,oword[bp+si+disp8] (opdsize)
+05   [mem](3) phsubw mm,[bp+di+disp8]
+05   [mem](3) phsubw xmm,oword[bp+di+disp8] (opdsize)
+05   [mem](4) phsubw mm,[si+disp8]
+05   [mem](4) phsubw xmm,oword[si+disp8] (opdsize)
+05   [mem](5) phsubw mm,[di+disp8]
+05   [mem](5) phsubw xmm,oword[di+disp8] (opdsize)
+05   [mem](6) phsubw mm,[bp+disp8]
+05   [mem](6) phsubw xmm,oword[bp+disp8] (opdsize)
+05   [mem](7) phsubw mm,[bx+disp8]
+05   [mem](7) phsubw xmm,oword[bx+disp8] (opdsize)
+05   [mem](0) phsubw mm,[bx+si+disp16]
+05   [mem](0) phsubw xmm,oword[bx+si+disp16] (opdsize)
+05   [mem](1) phsubw mm,[bx+di+disp16]
+05   [mem](1) phsubw xmm,oword[bx+di+disp16] (opdsize)
+05   [mem](2) phsubw mm,[bp+si+disp16]
+05   [mem](2) phsubw xmm,oword[bp+si+disp16] (opdsize)
+05   [mem](3) phsubw mm,[bp+di+disp16]
+05   [mem](3) phsubw xmm,oword[bp+di+disp16] (opdsize)
+05   [mem](4) phsubw mm,[si+disp16]
+05   [mem](4) phsubw xmm,oword[si+disp16] (opdsize)
+05   [mem](5) phsubw mm,[di+disp16]
+05   [mem](5) phsubw xmm,oword[di+disp16] (opdsize)
+05   [mem](6) phsubw mm,[bp+disp16]
+05   [mem](6) phsubw xmm,oword[bp+disp16] (opdsize)
+05   [mem](7) phsubw mm,[bx+disp16]
+05   [mem](7) phsubw xmm,oword[bx+disp16] (opdsize)
+05   [11B](0) phsubw mm,mm0
+05   [11B](0) phsubw xmm,xmm0 (opdsize)
+05   [11B](1) phsubw mm,mm1
+05   [11B](1) phsubw xmm,xmm1 (opdsize)
+05   [11B](2) phsubw mm,mm2
+05   [11B](2) phsubw xmm,xmm2 (opdsize)
+05   [11B](3) phsubw mm,mm3
+05   [11B](3) phsubw xmm,xmm3 (opdsize)
+05   [11B](4) phsubw mm,mm4
+05   [11B](4) phsubw xmm,xmm4 (opdsize)
+05   [11B](5) phsubw mm,mm5
+05   [11B](5) phsubw xmm,xmm5 (opdsize)
+05   [11B](6) phsubw mm,mm6
+05   [11B](6) phsubw xmm,xmm6 (opdsize)
+05   [11B](7) phsubw mm,mm7
+05   [11B](7) phsubw xmm,xmm7 (opdsize)
+06   [mem](0) phsubd mm,[bx+si]
+06   [mem](0) phsubd xmm,oword[bx+si] (opdsize)
+06   [mem](1) phsubd mm,[bx+di]
+06   [mem](1) phsubd xmm,oword[bx+di] (opdsize)
+06   [mem](2) phsubd mm,[bp+si]
+06   [mem](2) phsubd xmm,oword[bp+si] (opdsize)
+06   [mem](3) phsubd mm,[bp+di]
+06   [mem](3) phsubd xmm,oword[bp+di] (opdsize)
+06   [mem](4) phsubd mm,[si]
+06   [mem](4) phsubd xmm,oword[si] (opdsize)
+06   [mem](5) phsubd mm,[di]
+06   [mem](5) phsubd xmm,oword[di] (opdsize)
+06   [mem](6) phsubd mm,[disp16]
+06   [mem](6) phsubd xmm,oword[disp16] (opdsize)
+06   [mem](7) phsubd mm,[bx]
+06   [mem](7) phsubd xmm,oword[bx] (opdsize)
+06   [mem](0) phsubd mm,[bx+si+disp8]
+06   [mem](0) phsubd xmm,oword[bx+si+disp8] (opdsize)
+06   [mem](1) phsubd mm,[bx+di+disp8]
+06   [mem](1) phsubd xmm,oword[bx+di+disp8] (opdsize)
+06   [mem](2) phsubd mm,[bp+si+disp8]
+06   [mem](2) phsubd xmm,oword[bp+si+disp8] (opdsize)
+06   [mem](3) phsubd mm,[bp+di+disp8]
+06   [mem](3) phsubd xmm,oword[bp+di+disp8] (opdsize)
+06   [mem](4) phsubd mm,[si+disp8]
+06   [mem](4) phsubd xmm,oword[si+disp8] (opdsize)
+06   [mem](5) phsubd mm,[di+disp8]
+06   [mem](5) phsubd xmm,oword[di+disp8] (opdsize)
+06   [mem](6) phsubd mm,[bp+disp8]
+06   [mem](6) phsubd xmm,oword[bp+disp8] (opdsize)
+06   [mem](7) phsubd mm,[bx+disp8]
+06   [mem](7) phsubd xmm,oword[bx+disp8] (opdsize)
+06   [mem](0) phsubd mm,[bx+si+disp16]
+06   [mem](0) phsubd xmm,oword[bx+si+disp16] (opdsize)
+06   [mem](1) phsubd mm,[bx+di+disp16]
+06   [mem](1) phsubd xmm,oword[bx+di+disp16] (opdsize)
+06   [mem](2) phsubd mm,[bp+si+disp16]
+06   [mem](2) phsubd xmm,oword[bp+si+disp16] (opdsize)
+06   [mem](3) phsubd mm,[bp+di+disp16]
+06   [mem](3) phsubd xmm,oword[bp+di+disp16] (opdsize)
+06   [mem](4) phsubd mm,[si+disp16]
+06   [mem](4) phsubd xmm,oword[si+disp16] (opdsize)
+06   [mem](5) phsubd mm,[di+disp16]
+06   [mem](5) phsubd xmm,oword[di+disp16] (opdsize)
+06   [mem](6) phsubd mm,[bp+disp16]
+06   [mem](6) phsubd xmm,oword[bp+disp16] (opdsize)
+06   [mem](7) phsubd mm,[bx+disp16]
+06   [mem](7) phsubd xmm,oword[bx+disp16] (opdsize)
+06   [11B](0) phsubd mm,mm0
+06   [11B](0) phsubd xmm,xmm0 (opdsize)
+06   [11B](1) phsubd mm,mm1
+06   [11B](1) phsubd xmm,xmm1 (opdsize)
+06   [11B](2) phsubd mm,mm2
+06   [11B](2) phsubd xmm,xmm2 (opdsize)
+06   [11B](3) phsubd mm,mm3
+06   [11B](3) phsubd xmm,xmm3 (opdsize)
+06   [11B](4) phsubd mm,mm4
+06   [11B](4) phsubd xmm,xmm4 (opdsize)
+06   [11B](5) phsubd mm,mm5
+06   [11B](5) phsubd xmm,xmm5 (opdsize)
+06   [11B](6) phsubd mm,mm6
+06   [11B](6) phsubd xmm,xmm6 (opdsize)
+06   [11B](7) phsubd mm,mm7
+06   [11B](7) phsubd xmm,xmm7 (opdsize)
+07   [mem](0) phsubsw mm,[bx+si]
+07   [mem](0) phsubsw xmm,oword[bx+si] (opdsize)
+07   [mem](1) phsubsw mm,[bx+di]
+07   [mem](1) phsubsw xmm,oword[bx+di] (opdsize)
+07   [mem](2) phsubsw mm,[bp+si]
+07   [mem](2) phsubsw xmm,oword[bp+si] (opdsize)
+07   [mem](3) phsubsw mm,[bp+di]
+07   [mem](3) phsubsw xmm,oword[bp+di] (opdsize)
+07   [mem](4) phsubsw mm,[si]
+07   [mem](4) phsubsw xmm,oword[si] (opdsize)
+07   [mem](5) phsubsw mm,[di]
+07   [mem](5) phsubsw xmm,oword[di] (opdsize)
+07   [mem](6) phsubsw mm,[disp16]
+07   [mem](6) phsubsw xmm,oword[disp16] (opdsize)
+07   [mem](7) phsubsw mm,[bx]
+07   [mem](7) phsubsw xmm,oword[bx] (opdsize)
+07   [mem](0) phsubsw mm,[bx+si+disp8]
+07   [mem](0) phsubsw xmm,oword[bx+si+disp8] (opdsize)
+07   [mem](1) phsubsw mm,[bx+di+disp8]
+07   [mem](1) phsubsw xmm,oword[bx+di+disp8] (opdsize)
+07   [mem](2) phsubsw mm,[bp+si+disp8]
+07   [mem](2) phsubsw xmm,oword[bp+si+disp8] (opdsize)
+07   [mem](3) phsubsw mm,[bp+di+disp8]
+07   [mem](3) phsubsw xmm,oword[bp+di+disp8] (opdsize)
+07   [mem](4) phsubsw mm,[si+disp8]
+07   [mem](4) phsubsw xmm,oword[si+disp8] (opdsize)
+07   [mem](5) phsubsw mm,[di+disp8]
+07   [mem](5) phsubsw xmm,oword[di+disp8] (opdsize)
+07   [mem](6) phsubsw mm,[bp+disp8]
+07   [mem](6) phsubsw xmm,oword[bp+disp8] (opdsize)
+07   [mem](7) phsubsw mm,[bx+disp8]
+07   [mem](7) phsubsw xmm,oword[bx+disp8] (opdsize)
+07   [mem](0) phsubsw mm,[bx+si+disp16]
+07   [mem](0) phsubsw xmm,oword[bx+si+disp16] (opdsize)
+07   [mem](1) phsubsw mm,[bx+di+disp16]
+07   [mem](1) phsubsw xmm,oword[bx+di+disp16] (opdsize)
+07   [mem](2) phsubsw mm,[bp+si+disp16]
+07   [mem](2) phsubsw xmm,oword[bp+si+disp16] (opdsize)
+07   [mem](3) phsubsw mm,[bp+di+disp16]
+07   [mem](3) phsubsw xmm,oword[bp+di+disp16] (opdsize)
+07   [mem](4) phsubsw mm,[si+disp16]
+07   [mem](4) phsubsw xmm,oword[si+disp16] (opdsize)
+07   [mem](5) phsubsw mm,[di+disp16]
+07   [mem](5) phsubsw xmm,oword[di+disp16] (opdsize)
+07   [mem](6) phsubsw mm,[bp+disp16]
+07   [mem](6) phsubsw xmm,oword[bp+disp16] (opdsize)
+07   [mem](7) phsubsw mm,[bx+disp16]
+07   [mem](7) phsubsw xmm,oword[bx+disp16] (opdsize)
+07   [11B](0) phsubsw mm,mm0
+07   [11B](0) phsubsw xmm,xmm0 (opdsize)
+07   [11B](1) phsubsw mm,mm1
+07   [11B](1) phsubsw xmm,xmm1 (opdsize)
+07   [11B](2) phsubsw mm,mm2
+07   [11B](2) phsubsw xmm,xmm2 (opdsize)
+07   [11B](3) phsubsw mm,mm3
+07   [11B](3) phsubsw xmm,xmm3 (opdsize)
+07   [11B](4) phsubsw mm,mm4
+07   [11B](4) phsubsw xmm,xmm4 (opdsize)
+07   [11B](5) phsubsw mm,mm5
+07   [11B](5) phsubsw xmm,xmm5 (opdsize)
+07   [11B](6) phsubsw mm,mm6
+07   [11B](6) phsubsw xmm,xmm6 (opdsize)
+07   [11B](7) phsubsw mm,mm7
+07   [11B](7) phsubsw xmm,xmm7 (opdsize)
+08   [mem](0) psignb mm,[bx+si]
+08   [mem](0) psignb xmm,oword[bx+si] (opdsize)
+08   [mem](1) psignb mm,[bx+di]
+08   [mem](1) psignb xmm,oword[bx+di] (opdsize)
+08   [mem](2) psignb mm,[bp+si]
+08   [mem](2) psignb xmm,oword[bp+si] (opdsize)
+08   [mem](3) psignb mm,[bp+di]
+08   [mem](3) psignb xmm,oword[bp+di] (opdsize)
+08   [mem](4) psignb mm,[si]
+08   [mem](4) psignb xmm,oword[si] (opdsize)
+08   [mem](5) psignb mm,[di]
+08   [mem](5) psignb xmm,oword[di] (opdsize)
+08   [mem](6) psignb mm,[disp16]
+08   [mem](6) psignb xmm,oword[disp16] (opdsize)
+08   [mem](7) psignb mm,[bx]
+08   [mem](7) psignb xmm,oword[bx] (opdsize)
+08   [mem](0) psignb mm,[bx+si+disp8]
+08   [mem](0) psignb xmm,oword[bx+si+disp8] (opdsize)
+08   [mem](1) psignb mm,[bx+di+disp8]
+08   [mem](1) psignb xmm,oword[bx+di+disp8] (opdsize)
+08   [mem](2) psignb mm,[bp+si+disp8]
+08   [mem](2) psignb xmm,oword[bp+si+disp8] (opdsize)
+08   [mem](3) psignb mm,[bp+di+disp8]
+08   [mem](3) psignb xmm,oword[bp+di+disp8] (opdsize)
+08   [mem](4) psignb mm,[si+disp8]
+08   [mem](4) psignb xmm,oword[si+disp8] (opdsize)
+08   [mem](5) psignb mm,[di+disp8]
+08   [mem](5) psignb xmm,oword[di+disp8] (opdsize)
+08   [mem](6) psignb mm,[bp+disp8]
+08   [mem](6) psignb xmm,oword[bp+disp8] (opdsize)
+08   [mem](7) psignb mm,[bx+disp8]
+08   [mem](7) psignb xmm,oword[bx+disp8] (opdsize)
+08   [mem](0) psignb mm,[bx+si+disp16]
+08   [mem](0) psignb xmm,oword[bx+si+disp16] (opdsize)
+08   [mem](1) psignb mm,[bx+di+disp16]
+08   [mem](1) psignb xmm,oword[bx+di+disp16] (opdsize)
+08   [mem](2) psignb mm,[bp+si+disp16]
+08   [mem](2) psignb xmm,oword[bp+si+disp16] (opdsize)
+08   [mem](3) psignb mm,[bp+di+disp16]
+08   [mem](3) psignb xmm,oword[bp+di+disp16] (opdsize)
+08   [mem](4) psignb mm,[si+disp16]
+08   [mem](4) psignb xmm,oword[si+disp16] (opdsize)
+08   [mem](5) psignb mm,[di+disp16]
+08   [mem](5) psignb xmm,oword[di+disp16] (opdsize)
+08   [mem](6) psignb mm,[bp+disp16]
+08   [mem](6) psignb xmm,oword[bp+disp16] (opdsize)
+08   [mem](7) psignb mm,[bx+disp16]
+08   [mem](7) psignb xmm,oword[bx+disp16] (opdsize)
+08   [11B](0) psignb mm,mm0
+08   [11B](0) psignb xmm,xmm0 (opdsize)
+08   [11B](1) psignb mm,mm1
+08   [11B](1) psignb xmm,xmm1 (opdsize)
+08   [11B](2) psignb mm,mm2
+08   [11B](2) psignb xmm,xmm2 (opdsize)
+08   [11B](3) psignb mm,mm3
+08   [11B](3) psignb xmm,xmm3 (opdsize)
+08   [11B](4) psignb mm,mm4
+08   [11B](4) psignb xmm,xmm4 (opdsize)
+08   [11B](5) psignb mm,mm5
+08   [11B](5) psignb xmm,xmm5 (opdsize)
+08   [11B](6) psignb mm,mm6
+08   [11B](6) psignb xmm,xmm6 (opdsize)
+08   [11B](7) psignb mm,mm7
+08   [11B](7) psignb xmm,xmm7 (opdsize)
+09   [mem](0) psignw mm,[bx+si]
+09   [mem](0) psignw xmm,oword[bx+si] (opdsize)
+09   [mem](1) psignw mm,[bx+di]
+09   [mem](1) psignw xmm,oword[bx+di] (opdsize)
+09   [mem](2) psignw mm,[bp+si]
+09   [mem](2) psignw xmm,oword[bp+si] (opdsize)
+09   [mem](3) psignw mm,[bp+di]
+09   [mem](3) psignw xmm,oword[bp+di] (opdsize)
+09   [mem](4) psignw mm,[si]
+09   [mem](4) psignw xmm,oword[si] (opdsize)
+09   [mem](5) psignw mm,[di]
+09   [mem](5) psignw xmm,oword[di] (opdsize)
+09   [mem](6) psignw mm,[disp16]
+09   [mem](6) psignw xmm,oword[disp16] (opdsize)
+09   [mem](7) psignw mm,[bx]
+09   [mem](7) psignw xmm,oword[bx] (opdsize)
+09   [mem](0) psignw mm,[bx+si+disp8]
+09   [mem](0) psignw xmm,oword[bx+si+disp8] (opdsize)
+09   [mem](1) psignw mm,[bx+di+disp8]
+09   [mem](1) psignw xmm,oword[bx+di+disp8] (opdsize)
+09   [mem](2) psignw mm,[bp+si+disp8]
+09   [mem](2) psignw xmm,oword[bp+si+disp8] (opdsize)
+09   [mem](3) psignw mm,[bp+di+disp8]
+09   [mem](3) psignw xmm,oword[bp+di+disp8] (opdsize)
+09   [mem](4) psignw mm,[si+disp8]
+09   [mem](4) psignw xmm,oword[si+disp8] (opdsize)
+09   [mem](5) psignw mm,[di+disp8]
+09   [mem](5) psignw xmm,oword[di+disp8] (opdsize)
+09   [mem](6) psignw mm,[bp+disp8]
+09   [mem](6) psignw xmm,oword[bp+disp8] (opdsize)
+09   [mem](7) psignw mm,[bx+disp8]
+09   [mem](7) psignw xmm,oword[bx+disp8] (opdsize)
+09   [mem](0) psignw mm,[bx+si+disp16]
+09   [mem](0) psignw xmm,oword[bx+si+disp16] (opdsize)
+09   [mem](1) psignw mm,[bx+di+disp16]
+09   [mem](1) psignw xmm,oword[bx+di+disp16] (opdsize)
+09   [mem](2) psignw mm,[bp+si+disp16]
+09   [mem](2) psignw xmm,oword[bp+si+disp16] (opdsize)
+09   [mem](3) psignw mm,[bp+di+disp16]
+09   [mem](3) psignw xmm,oword[bp+di+disp16] (opdsize)
+09   [mem](4) psignw mm,[si+disp16]
+09   [mem](4) psignw xmm,oword[si+disp16] (opdsize)
+09   [mem](5) psignw mm,[di+disp16]
+09   [mem](5) psignw xmm,oword[di+disp16] (opdsize)
+09   [mem](6) psignw mm,[bp+disp16]
+09   [mem](6) psignw xmm,oword[bp+disp16] (opdsize)
+09   [mem](7) psignw mm,[bx+disp16]
+09   [mem](7) psignw xmm,oword[bx+disp16] (opdsize)
+09   [11B](0) psignw mm,mm0
+09   [11B](0) psignw xmm,xmm0 (opdsize)
+09   [11B](1) psignw mm,mm1
+09   [11B](1) psignw xmm,xmm1 (opdsize)
+09   [11B](2) psignw mm,mm2
+09   [11B](2) psignw xmm,xmm2 (opdsize)
+09   [11B](3) psignw mm,mm3
+09   [11B](3) psignw xmm,xmm3 (opdsize)
+09   [11B](4) psignw mm,mm4
+09   [11B](4) psignw xmm,xmm4 (opdsize)
+09   [11B](5) psignw mm,mm5
+09   [11B](5) psignw xmm,xmm5 (opdsize)
+09   [11B](6) psignw mm,mm6
+09   [11B](6) psignw xmm,xmm6 (opdsize)
+09   [11B](7) psignw mm,mm7
+09   [11B](7) psignw xmm,xmm7 (opdsize)
+0A   [mem](0) psignd mm,[bx+si]
+0A   [mem](0) psignd xmm,oword[bx+si] (opdsize)
+0A   [mem](1) psignd mm,[bx+di]
+0A   [mem](1) psignd xmm,oword[bx+di] (opdsize)
+0A   [mem](2) psignd mm,[bp+si]
+0A   [mem](2) psignd xmm,oword[bp+si] (opdsize)
+0A   [mem](3) psignd mm,[bp+di]
+0A   [mem](3) psignd xmm,oword[bp+di] (opdsize)
+0A   [mem](4) psignd mm,[si]
+0A   [mem](4) psignd xmm,oword[si] (opdsize)
+0A   [mem](5) psignd mm,[di]
+0A   [mem](5) psignd xmm,oword[di] (opdsize)
+0A   [mem](6) psignd mm,[disp16]
+0A   [mem](6) psignd xmm,oword[disp16] (opdsize)
+0A   [mem](7) psignd mm,[bx]
+0A   [mem](7) psignd xmm,oword[bx] (opdsize)
+0A   [mem](0) psignd mm,[bx+si+disp8]
+0A   [mem](0) psignd xmm,oword[bx+si+disp8] (opdsize)
+0A   [mem](1) psignd mm,[bx+di+disp8]
+0A   [mem](1) psignd xmm,oword[bx+di+disp8] (opdsize)
+0A   [mem](2) psignd mm,[bp+si+disp8]
+0A   [mem](2) psignd xmm,oword[bp+si+disp8] (opdsize)
+0A   [mem](3) psignd mm,[bp+di+disp8]
+0A   [mem](3) psignd xmm,oword[bp+di+disp8] (opdsize)
+0A   [mem](4) psignd mm,[si+disp8]
+0A   [mem](4) psignd xmm,oword[si+disp8] (opdsize)
+0A   [mem](5) psignd mm,[di+disp8]
+0A   [mem](5) psignd xmm,oword[di+disp8] (opdsize)
+0A   [mem](6) psignd mm,[bp+disp8]
+0A   [mem](6) psignd xmm,oword[bp+disp8] (opdsize)
+0A   [mem](7) psignd mm,[bx+disp8]
+0A   [mem](7) psignd xmm,oword[bx+disp8] (opdsize)
+0A   [mem](0) psignd mm,[bx+si+disp16]
+0A   [mem](0) psignd xmm,oword[bx+si+disp16] (opdsize)
+0A   [mem](1) psignd mm,[bx+di+disp16]
+0A   [mem](1) psignd xmm,oword[bx+di+disp16] (opdsize)
+0A   [mem](2) psignd mm,[bp+si+disp16]
+0A   [mem](2) psignd xmm,oword[bp+si+disp16] (opdsize)
+0A   [mem](3) psignd mm,[bp+di+disp16]
+0A   [mem](3) psignd xmm,oword[bp+di+disp16] (opdsize)
+0A   [mem](4) psignd mm,[si+disp16]
+0A   [mem](4) psignd xmm,oword[si+disp16] (opdsize)
+0A   [mem](5) psignd mm,[di+disp16]
+0A   [mem](5) psignd xmm,oword[di+disp16] (opdsize)
+0A   [mem](6) psignd mm,[bp+disp16]
+0A   [mem](6) psignd xmm,oword[bp+disp16] (opdsize)
+0A   [mem](7) psignd mm,[bx+disp16]
+0A   [mem](7) psignd xmm,oword[bx+disp16] (opdsize)
+0A   [11B](0) psignd mm,mm0
+0A   [11B](0) psignd xmm,xmm0 (opdsize)
+0A   [11B](1) psignd mm,mm1
+0A   [11B](1) psignd xmm,xmm1 (opdsize)
+0A   [11B](2) psignd mm,mm2
+0A   [11B](2) psignd xmm,xmm2 (opdsize)
+0A   [11B](3) psignd mm,mm3
+0A   [11B](3) psignd xmm,xmm3 (opdsize)
+0A   [11B](4) psignd mm,mm4
+0A   [11B](4) psignd xmm,xmm4 (opdsize)
+0A   [11B](5) psignd mm,mm5
+0A   [11B](5) psignd xmm,xmm5 (opdsize)
+0A   [11B](6) psignd mm,mm6
+0A   [11B](6) psignd xmm,xmm6 (opdsize)
+0A   [11B](7) psignd mm,mm7
+0A   [11B](7) psignd xmm,xmm7 (opdsize)
+0B   [mem](0) pmulhrsw mm,[bx+si]
+0B   [mem](0) pmulhrsw xmm,oword[bx+si] (opdsize)
+0B   [mem](1) pmulhrsw mm,[bx+di]
+0B   [mem](1) pmulhrsw xmm,oword[bx+di] (opdsize)
+0B   [mem](2) pmulhrsw mm,[bp+si]
+0B   [mem](2) pmulhrsw xmm,oword[bp+si] (opdsize)
+0B   [mem](3) pmulhrsw mm,[bp+di]
+0B   [mem](3) pmulhrsw xmm,oword[bp+di] (opdsize)
+0B   [mem](4) pmulhrsw mm,[si]
+0B   [mem](4) pmulhrsw xmm,oword[si] (opdsize)
+0B   [mem](5) pmulhrsw mm,[di]
+0B   [mem](5) pmulhrsw xmm,oword[di] (opdsize)
+0B   [mem](6) pmulhrsw mm,[disp16]
+0B   [mem](6) pmulhrsw xmm,oword[disp16] (opdsize)
+0B   [mem](7) pmulhrsw mm,[bx]
+0B   [mem](7) pmulhrsw xmm,oword[bx] (opdsize)
+0B   [mem](0) pmulhrsw mm,[bx+si+disp8]
+0B   [mem](0) pmulhrsw xmm,oword[bx+si+disp8] (opdsize)
+0B   [mem](1) pmulhrsw mm,[bx+di+disp8]
+0B   [mem](1) pmulhrsw xmm,oword[bx+di+disp8] (opdsize)
+0B   [mem](2) pmulhrsw mm,[bp+si+disp8]
+0B   [mem](2) pmulhrsw xmm,oword[bp+si+disp8] (opdsize)
+0B   [mem](3) pmulhrsw mm,[bp+di+disp8]
+0B   [mem](3) pmulhrsw xmm,oword[bp+di+disp8] (opdsize)
+0B   [mem](4) pmulhrsw mm,[si+disp8]
+0B   [mem](4) pmulhrsw xmm,oword[si+disp8] (opdsize)
+0B   [mem](5) pmulhrsw mm,[di+disp8]
+0B   [mem](5) pmulhrsw xmm,oword[di+disp8] (opdsize)
+0B   [mem](6) pmulhrsw mm,[bp+disp8]
+0B   [mem](6) pmulhrsw xmm,oword[bp+disp8] (opdsize)
+0B   [mem](7) pmulhrsw mm,[bx+disp8]
+0B   [mem](7) pmulhrsw xmm,oword[bx+disp8] (opdsize)
+0B   [mem](0) pmulhrsw mm,[bx+si+disp16]
+0B   [mem](0) pmulhrsw xmm,oword[bx+si+disp16] (opdsize)
+0B   [mem](1) pmulhrsw mm,[bx+di+disp16]
+0B   [mem](1) pmulhrsw xmm,oword[bx+di+disp16] (opdsize)
+0B   [mem](2) pmulhrsw mm,[bp+si+disp16]
+0B   [mem](2) pmulhrsw xmm,oword[bp+si+disp16] (opdsize)
+0B   [mem](3) pmulhrsw mm,[bp+di+disp16]
+0B   [mem](3) pmulhrsw xmm,oword[bp+di+disp16] (opdsize)
+0B   [mem](4) pmulhrsw mm,[si+disp16]
+0B   [mem](4) pmulhrsw xmm,oword[si+disp16] (opdsize)
+0B   [mem](5) pmulhrsw mm,[di+disp16]
+0B   [mem](5) pmulhrsw xmm,oword[di+disp16] (opdsize)
+0B   [mem](6) pmulhrsw mm,[bp+disp16]
+0B   [mem](6) pmulhrsw xmm,oword[bp+disp16] (opdsize)
+0B   [mem](7) pmulhrsw mm,[bx+disp16]
+0B   [mem](7) pmulhrsw xmm,oword[bx+disp16] (opdsize)
+0B   [11B](0) pmulhrsw mm,mm0
+0B   [11B](0) pmulhrsw xmm,xmm0 (opdsize)
+0B   [11B](1) pmulhrsw mm,mm1
+0B   [11B](1) pmulhrsw xmm,xmm1 (opdsize)
+0B   [11B](2) pmulhrsw mm,mm2
+0B   [11B](2) pmulhrsw xmm,xmm2 (opdsize)
+0B   [11B](3) pmulhrsw mm,mm3
+0B   [11B](3) pmulhrsw xmm,xmm3 (opdsize)
+0B   [11B](4) pmulhrsw mm,mm4
+0B   [11B](4) pmulhrsw xmm,xmm4 (opdsize)
+0B   [11B](5) pmulhrsw mm,mm5
+0B   [11B](5) pmulhrsw xmm,xmm5 (opdsize)
+0B   [11B](6) pmulhrsw mm,mm6
+0B   [11B](6) pmulhrsw xmm,xmm6 (opdsize)
+0B   [11B](7) pmulhrsw mm,mm7
+0B   [11B](7) pmulhrsw xmm,xmm7 (opdsize)
+10   [mem](0) pblendvb xmm,[bx+si],xmm0 (opdsize)
+10   [mem](1) pblendvb xmm,[bx+di],xmm0 (opdsize)
+10   [mem](2) pblendvb xmm,[bp+si],xmm0 (opdsize)
+10   [mem](3) pblendvb xmm,[bp+di],xmm0 (opdsize)
+10   [mem](4) pblendvb xmm,[si],xmm0 (opdsize)
+10   [mem](5) pblendvb xmm,[di],xmm0 (opdsize)
+10   [mem](6) pblendvb xmm,[disp16],xmm0 (opdsize)
+10   [mem](7) pblendvb xmm,[bx],xmm0 (opdsize)
+10   [mem](0) pblendvb xmm,[bx+si+disp8],xmm0 (opdsize)
+10   [mem](1) pblendvb xmm,[bx+di+disp8],xmm0 (opdsize)
+10   [mem](2) pblendvb xmm,[bp+si+disp8],xmm0 (opdsize)
+10   [mem](3) pblendvb xmm,[bp+di+disp8],xmm0 (opdsize)
+10   [mem](4) pblendvb xmm,[si+disp8],xmm0 (opdsize)
+10   [mem](5) pblendvb xmm,[di+disp8],xmm0 (opdsize)
+10   [mem](6) pblendvb xmm,[bp+disp8],xmm0 (opdsize)
+10   [mem](7) pblendvb xmm,[bx+disp8],xmm0 (opdsize)
+10   [mem](0) pblendvb xmm,[bx+si+disp16],xmm0 (opdsize)
+10   [mem](1) pblendvb xmm,[bx+di+disp16],xmm0 (opdsize)
+10   [mem](2) pblendvb xmm,[bp+si+disp16],xmm0 (opdsize)
+10   [mem](3) pblendvb xmm,[bp+di+disp16],xmm0 (opdsize)
+10   [mem](4) pblendvb xmm,[si+disp16],xmm0 (opdsize)
+10   [mem](5) pblendvb xmm,[di+disp16],xmm0 (opdsize)
+10   [mem](6) pblendvb xmm,[bp+disp16],xmm0 (opdsize)
+10   [mem](7) pblendvb xmm,[bx+disp16],xmm0 (opdsize)
+10   [11B](0) pblendvb xmm,xmm0,xmm0 (opdsize)
+10   [11B](1) pblendvb xmm,xmm1,xmm0 (opdsize)
+10   [11B](2) pblendvb xmm,xmm2,xmm0 (opdsize)
+10   [11B](3) pblendvb xmm,xmm3,xmm0 (opdsize)
+10   [11B](4) pblendvb xmm,xmm4,xmm0 (opdsize)
+10   [11B](5) pblendvb xmm,xmm5,xmm0 (opdsize)
+10   [11B](6) pblendvb xmm,xmm6,xmm0 (opdsize)
+10   [11B](7) pblendvb xmm,xmm7,xmm0 (opdsize)
+14   [mem](0) blendvps xmm,oword[bx+si],xmm0 (opdsize)
+14   [mem](1) blendvps xmm,oword[bx+di],xmm0 (opdsize)
+14   [mem](2) blendvps xmm,oword[bp+si],xmm0 (opdsize)
+14   [mem](3) blendvps xmm,oword[bp+di],xmm0 (opdsize)
+14   [mem](4) blendvps xmm,oword[si],xmm0 (opdsize)
+14   [mem](5) blendvps xmm,oword[di],xmm0 (opdsize)
+14   [mem](6) blendvps xmm,oword[disp16],xmm0 (opdsize)
+14   [mem](7) blendvps xmm,oword[bx],xmm0 (opdsize)
+14   [mem](0) blendvps xmm,oword[bx+si+disp8],xmm0 (opdsize)
+14   [mem](1) blendvps xmm,oword[bx+di+disp8],xmm0 (opdsize)
+14   [mem](2) blendvps xmm,oword[bp+si+disp8],xmm0 (opdsize)
+14   [mem](3) blendvps xmm,oword[bp+di+disp8],xmm0 (opdsize)
+14   [mem](4) blendvps xmm,oword[si+disp8],xmm0 (opdsize)
+14   [mem](5) blendvps xmm,oword[di+disp8],xmm0 (opdsize)
+14   [mem](6) blendvps xmm,oword[bp+disp8],xmm0 (opdsize)
+14   [mem](7) blendvps xmm,oword[bx+disp8],xmm0 (opdsize)
+14   [mem](0) blendvps xmm,oword[bx+si+disp16],xmm0 (opdsize)
+14   [mem](1) blendvps xmm,oword[bx+di+disp16],xmm0 (opdsize)
+14   [mem](2) blendvps xmm,oword[bp+si+disp16],xmm0 (opdsize)
+14   [mem](3) blendvps xmm,oword[bp+di+disp16],xmm0 (opdsize)
+14   [mem](4) blendvps xmm,oword[si+disp16],xmm0 (opdsize)
+14   [mem](5) blendvps xmm,oword[di+disp16],xmm0 (opdsize)
+14   [mem](6) blendvps xmm,oword[bp+disp16],xmm0 (opdsize)
+14   [mem](7) blendvps xmm,oword[bx+disp16],xmm0 (opdsize)
+14   [11B](0) blendvps xmm,xmm0,xmm0 (opdsize)
+14   [11B](1) blendvps xmm,xmm1,xmm0 (opdsize)
+14   [11B](2) blendvps xmm,xmm2,xmm0 (opdsize)
+14   [11B](3) blendvps xmm,xmm3,xmm0 (opdsize)
+14   [11B](4) blendvps xmm,xmm4,xmm0 (opdsize)
+14   [11B](5) blendvps xmm,xmm5,xmm0 (opdsize)
+14   [11B](6) blendvps xmm,xmm6,xmm0 (opdsize)
+14   [11B](7) blendvps xmm,xmm7,xmm0 (opdsize)
+15   [mem](0) blendvpd xmm,oword[bx+si],xmm0 (opdsize)
+15   [mem](1) blendvpd xmm,oword[bx+di],xmm0 (opdsize)
+15   [mem](2) blendvpd xmm,oword[bp+si],xmm0 (opdsize)
+15   [mem](3) blendvpd xmm,oword[bp+di],xmm0 (opdsize)
+15   [mem](4) blendvpd xmm,oword[si],xmm0 (opdsize)
+15   [mem](5) blendvpd xmm,oword[di],xmm0 (opdsize)
+15   [mem](6) blendvpd xmm,oword[disp16],xmm0 (opdsize)
+15   [mem](7) blendvpd xmm,oword[bx],xmm0 (opdsize)
+15   [mem](0) blendvpd xmm,oword[bx+si+disp8],xmm0 (opdsize)
+15   [mem](1) blendvpd xmm,oword[bx+di+disp8],xmm0 (opdsize)
+15   [mem](2) blendvpd xmm,oword[bp+si+disp8],xmm0 (opdsize)
+15   [mem](3) blendvpd xmm,oword[bp+di+disp8],xmm0 (opdsize)
+15   [mem](4) blendvpd xmm,oword[si+disp8],xmm0 (opdsize)
+15   [mem](5) blendvpd xmm,oword[di+disp8],xmm0 (opdsize)
+15   [mem](6) blendvpd xmm,oword[bp+disp8],xmm0 (opdsize)
+15   [mem](7) blendvpd xmm,oword[bx+disp8],xmm0 (opdsize)
+15   [mem](0) blendvpd xmm,oword[bx+si+disp16],xmm0 (opdsize)
+15   [mem](1) blendvpd xmm,oword[bx+di+disp16],xmm0 (opdsize)
+15   [mem](2) blendvpd xmm,oword[bp+si+disp16],xmm0 (opdsize)
+15   [mem](3) blendvpd xmm,oword[bp+di+disp16],xmm0 (opdsize)
+15   [mem](4) blendvpd xmm,oword[si+disp16],xmm0 (opdsize)
+15   [mem](5) blendvpd xmm,oword[di+disp16],xmm0 (opdsize)
+15   [mem](6) blendvpd xmm,oword[bp+disp16],xmm0 (opdsize)
+15   [mem](7) blendvpd xmm,oword[bx+disp16],xmm0 (opdsize)
+15   [11B](0) blendvpd xmm,xmm0,xmm0 (opdsize)
+15   [11B](1) blendvpd xmm,xmm1,xmm0 (opdsize)
+15   [11B](2) blendvpd xmm,xmm2,xmm0 (opdsize)
+15   [11B](3) blendvpd xmm,xmm3,xmm0 (opdsize)
+15   [11B](4) blendvpd xmm,xmm4,xmm0 (opdsize)
+15   [11B](5) blendvpd xmm,xmm5,xmm0 (opdsize)
+15   [11B](6) blendvpd xmm,xmm6,xmm0 (opdsize)
+15   [11B](7) blendvpd xmm,xmm7,xmm0 (opdsize)
+17   [mem](0) ptest xmm,oword[bx+si] (opdsize)
+17   [mem](1) ptest xmm,oword[bx+di] (opdsize)
+17   [mem](2) ptest xmm,oword[bp+si] (opdsize)
+17   [mem](3) ptest xmm,oword[bp+di] (opdsize)
+17   [mem](4) ptest xmm,oword[si] (opdsize)
+17   [mem](5) ptest xmm,oword[di] (opdsize)
+17   [mem](6) ptest xmm,oword[disp16] (opdsize)
+17   [mem](7) ptest xmm,oword[bx] (opdsize)
+17   [mem](0) ptest xmm,oword[bx+si+disp8] (opdsize)
+17   [mem](1) ptest xmm,oword[bx+di+disp8] (opdsize)
+17   [mem](2) ptest xmm,oword[bp+si+disp8] (opdsize)
+17   [mem](3) ptest xmm,oword[bp+di+disp8] (opdsize)
+17   [mem](4) ptest xmm,oword[si+disp8] (opdsize)
+17   [mem](5) ptest xmm,oword[di+disp8] (opdsize)
+17   [mem](6) ptest xmm,oword[bp+disp8] (opdsize)
+17   [mem](7) ptest xmm,oword[bx+disp8] (opdsize)
+17   [mem](0) ptest xmm,oword[bx+si+disp16] (opdsize)
+17   [mem](1) ptest xmm,oword[bx+di+disp16] (opdsize)
+17   [mem](2) ptest xmm,oword[bp+si+disp16] (opdsize)
+17   [mem](3) ptest xmm,oword[bp+di+disp16] (opdsize)
+17   [mem](4) ptest xmm,oword[si+disp16] (opdsize)
+17   [mem](5) ptest xmm,oword[di+disp16] (opdsize)
+17   [mem](6) ptest xmm,oword[bp+disp16] (opdsize)
+17   [mem](7) ptest xmm,oword[bx+disp16] (opdsize)
+17   [11B](0) ptest xmm,xmm0 (opdsize)
+17   [11B](1) ptest xmm,xmm1 (opdsize)
+17   [11B](2) ptest xmm,xmm2 (opdsize)
+17   [11B](3) ptest xmm,xmm3 (opdsize)
+17   [11B](4) ptest xmm,xmm4 (opdsize)
+17   [11B](5) ptest xmm,xmm5 (opdsize)
+17   [11B](6) ptest xmm,xmm6 (opdsize)
+17   [11B](7) ptest xmm,xmm7 (opdsize)
+1C   [mem](0) pabsb mm,[bx+si]
+1C   [mem](0) pabsb xmm,oword[bx+si] (opdsize)
+1C   [mem](1) pabsb mm,[bx+di]
+1C   [mem](1) pabsb xmm,oword[bx+di] (opdsize)
+1C   [mem](2) pabsb mm,[bp+si]
+1C   [mem](2) pabsb xmm,oword[bp+si] (opdsize)
+1C   [mem](3) pabsb mm,[bp+di]
+1C   [mem](3) pabsb xmm,oword[bp+di] (opdsize)
+1C   [mem](4) pabsb mm,[si]
+1C   [mem](4) pabsb xmm,oword[si] (opdsize)
+1C   [mem](5) pabsb mm,[di]
+1C   [mem](5) pabsb xmm,oword[di] (opdsize)
+1C   [mem](6) pabsb mm,[disp16]
+1C   [mem](6) pabsb xmm,oword[disp16] (opdsize)
+1C   [mem](7) pabsb mm,[bx]
+1C   [mem](7) pabsb xmm,oword[bx] (opdsize)
+1C   [mem](0) pabsb mm,[bx+si+disp8]
+1C   [mem](0) pabsb xmm,oword[bx+si+disp8] (opdsize)
+1C   [mem](1) pabsb mm,[bx+di+disp8]
+1C   [mem](1) pabsb xmm,oword[bx+di+disp8] (opdsize)
+1C   [mem](2) pabsb mm,[bp+si+disp8]
+1C   [mem](2) pabsb xmm,oword[bp+si+disp8] (opdsize)
+1C   [mem](3) pabsb mm,[bp+di+disp8]
+1C   [mem](3) pabsb xmm,oword[bp+di+disp8] (opdsize)
+1C   [mem](4) pabsb mm,[si+disp8]
+1C   [mem](4) pabsb xmm,oword[si+disp8] (opdsize)
+1C   [mem](5) pabsb mm,[di+disp8]
+1C   [mem](5) pabsb xmm,oword[di+disp8] (opdsize)
+1C   [mem](6) pabsb mm,[bp+disp8]
+1C   [mem](6) pabsb xmm,oword[bp+disp8] (opdsize)
+1C   [mem](7) pabsb mm,[bx+disp8]
+1C   [mem](7) pabsb xmm,oword[bx+disp8] (opdsize)
+1C   [mem](0) pabsb mm,[bx+si+disp16]
+1C   [mem](0) pabsb xmm,oword[bx+si+disp16] (opdsize)
+1C   [mem](1) pabsb mm,[bx+di+disp16]
+1C   [mem](1) pabsb xmm,oword[bx+di+disp16] (opdsize)
+1C   [mem](2) pabsb mm,[bp+si+disp16]
+1C   [mem](2) pabsb xmm,oword[bp+si+disp16] (opdsize)
+1C   [mem](3) pabsb mm,[bp+di+disp16]
+1C   [mem](3) pabsb xmm,oword[bp+di+disp16] (opdsize)
+1C   [mem](4) pabsb mm,[si+disp16]
+1C   [mem](4) pabsb xmm,oword[si+disp16] (opdsize)
+1C   [mem](5) pabsb mm,[di+disp16]
+1C   [mem](5) pabsb xmm,oword[di+disp16] (opdsize)
+1C   [mem](6) pabsb mm,[bp+disp16]
+1C   [mem](6) pabsb xmm,oword[bp+disp16] (opdsize)
+1C   [mem](7) pabsb mm,[bx+disp16]
+1C   [mem](7) pabsb xmm,oword[bx+disp16] (opdsize)
+1C   [11B](0) pabsb mm,mm0
+1C   [11B](0) pabsb xmm,xmm0 (opdsize)
+1C   [11B](1) pabsb mm,mm1
+1C   [11B](1) pabsb xmm,xmm1 (opdsize)
+1C   [11B](2) pabsb mm,mm2
+1C   [11B](2) pabsb xmm,xmm2 (opdsize)
+1C   [11B](3) pabsb mm,mm3
+1C   [11B](3) pabsb xmm,xmm3 (opdsize)
+1C   [11B](4) pabsb mm,mm4
+1C   [11B](4) pabsb xmm,xmm4 (opdsize)
+1C   [11B](5) pabsb mm,mm5
+1C   [11B](5) pabsb xmm,xmm5 (opdsize)
+1C   [11B](6) pabsb mm,mm6
+1C   [11B](6) pabsb xmm,xmm6 (opdsize)
+1C   [11B](7) pabsb mm,mm7
+1C   [11B](7) pabsb xmm,xmm7 (opdsize)
+1D   [mem](0) pabsw mm,[bx+si]
+1D   [mem](0) pabsw xmm,oword[bx+si] (opdsize)
+1D   [mem](1) pabsw mm,[bx+di]
+1D   [mem](1) pabsw xmm,oword[bx+di] (opdsize)
+1D   [mem](2) pabsw mm,[bp+si]
+1D   [mem](2) pabsw xmm,oword[bp+si] (opdsize)
+1D   [mem](3) pabsw mm,[bp+di]
+1D   [mem](3) pabsw xmm,oword[bp+di] (opdsize)
+1D   [mem](4) pabsw mm,[si]
+1D   [mem](4) pabsw xmm,oword[si] (opdsize)
+1D   [mem](5) pabsw mm,[di]
+1D   [mem](5) pabsw xmm,oword[di] (opdsize)
+1D   [mem](6) pabsw mm,[disp16]
+1D   [mem](6) pabsw xmm,oword[disp16] (opdsize)
+1D   [mem](7) pabsw mm,[bx]
+1D   [mem](7) pabsw xmm,oword[bx] (opdsize)
+1D   [mem](0) pabsw mm,[bx+si+disp8]
+1D   [mem](0) pabsw xmm,oword[bx+si+disp8] (opdsize)
+1D   [mem](1) pabsw mm,[bx+di+disp8]
+1D   [mem](1) pabsw xmm,oword[bx+di+disp8] (opdsize)
+1D   [mem](2) pabsw mm,[bp+si+disp8]
+1D   [mem](2) pabsw xmm,oword[bp+si+disp8] (opdsize)
+1D   [mem](3) pabsw mm,[bp+di+disp8]
+1D   [mem](3) pabsw xmm,oword[bp+di+disp8] (opdsize)
+1D   [mem](4) pabsw mm,[si+disp8]
+1D   [mem](4) pabsw xmm,oword[si+disp8] (opdsize)
+1D   [mem](5) pabsw mm,[di+disp8]
+1D   [mem](5) pabsw xmm,oword[di+disp8] (opdsize)
+1D   [mem](6) pabsw mm,[bp+disp8]
+1D   [mem](6) pabsw xmm,oword[bp+disp8] (opdsize)
+1D   [mem](7) pabsw mm,[bx+disp8]
+1D   [mem](7) pabsw xmm,oword[bx+disp8] (opdsize)
+1D   [mem](0) pabsw mm,[bx+si+disp16]
+1D   [mem](0) pabsw xmm,oword[bx+si+disp16] (opdsize)
+1D   [mem](1) pabsw mm,[bx+di+disp16]
+1D   [mem](1) pabsw xmm,oword[bx+di+disp16] (opdsize)
+1D   [mem](2) pabsw mm,[bp+si+disp16]
+1D   [mem](2) pabsw xmm,oword[bp+si+disp16] (opdsize)
+1D   [mem](3) pabsw mm,[bp+di+disp16]
+1D   [mem](3) pabsw xmm,oword[bp+di+disp16] (opdsize)
+1D   [mem](4) pabsw mm,[si+disp16]
+1D   [mem](4) pabsw xmm,oword[si+disp16] (opdsize)
+1D   [mem](5) pabsw mm,[di+disp16]
+1D   [mem](5) pabsw xmm,oword[di+disp16] (opdsize)
+1D   [mem](6) pabsw mm,[bp+disp16]
+1D   [mem](6) pabsw xmm,oword[bp+disp16] (opdsize)
+1D   [mem](7) pabsw mm,[bx+disp16]
+1D   [mem](7) pabsw xmm,oword[bx+disp16] (opdsize)
+1D   [11B](0) pabsw mm,mm0
+1D   [11B](0) pabsw xmm,xmm0 (opdsize)
+1D   [11B](1) pabsw mm,mm1
+1D   [11B](1) pabsw xmm,xmm1 (opdsize)
+1D   [11B](2) pabsw mm,mm2
+1D   [11B](2) pabsw xmm,xmm2 (opdsize)
+1D   [11B](3) pabsw mm,mm3
+1D   [11B](3) pabsw xmm,xmm3 (opdsize)
+1D   [11B](4) pabsw mm,mm4
+1D   [11B](4) pabsw xmm,xmm4 (opdsize)
+1D   [11B](5) pabsw mm,mm5
+1D   [11B](5) pabsw xmm,xmm5 (opdsize)
+1D   [11B](6) pabsw mm,mm6
+1D   [11B](6) pabsw xmm,xmm6 (opdsize)
+1D   [11B](7) pabsw mm,mm7
+1D   [11B](7) pabsw xmm,xmm7 (opdsize)
+1E   [mem](0) pabsd mm,[bx+si]
+1E   [mem](0) pabsd xmm,oword[bx+si] (opdsize)
+1E   [mem](1) pabsd mm,[bx+di]
+1E   [mem](1) pabsd xmm,oword[bx+di] (opdsize)
+1E   [mem](2) pabsd mm,[bp+si]
+1E   [mem](2) pabsd xmm,oword[bp+si] (opdsize)
+1E   [mem](3) pabsd mm,[bp+di]
+1E   [mem](3) pabsd xmm,oword[bp+di] (opdsize)
+1E   [mem](4) pabsd mm,[si]
+1E   [mem](4) pabsd xmm,oword[si] (opdsize)
+1E   [mem](5) pabsd mm,[di]
+1E   [mem](5) pabsd xmm,oword[di] (opdsize)
+1E   [mem](6) pabsd mm,[disp16]
+1E   [mem](6) pabsd xmm,oword[disp16] (opdsize)
+1E   [mem](7) pabsd mm,[bx]
+1E   [mem](7) pabsd xmm,oword[bx] (opdsize)
+1E   [mem](0) pabsd mm,[bx+si+disp8]
+1E   [mem](0) pabsd xmm,oword[bx+si+disp8] (opdsize)
+1E   [mem](1) pabsd mm,[bx+di+disp8]
+1E   [mem](1) pabsd xmm,oword[bx+di+disp8] (opdsize)
+1E   [mem](2) pabsd mm,[bp+si+disp8]
+1E   [mem](2) pabsd xmm,oword[bp+si+disp8] (opdsize)
+1E   [mem](3) pabsd mm,[bp+di+disp8]
+1E   [mem](3) pabsd xmm,oword[bp+di+disp8] (opdsize)
+1E   [mem](4) pabsd mm,[si+disp8]
+1E   [mem](4) pabsd xmm,oword[si+disp8] (opdsize)
+1E   [mem](5) pabsd mm,[di+disp8]
+1E   [mem](5) pabsd xmm,oword[di+disp8] (opdsize)
+1E   [mem](6) pabsd mm,[bp+disp8]
+1E   [mem](6) pabsd xmm,oword[bp+disp8] (opdsize)
+1E   [mem](7) pabsd mm,[bx+disp8]
+1E   [mem](7) pabsd xmm,oword[bx+disp8] (opdsize)
+1E   [mem](0) pabsd mm,[bx+si+disp16]
+1E   [mem](0) pabsd xmm,oword[bx+si+disp16] (opdsize)
+1E   [mem](1) pabsd mm,[bx+di+disp16]
+1E   [mem](1) pabsd xmm,oword[bx+di+disp16] (opdsize)
+1E   [mem](2) pabsd mm,[bp+si+disp16]
+1E   [mem](2) pabsd xmm,oword[bp+si+disp16] (opdsize)
+1E   [mem](3) pabsd mm,[bp+di+disp16]
+1E   [mem](3) pabsd xmm,oword[bp+di+disp16] (opdsize)
+1E   [mem](4) pabsd mm,[si+disp16]
+1E   [mem](4) pabsd xmm,oword[si+disp16] (opdsize)
+1E   [mem](5) pabsd mm,[di+disp16]
+1E   [mem](5) pabsd xmm,oword[di+disp16] (opdsize)
+1E   [mem](6) pabsd mm,[bp+disp16]
+1E   [mem](6) pabsd xmm,oword[bp+disp16] (opdsize)
+1E   [mem](7) pabsd mm,[bx+disp16]
+1E   [mem](7) pabsd xmm,oword[bx+disp16] (opdsize)
+1E   [11B](0) pabsd mm,mm0
+1E   [11B](0) pabsd xmm,xmm0 (opdsize)
+1E   [11B](1) pabsd mm,mm1
+1E   [11B](1) pabsd xmm,xmm1 (opdsize)
+1E   [11B](2) pabsd mm,mm2
+1E   [11B](2) pabsd xmm,xmm2 (opdsize)
+1E   [11B](3) pabsd mm,mm3
+1E   [11B](3) pabsd xmm,xmm3 (opdsize)
+1E   [11B](4) pabsd mm,mm4
+1E   [11B](4) pabsd xmm,xmm4 (opdsize)
+1E   [11B](5) pabsd mm,mm5
+1E   [11B](5) pabsd xmm,xmm5 (opdsize)
+1E   [11B](6) pabsd mm,mm6
+1E   [11B](6) pabsd xmm,xmm6 (opdsize)
+1E   [11B](7) pabsd mm,mm7
+1E   [11B](7) pabsd xmm,xmm7 (opdsize)
+20   [mem](0) pmovsxbw xmm,qword[bx+si] (opdsize)
+20   [mem](1) pmovsxbw xmm,qword[bx+di] (opdsize)
+20   [mem](2) pmovsxbw xmm,qword[bp+si] (opdsize)
+20   [mem](3) pmovsxbw xmm,qword[bp+di] (opdsize)
+20   [mem](4) pmovsxbw xmm,qword[si] (opdsize)
+20   [mem](5) pmovsxbw xmm,qword[di] (opdsize)
+20   [mem](6) pmovsxbw xmm,qword[disp16] (opdsize)
+20   [mem](7) pmovsxbw xmm,qword[bx] (opdsize)
+20   [mem](0) pmovsxbw xmm,qword[bx+si+disp8] (opdsize)
+20   [mem](1) pmovsxbw xmm,qword[bx+di+disp8] (opdsize)
+20   [mem](2) pmovsxbw xmm,qword[bp+si+disp8] (opdsize)
+20   [mem](3) pmovsxbw xmm,qword[bp+di+disp8] (opdsize)
+20   [mem](4) pmovsxbw xmm,qword[si+disp8] (opdsize)
+20   [mem](5) pmovsxbw xmm,qword[di+disp8] (opdsize)
+20   [mem](6) pmovsxbw xmm,qword[bp+disp8] (opdsize)
+20   [mem](7) pmovsxbw xmm,qword[bx+disp8] (opdsize)
+20   [mem](0) pmovsxbw xmm,qword[bx+si+disp16] (opdsize)
+20   [mem](1) pmovsxbw xmm,qword[bx+di+disp16] (opdsize)
+20   [mem](2) pmovsxbw xmm,qword[bp+si+disp16] (opdsize)
+20   [mem](3) pmovsxbw xmm,qword[bp+di+disp16] (opdsize)
+20   [mem](4) pmovsxbw xmm,qword[si+disp16] (opdsize)
+20   [mem](5) pmovsxbw xmm,qword[di+disp16] (opdsize)
+20   [mem](6) pmovsxbw xmm,qword[bp+disp16] (opdsize)
+20   [mem](7) pmovsxbw xmm,qword[bx+disp16] (opdsize)
+20   [11B](0) pmovsxbw xmm,xmm0 (opdsize)
+20   [11B](1) pmovsxbw xmm,xmm1 (opdsize)
+20   [11B](2) pmovsxbw xmm,xmm2 (opdsize)
+20   [11B](3) pmovsxbw xmm,xmm3 (opdsize)
+20   [11B](4) pmovsxbw xmm,xmm4 (opdsize)
+20   [11B](5) pmovsxbw xmm,xmm5 (opdsize)
+20   [11B](6) pmovsxbw xmm,xmm6 (opdsize)
+20   [11B](7) pmovsxbw xmm,xmm7 (opdsize)
+21   [mem](0) pmovsxbd xmm,dword[bx+si] (opdsize)
+21   [mem](1) pmovsxbd xmm,dword[bx+di] (opdsize)
+21   [mem](2) pmovsxbd xmm,dword[bp+si] (opdsize)
+21   [mem](3) pmovsxbd xmm,dword[bp+di] (opdsize)
+21   [mem](4) pmovsxbd xmm,dword[si] (opdsize)
+21   [mem](5) pmovsxbd xmm,dword[di] (opdsize)
+21   [mem](6) pmovsxbd xmm,dword[disp16] (opdsize)
+21   [mem](7) pmovsxbd xmm,dword[bx] (opdsize)
+21   [mem](0) pmovsxbd xmm,dword[bx+si+disp8] (opdsize)
+21   [mem](1) pmovsxbd xmm,dword[bx+di+disp8] (opdsize)
+21   [mem](2) pmovsxbd xmm,dword[bp+si+disp8] (opdsize)
+21   [mem](3) pmovsxbd xmm,dword[bp+di+disp8] (opdsize)
+21   [mem](4) pmovsxbd xmm,dword[si+disp8] (opdsize)
+21   [mem](5) pmovsxbd xmm,dword[di+disp8] (opdsize)
+21   [mem](6) pmovsxbd xmm,dword[bp+disp8] (opdsize)
+21   [mem](7) pmovsxbd xmm,dword[bx+disp8] (opdsize)
+21   [mem](0) pmovsxbd xmm,dword[bx+si+disp16] (opdsize)
+21   [mem](1) pmovsxbd xmm,dword[bx+di+disp16] (opdsize)
+21   [mem](2) pmovsxbd xmm,dword[bp+si+disp16] (opdsize)
+21   [mem](3) pmovsxbd xmm,dword[bp+di+disp16] (opdsize)
+21   [mem](4) pmovsxbd xmm,dword[si+disp16] (opdsize)
+21   [mem](5) pmovsxbd xmm,dword[di+disp16] (opdsize)
+21   [mem](6) pmovsxbd xmm,dword[bp+disp16] (opdsize)
+21   [mem](7) pmovsxbd xmm,dword[bx+disp16] (opdsize)
+21   [11B](0) pmovsxbd xmm,xmm0 (opdsize)
+21   [11B](1) pmovsxbd xmm,xmm1 (opdsize)
+21   [11B](2) pmovsxbd xmm,xmm2 (opdsize)
+21   [11B](3) pmovsxbd xmm,xmm3 (opdsize)
+21   [11B](4) pmovsxbd xmm,xmm4 (opdsize)
+21   [11B](5) pmovsxbd xmm,xmm5 (opdsize)
+21   [11B](6) pmovsxbd xmm,xmm6 (opdsize)
+21   [11B](7) pmovsxbd xmm,xmm7 (opdsize)
+22   [mem](0) pmovsxbq xmm,word[bx+si] (opdsize)
+22   [mem](1) pmovsxbq xmm,word[bx+di] (opdsize)
+22   [mem](2) pmovsxbq xmm,word[bp+si] (opdsize)
+22   [mem](3) pmovsxbq xmm,word[bp+di] (opdsize)
+22   [mem](4) pmovsxbq xmm,word[si] (opdsize)
+22   [mem](5) pmovsxbq xmm,word[di] (opdsize)
+22   [mem](6) pmovsxbq xmm,word[disp16] (opdsize)
+22   [mem](7) pmovsxbq xmm,word[bx] (opdsize)
+22   [mem](0) pmovsxbq xmm,word[bx+si+disp8] (opdsize)
+22   [mem](1) pmovsxbq xmm,word[bx+di+disp8] (opdsize)
+22   [mem](2) pmovsxbq xmm,word[bp+si+disp8] (opdsize)
+22   [mem](3) pmovsxbq xmm,word[bp+di+disp8] (opdsize)
+22   [mem](4) pmovsxbq xmm,word[si+disp8] (opdsize)
+22   [mem](5) pmovsxbq xmm,word[di+disp8] (opdsize)
+22   [mem](6) pmovsxbq xmm,word[bp+disp8] (opdsize)
+22   [mem](7) pmovsxbq xmm,word[bx+disp8] (opdsize)
+22   [mem](0) pmovsxbq xmm,word[bx+si+disp16] (opdsize)
+22   [mem](1) pmovsxbq xmm,word[bx+di+disp16] (opdsize)
+22   [mem](2) pmovsxbq xmm,word[bp+si+disp16] (opdsize)
+22   [mem](3) pmovsxbq xmm,word[bp+di+disp16] (opdsize)
+22   [mem](4) pmovsxbq xmm,word[si+disp16] (opdsize)
+22   [mem](5) pmovsxbq xmm,word[di+disp16] (opdsize)
+22   [mem](6) pmovsxbq xmm,word[bp+disp16] (opdsize)
+22   [mem](7) pmovsxbq xmm,word[bx+disp16] (opdsize)
+22   [11B](0) pmovsxbq xmm,xmm0 (opdsize)
+22   [11B](1) pmovsxbq xmm,xmm1 (opdsize)
+22   [11B](2) pmovsxbq xmm,xmm2 (opdsize)
+22   [11B](3) pmovsxbq xmm,xmm3 (opdsize)
+22   [11B](4) pmovsxbq xmm,xmm4 (opdsize)
+22   [11B](5) pmovsxbq xmm,xmm5 (opdsize)
+22   [11B](6) pmovsxbq xmm,xmm6 (opdsize)
+22   [11B](7) pmovsxbq xmm,xmm7 (opdsize)
+23   [mem](0) pmovsxwd xmm,qword[bx+si] (opdsize)
+23   [mem](1) pmovsxwd xmm,qword[bx+di] (opdsize)
+23   [mem](2) pmovsxwd xmm,qword[bp+si] (opdsize)
+23   [mem](3) pmovsxwd xmm,qword[bp+di] (opdsize)
+23   [mem](4) pmovsxwd xmm,qword[si] (opdsize)
+23   [mem](5) pmovsxwd xmm,qword[di] (opdsize)
+23   [mem](6) pmovsxwd xmm,qword[disp16] (opdsize)
+23   [mem](7) pmovsxwd xmm,qword[bx] (opdsize)
+23   [mem](0) pmovsxwd xmm,qword[bx+si+disp8] (opdsize)
+23   [mem](1) pmovsxwd xmm,qword[bx+di+disp8] (opdsize)
+23   [mem](2) pmovsxwd xmm,qword[bp+si+disp8] (opdsize)
+23   [mem](3) pmovsxwd xmm,qword[bp+di+disp8] (opdsize)
+23   [mem](4) pmovsxwd xmm,qword[si+disp8] (opdsize)
+23   [mem](5) pmovsxwd xmm,qword[di+disp8] (opdsize)
+23   [mem](6) pmovsxwd xmm,qword[bp+disp8] (opdsize)
+23   [mem](7) pmovsxwd xmm,qword[bx+disp8] (opdsize)
+23   [mem](0) pmovsxwd xmm,qword[bx+si+disp16] (opdsize)
+23   [mem](1) pmovsxwd xmm,qword[bx+di+disp16] (opdsize)
+23   [mem](2) pmovsxwd xmm,qword[bp+si+disp16] (opdsize)
+23   [mem](3) pmovsxwd xmm,qword[bp+di+disp16] (opdsize)
+23   [mem](4) pmovsxwd xmm,qword[si+disp16] (opdsize)
+23   [mem](5) pmovsxwd xmm,qword[di+disp16] (opdsize)
+23   [mem](6) pmovsxwd xmm,qword[bp+disp16] (opdsize)
+23   [mem](7) pmovsxwd xmm,qword[bx+disp16] (opdsize)
+23   [11B](0) pmovsxwd xmm,xmm0 (opdsize)
+23   [11B](1) pmovsxwd xmm,xmm1 (opdsize)
+23   [11B](2) pmovsxwd xmm,xmm2 (opdsize)
+23   [11B](3) pmovsxwd xmm,xmm3 (opdsize)
+23   [11B](4) pmovsxwd xmm,xmm4 (opdsize)
+23   [11B](5) pmovsxwd xmm,xmm5 (opdsize)
+23   [11B](6) pmovsxwd xmm,xmm6 (opdsize)
+23   [11B](7) pmovsxwd xmm,xmm7 (opdsize)
+24   [mem](0) pmovsxwq xmm,dword[bx+si] (opdsize)
+24   [mem](1) pmovsxwq xmm,dword[bx+di] (opdsize)
+24   [mem](2) pmovsxwq xmm,dword[bp+si] (opdsize)
+24   [mem](3) pmovsxwq xmm,dword[bp+di] (opdsize)
+24   [mem](4) pmovsxwq xmm,dword[si] (opdsize)
+24   [mem](5) pmovsxwq xmm,dword[di] (opdsize)
+24   [mem](6) pmovsxwq xmm,dword[disp16] (opdsize)
+24   [mem](7) pmovsxwq xmm,dword[bx] (opdsize)
+24   [mem](0) pmovsxwq xmm,dword[bx+si+disp8] (opdsize)
+24   [mem](1) pmovsxwq xmm,dword[bx+di+disp8] (opdsize)
+24   [mem](2) pmovsxwq xmm,dword[bp+si+disp8] (opdsize)
+24   [mem](3) pmovsxwq xmm,dword[bp+di+disp8] (opdsize)
+24   [mem](4) pmovsxwq xmm,dword[si+disp8] (opdsize)
+24   [mem](5) pmovsxwq xmm,dword[di+disp8] (opdsize)
+24   [mem](6) pmovsxwq xmm,dword[bp+disp8] (opdsize)
+24   [mem](7) pmovsxwq xmm,dword[bx+disp8] (opdsize)
+24   [mem](0) pmovsxwq xmm,dword[bx+si+disp16] (opdsize)
+24   [mem](1) pmovsxwq xmm,dword[bx+di+disp16] (opdsize)
+24   [mem](2) pmovsxwq xmm,dword[bp+si+disp16] (opdsize)
+24   [mem](3) pmovsxwq xmm,dword[bp+di+disp16] (opdsize)
+24   [mem](4) pmovsxwq xmm,dword[si+disp16] (opdsize)
+24   [mem](5) pmovsxwq xmm,dword[di+disp16] (opdsize)
+24   [mem](6) pmovsxwq xmm,dword[bp+disp16] (opdsize)
+24   [mem](7) pmovsxwq xmm,dword[bx+disp16] (opdsize)
+24   [11B](0) pmovsxwq xmm,xmm0 (opdsize)
+24   [11B](1) pmovsxwq xmm,xmm1 (opdsize)
+24   [11B](2) pmovsxwq xmm,xmm2 (opdsize)
+24   [11B](3) pmovsxwq xmm,xmm3 (opdsize)
+24   [11B](4) pmovsxwq xmm,xmm4 (opdsize)
+24   [11B](5) pmovsxwq xmm,xmm5 (opdsize)
+24   [11B](6) pmovsxwq xmm,xmm6 (opdsize)
+24   [11B](7) pmovsxwq xmm,xmm7 (opdsize)
+25   [mem](0) pmovsxdq xmm,qword[bx+si] (opdsize)
+25   [mem](1) pmovsxdq xmm,qword[bx+di] (opdsize)
+25   [mem](2) pmovsxdq xmm,qword[bp+si] (opdsize)
+25   [mem](3) pmovsxdq xmm,qword[bp+di] (opdsize)
+25   [mem](4) pmovsxdq xmm,qword[si] (opdsize)
+25   [mem](5) pmovsxdq xmm,qword[di] (opdsize)
+25   [mem](6) pmovsxdq xmm,qword[disp16] (opdsize)
+25   [mem](7) pmovsxdq xmm,qword[bx] (opdsize)
+25   [mem](0) pmovsxdq xmm,qword[bx+si+disp8] (opdsize)
+25   [mem](1) pmovsxdq xmm,qword[bx+di+disp8] (opdsize)
+25   [mem](2) pmovsxdq xmm,qword[bp+si+disp8] (opdsize)
+25   [mem](3) pmovsxdq xmm,qword[bp+di+disp8] (opdsize)
+25   [mem](4) pmovsxdq xmm,qword[si+disp8] (opdsize)
+25   [mem](5) pmovsxdq xmm,qword[di+disp8] (opdsize)
+25   [mem](6) pmovsxdq xmm,qword[bp+disp8] (opdsize)
+25   [mem](7) pmovsxdq xmm,qword[bx+disp8] (opdsize)
+25   [mem](0) pmovsxdq xmm,qword[bx+si+disp16] (opdsize)
+25   [mem](1) pmovsxdq xmm,qword[bx+di+disp16] (opdsize)
+25   [mem](2) pmovsxdq xmm,qword[bp+si+disp16] (opdsize)
+25   [mem](3) pmovsxdq xmm,qword[bp+di+disp16] (opdsize)
+25   [mem](4) pmovsxdq xmm,qword[si+disp16] (opdsize)
+25   [mem](5) pmovsxdq xmm,qword[di+disp16] (opdsize)
+25   [mem](6) pmovsxdq xmm,qword[bp+disp16] (opdsize)
+25   [mem](7) pmovsxdq xmm,qword[bx+disp16] (opdsize)
+25   [11B](0) pmovsxdq xmm,xmm0 (opdsize)
+25   [11B](1) pmovsxdq xmm,xmm1 (opdsize)
+25   [11B](2) pmovsxdq xmm,xmm2 (opdsize)
+25   [11B](3) pmovsxdq xmm,xmm3 (opdsize)
+25   [11B](4) pmovsxdq xmm,xmm4 (opdsize)
+25   [11B](5) pmovsxdq xmm,xmm5 (opdsize)
+25   [11B](6) pmovsxdq xmm,xmm6 (opdsize)
+25   [11B](7) pmovsxdq xmm,xmm7 (opdsize)
+28   [mem](0) pmuldq xmm,oword[bx+si] (opdsize)
+28   [mem](1) pmuldq xmm,oword[bx+di] (opdsize)
+28   [mem](2) pmuldq xmm,oword[bp+si] (opdsize)
+28   [mem](3) pmuldq xmm,oword[bp+di] (opdsize)
+28   [mem](4) pmuldq xmm,oword[si] (opdsize)
+28   [mem](5) pmuldq xmm,oword[di] (opdsize)
+28   [mem](6) pmuldq xmm,oword[disp16] (opdsize)
+28   [mem](7) pmuldq xmm,oword[bx] (opdsize)
+28   [mem](0) pmuldq xmm,oword[bx+si+disp8] (opdsize)
+28   [mem](1) pmuldq xmm,oword[bx+di+disp8] (opdsize)
+28   [mem](2) pmuldq xmm,oword[bp+si+disp8] (opdsize)
+28   [mem](3) pmuldq xmm,oword[bp+di+disp8] (opdsize)
+28   [mem](4) pmuldq xmm,oword[si+disp8] (opdsize)
+28   [mem](5) pmuldq xmm,oword[di+disp8] (opdsize)
+28   [mem](6) pmuldq xmm,oword[bp+disp8] (opdsize)
+28   [mem](7) pmuldq xmm,oword[bx+disp8] (opdsize)
+28   [mem](0) pmuldq xmm,oword[bx+si+disp16] (opdsize)
+28   [mem](1) pmuldq xmm,oword[bx+di+disp16] (opdsize)
+28   [mem](2) pmuldq xmm,oword[bp+si+disp16] (opdsize)
+28   [mem](3) pmuldq xmm,oword[bp+di+disp16] (opdsize)
+28   [mem](4) pmuldq xmm,oword[si+disp16] (opdsize)
+28   [mem](5) pmuldq xmm,oword[di+disp16] (opdsize)
+28   [mem](6) pmuldq xmm,oword[bp+disp16] (opdsize)
+28   [mem](7) pmuldq xmm,oword[bx+disp16] (opdsize)
+28   [11B](0) pmuldq xmm,xmm0 (opdsize)
+28   [11B](1) pmuldq xmm,xmm1 (opdsize)
+28   [11B](2) pmuldq xmm,xmm2 (opdsize)
+28   [11B](3) pmuldq xmm,xmm3 (opdsize)
+28   [11B](4) pmuldq xmm,xmm4 (opdsize)
+28   [11B](5) pmuldq xmm,xmm5 (opdsize)
+28   [11B](6) pmuldq xmm,xmm6 (opdsize)
+28   [11B](7) pmuldq xmm,xmm7 (opdsize)
+29   [mem](0) pcmpeqq xmm,oword[bx+si] (opdsize)
+29   [mem](1) pcmpeqq xmm,oword[bx+di] (opdsize)
+29   [mem](2) pcmpeqq xmm,oword[bp+si] (opdsize)
+29   [mem](3) pcmpeqq xmm,oword[bp+di] (opdsize)
+29   [mem](4) pcmpeqq xmm,oword[si] (opdsize)
+29   [mem](5) pcmpeqq xmm,oword[di] (opdsize)
+29   [mem](6) pcmpeqq xmm,oword[disp16] (opdsize)
+29   [mem](7) pcmpeqq xmm,oword[bx] (opdsize)
+29   [mem](0) pcmpeqq xmm,oword[bx+si+disp8] (opdsize)
+29   [mem](1) pcmpeqq xmm,oword[bx+di+disp8] (opdsize)
+29   [mem](2) pcmpeqq xmm,oword[bp+si+disp8] (opdsize)
+29   [mem](3) pcmpeqq xmm,oword[bp+di+disp8] (opdsize)
+29   [mem](4) pcmpeqq xmm,oword[si+disp8] (opdsize)
+29   [mem](5) pcmpeqq xmm,oword[di+disp8] (opdsize)
+29   [mem](6) pcmpeqq xmm,oword[bp+disp8] (opdsize)
+29   [mem](7) pcmpeqq xmm,oword[bx+disp8] (opdsize)
+29   [mem](0) pcmpeqq xmm,oword[bx+si+disp16] (opdsize)
+29   [mem](1) pcmpeqq xmm,oword[bx+di+disp16] (opdsize)
+29   [mem](2) pcmpeqq xmm,oword[bp+si+disp16] (opdsize)
+29   [mem](3) pcmpeqq xmm,oword[bp+di+disp16] (opdsize)
+29   [mem](4) pcmpeqq xmm,oword[si+disp16] (opdsize)
+29   [mem](5) pcmpeqq xmm,oword[di+disp16] (opdsize)
+29   [mem](6) pcmpeqq xmm,oword[bp+disp16] (opdsize)
+29   [mem](7) pcmpeqq xmm,oword[bx+disp16] (opdsize)
+29   [11B](0) pcmpeqq xmm,xmm0 (opdsize)
+29   [11B](1) pcmpeqq xmm,xmm1 (opdsize)
+29   [11B](2) pcmpeqq xmm,xmm2 (opdsize)
+29   [11B](3) pcmpeqq xmm,xmm3 (opdsize)
+29   [11B](4) pcmpeqq xmm,xmm4 (opdsize)
+29   [11B](5) pcmpeqq xmm,xmm5 (opdsize)
+29   [11B](6) pcmpeqq xmm,xmm6 (opdsize)
+29   [11B](7) pcmpeqq xmm,xmm7 (opdsize)
+2A   [mem](0) movntdqa xmm,oword[bx+si] (opdsize)
+2A   [mem](1) movntdqa xmm,oword[bx+di] (opdsize)
+2A   [mem](2) movntdqa xmm,oword[bp+si] (opdsize)
+2A   [mem](3) movntdqa xmm,oword[bp+di] (opdsize)
+2A   [mem](4) movntdqa xmm,oword[si] (opdsize)
+2A   [mem](5) movntdqa xmm,oword[di] (opdsize)
+2A   [mem](6) movntdqa xmm,oword[disp16] (opdsize)
+2A   [mem](7) movntdqa xmm,oword[bx] (opdsize)
+2A   [mem](0) movntdqa xmm,oword[bx+si+disp8] (opdsize)
+2A   [mem](1) movntdqa xmm,oword[bx+di+disp8] (opdsize)
+2A   [mem](2) movntdqa xmm,oword[bp+si+disp8] (opdsize)
+2A   [mem](3) movntdqa xmm,oword[bp+di+disp8] (opdsize)
+2A   [mem](4) movntdqa xmm,oword[si+disp8] (opdsize)
+2A   [mem](5) movntdqa xmm,oword[di+disp8] (opdsize)
+2A   [mem](6) movntdqa xmm,oword[bp+disp8] (opdsize)
+2A   [mem](7) movntdqa xmm,oword[bx+disp8] (opdsize)
+2A   [mem](0) movntdqa xmm,oword[bx+si+disp16] (opdsize)
+2A   [mem](1) movntdqa xmm,oword[bx+di+disp16] (opdsize)
+2A   [mem](2) movntdqa xmm,oword[bp+si+disp16] (opdsize)
+2A   [mem](3) movntdqa xmm,oword[bp+di+disp16] (opdsize)
+2A   [mem](4) movntdqa xmm,oword[si+disp16] (opdsize)
+2A   [mem](5) movntdqa xmm,oword[di+disp16] (opdsize)
+2A   [mem](6) movntdqa xmm,oword[bp+disp16] (opdsize)
+2A   [mem](7) movntdqa xmm,oword[bx+disp16] (opdsize)
+2B   [mem](0) packusdw xmm,oword[bx+si] (opdsize)
+2B   [mem](1) packusdw xmm,oword[bx+di] (opdsize)
+2B   [mem](2) packusdw xmm,oword[bp+si] (opdsize)
+2B   [mem](3) packusdw xmm,oword[bp+di] (opdsize)
+2B   [mem](4) packusdw xmm,oword[si] (opdsize)
+2B   [mem](5) packusdw xmm,oword[di] (opdsize)
+2B   [mem](6) packusdw xmm,oword[disp16] (opdsize)
+2B   [mem](7) packusdw xmm,oword[bx] (opdsize)
+2B   [mem](0) packusdw xmm,oword[bx+si+disp8] (opdsize)
+2B   [mem](1) packusdw xmm,oword[bx+di+disp8] (opdsize)
+2B   [mem](2) packusdw xmm,oword[bp+si+disp8] (opdsize)
+2B   [mem](3) packusdw xmm,oword[bp+di+disp8] (opdsize)
+2B   [mem](4) packusdw xmm,oword[si+disp8] (opdsize)
+2B   [mem](5) packusdw xmm,oword[di+disp8] (opdsize)
+2B   [mem](6) packusdw xmm,oword[bp+disp8] (opdsize)
+2B   [mem](7) packusdw xmm,oword[bx+disp8] (opdsize)
+2B   [mem](0) packusdw xmm,oword[bx+si+disp16] (opdsize)
+2B   [mem](1) packusdw xmm,oword[bx+di+disp16] (opdsize)
+2B   [mem](2) packusdw xmm,oword[bp+si+disp16] (opdsize)
+2B   [mem](3) packusdw xmm,oword[bp+di+disp16] (opdsize)
+2B   [mem](4) packusdw xmm,oword[si+disp16] (opdsize)
+2B   [mem](5) packusdw xmm,oword[di+disp16] (opdsize)
+2B   [mem](6) packusdw xmm,oword[bp+disp16] (opdsize)
+2B   [mem](7) packusdw xmm,oword[bx+disp16] (opdsize)
+2B   [11B](0) packusdw xmm,xmm0 (opdsize)
+2B   [11B](1) packusdw xmm,xmm1 (opdsize)
+2B   [11B](2) packusdw xmm,xmm2 (opdsize)
+2B   [11B](3) packusdw xmm,xmm3 (opdsize)
+2B   [11B](4) packusdw xmm,xmm4 (opdsize)
+2B   [11B](5) packusdw xmm,xmm5 (opdsize)
+2B   [11B](6) packusdw xmm,xmm6 (opdsize)
+2B   [11B](7) packusdw xmm,xmm7 (opdsize)
+30   [mem](0) pmovzxbw xmm,qword[bx+si] (opdsize)
+30   [mem](1) pmovzxbw xmm,qword[bx+di] (opdsize)
+30   [mem](2) pmovzxbw xmm,qword[bp+si] (opdsize)
+30   [mem](3) pmovzxbw xmm,qword[bp+di] (opdsize)
+30   [mem](4) pmovzxbw xmm,qword[si] (opdsize)
+30   [mem](5) pmovzxbw xmm,qword[di] (opdsize)
+30   [mem](6) pmovzxbw xmm,qword[disp16] (opdsize)
+30   [mem](7) pmovzxbw xmm,qword[bx] (opdsize)
+30   [mem](0) pmovzxbw xmm,qword[bx+si+disp8] (opdsize)
+30   [mem](1) pmovzxbw xmm,qword[bx+di+disp8] (opdsize)
+30   [mem](2) pmovzxbw xmm,qword[bp+si+disp8] (opdsize)
+30   [mem](3) pmovzxbw xmm,qword[bp+di+disp8] (opdsize)
+30   [mem](4) pmovzxbw xmm,qword[si+disp8] (opdsize)
+30   [mem](5) pmovzxbw xmm,qword[di+disp8] (opdsize)
+30   [mem](6) pmovzxbw xmm,qword[bp+disp8] (opdsize)
+30   [mem](7) pmovzxbw xmm,qword[bx+disp8] (opdsize)
+30   [mem](0) pmovzxbw xmm,qword[bx+si+disp16] (opdsize)
+30   [mem](1) pmovzxbw xmm,qword[bx+di+disp16] (opdsize)
+30   [mem](2) pmovzxbw xmm,qword[bp+si+disp16] (opdsize)
+30   [mem](3) pmovzxbw xmm,qword[bp+di+disp16] (opdsize)
+30   [mem](4) pmovzxbw xmm,qword[si+disp16] (opdsize)
+30   [mem](5) pmovzxbw xmm,qword[di+disp16] (opdsize)
+30   [mem](6) pmovzxbw xmm,qword[bp+disp16] (opdsize)
+30   [mem](7) pmovzxbw xmm,qword[bx+disp16] (opdsize)
+30   [11B](0) pmovzxbw xmm,xmm0 (opdsize)
+30   [11B](1) pmovzxbw xmm,xmm1 (opdsize)
+30   [11B](2) pmovzxbw xmm,xmm2 (opdsize)
+30   [11B](3) pmovzxbw xmm,xmm3 (opdsize)
+30   [11B](4) pmovzxbw xmm,xmm4 (opdsize)
+30   [11B](5) pmovzxbw xmm,xmm5 (opdsize)
+30   [11B](6) pmovzxbw xmm,xmm6 (opdsize)
+30   [11B](7) pmovzxbw xmm,xmm7 (opdsize)
+31   [mem](0) pmovzxbd xmm,dword[bx+si] (opdsize)
+31   [mem](1) pmovzxbd xmm,dword[bx+di] (opdsize)
+31   [mem](2) pmovzxbd xmm,dword[bp+si] (opdsize)
+31   [mem](3) pmovzxbd xmm,dword[bp+di] (opdsize)
+31   [mem](4) pmovzxbd xmm,dword[si] (opdsize)
+31   [mem](5) pmovzxbd xmm,dword[di] (opdsize)
+31   [mem](6) pmovzxbd xmm,dword[disp16] (opdsize)
+31   [mem](7) pmovzxbd xmm,dword[bx] (opdsize)
+31   [mem](0) pmovzxbd xmm,dword[bx+si+disp8] (opdsize)
+31   [mem](1) pmovzxbd xmm,dword[bx+di+disp8] (opdsize)
+31   [mem](2) pmovzxbd xmm,dword[bp+si+disp8] (opdsize)
+31   [mem](3) pmovzxbd xmm,dword[bp+di+disp8] (opdsize)
+31   [mem](4) pmovzxbd xmm,dword[si+disp8] (opdsize)
+31   [mem](5) pmovzxbd xmm,dword[di+disp8] (opdsize)
+31   [mem](6) pmovzxbd xmm,dword[bp+disp8] (opdsize)
+31   [mem](7) pmovzxbd xmm,dword[bx+disp8] (opdsize)
+31   [mem](0) pmovzxbd xmm,dword[bx+si+disp16] (opdsize)
+31   [mem](1) pmovzxbd xmm,dword[bx+di+disp16] (opdsize)
+31   [mem](2) pmovzxbd xmm,dword[bp+si+disp16] (opdsize)
+31   [mem](3) pmovzxbd xmm,dword[bp+di+disp16] (opdsize)
+31   [mem](4) pmovzxbd xmm,dword[si+disp16] (opdsize)
+31   [mem](5) pmovzxbd xmm,dword[di+disp16] (opdsize)
+31   [mem](6) pmovzxbd xmm,dword[bp+disp16] (opdsize)
+31   [mem](7) pmovzxbd xmm,dword[bx+disp16] (opdsize)
+31   [11B](0) pmovzxbd xmm,xmm0 (opdsize)
+31   [11B](1) pmovzxbd xmm,xmm1 (opdsize)
+31   [11B](2) pmovzxbd xmm,xmm2 (opdsize)
+31   [11B](3) pmovzxbd xmm,xmm3 (opdsize)
+31   [11B](4) pmovzxbd xmm,xmm4 (opdsize)
+31   [11B](5) pmovzxbd xmm,xmm5 (opdsize)
+31   [11B](6) pmovzxbd xmm,xmm6 (opdsize)
+31   [11B](7) pmovzxbd xmm,xmm7 (opdsize)
+32   [mem](0) pmovzxbq xmm,word[bx+si] (opdsize)
+32   [mem](1) pmovzxbq xmm,word[bx+di] (opdsize)
+32   [mem](2) pmovzxbq xmm,word[bp+si] (opdsize)
+32   [mem](3) pmovzxbq xmm,word[bp+di] (opdsize)
+32   [mem](4) pmovzxbq xmm,word[si] (opdsize)
+32   [mem](5) pmovzxbq xmm,word[di] (opdsize)
+32   [mem](6) pmovzxbq xmm,word[disp16] (opdsize)
+32   [mem](7) pmovzxbq xmm,word[bx] (opdsize)
+32   [mem](0) pmovzxbq xmm,word[bx+si+disp8] (opdsize)
+32   [mem](1) pmovzxbq xmm,word[bx+di+disp8] (opdsize)
+32   [mem](2) pmovzxbq xmm,word[bp+si+disp8] (opdsize)
+32   [mem](3) pmovzxbq xmm,word[bp+di+disp8] (opdsize)
+32   [mem](4) pmovzxbq xmm,word[si+disp8] (opdsize)
+32   [mem](5) pmovzxbq xmm,word[di+disp8] (opdsize)
+32   [mem](6) pmovzxbq xmm,word[bp+disp8] (opdsize)
+32   [mem](7) pmovzxbq xmm,word[bx+disp8] (opdsize)
+32   [mem](0) pmovzxbq xmm,word[bx+si+disp16] (opdsize)
+32   [mem](1) pmovzxbq xmm,word[bx+di+disp16] (opdsize)
+32   [mem](2) pmovzxbq xmm,word[bp+si+disp16] (opdsize)
+32   [mem](3) pmovzxbq xmm,word[bp+di+disp16] (opdsize)
+32   [mem](4) pmovzxbq xmm,word[si+disp16] (opdsize)
+32   [mem](5) pmovzxbq xmm,word[di+disp16] (opdsize)
+32   [mem](6) pmovzxbq xmm,word[bp+disp16] (opdsize)
+32   [mem](7) pmovzxbq xmm,word[bx+disp16] (opdsize)
+32   [11B](0) pmovzxbq xmm,xmm0 (opdsize)
+32   [11B](1) pmovzxbq xmm,xmm1 (opdsize)
+32   [11B](2) pmovzxbq xmm,xmm2 (opdsize)
+32   [11B](3) pmovzxbq xmm,xmm3 (opdsize)
+32   [11B](4) pmovzxbq xmm,xmm4 (opdsize)
+32   [11B](5) pmovzxbq xmm,xmm5 (opdsize)
+32   [11B](6) pmovzxbq xmm,xmm6 (opdsize)
+32   [11B](7) pmovzxbq xmm,xmm7 (opdsize)
+33   [mem](0) pmovzxwd xmm,qword[bx+si] (opdsize)
+33   [mem](1) pmovzxwd xmm,qword[bx+di] (opdsize)
+33   [mem](2) pmovzxwd xmm,qword[bp+si] (opdsize)
+33   [mem](3) pmovzxwd xmm,qword[bp+di] (opdsize)
+33   [mem](4) pmovzxwd xmm,qword[si] (opdsize)
+33   [mem](5) pmovzxwd xmm,qword[di] (opdsize)
+33   [mem](6) pmovzxwd xmm,qword[disp16] (opdsize)
+33   [mem](7) pmovzxwd xmm,qword[bx] (opdsize)
+33   [mem](0) pmovzxwd xmm,qword[bx+si+disp8] (opdsize)
+33   [mem](1) pmovzxwd xmm,qword[bx+di+disp8] (opdsize)
+33   [mem](2) pmovzxwd xmm,qword[bp+si+disp8] (opdsize)
+33   [mem](3) pmovzxwd xmm,qword[bp+di+disp8] (opdsize)
+33   [mem](4) pmovzxwd xmm,qword[si+disp8] (opdsize)
+33   [mem](5) pmovzxwd xmm,qword[di+disp8] (opdsize)
+33   [mem](6) pmovzxwd xmm,qword[bp+disp8] (opdsize)
+33   [mem](7) pmovzxwd xmm,qword[bx+disp8] (opdsize)
+33   [mem](0) pmovzxwd xmm,qword[bx+si+disp16] (opdsize)
+33   [mem](1) pmovzxwd xmm,qword[bx+di+disp16] (opdsize)
+33   [mem](2) pmovzxwd xmm,qword[bp+si+disp16] (opdsize)
+33   [mem](3) pmovzxwd xmm,qword[bp+di+disp16] (opdsize)
+33   [mem](4) pmovzxwd xmm,qword[si+disp16] (opdsize)
+33   [mem](5) pmovzxwd xmm,qword[di+disp16] (opdsize)
+33   [mem](6) pmovzxwd xmm,qword[bp+disp16] (opdsize)
+33   [mem](7) pmovzxwd xmm,qword[bx+disp16] (opdsize)
+33   [11B](0) pmovzxwd xmm,xmm0 (opdsize)
+33   [11B](1) pmovzxwd xmm,xmm1 (opdsize)
+33   [11B](2) pmovzxwd xmm,xmm2 (opdsize)
+33   [11B](3) pmovzxwd xmm,xmm3 (opdsize)
+33   [11B](4) pmovzxwd xmm,xmm4 (opdsize)
+33   [11B](5) pmovzxwd xmm,xmm5 (opdsize)
+33   [11B](6) pmovzxwd xmm,xmm6 (opdsize)
+33   [11B](7) pmovzxwd xmm,xmm7 (opdsize)
+34   [mem](0) pmovzxwq xmm,dword[bx+si] (opdsize)
+34   [mem](1) pmovzxwq xmm,dword[bx+di] (opdsize)
+34   [mem](2) pmovzxwq xmm,dword[bp+si] (opdsize)
+34   [mem](3) pmovzxwq xmm,dword[bp+di] (opdsize)
+34   [mem](4) pmovzxwq xmm,dword[si] (opdsize)
+34   [mem](5) pmovzxwq xmm,dword[di] (opdsize)
+34   [mem](6) pmovzxwq xmm,dword[disp16] (opdsize)
+34   [mem](7) pmovzxwq xmm,dword[bx] (opdsize)
+34   [mem](0) pmovzxwq xmm,dword[bx+si+disp8] (opdsize)
+34   [mem](1) pmovzxwq xmm,dword[bx+di+disp8] (opdsize)
+34   [mem](2) pmovzxwq xmm,dword[bp+si+disp8] (opdsize)
+34   [mem](3) pmovzxwq xmm,dword[bp+di+disp8] (opdsize)
+34   [mem](4) pmovzxwq xmm,dword[si+disp8] (opdsize)
+34   [mem](5) pmovzxwq xmm,dword[di+disp8] (opdsize)
+34   [mem](6) pmovzxwq xmm,dword[bp+disp8] (opdsize)
+34   [mem](7) pmovzxwq xmm,dword[bx+disp8] (opdsize)
+34   [mem](0) pmovzxwq xmm,dword[bx+si+disp16] (opdsize)
+34   [mem](1) pmovzxwq xmm,dword[bx+di+disp16] (opdsize)
+34   [mem](2) pmovzxwq xmm,dword[bp+si+disp16] (opdsize)
+34   [mem](3) pmovzxwq xmm,dword[bp+di+disp16] (opdsize)
+34   [mem](4) pmovzxwq xmm,dword[si+disp16] (opdsize)
+34   [mem](5) pmovzxwq xmm,dword[di+disp16] (opdsize)
+34   [mem](6) pmovzxwq xmm,dword[bp+disp16] (opdsize)
+34   [mem](7) pmovzxwq xmm,dword[bx+disp16] (opdsize)
+34   [11B](0) pmovzxwq xmm,xmm0 (opdsize)
+34   [11B](1) pmovzxwq xmm,xmm1 (opdsize)
+34   [11B](2) pmovzxwq xmm,xmm2 (opdsize)
+34   [11B](3) pmovzxwq xmm,xmm3 (opdsize)
+34   [11B](4) pmovzxwq xmm,xmm4 (opdsize)
+34   [11B](5) pmovzxwq xmm,xmm5 (opdsize)
+34   [11B](6) pmovzxwq xmm,xmm6 (opdsize)
+34   [11B](7) pmovzxwq xmm,xmm7 (opdsize)
+35   [mem](0) pmovzxdq xmm,qword[bx+si] (opdsize)
+35   [mem](1) pmovzxdq xmm,qword[bx+di] (opdsize)
+35   [mem](2) pmovzxdq xmm,qword[bp+si] (opdsize)
+35   [mem](3) pmovzxdq xmm,qword[bp+di] (opdsize)
+35   [mem](4) pmovzxdq xmm,qword[si] (opdsize)
+35   [mem](5) pmovzxdq xmm,qword[di] (opdsize)
+35   [mem](6) pmovzxdq xmm,qword[disp16] (opdsize)
+35   [mem](7) pmovzxdq xmm,qword[bx] (opdsize)
+35   [mem](0) pmovzxdq xmm,qword[bx+si+disp8] (opdsize)
+35   [mem](1) pmovzxdq xmm,qword[bx+di+disp8] (opdsize)
+35   [mem](2) pmovzxdq xmm,qword[bp+si+disp8] (opdsize)
+35   [mem](3) pmovzxdq xmm,qword[bp+di+disp8] (opdsize)
+35   [mem](4) pmovzxdq xmm,qword[si+disp8] (opdsize)
+35   [mem](5) pmovzxdq xmm,qword[di+disp8] (opdsize)
+35   [mem](6) pmovzxdq xmm,qword[bp+disp8] (opdsize)
+35   [mem](7) pmovzxdq xmm,qword[bx+disp8] (opdsize)
+35   [mem](0) pmovzxdq xmm,qword[bx+si+disp16] (opdsize)
+35   [mem](1) pmovzxdq xmm,qword[bx+di+disp16] (opdsize)
+35   [mem](2) pmovzxdq xmm,qword[bp+si+disp16] (opdsize)
+35   [mem](3) pmovzxdq xmm,qword[bp+di+disp16] (opdsize)
+35   [mem](4) pmovzxdq xmm,qword[si+disp16] (opdsize)
+35   [mem](5) pmovzxdq xmm,qword[di+disp16] (opdsize)
+35   [mem](6) pmovzxdq xmm,qword[bp+disp16] (opdsize)
+35   [mem](7) pmovzxdq xmm,qword[bx+disp16] (opdsize)
+35   [11B](0) pmovzxdq xmm,xmm0 (opdsize)
+35   [11B](1) pmovzxdq xmm,xmm1 (opdsize)
+35   [11B](2) pmovzxdq xmm,xmm2 (opdsize)
+35   [11B](3) pmovzxdq xmm,xmm3 (opdsize)
+35   [11B](4) pmovzxdq xmm,xmm4 (opdsize)
+35   [11B](5) pmovzxdq xmm,xmm5 (opdsize)
+35   [11B](6) pmovzxdq xmm,xmm6 (opdsize)
+35   [11B](7) pmovzxdq xmm,xmm7 (opdsize)
+38   [mem](0) pminsb xmm,oword[bx+si] (opdsize)
+38   [mem](1) pminsb xmm,oword[bx+di] (opdsize)
+38   [mem](2) pminsb xmm,oword[bp+si] (opdsize)
+38   [mem](3) pminsb xmm,oword[bp+di] (opdsize)
+38   [mem](4) pminsb xmm,oword[si] (opdsize)
+38   [mem](5) pminsb xmm,oword[di] (opdsize)
+38   [mem](6) pminsb xmm,oword[disp16] (opdsize)
+38   [mem](7) pminsb xmm,oword[bx] (opdsize)
+38   [mem](0) pminsb xmm,oword[bx+si+disp8] (opdsize)
+38   [mem](1) pminsb xmm,oword[bx+di+disp8] (opdsize)
+38   [mem](2) pminsb xmm,oword[bp+si+disp8] (opdsize)
+38   [mem](3) pminsb xmm,oword[bp+di+disp8] (opdsize)
+38   [mem](4) pminsb xmm,oword[si+disp8] (opdsize)
+38   [mem](5) pminsb xmm,oword[di+disp8] (opdsize)
+38   [mem](6) pminsb xmm,oword[bp+disp8] (opdsize)
+38   [mem](7) pminsb xmm,oword[bx+disp8] (opdsize)
+38   [mem](0) pminsb xmm,oword[bx+si+disp16] (opdsize)
+38   [mem](1) pminsb xmm,oword[bx+di+disp16] (opdsize)
+38   [mem](2) pminsb xmm,oword[bp+si+disp16] (opdsize)
+38   [mem](3) pminsb xmm,oword[bp+di+disp16] (opdsize)
+38   [mem](4) pminsb xmm,oword[si+disp16] (opdsize)
+38   [mem](5) pminsb xmm,oword[di+disp16] (opdsize)
+38   [mem](6) pminsb xmm,oword[bp+disp16] (opdsize)
+38   [mem](7) pminsb xmm,oword[bx+disp16] (opdsize)
+38   [11B](0) pminsb xmm,xmm0 (opdsize)
+38   [11B](1) pminsb xmm,xmm1 (opdsize)
+38   [11B](2) pminsb xmm,xmm2 (opdsize)
+38   [11B](3) pminsb xmm,xmm3 (opdsize)
+38   [11B](4) pminsb xmm,xmm4 (opdsize)
+38   [11B](5) pminsb xmm,xmm5 (opdsize)
+38   [11B](6) pminsb xmm,xmm6 (opdsize)
+38   [11B](7) pminsb xmm,xmm7 (opdsize)
+39   [mem](0) pminsd xmm,oword[bx+si] (opdsize)
+39   [mem](1) pminsd xmm,oword[bx+di] (opdsize)
+39   [mem](2) pminsd xmm,oword[bp+si] (opdsize)
+39   [mem](3) pminsd xmm,oword[bp+di] (opdsize)
+39   [mem](4) pminsd xmm,oword[si] (opdsize)
+39   [mem](5) pminsd xmm,oword[di] (opdsize)
+39   [mem](6) pminsd xmm,oword[disp16] (opdsize)
+39   [mem](7) pminsd xmm,oword[bx] (opdsize)
+39   [mem](0) pminsd xmm,oword[bx+si+disp8] (opdsize)
+39   [mem](1) pminsd xmm,oword[bx+di+disp8] (opdsize)
+39   [mem](2) pminsd xmm,oword[bp+si+disp8] (opdsize)
+39   [mem](3) pminsd xmm,oword[bp+di+disp8] (opdsize)
+39   [mem](4) pminsd xmm,oword[si+disp8] (opdsize)
+39   [mem](5) pminsd xmm,oword[di+disp8] (opdsize)
+39   [mem](6) pminsd xmm,oword[bp+disp8] (opdsize)
+39   [mem](7) pminsd xmm,oword[bx+disp8] (opdsize)
+39   [mem](0) pminsd xmm,oword[bx+si+disp16] (opdsize)
+39   [mem](1) pminsd xmm,oword[bx+di+disp16] (opdsize)
+39   [mem](2) pminsd xmm,oword[bp+si+disp16] (opdsize)
+39   [mem](3) pminsd xmm,oword[bp+di+disp16] (opdsize)
+39   [mem](4) pminsd xmm,oword[si+disp16] (opdsize)
+39   [mem](5) pminsd xmm,oword[di+disp16] (opdsize)
+39   [mem](6) pminsd xmm,oword[bp+disp16] (opdsize)
+39   [mem](7) pminsd xmm,oword[bx+disp16] (opdsize)
+39   [11B](0) pminsd xmm,xmm0 (opdsize)
+39   [11B](1) pminsd xmm,xmm1 (opdsize)
+39   [11B](2) pminsd xmm,xmm2 (opdsize)
+39   [11B](3) pminsd xmm,xmm3 (opdsize)
+39   [11B](4) pminsd xmm,xmm4 (opdsize)
+39   [11B](5) pminsd xmm,xmm5 (opdsize)
+39   [11B](6) pminsd xmm,xmm6 (opdsize)
+39   [11B](7) pminsd xmm,xmm7 (opdsize)
+3A   [mem](0) pminuw xmm,oword[bx+si] (opdsize)
+3A   [mem](1) pminuw xmm,oword[bx+di] (opdsize)
+3A   [mem](2) pminuw xmm,oword[bp+si] (opdsize)
+3A   [mem](3) pminuw xmm,oword[bp+di] (opdsize)
+3A   [mem](4) pminuw xmm,oword[si] (opdsize)
+3A   [mem](5) pminuw xmm,oword[di] (opdsize)
+3A   [mem](6) pminuw xmm,oword[disp16] (opdsize)
+3A   [mem](7) pminuw xmm,oword[bx] (opdsize)
+3A   [mem](0) pminuw xmm,oword[bx+si+disp8] (opdsize)
+3A   [mem](1) pminuw xmm,oword[bx+di+disp8] (opdsize)
+3A   [mem](2) pminuw xmm,oword[bp+si+disp8] (opdsize)
+3A   [mem](3) pminuw xmm,oword[bp+di+disp8] (opdsize)
+3A   [mem](4) pminuw xmm,oword[si+disp8] (opdsize)
+3A   [mem](5) pminuw xmm,oword[di+disp8] (opdsize)
+3A   [mem](6) pminuw xmm,oword[bp+disp8] (opdsize)
+3A   [mem](7) pminuw xmm,oword[bx+disp8] (opdsize)
+3A   [mem](0) pminuw xmm,oword[bx+si+disp16] (opdsize)
+3A   [mem](1) pminuw xmm,oword[bx+di+disp16] (opdsize)
+3A   [mem](2) pminuw xmm,oword[bp+si+disp16] (opdsize)
+3A   [mem](3) pminuw xmm,oword[bp+di+disp16] (opdsize)
+3A   [mem](4) pminuw xmm,oword[si+disp16] (opdsize)
+3A   [mem](5) pminuw xmm,oword[di+disp16] (opdsize)
+3A   [mem](6) pminuw xmm,oword[bp+disp16] (opdsize)
+3A   [mem](7) pminuw xmm,oword[bx+disp16] (opdsize)
+3A   [11B](0) pminuw xmm,xmm0 (opdsize)
+3A   [11B](1) pminuw xmm,xmm1 (opdsize)
+3A   [11B](2) pminuw xmm,xmm2 (opdsize)
+3A   [11B](3) pminuw xmm,xmm3 (opdsize)
+3A   [11B](4) pminuw xmm,xmm4 (opdsize)
+3A   [11B](5) pminuw xmm,xmm5 (opdsize)
+3A   [11B](6) pminuw xmm,xmm6 (opdsize)
+3A   [11B](7) pminuw xmm,xmm7 (opdsize)
+3B   [mem](0) pminud xmm,oword[bx+si] (opdsize)
+3B   [mem](1) pminud xmm,oword[bx+di] (opdsize)
+3B   [mem](2) pminud xmm,oword[bp+si] (opdsize)
+3B   [mem](3) pminud xmm,oword[bp+di] (opdsize)
+3B   [mem](4) pminud xmm,oword[si] (opdsize)
+3B   [mem](5) pminud xmm,oword[di] (opdsize)
+3B   [mem](6) pminud xmm,oword[disp16] (opdsize)
+3B   [mem](7) pminud xmm,oword[bx] (opdsize)
+3B   [mem](0) pminud xmm,oword[bx+si+disp8] (opdsize)
+3B   [mem](1) pminud xmm,oword[bx+di+disp8] (opdsize)
+3B   [mem](2) pminud xmm,oword[bp+si+disp8] (opdsize)
+3B   [mem](3) pminud xmm,oword[bp+di+disp8] (opdsize)
+3B   [mem](4) pminud xmm,oword[si+disp8] (opdsize)
+3B   [mem](5) pminud xmm,oword[di+disp8] (opdsize)
+3B   [mem](6) pminud xmm,oword[bp+disp8] (opdsize)
+3B   [mem](7) pminud xmm,oword[bx+disp8] (opdsize)
+3B   [mem](0) pminud xmm,oword[bx+si+disp16] (opdsize)
+3B   [mem](1) pminud xmm,oword[bx+di+disp16] (opdsize)
+3B   [mem](2) pminud xmm,oword[bp+si+disp16] (opdsize)
+3B   [mem](3) pminud xmm,oword[bp+di+disp16] (opdsize)
+3B   [mem](4) pminud xmm,oword[si+disp16] (opdsize)
+3B   [mem](5) pminud xmm,oword[di+disp16] (opdsize)
+3B   [mem](6) pminud xmm,oword[bp+disp16] (opdsize)
+3B   [mem](7) pminud xmm,oword[bx+disp16] (opdsize)
+3B   [11B](0) pminud xmm,xmm0 (opdsize)
+3B   [11B](1) pminud xmm,xmm1 (opdsize)
+3B   [11B](2) pminud xmm,xmm2 (opdsize)
+3B   [11B](3) pminud xmm,xmm3 (opdsize)
+3B   [11B](4) pminud xmm,xmm4 (opdsize)
+3B   [11B](5) pminud xmm,xmm5 (opdsize)
+3B   [11B](6) pminud xmm,xmm6 (opdsize)
+3B   [11B](7) pminud xmm,xmm7 (opdsize)
+3C   [mem](0) pmaxsb xmm,oword[bx+si] (opdsize)
+3C   [mem](1) pmaxsb xmm,oword[bx+di] (opdsize)
+3C   [mem](2) pmaxsb xmm,oword[bp+si] (opdsize)
+3C   [mem](3) pmaxsb xmm,oword[bp+di] (opdsize)
+3C   [mem](4) pmaxsb xmm,oword[si] (opdsize)
+3C   [mem](5) pmaxsb xmm,oword[di] (opdsize)
+3C   [mem](6) pmaxsb xmm,oword[disp16] (opdsize)
+3C   [mem](7) pmaxsb xmm,oword[bx] (opdsize)
+3C   [mem](0) pmaxsb xmm,oword[bx+si+disp8] (opdsize)
+3C   [mem](1) pmaxsb xmm,oword[bx+di+disp8] (opdsize)
+3C   [mem](2) pmaxsb xmm,oword[bp+si+disp8] (opdsize)
+3C   [mem](3) pmaxsb xmm,oword[bp+di+disp8] (opdsize)
+3C   [mem](4) pmaxsb xmm,oword[si+disp8] (opdsize)
+3C   [mem](5) pmaxsb xmm,oword[di+disp8] (opdsize)
+3C   [mem](6) pmaxsb xmm,oword[bp+disp8] (opdsize)
+3C   [mem](7) pmaxsb xmm,oword[bx+disp8] (opdsize)
+3C   [mem](0) pmaxsb xmm,oword[bx+si+disp16] (opdsize)
+3C   [mem](1) pmaxsb xmm,oword[bx+di+disp16] (opdsize)
+3C   [mem](2) pmaxsb xmm,oword[bp+si+disp16] (opdsize)
+3C   [mem](3) pmaxsb xmm,oword[bp+di+disp16] (opdsize)
+3C   [mem](4) pmaxsb xmm,oword[si+disp16] (opdsize)
+3C   [mem](5) pmaxsb xmm,oword[di+disp16] (opdsize)
+3C   [mem](6) pmaxsb xmm,oword[bp+disp16] (opdsize)
+3C   [mem](7) pmaxsb xmm,oword[bx+disp16] (opdsize)
+3C   [11B](0) pmaxsb xmm,xmm0 (opdsize)
+3C   [11B](1) pmaxsb xmm,xmm1 (opdsize)
+3C   [11B](2) pmaxsb xmm,xmm2 (opdsize)
+3C   [11B](3) pmaxsb xmm,xmm3 (opdsize)
+3C   [11B](4) pmaxsb xmm,xmm4 (opdsize)
+3C   [11B](5) pmaxsb xmm,xmm5 (opdsize)
+3C   [11B](6) pmaxsb xmm,xmm6 (opdsize)
+3C   [11B](7) pmaxsb xmm,xmm7 (opdsize)
+3D   [mem](0) pmaxsd xmm,oword[bx+si] (opdsize)
+3D   [mem](1) pmaxsd xmm,oword[bx+di] (opdsize)
+3D   [mem](2) pmaxsd xmm,oword[bp+si] (opdsize)
+3D   [mem](3) pmaxsd xmm,oword[bp+di] (opdsize)
+3D   [mem](4) pmaxsd xmm,oword[si] (opdsize)
+3D   [mem](5) pmaxsd xmm,oword[di] (opdsize)
+3D   [mem](6) pmaxsd xmm,oword[disp16] (opdsize)
+3D   [mem](7) pmaxsd xmm,oword[bx] (opdsize)
+3D   [mem](0) pmaxsd xmm,oword[bx+si+disp8] (opdsize)
+3D   [mem](1) pmaxsd xmm,oword[bx+di+disp8] (opdsize)
+3D   [mem](2) pmaxsd xmm,oword[bp+si+disp8] (opdsize)
+3D   [mem](3) pmaxsd xmm,oword[bp+di+disp8] (opdsize)
+3D   [mem](4) pmaxsd xmm,oword[si+disp8] (opdsize)
+3D   [mem](5) pmaxsd xmm,oword[di+disp8] (opdsize)
+3D   [mem](6) pmaxsd xmm,oword[bp+disp8] (opdsize)
+3D   [mem](7) pmaxsd xmm,oword[bx+disp8] (opdsize)
+3D   [mem](0) pmaxsd xmm,oword[bx+si+disp16] (opdsize)
+3D   [mem](1) pmaxsd xmm,oword[bx+di+disp16] (opdsize)
+3D   [mem](2) pmaxsd xmm,oword[bp+si+disp16] (opdsize)
+3D   [mem](3) pmaxsd xmm,oword[bp+di+disp16] (opdsize)
+3D   [mem](4) pmaxsd xmm,oword[si+disp16] (opdsize)
+3D   [mem](5) pmaxsd xmm,oword[di+disp16] (opdsize)
+3D   [mem](6) pmaxsd xmm,oword[bp+disp16] (opdsize)
+3D   [mem](7) pmaxsd xmm,oword[bx+disp16] (opdsize)
+3D   [11B](0) pmaxsd xmm,xmm0 (opdsize)
+3D   [11B](1) pmaxsd xmm,xmm1 (opdsize)
+3D   [11B](2) pmaxsd xmm,xmm2 (opdsize)
+3D   [11B](3) pmaxsd xmm,xmm3 (opdsize)
+3D   [11B](4) pmaxsd xmm,xmm4 (opdsize)
+3D   [11B](5) pmaxsd xmm,xmm5 (opdsize)
+3D   [11B](6) pmaxsd xmm,xmm6 (opdsize)
+3D   [11B](7) pmaxsd xmm,xmm7 (opdsize)
+3E   [mem](0) pmaxuw xmm,oword[bx+si] (opdsize)
+3E   [mem](1) pmaxuw xmm,oword[bx+di] (opdsize)
+3E   [mem](2) pmaxuw xmm,oword[bp+si] (opdsize)
+3E   [mem](3) pmaxuw xmm,oword[bp+di] (opdsize)
+3E   [mem](4) pmaxuw xmm,oword[si] (opdsize)
+3E   [mem](5) pmaxuw xmm,oword[di] (opdsize)
+3E   [mem](6) pmaxuw xmm,oword[disp16] (opdsize)
+3E   [mem](7) pmaxuw xmm,oword[bx] (opdsize)
+3E   [mem](0) pmaxuw xmm,oword[bx+si+disp8] (opdsize)
+3E   [mem](1) pmaxuw xmm,oword[bx+di+disp8] (opdsize)
+3E   [mem](2) pmaxuw xmm,oword[bp+si+disp8] (opdsize)
+3E   [mem](3) pmaxuw xmm,oword[bp+di+disp8] (opdsize)
+3E   [mem](4) pmaxuw xmm,oword[si+disp8] (opdsize)
+3E   [mem](5) pmaxuw xmm,oword[di+disp8] (opdsize)
+3E   [mem](6) pmaxuw xmm,oword[bp+disp8] (opdsize)
+3E   [mem](7) pmaxuw xmm,oword[bx+disp8] (opdsize)
+3E   [mem](0) pmaxuw xmm,oword[bx+si+disp16] (opdsize)
+3E   [mem](1) pmaxuw xmm,oword[bx+di+disp16] (opdsize)
+3E   [mem](2) pmaxuw xmm,oword[bp+si+disp16] (opdsize)
+3E   [mem](3) pmaxuw xmm,oword[bp+di+disp16] (opdsize)
+3E   [mem](4) pmaxuw xmm,oword[si+disp16] (opdsize)
+3E   [mem](5) pmaxuw xmm,oword[di+disp16] (opdsize)
+3E   [mem](6) pmaxuw xmm,oword[bp+disp16] (opdsize)
+3E   [mem](7) pmaxuw xmm,oword[bx+disp16] (opdsize)
+3E   [11B](0) pmaxuw xmm,xmm0 (opdsize)
+3E   [11B](1) pmaxuw xmm,xmm1 (opdsize)
+3E   [11B](2) pmaxuw xmm,xmm2 (opdsize)
+3E   [11B](3) pmaxuw xmm,xmm3 (opdsize)
+3E   [11B](4) pmaxuw xmm,xmm4 (opdsize)
+3E   [11B](5) pmaxuw xmm,xmm5 (opdsize)
+3E   [11B](6) pmaxuw xmm,xmm6 (opdsize)
+3E   [11B](7) pmaxuw xmm,xmm7 (opdsize)
+3F   [mem](0) pmaxud xmm,oword[bx+si] (opdsize)
+3F   [mem](1) pmaxud xmm,oword[bx+di] (opdsize)
+3F   [mem](2) pmaxud xmm,oword[bp+si] (opdsize)
+3F   [mem](3) pmaxud xmm,oword[bp+di] (opdsize)
+3F   [mem](4) pmaxud xmm,oword[si] (opdsize)
+3F   [mem](5) pmaxud xmm,oword[di] (opdsize)
+3F   [mem](6) pmaxud xmm,oword[disp16] (opdsize)
+3F   [mem](7) pmaxud xmm,oword[bx] (opdsize)
+3F   [mem](0) pmaxud xmm,oword[bx+si+disp8] (opdsize)
+3F   [mem](1) pmaxud xmm,oword[bx+di+disp8] (opdsize)
+3F   [mem](2) pmaxud xmm,oword[bp+si+disp8] (opdsize)
+3F   [mem](3) pmaxud xmm,oword[bp+di+disp8] (opdsize)
+3F   [mem](4) pmaxud xmm,oword[si+disp8] (opdsize)
+3F   [mem](5) pmaxud xmm,oword[di+disp8] (opdsize)
+3F   [mem](6) pmaxud xmm,oword[bp+disp8] (opdsize)
+3F   [mem](7) pmaxud xmm,oword[bx+disp8] (opdsize)
+3F   [mem](0) pmaxud xmm,oword[bx+si+disp16] (opdsize)
+3F   [mem](1) pmaxud xmm,oword[bx+di+disp16] (opdsize)
+3F   [mem](2) pmaxud xmm,oword[bp+si+disp16] (opdsize)
+3F   [mem](3) pmaxud xmm,oword[bp+di+disp16] (opdsize)
+3F   [mem](4) pmaxud xmm,oword[si+disp16] (opdsize)
+3F   [mem](5) pmaxud xmm,oword[di+disp16] (opdsize)
+3F   [mem](6) pmaxud xmm,oword[bp+disp16] (opdsize)
+3F   [mem](7) pmaxud xmm,oword[bx+disp16] (opdsize)
+3F   [11B](0) pmaxud xmm,xmm0 (opdsize)
+3F   [11B](1) pmaxud xmm,xmm1 (opdsize)
+3F   [11B](2) pmaxud xmm,xmm2 (opdsize)
+3F   [11B](3) pmaxud xmm,xmm3 (opdsize)
+3F   [11B](4) pmaxud xmm,xmm4 (opdsize)
+3F   [11B](5) pmaxud xmm,xmm5 (opdsize)
+3F   [11B](6) pmaxud xmm,xmm6 (opdsize)
+3F   [11B](7) pmaxud xmm,xmm7 (opdsize)
+40   [mem](0) pmulld xmm,oword[bx+si] (opdsize)
+40   [mem](1) pmulld xmm,oword[bx+di] (opdsize)
+40   [mem](2) pmulld xmm,oword[bp+si] (opdsize)
+40   [mem](3) pmulld xmm,oword[bp+di] (opdsize)
+40   [mem](4) pmulld xmm,oword[si] (opdsize)
+40   [mem](5) pmulld xmm,oword[di] (opdsize)
+40   [mem](6) pmulld xmm,oword[disp16] (opdsize)
+40   [mem](7) pmulld xmm,oword[bx] (opdsize)
+40   [mem](0) pmulld xmm,oword[bx+si+disp8] (opdsize)
+40   [mem](1) pmulld xmm,oword[bx+di+disp8] (opdsize)
+40   [mem](2) pmulld xmm,oword[bp+si+disp8] (opdsize)
+40   [mem](3) pmulld xmm,oword[bp+di+disp8] (opdsize)
+40   [mem](4) pmulld xmm,oword[si+disp8] (opdsize)
+40   [mem](5) pmulld xmm,oword[di+disp8] (opdsize)
+40   [mem](6) pmulld xmm,oword[bp+disp8] (opdsize)
+40   [mem](7) pmulld xmm,oword[bx+disp8] (opdsize)
+40   [mem](0) pmulld xmm,oword[bx+si+disp16] (opdsize)
+40   [mem](1) pmulld xmm,oword[bx+di+disp16] (opdsize)
+40   [mem](2) pmulld xmm,oword[bp+si+disp16] (opdsize)
+40   [mem](3) pmulld xmm,oword[bp+di+disp16] (opdsize)
+40   [mem](4) pmulld xmm,oword[si+disp16] (opdsize)
+40   [mem](5) pmulld xmm,oword[di+disp16] (opdsize)
+40   [mem](6) pmulld xmm,oword[bp+disp16] (opdsize)
+40   [mem](7) pmulld xmm,oword[bx+disp16] (opdsize)
+40   [11B](0) pmulld xmm,xmm0 (opdsize)
+40   [11B](1) pmulld xmm,xmm1 (opdsize)
+40   [11B](2) pmulld xmm,xmm2 (opdsize)
+40   [11B](3) pmulld xmm,xmm3 (opdsize)
+40   [11B](4) pmulld xmm,xmm4 (opdsize)
+40   [11B](5) pmulld xmm,xmm5 (opdsize)
+40   [11B](6) pmulld xmm,xmm6 (opdsize)
+40   [11B](7) pmulld xmm,xmm7 (opdsize)
+41   [mem](0) phminposuw xmm,oword[bx+si] (opdsize)
+41   [mem](1) phminposuw xmm,oword[bx+di] (opdsize)
+41   [mem](2) phminposuw xmm,oword[bp+si] (opdsize)
+41   [mem](3) phminposuw xmm,oword[bp+di] (opdsize)
+41   [mem](4) phminposuw xmm,oword[si] (opdsize)
+41   [mem](5) phminposuw xmm,oword[di] (opdsize)
+41   [mem](6) phminposuw xmm,oword[disp16] (opdsize)
+41   [mem](7) phminposuw xmm,oword[bx] (opdsize)
+41   [mem](0) phminposuw xmm,oword[bx+si+disp8] (opdsize)
+41   [mem](1) phminposuw xmm,oword[bx+di+disp8] (opdsize)
+41   [mem](2) phminposuw xmm,oword[bp+si+disp8] (opdsize)
+41   [mem](3) phminposuw xmm,oword[bp+di+disp8] (opdsize)
+41   [mem](4) phminposuw xmm,oword[si+disp8] (opdsize)
+41   [mem](5) phminposuw xmm,oword[di+disp8] (opdsize)
+41   [mem](6) phminposuw xmm,oword[bp+disp8] (opdsize)
+41   [mem](7) phminposuw xmm,oword[bx+disp8] (opdsize)
+41   [mem](0) phminposuw xmm,oword[bx+si+disp16] (opdsize)
+41   [mem](1) phminposuw xmm,oword[bx+di+disp16] (opdsize)
+41   [mem](2) phminposuw xmm,oword[bp+si+disp16] (opdsize)
+41   [mem](3) phminposuw xmm,oword[bp+di+disp16] (opdsize)
+41   [mem](4) phminposuw xmm,oword[si+disp16] (opdsize)
+41   [mem](5) phminposuw xmm,oword[di+disp16] (opdsize)
+41   [mem](6) phminposuw xmm,oword[bp+disp16] (opdsize)
+41   [mem](7) phminposuw xmm,oword[bx+disp16] (opdsize)
+41   [11B](0) phminposuw xmm,xmm0 (opdsize)
+41   [11B](1) phminposuw xmm,xmm1 (opdsize)
+41   [11B](2) phminposuw xmm,xmm2 (opdsize)
+41   [11B](3) phminposuw xmm,xmm3 (opdsize)
+41   [11B](4) phminposuw xmm,xmm4 (opdsize)
+41   [11B](5) phminposuw xmm,xmm5 (opdsize)
+41   [11B](6) phminposuw xmm,xmm6 (opdsize)
+41   [11B](7) phminposuw xmm,xmm7 (opdsize)
+82   [mem](0) invpcid r32,oword[bx+si] (opdsize)
+82   [mem](1) invpcid r32,oword[bx+di] (opdsize)
+82   [mem](2) invpcid r32,oword[bp+si] (opdsize)
+82   [mem](3) invpcid r32,oword[bp+di] (opdsize)
+82   [mem](4) invpcid r32,oword[si] (opdsize)
+82   [mem](5) invpcid r32,oword[di] (opdsize)
+82   [mem](6) invpcid r32,oword[disp16] (opdsize)
+82   [mem](7) invpcid r32,oword[bx] (opdsize)
+82   [mem](0) invpcid r32,oword[bx+si+disp8] (opdsize)
+82   [mem](1) invpcid r32,oword[bx+di+disp8] (opdsize)
+82   [mem](2) invpcid r32,oword[bp+si+disp8] (opdsize)
+82   [mem](3) invpcid r32,oword[bp+di+disp8] (opdsize)
+82   [mem](4) invpcid r32,oword[si+disp8] (opdsize)
+82   [mem](5) invpcid r32,oword[di+disp8] (opdsize)
+82   [mem](6) invpcid r32,oword[bp+disp8] (opdsize)
+82   [mem](7) invpcid r32,oword[bx+disp8] (opdsize)
+82   [mem](0) invpcid r32,oword[bx+si+disp16] (opdsize)
+82   [mem](1) invpcid r32,oword[bx+di+disp16] (opdsize)
+82   [mem](2) invpcid r32,oword[bp+si+disp16] (opdsize)
+82   [mem](3) invpcid r32,oword[bp+di+disp16] (opdsize)
+82   [mem](4) invpcid r32,oword[si+disp16] (opdsize)
+82   [mem](5) invpcid r32,oword[di+disp16] (opdsize)
+82   [mem](6) invpcid r32,oword[bp+disp16] (opdsize)
+82   [mem](7) invpcid r32,oword[bx+disp16] (opdsize)

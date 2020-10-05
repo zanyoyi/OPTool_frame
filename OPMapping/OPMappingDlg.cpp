@@ -253,9 +253,9 @@ void COPMappingDlg::OnBnClickedButton2()
 				if ((OpEntry[i].OPExt & 0x80) && (OpEntry[i].Attr & 0xFC))
 				{
 					if ((OpEntry[i].OPExt & 0x10) && (OpEntry[i].OPExt & 0x08))
-						strTemp.Format(_T("%02X/%x [11B] %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
+						strTemp.Format(_T("%02X/%x [11B](%x) %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].OPExt2 & 0x7, OpEntry[i].strDisasm, prefixes);
 					else if (OpEntry[i].OPExt & 0x10)
-						strTemp.Format(_T("%02X/%x [mem] %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
+						strTemp.Format(_T("%02X/%x [mem](%x) %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].OPExt2 & 0x7, OpEntry[i].strDisasm, prefixes);
 					else
 						strTemp.Format(_T("%02X/%x       %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm, prefixes);
 				}
@@ -263,31 +263,31 @@ void COPMappingDlg::OnBnClickedButton2()
 				else if (OpEntry[i].Attr & 0xFC)
 				{
 					if ((OpEntry[i].OPExt & 0x10) && (OpEntry[i].OPExt & 0x08))
-						strTemp.Format(_T("%02X   [11B] %s (%s)"), OpEntry[i].OP, OpEntry[i].strDisasm, prefixes);
+						strTemp.Format(_T("%02X   [11B](%x) %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt2 & 0x7, OpEntry[i].strDisasm, prefixes);
 					else if (OpEntry[i].OPExt & 0x10)
-						strTemp.Format(_T("%02X   [mem] %s (%s)"), OpEntry[i].OP, OpEntry[i].strDisasm, prefixes);
+						strTemp.Format(_T("%02X   [mem](%x) %s (%s)"), OpEntry[i].OP, OpEntry[i].OPExt2 & 0x7, OpEntry[i].strDisasm, prefixes);
 					else
-						strTemp.Format(_T("%02X         %s (%s)"), OpEntry[i].OP, OpEntry[i].strDisasm, prefixes);
+						strTemp.Format(_T("%02X            %s (%s)"), OpEntry[i].OP, OpEntry[i].strDisasm, prefixes);
 				}
 				// group
 				else if (OpEntry[i].OPExt & 0x80)
 				{
 					if ((OpEntry[i].OPExt & 0x10) && (OpEntry[i].OPExt & 0x08))
-						strTemp.Format(_T("%02X/%x [11B] %s"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm);
+						strTemp.Format(_T("%02X/%x [11B](%x) %s"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].OPExt2 & 0x7, OpEntry[i].strDisasm);
 					else if (OpEntry[i].OPExt & 0x10)
-						strTemp.Format(_T("%02X/%x [mem] %s"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm);
+						strTemp.Format(_T("%02X/%x [mem](%x) %s"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].OPExt2 & 0x7, OpEntry[i].strDisasm);
 					else
-						strTemp.Format(_T("%02X/%x       %s"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm);
+						strTemp.Format(_T("%02X/%x          %s"), OpEntry[i].OP, OpEntry[i].OPExt & 0x07, OpEntry[i].strDisasm);
 				}
 				// default
 				else
 				{
 					if ((OpEntry[i].OPExt & 0x10) && (OpEntry[i].OPExt & 0x08))
-						strTemp.Format(_T("%02X   [11B] %s"), OpEntry[i].OP, OpEntry[i].strDisasm);
+						strTemp.Format(_T("%02X   [11B](%x) %s"), OpEntry[i].OP, OpEntry[i].OPExt2 & 0x7, OpEntry[i].strDisasm);
 					else if (OpEntry[i].OPExt & 0x10)
-						strTemp.Format(_T("%02X   [mem] %s"), OpEntry[i].OP, OpEntry[i].strDisasm);
+						strTemp.Format(_T("%02X   [mem](%x) %s"), OpEntry[i].OP, OpEntry[i].OPExt2 & 0x7, OpEntry[i].strDisasm);
 					else
-						strTemp.Format(_T("%02X         %s"), OpEntry[i].OP, OpEntry[i].strDisasm);
+						strTemp.Format(_T("%02X            %s"), OpEntry[i].OP, OpEntry[i].strDisasm);
 				}
 				m_strAsmList.AddString(strTemp);
 			#ifdef SHOW_VALID
@@ -421,41 +421,41 @@ void COPMappingDlg::OnBnClickedButton1()
 			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x          %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
 			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X            %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// group
 			else if (ptr_OpEntry[i].OPExt & 0x80)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x          %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
 			}
 			// default
 			else
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X            %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
 			}
 		}
 	}
@@ -500,41 +500,41 @@ void COPMappingDlg::OnBnClickedButton1()
 			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x          %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
 			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X            %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// group
 			else if (ptr_OpEntry[i].OPExt & 0x80)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x          %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
 			}
 			// default
 			else
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X            %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
 			}
 		}
 	}
@@ -579,41 +579,41 @@ void COPMappingDlg::OnBnClickedButton1()
 			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x          %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
 			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X            %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// group
 			else if (ptr_OpEntry[i].OPExt & 0x80)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x          %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
 			}
 			// default
 			else
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X            %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
 			}
 		}
 	}
@@ -659,41 +659,41 @@ void COPMappingDlg::OnBnClickedButton1()
 			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x          %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
 			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X            %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// group
 			else if (ptr_OpEntry[i].OPExt & 0x80)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x          %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
 			}
 			// default
 			else
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X            %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
 			}
 		}
 	}
@@ -738,41 +738,41 @@ void COPMappingDlg::OnBnClickedButton1()
 			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x          %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
 			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X            %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// group
 			else if (ptr_OpEntry[i].OPExt & 0x80)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x          %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
 			}
 			// default
 			else
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X            %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
 			}
 		}
 	}
@@ -817,41 +817,41 @@ void COPMappingDlg::OnBnClickedButton1()
 			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x          %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
 			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X            %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// group
 			else if (ptr_OpEntry[i].OPExt & 0x80)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x          %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
 			}
 			// default
 			else
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X            %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
 			}
 		}
 	}
@@ -896,41 +896,41 @@ void COPMappingDlg::OnBnClickedButton1()
 			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x          %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
 			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X            %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// group
 			else if (ptr_OpEntry[i].OPExt & 0x80)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x          %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
 			}
 			// default
 			else
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X            %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
 			}
 		}
 	}
@@ -975,41 +975,41 @@ void COPMappingDlg::OnBnClickedButton1()
 			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x          %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
 			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X            %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// group
 			else if (ptr_OpEntry[i].OPExt & 0x80)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x          %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
 			}
 			// default
 			else
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X            %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
 			}
 		}
 	}
@@ -1054,41 +1054,41 @@ void COPMappingDlg::OnBnClickedButton1()
 			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x          %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
 			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X            %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// group
 			else if (ptr_OpEntry[i].OPExt & 0x80)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x          %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
 			}
 			// default
 			else
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X            %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
 			}
 		}
 	}
@@ -1133,41 +1133,41 @@ void COPMappingDlg::OnBnClickedButton1()
 			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x          %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
 			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X            %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// group
 			else if (ptr_OpEntry[i].OPExt & 0x80)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x          %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
 			}
 			// default
 			else
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X            %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
 			}
 		}
 	}
@@ -1213,41 +1213,41 @@ void COPMappingDlg::OnBnClickedButton1()
 			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x          %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
 			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X            %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// group
 			else if (ptr_OpEntry[i].OPExt & 0x80)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x          %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
 			}
 			// default
 			else
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X            %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
 			}
 		}
 	}
@@ -1293,41 +1293,41 @@ void COPMappingDlg::OnBnClickedButton1()
 			if ((ptr_OpEntry[i].OPExt & 0x80) && (ptr_OpEntry[i].Attr & 0xFC))
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X/%x          %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// prefixes
 			else if (ptr_OpEntry[i].Attr & 0xFC)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm, prefixes);
 				else
-					fwprintf(File_Handler, L"%02X         %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
+					fwprintf(File_Handler, L"%02X            %s (%s)\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm, prefixes);
 			}
 			// group
 			else if (ptr_OpEntry[i].OPExt & 0x80)
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X/%x [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X/%x [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X/%x       %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X/%x          %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt & 0x07, ptr_OpEntry[i].strDisasm);
 			}
 			// default
 			else
 			{
 				if ((ptr_OpEntry[i].OPExt & 0x10) && (ptr_OpEntry[i].OPExt & 0x08))
-					fwprintf(File_Handler, L"%02X   [11B] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [11B](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else if (ptr_OpEntry[i].OPExt & 0x10)
-					fwprintf(File_Handler, L"%02X   [mem] %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X   [mem](%x) %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].OPExt2 & 0x07, ptr_OpEntry[i].strDisasm);
 				else
-					fwprintf(File_Handler, L"%02X         %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
+					fwprintf(File_Handler, L"%02X            %s\n", ptr_OpEntry[i].OP, ptr_OpEntry[i].strDisasm);
 			}
 		}
 		// bonus infomation

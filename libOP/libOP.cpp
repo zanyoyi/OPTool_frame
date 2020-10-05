@@ -1594,6 +1594,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     pOpEntry->OP = (BYTE)OpIdx;
                     // group indicator | mod indicator | 11B indicator | group number
                     pOpEntry->OPExt = 0x80 | 0x10 | ((OP_2 >= 0xC0) << 3) | ((OP_2 >> 3) & 0x07);
+                    pOpEntry->OPExt2 = (BYTE)OP_2;
                     if (lendis && (options & 0x00F00000) && PrefixIdx_next)
                     {
                         // highlight those that are not so sure
@@ -1644,6 +1645,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     pOpEntry->OP = (BYTE)OpIdx;
                     // mod indicator | 11B indicator
                     pOpEntry->OPExt = 0x10 | ((OP_2 >= 0xC0) << 3);
+                    pOpEntry->OPExt2 = (BYTE)OP_2;
                     if (lendis && (options & 0x00F00000) && PrefixIdx_next)
                     {
                         // highlight those that are not so sure
@@ -1702,6 +1704,7 @@ LIB_OP_API DWORD xEnumOPCode(E_XB_OP eOPTab, E_ADM eADM, WCHAR* strOPMatch, OPEN
                     pOpEntry->Attr = prefixes;
                     pOpEntry->OP = (BYTE)OpIdx;
                     pOpEntry->OPExt = 0;
+                    pOpEntry->OPExt2 = (BYTE)OP_2;
                     if (lendis && (options & 0x00F00000) && PrefixIdx_next)
                     {
                         // highlight those that are not so sure
