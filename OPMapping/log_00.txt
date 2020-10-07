@@ -324,7 +324,7 @@ FE/1           DEC Eb
 FF/0           INC Ev
 FF/1           DEC Ev
 FF/2           CALL Ev
-FF/3           CALL FAR Ep
+FF/3           CALL FAR Mp
 FF/4           JMP Ev
 FF/5           JMP FAR Mp
 FF/6           PUSH Ev

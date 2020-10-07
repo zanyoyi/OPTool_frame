@@ -1398,7 +1398,7 @@ OP_ENTRY Grp05_FFh[8] = {
     {0xFF,0x80,0 | PF_Valid," INC Ev"},
     {0xFF,0x81,0 | PF_Valid," DEC Ev"},
     {0xFF,0x82,0 | PF_Valid," CALL Ev"},
-    {0xFF,0x83,0 | PF_Valid," CALL FAR Ep"},
+    {0xFF,0xC3,0 | PF_Valid," CALL FAR Mp"},
     {0xFF,0x84,0 | PF_Valid," JMP Ev"},
     {0xFF,0xC5,0 | PF_Valid," JMP FAR Mp"},
     {0xFF,0x86,0 | PF_Valid," PUSH Ev"},
